@@ -1,5 +1,5 @@
 ,opening_name,prev_moves,last_move
-0,Slav Defense: Exchange Variation,d4,
+0,Slav Defense: Exchange Variation,,d4
 1,Slav Defense: Exchange Variation,d4,d5
 2,Slav Defense: Exchange Variation,d4 d5,c4
 3,Slav Defense: Exchange Variation,d4 d5 c4,c6
@@ -12,7 +12,7 @@
 10,Slav Defense: Exchange Variation,d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+,Nc3
 11,Slav Defense: Exchange Variation,d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3,Ba5
 12,Slav Defense: Exchange Variation,d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3 Ba5,Bf4
-13,Nimzowitsch Defense: Kennedy Variation,d4,
+13,Nimzowitsch Defense: Kennedy Variation,,d4
 14,Nimzowitsch Defense: Kennedy Variation,d4,Nc6
 15,Nimzowitsch Defense: Kennedy Variation,d4 Nc6,e4
 16,Nimzowitsch Defense: Kennedy Variation,d4 Nc6 e4,e5
@@ -28,7 +28,7 @@
 26,Nimzowitsch Defense: Kennedy Variation,d4 Nc6 e4 e5 f4 f6 dxe5 fxe5 fxe5 Nxe5 Qd4 Nc6 Qe5+,Nxe5
 27,Nimzowitsch Defense: Kennedy Variation,d4 Nc6 e4 e5 f4 f6 dxe5 fxe5 fxe5 Nxe5 Qd4 Nc6 Qe5+ Nxe5,c4
 28,Nimzowitsch Defense: Kennedy Variation,d4 Nc6 e4 e5 f4 f6 dxe5 fxe5 fxe5 Nxe5 Qd4 Nc6 Qe5+ Nxe5 c4,Bb4+
-29,King's Pawn Game: Leonardis Variation,e4,
+29,King's Pawn Game: Leonardis Variation,,e4
 30,King's Pawn Game: Leonardis Variation,e4,e5
 31,King's Pawn Game: Leonardis Variation,e4 e5,d3
 32,King's Pawn Game: Leonardis Variation,e4 e5 d3,d6
@@ -89,7 +89,7 @@
 87,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2 b5 Nd2 a5 a4 c5 axb5 Nc6 bxc6 Ra6 Nc4 a4 c3 a3 Nxa3 Rxa3 Rxa3 c4 dxc4 d5 cxd5 Qxd5 exd5 Be6 Ra8+ Ke7 Bc5+ Kf6 Bxf8 Kg6 Bxg7 Kxg7 dxe6 Kh6 exf7 Nf6 Rxh8 Nh5 Bxh5 Kg5 Rxh7 Kf5 Qf3+ Ke6 Bg4+ Kd6 Rh6+ Kc5 Qe3+ Kb5 c4+ Kb4,Qc3+
 88,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2 b5 Nd2 a5 a4 c5 axb5 Nc6 bxc6 Ra6 Nc4 a4 c3 a3 Nxa3 Rxa3 Rxa3 c4 dxc4 d5 cxd5 Qxd5 exd5 Be6 Ra8+ Ke7 Bc5+ Kf6 Bxf8 Kg6 Bxg7 Kxg7 dxe6 Kh6 exf7 Nf6 Rxh8 Nh5 Bxh5 Kg5 Rxh7 Kf5 Qf3+ Ke6 Bg4+ Kd6 Rh6+ Kc5 Qe3+ Kb5 c4+ Kb4 Qc3+,Ka4
 89,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2 b5 Nd2 a5 a4 c5 axb5 Nc6 bxc6 Ra6 Nc4 a4 c3 a3 Nxa3 Rxa3 Rxa3 c4 dxc4 d5 cxd5 Qxd5 exd5 Be6 Ra8+ Ke7 Bc5+ Kf6 Bxf8 Kg6 Bxg7 Kxg7 dxe6 Kh6 exf7 Nf6 Rxh8 Nh5 Bxh5 Kg5 Rxh7 Kf5 Qf3+ Ke6 Bg4+ Kd6 Rh6+ Kc5 Qe3+ Kb5 c4+ Kb4 Qc3+ Ka4,Bd1#
-90,Queen's Pawn Game: Zukertort Variation,d4,
+90,Queen's Pawn Game: Zukertort Variation,,d4
 91,Queen's Pawn Game: Zukertort Variation,d4,d5
 92,Queen's Pawn Game: Zukertort Variation,d4 d5,Nf3
 93,Queen's Pawn Game: Zukertort Variation,d4 d5 Nf3,Bf5
@@ -150,7 +150,7 @@
 148,Queen's Pawn Game: Zukertort Variation,d4 d5 Nf3 Bf5 Nc3 Nf6 Bf4 Ng4 e3 Nc6 Be2 Qd7 O-O O-O-O Nb5 Nb4 Rc1 Nxa2 Ra1 Nb4 Nxa7+ Kb8 Nb5 Bxc2 Bxc7+ Kc8 Qd2 Qc6 Na7+ Kd7 Nxc6 bxc6 Bxd8 Kxd8 Qxb4 e5 Qb8+ Ke7 dxe5 Be4 Ra7+ Ke6 Qe8+ Kf5 Qxf7+ Nf6 Nh4+ Kg5 g3 Ng4 Qf4+ Kh5 Qxg4+ Kh6 Qf4+ g5 Qf6+ Bg6,Nxg6
 149,Queen's Pawn Game: Zukertort Variation,d4 d5 Nf3 Bf5 Nc3 Nf6 Bf4 Ng4 e3 Nc6 Be2 Qd7 O-O O-O-O Nb5 Nb4 Rc1 Nxa2 Ra1 Nb4 Nxa7+ Kb8 Nb5 Bxc2 Bxc7+ Kc8 Qd2 Qc6 Na7+ Kd7 Nxc6 bxc6 Bxd8 Kxd8 Qxb4 e5 Qb8+ Ke7 dxe5 Be4 Ra7+ Ke6 Qe8+ Kf5 Qxf7+ Nf6 Nh4+ Kg5 g3 Ng4 Qf4+ Kh5 Qxg4+ Kh6 Qf4+ g5 Qf6+ Bg6 Nxg6,Bg7
 150,Queen's Pawn Game: Zukertort Variation,d4 d5 Nf3 Bf5 Nc3 Nf6 Bf4 Ng4 e3 Nc6 Be2 Qd7 O-O O-O-O Nb5 Nb4 Rc1 Nxa2 Ra1 Nb4 Nxa7+ Kb8 Nb5 Bxc2 Bxc7+ Kc8 Qd2 Qc6 Na7+ Kd7 Nxc6 bxc6 Bxd8 Kxd8 Qxb4 e5 Qb8+ Ke7 dxe5 Be4 Ra7+ Ke6 Qe8+ Kf5 Qxf7+ Nf6 Nh4+ Kg5 g3 Ng4 Qf4+ Kh5 Qxg4+ Kh6 Qf4+ g5 Qf6+ Bg6 Nxg6 Bg7,Qxg7#
-151,Philidor Defense,e4,
+151,Philidor Defense,,e4
 152,Philidor Defense,e4,e5
 153,Philidor Defense,e4 e5,Nf3
 154,Philidor Defense,e4 e5 Nf3,d6
@@ -245,12 +245,12 @@
 243,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q e4 Rf7+ Kg5,Qg8+
 244,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q e4 Rf7+ Kg5 Qg8+,Kh6
 245,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q e4 Rf7+ Kg5 Qg8+ Kh6,Rh7#
-246,Sicilian Defense: Mongoose Variation,e4,
+246,Sicilian Defense: Mongoose Variation,,e4
 247,Sicilian Defense: Mongoose Variation,e4,c5
 248,Sicilian Defense: Mongoose Variation,e4 c5,Nf3
 249,Sicilian Defense: Mongoose Variation,e4 c5 Nf3,Qa5
 250,Sicilian Defense: Mongoose Variation,e4 c5 Nf3 Qa5,a3
-251,Blackmar-Diemer Gambit: Pietrowsky Defense,d4,
+251,Blackmar-Diemer Gambit: Pietrowsky Defense,,d4
 252,Blackmar-Diemer Gambit: Pietrowsky Defense,d4,d5
 253,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5,e4
 254,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4,dxe4
@@ -283,7 +283,7 @@
 281,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6 Bb5 a6 Bd3 Bg4 O-O Nxd4 Be2 Nxe2+ Qxe2 Bxf3 Qxf3 Qd4+ Be3 Qg4 Qxb7 Rd8 Qc6+ Nd7 Nd5 e6,Nxc7+
 282,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6 Bb5 a6 Bd3 Bg4 O-O Nxd4 Be2 Nxe2+ Qxe2 Bxf3 Qxf3 Qd4+ Be3 Qg4 Qxb7 Rd8 Qc6+ Nd7 Nd5 e6 Nxc7+,Ke7
 283,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6 Bb5 a6 Bd3 Bg4 O-O Nxd4 Be2 Nxe2+ Qxe2 Bxf3 Qxf3 Qd4+ Be3 Qg4 Qxb7 Rd8 Qc6+ Nd7 Nd5 e6 Nxc7+ Ke7,Bd2
-284,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4,
+284,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,,e4
 285,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4,Nc6
 286,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4 Nc6,d4
 287,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4 Nc6 d4,e5
@@ -292,7 +292,7 @@
 290,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4 Nc6 d4 e5 d5 Nce7,c3
 291,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4 Nc6 d4 e5 d5 Nce7 c3,Ng6
 292,Nimzowitsch Defense: Kennedy Variation |  Linksspringer Variation,e4 Nc6 d4 e5 d5 Nce7 c3 Ng6,b4
-293,Italian Game: Schilling-Kostic Gambit,e4,
+293,Italian Game: Schilling-Kostic Gambit,,e4
 294,Italian Game: Schilling-Kostic Gambit,e4,e5
 295,Italian Game: Schilling-Kostic Gambit,e4 e5,Bc4
 296,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4,Nc6
@@ -358,7 +358,7 @@
 356,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5 Bc2 Qe1+ Kh2 Nh5 Qxd6 Qxf2 Bxe4 Rxe4 Nd3 Qg3+ Kg1 Qxd3 Rf1 Rce8 Qd7 Qe3+ Kh1,Ng3+
 357,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5 Bc2 Qe1+ Kh2 Nh5 Qxd6 Qxf2 Bxe4 Rxe4 Nd3 Qg3+ Kg1 Qxd3 Rf1 Rce8 Qd7 Qe3+ Kh1 Ng3+,Kh2
 358,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5 Bc2 Qe1+ Kh2 Nh5 Qxd6 Qxf2 Bxe4 Rxe4 Nd3 Qg3+ Kg1 Qxd3 Rf1 Rce8 Qd7 Qe3+ Kh1 Ng3+ Kh2,Nxf1+
-359,Scandinavian Defense: Mieses-Kotroc Variation,e4,
+359,Scandinavian Defense: Mieses-Kotroc Variation,,e4
 360,Scandinavian Defense: Mieses-Kotroc Variation,e4,d5
 361,Scandinavian Defense: Mieses-Kotroc Variation,e4 d5,exd5
 362,Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5,Qxd5
@@ -477,7 +477,7 @@
 475,Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Na6 d4 Qf5 Bxa6 bxa6 Nf3 Qe6+ Be3 Bb7 Ng5 Qc4 Qh5 Bxg2 Qxf7+ Qxf7 Nxf7 Kxf7 Rg1 Bf3 Rg3 Bh5 Rh3 g6 Ne4 Nf6 Nc5 e6 Nxa6 Rc8 Bf4 Bg4 Rg3 c6 Nb4 Bxb4+ c3 Ba5 b4 Bc7 Bxc7 Rxc7 Rb1 e5 dxe5 Re8 f4 Rd7 Kf2 Rd2+ Kg1 Rxa2 exf6 Kxf6 Rxg4 Kf5 Rg2 Rxg2+ Kxg2 Re2+ Kf3 Re4 Ra1 Rxf4+ Kg3 Rg4+ Kh3 h5 Rxa7 g5 Rf7+ Kg6 Rf3 Rf4 Rxf4 gxf4 Kg2 Kg5 c4 h4 b5 cxb5 cxb5 Kg4 b6 f3+ Kf2 Kf4 b7 h3 b8=Q+ Ke4 Qb4+ Kd5 Kxf3 Ke5 Kg3 Kf6 Qe4 Kg5 Qf3 Kh6 Qg4 Kh7 Qg5 Kh8 Kf4 Kh7 Kf5 Kh8,Kf6
 476,Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Na6 d4 Qf5 Bxa6 bxa6 Nf3 Qe6+ Be3 Bb7 Ng5 Qc4 Qh5 Bxg2 Qxf7+ Qxf7 Nxf7 Kxf7 Rg1 Bf3 Rg3 Bh5 Rh3 g6 Ne4 Nf6 Nc5 e6 Nxa6 Rc8 Bf4 Bg4 Rg3 c6 Nb4 Bxb4+ c3 Ba5 b4 Bc7 Bxc7 Rxc7 Rb1 e5 dxe5 Re8 f4 Rd7 Kf2 Rd2+ Kg1 Rxa2 exf6 Kxf6 Rxg4 Kf5 Rg2 Rxg2+ Kxg2 Re2+ Kf3 Re4 Ra1 Rxf4+ Kg3 Rg4+ Kh3 h5 Rxa7 g5 Rf7+ Kg6 Rf3 Rf4 Rxf4 gxf4 Kg2 Kg5 c4 h4 b5 cxb5 cxb5 Kg4 b6 f3+ Kf2 Kf4 b7 h3 b8=Q+ Ke4 Qb4+ Kd5 Kxf3 Ke5 Kg3 Kf6 Qe4 Kg5 Qf3 Kh6 Qg4 Kh7 Qg5 Kh8 Kf4 Kh7 Kf5 Kh8 Kf6,Kh7
 477,Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Nc3 Qe5+ Be2 Na6 d4 Qf5 Bxa6 bxa6 Nf3 Qe6+ Be3 Bb7 Ng5 Qc4 Qh5 Bxg2 Qxf7+ Qxf7 Nxf7 Kxf7 Rg1 Bf3 Rg3 Bh5 Rh3 g6 Ne4 Nf6 Nc5 e6 Nxa6 Rc8 Bf4 Bg4 Rg3 c6 Nb4 Bxb4+ c3 Ba5 b4 Bc7 Bxc7 Rxc7 Rb1 e5 dxe5 Re8 f4 Rd7 Kf2 Rd2+ Kg1 Rxa2 exf6 Kxf6 Rxg4 Kf5 Rg2 Rxg2+ Kxg2 Re2+ Kf3 Re4 Ra1 Rxf4+ Kg3 Rg4+ Kh3 h5 Rxa7 g5 Rf7+ Kg6 Rf3 Rf4 Rxf4 gxf4 Kg2 Kg5 c4 h4 b5 cxb5 cxb5 Kg4 b6 f3+ Kf2 Kf4 b7 h3 b8=Q+ Ke4 Qb4+ Kd5 Kxf3 Ke5 Kg3 Kf6 Qe4 Kg5 Qf3 Kh6 Qg4 Kh7 Qg5 Kh8 Kf4 Kh7 Kf5 Kh8 Kf6 Kh7,Qg7#
-478,Van't Kruijs Opening,e3,
+478,Van't Kruijs Opening,,e3
 479,Van't Kruijs Opening,e3,e6
 480,Van't Kruijs Opening,e3 e6,d4
 481,Van't Kruijs Opening,e3 e6 d4,d6
