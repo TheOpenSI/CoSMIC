@@ -6,8 +6,8 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ### 1. Progressive Move Dataset
 
-- [ ] **Collect Data**: LICHESS dataset from [Kaggle](https://www.kaggle.com/datasets/datasnaek/chess)
-- [ ] **Preprocess Data**: Create the progressive move dataset
+- [x] **Collect Data**: LICHESS dataset from [Kaggle](https://www.kaggle.com/datasets/datasnaek/chess)
+- [x] **Preprocess Data**: Create the progressive move dataset
 
 ### 2. Prompt Engineering Template
 
