@@ -37,3 +37,7 @@ This repository contains the implementation of a Cognitive AI experiments
 - [ ] **Setup RAG**: Implement the Retrieval-Augmented Generation process to enhance the model's responses with relevant information retrieval.
 - [ ] **Collect Chess Documents**: Feed the model a comprehensive collection of chess books and other form of documents
 - [ ] **Test and Validate**: Conduct thorough testing to validate the integration and performance of the RAG system.
+
+## Setup
+
+Create ```.env``` file and add the openai API token using the variable ```openai_api_key```

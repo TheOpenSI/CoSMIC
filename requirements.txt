@@ -1,2 +1,3 @@
 pandas
 dotenv
+openai
