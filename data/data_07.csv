@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4,dxe4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4,Rxh4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4,Nc3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3,g5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5,c5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5,gxh6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6,gxh6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6,Bxh6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6,Rfc8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8,Nc4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4,Ra6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6,Nd6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6,Rc7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6 Rc7,Ne8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6 Rc7 Ne8,Rc8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6 Rc7 Ne8 Rc8,Nf6+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6 Rc7 Ne8 Rc8 Nf6+,Kh8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6 Bxe4 dxe4 Rxh4 Nc3 g5 c5 gxh6 gxh6 Bxh6 Rfc8 Nc4 Ra6 Nd6 Rc7 Ne8 Rc8 Nf6+ Kh8,Bf8#
+English Opening: Anglo-Lithuanian Variation,None,c4
+English Opening: Anglo-Lithuanian Variation,c4,Nc6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6,d4
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4,g6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6,e3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3,Bg7
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7,Nc3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3,d6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6,Bd2
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2,Bf5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5,Nf3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3,Bg4
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4,Be2
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2,Bxf3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3,Bxf3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3,e5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5,dxe5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5,Nxe5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5,O-O
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O,Ne7
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7,b3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3,Nf5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5,Be4
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4,Qg5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5,Nd5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5,Kd7
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7,f4
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4,Qg4
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4,fxe5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5,Qxd1
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1,Raxd1
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1,Bxe5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5,Bxf5+
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+,gxf5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5,Rxf5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5,Raf8
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8,Bc3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3,Bxc3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3,Nxc3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3,Re8
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8,Rxf7+
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+,Kc8
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8,Nd5
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5,c6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6,Nf6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6,Rxe3
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6 Rxe3,Rxd6
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6 Rxe3 Rxd6,Re1+
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6 Rxe3 Rxd6 Re1+,Kf2
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6 Rxe3 Rxd6 Re1+ Kf2,Rhe8
+English Opening: Anglo-Lithuanian Variation,c4 Nc6 d4 g6 e3 Bg7 Nc3 d6 Bd2 Bf5 Nf3 Bg4 Be2 Bxf3 Bxf3 e5 dxe5 Nxe5 O-O Ne7 b3 Nf5 Be4 Qg5 Nd5 Kd7 f4 Qg4 fxe5 Qxd1 Raxd1 Bxe5 Bxf5+ gxf5 Rxf5 Raf8 Bc3 Bxc3 Nxc3 Re8 Rxf7+ Kc8 Nd5 c6 Nf6 Rxe3 Rxd6 Re1+ Kf2 Rhe8,h3
+Crab Opening,None,a4
+Crab Opening,a4,e5
+Crab Opening,a4 e5,h4
+Crab Opening,a4 e5 h4,d5
+Crab Opening,a4 e5 h4 d5,b3
+Crab Opening,a4 e5 h4 d5 b3,Nc6
+Crab Opening,a4 e5 h4 d5 b3 Nc6,e3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3,Bf5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5,Bb5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5,Ne7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7,g4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4,Bd7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7,Bxc6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6,Bxc6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6,d4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4,e4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4,b4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4,a6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6,c3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3,g6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6,Ra2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2,Bg7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7,Nd2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2,O-O
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O,f3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3,Qd7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7,Nh3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3,b5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5,a5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5,f5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5,Ng5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5,Bh6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6,fxe4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4,fxe4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4,Nf1
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1,Bxg5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5,hxg5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5,Rf7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7,Rah2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2,Raf8
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8,Ng3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3,Bb7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7,Rh4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4,Nc8
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8,Qe2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2,Nd6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6,R1h3
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3,Nc4
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4,Qh2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2,Qe7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7,Rh6
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6,Rg7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7,Ke2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7 Ke2,Rff7
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7 Ke2 Rff7,Bd2
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7 Ke2 Rff7 Bd2,Qxg5
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7 Ke2 Rff7 Bd2 Qxg5,Be1
+Crab Opening,a4 e5 h4 d5 b3 Nc6 e3 Bf5 Bb5 Ne7 g4 Bd7 Bxc6 Bxc6 d4 e4 b4 a6 c3 g6 Ra2 Bg7 Nd2 O-O f3 Qd7 Nh3 b5 a5 f5 Ng5 Bh6 fxe4 fxe4 Nf1 Bxg5 hxg5 Rf7 Rah2 Raf8 Ng3 Bb7 Rh4 Nc8 Qe2 Nd6 R1h3 Nc4 Qh2 Qe7 Rh6 Rg7 Ke2 Rff7 Bd2 Qxg5 Be1,Qxg4#
+Queen's Pawn Game: Mason Attack,None,d4
+Queen's Pawn Game: Mason Attack,d4,d5
+Queen's Pawn Game: Mason Attack,d4 d5,Bf4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4,Nc6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6,Nf3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3,f6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6,e3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3,g5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5,Bg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3,Be6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6,c3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3,Bf7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7,Bb5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5,a6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6,Bxc6+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+,bxc6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6,Qa4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4,Qd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7,O-O
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O,Bg6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6,Rd1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1,Kf7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7,Nbd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2,e6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6,c4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4,Ne7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7,c5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5,Nf5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5,h3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3,Nxg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3,fxg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3,h5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5,Rf1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1,Kg7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7,Qd1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1,Qe7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7,Rf2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2,e5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5,dxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5,fxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5,Qf1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1,Qxc5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5,Nxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5,Qxe3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3,Re1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1,Qd4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4,Nxg6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6,Re8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8,Nxh8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8,Rxe1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1,Qxe1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1,Kxh8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8,Qe8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8,Kg8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8,Qf7+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+,Kh8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8,Kh2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2,Qg7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7,Qxf8+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+,Qxf8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8,Rxf8+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+,Kg7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7,Rc8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8,g4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4,Rxc7+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+,Kf8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+ Kf8,h4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+ Kf8 h4,a5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+ Kf8 h4 a5,Rxc6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+ Kf8 h4 a5 Rxc6,d4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+ bxc6 Qa4 Qd7 O-O Bg6 Rd1 Kf7 Nbd2 e6 c4 Ne7 c5 Nf5 h3 Nxg3 fxg3 h5 Rf1 Kg7 Qd1 Qe7 Rf2 e5 dxe5 fxe5 Qf1 Qxc5 Nxe5 Qxe3 Re1 Qd4 Nxg6 Re8 Nxh8 Rxe1 Qxe1 Kxh8 Qe8 Kg8 Qf7+ Kh8 Kh2 Qg7 Qxf8+ Qxf8 Rxf8+ Kg7 Rc8 g4 Rxc7+ Kf8 h4 a5 Rxc6 d4,Rd6
+Queen's Pawn,None,d4
+Queen's Pawn,d4,c6
+Queen's Pawn,d4 c6,Bf4
+Queen's Pawn,d4 c6 Bf4,e6
+Queen's Pawn,d4 c6 Bf4 e6,Nf3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3,d5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5,Nbd2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2,c5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5,e3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3,cxd4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4,Nxd4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4,a6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6,c4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4,Nf6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6,Bd3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3,h6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6,O-O
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O,Bd6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6,Bxd6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6,Qxd6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6,cxd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5,Qxd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5,Bc4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4,Qd6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6,Rc1
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1,O-O
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O,Qb3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3,b5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5,Be2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2,Bb7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7,Nc4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4,Qd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5,Bf3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3,Ne4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4,Nb6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6,Qxb3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3,Nxb3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3,Ra7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7,Rc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7,f5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5,Rd1
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1,Nc6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6,Bxe4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4,fxe4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4,Rdd7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7,Kh8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8,Rxg7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7,Ba8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8,Rxa7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7,Nxa7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7,Rxa7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7,Bd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5,Nxd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5,exd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5,Rd7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7,Rc8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8,Rxd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5,Rc2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2,Rd2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2,Rc8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8,f3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3,exf3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3,gxf3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3,h5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5,Rd5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5,Rc2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2,Rxh5+
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+,Kg7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7,Rg5+
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+,Kh7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7,Rg2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2,Rc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7,f4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4,Ra7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7,e4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4,a5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5,e5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5,a4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4,Nd4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4,b4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4,e6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6,a3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3,b3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3,Rc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7,Rc2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2,Rg7+
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+,Kf2
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2,Re7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7,f5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5,Kg7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7,Nc6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6,Rc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7,Kf3
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3,Kf6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6,Kf4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4,Rc8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8,h4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4,Rc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7,e7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7,Rc8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8,h5
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5,Kf7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7,Nd8+
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+,Kxe7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7,Rxc8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8,Kd7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7,Rb8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8,Kc7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7,Rxb4
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7 Rxb4,Kxd8
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7 Rxb4 Kxd8,h6
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7 Rxb4 Kxd8 h6,Ke7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7 Rxb4 Kxd8 h6 Ke7,h7
+Queen's Pawn,d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7 Nc4 Qd5 Bf3 Ne4 Nb6 Qxb3 Nxb3 Ra7 Rc7 f5 Rd1 Nc6 Bxe4 fxe4 Rdd7 Kh8 Rxg7 Ba8 Rxa7 Nxa7 Rxa7 Bd5 Nxd5 exd5 Rd7 Rc8 Rxd5 Rc2 Rd2 Rc8 f3 exf3 gxf3 h5 Rd5 Rc2 Rxh5+ Kg7 Rg5+ Kh7 Rg2 Rc7 f4 Ra7 e4 a5 e5 a4 Nd4 b4 e6 a3 b3 Rc7 Rc2 Rg7+ Kf2 Re7 f5 Kg7 Nc6 Rc7 Kf3 Kf6 Kf4 Rc8 h4 Rc7 e7 Rc8 h5 Kf7 Nd8+ Kxe7 Rxc8 Kd7 Rb8 Kc7 Rxb4 Kxd8 h6 Ke7 h7,Kf6
+French Defense: Winawer Variation |  Advance Variation #2,None,e4
+French Defense: Winawer Variation |  Advance Variation #2,e4,e6
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6,d4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4,d5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5,Nc3
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3,Bb4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4,e5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5,c5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5,a3
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3,Bxc3+
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+,bxc3
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3,cxd4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4,cxd4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4,Ne7
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7,f4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4,Nbc6
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6,Nf3
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3,Nf5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5,c4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4,O-O
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O,g4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4,Nfe7
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7,Bd3
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3,g6
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6,f5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5,exf5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5,gxf5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5,Nxf5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5,cxd5
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5,Ncxd4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4,Nxd4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4,Nxd4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4,Bc4
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4,Qh4+
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4 Qh4+,Kf1
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4 Qh4+ Kf1,Bh3+
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4 Qh4+ Kf1 Bh3+,Kg1
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4 Qh4+ Kf1 Bh3+ Kg1,Qg5+
+French Defense: Winawer Variation |  Advance Variation #2,e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4 O-O g4 Nfe7 Bd3 g6 f5 exf5 gxf5 Nxf5 cxd5 Ncxd4 Nxd4 Nxd4 Bc4 Qh4+ Kf1 Bh3+ Kg1 Qg5+,Bxg5
+Queen's Pawn Game: London System,None,d4
+Queen's Pawn Game: London System,d4,Nf6
+Queen's Pawn Game: London System,d4 Nf6,Bf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4,d5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5,Nf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3,Bf5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5,e3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3,c6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6,Nbd2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2,Qb6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6,b3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3,Nbd7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7,h3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3,Be4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4,Nxe4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4,Nxe4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4,Bd3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3,Nc3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3,Ne5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5,Nxd1
+Queen's Pawn Game: Mason Attack,None,d4
+Queen's Pawn Game: Mason Attack,d4,d5
+Queen's Pawn Game: Mason Attack,d4 d5,Bf4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4,e6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6,Nf3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3,c5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5,e3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3,Bd6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6,Bg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3,Bxg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3,hxg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3,cxd4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4,exd4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4,a6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6,c3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3,Nf6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6,Bd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3,Nbd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7,Nbd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2,b5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5,Ne5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5,Nxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5,dxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5,Nd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7,f4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4,Bb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7,Rh2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2,Qb6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6,Nf3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3,g6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6,Qd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2,Rc8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8,Rc1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1,O-O
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O,f5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5,exf5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5,Qh6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6,Rfe8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8,Qxh7+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+,Kf8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8,Ng5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5,Qe3+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+,Be2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+ Be2,Qxc1+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+ Be2 Qxc1+,Kf2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+ Be2 Qxc1+ Kf2,Qxg5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+ Be2 Qxc1+ Kf2 Qxg5,Qh8+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5 exf5 Qh6 Rfe8 Qxh7+ Kf8 Ng5 Qe3+ Be2 Qxc1+ Kf2 Qxg5 Qh8+,Ke7
+French Defense: Knight Variation,None,e4
+French Defense: Knight Variation,e4,e6
+French Defense: Knight Variation,e4 e6,Nf3
+French Defense: Knight Variation,e4 e6 Nf3,d5
+French Defense: Knight Variation,e4 e6 Nf3 d5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5,d4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4,Bg4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4,Be2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2,Qe7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7,O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O,Nc6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6,Re1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1,O-O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O,Bb5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5,Qf6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6,Re3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3,Bxf3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3,Rxf3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3,Qxd4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4,Rd3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3,Qc5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5,Nc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3,Nf6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6,Be3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3,Qd6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6,a4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4,h5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5,Qe2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5 Qe2,Ng4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5 Qe2 Ng4,Bg5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5 Qe2 Ng4 Bg5,Qxh2+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5 Qe2 Ng4 Bg5 Qxh2+,Kf1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5 Nc3 Nf6 Be3 Qd6 a4 h5 Qe2 Ng4 Bg5 Qxh2+ Kf1,Qh1#
+Queen's Pawn Game: London System,None,d4
+Queen's Pawn Game: London System,d4,d5
+Queen's Pawn Game: London System,d4 d5,Bf4
+Queen's Pawn Game: London System,d4 d5 Bf4,Nf6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6,Nf3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3,h6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6,e3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3,e6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6,Bd3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3,Nc6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6,Nbd2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2,a6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6,c3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3,Bd6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6,Bg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3,Bxg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3,hxg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3,O-O
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O,Qc2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2,g6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6,Rxh6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6,Re8
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8,Nh4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4,e5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5,Nxg6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6,fxg6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6,Bxg6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6,Re6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6,Bh7+
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+,Kf7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7,Qg6+
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+,Ke7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7,Qg7+
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+,Kd6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6,Bf5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5,Re7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7,Rxf6+
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+,Re6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6,Bxe6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6,Bxe6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6,O-O-O
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O,exd4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O exd4,exd4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O exd4 exd4,Ne7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O exd4 exd4 Ne7,Re1
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O exd4 exd4 Ne7 Re1,c5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6 Re6 Bh7+ Kf7 Qg6+ Ke7 Qg7+ Kd6 Bf5 Re7 Rxf6+ Re6 Bxe6 Bxe6 O-O-O exd4 exd4 Ne7 Re1 c5,Rexe6+

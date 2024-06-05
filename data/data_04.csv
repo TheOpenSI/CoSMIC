@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2,Nc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6,Bc4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4,Be6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6,Bxe6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6,Nxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4,Bxf7+
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+,Rxf7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7,Bxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4,d5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5,e5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5,Ne8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8,e6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6,Rf8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8,O-O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O,Bxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O Bxd4,Qxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O Bxd4 Qxd4,Qa5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O Bxd4 Qxd4 Qa5,Nxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O Bxd4 Qxd4 Qa5 Nxd5,Rc8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 Bc4 Be6 Bxe6 Nxd4 Bxf7+ Rxf7 Bxd4 d5 e5 Ne8 e6 Rf8 O-O-O Bxd4 Qxd4 Qa5 Nxd5 Rc8,Nxe7#
+Scandinavian Defense: Mieses-Kotroc Variation,None,e4
+Scandinavian Defense: Mieses-Kotroc Variation,e4,d5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5,exd5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5,Qxd5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5,Qf3
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3,Qe5+
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+,Ne2
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2,Nf6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6,d4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4,Qd5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5,Qxd5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5,Nxd5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5,a3
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3,Nb6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6,Ng3
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3,Nc6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6,Be3
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3,e5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5,dxe5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5,Nxe5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5,Nd2
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2,Be6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6,O-O-O
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O,Nbc4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4,Nxc4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4,Nxc4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4,Bxc4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4,Bxc4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4,Rhe1
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1,Be7
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7,Nf5
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5,Be6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6,Nxg7+
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+,Kf8
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8,Bh6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6,Bg4
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6 Bg4,f3
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6 Bg4 f3,Be6
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6 Bg4 f3 Be6,Nxe6+
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6 Bg4 f3 Be6 Nxe6+,Ke8
+Scandinavian Defense: Mieses-Kotroc Variation,e4 d5 exd5 Qxd5 Qf3 Qe5+ Ne2 Nf6 d4 Qd5 Qxd5 Nxd5 a3 Nb6 Ng3 Nc6 Be3 e5 dxe5 Nxe5 Nd2 Be6 O-O-O Nbc4 Nxc4 Nxc4 Bxc4 Bxc4 Rhe1 Be7 Nf5 Be6 Nxg7+ Kf8 Bh6 Bg4 f3 Be6 Nxe6+ Ke8,Nxc7#
+French Defense: Normal Variation,None,d4
+French Defense: Normal Variation,d4,e6
+French Defense: Normal Variation,d4 e6,e4
+French Defense: Normal Variation,d4 e6 e4,Qh4
+French Defense: Normal Variation,d4 e6 e4 Qh4,Nc3
+King's Pawn Game: Beyer Gambit,None,e4
+King's Pawn Game: Beyer Gambit,e4,e5
+King's Pawn Game: Beyer Gambit,e4 e5,d4
+King's Pawn Game: Beyer Gambit,e4 e5 d4,d5
+King's Pawn Game: Beyer Gambit,e4 e5 d4 d5,Nf3
+King's Pawn Game: Beyer Gambit,e4 e5 d4 d5 Nf3,dxe4
+King's Pawn Game: Beyer Gambit,e4 e5 d4 d5 Nf3 dxe4,Nxe5
+Dutch Defense,None,d4
+Dutch Defense,d4,f5
+Dutch Defense,d4 f5,e3
+Dutch Defense,d4 f5 e3,Nf6
+Dutch Defense,d4 f5 e3 Nf6,Nc3
+Dutch Defense,d4 f5 e3 Nf6 Nc3,d5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5,Bb5+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+,c6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6,Bd3
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3,b5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5,Qf3
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3,Qa5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5,Bxf5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5,Nbd7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7,Bxd7+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+,Bxd7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7,a3
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3,Bg4
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4,Qf4
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4,h5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5,b4
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4,Qb6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6,h3
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3,Be6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6,Nf3
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3,c5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5,bxc5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5,Qa5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5,Bb2
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2,Rb8
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8,Qxb8+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+,Kd7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7,Qb7+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+,Kd8
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8,Qa8+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+,Bc8
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8,c6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6,Qc7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7,Nxb5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5,Qxc6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6,Qxc6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6,Ne4
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4,Qc7+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+,Ke8
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8,Qxc8+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+,Kf7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7,Ne5+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+,Kf6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+ Kf6,Nc7
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+ Kf6 Nc7,e6
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+ Kf6 Nc7 e6,Qxe6+
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+ Kf6 Nc7 e6 Qxe6+,Kg5
+Dutch Defense,d4 f5 e3 Nf6 Nc3 d5 Bb5+ c6 Bd3 b5 Qf3 Qa5 Bxf5 Nbd7 Bxd7+ Bxd7 a3 Bg4 Qf4 h5 b4 Qb6 h3 Be6 Nf3 c5 bxc5 Qa5 Bb2 Rb8 Qxb8+ Kd7 Qb7+ Kd8 Qa8+ Bc8 c6 Qc7 Nxb5 Qxc6 Qxc6 Ne4 Qc7+ Ke8 Qxc8+ Kf7 Ne5+ Kf6 Nc7 e6 Qxe6+ Kg5,h4#
+English Opening: King's English Variation,None,c4
+English Opening: King's English Variation,c4,e5
+English Opening: King's English Variation,c4 e5,b3
+English Opening: King's English Variation,c4 e5 b3,d5
+English Opening: King's English Variation,c4 e5 b3 d5,Bb2
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2,e4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4,d4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4,exd3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3,Qxd3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3,Nf6
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6,Be5
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5,dxc4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4,bxc4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4,Bb4+
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+,Nc3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3,Bxc3+
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+,Qxc3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3,Ne4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4,Qh3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3,Ng5
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5,Qa3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3,Ne4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4,Bxg7
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7,Rg8
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8,Qa4+
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+,Bd7
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7,Bf6
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6,Qxf6
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6,Nf3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3,Bxa4
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4,e3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4 e3,Qxa1+
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4 e3 Qxa1+,Ke2
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4 e3 Qxa1+ Ke2,Qxa2+
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4 e3 Qxa1+ Ke2 Qxa2+,Kd3
+English Opening: King's English Variation,c4 e5 b3 d5 Bb2 e4 d4 exd3 Qxd3 Nf6 Be5 dxc4 bxc4 Bb4+ Nc3 Bxc3+ Qxc3 Ne4 Qh3 Ng5 Qa3 Ne4 Bxg7 Rg8 Qa4+ Bd7 Bf6 Qxf6 Nf3 Bxa4 e3 Qxa1+ Ke2 Qxa2+ Kd3,Nxf2+
+Zukertort Opening: Ross Gambit,None,Nf3
+Zukertort Opening: Ross Gambit,Nf3,e5
+Zukertort Opening: Ross Gambit,Nf3 e5,Nxe5
+Zukertort Opening: Ross Gambit,Nf3 e5 Nxe5,Ke7
+Zukertort Opening: Ross Gambit,Nf3 e5 Nxe5 Ke7,e4
+Zukertort Opening: Ross Gambit,Nf3 e5 Nxe5 Ke7 e4,Kd6
+Zukertort Opening: Ross Gambit,Nf3 e5 Nxe5 Ke7 e4 Kd6,d4
+Zukertort Opening: Ross Gambit,Nf3 e5 Nxe5 Ke7 e4 Kd6 d4,Nc6
+Sicilian Defense: Closed Variation,None,e4
+Sicilian Defense: Closed Variation,e4,c5
+Sicilian Defense: Closed Variation,e4 c5,Nc3
+Vienna Game: Mengarini Variation,None,e4
+Vienna Game: Mengarini Variation,e4,e5
+Vienna Game: Mengarini Variation,e4 e5,a3
+Vienna Game: Mengarini Variation,e4 e5 a3,Nf6
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6,Nc3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3,d5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5,exd5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5,Nxd5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5,Nxd5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5,Qxd5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5,Qf3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3,e4
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4,Qe3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3,Bc5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5,Qg3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3,O-O
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O,Ne2
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2,Re8
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8,Qxc7
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7,Bd6
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6,Qc3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3,Be5
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5,Qe3
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5 Qe3,Bd4
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5 Qe3 Bd4,Qxd4
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5 Qe3 Bd4 Qxd4,Qxd4
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5 Qe3 Bd4 Qxd4 Qxd4,Nxd4
+Vienna Game: Mengarini Variation,e4 e5 a3 Nf6 Nc3 d5 exd5 Nxd5 Nxd5 Qxd5 Qf3 e4 Qe3 Bc5 Qg3 O-O Ne2 Re8 Qxc7 Bd6 Qc3 Be5 Qe3 Bd4 Qxd4 Qxd4 Nxd4,Bf5
+Philidor Defense: Larsen Variation,None,e4
+Philidor Defense: Larsen Variation,e4,e5
+Philidor Defense: Larsen Variation,e4 e5,Nf3
+Philidor Defense: Larsen Variation,e4 e5 Nf3,d6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6,d4
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4,exd4
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4,Nxd4
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4,g6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6,Bc4
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4,Nf6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6,Bg5
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5,Bg7
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7,O-O
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O,O-O
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O,Nc3
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3,h6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6,Bxf6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6,Bxf6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6,Re1
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1,Re8
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8,Nd5
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5,c5
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5,Nf3
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3,Bxb2
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2,Rb1
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2 Rb1,Bf6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2 Rb1 Bf6,Nxf6+
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2 Rb1 Bf6 Nxf6+,Qxf6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2 Rb1 Bf6 Nxf6+ Qxf6,Qxd6
+Philidor Defense: Larsen Variation,e4 e5 Nf3 d6 d4 exd4 Nxd4 g6 Bc4 Nf6 Bg5 Bg7 O-O O-O Nc3 h6 Bxf6 Bxf6 Re1 Re8 Nd5 c5 Nf3 Bxb2 Rb1 Bf6 Nxf6+ Qxf6 Qxd6,Qxd6
+Scotch Game,None,e4
+Scotch Game,e4,e5
+Scotch Game,e4 e5,Nf3
+Scotch Game,e4 e5 Nf3,Nc6
+Scotch Game,e4 e5 Nf3 Nc6,d4
+Scotch Game,e4 e5 Nf3 Nc6 d4,Bb4+
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+,c3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3,Bd6
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6,d5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5,Nce7
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7,c4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4,c6
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6,Be2
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2,Nf6
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6,Bg5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5,Nxe4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4,Bxe7
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7,Qxe7
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7,dxc6
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6,dxc6
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6,Bd3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3,Nc5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5,O-O
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O,f5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5,Re1
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1,e4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4,Bc2
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2,O-O
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O,Nd4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4,Qe5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5,Nf3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3,Qf4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4,Nd4
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4,Qxh2+
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+,Kf1
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1,Be5
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5,Nf3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3,exf3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3,Qxf3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3 Qxf3,Bxb2
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3 Qxf3 Bxb2,Nc3
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3 Qxf3 Bxb2 Nc3,Bxa1
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3 Qxf3 Bxb2 Nc3 Bxa1,Rxa1
+Scotch Game,e4 e5 Nf3 Nc6 d4 Bb4+ c3 Bd6 d5 Nce7 c4 c6 Be2 Nf6 Bg5 Nxe4 Bxe7 Qxe7 dxc6 dxc6 Bd3 Nc5 O-O f5 Re1 e4 Bc2 O-O Nd4 Qe5 Nf3 Qf4 Nd4 Qxh2+ Kf1 Be5 Nf3 exf3 Qxf3 Bxb2 Nc3 Bxa1 Rxa1,Qh1+
+Philidor Defense: Lopez Countergambit,None,e4
+Philidor Defense: Lopez Countergambit,e4,e5
+Philidor Defense: Lopez Countergambit,e4 e5,Nf3
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3,d6
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6,Bc4
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4,f5
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5,exf5
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5,Bxf5
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5,Nc3
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3,e4
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4,Nd4
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4,Bg6
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6,Qg4
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4,Nf6
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6,Qe6+
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+,Qe7
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7,Qc8+
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+,Qd8
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8,Qxb7
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7,Nbd7
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7,Nc6
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6,Qc8
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8,Qxc8+
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+,Rxc8
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+ Rxc8,Nxa7
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+ Rxc8 Nxa7,Ra8
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+ Rxc8 Nxa7 Ra8,Nab5
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+ Rxc8 Nxa7 Ra8 Nab5,c6
+Philidor Defense: Lopez Countergambit,e4 e5 Nf3 d6 Bc4 f5 exf5 Bxf5 Nc3 e4 Nd4 Bg6 Qg4 Nf6 Qe6+ Qe7 Qc8+ Qd8 Qxb7 Nbd7 Nc6 Qc8 Qxc8+ Rxc8 Nxa7 Ra8 Nab5 c6,Nc7+
+French Defense: Knight Variation,None,e4
+French Defense: Knight Variation,e4,e6
+French Defense: Knight Variation,e4 e6,Nf3
+French Defense: Knight Variation,e4 e6 Nf3,d5
+French Defense: Knight Variation,e4 e6 Nf3 d5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5,d4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4,Bg4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4,c4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4,Bb4+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+,Bd2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2,Qe7+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+,Be2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2,Bxf3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3,Bxb4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4,Qxb4+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+,Nc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3,Bxe2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2,Qxe2+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+,Ne7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7,O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O,O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O,a3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3,Qd6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6,cxd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5,Nxd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5,Qe4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4,Nxc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3,Qxb7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7,Nc6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6,bxc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3,a5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3 a5,h3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3 a5 h3,Rfb8
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3 a5 h3 Rfb8,Qxa8
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3 a5 h3 Rfb8 Qxa8,Rxa8
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 c4 Bb4+ Bd2 Qe7+ Be2 Bxf3 Bxb4 Qxb4+ Nc3 Bxe2 Qxe2+ Ne7 O-O O-O a3 Qd6 cxd5 Nxd5 Qe4 Nxc3 Qxb7 Nc6 bxc3 a5 h3 Rfb8 Qxa8 Rxa8,Rfe1
+Modern Defense,None,d4
+Modern Defense,d4,g6
+Modern Defense,d4 g6,Nf3
+Modern Defense,d4 g6 Nf3,Bg7
+Modern Defense,d4 g6 Nf3 Bg7,Bf4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4,d6
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6,e3
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3,Nd7
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7,c3
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3,e5
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5,Bg3
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3,Ne7
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7,Nbd2
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2,O-O
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O,a4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4,f5
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5,Bh4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4,exd4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4,Qb3+
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+,Kh8
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8,exd4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4,Qe8
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8,Qd1
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1,Nd5+
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+,Be2
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2,Nf4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4,Kf1
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1,Nxe2
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2,Qxe2
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2,Qxe2+
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+,Kxe2
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2,Re8+
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+,Kd3
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3,c5
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5,Rhe1
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1,Rf8
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8,Ng5
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5,cxd4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4,cxd4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4,b6
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6,Ne6
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6,Rf7
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7,Nc4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4,Ba6
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4 Ba6,b4
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4 Ba6 b4,b5
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4 Ba6 b4 b5,Nxd6
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4 Ba6 b4 b5 Nxd6,bxa4+
+Modern Defense,d4 g6 Nf3 Bg7 Bf4 d6 e3 Nd7 c3 e5 Bg3 Ne7 Nbd2 O-O a4 f5 Bh4 exd4 Qb3+ Kh8 exd4 Qe8 Qd1 Nd5+ Be2 Nf4 Kf1 Nxe2 Qxe2 Qxe2+ Kxe2 Re8+ Kd3 c5 Rhe1 Rf8 Ng5 cxd4 cxd4 b6 Ne6 Rf7 Nc4 Ba6 b4 b5 Nxd6 bxa4+,b5
+Horwitz Defense,None,d4
+Horwitz Defense,d4,e6
+Horwitz Defense,d4 e6,Bf4
+Horwitz Defense,d4 e6 Bf4,c5
+Horwitz Defense,d4 e6 Bf4 c5,c3
+Horwitz Defense,d4 e6 Bf4 c5 c3,Qb6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6,b3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3,cxd4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4,cxd4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4,Bb4+
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+,Bd2
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2,Qxd4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4,e3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3,Qxa1
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1,Bxb4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4,Qf6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6,Bc3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3,Qg6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6,Nf3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3,h6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6,Ne5
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5,Qg5
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5,h4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4,Qe7
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7,Qf3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3,Nf6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6,a3
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6 a3,d6
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6 a3 d6,Bb5+
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6 a3 d6 Bb5+,Kf8
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6 a3 d6 Bb5+ Kf8,Bb4
+Horwitz Defense,d4 e6 Bf4 c5 c3 Qb6 b3 cxd4 cxd4 Bb4+ Bd2 Qxd4 e3 Qxa1 Bxb4 Qf6 Bc3 Qg6 Nf3 h6 Ne5 Qg5 h4 Qe7 Qf3 Nf6 a3 d6 Bb5+ Kf8 Bb4,a5
+Blumenfeld Countergambit #2,None,d4
+Blumenfeld Countergambit #2,d4,Nf6
+Blumenfeld Countergambit #2,d4 Nf6,c4
+Blumenfeld Countergambit #2,d4 Nf6 c4,e6
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6,Nf3
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3,c5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5,d5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5,exd5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5,cxd5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5,c4
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4,Nc3
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3,Bb4
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4,Bg5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5,Bxc3+
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+,bxc3
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3,h6
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6,Bh4
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4,g5
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5,Bg3
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3,Ne4
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3 Ne4,Qd4
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3 Ne4 Qd4,Qf6
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3 Ne4 Qd4 Qf6,Qxe4+
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3 Ne4 Qd4 Qf6 Qxe4+,Kf8
+Blumenfeld Countergambit #2,d4 Nf6 c4 e6 Nf3 c5 d5 exd5 cxd5 c4 Nc3 Bb4 Bg5 Bxc3+ bxc3 h6 Bh4 g5 Bg3 Ne4 Qd4 Qf6 Qxe4+ Kf8,Be5
+French Defense #2,None,e4
+French Defense #2,e4,e6
+French Defense #2,e4 e6,Bc4
+French Defense #2,e4 e6 Bc4,d5
+French Defense #2,e4 e6 Bc4 d5,exd5
+French Defense #2,e4 e6 Bc4 d5 exd5,exd5
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5,Bb3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3,Qe7+
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+,Ne2
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2,Nf6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6,d4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4,Nc6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6,O-O
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O,Bf5
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5,Bg5
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5,h6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6,Bxf6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6,Qxf6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6,Bxd5
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5,Nb4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4,Bb3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3,O-O-O
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O,a3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3,Nc6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6,c3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3,Bd6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6,Ng3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3,g6
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6,Nd2
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2,h5
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5,Nge4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4,Bxe4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4,Nxe4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4,Bxh2+
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+,Kh1
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+ Kh1,Qh4
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+ Kh1 Qh4,f3
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+ Kh1 Qh4 f3,Bg3+
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+ Kh1 Qh4 f3 Bg3+,Kg1
+French Defense #2,e4 e6 Bc4 d5 exd5 exd5 Bb3 Qe7+ Ne2 Nf6 d4 Nc6 O-O Bf5 Bg5 h6 Bxf6 Qxf6 Bxd5 Nb4 Bb3 O-O-O a3 Nc6 c3 Bd6 Ng3 g6 Nd2 h5 Nge4 Bxe4 Nxe4 Bxh2+ Kh1 Qh4 f3 Bg3+ Kg1,Qh2#
+Zukertort Opening: Kingside Fianchetto,None,Nf3
+Zukertort Opening: Kingside Fianchetto,Nf3,g6
+Zukertort Opening: Kingside Fianchetto,Nf3 g6,g3
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3,Bg7
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7,Bg2
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2,e6
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6,O-O
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O,Ne7
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7,c3
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3,c5
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5,d4
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4,Qb6
+Zukertort Opening: Kingside Fianchetto,Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6,dxc5

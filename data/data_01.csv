@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O,e5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5,Nd5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5,Nxd5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5,Qxd5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5,Bc4
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4,Qd7
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7,Rad1
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1,Qb7
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7,Bg5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5,Re8
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8,Bxe7
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7,Rxe7
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7 Rxe7,Rd8+
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7 Rxe7 Rd8+,Re8
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7 Rxe7 Rd8+ Re8,Red1
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7 Rxe7 Rd8+ Re8 Red1,Bd5
+Van't Kruijs Opening,e3 e6 d4 d6 Bd3 c6 Nf3 Be7 Nc3 Nf6 Bd2 Bd7 Qe2 c5 dxc5 dxc5 O-O b6 Rfe1 Bc6 e4 O-O e5 Nd5 Nxd5 Qxd5 Bc4 Qd7 Rad1 Qb7 Bg5 Re8 Bxe7 Rxe7 Rd8+ Re8 Red1 Bd5,Rxe8#
+French Defense: Advance Variation |  Paulsen Attack,None,e4
+French Defense: Advance Variation |  Paulsen Attack,e4,e6
+French Defense: Advance Variation |  Paulsen Attack,e4 e6,d4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4,d5
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5,e5
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5,c5
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5,c3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3,Nc6
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6,Nf3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3,Qb6
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6,Be3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3,Qxb2
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2,Nbd2
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2,cxd4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4,cxd4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4,Nb4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4,Rb1
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1,Qxa2
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2,Qb3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3,Qxb3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3,Nxb3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3,Nc2+
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+,Kd1
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1,Nxe3+
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+,fxe3
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3,Ne7
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7,Nc5
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5,Nf5
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5,e4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4,dxe4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4,Nxe4
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4,Ne3+
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+,Ke2
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+ Ke2,Nxf1
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+ Ke2 Nxf1,Rhxf1
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+ Ke2 Nxf1 Rhxf1,b6
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+ Ke2 Nxf1 Rhxf1 b6,Ned2
+French Defense: Advance Variation |  Paulsen Attack,e4 e6 d4 d5 e5 c5 c3 Nc6 Nf3 Qb6 Be3 Qxb2 Nbd2 cxd4 cxd4 Nb4 Rb1 Qxa2 Qb3 Qxb3 Nxb3 Nc2+ Kd1 Nxe3+ fxe3 Ne7 Nc5 Nf5 e4 dxe4 Nxe4 Ne3+ Ke2 Nxf1 Rhxf1 b6 Ned2,Ba6+
+French Defense: Knight Variation,None,e4
+French Defense: Knight Variation,e4,e6
+French Defense: Knight Variation,e4 e6,Nf3
+French Defense: Knight Variation,e4 e6 Nf3,d5
+French Defense: Knight Variation,e4 e6 Nf3 d5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5,exd5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5,Qe2+
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+,Be7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7,Nc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3,Nf6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6,d4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4,O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O,g4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4,Bxg4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4,Bg2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2,Nbd7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7,O-O
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O,c6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6,h3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3,Bh5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5,Bf4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4,Re8
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8,Rfe1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1,Bd6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6,Be3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3,Nb6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6,Ng5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5,h6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6,Nf3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3,Nc4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4,b3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3,Nxe3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3,fxe3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3,Bf4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4,Nd1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1,Nd7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7,Qd2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2,Bd6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6,c4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4,dxc4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4,bxc4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4,a5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5,a4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4,Bb4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4,Nc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3,Qc7
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7,Rad1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1,Bxc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3,Qxc3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3,Qg3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3,e4
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4,Re6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6,d5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5,Rf6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6,Re3
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6 Re3,Nc5
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6 Re3 Nc5,Ra1
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6 Re3 Nc5 Ra1,Rg6
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6 Re3 Nc5 Ra1 Rg6,Ra2
+French Defense: Knight Variation,e4 e6 Nf3 d5 exd5 exd5 Qe2+ Be7 Nc3 Nf6 d4 O-O g4 Bxg4 Bg2 Nbd7 O-O c6 h3 Bh5 Bf4 Re8 Rfe1 Bd6 Be3 Nb6 Ng5 h6 Nf3 Nc4 b3 Nxe3 fxe3 Bf4 Nd1 Nd7 Qd2 Bd6 c4 dxc4 bxc4 a5 a4 Bb4 Nc3 Qc7 Rad1 Bxc3 Qxc3 Qg3 e4 Re6 d5 Rf6 Re3 Nc5 Ra1 Rg6 Ra2,Nxe4
+French Defense #2,None,e4
+French Defense #2,e4,e6
+French Defense #2,e4 e6,Qh5
+French Defense #2,e4 e6 Qh5,g6
+French Defense #2,e4 e6 Qh5 g6,Qe5
+French Defense #2,e4 e6 Qh5 g6 Qe5,Nf6
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6,d4
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4,d6
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6,Qb5+
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+,Bd7
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7,Qxb7
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7,Bc6
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6,Qb3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3,Nxe4
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4,Qe3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3,Nd7
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7,f3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3,Nef6
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6,Bd3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3,Bg7
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7,Qf2
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2,Nh5
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5,g4
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4,Nf4
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4,Qg3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3,Nxd3+
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3 Nxd3+,cxd3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3 Nxd3+ cxd3,Bxd4
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3 Nxd3+ cxd3 Bxd4,Nc3
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3 Nxd3+ cxd3 Bxd4 Nc3,Nc5
+French Defense #2,e4 e6 Qh5 g6 Qe5 Nf6 d4 d6 Qb5+ Bd7 Qxb7 Bc6 Qb3 Nxe4 Qe3 Nd7 f3 Nef6 Bd3 Bg7 Qf2 Nh5 g4 Nf4 Qg3 Nxd3+ cxd3 Bxd4 Nc3 Nc5,Be3
+Four Knights Game: Italian Variation,None,e4
+Four Knights Game: Italian Variation,e4,e5
+Four Knights Game: Italian Variation,e4 e5,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3,Nc6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6,Bc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6,Nc3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3,Bc5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O,d3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3,Ne8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8,Bg5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6,Nd5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5,h6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6,Nxf6+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+,gxf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6,Bxh6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6,Re8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8,Ne1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1,d6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6,Qh5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5,Re7
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3,Be6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3 Be6,Bxe6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3 Be6 Bxe6,Rxe6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3 Be6 Bxe6 Rxe6,Qg4+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3 Be6 Bxe6 Rxe6 Qg4+,Kh8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O d3 Ne8 Bg5 Nf6 Nd5 h6 Nxf6+ gxf6 Bxh6 Re8 Ne1 d6 Qh5 Re7 Nf3 Be6 Bxe6 Rxe6 Qg4+ Kh8,Qg7#
+Italian Game: Two Knights Defense |  Knight Attack,None,e4
+Italian Game: Two Knights Defense |  Knight Attack,e4,e5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5,Nf3
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3,Nc6
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6,Bc4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4,Nf6
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6,Ng5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5,Qe7
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7,O-O
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O,Nxe4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4,Nxe4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4,h6
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6,Re1
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1,Qh4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4,g3
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3,Qd8
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8,Nec3
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3,Bc5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5,Kh1
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1,O-O
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O,f4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4,d6
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6,fxe5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5,dxe5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5,Rf1
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1,Qd7
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7,Nd5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5,b6
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6,Qh5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5,Nd8
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8,g4
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4,Bb7
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7,g5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5,Bxd5+
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+,Bxd5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5,Qxd5+
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+,Rf3
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3,hxg5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3 hxg5,Qxg5
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3 hxg5 Qxg5,Qxf3+
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3 hxg5 Qxg5 Qxf3+,Qg2
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3 hxg5 Qxg5 Qxf3+ Qg2,Qd1+
+Italian Game: Two Knights Defense |  Knight Attack,e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 Qe7 O-O Nxe4 Nxe4 h6 Re1 Qh4 g3 Qd8 Nec3 Bc5 Kh1 O-O f4 d6 fxe5 dxe5 Rf1 Qd7 Nd5 b6 Qh5 Nd8 g4 Bb7 g5 Bxd5+ Bxd5 Qxd5+ Rf3 hxg5 Qxg5 Qxf3+ Qg2 Qd1+,Qf1
+Four Knights Game: Italian Variation,None,e4
+Four Knights Game: Italian Variation,e4,e5
+Four Knights Game: Italian Variation,e4 e5,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3,Nc6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6,Bc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6,Nc3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3,Bc5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O,Ne1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1,d6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6,d3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3,Ne8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8,Qf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3,Nd4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4,Qg3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3,Bb4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4,Bh6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6,g6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6,Bxf8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8,Bxc3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3,Qe3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3,Kxf8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8,bxc3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3,Nc6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6,Qf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6,Rd1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1,Bg4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4,Qg3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3,Bxd1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1,h3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3,Be2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3,Nh5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5,Qg4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4,Bxf1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1,Kxf1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6,Ng5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5,Nxg4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4,Nxf7
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7,Nh2+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+,Kg1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1,Qh4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4,Kxh2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4 Kxh2,Qxf2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4 Kxh2 Qxf2,Be6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4 Kxh2 Qxf2 Be6,Nd8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4 Kxh2 Qxf2 Be6 Nd8,Nxd8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 d6 d3 Ne8 Qf3 Nd4 Qg3 Bb4 Bh6 g6 Bxf8 Bxc3 Qe3 Kxf8 bxc3 Nc6 Qf3 Nf6 Rd1 Bg4 Qg3 Bxd1 h3 Be2 Nf3 Nh5 Qg4 Bxf1 Kxf1 Nf6 Ng5 Nxg4 Nxf7 Nh2+ Kg1 Qh4 Kxh2 Qxf2 Be6 Nd8 Nxd8,Rxd8
+Four Knights Game: Italian Variation,None,e4
+Four Knights Game: Italian Variation,e4,e5
+Four Knights Game: Italian Variation,e4 e5,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3,Nc6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6,Bc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4,Nf6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6,Nc3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3,Bc5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O,O-O
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O,Ne1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1,Ne8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8,Qf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3,Qg5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5,d4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4,Qg6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6,dxc5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5,Nd4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4,Qd1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1,d6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6,g3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3,Bh3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3,Bxf1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1,Qxf1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1,Nxf3+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+,Kg2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2,Nh4+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+,Kh1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1,Nf3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3,Nd5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5,Qe6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6,Nxc7
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7,Qc8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8,Nxa8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8,Qxa8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8,cxd6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6,Nxd6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6,Be2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2,Nd4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4,Bd3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3,Qc8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8,c3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3,Ne6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6,Qe1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1,Nc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4,Bxc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4,Qxc4
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4,b3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3,Qc6
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6,Ba3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3,Rd8
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8,Be7
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7,Rd7
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7,Ba3
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3,Ng5
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5,Qd2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2,Rxd2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2,Kg2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2,Qxe4+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+,Kf1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+ Kf1,Qe2+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+ Kf1 Qe2+,Kg2
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+ Kf1 Qe2+ Kg2,Qxf2+
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+ Kf1 Qe2+ Kg2 Qxf2+,Kh1
+Four Knights Game: Italian Variation,e4 e5 Nf3 Nc6 Bc4 Nf6 Nc3 Bc5 O-O O-O Ne1 Ne8 Qf3 Qg5 d4 Qg6 dxc5 Nd4 Qd1 d6 g3 Bh3 Nf3 Bxf1 Qxf1 Nxf3+ Kg2 Nh4+ Kh1 Nf3 Nd5 Qe6 Nxc7 Qc8 Nxa8 Qxa8 cxd6 Nxd6 Be2 Nd4 Bd3 Qc8 c3 Ne6 Qe1 Nc4 Bxc4 Qxc4 b3 Qc6 Ba3 Rd8 Be7 Rd7 Ba3 Ng5 Qd2 Rxd2 Kg2 Qxe4+ Kf1 Qe2+ Kg2 Qxf2+ Kh1,Qxh2#
+Philidor Defense #3,None,e4
+Philidor Defense #3,e4,e5
+Philidor Defense #3,e4 e5,Nf3
+Philidor Defense #3,e4 e5 Nf3,d6
+Philidor Defense #3,e4 e5 Nf3 d6,Bc4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4,Be6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6,d3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3,Bxc4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4,dxc4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4,c5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5,O-O
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O,h6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6,Nc3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3,Nf6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6,Nd5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5,Nxe4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4,Re1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1,Nf6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6,Nxf6+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+,Qxf6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6,Qd5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5,Nd7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7,Qxb7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7,Rb8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8,Qxa7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7,Be7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7,Bd2
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2,Qf5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5,c3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3,Qc2
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2,Rab1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1,O-O
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O,Rec1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1,Qd3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3,b4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4,Rfd8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8,bxc5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5,dxc5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5,Rxb8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8,Rxb8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8,Rd1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1,Rb1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1,Qa8+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+,Bf8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8,Qa4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4,Rxd1+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+,Qxd1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1,e4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4,Ne1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1,Qd6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6,h3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3,Qe5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5,a4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4,Bd6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6,f4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4,Qf5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5,Be3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3,Bxf4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4,Bxf4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4,Qxf4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4,Qxd7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7,Qe3+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+,Kh2
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2,Qxe1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1,Qe8+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+,Kh7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7,Qxf7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7,e3
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3,Qf5+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+,Kg8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8,Qd5+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+,Kh7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7,Qxc5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5,e2
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2,Qf5+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+,Kg8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8,Qe6+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+,Kh7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7,Qe4+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+,Kg8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8,a5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5,Qd1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1,Qa8+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+,Kh7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7,Qe4+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+,Kg8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8,Qd5+
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+,Qxd5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5,cxd5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5,e1=Q
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q,a6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6,Qa1
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1,d6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6,Qxa6
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6,d7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7,Qa8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7 Qa8,c4
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7 Qa8 c4,Qd8
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7 Qa8 c4 Qd8,c5
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7 Qa8 c4 Qd8 c5,Qxd7
+Philidor Defense #3,e4 e5 Nf3 d6 Bc4 Be6 d3 Bxc4 dxc4 c5 O-O h6 Nc3 Nf6 Nd5 Nxe4 Re1 Nf6 Nxf6+ Qxf6 Qd5 Nd7 Qxb7 Rb8 Qxa7 Be7 Bd2 Qf5 c3 Qc2 Rab1 O-O Rec1 Qd3 b4 Rfd8 bxc5 dxc5 Rxb8 Rxb8 Rd1 Rb1 Qa8+ Bf8 Qa4 Rxd1+ Qxd1 e4 Ne1 Qd6 h3 Qe5 a4 Bd6 f4 Qf5 Be3 Bxf4 Bxf4 Qxf4 Qxd7 Qe3+ Kh2 Qxe1 Qe8+ Kh7 Qxf7 e3 Qf5+ Kg8 Qd5+ Kh7 Qxc5 e2 Qf5+ Kg8 Qe6+ Kh7 Qe4+ Kg8 a5 Qd1 Qa8+ Kh7 Qe4+ Kg8 Qd5+ Qxd5 cxd5 e1=Q a6 Qa1 d6 Qxa6 d7 Qa8 c4 Qd8 c5 Qxd7,c6
+Queen's Pawn Game,None,d4
+Queen's Pawn Game,d4,d5
+Queen's Pawn Game,d4 d5,h3
+Queen's Pawn Game,d4 d5 h3,Nc6
+Queen's Pawn Game,d4 d5 h3 Nc6,Nf3
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3,Nf6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6,Bg5
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5,h6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6,Bxf6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6,exf6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6,e3
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3,Bb4+
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+,c3
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3,Bd6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6,Bb5
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5,Bd7
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7,O-O
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O,a6
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6,Ba4
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4,b5
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4 b5,Bb3
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4 b5 Bb3,Na5
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4 b5 Bb3 Na5,Bxd5
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4 b5 Bb3 Na5 Bxd5,Nc4
+Queen's Pawn Game,d4 d5 h3 Nc6 Nf3 Nf6 Bg5 h6 Bxf6 exf6 e3 Bb4+ c3 Bd6 Bb5 Bd7 O-O a6 Ba4 b5 Bb3 Na5 Bxd5 Nc4,Bxa8
+Italian Game: Anti-Fried Liver Defense,None,e4
+Italian Game: Anti-Fried Liver Defense,e4,e5
+Italian Game: Anti-Fried Liver Defense,e4 e5,Nf3
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3,Nc6
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6,Bc4
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4,h6
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6,O-O
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O,Bc5
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5,d3
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5 d3,Nf6
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5 d3 Nf6,Nc3
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5 d3 Nf6 Nc3,Ng4
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5 d3 Nf6 Nc3 Ng4,h3
+Italian Game: Anti-Fried Liver Defense,e4 e5 Nf3 Nc6 Bc4 h6 O-O Bc5 d3 Nf6 Nc3 Ng4 h3,Nxf2
+Horwitz Defense,None,d4
+Horwitz Defense,d4,e6
+Horwitz Defense,d4 e6,Nc3
+Sicilian Defense: Bowdler Attack,None,e4
+Sicilian Defense: Bowdler Attack,e4,c5
+Sicilian Defense: Bowdler Attack,e4 c5,Bc4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4,Nf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6,Nc3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3,d6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6,Nf3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3,g6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6,Ng5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5,e6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6,d3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3,Bg7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3 Bg7,O-O
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3 Bg7 O-O,Bh6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3 Bg7 O-O Bh6,Nxe6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3 Bg7 O-O Bh6 Nxe6,fxe6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 Nc3 d6 Nf3 g6 Ng5 e6 d3 Bg7 O-O Bh6 Nxe6 fxe6,Bxh6
+English Opening: King's English Variation |  Reversed Closed Sicilian,None,c4
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4,Nc6

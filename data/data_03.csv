@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8,c3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3,Nd5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5,Bc2
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2,Rc7
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7,Ba3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3,b5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5,Rad1
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1,Rd7
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7,c4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7 c4,e6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7 c4 e6,cxd5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7 c4 e6 cxd5,exd5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7 c4 e6 cxd5 exd5,Rxe8+
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1 Re8 c3 Nd5 Bc2 Rc7 Ba3 b5 Rad1 Rd7 c4 e6 cxd5 exd5 Rxe8+,Bf8
+Queen's Gambit Accepted: Central Variation |  Greco Variation,None,d4
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4,d5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5,c4
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4,dxc4
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4,e4
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4,b5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5,Na3
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3,a6
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6,Qf3
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3,f6
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6,e5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5,fxe5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5,Qxa8
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8,Nd7
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7,dxe5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5,Nxe5
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5 Nxe5,Qf3
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5 Nxe5 Qf3,Qd4
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5 Nxe5 Qf3 Qd4,Qh5+
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5 Nxe5 Qf3 Qd4 Qh5+,g6
+Queen's Gambit Accepted: Central Variation |  Greco Variation,d4 d5 c4 dxc4 e4 b5 Na3 a6 Qf3 f6 e5 fxe5 Qxa8 Nd7 dxe5 Nxe5 Qf3 Qd4 Qh5+ g6,Qd1
+Sicilian Defense: Bowdler Attack,None,e4
+Sicilian Defense: Bowdler Attack,e4,c5
+Sicilian Defense: Bowdler Attack,e4 c5,Bc4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4,Nf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6,d3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3,d6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3 d6,Nf3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3 d6 Nf3,g6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3 d6 Nf3 g6,Ng5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3 d6 Nf3 g6 Ng5,Bg7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 d3 d6 Nf3 g6 Ng5 Bg7,Nxf7
+Robatsch (Modern) Defense,None,d4
+Robatsch (Modern) Defense,d4,g6
+Robatsch (Modern) Defense,d4 g6,e4
+Robatsch (Modern) Defense,d4 g6 e4,Bg7
+Robatsch (Modern) Defense,d4 g6 e4 Bg7,Bf4
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4,e6
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6,Bc4
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4,Ne7
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7,Nf3
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3,h6
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6,Ne5
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5,O-O
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O,Qg4
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4,d5
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5,exd5
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5,exd5
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5,Bd3
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3,Bxg4
+Robatsch (Modern) Defense,d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4,Bxg6
+Blackmar-Diemer Gambit: Tartakower Variation,None,d4
+Blackmar-Diemer Gambit: Tartakower Variation,d4,d5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5,e4
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4,dxe4
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4,Nc3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3,Nf6
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6,f3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3,exf3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3,Nxf3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3,Bf5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5,Bd3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3,Bxd3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3,Qxd3
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3,Nc6
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6,O-O
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O,Nb4
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4,Qf5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5,Nc6
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6,d5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5,Nxd5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5,Nxd5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5,e6
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6,Qf4
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6 Qf4,exd5
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6 Qf4 exd5,Nd4
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6 Qf4 exd5 Nd4,Ne7
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6 Qf4 exd5 Nd4 Ne7,Qxf7+
+Blackmar-Diemer Gambit: Tartakower Variation,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Bf5 Bd3 Bxd3 Qxd3 Nc6 O-O Nb4 Qf5 Nc6 d5 Nxd5 Nxd5 e6 Qf4 exd5 Nd4 Ne7 Qxf7+,Kd7
+Indian Game,None,d4
+Indian Game,d4,Nf6
+Indian Game,d4 Nf6,Nc3
+Indian Game,d4 Nf6 Nc3,d6
+Indian Game,d4 Nf6 Nc3 d6,d5
+Indian Game,d4 Nf6 Nc3 d6 d5,g6
+Indian Game,d4 Nf6 Nc3 d6 d5 g6,e4
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4,Bg7
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7,Nf3
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3,O-O
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O,Ng5
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5,a6
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6,Qf3
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3,c6
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6,Qg3
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3,b5
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5,Qh4
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5 Qh4,h6
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5 Qh4 h6,Nf3
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5 Qh4 h6 Nf3,g5
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5 Qh4 h6 Nf3 g5,Qxg5
+Indian Game,d4 Nf6 Nc3 d6 d5 g6 e4 Bg7 Nf3 O-O Ng5 a6 Qf3 c6 Qg3 b5 Qh4 h6 Nf3 g5 Qxg5,hxg5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,None,e4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4,c5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5,Nf3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3,d6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6,d4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4,cxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4,Nxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4,Nf6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6,Nc3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3,g6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6,Be3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3,Bg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7,Bc4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4,O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O,f3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3,Nc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6,Qd2
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2,a6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6,O-O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O,b5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5,Bb3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3,Na5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5,Kb1
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1,Nxb3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3,cxb3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3,d5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5,Nc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6,Qd7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7,exd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5,Nxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5,Qxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5,Qf5+
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5 Qf5+,Qxf5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5 Qf5+ Qxf5,Bxf5+
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5 Qf5+ Qxf5 Bxf5+,Ka1
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5 Qf5+ Qxf5 Bxf5+ Ka1,Rac8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 Bc4 O-O f3 Nc6 Qd2 a6 O-O-O b5 Bb3 Na5 Kb1 Nxb3 cxb3 d5 Nc6 Qd7 exd5 Nxd5 Qxd5 Qf5+ Qxf5 Bxf5+ Ka1 Rac8,Nxe7+
+English Opening: King's English Variation |  Reversed Sicilian,None,c4
+English Opening: King's English Variation |  Reversed Sicilian,c4,e5
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5,Nc3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3,Bc5
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5,g3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3,Nc6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6,Bg2
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2,Nf6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6,Nf3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3,b6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6,Nxe5
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5,Bb7
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7,Nd3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3,Bd4
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4,O-O
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O,Bxc3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3,dxc3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3,O-O
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O,Nb4
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4,Re8
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8,Nxc6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6,Bxc6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6,Bxc6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6,dxc6
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6,Be3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3,Ng4
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4,Qxd8
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8,Raxd8
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8,Rad1
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8 Rad1,Nxe3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8 Rad1 Nxe3,fxe3
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8 Rad1 Nxe3 fxe3,Rxd1
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8 Rad1 Nxe3 fxe3 Rxd1,Rxd1
+English Opening: King's English Variation |  Reversed Sicilian,c4 e5 Nc3 Bc5 g3 Nc6 Bg2 Nf6 Nf3 b6 Nxe5 Bb7 Nd3 Bd4 O-O Bxc3 dxc3 O-O Nb4 Re8 Nxc6 Bxc6 Bxc6 dxc6 Be3 Ng4 Qxd8 Raxd8 Rad1 Nxe3 fxe3 Rxd1 Rxd1,Rxe3
+Sicilian Defense: Dragon Variation,None,e4
+Sicilian Defense: Dragon Variation,e4,c5
+Sicilian Defense: Dragon Variation,e4 c5,Nf3
+Sicilian Defense: Dragon Variation,e4 c5 Nf3,d6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6,d4
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4,cxd4
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4,Nxd4
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4,Nf6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6,Nc3
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3,g6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6,Bg5
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5,Bg7
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7,Bxf6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6,Bxf6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6,Bb5+
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+,Bd7
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7,Bxd7+
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+,Nxd7
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7,O-O
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O,Bxd4
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4,Qxd4
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4,O-O
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O,f3
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3,Qb6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6,Qxb6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6,Nxb6
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6,Nd5
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6 Nd5,Nxd5
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6 Nd5 Nxd5,exd5
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6 Nd5 Nxd5 exd5,Rac8
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6 Nd5 Nxd5 exd5 Rac8,c3
+Sicilian Defense: Dragon Variation,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Bg5 Bg7 Bxf6 Bxf6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Bxd4 Qxd4 O-O f3 Qb6 Qxb6 Nxb6 Nd5 Nxd5 exd5 Rac8 c3,Rc5
+Sicilian Defense: Closed Variation,None,e4
+Sicilian Defense: Closed Variation,e4,c5
+Sicilian Defense: Closed Variation,e4 c5,Nc3
+Sicilian Defense: Closed Variation,e4 c5 Nc3,d6
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6,Bc4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4,Nf6
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6,Qe2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2,g6
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6,e5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5,dxe5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5,Qxe5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5,Qd4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4,Bb5+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+,Bd7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7,Bxd7+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+,Nbxd7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7,f4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4,Nxe5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5,fxe5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5,Qxe5+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+,Nge2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2,Ne4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4,Nxe4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4,Qxe4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4,O-O
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O,Qxc2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2,Nf4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4,Bh6
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6,Nd5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5,Rc8
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8,b4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4,Bxd2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2,b5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5,Bxc1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1,Raxc1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1,Qxa2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2,b6
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6,Qxd5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5,bxa7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7,Qd4+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+,Kh1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1,e5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5,Ra1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1,O-O
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O,Rfb1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1,Qd7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7,g3
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3,Qc6+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+,Kg1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1,c4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4,Re1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1,Qc5+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+,Kf1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1,Ra8
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8,Reb1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1,Rxa7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7,Rxa7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7,Qxa7
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7,Rd1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1,Qa4
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4,Rd5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5,c3
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3,Ke1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1,c2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2,Kd2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2,Qb3
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2 Qb3,Rxe5
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2 Qb3 Rxe5,Qb2
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2 Qb3 Rxe5 Qb2,Re1
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2 Qb3 Rxe5 Qb2 Re1,c1=Q+
+Sicilian Defense: Closed Variation,e4 c5 Nc3 d6 Bc4 Nf6 Qe2 g6 e5 dxe5 Qxe5 Qd4 Bb5+ Bd7 Bxd7+ Nbxd7 f4 Nxe5 fxe5 Qxe5+ Nge2 Ne4 Nxe4 Qxe4 O-O Qxc2 Nf4 Bh6 Nd5 Rc8 b4 Bxd2 b5 Bxc1 Raxc1 Qxa2 b6 Qxd5 bxa7 Qd4+ Kh1 e5 Ra1 O-O Rfb1 Qd7 g3 Qc6+ Kg1 c4 Re1 Qc5+ Kf1 Ra8 Reb1 Rxa7 Rxa7 Qxa7 Rd1 Qa4 Rd5 c3 Ke1 c2 Kd2 Qb3 Rxe5 Qb2 Re1 c1=Q+,Kd3
+Sicilian Defense: Smith-Morra Gambit #2,None,e4
+Sicilian Defense: Smith-Morra Gambit #2,e4,c5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5,d4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4,cxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4,Qxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4,Nc6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6,Qa4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4,Nf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6,Nf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3,g6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6,Bg5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5,Qa5+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+,Qxa5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5,Nxa5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5,Nbd2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2,Bg7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7,Bxf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6,Bxf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6,O-O-O
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O,e6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6,e5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5,Bg5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5,Bd3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3,Bxd2+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+,Nxd2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+ Nxd2,O-O
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+ Nxd2 O-O,h4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+ Nxd2 O-O h4,h6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+ Nxd2 O-O h4 h6,Nf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nf3 g6 Bg5 Qa5+ Qxa5 Nxa5 Nbd2 Bg7 Bxf6 Bxf6 O-O-O e6 e5 Bg5 Bd3 Bxd2+ Nxd2 O-O h4 h6 Nf3,f6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,None,e4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4,c5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5,Nf3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3,d6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6,d4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4,cxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4,Nxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4,Nf6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6,Nc3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3,g6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6,Be3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3,Bg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7,f3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3,O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O,Qd2
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2,Nc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6,O-O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O,d5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5,exd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5,Nxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5,Nxc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6,bxc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6,Nxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5,cxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5,Qxd5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5,Qc7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7,Qc5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5,Qb7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7,b3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3,Bf5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5,Bd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3,Rac8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8,Qa3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3,Bxd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3,Rxd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3,Qc7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7,c4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4,Qe5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5,Kc2
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2,Rfd8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8,Rhd1
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1,Rxd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3,Rxd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3,Rc6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6,Rd8+
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+,Bf8
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8,Qxa7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7,Rd6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6,Rxd6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6,exd6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6,Qd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4,Qf5+
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+,Qd3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3,Qf6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6,Bd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4,Qf5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5,Qxf5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5,gxf5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5,a4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4,Bg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7,Bxg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7 Bxg7,Kxg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7 Bxg7 Kxg7,a5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7 Bxg7 Kxg7 a5,f4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7 Bxg7 Kxg7 a5 f4,a6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Modern Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O Qd2 Nc6 O-O-O d5 exd5 Nxd5 Nxc6 bxc6 Nxd5 cxd5 Qxd5 Qc7 Qc5 Qb7 b3 Bf5 Bd3 Rac8 Qa3 Bxd3 Rxd3 Qc7 c4 Qe5 Kc2 Rfd8 Rhd1 Rxd3 Rxd3 Rc6 Rd8+ Bf8 Qxa7 Rd6 Rxd6 exd6 Qd4 Qf5+ Qd3 Qf6 Bd4 Qf5 Qxf5 gxf5 a4 Bg7 Bxg7 Kxg7 a5 f4 a6,Kf8
+Sicilian Defense: Smith-Morra Gambit #2,None,e4
+Sicilian Defense: Smith-Morra Gambit #2,e4,c5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5,d4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4,cxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4,Qxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4,Nc6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6,Qe3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3,Nf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6,e5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5,Qa5+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+,c3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3,Nxe5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5,f4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4,Neg4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4,Qf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3,Ne5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5,fxe5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5,Qxe5+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+,Be2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2,d5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5,Bf4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4,Qe4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4,Nd2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2,Qxf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3,Ndxf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3,Bg4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4,Rd1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1,Bxf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3,Bxf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3,e6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6,c4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4,dxc4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4,Ne2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2,Bb4+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+,Nc3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3,Rd8
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3 Rd8,O-O
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3 Rd8 O-O,Rd3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3 Rd8 O-O Rd3,Rxd3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3 Rd8 O-O Rd3 Rxd3,cxd3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qe3 Nf6 e5 Qa5+ c3 Nxe5 f4 Neg4 Qf3 Ne5 fxe5 Qxe5+ Be2 d5 Bf4 Qe4 Nd2 Qxf3 Ndxf3 Bg4 Rd1 Bxf3 Bxf3 e6 c4 dxc4 Ne2 Bb4+ Nc3 Rd8 O-O Rd3 Rxd3 cxd3,Rd1
+Sicilian Defense: Bowdler Attack,None,e4
+Sicilian Defense: Bowdler Attack,e4,c5
+Sicilian Defense: Bowdler Attack,e4 c5,Bc4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4,Nc6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6,Nc3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3,d6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6,d3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3,Nf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6,Nge2
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2,g6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6,O-O
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O,Nd4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4,f4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4,e5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5,fxe5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5,dxe5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5,Bg5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5,Bg7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7,Nd5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5,Be6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6,Bxf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6,Bxf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6,Nxf6+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+,Ke7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7,Bxe6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6,fxe6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6,c3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3,Nxe2+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+,Qxe2
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2,Rf8
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8,Nxh7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7,Rxf1+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+,Rxf1
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1,Ke8
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8,Qg4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4,Ke7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7,Qxg6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6,Qxd3
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3,Qf6+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+,Kd6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6,Ng5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5,Qe3+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+,Kh1
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1,Re8
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1 Re8,Nf7+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1 Re8 Nf7+,Kd7
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1 Re8 Nf7+ Kd7,Nxe5+
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1 Re8 Nf7+ Kd7 Nxe5+,Kd6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nc6 Nc3 d6 d3 Nf6 Nge2 g6 O-O Nd4 f4 e5 fxe5 dxe5 Bg5 Bg7 Nd5 Be6 Bxf6 Bxf6 Nxf6+ Ke7 Bxe6 fxe6 c3 Nxe2+ Qxe2 Rf8 Nxh7 Rxf1+ Rxf1 Ke8 Qg4 Ke7 Qxg6 Qxd3 Qf6+ Kd6 Ng5 Qe3+ Kh1 Re8 Nf7+ Kd7 Nxe5+ Kd6,Nc4+
+Scandinavian Defense,None,e4
+Scandinavian Defense,e4,d5
+Scandinavian Defense,e4 d5,exd5
+Sicilian Defense: Bowdler Attack,None,e4
+Sicilian Defense: Bowdler Attack,e4,c5
+Sicilian Defense: Bowdler Attack,e4 c5,Bc4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4,Nf6
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6,e5
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 e5,Ne4
+Sicilian Defense: Bowdler Attack,e4 c5 Bc4 Nf6 e5 Ne4,Nf3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,None,e4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4,c5
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5,Nf3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3,d6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6,d4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4,cxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4,Nxd4
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4,Nf6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6,Nc3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3,g6
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6,Be3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3,Bg7
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7,f3
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3,O-O
+Sicilian Defense: Dragon Variation |  Yugoslav Attack |  Main Line,e4 c5 Nf3 d6 d4 cxd4 Nxd4 Nf6 Nc3 g6 Be3 Bg7 f3 O-O,Qd2

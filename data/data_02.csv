@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6,Nc3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3,e5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5,g3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3,Bc5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5,Bg2
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2,Nge7
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7,e3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3,b6
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6,a3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3,Bb7
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7,b4
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4,Bd6
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6,Nb5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5,O-O
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O,Nxd6
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6,cxd6
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6,Ne2
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2,Nf5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5,Nc3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3,d5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5,Nxd5
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5,Nce7
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7,Nxe7+
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+,Qxe7
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7,Bxb7
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7,Qe8
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8,O-O
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O,Rb8
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8,Bg2
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8 Bg2,Rc8
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8 Bg2 Rc8,d3
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8 Bg2 Rc8 d3,e4
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8 Bg2 Rc8 d3 e4,Bxe4
+English Opening: King's English Variation |  Reversed Closed Sicilian,c4 Nc6 Nc3 e5 g3 Bc5 Bg2 Nge7 e3 b6 a3 Bb7 b4 Bd6 Nb5 O-O Nxd6 cxd6 Ne2 Nf5 Nc3 d5 Nxd5 Nce7 Nxe7+ Qxe7 Bxb7 Qe8 O-O Rb8 Bg2 Rc8 d3 e4 Bxe4,Nxe3
+Sicilian Defense: Smith-Morra Gambit #2,None,e4
+Sicilian Defense: Smith-Morra Gambit #2,e4,c5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5,d4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4,cxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4,Qxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4,Nc6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6,Qa4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4,e5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 e5,Be3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 e5 Be3,Nf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 e5 Be3 Nf6,Nf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 e5 Be3 Nf6 Nf3,h6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 e5 Be3 Nf6 Nf3 h6,Nc3
+Queen's Pawn Game: Chigorin Variation,None,d4
+Queen's Pawn Game: Chigorin Variation,d4,d5
+Queen's Pawn Game: Chigorin Variation,d4 d5,Nc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3,Nf6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6,Bf4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4,Bf5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5,Nf3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3,e6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6,e3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3,Be7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7,Bb5+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+,c6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6,Bd3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3,Bxd3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3,Qxd3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3,O-O
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O,Bg5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5,Ng4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4,Bxe7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7,Qxe7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7,O-O
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O,Qg5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5,h3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3,Qf6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6,hxg4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4,Qh6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6,Na4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4,b5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5,Nc5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5,Kh8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8,Nb7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7,g6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6,Nd6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6,Na6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6,Ne5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5,Kg8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8,Ndxf7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7,Rxf7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7,Nxf7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7,Kxf7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7,f4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4,g5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5,fxg5+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+,Kg7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7,gxh6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+,Kxh6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6,Rf6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+,Kg7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7,g5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5,h6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6,Qg6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+,Kh8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8,Qxh6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+,Kg8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8,Rxe6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6,Kf7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7,Qf6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+,Kg8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8,Re8+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+,Rxe8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8,Qg6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+,Kf8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8,Qh6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+,Kg8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+ Kg8,g6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+ Kg8 g6,Nb4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+ Kg8 g6 Nb4,Rf1
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+ Kg8 g6 Nb4 Rf1,Nxc2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Bf4 Bf5 Nf3 e6 e3 Be7 Bb5+ c6 Bd3 Bxd3 Qxd3 O-O Bg5 Ng4 Bxe7 Qxe7 O-O Qg5 h3 Qf6 hxg4 Qh6 Na4 b5 Nc5 Kh8 Nb7 g6 Nd6 Na6 Ne5 Kg8 Ndxf7 Rxf7 Nxf7 Kxf7 f4 g5 fxg5+ Kg7 gxh6+ Kxh6 Rf6+ Kg7 g5 h6 Qg6+ Kh8 Qxh6+ Kg8 Rxe6 Kf7 Qf6+ Kg8 Re8+ Rxe8 Qg6+ Kf8 Qh6+ Kg8 g6 Nb4 Rf1 Nxc2,Qh7#
+Scotch Game: Haxo Gambit,None,e4
+Scotch Game: Haxo Gambit,e4,e5
+Scotch Game: Haxo Gambit,e4 e5,Nf3
+Scotch Game: Haxo Gambit,e4 e5 Nf3,Nc6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6,d4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4,exd4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4,Bc4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4,Bc5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5,c3
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3,dxc3
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3,Bxf7+
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+,Kxf7
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7,Qd5+
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+,Ke8
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8,Qxc5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5,Qe7
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7,Qxe7+
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+,Ncxe7
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7,Nxc3
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3,d6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6,O-O
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O,Bg4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4,Nd4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4,Nf6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6,f3
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3,Bh5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5,Bg5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5,h6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6,Bxf6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6,gxf6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6,Ne6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6,Bf7
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7,Nxc7+
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+,Kd7
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7,Nxa8
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8,Rxa8
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8,Rfd1
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1,Bc4
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1 Bc4,b3
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1 Bc4 b3,Ba6
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1 Bc4 b3 Ba6,Nd5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1 Bc4 b3 Ba6 Nd5,Nxd5
+Scotch Game: Haxo Gambit,e4 e5 Nf3 Nc6 d4 exd4 Bc4 Bc5 c3 dxc3 Bxf7+ Kxf7 Qd5+ Ke8 Qxc5 Qe7 Qxe7+ Ncxe7 Nxc3 d6 O-O Bg4 Nd4 Nf6 f3 Bh5 Bg5 h6 Bxf6 gxf6 Ne6 Bf7 Nxc7+ Kd7 Nxa8 Rxa8 Rfd1 Bc4 b3 Ba6 Nd5 Nxd5,Rxd5
+Queen's Pawn Game: Chigorin Variation,None,d4
+Queen's Pawn Game: Chigorin Variation,d4,d5
+Queen's Pawn Game: Chigorin Variation,d4 d5,Nc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3,Nf6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6,Nf3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3,Nc6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6,e3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3,Bf5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5,h4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4,e6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6,g3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3,Bb4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4,a3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3,Bxc3+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+,bxc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3,Ne4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4,Rh2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2,Nxc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3,Qd2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2,Ne4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4,Qe2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2,Nc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3,Qd2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2,Ne4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4,Qd3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3,Ng5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5,Qb5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5,Nxf3+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+,Kd1
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1,Nxh2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2,Bd3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3,Bg4+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+,Kd2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2,Nf3+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+,Kc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3,a6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6,Qxb7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7,Qb8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8,Qxc6+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+,Kd8
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8,Bxa6
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6,e5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5,Bb5
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5,exd4+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+,Kb3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3,dxe3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3,Qd7+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+,Bxd7
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7,Kb4
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7 Kb4,Qxb5+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7 Kb4 Qxb5+,Kc3
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7 Kb4 Qxb5+ Kc3,Qc4+
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7 Kb4 Qxb5+ Kc3 Qc4+,Kb2
+Queen's Pawn Game: Chigorin Variation,d4 d5 Nc3 Nf6 Nf3 Nc6 e3 Bf5 h4 e6 g3 Bb4 a3 Bxc3+ bxc3 Ne4 Rh2 Nxc3 Qd2 Ne4 Qe2 Nc3 Qd2 Ne4 Qd3 Ng5 Qb5 Nxf3+ Kd1 Nxh2 Bd3 Bg4+ Kd2 Nf3+ Kc3 a6 Qxb7 Qb8 Qxc6+ Kd8 Bxa6 e5 Bb5 exd4+ Kb3 dxe3 Qd7+ Bxd7 Kb4 Qxb5+ Kc3 Qc4+ Kb2,Rb8#
+Slav Defense,None,d4
+Slav Defense,d4,d5
+Slav Defense,d4 d5,c4
+Slav Defense,d4 d5 c4,c6
+Slav Defense,d4 d5 c4 c6,e3
+Slav Defense,d4 d5 c4 c6 e3,dxc4
+Slav Defense,d4 d5 c4 c6 e3 dxc4,Bxc4
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4,Nf6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6,Nc3
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3,e6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6,e4
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4,e5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5,d5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5,cxd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5,exd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5,Bd6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6,Bg5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5,O-O
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O,Bxf6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6,Qxf6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6,Nf3
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3,Bc5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5,O-O
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O,Qg6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6,Nxe5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5,Qg5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5,Nf3
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3,Qh6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6,Nb5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5,Na6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6,d6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6,Rd8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8,Qd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5,Bxd6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6,Qxf7+
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+,Kh8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8,Nxd6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6,Qxd6
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6,Rfd1
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1,Qf8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8,Rxd8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8,Qxd8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8,h3
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3,Bf5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5,Qxf5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5,Qf8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8,Qd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5,Nc7
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5 Nc7,Qxb7
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5 Nc7 Qxb7,Qb8
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5 Nc7 Qxb7 Qb8,Qd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5 Nc7 Qxb7 Qb8 Qd5,Nxd5
+Slav Defense,d4 d5 c4 c6 e3 dxc4 Bxc4 Nf6 Nc3 e6 e4 e5 d5 cxd5 exd5 Bd6 Bg5 O-O Bxf6 Qxf6 Nf3 Bc5 O-O Qg6 Nxe5 Qg5 Nf3 Qh6 Nb5 Na6 d6 Rd8 Qd5 Bxd6 Qxf7+ Kh8 Nxd6 Qxd6 Rfd1 Qf8 Rxd8 Qxd8 h3 Bf5 Qxf5 Qf8 Qd5 Nc7 Qxb7 Qb8 Qd5 Nxd5,Bxd5
+Queen's Gambit Refused: Marshall Defense,None,d4
+Queen's Gambit Refused: Marshall Defense,d4,d5
+Queen's Gambit Refused: Marshall Defense,d4 d5,c4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4,Nf6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6,Nc3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3,Nc6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6,Nf3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3,e6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6,e3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3,Bd6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6,Bd3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3,Ne4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4,Bxe4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4,dxe4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4,Ne5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5,f5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5,Nxc6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6,bxc6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6,Qh5+
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+,g6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6,Qd1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1,O-O
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O,O-O
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O,Bb4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4,a3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3,Bxc3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3,bxc3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3,Qe7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7,h3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3,c5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5,d5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5,exd5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5,cxd5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5,Ba6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6,a4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4,Bxf1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1,Qxf1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1,a5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5,Ba3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3,Qe5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5,Qd1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1,f4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4,exf4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4,Qxf4
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4,Bxc5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5,Rf7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7,d6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6,cxd6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6,Bb6
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6,Rb8
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8,Ba7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7,Rxa7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7,Qd5+
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+,Kg7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7,Qd4+
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+,Kf8
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8,Qxa7
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7,Re8
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8,Qxa5
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5,e3
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3,Rf1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3 Rf1,exf2+
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3 Rf1 exf2+,Rxf2
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3 Rf1 exf2+ Rxf2,Re1+
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3 Rf1 exf2+ Rxf2 Re1+,Rf1
+Queen's Gambit Refused: Marshall Defense,d4 d5 c4 Nf6 Nc3 Nc6 Nf3 e6 e3 Bd6 Bd3 Ne4 Bxe4 dxe4 Ne5 f5 Nxc6 bxc6 Qh5+ g6 Qd1 O-O O-O Bb4 a3 Bxc3 bxc3 Qe7 h3 c5 d5 exd5 cxd5 Ba6 a4 Bxf1 Qxf1 a5 Ba3 Qe5 Qd1 f4 exf4 Qxf4 Bxc5 Rf7 d6 cxd6 Bb6 Rb8 Ba7 Rxa7 Qd5+ Kg7 Qd4+ Kf8 Qxa7 Re8 Qxa5 e3 Rf1 exf2+ Rxf2 Re1+ Rf1,Rxf1#
+Sicilian Defense: Smith-Morra Gambit #2,None,e4
+Sicilian Defense: Smith-Morra Gambit #2,e4,c5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5,d4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4,cxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4,Qxd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4,Nc6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6,Qa4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4,Nf6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6,Nc3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3,g6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6,Nf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3,Bg7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7,Bb5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5,O-O
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O,O-O
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O,a6
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6,Bg5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5,axb5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5,Qxa8
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8,d5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5,Rab1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1,dxe4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4,Rbd1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1,Qa5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5,Qxa5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5,Nxa5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5,Nxb5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5,exf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3,gxf3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3,Nc4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4,Na7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7,Nxb2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2,Rb1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1,Nc4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4,Rb4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4,Nd2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2,Rd1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1,Nxf3+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+,Kf1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1,Nxh2+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+,Kg1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1,Nf3+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+,Kg2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2,Nxg5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5,Rbd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4,Bh3+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+,Kg3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3,Nge4+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+,Kxh3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3,Nxf2+
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+,Kg2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2,Nxd1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1,Rxd1
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1,Ne4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4,Rd4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4,Nc3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3,Rb4
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4,Nxa2
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2,Rxb7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2 Rxb7,Nc3
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2 Rxb7 Nc3,Rxe7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2 Rxb7 Nc3 Rxe7,Nd5
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2 Rxb7 Nc3 Rxe7 Nd5,Rc7
+Sicilian Defense: Smith-Morra Gambit #2,e4 c5 d4 cxd4 Qxd4 Nc6 Qa4 Nf6 Nc3 g6 Nf3 Bg7 Bb5 O-O O-O a6 Bg5 axb5 Qxa8 d5 Rab1 dxe4 Rbd1 Qa5 Qxa5 Nxa5 Nxb5 exf3 gxf3 Nc4 Na7 Nxb2 Rb1 Nc4 Rb4 Nd2 Rd1 Nxf3+ Kf1 Nxh2+ Kg1 Nf3+ Kg2 Nxg5 Rbd4 Bh3+ Kg3 Nge4+ Kxh3 Nxf2+ Kg2 Nxd1 Rxd1 Ne4 Rd4 Nc3 Rb4 Nxa2 Rxb7 Nc3 Rxe7 Nd5 Rc7,Nxc7
+Sicilian Defense: Canal Attack |  Main Line,None,e4
+Sicilian Defense: Canal Attack |  Main Line,e4,c5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5,Nf3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3,d6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6,Bb5+
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+,Bd7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7,Bxd7+
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+,Nxd7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7,O-O
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O,Ngf6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6,Nc3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3,g6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6,d3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3,Bg7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7,Bg5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5,O-O
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O,Nd5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5,Nxd5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5,exd5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5,Bxb2
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2,Bh6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6,Bg7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7,Bxg7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7,Kxg7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7,Ng5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5,Kg8
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8,d4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4,c4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4,c3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3,e5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5,Re1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1,Qxg5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5,Qa4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4,Rfd8
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8,Qa3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3,exd4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4,cxd4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4,Qxd5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5,Rad1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1,Re8
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8,Re3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3,Rxe3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3,fxe3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3,b6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6,Re1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1,Nf6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6,Qc3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3,Ne4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4,Qb4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4,c3
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3,Rc1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1,Rc8
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8,Qa4
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4,a5
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5,Qd7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7,Rf8
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8,Qa7
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7,Qxa2
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2,Qxb6
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2 Qxb6,Qf2+
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2 Qxb6 Qf2+,Kh1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2 Qxb6 Qf2+ Kh1,Qd2
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2 Qxb6 Qf2+ Kh1 Qd2,Rg1
+Sicilian Defense: Canal Attack |  Main Line,e4 c5 Nf3 d6 Bb5+ Bd7 Bxd7+ Nxd7 O-O Ngf6 Nc3 g6 d3 Bg7 Bg5 O-O Nd5 Nxd5 exd5 Bxb2 Bh6 Bg7 Bxg7 Kxg7 Ng5 Kg8 d4 c4 c3 e5 Re1 Qxg5 Qa4 Rfd8 Qa3 exd4 cxd4 Qxd5 Rad1 Re8 Re3 Rxe3 fxe3 b6 Re1 Nf6 Qc3 Ne4 Qb4 c3 Rc1 Rc8 Qa4 a5 Qd7 Rf8 Qa7 Qxa2 Qxb6 Qf2+ Kh1 Qd2 Rg1,Nf2#
+Sicilian Defense,None,e4
+Sicilian Defense,e4,c5
+Sicilian Defense,e4 c5,Nf3
+Sicilian Defense,e4 c5 Nf3,d5
+Sicilian Defense,e4 c5 Nf3 d5,exd5
+Sicilian Defense,e4 c5 Nf3 d5 exd5,Qxd5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5,Nc3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3,Qe6+
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+,Qe2
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2,Qxe2+
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+,Bxe2
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2,Nf6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6,O-O
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O,g6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6,d3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3,Bg7
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7,Nb5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5,Na6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6,Bf4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4,O-O
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O,d4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4,Bd7
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7,dxc5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5,Bxb5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5,Bxb5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5,Nxc5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5,Be3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3,Ne6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6,Nd4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4,a6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6,Bd3
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3,Nxd4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4,Bxd4
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4,Rad8
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8,Bb6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6,Rd6
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6,Bc5
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5,Rd7
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7,Rfe1
+Sicilian Defense,e4 c5 Nf3 d5 exd5 Qxd5 Nc3 Qe6+ Qe2 Qxe2+ Bxe2 Nf6 O-O g6 d3 Bg7 Nb5 Na6 Bf4 O-O d4 Bd7 dxc5 Bxb5 Bxb5 Nxc5 Be3 Ne6 Nd4 a6 Bd3 Nxd4 Bxd4 Rad8 Bb6 Rd6 Bc5 Rd7 Rfe1,Re8

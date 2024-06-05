@@ -1,0 +1,501 @@
+opening_name,prev_moves,last_move
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5,Re8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8,Ba6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6,e5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5,Ke2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2,exd4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4,Qxd4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4,Qa5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5,Bd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3,Re7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7,h4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4,Ne5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5,h5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5,Nxd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3,Kxd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3,Rexb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7,Rxb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7,Rxb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7,Rg1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7 Rg1,Qxa3+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7 Rg1 Qxa3+,Kc2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7 Rg1 Qxa3+ Kc2,Qa2+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7 Rg1 Qxa3+ Kc2 Qa2+,Kd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nc6 e3 Nf6 Nf3 Bg4 h3 Bh5 c4 e6 Nbd2 Bb4 a3 Bxd2+ Qxd2 Bxf3 gxf3 O-O b4 Nh5 b5 Nxf4 bxc6 Ng6 cxb7 Rb8 Rb1 c6 c5 Re8 Ba6 e5 Ke2 exd4 Qxd4 Qa5 Bd3 Re7 h4 Ne5 h5 Nxd3 Kxd3 Rexb7 Rxb7 Rxb7 Rg1 Qxa3+ Kc2 Qa2+ Kd3,Rb3+
+French Defense: Exchange Variation,None,e4
+French Defense: Exchange Variation,e4,e6
+French Defense: Exchange Variation,e4 e6,d4
+French Defense: Exchange Variation,e4 e6 d4,d5
+French Defense: Exchange Variation,e4 e6 d4 d5,exd5
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5,exd5
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5,Bd3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3,Bd6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6,h3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3,Ne7
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7,Nf3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3,O-O
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O,O-O
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O,Bf5
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5,a3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3,Nbc6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6,Re1
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1,Re8
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8,b3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3,Ng6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6,Bxf5
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5,Qf6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6,Bxg6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6,hxg6
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6,Nc3
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3,Rxe1+
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+,Qxe1
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1,Nxd4
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4,Nxd4
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4,Qxd4
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4,Rb1
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1,Kf8
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1 Kf8,Nb5
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1 Kf8 Nb5,Re8
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1 Kf8 Nb5 Re8,Qxe8+
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1 Kf8 Nb5 Re8 Qxe8+,Kxe8
+French Defense: Exchange Variation,e4 e6 d4 d5 exd5 exd5 Bd3 Bd6 h3 Ne7 Nf3 O-O O-O Bf5 a3 Nbc6 Re1 Re8 b3 Ng6 Bxf5 Qf6 Bxg6 hxg6 Nc3 Rxe1+ Qxe1 Nxd4 Nxd4 Qxd4 Rb1 Kf8 Nb5 Re8 Qxe8+ Kxe8,Nxd4
+Horwitz Defense,None,d4
+Horwitz Defense,d4,e6
+Horwitz Defense,d4 e6,Bf4
+Horwitz Defense,d4 e6 Bf4,h6
+Horwitz Defense,d4 e6 Bf4 h6,Nf3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3,d6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6,e4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4,Qf6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6,Qd2
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2,Nc6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6,Bb5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5,Bd7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7,Nc3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3,a6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6,Bxc6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6,bxc6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6,e5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5,Qd8
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8,exd6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6,cxd6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6,O-O
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O,Nf6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6,Rae1
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1,Be7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7,a4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4,d5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5,Ne5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5,Bb4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4,b3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3,Ne4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4,Qd3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3,Bxc3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3,Rxe4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4,dxe4
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4,Qxc3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3,Rc8
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8,Nxd7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7,Qxd7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7,d5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5,cxd5
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5,Qxg7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7,Rf8
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8,Bxh6
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6,Qe7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7,c3
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7 c3,Rg8
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7 c3 Rg8,Qxg8+
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7 c3 Rg8 Qxg8+,Kd7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7 c3 Rg8 Qxg8+ Kd7,Qg7
+Horwitz Defense,d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6 bxc6 e5 Qd8 exd6 cxd6 O-O Nf6 Rae1 Be7 a4 d5 Ne5 Bb4 b3 Ne4 Qd3 Bxc3 Rxe4 dxe4 Qxc3 Rc8 Nxd7 Qxd7 d5 cxd5 Qxg7 Rf8 Bxh6 Qe7 c3 Rg8 Qxg8+ Kd7 Qg7,Rxc3
+Queen's Pawn Game: London System,None,d4
+Queen's Pawn Game: London System,d4,Nf6
+Queen's Pawn Game: London System,d4 Nf6,Bf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4,d5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5,Nf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3,e6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6,c4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4,Bd6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6,Bg3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3,Bxg3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3,hxg3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3,h6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6,Nbd2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2,c5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5,e3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3,cxd4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4,exd4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4,Nc6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6,cxd5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5,exd5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5,Bb5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5,Qe7+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+,Qe2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2,Qxe2+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+,Bxe2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2,a6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6,Rc1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1,O-O
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O,Nb3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3,Ne4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4,Nc5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5,Nxc5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5,dxc5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5,Be6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6,O-O
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O,Rac8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8,a3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3,a5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5,Bb5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5,Bg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4,Bxc6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6,bxc6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6,Ne5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5,Be6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6,f4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4,f5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5,Ng6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6,Rfe8
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8,Rf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3,Bf7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7,Ne5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5,Re7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7,Nxf7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7,Rxf7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7,Rb3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3,Ra7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7,Rb6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6,Kf7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7,Re1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1,a4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4,Kh2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2,Rcc7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7,Kh3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3,Ra5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5,Rc1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1,Rb5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5,Rxb5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5,cxb5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5,Kh4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4,g6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6,g4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4,fxg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4,Kxg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4,Kf6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6,g3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3,h5+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+,Kf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3,Kf5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5,Ke3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3,Kg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4,Kf2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2,Rc6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6,Rc3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3,h4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4,gxh4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4,Kxf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4,Rf3+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+,Ke4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4,Rg3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3,Rxc5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5,Rxg6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6,Rc2+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+,Kg3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3,Rxb2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2,h5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5,Rb3+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+,Kg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4,Rxa3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3,h6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6,Ra1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1,Rg5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5,Rh1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1,Rh5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5,Rg1+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+,Kh3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3,d4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4,h7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7,Rh1+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+,Kg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4,Rg1+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+,Kh3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3,Kf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4,Rh4+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+,Kf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3,Rf4+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+,Kxf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4,Kh2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2,Re1
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1,h8=Q
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q,d3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3,Qd4+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+,Re4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4,Qxd3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3,b4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4,Qd2+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+,Ke5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+ Ke5,Qg5+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+ Ke5 Qg5+,Kd4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+ Ke5 Qg5+ Kd4,Qa5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+ Ke5 Qg5+ Kd4 Qa5,Re2+
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+ Qe2 Qxe2+ Bxe2 a6 Rc1 O-O Nb3 Ne4 Nc5 Nxc5 dxc5 Be6 O-O Rac8 a3 a5 Bb5 Bg4 Bxc6 bxc6 Ne5 Be6 f4 f5 Ng6 Rfe8 Rf3 Bf7 Ne5 Re7 Nxf7 Rxf7 Rb3 Ra7 Rb6 Kf7 Re1 a4 Kh2 Rcc7 Kh3 Ra5 Rc1 Rb5 Rxb5 cxb5 Kh4 g6 g4 fxg4 Kxg4 Kf6 g3 h5+ Kf3 Kf5 Ke3 Kg4 Kf2 Rc6 Rc3 h4 gxh4 Kxf4 Rf3+ Ke4 Rg3 Rxc5 Rxg6 Rc2+ Kg3 Rxb2 h5 Rb3+ Kg4 Rxa3 h6 Ra1 Rg5 Rh1 Rh5 Rg1+ Kh3 d4 h7 Rh1+ Kg4 Rg1+ Kh3 Kf4 Rh4+ Kf3 Rf4+ Kxf4 Kh2 Re1 h8=Q d3 Qd4+ Re4 Qxd3 b4 Qd2+ Ke5 Qg5+ Kd4 Qa5 Re2+,Kg3
+French Defense: Chigorin Variation,None,e4
+French Defense: Chigorin Variation,e4,e6
+French Defense: Chigorin Variation,e4 e6,Qe2
+French Defense: Chigorin Variation,e4 e6 Qe2,c5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5,Nf3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3,Nc6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6,g3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3,g6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6,Bg2
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2,Bg7
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7,O-O
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O,Nge7
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7,c3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3,O-O
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O,d3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3,b6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6,Na3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3,a6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6,Re1
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1,d6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6,Nc4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4,b5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5,Ne3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3,b4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4,Qc2
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2,bxc3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3,bxc3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3,Nb4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4,Qd2
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2,a5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5,Rb1
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1,Nbc6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6,Ng5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5,h6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6,Nf3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3,Ba6
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6,Ba3
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3,a4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4,d4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4,Qa5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5,e5
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5,cxd4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4,cxd4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4 cxd4,Qxd2
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4 cxd4 Qxd2,Nxd2
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4 cxd4 Qxd2 Nxd2,Nxd4
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4 cxd4 Qxd2 Nxd2 Nxd4,Bxa8
+French Defense: Chigorin Variation,e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4 b5 Ne3 b4 Qc2 bxc3 bxc3 Nb4 Qd2 a5 Rb1 Nbc6 Ng5 h6 Nf3 Ba6 Ba3 a4 d4 Qa5 e5 cxd4 cxd4 Qxd2 Nxd2 Nxd4 Bxa8,Nc2
+Queen's Pawn Game: London System,None,d4
+Queen's Pawn Game: London System,d4,d5
+Queen's Pawn Game: London System,d4 d5,Bf4
+Queen's Pawn Game: London System,d4 d5 Bf4,Nf6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6,Nf3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3,e6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6,e3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3,Bd6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6,Bg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3,O-O
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O,Bd3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3,b6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6,Nbd2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2,Bb7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7,a3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3,Nbd7
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7,c4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4,Bxg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3,hxg3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3,Re8
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8,Qb1
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1,h6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6,e4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4,dxe4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4,Nxe4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4,e5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5,d5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5,c6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6,Nd6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6,e4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4,Nxe8
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8,Qxe8
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8,Bxe4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4,cxd5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5,cxd5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5,Ba6
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6,Nd2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2,Nc5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5,f3
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3,Qe5
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5,Kd1
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1,Qd4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1 Qd4,Rh4
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1 Qd4 Rh4,Qf2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1 Qd4 Rh4 Qf2,Kc2
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1 Qd4 Rh4 Qf2 Kc2,Rc8
+Queen's Pawn Game: London System,d4 d5 Bf4 Nf6 Nf3 e6 e3 Bd6 Bg3 O-O Bd3 b6 Nbd2 Bb7 a3 Nbd7 c4 Bxg3 hxg3 Re8 Qb1 h6 e4 dxe4 Nxe4 e5 d5 c6 Nd6 e4 Nxe8 Qxe8 Bxe4 cxd5 cxd5 Ba6 Nd2 Nc5 f3 Qe5 Kd1 Qd4 Rh4 Qf2 Kc2 Rc8,Bd3
+French Defense: La Bourdonnais Variation,None,e4
+French Defense: La Bourdonnais Variation,e4,e6
+French Defense: La Bourdonnais Variation,e4 e6,f4
+French Defense: La Bourdonnais Variation,e4 e6 f4,d5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5,e5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5,c5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5,Nf3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3,Nc6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6,c3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3,Nh6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6,d4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4,cxd4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4,cxd4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4,Qa5+
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+,Bd2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2,Bb4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4,Nc3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3,Nf5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5,Bb5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5,Bxc3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3,Bxc6+
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+,bxc6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6,Bxc3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3,Qb6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6,O-O
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O,Ne3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3,Qe2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2,Nxf1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1,Rxf1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1,Ba6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6,Qf2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2,Bxf1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1,Qxf1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1,c5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5,dxc5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5,Qxc5+
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+,Bd4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4,Qa5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5,a3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3,Rc8
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8,h3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3,O-O
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O,Qd3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3,Rc1+
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+,Kh2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2,Rfc8
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8,Ng5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5,g6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6,Qg3
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3,Qe1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1,Qxe1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1,Rxe1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1,Bxa7
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7,Rc2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2,b4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4,Ree2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2,b5
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5,Rxg2+
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+,Kh1
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+ Kh1,Ra2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+ Kh1 Ra2,b6
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+ Kh1 Ra2 b6,Rgb2
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+ Kh1 Ra2 b6 Rgb2,a4
+French Defense: La Bourdonnais Variation,e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+ Bd2 Bb4 Nc3 Nf5 Bb5 Bxc3 Bxc6+ bxc6 Bxc3 Qb6 O-O Ne3 Qe2 Nxf1 Rxf1 Ba6 Qf2 Bxf1 Qxf1 c5 dxc5 Qxc5+ Bd4 Qa5 a3 Rc8 h3 O-O Qd3 Rc1+ Kh2 Rfc8 Ng5 g6 Qg3 Qe1 Qxe1 Rxe1 Bxa7 Rc2 b4 Ree2 b5 Rxg2+ Kh1 Ra2 b6 Rgb2 a4,Ra1#
+Queen's Pawn Game: Mason Attack,None,d4
+Queen's Pawn Game: Mason Attack,d4,d5
+Queen's Pawn Game: Mason Attack,d4 d5,Bf4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4,Nf6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6,e3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3,g6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6,Nf3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3,Bg7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7,c4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4,dxc4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4,Bxc4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4,O-O
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O,Qb3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3,e6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6,O-O
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O,c6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6,Nbd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2,b5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5,Bd3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3,Bb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7,a4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4,a6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6,Ne4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4,Nxe4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4,Bxe4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4,Qe7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7,Ne5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5,Bxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5,Bxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5,Nd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7,Bg3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3,Ra7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7,axb5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5,cxb5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5,Bxb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7,Rxb7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7,Rxa6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6,Nf6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6,Bd6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6,Qd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7,Bxf8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8,Kxf8
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8,Ra8+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+,Kg7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7,Rc1
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1,Qd6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6,Rc5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5,Ng4
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4,g3
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3,e5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5,dxe5
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5,Qd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2,Rc2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2,Qe1+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+,Kg2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2,Rd7
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2 Rd7,e6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2 Rd7 e6,Rd2
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2 Rd7 e6 Rd2,Qc3+
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2 Rd7 e6 Rd2 Qc3+,Kh6
+Queen's Pawn Game: Mason Attack,d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2 b5 Bd3 Bb7 a4 a6 Ne4 Nxe4 Bxe4 Qe7 Ne5 Bxe5 Bxe5 Nd7 Bg3 Ra7 axb5 cxb5 Bxb7 Rxb7 Rxa6 Nf6 Bd6 Qd7 Bxf8 Kxf8 Ra8+ Kg7 Rc1 Qd6 Rc5 Ng4 g3 e5 dxe5 Qd2 Rc2 Qe1+ Kg2 Rd7 e6 Rd2 Qc3+ Kh6,Qxd2
+Queen's Pawn Game: London System,None,d4
+Queen's Pawn Game: London System,d4,Nf6
+Queen's Pawn Game: London System,d4 Nf6,Bf4
+Queen's Pawn Game: London System,d4 Nf6 Bf4,d5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5,Nf3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3,Nc6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6,e3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3,Bg4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4,h3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3,Bh5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5,c4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4,e6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6,Qa4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4,Ne4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4,c5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5,Be7
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7,Ne5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5,O-O
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O,g4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4,Bg6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6,h4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4,Nxe5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5,dxe5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5,Nxc5
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5,Qd4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4,Be4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4,Rh2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2,c6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6,Nd2
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2,h6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6,b4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4,Na4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4,a3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3,Bxh4
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4,Bd3
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3,Qb6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6,Qxb6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6,axb6
+Queen's Pawn Game: London System,d4 Nf6 Bf4 d5 Nf3 Nc6 e3 Bg4 h3 Bh5 c4 e6 Qa4 Ne4 c5 Be7 Ne5 O-O g4 Bg6 h4 Nxe5 dxe5 Nxc5 Qd4 Be4 Rh2 c6 Nd2 h6 b4 Na4 a3 Bxh4 Bd3 Qb6 Qxb6 axb6,Bxe4

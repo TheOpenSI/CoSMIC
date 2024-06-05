@@ -37,6 +37,7 @@ def generate_explanation(client : OpenAI, df : pd.DataFrame, sytem_content : str
     return_df = df.copy()
 
     for i in range(df.shape[0]):
+        print(f"[Info] Generating explanation for row {i}")
         prev_moves = df.iloc[i]["prev_moves"]
         last_move = df.iloc[i]["last_move"]
 
@@ -55,29 +56,40 @@ def generate_explanation(client : OpenAI, df : pd.DataFrame, sytem_content : str
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 explanation += chunk.choices[0].delta.content
-        return_df.loc[i, "explanation"] = explanation
+        return_df.loc[i, "explanation"] = explanation.strip()
     return return_df
 
 def arg_setup() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--file", required=True, help="[Required] path to the input data cluster(csv file)")
     parser.add_argument("-i", help = "use a .txt file to pass token")
     parser.add_argument("-mI", action = "store_true", help = "manually enter your token")
     return parser
 
 def load_df(file_path : str) -> pd.DataFrame:
-    df = pd.read_csv("./data/progressive_moves_500.csv", index_col=0)
+    df = pd.read_csv(file_path)
     df.drop("opening_name", axis = 1, inplace=True)
     df = df.fillna("None")
     df["explanation"] = " "
     return df
+
+def get_file_path(file_number):
+      if 0 <= file_number <= 9:
+          return f"./data/data_{file_number:02d}.csv"
+
+      else:
+          print(f"Invalid file number: {file_number}. Please enter a number between 0 and 19.")
+          return None
+
 
 if __name__ == "__main__":
     args = arg_setup().parse_args()
 
     openai_api_key = get_api_key(args)
 
-    target_df  = load_df("file_path")
-    target_df = target_df.head().copy()
+    target_file_path = get_file_path(int(args.file))
+    target_df  = load_df(target_file_path)
+    # target_df = target_df.head().copy()
 
     # selected prompt
     system_content_cot = '''Assume you are a chess master.
@@ -86,5 +98,5 @@ if __name__ == "__main__":
     '''
 
     target_df = generate_explanation(OpenAI(api_key = openai_api_key), target_df, system_content_cot)
-    target_df.to_csv("./data/generated.csv")
+    target_df.to_csv(f"./exp_data/generated_data_{int(args.file):02d}.csv")
     print("[Info] CSV generated")
