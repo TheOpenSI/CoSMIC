@@ -40,6 +40,12 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ## Setup
 
+### Docker
+I used a docker image with all necessary libraries including jupyter-lab, torch, llama_index, langchain, bits_and_bytes, accelerate, transformers for local development.
+```bash
+docker pull ghost525/llm_finetune:latest
+``` 
+
 ### Progressive Move Dataset
 From Kaggle Lichess dataset, we created progessive move dataset to support a typical NLP training pipeline. Target dataset shape is ```(5000, 3)``` which had been splitted into 10 files, each with 500 rows.
 
