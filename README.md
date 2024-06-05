@@ -11,12 +11,12 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ### 2. Prompt Engineering Template
 
-- [ ] **Design Templates**: Create chain-of-thought prompt template
-- [ ] **Test Prompts**: Validate the prompts with OPENAI API
+- [x] **Design Prompt Templates**: Create chain-of-thought prompt template
+- [x] **Test Prompts**: Validate the prompts with OPENAI API
 
 ### 3. Generate Explanation
 
-- [ ] **Xxplanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
+- [ ] **Explanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
 
 ### 4. Select LLM
 
