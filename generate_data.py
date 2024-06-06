@@ -64,7 +64,7 @@ def arg_setup() -> argparse.ArgumentParser:
     parser.add_argument("--file", required=True, help="[Required] path to the input data cluster(csv file)")
     parser.add_argument("-i", help = "use a .txt file to pass token")
     parser.add_argument("-mI", action = "store_true", help = "manually enter your token")
-    return parser
+    return parserget_file_path
 
 def load_df(file_path : str) -> pd.DataFrame:
     df = pd.read_csv(file_path)
