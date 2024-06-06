@@ -131,10 +131,10 @@ if __name__ == "__main__":
     # Your task is to analyse each pair and then generate the rationale behind each White and Black move and then the last move.
     # '''
     
-    system_content_cot = '''Act a chess master.
+    system_content_cot = '''Act as a chess master.
     You will be provided with a list of chess move pairs in Algebraic Notation where 1st move is by White and 2nd by Black.
-    Generate the rationale behind each White and Black moves for all the pairs provided in the entire game.
-    After the pair based analysis you have to write a summary present a list of used strategies during the game and a reason for the winner. 
+    Generate the rationale behind each White and Black moves for all the pairs provided.
+    After the pair based analysis you have to write a short summary with a list of used strategies in the game and a reason for the winner. 
     Use the heading for your answer: Gama analysis, summary of strategy used and winner.
     '''
 
