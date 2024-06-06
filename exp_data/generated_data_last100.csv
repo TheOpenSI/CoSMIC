@@ -1,0 +1,46 @@
+,id,rated,created_at,last_move_at,turns,victory_status,winner,increment_code,white_id,white_rating,black_id,black_rating,moves,opening_eco,opening_ply,explanation
+20057,N8G2JHGG,True,1499643152649.0,1499643889348.0,78,mate,black,10+0,jamboger,1235,ffbob,1339,d4 d5 Bf4 Na6 e3 e6 c3 Nf6 Nf3 Bd7 Nbd2 b5 Bd3 Qc8 e4 b4 e5 Ne4 Nxe4 dxe4 Bxe4 bxc3 Bxa8 Qxa8 bxc3 Ba3 Rb1 c5 Qd3 O-O Qxa6 Bc6 Qxa3 Bxf3 gxf3 Qxf3 Qxa7 Qxh1+ Ke2 Qxb1 Qxc5 Qc2+ Ke3 Qxa2 Qb4 h6 c4 g5 Bg3 Qa8 c5 Rb8 Qc3 f5 f4 Qe4+ Kd2 Qg2+ Kd3 gxf4 Bxf4 Qf3+ Kc4 Qxf4 c6 Qf1+ Kc5 Rb1 Qg3+ Kf7 c7 Rc1+ Kd6 Qa6+ Kd7 Qb5+ Kd8 Qe8#,D00,3,"### Game analysis
+
+1. White: d4, Black: d5
+   - White opens the game by controlling the center with the pawn move to d4.
+   - Black responds symmetrically by mirroring White's move, also controlling the center with their pawn move to d5.
+
+2. White: Bf4, Black: Na6
+   - White develops the bishop to f4, aiming to control the central squares and preparing for future castling.
+   - Black brings out the knight to a6, a less common square, possibly preparing for a fianchetto setup or looking to reroute the knight to a more active square.
+
+3. White: e3, Black: e6
+   - White solidifies the center with the pawn to e3, supporting the pawn on d4 and preparing for the development of the other bishop.
+   - Black mirrors White's pawn move by playing e6, preparing to develop the dark-squared bishop and allowing the light-squared bishop to fianchetto.
+
+4. White: c3, Black: Nf6
+   - White strengthens the center further and prepares for pawn breaks with the move c3.
+   - Black develops the knight to f6, eyeing the central squares and preparing for further piece development.
+
+5. White: Nf3, Black: Bd7
+   - White develops the knight to f3, getting ready to castle kingside and adding more control to the center.
+   - Black develops the light-squared bishop to d7, preparing to castle kingside and completing the development of the minor pieces.
+
+6. White: Nbd2, Black: b5
+   - White reroutes the knight to d2, possibly preparing to support the e4 pawn advance or controlling the center.
+   - Black expands on the queenside with the pawn move b5, gaining space and preparing for possible pawn breaks.
+
+7. White: Bd3, Black: Qc8
+   - White completes the development of the light-squared bishop, aiming towards the long diagonal and potentially putting pressure on Black's kingside.
+   - Black brings the queen to c8, connecting the rooks and preparing for possible central actions.
+
+8. White: e4, Black: b4
+   - White pushes the central pawn to e4, aiming for a strong pawn center and gaining space.
+   - Black counters on the queenside with the pawn push b4, challenging White's pawn structure and gaining space.
+
+9. White: e5, Black: Ne4
+   - White pushes the e pawn further to e5, gaining more space in the center.
+   - Black brings the knight to a centralized square on e4, eyeing the d2 square and potentially putting pressure on White's pawn structure.
+
+### Summary of strategies used and winner
+
+Throughout the game, White focused on controlling the center, developing pieces, and pushing for space advantage with pawn breaks. Black, on the other hand, aimed to challenge White's center, gain counterplay on the queenside, and create tactical opportunities.
+
+White's strategy of controlling the center and steadily improving piece activity allowed them to build a strong position, eventually leading to a decisive advantage. In the endgame, White's active pieces and passed pawns proved too much for Black to handle, leading to a checkmate.
+
+Therefore, White emerges as the winner due to their strategic play, center control, and effective piece coordination throughout the game."

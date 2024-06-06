@@ -95,7 +95,7 @@ def arg_setup() -> argparse.ArgumentParser:
     # parser.add_argument("--file", required=True, help="[Required] path to the input data cluster(csv file)")
     parser.add_argument("-i", help = "use a .txt file to pass token")
     parser.add_argument("-mI", action = "store_true", help = "manually enter your token")
-    return parserget_file_path
+    return parser
 
 def load_df(file_path : str) -> pd.DataFrame:
     df = pd.read_csv(file_path)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     target_file_path = './data/games.csv'
     
     df = load_df(target_file_path)
-    target_df  = df.iloc[:-1]
+    target_df  = df.iloc[-1:]
     # target_df = target_df.head().copy()
 
     # selected prompt
@@ -131,12 +131,14 @@ if __name__ == "__main__":
     # Your task is to analyse each pair and then generate the rationale behind each White and Black move and then the last move.
     # '''
     
-    system_content_cot = '''Assume you are a chess master.
-    You will be provided with a list of chess move pairs in Algebraic Notation where 1st move is by White and 2nd by Black and so on.
-    Your task is to analyse each pair and then generate the rationale behind each White and Black move.
-    After the pair based analysis you have to write a summary present a list of used strategies during the game and a reason for the winner.
+    system_content_cot = '''Act a chess master.
+    You will be provided with a list of chess move pairs in Algebraic Notation where 1st move is by White and 2nd by Black.
+    Generate the rationale behind each White and Black moves for all the pairs provided in the entire game.
+    After the pair based analysis you have to write a summary present a list of used strategies during the game and a reason for the winner. 
+    Use the heading for your answer: Gama analysis, summary of strategy used and winner.
     '''
 
     target_df = generate_explanation(OpenAI(api_key = openai_api_key), target_df, system_content_cot)
-    target_df.to_csv(f"./exp_data/generated_data_{int(args.file):02d}.csv")
+    # target_df.to_csv(f"./exp_data/generated_data_{int(args.file):02d}.csv")
+    target_df.to_csv(f"./exp_data/generated_data_last100.csv")
     print("[Info] CSV generated")
