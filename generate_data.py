@@ -25,13 +25,18 @@ def get_api_key(args):
         load_dotenv()
         return os.getenv("openai_api_key")
 
-def gen_cot_prompt(prev_moves : str, last_move : str) -> str:
-    if prev_moves == "None":
-        return f"White : {last_move}"
-    else: 
-        prev_moves = (prev_moves+f" {last_move}").split(" ")
-        cot_moves = [f"White: {prev_moves[i]}, Black: {prev_moves[i+1]}" if i + 1 < len(prev_moves) else f"White: {prev_moves[i]}" for i in range(0, len(prev_moves), 2)]
-        return "\n".join(cot_moves)
+# def gen_cot_prompt(prev_moves : str, last_move : str) -> str:
+#     if prev_moves == "None":
+#         return f"White : {last_move}"
+#     else: 
+#         prev_moves = (prev_moves+f" {last_move}").split(" ")
+#         cot_moves = [f"White: {prev_moves[i]}, Black: {prev_moves[i+1]}" if i + 1 < len(prev_moves) else f"White: {prev_moves[i]}" for i in range(0, len(prev_moves), 2)]
+#         return "\n".join(cot_moves)
+
+def gen_cot_prompt(moves : str) -> str:
+    prev_moves = moves.split(" ")
+    cot_moves = [f"White: {prev_moves[i]}, Black: {prev_moves[i+1]}" if i + 1 < len(prev_moves) else f"White: {prev_moves[i]}" for i in range(0, len(prev_moves), 2)]
+    return cot_moves
 
 def generate_explanation(client : OpenAI, df : pd.DataFrame, sytem_content : str) -> pd.DataFrame:
     return_df = df.copy()
