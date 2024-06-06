@@ -76,7 +76,8 @@ def generate_explanation(client : OpenAI, df : pd.DataFrame, sytem_content : str
         user_content_cot = f"Previous move pairs are - \n{user_prompt_move}"
         
         stream = client.chat.completions.create(
-        model="gpt-3.5-turbo-0125",
+        # model="gpt-3.5-turbo-0125",
+        model="gpt-4o",
         messages = [{"role": "system",
                      "content": sytem_content},
                     {"role": "user",
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     target_file_path = './data/games.csv'
     
     df = load_df(target_file_path)
-    target_df  = df.iloc[-1:]
+    target_df  = df.iloc[-500:]
     # target_df = target_df.head().copy()
 
     # selected prompt
