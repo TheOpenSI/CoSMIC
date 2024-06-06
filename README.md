@@ -20,16 +20,16 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ### 4. Select LLM
 
-- [ ] **Evaluate Options**: Review available open source Large Language Models with **System Prompt** compatibility
-- [ ] **Select Model**: Choose the most appropriate LLM
+- [x] **Evaluate Options**: Review available open source Large Language Models with **System Prompt** compatibility
+- [x] **Select Model**: Choose the most appropriate LLM. Selected model/s so far - Mistral 7B instruct
 
 ### 5. Load LLM
 
-- [ ] **Load Model**: LoRA, DoRA, Quantization
+- [x] **Load Model**: Quantization
 
 ### 6. Finetune
 
-- [ ] **Finetune Model**
+- [ ] **Finetune Model**: LoRA, DoRA
 - [ ] **Evaluate Performance**
 
 ### 7. Retrieval-Augmented Generation (RAG)
