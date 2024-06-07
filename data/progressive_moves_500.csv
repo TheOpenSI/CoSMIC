@@ -34,7 +34,7 @@
 32,King's Pawn Game: Leonardis Variation,e4 e5 d3,d6
 33,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6,Be3
 34,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3,c6
-35,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6,Be2
+35,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6,Be2EQwkA7Za
 36,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2,b5
 37,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2 b5,Nd2
 38,King's Pawn Game: Leonardis Variation,e4 e5 d3 d6 Be3 c6 Be2 b5 Nd2,a5
@@ -238,7 +238,7 @@
 236,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7,f5
 237,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5,exf5
 238,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5,Kxf5
-239,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5,b8=Q
+239,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5EQwkA7Za Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5,b8=Q
 240,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q,e4
 241,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q e4,Rf7+
 242,Philidor Defense,e4 e5 Nf3 d6 d4 Nc6 d5 Nb4 a3 Na6 Nc3 Be7 b4 Nf6 Bg5 O-O b5 Nc5 Bxf6 Bxf6 Bd3 Qd7 O-O Nxd3 Qxd3 c6 a4 cxd5 Nxd5 Qe6 Nc7 Qg4 Nxa8 Bd7 Nc7 Rc8 Nd5 Qg6 Nxf6+ Qxf6 Rfd1 Re8 Qxd6 Bg4 Qxf6 gxf6 Rd3 Bxf3 Rxf3 Rd8 Rxf6 Kg7 Rf3 Rd2 Rg3+ Kf8 c3 Re2 f3 Rc2 Rg5 f6 Rh5 Kg7 Rd1 Kg6 Rh3 Rxc3 Rd7 Rc1+ Kf2 Rc2+ Kg3 h5 Rxb7 Kg5 Rxa7 h4+ Rxh4 Rxg2+ Kxg2 Kxh4 b6 Kg5 b7 f5 exf5 Kxf5 b8=Q e4 Rf7+,Kg5
@@ -259,7 +259,7 @@
 257,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6,f3
 258,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3,exf3
 259,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3,Nxf3
-260,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3,Nc6
+260,Blackmar-Diemer Gambit: Pietrowsky DefeEQwkA7Zanse,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3,Nc6
 261,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6,Bb5
 262,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6 Bb5,a6
 263,Blackmar-Diemer Gambit: Pietrowsky Defense,d4 d5 e4 dxe4 Nc3 Nf6 f3 exf3 Nxf3 Nc6 Bb5 a6,Bd3
@@ -310,7 +310,7 @@
 308,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3,Bxe3
 309,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3,Qxe3
 310,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3,Re8
-311,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8,Qf3
+311,Italian Game: Schilling-Kostic Gambit,EQwkA7Zae4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8,Qf3
 312,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3,c6
 313,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6,Nc3
 314,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3,b5
@@ -337,7 +337,7 @@
 335,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5,Qg4
 336,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4,Nf6
 337,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6,Qf4
-338,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4,Qa5
+338,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5EQwkA7Za a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4,Qa5
 339,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5,Bc2
 340,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5 Bc2,Qe1+
 341,Italian Game: Schilling-Kostic Gambit,e4 e5 Bc4 Nc6 Nf3 Nd4 d3 Nxf3+ Qxf3 Nf6 h3 Bc5 a3 O-O Be3 Bxe3 Qxe3 Re8 Qf3 c6 Nc3 b5 Bb3 Qa5 O-O Bb7 Ne2 c5 Rfd1 d6 c4 bxc4 dxc4 Rac8 Rd5 Bxd5 exd5 Qb6 Nc1 e4 Qf4 Nh5 Qg4 Nf6 Qf4 Qa5 Bc2 Qe1+,Kh2

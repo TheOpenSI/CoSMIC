@@ -88,7 +88,11 @@ def generate_explanation(client : OpenAI, df : pd.DataFrame, sytem_content : str
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 explanation += chunk.choices[0].delta.content
-        return_df.loc[id_temp, "explanation"] = explanation.strip()
+        return_df.loc[id_temp, "explanation"] = explanation.strip() 
+        
+        header = (i == 0)
+        return_df.to_csv('./exp_data/temp.csv', mode="w", header=header, index=False)
+        
     return return_df
 
 def arg_setup() -> argparse.ArgumentParser:
@@ -124,7 +128,7 @@ if __name__ == "__main__":
     
     df = load_df(target_file_path)
     target_df  = df.iloc[-500:]
-    # target_df = target_df.head().copy()
+
 
     # selected prompt
     # system_content_cot = '''Assume you are a chess master.
@@ -141,5 +145,6 @@ if __name__ == "__main__":
 
     target_df = generate_explanation(OpenAI(api_key = openai_api_key), target_df, system_content_cot)
     # target_df.to_csv(f"./exp_data/generated_data_{int(args.file):02d}.csv")
-    target_df.to_csv(f"./exp_data/generated_data_last100.csv")
-    print("[Info] CSV generated")
+    target_df.to_csv(f"./exp_data/generated_data_last_500.csv")
+    print("[Info] CSV generated")  target_df = target_df["moves"]
+    target_df["explanation"] = ""
