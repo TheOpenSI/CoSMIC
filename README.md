@@ -16,7 +16,8 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ### 3. Generate Explanation
 
-- [ ] **Explanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
+- [x] **Explanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
+- [ ] **Validate Dataset**: Valdiate the generated dataset.
 
 ### 4. Select LLM
 
