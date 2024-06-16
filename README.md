@@ -17,21 +17,21 @@ This repository contains the implementation of a Cognitive AI experiments
 ### 3. Generate Explanation
 
 - [x] **Explanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
-- [ ] **Validate Dataset**: Valdiate the generated dataset.
+- [x] **Validate Dataset**: Valdiate the generated dataset.
 
 ### 4. Select LLM
 
-- [ ] **Evaluate Options**: Review available open source Large Language Models with **System Prompt** compatibility
-- [ ] **Select Model**: Choose the most appropriate LLM
+- [x] **Evaluate Options**: Review available open source Large Language Models with **System Prompt** compatibility
+- [x] **Select Model**: Choose the most appropriate LLM. Selected model/s so far - **Mistral 7B instruct**, **Orca 2**  
 
 ### 5. Load LLM
 
-- [ ] **Load Model**: LoRA, DoRA, Quantization
+- [x] **Load Model**: Quantization
 
 ### 6. Finetune
 
-- [ ] **Finetune Model**
-- [ ] **Evaluate Performance**
+- [x] **Finetune Model:** LoRA, DoRA (Used LoRA for now)
+- [x] **Evaluate Performance**: [OpenSI Finetuned Mistral](adnaan525/opensi_mistral_3tasks)
 
 ### 7. Retrieval-Augmented Generation (RAG)
 
