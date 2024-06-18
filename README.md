@@ -40,7 +40,7 @@ This repository contains the implementation of a Cognitive AI experiments
 - [x] **Vectore Store Sync**: Update vector store on the fly, **Inserting new document**
 - [x] **Test and Validate**: Conduct thorough testing to validate the integration and performance of the RAG system.
 
-![Updating vector index on a new thread to gather new information](https://github.com/TheOpenSI/cognitive_AI_experiments/blob/RAG/RAG/RAG.png)
+![Updating vector index on a new thread to gather new information](https://github.com/TheOpenSI/cognitive_AI_experiments/blob/master/RAG/RAG.png)
 
 ## Setup
 
