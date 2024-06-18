@@ -35,10 +35,12 @@ This repository contains the implementation of a Cognitive AI experiments
 
 ### 7. Retrieval-Augmented Generation (RAG)
 
-- [ ] **Setup RAG**: Implement the Retrieval-Augmented Generation process (learn new knowledge)
-- [ ] **Collect Chess Documents**: Feed the model a comprehensive collection of chess books
-- [ ] **Vectore Store Sync**: Update vector store on the fly
-- [ ] **Test and Validate**: Conduct thorough testing to validate the integration and performance of the RAG system.
+- [x] **Setup RAG**: Implement the Retrieval-Augmented Generation process (learn new knowledge)
+- [x] **Collect Documents**: Feed the model a comprehensive collection of chess books
+- [x] **Vectore Store Sync**: Update vector store on the fly, **Inserting new document**
+- [x] **Test and Validate**: Conduct thorough testing to validate the integration and performance of the RAG system.
+
+![Updating vector index on a new thread to gather new information](https://github.com/TheOpenSI/cognitive_AI_experiments/blob/RAG/RAG/RAG.png)
 
 ## Setup
 
