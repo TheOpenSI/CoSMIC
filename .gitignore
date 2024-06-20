@@ -3,3 +3,6 @@ finetune/filtered_data
 finetune/mistral_7b/
 finetune/orca_2/
 finetune/mistral_7b_too_focused/
+cognition_framework/stockfish
+cognition_framework/vector_store
+cognition_framework/__pycache__

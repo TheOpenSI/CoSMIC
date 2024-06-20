@@ -29,3 +29,4 @@ chromadb
 faiss-cpu
 peft
 trl
+stockfish
