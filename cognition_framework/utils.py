@@ -113,7 +113,7 @@ def set_models(model_id):
     # llm
     query_wrapper_prompt = PromptTemplate(
     "Always answer the question, even if the context isn't helpful."
-    "Write a concise response that appropriately completes the request, do not write anything that's unnecessary.\n\n"
+    "Write a response that appropriately completes the request, do not write any explanation, only answer.\n\n"
     "### Instruction:\n Using the most updated information, {query_str}\n\n### Response:")
     llm = HuggingFaceLLM(
     context_window=2048,

@@ -90,3 +90,17 @@ The ```generate_data.py``` will generate explanation data and save in a CSV file
     [Info] Generating explanation for row 4
     [Info] CSV generated
     ```
+## Cognition Framework test
+The congnition_test script requires an argument to specify the model, currently 3 models are supported.
+```
+$ python cognition_test.py --help
+usage: cognition_test.py [-h] --model MODEL
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --model MODEL  [Required] mistral or gemma or llama
+```
+Example use
+```
+$ python cognition_test.py --model gemma
+```
