@@ -66,7 +66,7 @@ def filter_query(query:str, vector_store:VectorStoreIndex, persist_dir:str):
     # update_store -- next move -- query
     if "__update__store__" in query:
         # update vector store
-        print("[Info] Update command detected")
+        print("[INFO] Update command detected")
         add_info = text_to_add(query)
         # thread controller
         stop_event = threading.Event()
