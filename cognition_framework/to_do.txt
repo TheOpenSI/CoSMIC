@@ -1,4 +1,0 @@
-1. check active lora adapters
-2. check inference behaviour after merging.
-3. tokenizer for merged model
-4. langchain
