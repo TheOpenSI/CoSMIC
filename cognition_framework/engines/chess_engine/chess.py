@@ -13,7 +13,7 @@ import chess.engine
 
 # =============================================================================================================
 
-class ChessEngine():
+class ChessEngine:
     def __init__(
         self,
         binary_path='',
@@ -126,7 +126,7 @@ class ChessEngine():
         # Add one to valid move count
         self.move_count += 1
 
-    def run(self, current_move='', move_mode='coordinate', is_last_move=False):
+    def __call__(self, current_move='', move_mode='coordinate', is_last_move=False):
         # Check if move_mode is valid
         self._check_move_mode(move_mode)
 
@@ -134,7 +134,7 @@ class ChessEngine():
         if current_move != '':
             # Parse moves in a string, if it is a '' also put it to a list
             if isinstance(current_move, str):
-                current_move = [str(v) for v in current_move.split(' ') if v != '']
+                current_move = [str(v.replace('.', '')) for v in current_move.split(' ') if v != '']
 
             # If push a list with multiple moves in advance
             for current_move_per in current_move:

@@ -45,7 +45,7 @@ if __name__ == '__main__':
             is_last_move = idx == len(sample_list) - 1
 
             # Run for each move
-            next_move = chess_engine.run(
+            next_move = chess_engine(
                 current_move=current_move,
                 move_mode=move_mode,
                 is_last_move=is_last_move
