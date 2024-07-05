@@ -11,6 +11,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
+from utils.log_tool import set_color
 
 
 # =============================================================================================================
@@ -141,7 +142,7 @@ class LLMEngine:
         for document_path in document_paths:
             if os.path.exists(document_path):
                 self.update_database_from_document(document_path)
-                print(f'!!! Success, add {document_path} to database.')
+                print(set_color('info', f"Add {document_path} to database."))
 
     def add_document_directory(self, document_dir):
         if os.path.exists(document_dir):
@@ -151,7 +152,7 @@ class LLMEngine:
             # Add these documents
             self.add_documents(document_paths)
 
-            print(f'!!! Success, add documents in {document_dir} to database.')
+            print(set_color('info', f"Add documents in {document_dir} to database."))
 
     def update_database_from_document(self, document_path):
         # Check if the document exists
@@ -173,17 +174,17 @@ class LLMEngine:
             if len(document_processed) > 0:  # for invalid pdf that is scanned
                 self.database.add_documents(document_processed)
         else:
-            print(f'!!! Warning document {document_path} not exists.')
+            print(set_color('warning', f"Document {document_path} not exists."))
 
     def update_database_from_text(self, text):
         if text != '':
             # Update the text with timestamp
-            text = f"{text} by date {self.time_stamper(datetime.now())}"
+            text = f"{text} by {self.time_stamper(datetime.now())}"
 
             # Add text to database
             self.database.add_texts([text])
 
-        print('!!! Success, update database from text.')
+        print(set_color('info', f"Update database from text."))
 
     def generate_text(self, query, context):
         # Set values to prompt

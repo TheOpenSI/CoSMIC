@@ -9,6 +9,7 @@ from fentoboardimage import fenToImage, loadPiecesFolder
 
 import chess, os, imageio
 import chess.engine
+import numpy as np
 
 
 # =============================================================================================================
@@ -50,7 +51,7 @@ class ChessEngine:
         if enable_visualization and self.visualization_dir == '':
             self.visualization_dir = f"{self.root}/viz"
 
-    def finish(self):
+    def quit(self):
         self.engine.quit()
 
     def initialize_engine(self):  # start a new game
@@ -117,7 +118,6 @@ class ChessEngine:
             # Check if it is legal, setting an initial board has no legal castling moves for O-O
             # assert current_move in [v for v in self.board.legal_moves], \
             #     f"!!! Error illegal move: {current_move}."
-
             current_move = str(self.board.parse_san(current_move))
 
         # if the current move is valid, then push to the board
@@ -126,7 +126,79 @@ class ChessEngine:
         # Add one to valid move count
         self.move_count += 1
 
-    def __call__(self, current_move='', move_mode='coordinate', is_last_move=False):
+    def puzzle_solve(self, fen, move_mode):
+        # Clean the current board and restart the game
+        self.initialize_engine()
+
+        # Set the FEN
+        self.board.set_fen(fen)
+
+        # Estimate the next moves for the current FEN then automatic till game over
+        next_move_list = self.__call__(
+            move_mode=move_mode,
+            is_puzzle=True
+        )
+
+        return next_move_list
+
+    def get_next_moves(self):
+        # All next moves on the current board, unnecessary to be the best move(s)
+        next_move_list = [v for v in self.board.generate_legal_moves()]
+
+        return next_move_list
+
+    def get_best_moves(self, info, is_puzzle=False):
+        # Get the color to be checkmated from FEN
+        fen = self.board.fen()
+        color_to_be_checked = fen.split(' ')[1]
+        assert color_to_be_checked in ['w', 'b']
+
+        mate_list = []
+
+        for info_per in info:
+            # Get the score object for the best solution(s)
+            scorer = info_per['score']
+
+            # Get the status to be checkmated
+            if is_puzzle:
+                if color_to_be_checked == 'w':
+                    mate = scorer.white().mate()
+                else:
+                    mate = scorer.black().mate()
+
+                # None means unlikely to be checkmated
+                if mate is None: mate = -np.inf
+            else:
+                # chess.WHITE wins, that is mate (all negative) maximum or cp maximum (if no mate)
+                mate = scorer.white().mate()
+                if mate is None: mate = scorer.white().cp
+
+            mate_list.append(mate)
+
+        # Find the solution(s) with the maximum negative value
+        least_move_for_checkmate = np.max(mate_list)
+
+        # Find the indices with the least_move_for_checkmate
+        least_move_for_checkmate_indices = \
+            [idx for idx, mate in enumerate(mate_list) if mate == least_move_for_checkmate]
+
+        # Find the result with each solution or move as a list
+        if is_puzzle:
+            # For puzzle, return all the moves in the solution(s) as a list
+            result = [info[idx]['pv'] for idx in least_move_for_checkmate_indices]
+        else:
+            # For next move, return the first move of the solution(s) as a list
+            result = [info[idx]['pv'][0] for idx in least_move_for_checkmate_indices]
+
+        return result
+
+    def __call__(
+        self,
+        current_move='',
+        move_mode='coordinate',
+        is_last_move=False,
+        is_puzzle=False
+    ):
         # Check if move_mode is valid
         self._check_move_mode(move_mode)
 
@@ -144,18 +216,38 @@ class ChessEngine:
         self.is_game_over = self.board.is_game_over()
 
         if not self.is_game_over:
-            # Analyse for next move
-            info = self.engine.analyse(self.board, chess.engine.Limit(depth=1))
+            # For puzzle, to get the best solution(s) with multiple moves; otherwise, just general next moves
+            # For next moves, get_best_moves() can also return best move(s) as next moves,
+            # but to the present, just general next moves from get_next_moves()
+            if is_puzzle:
+                # Analyse for next move, depth for the moves of a solution, multipv for multiple solutions
+                info = self.engine.analyse(self.board, chess.engine.Limit(depth=20), multipv=50)
 
-            # Predict the next move by .uci() and set to the board
-            next_move = info['pv'][0].uci()
+                # This is a customized best move estimator (since inbuilt BestMove function will be deadlock)
+                # The best_solution_list can be multiple solution with multiple moves
+                best_solution_list = self.get_best_moves(info, is_puzzle=is_puzzle)
+            else:
+                best_solution_list = self.get_next_moves()
 
-            # Conver to the same input move format
-            if move_mode == 'algebric':
-                next_move = self.board.san(info['pv'][0])
+            # Convert the move format to string
+            next_move = []
+
+            for best_solution in best_solution_list:
+                if is_puzzle:
+                    # Each solution is a list of multiple moves
+                    # Next moves of a solution cannot be converted sequentially, unless push first
+                    next_move.append([str(v) for v in best_solution])
+                else:
+                    # Eeach solution is a move
+                    if move_mode == 'algebric':
+                        # Next move can be converted based on the current FEN
+                        next_move.append(str(self.board.san(best_solution)))
+                    else:
+                        # Append directly as it is already coordinate required
+                        next_move.append(str(best_solution))
         else:
             # If game over, no 'pv' in info for analysis
-            next_move = None
+            next_move = ''
 
         # Save image for visualization
         if self.enable_visualization:
