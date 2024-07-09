@@ -1,5 +1,6 @@
 # Install visualization tool by pip install fenToBoardImage
 from fentoboardimage import fenToImage, loadPiecesFolder
+from stockfish import Stockfish
 
 # Install chess engine by pip install python-chess
 # Check API docs at https://python-chess.readthedocs.io
@@ -7,9 +8,13 @@ from fentoboardimage import fenToImage, loadPiecesFolder
 # Source code at https://github.com/Monika-After-Story/MonikaModDev/blob/master/Monika%20After%20Story/
 # game/python-packages/chess/__init__.py
 
-import chess, os, imageio
+import chess, os, imageio, sys
 import chess.engine
 import numpy as np
+
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+
+from utils.log_tool import set_color
 
 
 # =============================================================================================================
@@ -19,22 +24,21 @@ class ChessEngine:
         self,
         binary_path='',
         enable_visualization=False,
-        visualization_dir=''
+        visualization_dir='',
+        back_end='stockfish'
     ):
         # Set config and status
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../../.."
         self.enable_visualization = enable_visualization
         self.visualization_dir = visualization_dir
+        self.back_end = back_end
         self.valid_move_modes = ['algebric', 'coordinate']
         self.image_list = []  # to generate GIF animates if enable_visualization is on
         self.game_count = -1  # one engine can have multiple games
         self.move_count = 0  # count moves for each game
         self.is_game_over = False
         self.board = chess.Board()
-
-        # Initialize the engine
-        self.initialize_engine()
     
         # Set initial path for stockfish
         if binary_path == '':
@@ -45,24 +49,44 @@ class ChessEngine:
             f'!!!Error, stockfish binary file not exist: {binary_path}.'
 
         # Set chess engine
-        self.engine = chess.engine.SimpleEngine.popen_uci(binary_path)
+        if self.back_end == 'chess-engine':
+            self.engine = chess.engine.SimpleEngine.popen_uci(binary_path)
+        else:
+            self.engine = Stockfish(
+                binary_path, depth=20,
+                parameters={"Threads": 2, "Minimum Thinking Time": 30}
+            )
 
         # Create image visualization path and list
         if enable_visualization and self.visualization_dir == '':
             self.visualization_dir = f"{self.root}/viz"
 
+        # Initialize the engine
+        self.initialize_engine()
+
     def quit(self):
-        self.engine.quit()
+        if self.back_end == 'chess-engine':
+            self.engine.quit()
 
     def initialize_engine(self):  # start a new game
+        # Reset board
+        self.reset_board()
+
+        # Initialize all global parameters for the current engine
+        self.game_count += 1
+
+    def reset_board(self):
         # Reset every in the board
         self.board.reset()
 
-        # Initialize all global parameters
-        self.image_list = []
-        self.game_count += 1
-        self.move_count = 0
+        # Reset stockfish
+        if self.back_end == 'stockfish':
+            self.engine.reset_engine_parameters()
+
+        # Initialize all global parameters for the current board
         self.is_game_over = False
+        self.move_count = 0
+        self.image_list = []
 
     def get_move_count(self):
         return self.move_count
@@ -112,19 +136,46 @@ class ChessEngine:
                 fps=1
             )
 
-    def push_single(self, current_move, move_mode):
-        # Convert from algebraic to coordinate
+    def convert_algebric_to_coordinate(self, move):
+        return str(self.board.parse_san(move))
+
+    def convert_coordinate_to_algebric(self, move):
+        # If move is a string, then convert to chess.Move for the board to parse
+        if not isinstance(move, chess.Move):
+            move = chess.Move.from_uci(move)
+
+        return str(self.board.san(move))
+
+    def check_is_legal_move(self, move, move_mode):
+        # self.board requires coordinate format
         if move_mode == 'algebric':
-            # Check if it is legal, setting an initial board has no legal castling moves for O-O
-            # assert current_move in [v for v in self.board.legal_moves], \
-            #     f"!!! Error illegal move: {current_move}."
-            current_move = str(self.board.parse_san(current_move))
+            move = self.convert_algebric_to_coordinate(move)
 
-        # if the current move is valid, then push to the board
-        self.board.push(chess.Move.from_uci(current_move))
+        # Check if the move is in the legal moves on the current board
+        is_legal = move in [str(v) for v in self.board.legal_moves]
 
-        # Add one to valid move count
-        self.move_count += 1
+        return is_legal
+
+    def push_single(self, current_move, move_mode):
+        # Check if the move is legal
+        is_legal = self.check_is_legal_move(current_move, move_mode)
+
+        if is_legal:
+            # Convert from algebraic to coordinate
+            if move_mode == 'algebric':
+                current_move = self.convert_algebric_to_coordinate(current_move)
+
+            # If the current move is valid, then push to the board
+            self.board.push(chess.Move.from_uci(current_move))
+
+            # Also push the move to stockfish
+            if self.back_end == 'stockfish':
+                self.engine.make_moves_from_current_position([current_move])
+
+            # Add one to valid move count
+            self.move_count += 1
+        else:
+            print(set_color('error', f"\nMove {current_move} is illegal on FEN {self.board.fen}."))
 
     def puzzle_solve(self, fen, move_mode):
         # Clean the current board and restart the game
@@ -132,6 +183,10 @@ class ChessEngine:
 
         # Set the FEN
         self.board.set_fen(fen)
+
+        # Set FEN to stockfish
+        if self.back_end == 'stockfish':
+            self.engine.set_fen_position(fen)
 
         # Estimate the next moves for the current FEN then automatic till game over
         next_move_list = self.__call__(
@@ -219,29 +274,38 @@ class ChessEngine:
             # For puzzle, to get the best solution(s) with multiple moves; otherwise, just general next moves
             # For next moves, get_best_moves() can also return best move(s) as next moves,
             # but to the present, just general next moves from get_next_moves()
-            if is_puzzle:
-                # Analyse for next move, depth for the moves of a solution, multipv for multiple solutions
-                info = self.engine.analyse(self.board, chess.engine.Limit(depth=20), multipv=50)
-
-                # This is a customized best move estimator (since inbuilt BestMove function will be deadlock)
-                # The best_solution_list can be multiple solution with multiple moves
-                best_solution_list = self.get_best_moves(info, is_puzzle=is_puzzle)
+            if self.back_end == 'stockfish':
+                if is_puzzle:
+                    # This returns only one move
+                    best_move = self.engine.get_best_move()
+                    best_solution_list = [best_move]
+                else:
+                    # This returns topk moves
+                    top_moves = self.engine.get_top_moves(5)
+                    best_solution_list = [v['Move'] for v in top_moves]
             else:
-                best_solution_list = self.get_next_moves()
+                if is_puzzle:
+                    # Analyse for next move, depth for the moves of a solution, multipv for multiple solutions
+                    info = self.engine.analyse(self.board, chess.engine.Limit(depth=20), multipv=50)
+
+                    # This is a customized best move estimator (since inbuilt BestMove function will be deadlock)
+                    # The best_solution_list can be multiple solution with multiple moves
+                    best_solution_list = self.get_best_moves(info, is_puzzle=is_puzzle)
+                else:
+                    best_solution_list = self.get_next_moves()
 
             # Convert the move format to string
             next_move = []
 
             for best_solution in best_solution_list:
-                if is_puzzle:
-                    # Each solution is a list of multiple moves
-                    # Next moves of a solution cannot be converted sequentially, unless push first
+                if is_puzzle and self.back_end == 'chess-engine':
+                    # The chess-engine returns a solution of multiple moves
                     next_move.append([str(v) for v in best_solution])
                 else:
                     # Eeach solution is a move
                     if move_mode == 'algebric':
-                        # Next move can be converted based on the current FEN
-                        next_move.append(str(self.board.san(best_solution)))
+                        best_solution = self.convert_coordinate_to_algebric(best_solution)
+                        next_move.append(best_solution)
                     else:
                         # Append directly as it is already coordinate required
                         next_move.append(str(best_solution))

@@ -16,20 +16,22 @@ class OpenSIEvalSystem:
         document_dir='',
         document_paths='',  # can be a list
         retrieve_score_threshold=0,
-        back_end='instance'
+        llm_back_end='instance',
+        chess_back_end='stockfish'
     ):
         # Set root for the location of this file relative to the repository
         self.root = f"{os.path.dirname(os.path.abspath(__file__))}/.."
+        self.chess_back_end = chess_back_end
 
         # Set up chess engine for __next_move__
-        self.chess_engine = ChessEngine()
+        self.chess_engine = ChessEngine(back_end=chess_back_end)
 
         # Set up LLM engine
         self.llm_engine = LLMEngine(
             llm_model_name='mistral',
             document_analyser_model_name='gte-small',
             retrieve_score_threshold=retrieve_score_threshold,
-            back_end=back_end  # options: 'instance'/'chat'
+            back_end=llm_back_end  # options: 'instance'/'chat'
         )
 
         # Update database through all .pdf in a folder
@@ -53,6 +55,7 @@ class OpenSIEvalSystem:
         fens = df['FEN']
         best_cases = df['best_case']
         players = df['player']
+        best_move_list = df['moves']
 
         # When start from black, the number of moves is across two blobs, thus minus 1
         best_case_updated = []
@@ -66,8 +69,15 @@ class OpenSIEvalSystem:
 
             best_case_updated.append(num_moves)
 
+        # Parse the ground truth moves given the FEN
+        # Remove namespace and . for each piece of moves
+        best_move_updated = []
+
+        for best_moves in best_move_list:
+            best_move_updated.append([v for v in best_moves.split(' ') if v.find('.') <= -1])
+
         # Set a dictionary
-        info = {'fen': fens, 'best_case': best_case_updated}
+        info = {'fen': fens, 'best_case': best_case_updated, 'moves': best_move_updated}
 
         return info
 
@@ -85,7 +95,8 @@ class OpenSIEvalSystem:
             move_mode = context
             if move_mode == '': move_mode = 'algebric'
 
-            # Predict the best move, a string style can be automatically parsed in the chess engine
+            # Predict the best move, a string style can be automatically
+            # parsed in the chess engine
             next_move = self.chess_engine(
                 current_move=current_move,
                 move_mode=move_mode,
@@ -107,18 +118,49 @@ class OpenSIEvalSystem:
 
                 # Get fens for puzzle solving
                 fens = puzzle_info['fen']
+                gt_move_lists = puzzle_info['moves']
                 num_fens = len(fens)
 
                 # Store the actual processed fen(s)
                 puzzle_solve_info = {'fen': [], 'best_case': [], 'solution': []}
 
                 # Set a .csv file containing multiple FEN to estimate the next move
-                for idx, fen in enumerate(fens):
+                for idx, (fen, gt_move_list) in enumerate(zip(fens, gt_move_lists)):
                     if idx % 10 == 0 or idx == num_fens - 1:
                         print(set_color('info', f"Solving puzzles {idx + 1}/{num_fens}..."))
 
-                    # Call to solve each puzzle
-                    next_moves = self.chess_engine.puzzle_solve(fen, move_mode)
+                    # Reset board
+                    self.chess_engine.reset_board()
+
+                    if self.chess_back_end == 'stockfish':
+                        # Set initial FEN since this will be update in every round
+                        current_fen = fen
+                        next_moves = []
+
+                        for idx_move, gt_move in enumerate(gt_move_list):
+                            # Stockfish only returns the best move, so push FEN to get the best move
+                            next_move = self.chess_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
+
+                            # Even step is the opponent, odd step is the player
+                            # Only push next_move for the player, and gt_move for the opponent
+                            if idx_move % 2 == 0:
+                                next_move = gt_move
+
+                            # Push the estimate move to the board
+                            self.chess_engine.push_single(next_move, move_mode=move_mode)
+
+                            # Then update the FEN in chess engine
+                            current_fen = self.chess_engine.get_current_board()
+
+                            # Save the actual move to next_moves
+                            next_moves.append(next_move)
+
+                        # Assume each puzzle can have multiple solutions, the above is one of them
+                        # thus, as a list, it is in another list
+                        next_moves = [next_moves]
+                    else:
+                        # Call to solve each puzzle
+                        next_moves = self.chess_engine.puzzle_solve(fen, move_mode)
 
                     # Store information
                     puzzle_solve_info['fen'].append(fen)
@@ -163,10 +205,15 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root = f"{current_dir}/.."
 
+    # Set config
+    llm_back_end = 'chat'  # chat/instance
+    chess_back_end = 'stockfish'  # stockfish/chess-engine
+
     # Build constructor of eval system
     qa_system = OpenSIEvalSystem(
         retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
-        back_end='chat'
+        llm_back_end=llm_back_end,
+        chess_back_end=chess_back_end
     )
 
     # Externally add other documents, a string or a list of strings
@@ -221,6 +268,7 @@ if __name__ == '__main__':
 
                     for fen, best_case, solution in zip(fens, best_cases, solutions):
                         # All the best solution for one FEN will be the same, divide by 2 for the number of blobs
+                        print('###', fen, solution[0])
                         solution_length = len(solution[0])
 
                         # Statistic of the tests
@@ -239,7 +287,10 @@ if __name__ == '__main__':
                             )
 
                     # Print information of puzzle success rate
-                    puzzle_success_rate = float(num_q_success_test_puzzle) / float(num_q_test_puzzle)
+                    if num_q_test_puzzle == 0:
+                        puzzle_success_rate = 0.0
+                    else:
+                        puzzle_success_rate = float(num_q_success_test_puzzle) / float(num_q_test_puzzle)
 
                     # Only all puzzles are successful, this test succeeds
                     if puzzle_success_rate == 1: num_q_success_tests += 1
