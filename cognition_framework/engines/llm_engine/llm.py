@@ -21,14 +21,18 @@ class LLMEngine:
         self,
         llm_model_name='mistral',
         document_analyser_model_name='gte-small',
-        prompt_variables='',
-        prompt_template='',
-        retrieve_score_threshold=0.
+        retrieve_score_threshold=0.,
+        back_end='instance'
     ):
         # Set config
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../../.."
         self.retrieve_score_threshold = retrieve_score_threshold
+        self.back_end = back_end
+
+        # Check valid engine mode
+        if back_end not in ['instance', 'chat']:
+            set_color('error', f"Back-end {back_end} is not supported.")
 
         # Login
         self.login()
@@ -41,7 +45,7 @@ class LLMEngine:
         # For LLM engine
         # Set model options
         LLM_MODEL_DICT = {
-            'mistral': "mistralai/Mistral-7B-v0.1"
+            'mistral': "mistralai/Mistral-7B-Instruct-v0.1"
         }
 
         # Build LLM model and tokenizer
@@ -57,6 +61,7 @@ class LLMEngine:
         model = AutoModelForCausalLM.from_pretrained(
             READER_MODEL_NAME,
             quantization_config=bnb_config,
+            low_cpu_mem_usage=True
         )
 
         # Set tokenizer
@@ -64,22 +69,74 @@ class LLMEngine:
             READER_MODEL_NAME,
         )
 
-        # Build LLM reader
-        self.llm_reader = pipeline(
-            task="text-generation",
-            model=model,
-            tokenizer=tokenizer,
-            do_sample=False,
-            # temperature=0.2,  # block do_sample thus remove this
-            repetition_penalty=1.1,
-            return_full_text=False,
-            max_new_tokens=500,
+        # Set LLM model for different uses
+        if self.back_end == 'chat':
+            # This user-assisant chat instance could be more accessable
+            # https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
+            # User-assistant chat template
+            chat_template = lambda query: [
+                {"role": "user", "content": "What is the full name of AI?"},
+                {"role": "assistant", "content": "The full name of AI is artificial intelligence."},
+                {"role": "user", "content": query}
+            ]
+
+            query_encoded = lambda query: \
+                tokenizer.apply_chat_template(
+                    chat_template(query),
+                    return_tensors="pt"
+                )
+
+            self.llm_reader = lambda query: \
+                tokenizer.batch_decode(
+                    model.generate(
+                        query_encoded(query),
+                        max_new_tokens=1000,
+                        do_sample=True
+                    )
+                )[0]
+
+            # Set prompt templates for those without/with context
+            prompt_template = "{question}"
+
+            prompt_template_context = \
+                "Given the context: '{context}', '{question}'. "
+        else:
+            # Build LLM reader
+            self.llm_reader = lambda query: pipeline(
+                task="text-generation",
+                model=model,
+                tokenizer=tokenizer,
+                do_sample=False,
+                # temperature=0.2,  # block do_sample thus remove this
+                repetition_penalty=1.1,
+                return_full_text=False,
+                max_new_tokens=500,
+            )(query)[0]["generated_text"]
+
+            # Set prompt templates for those without/with context
+            # 1. Set up LLM prompt template
+            prompt_template = \
+                "<s> [INST] Answer the question: 'What is the capital of China?' [/INST]\n" \
+                "The capital of China is Beijing.</s> \n" \
+                "[INST] Answer the question: '{question}'\n [/INST]"
+
+            # 2. Set up LLM prompt template with context
+            prompt_template_context = \
+                "<s> [INST] Given context: 'Beijing is the capital of China', answer the question: 'What is the capital of China?'. [/INST]\n" \
+                "The capital of China is Beijing.</s> \n" \
+                "[INST] Given context: '{context}', answer the question: '{question}'.\n [/INST]"
+
+        # Set prompt instances for those without/with context
+        # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
+        # https://medium.com/@thakermadhav/build-your-own-rag-with-mistral-7b-and-langchain-97d0c92fa146
+        self.prompt = PromptTemplate(
+            input_variables=['question'],
+            template=prompt_template,
         )
 
-        # Set prompt constructor
-        self.prompt = PromptTemplate(
-            input_variables=prompt_variables,
-            template=prompt_template,
+        self.prompt_context = PromptTemplate(
+            input_variables=['question', 'context'],
+            template=prompt_template_context,
         )
 
         # -----------------------------------------------------------------------------------------------------
@@ -179,21 +236,12 @@ class LLMEngine:
     def update_database_from_text(self, text):
         if text != '':
             # Update the text with timestamp
-            text = f"{text} by {self.time_stamper(datetime.now())}"
+            text = f"{text} by the date {self.time_stamper(datetime.now())}"
 
             # Add text to database
             self.database.add_texts([text])
 
         print(set_color('info', f"Update database from text."))
-
-    def generate_text(self, query, context):
-        # Set values to prompt
-        query = self.prompt.format(question=query, context=context)
-
-        # Get the generated text
-        answer = self.llm_reader(query)[0]["generated_text"]
-
-        return answer
 
     def retrieve_context(self, query, topk=1):
         # Find the topk relevant tokens
@@ -213,12 +261,22 @@ class LLMEngine:
         if len(retrieved_docs_text) == 0:
             context = ''
         else:
-            context = "\nExtracted documents:\n"
-            context += "".join(
-                [f"Document {str(i)}:::\n" + doc for i, doc in enumerate(retrieved_docs_text)]
+            context = "".join(
+                [f"Document {str(i)}:" + doc + '\n' for i, doc in enumerate(retrieved_docs_text)]
             )
 
         return context
+
+    def generate_prompt(self, question, context=''):
+        if context == '':
+            prompt = self.prompt.format(question=question)
+        else:
+            prompt = self.prompt_context.format(
+                question=question,
+                context=context
+            )
+
+        return prompt
 
     def __call__(
             self,
@@ -244,7 +302,16 @@ class LLMEngine:
             # Retrieve context from stored database
             context = self.retrieve_context(user_query, topk=topk)
 
-            # Question answering from distilled knowledge of model or document context
-            answer = self.generate_text(user_query, context)
+            # Generate prompt
+            prompt = self.generate_prompt(question=user_query, context=context)
+
+            # Generate the answer
+            answer = self.llm_reader(prompt)
+
+            # Parse the answer
+            if self.back_end == 'chat':
+                answer = answer.split('[/INST]')[-1].split('</s>')[0].strip()
+            else:
+                answer = answer.split('[INST]')[0].strip()
 
         return answer

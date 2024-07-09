@@ -15,7 +15,8 @@ class OpenSIEvalSystem:
     def __init__(self,
         document_dir='',
         document_paths='',  # can be a list
-        retrieve_score_threshold=0
+        retrieve_score_threshold=0,
+        back_end='instance'
     ):
         # Set root for the location of this file relative to the repository
         self.root = f"{os.path.dirname(os.path.abspath(__file__))}/.."
@@ -23,23 +24,12 @@ class OpenSIEvalSystem:
         # Set up chess engine for __next_move__
         self.chess_engine = ChessEngine()
 
-        # Set up LLM prompt template
-        # TODO have not yet figured out the format
-        # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
-        prompt_template = \
-            "[INST] Always answer the question, even if the context isn't helpful.\n\n" \
-            " Write a response that appropriately completes the request, do not" \
-            " write any explanation nor response, only answer.\n\n" \
-            "### Instruction:\n use the context '{context}'" \
-            "and answer the question '{question}'.\n [/INST]"
-
         # Set up LLM engine
         self.llm_engine = LLMEngine(
             llm_model_name='mistral',
             document_analyser_model_name='gte-small',
-            prompt_variables=['question', 'context'],
-            prompt_template=prompt_template,
-            retrieve_score_threshold=retrieve_score_threshold
+            retrieve_score_threshold=retrieve_score_threshold,
+            back_end=back_end  # options: 'instance'/'chat'
         )
 
         # Update database through all .pdf in a folder
@@ -161,9 +151,6 @@ class OpenSIEvalSystem:
                 topk=topk
             )
 
-            # Parse the answer
-            if result is not None: result = result.strip()
-
         return result
 
 # =============================================================================================================
@@ -178,16 +165,15 @@ if __name__ == '__main__':
 
     # Build constructor of eval system
     qa_system = OpenSIEvalSystem(
-        document_dir=f'',
-        retrieve_score_threshold=0.7  # filter out low-confidence retrieved context
+        retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
+        back_end='chat'
     )
 
     # Externally add other documents, a string or a list of strings
-    qa_system.add_documents(f'{root}/cognition_framework/test_doc/ucl_2023.pdf')
+    qa_system.add_documents(f'{root}/cognition_framework/doc/ucl_2023.pdf')
 
     # Externally add a document directory
     qa_system.add_document_directory(f'{root}/cognition_framework/doc')
-    qa_system.add_document_directory(f'{root}/cognition_framework/test_doc')
 
     # Set a bunch of questions, can also read from .csv
     df = pd.read_csv(f"{root}/cognition_framework/tests/test.csv")
@@ -220,7 +206,7 @@ if __name__ == '__main__':
                 else:
                     status = 'fail'
 
-                print(set_color(status, f"Question: {query} with GT: {gt}.\n==> Answer: {answer}.\n"))
+                print(set_color(status, f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n"))
             else:
                 if query.find('puzzle') > -1 and query.find('.csv') > -1:
                     # Get information from puzzle_solve_info for comparison
@@ -246,8 +232,8 @@ if __name__ == '__main__':
                         else:
                             print(set_color(
                                 'fail',
-                                f"Question: {query}." \
-                                f"\n==> Answer: the solution for FEN\n{fen}\nis" \
+                                f"\nQuestion: {query}." \
+                                f"\n==> The solution for FEN\n{fen}\nis" \
                                 f"\n{[f'{v_idx}: {v}' for v_idx, v in enumerate(solution)]}" \
                                 f"\nthe number of moves in the solution(s) is \n{[len(v) for v in solution]}.\n")
                             )
@@ -266,7 +252,7 @@ if __name__ == '__main__':
                         f" ({num_q_success_test_puzzle} out of {num_q_test_puzzle}).")
                     )
                 else:
-                    print(set_color('info', f"Query: {query}.\n==> Answer: {answer}."))
+                    print(set_color('info', f"\nQuery: {query}.\nAnswer: {answer}."))
 
     # Release the system
     qa_system.quit()
