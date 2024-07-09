@@ -97,8 +97,8 @@ Our finetuned model has currently been introduced to the following tasks -
 - Predict possible next winner  
 The following will be added to the training dataset to diversify the range of tasks - 
 - [x] Capture analysis
-- [x] FEN parsing and reasoning after FEN state
-- [x] Learn to use RAG context, may be useful for RAFT
+- [ ] FEN parsing and reasoning after FEN state
+- [ ] Learn to use RAG context, may be useful for RAFT
 
 ## Cognition Framework test with LLama-Indexing Implementation
 The congnition_test script requires an argument to specify the model, currently 3 models are supported.
