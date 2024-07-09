@@ -104,3 +104,49 @@ Example use
 ```
 $ python cognition_test.py --model gemma
 ```
+
+## OpenSI Evaluation System
+The prototype of the evaluation system is showcased by running
+```
+cd cognition_framework;
+python opensi_eval_system.py
+```
+It will return the success ratio of testing samplings given in
+```
+cognition_framework/tests/test.csv
+```
+Questions with keyword "skip" will be ignored during evaluation.
+
+**Functions supported**
+- General question answering
+- Question answering with context parsed from documents
+- Next move prediction for chess games
+- Solution prediction for chess puzzles
+
+**Engines of the evaluation system**
+- Large language model engine in [`llm.py`](./cognition_framework/engines/llm_engine/llm.py)
+- Chess engine (with API of Stockfish) in [`chess.py`](./cognition_framework/engines/chess_engine/chess.py)
+
+**API demo**
+```
+# Filter out low-confidence retrieved context if context document/text is provided, default retrieve_score_threshold=0.0
+qa_system = OpenSIEvalSystem(retrieve_score_threshold=0.7)
+
+# Provide a document path, .pdf only
+qa_system.add_documents([document path])
+
+# Provide a document directory containing multiple .pdf files
+qa_system.add_document_directory([document directory])
+
+# Set up a question
+query = "What is the capital of Australia?"
+
+# Call the evaluation system entry with up to topk tokens from the context document(s) provided
+answer = qa_system(query, topk=5)
+
+# Print out the testing sample with answer
+print(set_color('info', f"Query: {query}.\n==> Answer: {answer}."))
+
+# Release the system
+qa_system.quit()
+```
