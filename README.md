@@ -2,6 +2,9 @@
 
 This repository contains the implementation of a Cognitive AI experiments
 
+## Draft System Architecture
+![System Architecture v-1.0](https://github.com/TheOpenSI/cognitive_AI_experiments/blob/master/draft_system_architecture_v1_0.png)
+
 ## Workflow
 
 ### 1. Progressive Move Dataset
