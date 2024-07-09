@@ -17,6 +17,7 @@ langchain_openai
 langchain_core
 langchain_community
 langchain
+langchain-huggingface
 streamlit
 langserve
 fastapi
@@ -29,3 +30,4 @@ chromadb
 faiss-cpu
 peft
 trl
+stockfish
