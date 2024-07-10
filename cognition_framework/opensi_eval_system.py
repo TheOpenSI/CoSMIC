@@ -77,7 +77,12 @@ class OpenSIEvalSystem:
             best_move_updated.append([v for v in best_moves.split(' ') if v.find('.') <= -1])
 
         # Set a dictionary
-        info = {'fen': fens, 'best_case': best_case_updated, 'moves': best_move_updated}
+        info = {
+            'fen': fens,
+            'best_case': best_case_updated,
+            'moves': best_move_updated,
+            'player': players
+        }
 
         return info
 
@@ -86,7 +91,7 @@ class OpenSIEvalSystem:
             result = 'exit'
         elif query.find('__next__move__') > -1:
             # Set a new board
-            self.chess_engine.initialize_engine()
+            self.chess_engine.reset_board()
 
             # Parse move string
             current_move = query.split('__next__move__')[-1]
@@ -103,8 +108,20 @@ class OpenSIEvalSystem:
                 is_last_move=True
             )
 
+            # Get the current FEN
+            current_fen = self.chess_engine.get_fen()
+
+            # The first move from White and then Black given an initial board
+            if len(current_move) % 2 == 0:
+                player = 'white'
+            else:
+                player = 'black'
+
+            # Interaction with LLM
+            analysis = self.llm_engine.chess_analysis(player=player, move=next_move, fen=current_fen)
+
             # Display as an answer
-            result = f"The next move of {[current_move]} is {next_move}"
+            result = f"The next move of {[current_move]} is one of {next_move}\nAnalysis: {analysis}"
         elif query.find('puzzle') > -1 and query.find('.csv') > -1:
             # Use context to indicate the move mode
             move_mode = context
@@ -119,13 +136,14 @@ class OpenSIEvalSystem:
                 # Get fens for puzzle solving
                 fens = puzzle_info['fen']
                 gt_move_lists = puzzle_info['moves']
+                players = puzzle_info['player']
                 num_fens = len(fens)
 
                 # Store the actual processed fen(s)
                 puzzle_solve_info = {'fen': [], 'best_case': [], 'solution': []}
 
                 # Set a .csv file containing multiple FEN to estimate the next move
-                for idx, (fen, gt_move_list) in enumerate(zip(fens, gt_move_lists)):
+                for idx, (fen, gt_move_list, player) in enumerate(zip(fens, gt_move_lists, players)):
                     if idx % 10 == 0 or idx == num_fens - 1:
                         print(set_color('info', f"Solving puzzles {idx + 1}/{num_fens}..."))
 
@@ -145,12 +163,23 @@ class OpenSIEvalSystem:
                             # Only push next_move for the player, and gt_move for the opponent
                             if idx_move % 2 == 0:
                                 next_move = gt_move
+                            else:
+                                # interaction between LLM and Chess engine
+                                analysis = self.llm_engine.chess_analysis(player=player, move=next_move, fen=current_fen)
+
+                                # Display the analysis
+                                print(set_color(
+                                    'info',
+                                    f"Puzzle {idx + 1} at step {idx_move + 1}:" \
+                                    f" player {player} takes {next_move} given FEN '{current_fen}'.\n" \
+                                    f"Analysis: {analysis}\n")
+                                )
 
                             # Push the estimate move to the board
                             self.chess_engine.push_single(next_move, move_mode=move_mode)
 
                             # Then update the FEN in chess engine
-                            current_fen = self.chess_engine.get_current_board()
+                            current_fen = self.chess_engine.get_fen()
 
                             # Save the actual move to next_moves
                             next_moves.append(next_move)
@@ -268,7 +297,6 @@ if __name__ == '__main__':
 
                     for fen, best_case, solution in zip(fens, best_cases, solutions):
                         # All the best solution for one FEN will be the same, divide by 2 for the number of blobs
-                        print('###', fen, solution[0])
                         solution_length = len(solution[0])
 
                         # Statistic of the tests

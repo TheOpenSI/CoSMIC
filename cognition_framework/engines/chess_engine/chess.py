@@ -97,7 +97,7 @@ class ChessEngine:
     def check_game_over(self):
         return self.is_game_over
 
-    def get_current_board(self):
+    def get_fen(self):
         return self.board.fen()
 
     def _check_move_mode(self, move_mode):

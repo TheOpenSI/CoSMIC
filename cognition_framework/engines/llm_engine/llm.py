@@ -37,9 +37,9 @@ class LLMEngine:
         # Login
         self.login()
 
-        # Set a time stamp
+        # Set a time stamp, day is not accurate, so remove
         self.time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
-            .astimezone(pytz.timezone('Australia/Sydney')).strftime("%d-%m, %Y")
+            .astimezone(pytz.timezone('Australia/Sydney')).strftime("%B, %Y")
 
         # -----------------------------------------------------------------------------------------------------
         # For LLM engine
@@ -69,16 +69,18 @@ class LLMEngine:
             READER_MODEL_NAME,
         )
 
+        # Suppress the warning from
+        # https://stackoverflow.com/questions/74682597/
+        # fine-tuning-gpt2-attention-mask-and-pad-token-id-errors
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
+
         # Set LLM model for different uses
         if self.back_end == 'chat':
             # This user-assisant chat instance could be more accessable
             # https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
             # User-assistant chat template
-            chat_template = lambda query: [
-                {"role": "user", "content": "What is the full name of AI?"},
-                {"role": "assistant", "content": "The full name of AI is artificial intelligence."},
-                {"role": "user", "content": query}
-            ]
+            chat_template = lambda query: [{"role": "user", "content": query}]
 
             query_encoded = lambda query: \
                 tokenizer.apply_chat_template(
@@ -89,9 +91,10 @@ class LLMEngine:
             self.llm_reader = lambda query: \
                 tokenizer.batch_decode(
                     model.generate(
-                        query_encoded(query),
+                        query_encoded(query).to('cuda'),
                         max_new_tokens=1000,
-                        do_sample=True
+                        do_sample=True,
+                        pad_token_id=tokenizer.pad_token_id
                     )
                 )[0]
 
@@ -139,6 +142,15 @@ class LLMEngine:
             template=prompt_template_context,
         )
 
+        # Set prompt template and instance for chess move analysis
+        prompt_template_chess_analysis = \
+            "Explain why {player} takes {move} given the chess board FEN '{fen}'?"
+
+        self.prompt_chess_analysis = PromptTemplate(
+            input_variables=['player', 'move', 'fen'],
+            template=prompt_template_chess_analysis,
+        )
+
         # -----------------------------------------------------------------------------------------------------
         # For document analysis and knowledge database generation/update
         EMBEDDING_MODEL_DICT = {
@@ -176,6 +188,12 @@ class LLMEngine:
             self.database_update_embedding,
             distance_strategy=DistanceStrategy.COSINE
         )
+
+    def get_back_end(self):
+        return self.back_end
+
+    def set_back_end(self, back_end):
+        self.back_end = back_end
 
     def set_retrieve_score_threshold(self, retrieve_score_threshold):
         self.retrieve_score_threshold = retrieve_score_threshold
@@ -267,6 +285,16 @@ class LLMEngine:
 
         return context
 
+    def generate_chess_analysis_prompt(self, player, move, fen):
+        # Chess analysis has specific prompt template and instance
+        prompt = self.prompt_chess_analysis.format(
+            player=player,
+            move=move,
+            fen=fen
+        )
+
+        return prompt
+
     def generate_prompt(self, question, context=''):
         if context == '':
             prompt = self.prompt.format(question=question)
@@ -277,6 +305,18 @@ class LLMEngine:
             )
 
         return prompt
+
+    def chess_analysis(self, player, move, fen):
+        # Specific to chess move analysis due to predefined prompt template
+        prompt = self.generate_chess_analysis_prompt(player, move, fen)
+
+        # Generate the answer
+        analysis = self.llm_reader(prompt)
+
+        # Remove the question
+        analysis = analysis.split('[/INST]')[-1].replace('\n', '').replace('</s>', '')
+
+        return analysis
 
     def __call__(
             self,
