@@ -1,0 +1,41 @@
+,setup,FEN,next_move_number,moves,result,player,best_case,best_case_updated
+0,1,1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33,33,33. Qf1 Bxd4+ 34. Kh1 Qxf1,0-1,Black,2,2
+1,1,2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20,20,20. d5 Rc1+ 21. Rxc1 Rxc1,0-1,Black,2,2
+2,1,4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26,26,26. Rff7 Qxg2,0-1,Black,1,1
+3,1,5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1,1,1... Rxf1 2. Rd8+ Rf8 3. Rxf8,1-0,White,3,2
+4,1,3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1,1,1... Qxd7 2. Qxf6+ Kg8 3. Qf8,1-0,White,3,2
+5,1,rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1,1,1. Nf3 Bxf3 2. Bxf3 Qh2,0-1,Black,2,2
+6,1,r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1,1,1. bxc3 Qd1+ 2. Re1 Qxe1,0-1,Black,2,2
+7,1,rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8,8,8... h6 9. Qc8,1-0,White,2,1
+8,1,3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22,22,22... Nd4 23. Qxf7,1-0,White,2,1
+9,1,r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11,11,11... gxh6 12. Qh5+ Ke7 13. Qf7,1-0,White,3,2
+10,1,r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16,16,16. Qd5 Qxf2+ 17. Kh1 Qg1,0-1,Black,2,2
+11,1,1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1,1,1. Rd2 Qa3+ 2. Kd1 Rb1,0-1,Black,2,2
+12,1,r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16,16,16... a6 17. Nf6+ Ke7 18. Rd7,1-0,White,3,2
+13,1,8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44,44,44. Ra5 Qd6+ 45. Kc8 Qc7,0-1,Black,2,2
+14,1,2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1,1,1... Rc1 2. Ng6+ hxg6 3. Rh4,1-0,White,3,2
+15,1,5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43,43,43. Rb6 Nd3+ 44. Kb1 Rf1,0-1,Black,2,2
+16,1,r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21,21,21... Kf8 22. Rxe8+ Kxe8 23. Qg8,1-0,White,3,2
+17,1,2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22,22,22. gxf5 Rg8+ 23. Kh1 Rh6+ 24. Qh5 Rxh5,0-1,Black,3,3
+18,1,8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36,36,36... Kg4 37. h3+ Kh4 38. Rxf4,1-0,White,3,2
+19,1,r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19,19,19. Re1 Qc2,0-1,Black,1,1
+20,1,r4rk1/4R2p/6p1/p6n/Np1q4/3P2Q1/1PP2PPP/4R1K1 w - - 3 23,23,23. Qc7 Qxf2+ 24. Kh1 Qf1+ 25. Rxf1 Rxf1,0-1,Black,3,3
+21,1,rn4rk/ppp2R1p/3p4/3P3q/2P1P3/2N5/PP3Q1P/2b4K b - - 1 28,28,28... Na6 29. Qf6+ Rg7 30. Qxg7,1-0,White,3,2
+22,1,r1b1k1nr/pppp1ppp/2n2q2/2b1p3/4P1Q1/1P6/PBPP1PPP/RN2KBNR w KQkq - 3 5,5,5. Nc3 Qxf2+ 6. Kd1 Qxf1,0-1,Black,2,2
+23,1,r3r1k1/2pp1p2/1p2q3/pP5p/2P3n1/4PKPR/1Q1PN3/7R w - - 0 1,1,1. Rxh5 Qe4,0-1,Black,1,1
+24,1,r7/pR6/4R3/2p2r2/1kP5/7P/PK6/8 b - - 2 39,39,39... Ka5 40. Rb5+ Ka4 41. Ra6,1-0,White,3,2
+25,1,4r1k1/4r1p1/7p/1p1PBp2/p4P2/P2Q1P1b/1P3q1P/R3R2K w - - 0 1,1,1. Re2 Bg2,0-1,Black,1,1
+26,1,r2q1rk1/pb3pp1/8/4pQ1p/4Nn2/8/PPB2PPP/R4RK1 b - - 1 16,16,16... Qe7 17. Nf6+ gxf6 18. Qh7,1-0,White,3,2
+27,1,7r/R2nk1p1/2B1p2p/2b4Q/3qP3/6P1/P2N1P1P/2B3K1 w - - 0 1,1,1. Ba3 Qxf2+ 2. Kh1 Qg1,0-1,Black,2,2
+28,1,r4rk1/pp2bppp/2p5/8/3B2Q1/8/P1q2PPP/3RK2R b K - 2 19,19,19... Qxa2 20. Qxg7,1-0,White,2,1
+29,1,2kr1b1r/p1pq1ppp/1p6/4P3/8/3P1N1b/PPP2PKP/RNBQ1R2 w - - 0 1,1,1. Kg1 Qg4+ 2. Kh1 Qg2,0-1,Black,2,2
+30,1,1b2r1k1/1p1q3p/p1n3pB/3N4/3Pp2Q/4P1P1/PP5P/5RK1 b - - 0 1,1,1... Qxd5 2. Qf6 Qd7 3. Qf8+ Rxf8 4. Rxf8,1-0,White,4,3
+31,1,2r3k1/p1Q2p2/q7/5N1p/1P2P1p1/P4pP1/5P1P/5RK1 w - - 1 31,31,31. Qe5 Qxf1+ 32. Kxf1 Rc1,0-1,Black,2,2
+32,1,r1n1r2k/5pq1/p1p4p/2Q1P3/P6n/1BN4P/1PP2RP1/5R1K w - - 2 27,27,27. Rxf7 Qxg2,0-1,Black,1,1
+33,1,1r1qr1k1/5p1R/p2p2p1/1ppP1bP1/5P2/2N1Q3/PPP3P1/2K4R b - - 0 1,1,1... Rxe3 2. Rh8+ Kg7 3. R1h7,1-0,White,3,2
+34,1,3R1k2/pbp1r2p/8/2b2pPp/2B2P2/6KP/PP6/8 b - - 5 31,31,31... Kg7 32. Rg8,1-0,White,2,1
+35,1,6k1/pp4q1/8/3b1Rb1/2p5/2P5/PP3QPP/4r1K1 w - - 0 1,1,1. Qxe1 Be3+ 2. Qxe3 Qxg2,0-1,Black,2,2
+36,1,1Q6/5ppk/3p4/4r3/4q3/2P5/P5PP/R5K1 w - - 3 25,25,25. Qxd6 Qe3+ 26. Kh1 Qe1+ 27. Rxe1 Rxe1,0-1,Black,3,3
+37,1,RR6/2r2pp1/4p1k1/3p4/1BrPnKPP/2P5/8/8 b - - 2 42,42,42... Nxc3 43. h5+ Kf6 44. g5,1-0,White,3,2
+38,1,8/2pQ1kpp/1p2p3/p2pP3/6P1/PKP1q3/7P/8 b - - 0 1,1,1... Kg6 2. Qxe6+ Kg5 3. Qf5+ Kh4 4. Qh5,1-0,White,4,3
+39,1,2k5/pp3Bp1/2pp4/4p1p1/4Pqn1/P2P1P2/1PPNQ1r1/6K1 w - - 0 31,31,31. Kxg2 Qh2+ 32. Kf1 Qh1,0-1,Black,2,2

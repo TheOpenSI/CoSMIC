@@ -117,11 +117,18 @@ class OpenSIEvalSystem:
             else:
                 player = 'black'
 
-            # Interaction with LLM
-            analysis = self.llm_engine.chess_analysis(player=player, move=next_move, fen=current_fen)
+            # Convert next move to a list for loopy analysis
+            if not isinstance(next_move, list): next_move = [next_move]
+
+            # Interaction with LLM for each next move
+            for next_move_per in next_move:
+                analysis = self.llm_engine.chess_analysis(player=player, move=next_move_per, fen=current_fen)
+
+                # Display the analysis
+                print(set_color('info', f"The next move of {[current_move]} is {next_move_per}\nAnalysis: {analysis}.\n"))
 
             # Display as an answer
-            result = f"The next move of {[current_move]} is one of {next_move}\nAnalysis: {analysis}"
+            result = f"The next move of {[current_move]} is one of {next_move}."
         elif query.find('puzzle') > -1 and query.find('.csv') > -1:
             # Use context to indicate the move mode
             move_mode = context
@@ -158,6 +165,9 @@ class OpenSIEvalSystem:
                         for idx_move, gt_move in enumerate(gt_move_list):
                             # Stockfish only returns the best move, so push FEN to get the best move
                             next_move = self.chess_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
+
+                            # Remove # for the checkmate next_move, in case the model just analyse the move by #
+                            next_move = next_move.replace('#', '')
 
                             # Even step is the opponent, odd step is the player
                             # Only push next_move for the player, and gt_move for the opponent

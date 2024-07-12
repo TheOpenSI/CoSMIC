@@ -93,7 +93,8 @@ class LLMEngine:
                     model.generate(
                         query_encoded(query).to('cuda'),
                         max_new_tokens=1000,
-                        do_sample=True,
+                        do_sample=False,
+                        # temperature=0.2,
                         pad_token_id=tokenizer.pad_token_id
                     )
                 )[0]
@@ -144,7 +145,11 @@ class LLMEngine:
 
         # Set prompt template and instance for chess move analysis
         prompt_template_chess_analysis = \
-            "Explain why {player} takes {move} given the chess board FEN '{fen}'?"
+            "Explain with one reason as short as possible why {player} takes {move} given the chess board FEN '{fen}'?"
+
+        # TODO
+        # prompt_template_chess_analysis = \
+        #     "Given chess board FEN '{fen}', tell me the number and name of pieces on the board?"
 
         self.prompt_chess_analysis = PromptTemplate(
             input_variables=['player', 'move', 'fen'],
