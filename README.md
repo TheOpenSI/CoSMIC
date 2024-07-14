@@ -117,3 +117,45 @@ Example use
 ```
 $ python cognition_test.py --model gemma
 ```
+Test result <b>[Using test.csv only]</b> - 
+```
+[INFO] Hansen_2017.pdf added
+[INFO] Loading Cognition Framework tests
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] What's the capital of Australia?
+[RESPONSE] Canberra
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] What's the capital of Bangladesh?
+[RESPONSE] Dhaka
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] What's the capital of Germany?
+[RESPONSE] Berlin
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] What's the capital of Spain?
+[RESPONSE] Madrid
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] __update__store__ Real Madrid won 15 UCL titles.
+[Info] Update command detected
+[INFO] Updating vector store ..
+[INFO] Vector Store updated
+[INFO] Persistent store updated
+[INFO] Continuing on the main thread
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] How many UCL titles does Real Madrid have?
+[RESPONSE] 15
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] What's the capital of Saudi Arabia?
+[RESPONSE] Riyadh
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] __next__move__ d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3 Ba5 Bf4.
+[INFO] Next Move command detected. Calling chess engine service
+[INFO] Generating next best move using Chess Engine Service STOCKFISH
+[STOCKFISH] Next best move will be __test__move__
+[INFO] Continuing on the main thread
+[INFO] Generating next best move using Chess Engine Service STOCKFISH
+[STOCKFISH] Next best move will be __test__move__
+[INPUT] Please type in your query. Keywords : '__update__store__', '__next__move__'.
+[QUERY] exit
+Exiting framework
+[INFO] Cognition score for GOOGLE/GEMMA-7B is 6
+```
