@@ -14,5 +14,24 @@ def get_fen_state_explanation(fen: str) -> str:
 
 
 if __name__ == "__main__":
-    FEN = "4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26"
-    print(get_fen_state_explanation(FEN))
+    all_fens = []
+    with open("/workspaces/cognitive_AI_experiments/2nd_fine_tune/FEN_parsing/FEN.txt", "r") as f:
+        all_fens = f.readlines()
+        all_fens = all_fens[:50]
+        all_fens = [fen.replace("-", "/").replace("\n", "")+" _" for fen in all_fens]
+
+    f.close()
+
+    # FEN = "4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26"
+    # print(get_fen_state_explanation(FEN))
+
+    fen_parsing = open("fen_parsing.txt", "w")
+    for fen in all_fens:
+        fen_parsing.write(fen.split(" ")[0]+"\n")
+        fen_parsing.write("-"*5+"\n")
+        fen_parsing.write("Empty chess board square is denoted by '1'\n")
+        fen_parsing.write(get_fen_state_explanation(fen)+"\n")
+        fen_parsing.write("-"*5+"\n")
+
+    fen_parsing.close()
+    

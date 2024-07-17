@@ -1,0 +1,1461 @@
+4n3/8/8/8/4B3/1K2kr2/8/1q6
+-----
+Empty chess board square is denoted by '1'
+Total 6 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White Bishop, 1 x White King
+
+            Black Pieces: 4 pieces which are 1 x Black Knight, 1 x Black King, 1 x Black Rook, 1 x Black Queen
+            
+Board State is:
+ 1 1 1 1 n 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 B 1 1 1
+ 1 K 1 1 k r 1 1
+ 1 1 1 1 1 1 1 1
+ 1 q 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at e8
+White Bishop at e4
+White King at b3
+Black King at e3
+Black Rook at f3
+Black Queen at b1
+
+-----
+6B1/2NRQ3/8/K1b5/7Q/1N6/1kpb4/8
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 7 pieces which are 1 x White Bishop, 2 x White Knight, 1 x White Rook, 2 x White Queen, 1 x White King
+
+            Black Pieces: 4 pieces which are 2 x Black Bishop, 1 x Black King, 1 x Black Pawn
+            
+Board State is:
+ 1 1 1 1 1 1 B 1
+ 1 1 N R Q 1 1 1
+ 1 1 1 1 1 1 1 1
+ K 1 b 1 1 1 1 1
+ 1 1 1 1 1 1 1 Q
+ 1 N 1 1 1 1 1 1
+ 1 k p b 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Bishop at g8
+White Knight at c7 b3
+White Rook at d7
+White Queen at e7 h4
+White King at a5
+Black Bishop at c5 d2
+Black King at b2
+Black Pawn at c2
+
+-----
+8/7n/2r2r2/3p1b2/1KP5/1r6/3pPk1n/8
+-----
+Empty chess board square is denoted by '1'
+Total 12 pieces present in the board
+
+            White Pieces: 3 pieces which are 1 x White King, 2 x White Pawn
+
+            Black Pieces: 9 pieces which are 2 x Black Knight, 3 x Black Rook, 2 x Black Pawn, 1 x Black Bishop, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 n
+ 1 1 r 1 1 r 1 1
+ 1 1 1 p 1 b 1 1
+ 1 K P 1 1 1 1 1
+ 1 r 1 1 1 1 1 1
+ 1 1 1 p P k 1 n
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at h7 h2
+Black Rook at c6 f6 b3
+Black Pawn at d5 d2
+Black Bishop at f5
+White King at b4
+White Pawn at c4 e2
+Black King at f2
+
+-----
+b7/2P1P3/1Kr1br1P/8/8/4B3/8/3n3k
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 5 pieces which are 3 x White Pawn, 1 x White King, 1 x White Bishop
+
+            Black Pieces: 6 pieces which are 2 x Black Bishop, 2 x Black Rook, 1 x Black Knight, 1 x Black King
+            
+Board State is:
+ b 1 1 1 1 1 1 1
+ 1 1 P 1 P 1 1 1
+ 1 K r 1 b r 1 P
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 B 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 n 1 1 1 k
+
+Piece Positions are:
+Black Bishop at a8 e6
+White Pawn at c7 e7 h6
+White King at b6
+Black Rook at c6 f6
+White Bishop at e3
+Black Knight at d1
+Black King at h1
+
+-----
+6k1/6q1/8/5K2/4q3/8/7P/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White King, 1 x White Pawn
+
+            Black Pieces: 3 pieces which are 1 x Black King, 2 x Black Queen
+            
+Board State is:
+ 1 1 1 1 1 1 k 1
+ 1 1 1 1 1 1 q 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 K 1 1
+ 1 1 1 1 q 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 P
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black King at g8
+Black Queen at g7 e4
+White King at f5
+White Pawn at h2
+
+-----
+4n2R/1R4q1/1K2p3/5r2/8/P7/6P1/4Rk2
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 6 pieces which are 3 x White Rook, 1 x White King, 2 x White Pawn
+
+            Black Pieces: 5 pieces which are 1 x Black Knight, 1 x Black Queen, 1 x Black Pawn, 1 x Black Rook, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 n 1 1 R
+ 1 R 1 1 1 1 q 1
+ 1 K 1 1 p 1 1 1
+ 1 1 1 1 1 r 1 1
+ 1 1 1 1 1 1 1 1
+ P 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 P 1
+ 1 1 1 1 R k 1 1
+
+Piece Positions are:
+Black Knight at e8
+White Rook at h8 b7 e1
+Black Queen at g7
+White King at b6
+Black Pawn at e6
+Black Rook at f5
+White Pawn at a3 g2
+Black King at f1
+
+-----
+1n6/8/K4N2/8/8/8/1k1P4/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 3 pieces which are 1 x White King, 1 x White Knight, 1 x White Pawn
+
+            Black Pieces: 2 pieces which are 1 x Black Knight, 1 x Black King
+            
+Board State is:
+ 1 n 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ K 1 1 1 1 N 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 k 1 P 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at b8
+White King at a6
+White Knight at f6
+Black King at b2
+White Pawn at d2
+
+-----
+1N6/N4p2/2Br3P/8/7r/6rr/2nK1N2/7k
+-----
+Empty chess board square is denoted by '1'
+Total 13 pieces present in the board
+
+            White Pieces: 6 pieces which are 3 x White Knight, 1 x White Bishop, 1 x White Pawn, 1 x White King
+
+            Black Pieces: 7 pieces which are 1 x Black Pawn, 4 x Black Rook, 1 x Black Knight, 1 x Black King
+            
+Board State is:
+ 1 N 1 1 1 1 1 1
+ N 1 1 1 1 p 1 1
+ 1 1 B r 1 1 1 P
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 r
+ 1 1 1 1 1 1 r r
+ 1 1 n K 1 N 1 1
+ 1 1 1 1 1 1 1 k
+
+Piece Positions are:
+White Knight at b8 a7 f2
+Black Pawn at f7
+White Bishop at c6
+Black Rook at d6 h4 g3 h3
+White Pawn at h6
+Black Knight at c2
+White King at d2
+Black King at h1
+
+-----
+3b4/2n1k2B/8/7n/7R/n7/3K4/4B3
+-----
+Empty chess board square is denoted by '1'
+Total 9 pieces present in the board
+
+            White Pieces: 4 pieces which are 2 x White Bishop, 1 x White Rook, 1 x White King
+
+            Black Pieces: 5 pieces which are 1 x Black Bishop, 3 x Black Knight, 1 x Black King
+            
+Board State is:
+ 1 1 1 b 1 1 1 1
+ 1 1 n 1 k 1 1 B
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 n
+ 1 1 1 1 1 1 1 R
+ n 1 1 1 1 1 1 1
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 B 1 1 1
+
+Piece Positions are:
+Black Bishop at d8
+Black Knight at c7 h5 a3
+Black King at e7
+White Bishop at h7 e1
+White Rook at h4
+White King at d2
+
+-----
+K3bk2/8/8/8/4Q3/8/1P6/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 3 pieces which are 1 x White King, 1 x White Queen, 1 x White Pawn
+
+            Black Pieces: 2 pieces which are 1 x Black Bishop, 1 x Black King
+            
+Board State is:
+ K 1 1 1 b k 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 Q 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 P 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White King at a8
+Black Bishop at e8
+Black King at f8
+White Queen at e4
+White Pawn at b2
+
+-----
+8/8/6k1/4KR2/2P5/4B3/8/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White King, 1 x White Rook, 1 x White Pawn, 1 x White Bishop
+
+            Black Pieces: 1 pieces which are 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 k 1
+ 1 1 1 1 K R 1 1
+ 1 1 P 1 1 1 1 1
+ 1 1 1 1 B 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black King at g6
+White King at e5
+White Rook at f5
+White Pawn at c4
+White Bishop at e3
+
+-----
+b7/2n1R2b/8/8/8/8/P1qK4/4Qnk1
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Rook, 1 x White Pawn, 1 x White King, 1 x White Queen
+
+            Black Pieces: 6 pieces which are 2 x Black Bishop, 2 x Black Knight, 1 x Black Queen, 1 x Black King
+            
+Board State is:
+ b 1 1 1 1 1 1 1
+ 1 1 n 1 R 1 1 b
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ P 1 q K 1 1 1 1
+ 1 1 1 1 Q n k 1
+
+Piece Positions are:
+Black Bishop at a8 h7
+Black Knight at c7 f1
+White Rook at e7
+White Pawn at a2
+Black Queen at c2
+White King at d2
+White Queen at e1
+Black King at g1
+
+-----
+8/5k1q/3K4/8/P7/3r4/8/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White King, 1 x White Pawn
+
+            Black Pieces: 3 pieces which are 1 x Black King, 1 x Black Queen, 1 x Black Rook
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 k 1 q
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ P 1 1 1 1 1 1 1
+ 1 1 1 r 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black King at f7
+Black Queen at h7
+White King at d6
+White Pawn at a4
+Black Rook at d3
+
+-----
+3K3n/7b/5n1k/3pB1N1/3n2P1/5pP1/8/8
+-----
+Empty chess board square is denoted by '1'
+Total 12 pieces present in the board
+
+            White Pieces: 5 pieces which are 1 x White King, 1 x White Bishop, 1 x White Knight, 2 x White Pawn
+
+            Black Pieces: 7 pieces which are 3 x Black Knight, 1 x Black Bishop, 1 x Black King, 2 x Black Pawn
+            
+Board State is:
+ 1 1 1 K 1 1 1 n
+ 1 1 1 1 1 1 1 b
+ 1 1 1 1 1 n 1 k
+ 1 1 1 p B 1 N 1
+ 1 1 1 n 1 1 P 1
+ 1 1 1 1 1 p P 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White King at d8
+Black Knight at h8 f6 d4
+Black Bishop at h7
+Black King at h6
+Black Pawn at d5 f3
+White Bishop at e5
+White Knight at g5
+White Pawn at g4 g3
+
+-----
+7n/3K4/2P5/5b1p/1p6/6k1/4R3/4R2q
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White King, 1 x White Pawn, 2 x White Rook
+
+            Black Pieces: 6 pieces which are 1 x Black Knight, 1 x Black Bishop, 2 x Black Pawn, 1 x Black King, 1 x Black Queen
+            
+Board State is:
+ 1 1 1 1 1 1 1 n
+ 1 1 1 K 1 1 1 1
+ 1 1 P 1 1 1 1 1
+ 1 1 1 1 1 b 1 p
+ 1 p 1 1 1 1 1 1
+ 1 1 1 1 1 1 k 1
+ 1 1 1 1 R 1 1 1
+ 1 1 1 1 R 1 1 q
+
+Piece Positions are:
+Black Knight at h8
+White King at d7
+White Pawn at c6
+Black Bishop at f5
+Black Pawn at h5 b4
+Black King at g3
+White Rook at e2 e1
+Black Queen at h1
+
+-----
+3K4/8/3p4/8/8/8/1B6/3r1bk1
+-----
+Empty chess board square is denoted by '1'
+Total 6 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White King, 1 x White Bishop
+
+            Black Pieces: 4 pieces which are 1 x Black Pawn, 1 x Black Rook, 1 x Black Bishop, 1 x Black King
+            
+Board State is:
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 p 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 B 1 1 1 1 1 1
+ 1 1 1 r 1 b k 1
+
+Piece Positions are:
+White King at d8
+Black Pawn at d6
+White Bishop at b2
+Black Rook at d1
+Black Bishop at f1
+Black King at g1
+
+-----
+3n2Qr/6N1/4p2k/8/8/nb2B3/2PK1B2/Nn6
+-----
+Empty chess board square is denoted by '1'
+Total 14 pieces present in the board
+
+            White Pieces: 7 pieces which are 1 x White Queen, 2 x White Knight, 2 x White Bishop, 1 x White Pawn, 1 x White King
+
+            Black Pieces: 7 pieces which are 3 x Black Knight, 1 x Black Rook, 1 x Black Pawn, 1 x Black King, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 n 1 1 Q r
+ 1 1 1 1 1 1 N 1
+ 1 1 1 1 p 1 1 k
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ n b 1 1 B 1 1 1
+ 1 1 P K 1 B 1 1
+ N n 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at d8 a3 b1
+White Queen at g8
+Black Rook at h8
+White Knight at g7 a1
+Black Pawn at e6
+Black King at h6
+Black Bishop at b3
+White Bishop at e3 f2
+White Pawn at c2
+White King at d2
+
+-----
+8/nK3P2/8/r3B3/2p2bk1/1N4P1/8/6B1
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 6 pieces which are 1 x White King, 2 x White Pawn, 2 x White Bishop, 1 x White Knight
+
+            Black Pieces: 5 pieces which are 1 x Black Knight, 1 x Black Rook, 1 x Black Pawn, 1 x Black Bishop, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ n K 1 1 1 P 1 1
+ 1 1 1 1 1 1 1 1
+ r 1 1 1 B 1 1 1
+ 1 1 p 1 1 b k 1
+ 1 N 1 1 1 1 P 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 B 1
+
+Piece Positions are:
+Black Knight at a7
+White King at b7
+White Pawn at f7 g3
+Black Rook at a5
+White Bishop at e5 g1
+Black Pawn at c4
+Black Bishop at f4
+Black King at g4
+White Knight at b3
+
+-----
+1N5k/3P2BB/2b5/4q1Q1/1K2pPR1/1r6/5b2/7B
+-----
+Empty chess board square is denoted by '1'
+Total 15 pieces present in the board
+
+            White Pieces: 9 pieces which are 1 x White Knight, 2 x White Pawn, 3 x White Bishop, 1 x White Queen, 1 x White King, 1 x White Rook
+
+            Black Pieces: 6 pieces which are 1 x Black King, 2 x Black Bishop, 1 x Black Queen, 1 x Black Pawn, 1 x Black Rook
+            
+Board State is:
+ 1 N 1 1 1 1 1 k
+ 1 1 1 P 1 1 B B
+ 1 1 b 1 1 1 1 1
+ 1 1 1 1 q 1 Q 1
+ 1 K 1 1 p P R 1
+ 1 r 1 1 1 1 1 1
+ 1 1 1 1 1 b 1 1
+ 1 1 1 1 1 1 1 B
+
+Piece Positions are:
+White Knight at b8
+Black King at h8
+White Pawn at d7 f4
+White Bishop at g7 h7 h1
+Black Bishop at c6 f2
+Black Queen at e5
+White Queen at g5
+White King at b4
+Black Pawn at e4
+White Rook at g4
+Black Rook at b3
+
+-----
+7n/8/3N4/6r1/2p1k3/8/rR5Q/K7
+-----
+Empty chess board square is denoted by '1'
+Total 9 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Knight, 1 x White Rook, 1 x White Queen, 1 x White King
+
+            Black Pieces: 5 pieces which are 1 x Black Knight, 2 x Black Rook, 1 x Black Pawn, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 n
+ 1 1 1 1 1 1 1 1
+ 1 1 1 N 1 1 1 1
+ 1 1 1 1 1 1 r 1
+ 1 1 p 1 k 1 1 1
+ 1 1 1 1 1 1 1 1
+ r R 1 1 1 1 1 Q
+ K 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at h8
+White Knight at d6
+Black Rook at g5 a2
+Black Pawn at c4
+Black King at e4
+White Rook at b2
+White Queen at h2
+White King at a1
+
+-----
+R7/4N3/4p3/8/7k/1pP5/6K1/8
+-----
+Empty chess board square is denoted by '1'
+Total 7 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Rook, 1 x White Knight, 1 x White Pawn, 1 x White King
+
+            Black Pieces: 3 pieces which are 2 x Black Pawn, 1 x Black King
+            
+Board State is:
+ R 1 1 1 1 1 1 1
+ 1 1 1 1 N 1 1 1
+ 1 1 1 1 p 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 k
+ 1 p P 1 1 1 1 1
+ 1 1 1 1 1 1 K 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Rook at a8
+White Knight at e7
+Black Pawn at e6 b3
+Black King at h4
+White Pawn at c3
+White King at g2
+
+-----
+8/6kp/6q1/8/8/8/n3Pb2/R1K5
+-----
+Empty chess board square is denoted by '1'
+Total 8 pieces present in the board
+
+            White Pieces: 3 pieces which are 1 x White Pawn, 1 x White Rook, 1 x White King
+
+            Black Pieces: 5 pieces which are 1 x Black King, 1 x Black Pawn, 1 x Black Queen, 1 x Black Knight, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 k p
+ 1 1 1 1 1 1 q 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ n 1 1 1 P b 1 1
+ R 1 K 1 1 1 1 1
+
+Piece Positions are:
+Black King at g7
+Black Pawn at h7
+Black Queen at g6
+Black Knight at a2
+White Pawn at e2
+Black Bishop at f2
+White Rook at a1
+White King at c1
+
+-----
+3B2Q1/8/7P/nNb5/7k/1Qp5/2PK4/8
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 7 pieces which are 1 x White Bishop, 2 x White Queen, 2 x White Pawn, 1 x White Knight, 1 x White King
+
+            Black Pieces: 4 pieces which are 1 x Black Knight, 1 x Black Bishop, 1 x Black King, 1 x Black Pawn
+            
+Board State is:
+ 1 1 1 B 1 1 Q 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 P
+ n N b 1 1 1 1 1
+ 1 1 1 1 1 1 1 k
+ 1 Q p 1 1 1 1 1
+ 1 1 P K 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Bishop at d8
+White Queen at g8 b3
+White Pawn at h6 c2
+Black Knight at a5
+White Knight at b5
+Black Bishop at c5
+Black King at h4
+Black Pawn at c3
+White King at d2
+
+-----
+4R2B/5P2/1n3K2/3r4/8/8/2p4k/2N3n1
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 5 pieces which are 1 x White Rook, 1 x White Bishop, 1 x White Pawn, 1 x White King, 1 x White Knight
+
+            Black Pieces: 5 pieces which are 2 x Black Knight, 1 x Black Rook, 1 x Black Pawn, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 R 1 1 B
+ 1 1 1 1 1 P 1 1
+ 1 n 1 1 1 K 1 1
+ 1 1 1 r 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 p 1 1 1 1 k
+ 1 1 N 1 1 1 n 1
+
+Piece Positions are:
+White Rook at e8
+White Bishop at h8
+White Pawn at f7
+Black Knight at b6 g1
+White King at f6
+Black Rook at d5
+Black Pawn at c2
+Black King at h2
+White Knight at c1
+
+-----
+8/8/7b/1Kb4R/1Q5n/3R4/3nP3/2k5
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 5 pieces which are 1 x White King, 2 x White Rook, 1 x White Queen, 1 x White Pawn
+
+            Black Pieces: 5 pieces which are 2 x Black Bishop, 2 x Black Knight, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 b
+ 1 K b 1 1 1 1 R
+ 1 Q 1 1 1 1 1 n
+ 1 1 1 R 1 1 1 1
+ 1 1 1 n P 1 1 1
+ 1 1 k 1 1 1 1 1
+
+Piece Positions are:
+Black Bishop at h6 c5
+White King at b5
+White Rook at h5 d3
+White Queen at b4
+Black Knight at h4 d2
+White Pawn at e2
+Black King at c1
+
+-----
+R4KBN/8/P4pk1/2pB4/Nr6/8/R7/2R1Q3
+-----
+Empty chess board square is denoted by '1'
+Total 14 pieces present in the board
+
+            White Pieces: 10 pieces which are 3 x White Rook, 1 x White King, 2 x White Bishop, 2 x White Knight, 1 x White Pawn, 1 x White Queen
+
+            Black Pieces: 4 pieces which are 2 x Black Pawn, 1 x Black King, 1 x Black Rook
+            
+Board State is:
+ R 1 1 1 1 K B N
+ 1 1 1 1 1 1 1 1
+ P 1 1 1 1 p k 1
+ 1 1 p B 1 1 1 1
+ N r 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ R 1 1 1 1 1 1 1
+ 1 1 R 1 Q 1 1 1
+
+Piece Positions are:
+White Rook at a8 a2 c1
+White King at f8
+White Bishop at g8 d5
+White Knight at h8 a4
+White Pawn at a6
+Black Pawn at f6 c5
+Black King at g6
+Black Rook at b4
+White Queen at e1
+
+-----
+K7/1r3p2/p1b5/5R2/8/7b/1b2N1k1/N5r1
+-----
+Empty chess board square is denoted by '1'
+Total 12 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White King, 1 x White Rook, 2 x White Knight
+
+            Black Pieces: 8 pieces which are 2 x Black Rook, 2 x Black Pawn, 3 x Black Bishop, 1 x Black King
+            
+Board State is:
+ K 1 1 1 1 1 1 1
+ 1 r 1 1 1 p 1 1
+ p 1 b 1 1 1 1 1
+ 1 1 1 1 1 R 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 b
+ 1 b 1 1 N 1 k 1
+ N 1 1 1 1 1 r 1
+
+Piece Positions are:
+White King at a8
+Black Rook at b7 g1
+Black Pawn at f7 a6
+Black Bishop at c6 h3 b2
+White Rook at f5
+White Knight at e2 a1
+Black King at g2
+
+-----
+7n/3q4/3K1p2/3P1k1P/1pq5/P6b/8/8
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White King, 3 x White Pawn
+
+            Black Pieces: 7 pieces which are 1 x Black Knight, 2 x Black Queen, 2 x Black Pawn, 1 x Black King, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 1 1 1 1 n
+ 1 1 1 q 1 1 1 1
+ 1 1 1 K 1 p 1 1
+ 1 1 1 P 1 k 1 P
+ 1 p q 1 1 1 1 1
+ P 1 1 1 1 1 1 b
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at h8
+Black Queen at d7 c4
+White King at d6
+Black Pawn at f6 b4
+White Pawn at d5 h5 a3
+Black King at f5
+Black Bishop at h3
+
+-----
+6b1/4K3/8/8/5k2/1bp1p3/8/8
+-----
+Empty chess board square is denoted by '1'
+Total 6 pieces present in the board
+
+            White Pieces: 1 pieces which are 1 x White King
+
+            Black Pieces: 5 pieces which are 2 x Black Bishop, 1 x Black King, 2 x Black Pawn
+            
+Board State is:
+ 1 1 1 1 1 1 b 1
+ 1 1 1 1 K 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 k 1 1
+ 1 b p 1 p 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Bishop at g8 b3
+White King at e7
+Black King at f4
+Black Pawn at c3 e3
+
+-----
+5B2/RB1R4/3r2N1/1Q2q3/1r4P1/2Qk4/4P3/1bK5
+-----
+Empty chess board square is denoted by '1'
+Total 15 pieces present in the board
+
+            White Pieces: 10 pieces which are 2 x White Bishop, 2 x White Rook, 1 x White Knight, 2 x White Queen, 2 x White Pawn, 1 x White King
+
+            Black Pieces: 5 pieces which are 2 x Black Rook, 1 x Black Queen, 1 x Black King, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 1 1 B 1 1
+ R B 1 R 1 1 1 1
+ 1 1 1 r 1 1 N 1
+ 1 Q 1 1 q 1 1 1
+ 1 r 1 1 1 1 P 1
+ 1 1 Q k 1 1 1 1
+ 1 1 1 1 P 1 1 1
+ 1 b K 1 1 1 1 1
+
+Piece Positions are:
+White Bishop at f8 b7
+White Rook at a7 d7
+Black Rook at d6 b4
+White Knight at g6
+White Queen at b5 c3
+Black Queen at e5
+White Pawn at g4 e2
+Black King at d3
+Black Bishop at b1
+White King at c1
+
+-----
+4Rk2/8/4KR1b/8/7P/4P1B1/2nBrp2/3b4
+-----
+Empty chess board square is denoted by '1'
+Total 13 pieces present in the board
+
+            White Pieces: 7 pieces which are 2 x White Rook, 1 x White King, 2 x White Pawn, 2 x White Bishop
+
+            Black Pieces: 6 pieces which are 1 x Black King, 2 x Black Bishop, 1 x Black Knight, 1 x Black Rook, 1 x Black Pawn
+            
+Board State is:
+ 1 1 1 1 R k 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 K R 1 b
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 P
+ 1 1 1 1 P 1 B 1
+ 1 1 n B r p 1 1
+ 1 1 1 b 1 1 1 1
+
+Piece Positions are:
+White Rook at e8 f6
+Black King at f8
+White King at e6
+Black Bishop at h6 d1
+White Pawn at h4 e3
+White Bishop at g3 d2
+Black Knight at c2
+Black Rook at e2
+Black Pawn at f2
+
+-----
+2b1Kn2/R6q/3R2p1/8/qRQ1Q1p1/8/4b3/B6k
+-----
+Empty chess board square is denoted by '1'
+Total 15 pieces present in the board
+
+            White Pieces: 7 pieces which are 1 x White King, 3 x White Rook, 2 x White Queen, 1 x White Bishop
+
+            Black Pieces: 8 pieces which are 2 x Black Bishop, 1 x Black Knight, 2 x Black Queen, 2 x Black Pawn, 1 x Black King
+            
+Board State is:
+ 1 1 b 1 K n 1 1
+ R 1 1 1 1 1 1 q
+ 1 1 1 R 1 1 p 1
+ 1 1 1 1 1 1 1 1
+ q R Q 1 Q 1 p 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 b 1 1 1
+ B 1 1 1 1 1 1 k
+
+Piece Positions are:
+Black Bishop at c8 e2
+White King at e8
+Black Knight at f8
+White Rook at a7 d6 b4
+Black Queen at h7 a4
+Black Pawn at g6 g4
+White Queen at c4 e4
+White Bishop at a1
+Black King at h1
+
+-----
+8/8/8/2r5/K2k4/8/r7/n7
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 1 pieces which are 1 x White King
+
+            Black Pieces: 4 pieces which are 2 x Black Rook, 1 x Black King, 1 x Black Knight
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 r 1 1 1 1 1
+ K 1 1 k 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ r 1 1 1 1 1 1 1
+ n 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Rook at c5 a2
+White King at a4
+Black King at d4
+Black Knight at a1
+
+-----
+3k4/6R1/3n2r1/K4n2/r7/8/8/1b6
+-----
+Empty chess board square is denoted by '1'
+Total 8 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White Rook, 1 x White King
+
+            Black Pieces: 6 pieces which are 1 x Black King, 2 x Black Knight, 2 x Black Rook, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 k 1 1 1 1
+ 1 1 1 1 1 1 R 1
+ 1 1 1 n 1 1 r 1
+ K 1 1 1 1 n 1 1
+ r 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 b 1 1 1 1 1 1
+
+Piece Positions are:
+Black King at d8
+White Rook at g7
+Black Knight at d6 f5
+Black Rook at g6 a4
+White King at a5
+Black Bishop at b1
+
+-----
+8/4b3/2PK4/8/3kPR2/2Q5/8/3N1n2
+-----
+Empty chess board square is denoted by '1'
+Total 9 pieces present in the board
+
+            White Pieces: 6 pieces which are 2 x White Pawn, 1 x White King, 1 x White Rook, 1 x White Queen, 1 x White Knight
+
+            Black Pieces: 3 pieces which are 1 x Black Bishop, 1 x Black King, 1 x Black Knight
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 b 1 1 1
+ 1 1 P K 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 k P R 1 1
+ 1 1 Q 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 N 1 n 1 1
+
+Piece Positions are:
+Black Bishop at e7
+White Pawn at c6 e4
+White King at d6
+Black King at d4
+White Rook at f4
+White Queen at c3
+White Knight at d1
+Black Knight at f1
+
+-----
+N6Q/5k2/8/2p5/8/6p1/Kp3P2/8
+-----
+Empty chess board square is denoted by '1'
+Total 8 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Knight, 1 x White Queen, 1 x White King, 1 x White Pawn
+
+            Black Pieces: 4 pieces which are 1 x Black King, 3 x Black Pawn
+            
+Board State is:
+ N 1 1 1 1 1 1 Q
+ 1 1 1 1 1 k 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 p 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 p 1
+ K p 1 1 1 P 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Knight at a8
+White Queen at h8
+Black King at f7
+Black Pawn at c5 g3 b2
+White King at a2
+White Pawn at f2
+
+-----
+8/n1B4b/1n3k2/3K4/8/3P4/6N1/4r3
+-----
+Empty chess board square is denoted by '1'
+Total 9 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Bishop, 1 x White King, 1 x White Pawn, 1 x White Knight
+
+            Black Pieces: 5 pieces which are 2 x Black Knight, 1 x Black Bishop, 1 x Black King, 1 x Black Rook
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ n 1 B 1 1 1 1 b
+ 1 n 1 1 1 k 1 1
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 P 1 1 1 1
+ 1 1 1 1 1 1 N 1
+ 1 1 1 1 r 1 1 1
+
+Piece Positions are:
+Black Knight at a7 b6
+White Bishop at c7
+Black Bishop at h7
+Black King at f6
+White King at d5
+White Pawn at d3
+White Knight at g2
+Black Rook at e1
+
+-----
+8/nN2q1P1/rb6/2r4R/3k4/8/K7/2b2q1r
+-----
+Empty chess board square is denoted by '1'
+Total 13 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Knight, 1 x White Pawn, 1 x White Rook, 1 x White King
+
+            Black Pieces: 9 pieces which are 1 x Black Knight, 2 x Black Queen, 3 x Black Rook, 2 x Black Bishop, 1 x Black King
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ n N 1 1 q 1 P 1
+ r b 1 1 1 1 1 1
+ 1 1 r 1 1 1 1 R
+ 1 1 1 k 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ K 1 1 1 1 1 1 1
+ 1 1 b 1 1 q 1 r
+
+Piece Positions are:
+Black Knight at a7
+White Knight at b7
+Black Queen at e7 f1
+White Pawn at g7
+Black Rook at a6 c5 h1
+Black Bishop at b6 c1
+White Rook at h5
+Black King at d4
+White King at a2
+
+-----
+2Br3k/1n6/8/1RK3b1/8/3p4/2r5/r2R4
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White Bishop, 2 x White Rook, 1 x White King
+
+            Black Pieces: 7 pieces which are 3 x Black Rook, 1 x Black King, 1 x Black Knight, 1 x Black Bishop, 1 x Black Pawn
+            
+Board State is:
+ 1 1 B r 1 1 1 k
+ 1 n 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 R K 1 1 1 b 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 p 1 1 1 1
+ 1 1 r 1 1 1 1 1
+ r 1 1 R 1 1 1 1
+
+Piece Positions are:
+White Bishop at c8
+Black Rook at d8 c2 a1
+Black King at h8
+Black Knight at b7
+White Rook at b5 d1
+White King at c5
+Black Bishop at g5
+Black Pawn at d3
+
+-----
+7k/6Q1/1p6/6K1/7R/8/r7/8
+-----
+Empty chess board square is denoted by '1'
+Total 6 pieces present in the board
+
+            White Pieces: 3 pieces which are 1 x White Queen, 1 x White King, 1 x White Rook
+
+            Black Pieces: 3 pieces which are 1 x Black King, 1 x Black Pawn, 1 x Black Rook
+            
+Board State is:
+ 1 1 1 1 1 1 1 k
+ 1 1 1 1 1 1 Q 1
+ 1 p 1 1 1 1 1 1
+ 1 1 1 1 1 1 K 1
+ 1 1 1 1 1 1 1 R
+ 1 1 1 1 1 1 1 1
+ r 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black King at h8
+White Queen at g7
+Black Pawn at b6
+White King at g5
+White Rook at h4
+Black Rook at a2
+
+-----
+3nb3/rr6/2N1N3/6K1/n7/8/8/5Qk1
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 4 pieces which are 2 x White Knight, 1 x White King, 1 x White Queen
+
+            Black Pieces: 6 pieces which are 2 x Black Knight, 1 x Black Bishop, 2 x Black Rook, 1 x Black King
+            
+Board State is:
+ 1 1 1 n b 1 1 1
+ r r 1 1 1 1 1 1
+ 1 1 N 1 N 1 1 1
+ 1 1 1 1 1 1 K 1
+ n 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 Q k 1
+
+Piece Positions are:
+Black Knight at d8 a4
+Black Bishop at e8
+Black Rook at a7 b7
+White Knight at c6 e6
+White King at g5
+White Queen at f1
+Black King at g1
+
+-----
+2B4r/6q1/6kB/8/6R1/8/8/5K2
+-----
+Empty chess board square is denoted by '1'
+Total 7 pieces present in the board
+
+            White Pieces: 4 pieces which are 2 x White Bishop, 1 x White Rook, 1 x White King
+
+            Black Pieces: 3 pieces which are 1 x Black Rook, 1 x Black Queen, 1 x Black King
+            
+Board State is:
+ 1 1 B 1 1 1 1 r
+ 1 1 1 1 1 1 q 1
+ 1 1 1 1 1 1 k B
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 R 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 K 1 1
+
+Piece Positions are:
+White Bishop at c8 h6
+Black Rook at h8
+Black Queen at g7
+Black King at g6
+White Rook at g4
+White King at f1
+
+-----
+B5b1/7k/1p6/4N3/3K4/6Q1/6BP/8
+-----
+Empty chess board square is denoted by '1'
+Total 9 pieces present in the board
+
+            White Pieces: 6 pieces which are 2 x White Bishop, 1 x White Knight, 1 x White King, 1 x White Queen, 1 x White Pawn
+
+            Black Pieces: 3 pieces which are 1 x Black Bishop, 1 x Black King, 1 x Black Pawn
+            
+Board State is:
+ B 1 1 1 1 1 b 1
+ 1 1 1 1 1 1 1 k
+ 1 p 1 1 1 1 1 1
+ 1 1 1 1 N 1 1 1
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 1 1 Q 1
+ 1 1 1 1 1 1 B P
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Bishop at a8 g2
+Black Bishop at g8
+Black King at h7
+Black Pawn at b6
+White Knight at e5
+White King at d4
+White Queen at g3
+White Pawn at h2
+
+-----
+1K4q1/1q2n3/2P5/8/6p1/4k1RN/6n1/3r4
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 4 pieces which are 1 x White King, 1 x White Pawn, 1 x White Rook, 1 x White Knight
+
+            Black Pieces: 7 pieces which are 2 x Black Queen, 2 x Black Knight, 1 x Black Pawn, 1 x Black King, 1 x Black Rook
+            
+Board State is:
+ 1 K 1 1 1 1 q 1
+ 1 q 1 1 n 1 1 1
+ 1 1 P 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 p 1
+ 1 1 1 1 k 1 R N
+ 1 1 1 1 1 1 n 1
+ 1 1 1 r 1 1 1 1
+
+Piece Positions are:
+White King at b8
+Black Queen at g8 b7
+Black Knight at e7 g2
+White Pawn at c6
+Black Pawn at g4
+Black King at e3
+White Rook at g3
+White Knight at h3
+Black Rook at d1
+
+-----
+8/p7/2K5/8/3k4/4B3/2bp1p2/8
+-----
+Empty chess board square is denoted by '1'
+Total 7 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White King, 1 x White Bishop
+
+            Black Pieces: 5 pieces which are 3 x Black Pawn, 1 x Black King, 1 x Black Bishop
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ p 1 1 1 1 1 1 1
+ 1 1 K 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 k 1 1 1 1
+ 1 1 1 1 B 1 1 1
+ 1 1 b p 1 p 1 1
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Pawn at a7 d2 f2
+White King at c6
+Black King at d4
+White Bishop at e3
+Black Bishop at c2
+
+-----
+3N2r1/4P3/8/2K1p3/Q2r4/P7/3Pb2k/8
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 6 pieces which are 1 x White Knight, 3 x White Pawn, 1 x White King, 1 x White Queen
+
+            Black Pieces: 5 pieces which are 2 x Black Rook, 1 x Black Pawn, 1 x Black Bishop, 1 x Black King
+            
+Board State is:
+ 1 1 1 N 1 1 r 1
+ 1 1 1 1 P 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 K 1 p 1 1 1
+ Q 1 1 r 1 1 1 1
+ P 1 1 1 1 1 1 1
+ 1 1 1 P b 1 1 k
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Knight at d8
+Black Rook at g8 d4
+White Pawn at e7 a3 d2
+White King at c5
+Black Pawn at e5
+White Queen at a4
+Black Bishop at e2
+Black King at h2
+
+-----
+K3q3/Q7/1N2k2b/8/2N4r/2P3q1/8/7r
+-----
+Empty chess board square is denoted by '1'
+Total 11 pieces present in the board
+
+            White Pieces: 5 pieces which are 1 x White King, 1 x White Queen, 2 x White Knight, 1 x White Pawn
+
+            Black Pieces: 6 pieces which are 2 x Black Queen, 1 x Black King, 1 x Black Bishop, 2 x Black Rook
+            
+Board State is:
+ K 1 1 1 q 1 1 1
+ Q 1 1 1 1 1 1 1
+ 1 N 1 1 k 1 1 b
+ 1 1 1 1 1 1 1 1
+ 1 1 N 1 1 1 1 r
+ 1 1 P 1 1 1 q 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 r
+
+Piece Positions are:
+White King at a8
+Black Queen at e8 g3
+White Queen at a7
+White Knight at b6 c4
+Black King at e6
+Black Bishop at h6
+Black Rook at h4 h1
+White Pawn at c3
+
+-----
+3K4/6k1/8/8/8/7r/1p5p/8
+-----
+Empty chess board square is denoted by '1'
+Total 5 pieces present in the board
+
+            White Pieces: 1 pieces which are 1 x White King
+
+            Black Pieces: 4 pieces which are 1 x Black King, 1 x Black Rook, 2 x Black Pawn
+            
+Board State is:
+ 1 1 1 K 1 1 1 1
+ 1 1 1 1 1 1 k 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 r
+ 1 p 1 1 1 1 1 p
+ 1 1 1 1 1 1 1 1
+
+Piece Positions are:
+White King at d8
+Black King at g7
+Black Rook at h3
+Black Pawn at b2 h2
+
+-----
+4N3/8/R1B1N1k1/8/8/1NK4r/4n3/1B6
+-----
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+            White Pieces: 7 pieces which are 3 x White Knight, 1 x White Rook, 2 x White Bishop, 1 x White King
+
+            Black Pieces: 3 pieces which are 1 x Black King, 1 x Black Rook, 1 x Black Knight
+            
+Board State is:
+ 1 1 1 1 N 1 1 1
+ 1 1 1 1 1 1 1 1
+ R 1 B 1 N 1 k 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 N K 1 1 1 1 r
+ 1 1 1 1 n 1 1 1
+ 1 B 1 1 1 1 1 1
+
+Piece Positions are:
+White Knight at e8 e6 b3
+White Rook at a6
+White Bishop at c6 b1
+Black King at g6
+White King at c3
+Black Rook at h3
+Black Knight at e2
+
+-----
+q5q1/p4kr1/6p1/2PP2B1/3P4/5P2/B5Bb/4K3
+-----
+Empty chess board square is denoted by '1'
+Total 15 pieces present in the board
+
+            White Pieces: 8 pieces which are 4 x White Pawn, 3 x White Bishop, 1 x White King
+
+            Black Pieces: 7 pieces which are 2 x Black Queen, 2 x Black Pawn, 1 x Black King, 1 x Black Rook, 1 x Black Bishop
+            
+Board State is:
+ q 1 1 1 1 1 q 1
+ p 1 1 1 1 k r 1
+ 1 1 1 1 1 1 p 1
+ 1 1 P P 1 1 B 1
+ 1 1 1 P 1 1 1 1
+ 1 1 1 1 1 P 1 1
+ B 1 1 1 1 1 B b
+ 1 1 1 1 K 1 1 1
+
+Piece Positions are:
+Black Queen at a8 g8
+Black Pawn at a7 g6
+Black King at f7
+Black Rook at g7
+White Pawn at c5 d5 d4 f3
+White Bishop at g5 a2 g2
+Black Bishop at h2
+White King at e1
+
+-----
