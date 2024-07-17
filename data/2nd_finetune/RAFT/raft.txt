@@ -1,0 +1,540 @@
+Who are Tardo and Peo in "DISQUALIFIED" by Charles L. Fontenay?
+-----
+To determine who Tardo and Peo are in "DISQUALIFIED" by Charles L. Fontenay, we can look at the provided context. 
+
+1. The context mentions that "Tardo, the Solar Council's Planetary Aid agent, and his companion, Peo, were taken to the castle." This indicates that Tardo is the Solar Council's Planetary Aid agent, and Peo is his companion.
+
+Therefore, based on the context provided, Tardo is the Solar Council's Planetary Aid agent, and Peo is his companion.
+
+<ANSWER>: Tardo is the Solar Council's Planetary Aid agent, and Peo is his companion.
+-----
+Tardo is the Solar Council's Planetary Aid agent and Peo is his companion.
+-----
+0
+-----
+What is the significance of the castle overlooking the area in "DISQUALIFIED" by Charles L. Fontenay?
+-----
+To determine the significance of the castle overlooking the area in "DISQUALIFIED" by Charles L. Fontenay, we can follow these steps:
+
+1. The context mentions that Tardo and Peo, the Solar Council's Planetary Aid agent and his companion, were taken to the castle after a morning inspection tour.
+2. The fact that the castle is situated on a hill overlooking the area suggests that it holds a position of prominence and authority.
+3. Castles historically symbolize power, control, and protection. In this story, the castle's location overlooking the area could indicate that it serves as a central hub for overseeing and managing the region.
+4. The castle's strategic position on a hill may also imply that it offers a vantage point for surveillance and defense, highlighting its importance in the story's setting.
+
+Therefore, the significance of the castle overlooking the area in "DISQUALIFIED" by Charles L. Fontenay is that it likely represents a symbol of authority, control, and strategic importance in the region. 
+
+<ANSWER>: The castle symbolizes authority, control, and strategic importance in the region.
+-----
+The castle is where Tardo and Peo are taken after the morning inspection tour.
+-----
+0
+-----
+Who entertained Tardo and Peo at luncheon?
+-----
+To answer the question "Who entertained Tardo and Peo at luncheon?":
+
+1. Identify the relevant information in the context:
+- Tardo and Peo were entertained royally at luncheon by Saranta, their host, who appeared to be the wealthy overlord of this portion of the planet.
+
+2. Apply the information:
+- ##Saranta## entertained Tardo and Peo at luncheon.
+
+Therefore, the answer is: Saranta
+-----
+Saranta
+-----
+1
+-----
+What was served for dessert?
+-----
+To determine what was served for dessert, we need to focus on the relevant part of the context which describes the meal. The context mentions that the meal consisted of "tender, inch-thick steaks served with delicate wine sauce and half a dozen of the planet's exotic vegetables, topped off by a cool fruit dessert."
+
+Therefore, the dessert served was a cool fruit dessert.
+
+<ANSWER>: A cool fruit dessert.
+-----
+Cool fruit dessert
+-----
+1
+-----
+What technical aid is available aboard the ship?
+-----
+To answer the question "What technical aid is available aboard the ship?" based on the provided context:
+
+1. Tardo mentions that there is certain technical aid aboard the ship that will be made available if the recommendation is favorable. This aid will not be advanced equipment from the Solar Council until a more thorough investigation is conducted.
+2. The context does not specify the exact details of the technical aid available aboard the ship, but it implies that there are resources or tools that can assist individuals based on the recommendation given.
+
+Therefore, based on the context provided, the technical aid available aboard the ship is unspecified but likely includes resources or tools to support individuals in some technical capacity.
+
+<ANSWER>: The technical aid available aboard the ship is unspecified but likely includes resources or tools to support individuals in some technical capacity.
+-----
+The technical aid available aboard the ship is certain equipment.
+-----
+2
+-----
+What kind of equipment will not be received until a more thorough investigation is conducted?
+-----
+To answer the question, we need to identify the type of equipment that will not be received until a more thorough investigation is conducted. 
+
+1. From the context provided, we see that Tardo mentions, "you will not receive advanced equipment from the Solar Council until there is a more thorough investigation."
+
+2. The relevant part of the context indicates that advanced equipment from the Solar Council will not be received until a more thorough investigation is conducted.
+
+Therefore, the type of equipment that will not be received until a more thorough investigation is conducted is <ANSWER>: advanced equipment from the Solar Council.
+-----
+Advanced equipment from the Solar Council will not be received until a more thorough investigation is conducted.
+-----
+2
+-----
+What are some fundamental requirements for colonies in other star systems?
+-----
+To answer the question about fundamental requirements for colonies in other star systems based on the context provided:
+
+1. Identify the relevant information in the context: The Council mentions certain fundamental requirements for colonies in other star systems, such as "no abnormal religious practices, no slavery."
+
+2. Exclude irrelevant information: The mention of the culture being simple and agrarian is not directly related to the fundamental requirements for colonies in other star systems.
+
+3. Summarize the key requirements: The fundamental requirements for colonies in other star systems include avoiding abnormal religious practices and slavery.
+
+Therefore, the fundamental requirements for colonies in other star systems are: no abnormal religious practices, no slavery.
+-----
+No abnormal religious practices, no slavery.
+-----
+3
+-----
+What difficulties have faced colonies in other star systems?
+-----
+To answer the question about the difficulties faced by colonies in other star systems based on the provided context, we can follow these steps:
+
+1. **Identify Relevant Information**: In the context provided, Saranta mentions that the Council understands the difficulties faced by colonies in other star systems. The Council outlines certain fundamental requirements for colonies, such as no abnormal religious practices and no slavery.
+
+2. **Analyze the Information**: The mention of the Council understanding the difficulties faced by colonies in other star systems implies that these colonies have encountered challenges in their development or interactions. The specific requirements mentioned, like no abnormal religious practices and no slavery, suggest that these issues may have been problematic for colonies in the past.
+
+3. **Final Answer**: The difficulties faced by colonies in other star systems may include challenges related to cultural practices, social structures, and ethical considerations. <ANSWER>: Challenges related to cultural practices, social structures, and ethical considerations.
+-----
+Saranta mentions that the Council understands these difficulties.
+-----
+3
+-----
+What is the reason why the ship just rusted away?
+-----
+To answer the question about why the ship just rusted away, we can follow these steps based on the provided context:
+
+1. Saranta mentions that their ancestors colonized the world a thousand years ago and there was no fuel for the ship to explore other planets in the system.
+2. Saranta explains, "the ship just rusted away" due to the lack of fuel for exploration.
+3. The reason for the ship rusting away is that there was no fuel available to maintain or operate it for further exploration.
+
+Final answer: The ship just rusted away due to the lack of fuel for exploration.
+-----
+Due to lack of fuel.
+-----
+4
+-----
+Who is the first ship to land on the planet since colonization?
+-----
+To answer the question "Who is the first ship to land on the planet since colonization?" based on the provided context:
+
+1. The context mentions that the speaker Saranta stated, "Since we are some distance from the solar system, yours is the first ship that has landed here since colonization."
+2. This indicates that the first ship to land on the planet since colonization is the ship belonging to the group that includes Tardo and Peo, who are being addressed by Saranta.
+3. The context also mentions that the group with Tardo and Peo is from a different solar system and their ship is the first to land on the planet since colonization.
+
+Therefore, the first ship to land on the planet since colonization is the ship belonging to the group that includes Tardo and Peo: the visitors from a different solar system. 
+
+<ANSWER>: The ship belonging to the group with Tardo and Peo.
+-----
+Tardo and Peo's ship.
+-----
+4
+-----
+What were the main difficulties faced by the colonizers on the planet?
+-----
+To answer the question about the main difficulties faced by the colonizers on the planet based on the provided context:
+
+1. The colonizers faced difficulties due to the absence of animal life on the planet. This made it challenging for them as they had no animals to domesticate for tasks like plowing. 
+2. The luxuriant vegetation on the planet did not compensate for the lack of animal life, as indicated by Saranta mentioning, "Luxuriant vegetation, but no animal life, so we had no animals to domesticate."
+
+Therefore, the main difficulties faced by the colonizers on the planet were the absence of animal life for domestication and the resulting manual labor required for tasks like plowing.
+
+<ANSWER>: The main difficulties faced by the colonizers on the planet were the absence of animal life for domestication and the resulting manual labor required for tasks like plowing.
+-----
+The main difficulties faced by the colonizers were the lack of animal life for domestication, making tasks like plowing difficult for humans.
+-----
+5
+-----
+Why did the colonizers know the planet was habitable before landing on it?
+-----
+To answer the question of why the colonizers knew the planet was habitable before landing on it, we can follow these steps based on the provided context:
+
+1. The navigator Peo mentioned that the colonizers were lucky not to have landed on a barren planet.
+2. Saranta, one of the colonizers, explained that they knew the planet was habitable from the first exploration expedition.
+3. Saranta mentioned that they encountered difficulties such as luxuriant vegetation but no animal life, which made plowing hard work for humans.
+
+Therefore, the colonizers knew the planet was habitable before landing on it because their first exploration expedition revealed signs of life such as luxuriant vegetation, indicating the planet's habitability despite the absence of animal life.
+
+<ANSWER>: The colonizers knew the planet was habitable due to signs of life like luxuriant vegetation observed during the first exploration expedition.
+-----
+The colonizers knew the planet was habitable from the first exploration expedition.
+-----
+5
+-----
+What did the colonists do to make the planet liveable?
+-----
+To answer the question "What did the colonists do to make the planet liveable?" based on the provided context, we can follow these steps:
+
+1. The relevant information in the context is: "The colonists were anxious to co-operate to make the planet liveable."
+
+2. From the context, it is implied that the colonists worked together and cooperated to make the planet liveable. They were willing to put in effort and labor towards this goal.
+
+3. The context also mentions that the colonists did not resort to slavery, indicating that their efforts to make the planet liveable were achieved through voluntary work and cooperation.
+
+Final Answer: The colonists cooperated and worked together voluntarily to make the planet liveable.
+-----
+They co-operated and worked.
+-----
+6
+-----
+Was slavery used by the colonists in this society?
+-----
+To answer the question of whether slavery was used by the colonists in this society based on the provided context:
+
+1. Tardo asked Saranta if he solved the situation in a humanitarian way without resorting to slavery.
+2. Saranta responded by questioning if the society looked like a slave society to Tardo, emphasizing that the colonists were willing to work together to make the planet liveable.
+
+The context does not provide a direct statement confirming or denying the use of slavery by the colonists in this society. However, Saranta's response implies that slavery was not used, as he highlighted the willingness of the colonists to cooperate and work without objection.
+
+<ANSWER>: Based on Saranta's response emphasizing cooperation and willingness to work, it can be inferred that slavery was not used by the colonists in this society.
+-----
+No, they did not resort to slavery.
+-----
+6
+-----
+What were the colonists anxious to cooperate on?
+-----
+To answer the question "What were the colonists anxious to cooperate on?" based on the provided context, we can follow these steps:
+
+1. The context mentions that the colonists were anxious to cooperate to make the planet liveable. This indicates that the colonists were eager to work together towards a common goal related to improving the living conditions on the planet.
+
+2. The context also states, "No one objected to work." This further emphasizes the willingness of the colonists to engage in cooperative efforts without resistance.
+
+3. The context does not provide specific details on the exact nature of the cooperation, but it suggests that the colonists were united in their efforts to make the planet habitable.
+
+Therefore, the colonists were anxious to cooperate on making the planet liveable. 
+
+<ANSWER>: The colonists were anxious to cooperate on making the planet liveable.
+-----
+Making the planet liveable.
+-----
+7
+-----
+What did Tardo base his conclusions on?
+-----
+To answer the question "What did Tardo base his conclusions on?" based on the provided context:
+
+1. Tardo mentioned that he must draw most of his conclusions from the attitudes of the hosts and others present on the planet: "I must draw most of my conclusions from the attitudes of you and the others who are our hosts."
+
+2. Tardo also considered the absence of slaves during his short inspection period: "It's true we've seen no slaves, that we know about," said Tardo. "But two days is a short time for inspection."
+
+3. Tardo likely observed the treatment and roles of the servants on the planet to form his conclusions: "How about the servants here?"
+
+Therefore, Tardo based his conclusions on the attitudes of the hosts, the absence of slaves during his short inspection, and the treatment of servants on the planet.
+
+<ANSWER>: Tardo based his conclusions on the attitudes of the hosts, the absence of slaves, and the treatment of servants on the planet.
+-----
+Attitudes of the hosts.
+-----
+7
+-----
+What do some people think about the pay of certain individuals?
+-----
+To answer the question, we need to analyze the provided context. Saranta mentioned that some people think certain individuals are paid too well and have a union. Tardo commented that having a union is unusual for a culture without technology. This implies that some people believe that the pay of these individuals is excessive due to their union representation, which is uncommon in a culture without technology.
+
+Therefore, some people think that the pay of certain individuals is excessive due to their union representation, which is unusual in a culture without technology.
+
+<ANSWER>: Some people think the pay of certain individuals is excessive due to their union representation.
+-----
+Some think they are paid too well.
+-----
+8
+-----
+Where did the concept of a union come from in this culture?
+-----
+To answer the question of where the concept of a union came from in this culture based on the provided context:
+
+1. The context mentions that the individuals in the culture are paid and have a union.
+2. Tardo comments that the union is likely "a carry-over from Earth."
+3. Tardo also notes that it is "an unusual one, too, for a culture without technology."
+
+Therefore, the concept of a union in this culture likely originated from Earth as a carry-over, even though it is unusual for a culture without technology.
+
+<ANSWER>: The concept of a union in this culture likely originated as a carry-over from Earth.
+-----
+It likely originated from Earth.
+-----
+8
+-----
+What kind of community did Tardo and the two men visit?
+-----
+To answer the question, we need to analyze the context provided. 
+
+1. Tardo and the two men visited a neat agricultural community with broad fields, well-constructed buildings, and a village where artisans and craftsmen worked peacefully. This community was described as having a castle-like home belonging to Saranta.
+
+2. Tardo commented that the community was "an unusual one, too, for a culture without technology." This implies that the community was unique in its lack of reliance on modern technology.
+
+Therefore, based on the context provided, Tardo and the two men visited a peaceful agricultural community with artisans and craftsmen, which was unusual for its lack of technology.
+
+<ANSWER>: They visited a peaceful agricultural community with artisans and craftsmen.
+-----
+A neat agricultural community.
+-----
+9
+-----
+What types of trades were being practiced in the village nearby?
+-----
+To answer the question about the types of trades being practiced in the nearby village, we can follow these steps based on the provided context:
+
+1. ##begin_quote##...a village in which artisans and craftsmen plied their peaceful trades.##end_quote##
+2. The context mentions that in the village nearby, artisans and craftsmen were practicing their trades. This indicates that the types of trades being practiced in the village include artisanal and craft-based activities.
+
+Therefore, the types of trades being practiced in the village nearby are artisanal and craft-based trades: Artisanal and craft-based trades.
+-----
+Artisans and craftsmen.
+-----
+9
+-----
+What kind of training did the Council agent have?
+-----
+To answer the question "What kind of training did the Council agent have?" based on the provided context:
+
+1. The context mentions that the Council agent had "intensive training and many years of experience."
+2. It also suggests that the Council agent's training was such that they would notice "very minor" factors that the average person would not.
+3. The context does not provide specific details about the exact nature of the training, but it does emphasize the agent's extensive experience and ability to notice subtle details.
+
+Therefore, based on the context, the Council agent likely had specialized training focused on observation, attention to detail, and the ability to discern significant information from seemingly minor cues.
+
+<ANSWER>: The Council agent likely had specialized training in observation, attention to detail, and discerning significant information from minor cues.
+-----
+Intensive training and many years of experience.
+-----
+10
+-----
+What factors would Tardo consider significant during the inspection?
+-----
+To answer the question of what factors Tardo would consider significant during the inspection based on the context provided, we can follow these steps:
+
+1. **Identify Tardo's expertise**: The context mentions that Tardo is a Council agent with intensive training and many years of experience. This indicates that Tardo is likely to have a keen eye for detail and a deep understanding of what to look for during an inspection.
+
+2. **Consider Peo's perspective**: Peo, who is trying to anticipate what Tardo would look for, believes that Tardo would focus on very minor factors that the average person would not notice. This suggests that Tardo's inspection criteria may be meticulous and thorough.
+
+3. **Infer Tardo's focus**: Given Tardo's expertise and Peo's perception, it can be inferred that Tardo would likely consider factors that are subtle, specific, and indicative of a high level of scrutiny. Tardo may pay attention to details that others might overlook, ensuring a comprehensive assessment during the inspection.
+
+<ANSWER>: Tardo would consider minor, subtle details that reflect a high level of scrutiny during the inspection.
+-----
+Very minor ones that the average man would not notice.
+-----
+10
+-----
+What was Tardo most intent on?
+-----
+To answer the question "What was Tardo most intent on?" based on the provided context:
+
+1. Tardo was most intent on the question of slavery. This is evident from the statement: "Tardo had seemed most intent on the question of slavery." This indicates that Tardo was focused on understanding the presence or absence of slavery on the planet.
+
+2. Peo looked for signs of slavery but could not find any: "Peo looked for signs of it. He could see none." This suggests that despite Tardo's interest in the topic, there were no visible indications of slavery among the people they encountered in the village.
+
+3. The people in the village displayed an air of independence: "The people they saw in the village wore a proud air of independence no slave could assume." This further supports the observation that there were no signs of slavery among the villagers.
+
+Therefore, based on the context provided, Tardo was most intent on understanding the question of slavery, but there were no visible signs of slavery among the independent villagers in the village.
+
+<ANSWER>: Tardo was most intent on the question of slavery.
+-----
+Slavery.
+-----
+11
+-----
+What was the reason for having to walk on the planet?
+-----
+To answer the question "What was the reason for having to walk on the planet?" based on the provided context:
+
+1. Tardo seemed focused on the issue of slavery, but Peo observed that the people in the village did not appear to be slaves as they displayed an air of independence.
+2. Saranta apologized for the need to walk, stating that there was no other means of transportation on the planet.
+
+Therefore, the reason for having to walk on the planet was that there was no other transportation available. 
+
+<ANSWER>: The reason for having to walk on the planet was that there was no other means of transportation available.
+-----
+No other means of transportation.
+-----
+11
+-----
+What is the reason for the lack of technology development on the planet?
+-----
+To answer the question about the reason for the lack of technology development on the planet based on the provided context:
+
+1. Saranta mentioned that there was no means of transportation on the planet, which hindered technology development. ##"And, without transportation, you can understand why we have not been able to develop a technology," he added.##
+
+2. Saranta expressed hope that transportation would be included in the assistance they receive, indicating that lack of transportation was a significant barrier to technological progress.
+
+3. The context does not provide direct information about other reasons for the lack of technology development on the planet.
+
+Final answer: The lack of transportation on the planet is the primary reason for the lack of technology development.
+-----
+The lack of transportation.
+-----
+12
+-----
+Who is responsible for working the fields on the planet?
+-----
+To answer the question "Who is responsible for working the fields on the planet?" based on the provided context:
+
+1. Saranta mentioned that there was no means of transportation on the planet, which hindered the development of technology.
+2. Tardo asked about the fields, noting that there was no one working them and inquired if the villagers were responsible.
+
+Therefore, based on the context, it can be inferred that the villagers are responsible for working the fields on the planet.
+
+<ANSWER>: The villagers are responsible for working the fields on the planet.
+-----
+Possibly the villagers.
+-----
+12
+-----
+Who typically works the fields in the village?
+-----
+To answer the question "Who typically works the fields in the village?" based on the provided context:
+
+1. Tardo asked Saranta about the fields, noticing that no one was working them. Saranta mentioned that their labor supply is transient, indicating that the villagers do not typically work the fields.
+2. Saranta explained that laborers from other towns or beyond are the ones who work the fields for a wage.
+3. The context does not provide specific details about the demographics or identities of the laborers who work the fields, but it is clear that it is not the villagers themselves.
+
+Therefore, based on the context, the answer to the question is: Laborers from other towns or beyond typically work the fields in the village.
+-----
+The laborers from the next town or beyond.
+-----
+13
+-----
+What is the reason for the lack of workers in the fields?
+-----
+To answer the question about the reason for the lack of workers in the fields based on the provided context:
+
+1. **Identify the relevant information**: Saranta explains that the lack of workers in the fields is due to the transient nature of the labor supply. She mentions that the laborers who would work the fields for a wage are currently in the next town or beyond.
+
+2. **Summarize the key point**: The reason for the lack of workers in the fields is that the labor supply is transient, with workers moving to other towns or locations.
+
+3. **Final Answer**: The reason for the lack of workers in the fields is that the labor supply is transient, with workers likely in the next town or beyond.
+-----
+Transient labor supply.
+-----
+13
+-----
+Why did Tardo decide against recommending technical aid for the world?
+-----
+To answer the question "Why did Tardo decide against recommending technical aid for the world?":
+
+1. Tardo and Peo were on their way back from a visit to Saranta when Peo mentioned the possibility of recommending technical aid for the world after an inspection the next day.
+2. Tardo responded by saying, "There will be no inspection tour tomorrow, and I shall recommend against aid at this time."
+3. Tardo's decision was based on his statement, "I've seen enough."
+
+Therefore, Tardo decided against recommending technical aid for the world because he believed he had seen enough during their visit to make that decision without the need for further inspection. 
+
+<ANSWER>: Tardo decided against recommending technical aid for the world because he believed he had seen enough during their visit to make that decision without the need for further inspection.
+-----
+Because Tardo had seen enough during their visit.
+-----
+14
+-----
+What were Tardo and Peo doing as Alpha Persei was sinking in the western sky?
+-----
+To answer the question, we need to focus on the specific actions of Tardo and Peo as Alpha Persei was sinking in the western sky. 
+
+1. Tardo and Peo took their leave of Saranta and made their way down the road toward their planetary landing craft.
+2. Peo commented on the world, saying, "It looks like a good world to me."
+3. Tardo responded to Peo's comment by stating, "There will be no inspection tour tomorrow, and I shall recommend against aid at this time. I've seen enough."
+
+Therefore, as Alpha Persei was sinking in the western sky, Tardo and Peo were leaving Saranta and heading towards their planetary landing craft, with Tardo deciding against recommending technical aid after seeing enough.
+
+<ANSWER>: Tardo and Peo were leaving Saranta and heading towards their planetary landing craft, with Tardo deciding against recommending technical aid after seeing enough.
+-----
+They were taking their leave of Saranta and heading towards their planetary landing craft.
+-----
+14
+-----
+What are the two classes of people on the planet according to Tardo?
+-----
+To answer the question, we need to analyze the statement made by Tardo in the provided context. Tardo mentions, "There are two classes of people on this planet, and we've seen only one." This indicates that according to Tardo, there are two classes of people on the planet. The relevant context states that the two classes are freemen and those who are "no better than animals." Tardo's decision not to recommend aid at that time is based on the belief that aiding the freemen would help them tighten their hold over the other class. Therefore, the two classes of people on the planet according to Tardo are freemen and those who are no better than animals.
+
+<ANSWER>: The two classes of people on the planet according to Tardo are freemen and those who are no better than animals.
+-----
+Freemen and those no better than animals.
+-----
+15
+-----
+Why does Tardo recommend against aid at this time?
+-----
+To answer the question "Why does Tardo recommend against aid at this time?":
+
+1. Tardo mentions, "There are two classes of people on this planet, and we've seen only one. Those we have seen are freemen. The others are no better than animals." This indicates that Tardo believes that the group they have encountered are freemen, while there is another class of people who are considered inferior.
+
+2. Tardo further explains, "We give no aid that helps men tighten their hold over their fellows." This implies that Tardo does not want to provide aid that could potentially empower or strengthen the position of those who are already in a dominant or oppressive position over others.
+
+Therefore, Tardo recommends against aid at this time because he does not want to support any assistance that could further enable individuals to exert control or dominance over their fellow beings.
+
+<ANSWER>: Tardo recommends against aid at this time because he does not want to support any assistance that could further enable individuals to exert control or dominance over their fellow beings.
+-----
+To avoid helping men tighten their hold over their fellows.
+-----
+15
+-----
+What was the challenge faced by colonizing ships 1000 years ago?
+-----
+To answer the question about the challenge faced by colonizing ships 1000 years ago, we can follow these steps based on the provided context:
+
+1. Peo questions the existence of another class, to which the response mentions hidden evidence and the historical context of colonizing ships 1000 years ago.
+2. The key challenge faced by colonizing ships 1000 years ago was the lack of space to carry animals along. They had to depend on the native animal life of the planet they were colonizing, which in this case had none.
+
+Therefore, the challenge faced by colonizing ships 1000 years ago was the inability to carry animals due to limited space, forcing them to rely on the native animal life of the planet they were colonizing.
+
+<ANSWER>: The challenge faced by colonizing ships 1000 years ago was the limited space to carry animals, leading to a reliance on the native animal life of the planet they were colonizing.
+-----
+They had no space to carry animals along.
+-----
+16
+-----
+Why did colonizing ships have to depend on native animal life of the planet they landed on?
+-----
+To answer the question "Why did colonizing ships have to depend on native animal life of the planet they landed on?":
+
+1. **Reasoning**:
+   - The context mentions that "colonizing ships 1000 years ago had no space to carry animals along."
+   - Therefore, they had to rely on the native animal life of the planet they landed on because they couldn't bring animals with them due to space constraints.
+
+2. **Final Answer**: Colonizing ships had to depend on native animal life of the planet they landed on because they had no space to carry animals along.
+-----
+Because the planet had no animal life.
+-----
+16
+-----
+What did Saranta say?
+-----
+To answer the question "What did Saranta say?" based on the provided context, we can follow these steps:
+
+1. Identify the relevant part of the context that mentions Saranta's words: "Saranta said that. But I don't see ..."
+
+2. Exclude the unrelated part of the context: "Those were delicious steaks, weren't they?" remarked Tardo quietly.
+
+3. Based on the relevant part of the context, Saranta said something that is not explicitly mentioned. We can only infer that Saranta made a statement, but the specific content of what was said is not provided.
+
+Final Answer: Saranta's exact words are not disclosed in the given context.
+-----
+The steaks were delicious, weren't they?
+-----
+17
+-----
+What is the context of Tardo's remark?
+-----
+To determine the context of Tardo's remark, we need to focus on the sentence where Tardo speaks. In the given context, Tardo says, "Those were delicious steaks, weren't they?" This remark is made after someone mentioned Saranta's statement, "Saranta said that. But I don't see ..." which is not directly relevant to Tardo's comment about the steaks. Therefore, we can conclude that Tardo's remark is about the deliciousness of the steaks that were previously mentioned. 
+
+<ANSWER>: Tardo's remark is about the delicious steaks that were mentioned.
+-----
+The context is about delicious steaks.
+-----
+17
+-----
