@@ -6,3 +6,4 @@ finetune/mistral_7b_too_focused/
 cognition_framework/stockfish
 cognition_framework/vector_store
 cognition_framework/__pycache__
+2nd_fine_tune/FEN_parsing/__pycache__/util.cpython-310.pyc
