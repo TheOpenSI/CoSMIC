@@ -1,0 +1,144 @@
+perception = p
+knowledge/memory = m
+attention = a
+problem solving = d (decision making)
+reasoning = r
+anticipation = an
+
+
+
+perception
+	p
+		1. How many pawns do white have after the following move - e4? ===== 8
+		2. How many pawns do black and white have after the following moves - e4 c5 Nf3 d6 d4 cxd4 ===== black 8, white 7
+		3. How many pawns do black and white have after the following moves - e4 c5 Nf3 d6 d4 cxd4 Nxd4 ===== black 7, white 7
+		4. How many pawns do white have after the following moves - d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6? ===== 8
+		5. How many pawns do black have after the following moves - d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6? ===== 8
+		6. How many pawns do white have after the following moves - e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4? ===== 8
+	p, a
+		7. Is white king in danger in the following game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+? ===== yes
+		8. Is black king in danger in the following game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+? ===== no
+		9. Is white king in danger in the following game - d4 d5 Bf4 Nf6 e3 g6 Nf3 Bg7 c4 dxc4 Bxc4 O-O Qb3 e6 O-O c6 Nbd2? ==== no
+		10. Is white king in danger in the following game - 	d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6 Nbd2 c5 e3 cxd4 exd4 Nc6 cxd5 exd5 Bb5 Qe7+? ===== yes
+		11. Is black king in danger in the following game - 	d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+? ===== yes
+		12. Is white king in danger in the following game - 	d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+? ===== no
+
+		13. Which chess pieces have been captured in the following game so far - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4 ===== White Queen, White Pawn, Black Pawn
+		14. Which chess pieces have been captured in the following game - 	d4 d5 Bf4 Nc6 Nf3 f6 e3 g5 Bg3 Be6 c3 Bf7 Bb5 a6 Bxc6+? ===== Black Knight
+		15. Which chess pieces have been captured in the following game - d4 c6 Bf4 e6 Nf3 d5 Nbd2 c5 e3 cxd4 Nxd4 a6 c4 Nf6 Bd3 h6 O-O Bd6 Bxd6 Qxd6 cxd5 Qxd5 Bc4 Qd6 Rc1 O-O Qb3 b5 Be2 Bb7? ===== 2 white pawns, 1 white bishop, 2 black pawns, 1 black bishop
+		16. Which chess pieces have been captured in the following game - e4 e6 d4 d5 Nc3 Bb4 e5 c5 a3 Bxc3+ bxc3 cxd4 cxd4 Ne7 f4 Nbc6 Nf3 Nf5 c4? ===== Black pawn, black bishop, white pawn, white knight
+		17. Which chess pieces have been captured in the following game - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5? ===== White Knight, Black bishop
+		18. Which chess pieces have been captured in the following game - d4 Nf6 Bf4? ===== None
+		
+		19. How many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4 ===== 3
+		20. How many chess pieces have been captured so far in the game - d4 Nf6 Bf4? ===== 0
+		21. How many chess pieces have been captured so far in the game - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5? ===== 2
+		22. How many chess pieces have been captured so far in the game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4? ===== 3
+		23. How many chess pieces have been captured so far in the game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+? ===== 2
+		24. How many chess pieces have been captured so far in the game - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3? ===== 4
+		25. How many chess pieces have been captured so far in this game - Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3 ===== 2
+		
+	p
+		26. After the following moves - e4, how many chess piecess are left on the board? ===== 32
+		27. After the following moves - d4 d5 Bf4 e6 Nf3 c5 c3 Nc6 e3 Nf6 Nbd2 Bd6 Bg3 cxd4 cxd4 Qb6 Bxd6 Nb4 Bxb4 Qxb4 b3 Bd7 Be2 h6 O-O g5 Ne5 O-O-O Nxf7 g4 Nxh8, how many chess pieces are left on the board? ===== 25
+		28. After the following moves - e4 e6 Nc3 Bb4 Nge2 Ne7 a3 Bxc3, how many chess piecess are left on the board? ===== 31
+		29. After the following moves - d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6, how many chess piecess are left on the board? ===== 26
+		30. After the following moves - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5, how many chess piecess are left on the board? ===== 27
+		31. After the following moves - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5, how many chess piecess are left on the board? ===== 26
+		32. After the following moves - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5, how many chess piecess are left on the board? ===== 30
+	p, a
+		33. What was the last chess piece that have been captured in the following game - d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6? ===== Black knight
+		34. What was the last chess piece that have been captured in the game - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5? ===== White knight
+		35. What was the last chess piece that have been captured in the game - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4? ===== Black bishop
+		36. What was the last chess piece that have been captured in the game - e4 e6 Nc3 d5 exd5 exd5 Nf3 Nf6 Bb5+ c6 Na4 cxb5 Qe2+ Be6 Qxb5+ Qd7 Nc3 a6 Qd3 Nc6 O-O Nb4 Qe2 d4 Ne4? ===== Black pawn
+		37. What was the last chess piece that have been captured in the game - e4 e6 Nc3 d5 exd5 exd5 Nf3 Nf6 Bb5+ c6 Na4 cxb5? ===== Black bishop
+		38. What was the last chess piece that have been captured in the game - d4 d5 Bf4 c5 e3 cxd4 exd4 e6 Nf3 Nc6 c3 h6 Qa4 Bd7 Bb5? ===== Black pawn
+		39. What was the last chess piece that have been captured in the game - d4 d5 Bf4 Nf6 Nf3 c5 e3 Bg4 Nbd2 cxd4 Bb5+ Nc6 exd4 Qb6 Bxc6+ bxc6 Nb3 e6 c3 Be7 h3 Bh5? ===== white bishop
+		40. What was the last chess piece that have been captured in the game - d4 Nf6 Nf3 b6 c3 Bb7 Qb3 e6 Ne5 Nc6 Bg5 Be7 Bxf6? ===== Black Knight
+	
+
+knowledge/memory
+	m
+		1. What is the name of the piece that moves in an L shape? ===== Knight
+		2. How many squares are there on a standard chessboard? ===== 64
+		3. What is the term for a situation where a king cannot escape check? ===== Checkmate
+		4. Which piece is the most powerful in chess?	===== Queen
+		5. What is the initial position of the white queen? ===== d1
+		6. In a game of chess which player moves first? ===== white
+		7. In a game of chess which player moves second? ===== black
+		8. What is the only piece that can jump over others? ===== Knight
+		9. What is it called when a pawn reaches the opposite side of the board? ===== Promotion
+		10. Which two pieces are involved in castling? ===== King and Rook
+		11. What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king? ===== Castling
+		12. Which piece starts on e1 for White? ===== King
+		13. How many ranks are there in a chess board? ===== 8
+		14. What is the term for a draw in chess? ===== Stalemate
+		15. What is the maximum number of queens a player can have on the board? ===== 9
+		16. What are the names of the files on a chessboard? ===== a, b, c, d, e, f, g, h
+		17. Which piece can only move diagonally? ===== Bishop
+		18. What is the name of the notation system used to record chess moves? ===== Algebraic Notation, PGN, FEN
+		19. Which piece starts on d8 for Black? ===== Queen
+		20. Which piece can move any number of squares along a rank, file, or diagonal? ===== Queen
+		21. What is the starting position of the white king's bishop? ===== c1
+		22. What is it called when the king is in check and cannot move out of check without moving into another check? ===== Checkmate
+		23. What is the move called when a pawn captures an opposing piece by moving diagonally? ===== Pawn Capture
+		24. Which piece can move one square in any direction? ===== King
+		25. Which chess piece can move any number of squares along a rank and file only? ===== Rook
+		26. Which chess pieces can participate in castling? ===== King and Rook
+		27. What is the standard number of squares each pawn moves on its first move? ===== 1 or 2
+		28. At the start of the game, how many chess pieces are present on the board? ===== 32
+		29. What a pawn that has advanced to the seventh rank gets promoted to? ===== Queen
+		30. Which piece can only move horizontally or vertically? ===== Rook
+		31. What is the starting position of the black king's knight? ===== g8
+		32. What is the special move involving a king and a rook? ===== Castling
+		33. How many pieces does each player start with? ===== 16
+		34. How many bishops does each player start with? ===== 2
+		35. How many knights does each player start with? ===== 2
+		36. How many rooks does each player start with? ===== 2
+		37. How many pawns does each player start with? ===== 8
+		38. How many queens does each player start with? ===== 1
+		39. Which chess piece is being moved when the chess move is e4 in Algebraic notation? ===== Pawn
+		40. Which chess piece is being moved when the chess move is Na3 in Algebraic notation? ===== Knight
+
+attention
+	a, m
+		### RAG
+
+problem solving
+	d, r, an
+		### puzzle data
+
+reasoning
+	d, r, an
+		### puzzle data
+
+anticipation
+	d, r, an
+		### puzzle data
+
+Previous questions which were removed from Attention - 
+		1. If the black king moves from e8 to e7, what is its new position? ===== e7
+		2. If the white knight moves from g1 to f3, what is its new position? ===== f3
+		3. If the black pawn moves from d7 to d5, what is its new position? ===== d5
+		4. If the white rook moves from a1 to a5, what is its new position? ===== a5
+		5. If the black bishop moves from c8 to f5, what is its new position? ===== f5
+		6. If the white pawn moves from h2 to h4, what is its new position? ===== h4
+		7. If the black queen moves from d8 to h4, what is its new position? ===== h4
+		8. If the white king moves from e1 to e2, what is its new position? ===== e2
+		9. If the black knight moves from b8 to c6, what is its new position? ===== c6
+		10. If the white bishop moves from f1 to c4, what is its new position? ===== c4
+		11. If the black rook moves from h8 to h6, what is its new position? ===== h6
+		12. If the white pawn moves from b2 to b4, what is its new position? ===== b4
+		13. If the black queen moves from d8 to d6, what is its new position? ===== d6
+		14. If the white knight moves from b1 to d2, what is its new position? ===== d2
+		15. If the black pawn moves from a7 to a5, what is its new position? ===== a5
+		16. If the white queen moves from d4 to h4, what is its new position? ===== h4
+		17. If the black bishop moves from f8 to b4, what is its new position? ===== b4
+		18. If the white rook moves from f1 to f3, what is its new position? ===== f3
+		19. If the black knight moves from g8 to f6, what is its new position? ===== f6
+		20. If the white king moves from e2 to f1, what is its new position? ===== f1
+		21. Given the moves: e4, e5, Nf3, Nc6, Bb5, a6, which chess piece was last moved? ===== Pawn
+		22. Given the moves: d4, Nf6, c4, e6, Nf3, d5, Nc3, Be7, which chess piece was last moved? ===== Bishop
+		23. Given the moves: e4, c5, Nf3, d6, d4, cxd4, Nxd4, Nf6, which chess piece was last moved? ===== Knight
+		24. Given the moves: Nf3, d5, g3, c6, Bg2, Bf5, O-O, e6, which chess piece was last moved? ===== Pawn
+		25. Given the moves: e4, e6, d4, d5, Nc3, Bb4, e5, c5, which chess piece was last moved? ===== Pawn

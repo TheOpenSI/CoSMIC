@@ -13,10 +13,10 @@ class OpenSIEvalSystem:
     Design an evaluation system for OpenSI.
     """
     def __init__(self,
+        llm_model='mistral-7b-v0.1',
         document_dir='',
         document_paths='',  # can be a list
         retrieve_score_threshold=0,
-        llm_back_end='instance',
         chess_back_end='stockfish'
     ):
         # Set root for the location of this file relative to the repository
@@ -28,10 +28,10 @@ class OpenSIEvalSystem:
 
         # Set up LLM engine
         self.llm_engine = LLMEngine(
-            llm_model_name='mistral',
-            document_analyser_model_name='gte-small',
+            llm_model=llm_model,
+            document_analyser_model='gte-small',
             retrieve_score_threshold=retrieve_score_threshold,
-            back_end=llm_back_end  # options: 'instance'/'chat'
+            prompt_example=True  # whether show an example in the prompt or not
         )
 
         # Update database through all .pdf in a folder
@@ -244,25 +244,23 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root = f"{current_dir}/.."
 
-    # Set config
-    llm_back_end = 'chat'  # chat/instance
-    chess_back_end = 'stockfish'  # stockfish/chess-engine
+    # Set model name, mistral-7b-v0.1/mistral-7b-instruct-v0.1/gemma-7b/gemma-7b-it/mistral-7b-finetuned
+    llm_model = "mistral-7b-v0.1"
 
     # Build constructor of eval system
     qa_system = OpenSIEvalSystem(
+        llm_model=llm_model,
         retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
-        llm_back_end=llm_back_end,
-        chess_back_end=chess_back_end
     )
 
     # Externally add other documents, a string or a list of strings
-    qa_system.add_documents(f'{root}/cognition_framework/doc/ucl_2023.pdf')
+    # qa_system.add_documents(f"{root}/cognition_framework/doc/ucl_2023.pdf")
 
     # Externally add a document directory
-    qa_system.add_document_directory(f'{root}/cognition_framework/doc')
+    qa_system.add_document_directory(f"{root}/cognition_framework/doc")
 
     # Set a bunch of questions, can also read from .csv
-    df = pd.read_csv(f"{root}/cognition_framework/tests/test.csv")
+    df = pd.read_csv(f"{root}/data/test.csv")
     queries = df["Question"]
     answers = df["Answer"]
 

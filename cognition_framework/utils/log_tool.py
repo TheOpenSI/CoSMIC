@@ -19,4 +19,5 @@ info_dict = {
 
 
 def set_color(status, information):
+    status = status.lower()
     return f"{info_dict[status]['color']}[{info_dict[status]['comment']}]{bcolors.ENDC} {information}"

@@ -3,7 +3,6 @@ import torch, os, pytz, glob
 from datetime import datetime
 from huggingface_hub import login
 from dotenv import load_dotenv
-from transformers import pipeline
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from langchain.prompts import PromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -11,28 +10,52 @@ from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
+from peft import PeftModel
 from utils.log_tool import set_color
+from .model_prompt import get_llm_reader, extract_answer_from_response, extract_chess_answer_from_response
 
+
+# =============================================================================================================
+
+# Set model specific dictionary
+LLM_MODEL_DICT = {
+    "mistral-7b-v0.1": "mistralai/Mistral-7B-v0.1",
+    "mistral-7b-instruct-v0.1": "mistralai/Mistral-7B-Instruct-v0.1",
+    "gemma-7b": "google/gemma-7b",
+    "gemma-7b-it": "google/gemma-7b-it",  # bad
+    "mistral-7b-finetuned": "adnaan525/opensi_mistral_3tasks"
+}
 
 # =============================================================================================================
 
 class LLMEngine:
     def __init__(
         self,
-        llm_model_name='mistral',
-        document_analyser_model_name='gte-small',
+        llm_model='mistral-7b-v0.1',
+        document_analyser_model='gte-small',
         retrieve_score_threshold=0.,
-        back_end='instance'
+        prompt_example=True
     ):
         # Set config
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../../.."
         self.retrieve_score_threshold = retrieve_score_threshold
-        self.back_end = back_end
+        self.llm_model = llm_model.lower()
+        self.prompt_example = prompt_example
+
+        # Automatically set back_end
+        if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it"]:
+            self.back_end = "chat"
+        else:
+            self.back_end = "instance"
+
+        # Check if LLM model is supported
+        assert self.llm_model in LLM_MODEL_DICT.keys(), \
+            print(set_color("error", f"LLM model {self.llm_model} is not supported."))
 
         # Check valid engine mode
-        if back_end not in ['instance', 'chat']:
-            set_color('error', f"Back-end {back_end} is not supported.")
+        if self.back_end not in ['instance', 'chat']:
+            set_color('error', f"Back-end {self.back_end} is not supported.")
 
         # Login
         self.login()
@@ -42,32 +65,43 @@ class LLMEngine:
             .astimezone(pytz.timezone('Australia/Sydney')).strftime("%B, %Y")
 
         # -----------------------------------------------------------------------------------------------------
-        # For LLM engine
-        # Set model options
-        LLM_MODEL_DICT = {
-            'mistral': "mistralai/Mistral-7B-Instruct-v0.1"
-        }
+        # For LoRA finetuned model
+        if self.llm_model == 'mistral-7b-finetuned':
+            # Model and tokenizer need to be based model config
+            base_llm_model = "mistral-7b-v0.1"
 
-        # Build LLM model and tokenizer
-        READER_MODEL_NAME = LLM_MODEL_DICT[llm_model_name]
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16,
-        )
+            bnb_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.bfloat16,
+            )
 
-        # Set model
-        model = AutoModelForCausalLM.from_pretrained(
-            READER_MODEL_NAME,
-            quantization_config=bnb_config,
-            low_cpu_mem_usage=True
-        )
+            base_model = AutoModelForCausalLM.from_pretrained(
+                LLM_MODEL_DICT[base_llm_model],
+                quantization_config=bnb_config,
+                low_cpu_mem_usage=True
+            )
+
+            model = PeftModel.from_pretrained(
+                base_model,
+                LLM_MODEL_DICT[self.llm_model]
+            )
+
+            # Set tokenizer
+            tokenizer_cls = LLM_MODEL_DICT[base_llm_model]
+        else:
+            model = AutoModelForCausalLM.from_pretrained(
+                LLM_MODEL_DICT[self.llm_model],
+                torch_dtype=torch.bfloat16,
+                device_map="cuda",
+            )
+
+            # Set tokenizer
+            tokenizer_cls = LLM_MODEL_DICT[self.llm_model]
 
         # Set tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(
-            READER_MODEL_NAME,
-        )
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_cls)
 
         # Suppress the warning from
         # https://stackoverflow.com/questions/74682597/
@@ -77,58 +111,69 @@ class LLMEngine:
 
         # Set LLM model for different uses
         if self.back_end == 'chat':
-            # This user-assisant chat instance could be more accessable
-            # https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
-            # User-assistant chat template
-            chat_template = lambda query: [{"role": "user", "content": query}]
-
-            query_encoded = lambda query: \
-                tokenizer.apply_chat_template(
-                    chat_template(query),
-                    return_tensors="pt"
-                )
-
-            self.llm_reader = lambda query: \
-                tokenizer.batch_decode(
-                    model.generate(
-                        query_encoded(query).to('cuda'),
-                        max_new_tokens=1000,
-                        do_sample=False,
-                        # temperature=0.2,
-                        pad_token_id=tokenizer.pad_token_id
-                    )
-                )[0]
-
             # Set prompt templates for those without/with context
             prompt_template = "{question}"
 
             prompt_template_context = \
-                "Given the context: '{context}', '{question}'. "
+                "Given context: '{context}', {question}"
         else:
-            # Build LLM reader
-            self.llm_reader = lambda query: pipeline(
-                task="text-generation",
-                model=model,
-                tokenizer=tokenizer,
-                do_sample=False,
-                # temperature=0.2,  # block do_sample thus remove this
-                repetition_penalty=1.1,
-                return_full_text=False,
-                max_new_tokens=500,
-            )(query)[0]["generated_text"]
+            if self.llm_model.find('mistral') > -1:
+                # Set prompt templates for those without/with context
+                if self.prompt_example:
+                    # For Mistral, https://www.promptingguide.ai/models/mistral-7b
+                    prompt_template = \
+                        "<s> [INST] What is the capital of China? [/INST]\n" \
+                        "Beijing</s>\n" \
+                        "[INST] {question} [/INST]"
 
-            # Set prompt templates for those without/with context
-            # 1. Set up LLM prompt template
-            prompt_template = \
-                "<s> [INST] Answer the question: 'What is the capital of China?' [/INST]\n" \
-                "The capital of China is Beijing.</s> \n" \
-                "[INST] Answer the question: '{question}'\n [/INST]"
+                    prompt_template_context = \
+                        "<s> [INST] Given that 'Beijing is the capital of China'," \
+                        " what is the capital of China? [/INST]\n" \
+                        "Beijing</s>\n" \
+                        "[INST] Given that '{context}', {question} [/INST]"
+                else:
+                    prompt_template = prompt_template_context = \
+                        "<s>[INST] \n" \
+                        "Instruction: Always answer the question even if the context isn't useful. \n" \
+                        "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                        "Here is context to help -\n" \
+                        "{context}\n\n" \
+                        "### QUESTION:\n" \
+                        "{question} \n\n" \
+                        "[/INST]\n"
+            elif self.llm_model.find('gemma') > -1:
+                if self.prompt_example:
+                    # https://medium.com/@coldstart_coder/
+                    # getting-started-with-googles-gemma-llm-using-huggingface-libraries-a0d826c552ae
+                    # https://www.promptingguide.ai/models/gemma
+                    prompt_template = \
+                        "<bos><start_of_turn>user\n" \
+                        "What is the capital of China?<end_of_turn>\n" \
+                        "<start_of_turn>model\n" \
+                        "Beijing<end_of_turn><eos>\n" \
+                        "<start_of_turn>user\n" \
+                        "{question}<end_of_turn>\n" \
+                        "<start_of_turn>model"
 
-            # 2. Set up LLM prompt template with context
-            prompt_template_context = \
-                "<s> [INST] Given context: 'Beijing is the capital of China', answer the question: 'What is the capital of China?'. [/INST]\n" \
-                "The capital of China is Beijing.</s> \n" \
-                "[INST] Given context: '{context}', answer the question: '{question}'.\n [/INST]"
+                    prompt_template_context = \
+                        "<bos><start_of_turn>user\n" \
+                        "Given that 'Beijing is the capital of China'," \
+                        " what is the capital of China?<end_of_turn>\n" \
+                        "<start_of_turn>model\n" \
+                        "Beijing<end_of_turn><eos>\n" \
+                        "<start_of_turn>user\n" \
+                        "Given that '{context}', {question}<end_of_turn>\n" \
+                        "<start_of_turn>model"
+                else:
+                    prompt_template = prompt_template_context = \
+                        "<bos><start_of_turn>user\n" \
+                        "Always answer the question even if the context isn't useful. \n" \
+                        "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                        "Here is context to help -\n" \
+                        "{context}\n\n" \
+                        "### QUESTION:\n" \
+                        "{question} \n\n<end_of_turn>" \
+                        "<start_of_turn>model"
 
         # Set prompt instances for those without/with context
         # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
@@ -144,17 +189,17 @@ class LLMEngine:
         )
 
         # Set prompt template and instance for chess move analysis
-        prompt_template_chess_analysis = \
-            "Explain with one reason as short as possible why {player} takes {move} given the chess board FEN '{fen}'?"
+        chess_prompt_template = \
+            "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
 
-        # TODO
-        # prompt_template_chess_analysis = \
-        #     "Given chess board FEN '{fen}', tell me the number and name of pieces on the board?"
-
-        self.prompt_chess_analysis = PromptTemplate(
+        self.chess_prompt = PromptTemplate(
             input_variables=['player', 'move', 'fen'],
-            template=prompt_template_chess_analysis,
+            template=chess_prompt_template,
         )
+
+        # -----------------------------------------------------------------------------------------------------
+        # Get LLM reader with inbuilt query encoder
+        self.llm_reader = get_llm_reader(self.llm_model, tokenizer, model)
 
         # -----------------------------------------------------------------------------------------------------
         # For document analysis and knowledge database generation/update
@@ -175,7 +220,7 @@ class LLMEngine:
         )
 
         # Build a document analyser
-        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT[document_analyser_model_name]
+        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT[document_analyser_model]
 
         self.database_update_embedding = HuggingFaceEmbeddings(
             model_name=EMBEDDING_MODEL_NAME,
@@ -284,15 +329,23 @@ class LLMEngine:
         if len(retrieved_docs_text) == 0:
             context = ''
         else:
-            context = "".join(
-                [f"Document {str(i)}:" + doc + '\n' for i, doc in enumerate(retrieved_docs_text)]
-            )
+            # Not use change line for each document
+            if False:
+                context = "\nExtracted documents:\n"
+                context += "".join(
+                    [f"Document {str(i)}:::\n" + doc for i, doc in enumerate(retrieved_docs_text)]
+                )
+            else:
+                context = "".join([
+                    f"Document {str(i)}: " + doc.replace('\n', ' ') + '. ' \
+                    for i, doc in enumerate(retrieved_docs_text)
+                ])
 
         return context
 
     def generate_chess_analysis_prompt(self, player, move, fen):
         # Chess analysis has specific prompt template and instance
-        prompt = self.prompt_chess_analysis.format(
+        prompt = self.chess_prompt.format(
             player=player,
             move=move,
             fen=fen
@@ -301,13 +354,20 @@ class LLMEngine:
         return prompt
 
     def generate_prompt(self, question, context=''):
-        if context == '':
-            prompt = self.prompt.format(question=question)
-        else:
+        # Assume that if context is empty, the prompt will ignore it
+        if self.prompt_example:
+            if context == '':
+                prompt = self.prompt.format(question=question)
+            else:
+                prompt = self.prompt_context.format(
+                    question=question,
+                    context=context
+                )
+        else:  # without example, always use prompt with context, although context is useless
             prompt = self.prompt_context.format(
-                question=question,
-                context=context
-            )
+                    question=question,
+                    context=context
+                )
 
         return prompt
 
@@ -318,8 +378,8 @@ class LLMEngine:
         # Generate the answer
         analysis = self.llm_reader(prompt)
 
-        # Remove the question
-        analysis = analysis.split('[/INST]')[-1].replace('\n', '').replace('</s>', '')
+        # Extract the key answer
+        analysis = extract_chess_answer_from_response(self.llm_model, analysis)
 
         return analysis
 
@@ -353,10 +413,7 @@ class LLMEngine:
             # Generate the answer
             answer = self.llm_reader(prompt)
 
-            # Parse the answer
-            if self.back_end == 'chat':
-                answer = answer.split('[/INST]')[-1].split('</s>')[0].strip()
-            else:
-                answer = answer.split('[INST]')[0].strip()
+            # Parse answer
+            answer = extract_answer_from_response(self.llm_model, answer, self.prompt_example)
 
         return answer
