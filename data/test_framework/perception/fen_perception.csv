@@ -1,0 +1,42 @@
+,Question,Answer
+0,"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the Black Queen?",d1
+1,"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the White King?",g1
+2,"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the White King?",e1
+3,"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the Black King?",g8
+4,"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the White Queen?",b3
+5,"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the Black King?",g8
+6,"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the White King?",g2
+7,"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the Black King?",h8
+8,"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the White Queen?",f3
+9,"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the Black King?",h8
+10,"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of theWhite Queen?",d1
+11,"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of the Black Queen?",e5
+12,"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the Black Queen?",d4
+13,"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the White Queen?",f3
+14,"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White King?",g1
+15,"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White Queen?",g4
+16,"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the White King?",h1
+17,"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the Black King?",e8
+18,"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the White King?",d1
+19,"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the Black Queen?",d8
+20,"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White King?",g1
+21,"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White Queen?",d1
+22,"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the White King?",c1
+23,"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the Black Queen?",e3
+24,"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White King?",g1
+25,"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White Bishop?",b3
+26,"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the White King?",d7
+27,"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the Black King?",g7
+28,"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the White King?",h2
+29,"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the Black King?",h8
+30,"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the White King?",b2
+31,"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the Black Rook?",f2
+32,"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White King?",h1
+33,"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White Queen?",b3
+34,"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the White King?",g1
+35,"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the Black King?",c8
+36,"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the White King?",g2
+37,"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the Black King?",f5
+38,"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the White King?",d1
+39,"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the Black Queen?",g2
+40,,
