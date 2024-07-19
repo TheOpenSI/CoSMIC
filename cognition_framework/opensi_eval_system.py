@@ -1,9 +1,12 @@
-import os
+import os, csv, numbers
 import pandas as pd
+import numpy as np
 
+# from difflib import SequenceMatcher
 from engines.chess_engine.chess import ChessEngine
 from engines.llm_engine.llm import LLMEngine
 from utils.log_tool import set_color
+from utils.num2word import convert_number2word
 
 
 # =============================================================================================================
@@ -22,6 +25,7 @@ class OpenSIEvalSystem:
         # Set root for the location of this file relative to the repository
         self.root = f"{os.path.dirname(os.path.abspath(__file__))}/.."
         self.chess_back_end = chess_back_end
+        self.prompt_example = True  # whether show an example in the prompt or not
 
         # Set up chess engine for __next_move__
         self.chess_engine = ChessEngine(back_end=chess_back_end)
@@ -31,7 +35,7 @@ class OpenSIEvalSystem:
             llm_model=llm_model,
             document_analyser_model='gte-small',
             retrieve_score_threshold=retrieve_score_threshold,
-            prompt_example=True  # whether show an example in the prompt or not
+            prompt_example=self.prompt_example
         )
 
         # Update database through all .pdf in a folder
@@ -86,9 +90,23 @@ class OpenSIEvalSystem:
 
         return info
 
-    def __call__(self, query, context='', topk=1):
+    def parse_quality_csv(self, csv_path):
+        # Read data
+        df = pd.read_csv(csv_path)
+
+        # Set a dictionary
+        info = {
+            'question': df['Question'],
+            'answer': df['Answer']
+        }
+
+        return info
+
+    def __call__(self, query, context='', topk=1, log_file=None):
         if query.find('exit') > -1:
             result = 'exit'
+        elif query.find('skip') > -1:
+            result = None
         elif query.find('__next__move__') > -1:
             # Set a new board
             self.chess_engine.reset_board()
@@ -129,28 +147,30 @@ class OpenSIEvalSystem:
 
             # Display as an answer
             result = f"The next move of {[current_move]} is one of {next_move}."
-        elif query.find('puzzle') > -1 and query.find('.csv') > -1:
-            # Use context to indicate the move mode
-            move_mode = context
-            if move_mode == '': move_mode = 'algebric'
-
+        elif query.find('.csv') > -1:
             # Remove all namespace
-            puzzle_path = f"{self.root}/{query.replace(' ', '')}"
+            query = query.replace(' ', '')
 
-            if os.path.exists(puzzle_path):
-                puzzle_info = self.parse_puzzle_csv(puzzle_path)
+            # Return if file is invalid
+            if not os.path.exists(query):
+                return f"!!! Error, {query} not exist."
+
+            if query.find('puzzle') > -1 :
+                puzzle_info = self.parse_puzzle_csv(query)
+
+                # Use context to indicate the move mode
+                move_mode = context
+                if move_mode == '': move_mode = 'algebric'
 
                 # Get fens for puzzle solving
                 fens = puzzle_info['fen']
                 gt_move_lists = puzzle_info['moves']
                 players = puzzle_info['player']
                 num_fens = len(fens)
-
-                # Store the actual processed fen(s)
-                puzzle_solve_info = {'fen': [], 'best_case': [], 'solution': []}
+                score_list = []
 
                 # Set a .csv file containing multiple FEN to estimate the next move
-                for idx, (fen, gt_move_list, player) in enumerate(zip(fens, gt_move_lists, players)):
+                for idx, (fen, gt_moves, player) in enumerate(zip(fens, gt_move_lists, players)):
                     if idx % 10 == 0 or idx == num_fens - 1:
                         print(set_color('info', f"Solving puzzles {idx + 1}/{num_fens}..."))
 
@@ -162,7 +182,7 @@ class OpenSIEvalSystem:
                         current_fen = fen
                         next_moves = []
 
-                        for idx_move, gt_move in enumerate(gt_move_list):
+                        for idx_move, gt_move in enumerate(gt_moves):
                             # Stockfish only returns the best move, so push FEN to get the best move
                             next_move = self.chess_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
 
@@ -185,6 +205,14 @@ class OpenSIEvalSystem:
                                     f"Analysis: {analysis}\n")
                                 )
 
+                                # Save to csv
+                                if log_file is not None:
+                                    log_file.writerow([
+                                        f"Puzzle {idx + 1} at step {idx_move + 1}: " \
+                                        f"player {player} takes {next_move} given FEN '{current_fen}'",
+                                        analysis
+                                    ])
+
                             # Push the estimate move to the board
                             self.chess_engine.push_single(next_move, move_mode=move_mode)
 
@@ -194,24 +222,96 @@ class OpenSIEvalSystem:
                             # Save the actual move to next_moves
                             next_moves.append(next_move)
 
-                        # Assume each puzzle can have multiple solutions, the above is one of them
-                        # thus, as a list, it is in another list
-                        next_moves = [next_moves]
+                        # Check if next moves are the same as GT moves
+                        score_per = np.prod(np.array([float(next_v == gt_v) for next_v, gt_v in zip(next_moves, gt_moves)]))
                     else:
-                        # Call to solve each puzzle
+                        # Call to solve each puzzle, not yet to be used for score calculation
                         next_moves = self.chess_engine.puzzle_solve(fen, move_mode)
 
-                    # Store information
-                    puzzle_solve_info['fen'].append(fen)
-                    puzzle_solve_info['best_case'].append(puzzle_info['best_case'][idx])
-                    puzzle_solve_info['solution'].append(next_moves)
+                    # Save to score list
+                    score_list.append(score_per)
+
+                    # Save to log file
+                    if log_file is not None:
+                        log_file.writerow([fen, next_moves, gt_moves, score_per])
+
+                # Calculate the overall score of all puzzles in the puzzle file
+                average_score = np.mean(score_list)
 
                 # Print for progress checking
                 print(set_color('info', "Solving puzzles finished."))
 
-                result = puzzle_solve_info
-            else:
-                result = f"!!! Error, {puzzle_path} not exist."
+                # Save to log file
+                if log_file is not None:
+                    log_file.writerow([query, "", "", f"{average_score:.4f}"])
+
+                result = average_score
+            elif query.find('attention') > -1 \
+                or query.find('memory') > -1 \
+                or query.find('perception') > -1:
+                rag_info = self.parse_quality_csv(query)
+                questions = rag_info['question']
+                answers = rag_info['answer']
+                num_questions = len(questions)
+                score_list = []
+
+                # Set tag for information print
+                if query.find('attention') > -1:
+                    quality_tag = 'Attention'
+                elif query.find('memory') > -1:
+                    quality_tag = 'Memory'
+                elif query.find('perception') > -1:
+                    quality_tag = 'Perception'
+                else:
+                    quality_tag = 'Unknown'
+
+                for idx, (question, gt_answer) in enumerate(zip(questions, answers)):
+                    # Print progress
+                    if idx % 10 == 0 or idx == num_questions - 1:
+                        print(set_color("info", f"Solving {quality_tag} {idx + 1}/{num_questions}..."))
+
+                    # Inner loop to call self.__call__ for update
+                    result = self.__call__(question, log_file=log_file, topk=topk)
+
+                    # For __update__store__, the result is None
+                    if result is None: continue
+
+                    # Change None to 'N/A' for comparison
+                    if (gt_answer is None) or (isinstance(gt_answer, numbers.Number) and np.isnan(gt_answer)):
+                        gt_answer = 'N/A'
+
+                    # Case insensitive and remove line change for better readability
+                    if isinstance(gt_answer, str):
+                        gt_answer = gt_answer.lower()
+                        gt_answer = gt_answer.replace('\n', ' ')
+                    elif isinstance(gt_answer, numbers.Number):
+                        # Convert number to word and compare both number and string format answer
+                        gt_answer = [str(int(gt_answer)), str(convert_number2word(int(gt_answer)))]
+
+                    if isinstance(result, str):
+                        result = result.lower()
+                        result = result.replace('\n', ' ')
+
+                    # Check if the answer word is in the prediction
+                    if isinstance(gt_answer, list):
+                        score_per = len(np.nonzero([float(result.find(v) > -1) for v in gt_answer])[0])
+                    else:
+                        score_per = float(result.find(gt_answer) > -1)
+
+                    # Push per question score to the list
+                    score_list.append(score_per)
+
+                    # Save to log
+                    if log_file is not None:
+                        log_file.writerow([question, result, gt_answer, score_per])
+
+                # Average the score
+                average_score = np.mean(np.array(score_list))
+                result = average_score
+
+                # Save to log
+                if log_file is not None:
+                    log_file.writerow([query, "", "", f"{average_score:.4f}"])
         else:
             # Update context from text has no question, thus updating the database only
             if query.find('__update__store__') > -1:
@@ -244,114 +344,102 @@ if __name__ == '__main__':
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root = f"{current_dir}/.."
 
-    # Set model name, mistral-7b-v0.1/mistral-7b-instruct-v0.1/gemma-7b/gemma-7b-it/mistral-7b-finetuned
-    llm_model = "mistral-7b-v0.1"
+    # Set llm_model_list to run all at once
+    llm_model_list = [
+        "mistral-7b-v0.1",
+        "mistral-7b-instruct-v0.1",
+        "gemma-7b",
+        "gemma-7b-it",
+        "mistral-7b-finetuned"
+    ]
 
-    # Build constructor of eval system
-    qa_system = OpenSIEvalSystem(
-        llm_model=llm_model,
-        retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
-    )
+    # Run all models at once
+    for llm_model in llm_model_list:
+        # Print head information
+        print(set_color('info', f"\n######## Evaluation with {llm_model} ########\n"))
 
-    # Externally add other documents, a string or a list of strings
-    # qa_system.add_documents(f"{root}/cognition_framework/doc/ucl_2023.pdf")
+        # Build constructor of eval system
+        qa_system = OpenSIEvalSystem(
+            llm_model=llm_model,
+            retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
+        )
 
-    # Externally add a document directory
-    qa_system.add_document_directory(f"{root}/cognition_framework/doc")
+        # Externally add a document directory
+        qa_system.add_document_directory(f"{root}/cognition_framework/doc")
 
-    # Set a bunch of questions, can also read from .csv
-    df = pd.read_csv(f"{root}/data/test.csv")
-    queries = df["Question"]
-    answers = df["Answer"]
+        # Set a bunch of questions, can also read from .csv
+        df = pd.read_csv(f"{root}/data/test.csv")
+        queries = df["Question"]
+        answers = df["Answer"]
 
-    # Initialize quality variables
-    num_q_tests = 0
-    num_q_success_tests = 0
+        # Initialize quality variables
+        test_score_list = []
 
-    # Loop over questions to get the answers
-    for idx, (query, gt) in enumerate(zip(queries, answers)):
-        # Skip marked questions
-        if query.find('skip') > -1: continue
+        # Loop over questions to get the answers
+        for idx, (query, gt) in enumerate(zip(queries, answers)):
+            # Skip marked questions
+            if query.find('skip') > -1: continue
 
-        # Solve the problem
-        answer = qa_system(query, topk=5)
+            # Create a log file
+            if query.find(".csv") > -1:
+                query = f"{root}/{query.replace(' ', '')}"
 
-        # Print the answer
-        if answer is not None:
-            if answer == 'exit':
-                break  # exit as requested
-            elif isinstance(gt, str):  # compare with GT string
-                # Assign to q variables: if successful, +1.
-                num_q_tests += 1
+                # Change the data folder to results for log file
+                log_file = query.replace('/data/', '/results/')
 
-                if answer.find(gt) > -1:
-                    num_q_success_tests += 1
-                    status = 'success'
-                else:
-                    status = 'fail'
+                # Create a folder
+                log_file_name = log_file.split('/')[-1]
+                log_dir = os.path.join(log_file.replace(log_file_name, ''), llm_model)
+                os.makedirs(log_dir, exist_ok=True)
 
-                print(set_color(status, f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n"))
+                # Open a log file and pass the instance
+                log_file = os.path.join(log_dir, log_file_name)
+                log_file_pt = open(log_file, 'w')
+                log_file = csv.writer(log_file_pt)
+
+                # Write heads
+                log_file.writerow(["Question", "Answer", "Label", "Score", "Comment"])
             else:
-                if query.find('puzzle') > -1 and query.find('.csv') > -1:
-                    # Get information from puzzle_solve_info for comparison
-                    fens = answer['fen']
-                    best_cases = answer['best_case']
-                    solutions = answer['solution']
+                log_file_pt = None
+                log_file = None
 
-                    # Get puzzle success ratio
-                    num_q_test_puzzle = 0
-                    num_q_success_test_puzzle = 0
-                    num_q_tests += 1
+            # Solve the problem
+            answer = qa_system(query, topk=5, log_file=log_file)
 
-                    for fen, best_case, solution in zip(fens, best_cases, solutions):
-                        # All the best solution for one FEN will be the same, divide by 2 for the number of blobs
-                        solution_length = len(solution[0])
+            # Print the answer
+            if answer is not None:
+                if answer == 'exit':
+                    break  # exit as requested
+                elif isinstance(gt, str):  # compare with GT string
+                    # Assign to q variables
+                    status = 'success' if (answer.find(gt) > -1) else 'fail'
 
-                        # Statistic of the tests
-                        num_q_test_puzzle += 1
+                    # Set the score to score list
+                    test_score_list.append(float(answer.find(gt) > -1))
 
-                        # If the best solution has less blobs, it succeeds
-                        if solution_length <= best_case:
-                            num_q_success_test_puzzle += 1
-                        else:
-                            print(set_color(
-                                'fail',
-                                f"\nQuestion: {query}." \
-                                f"\n==> The solution for FEN\n{fen}\nis" \
-                                f"\n{[f'{v_idx}: {v}' for v_idx, v in enumerate(solution)]}" \
-                                f"\nthe number of moves in the solution(s) is \n{[len(v) for v in solution]}.\n")
-                            )
-
-                    # Print information of puzzle success rate
-                    if num_q_test_puzzle == 0:
-                        puzzle_success_rate = 0.0
-                    else:
-                        puzzle_success_rate = float(num_q_success_test_puzzle) / float(num_q_test_puzzle)
-
-                    # Only all puzzles are successful, this test succeeds
-                    if puzzle_success_rate == 1: num_q_success_tests += 1
-
-                    # Print locally
-                    print(set_color(
-                        'info',
-                        f"Puzzle from {query}" \
-                        f" has success rate: {puzzle_success_rate * 100.:.2f}%" \
-                        f" ({num_q_success_test_puzzle} out of {num_q_test_puzzle}).")
-                    )
+                    print(set_color(status, f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n"))
                 else:
-                    print(set_color('info', f"\nQuery: {query}.\nAnswer: {answer}."))
+                    # The answer can be the average score from a .csv test file
+                    if isinstance(answer, numbers.Number):
+                        test_score_list.append(answer)
+                        status = 'success' if answer == 1 else 'fail'
+                    else:
+                        status = 'info'
 
-    # Release the system
-    qa_system.quit()
+                    print(set_color(status, f"\nQuery: {query}.\nAnswer: {answer}."))
 
-    # Print out the success rate
-    if num_q_tests == 0:  # in case no questions in the test file
-        success_ratio = 0.0
-    else:
-        success_ratio = num_q_success_tests / num_q_tests
+            # Close log file pointer
+            if log_file_pt is not None:
+                log_file_pt.close()
 
-    print(set_color(
-        'info',
-        f"Success ratio: {success_ratio * 100.:.2f}%" \
-        f" ({num_q_success_tests} out of {num_q_tests}).\n")
-    )
+        # Release the system
+        qa_system.quit()
+
+        # Print out the success rate
+        success_ratio = np.mean(np.array(test_score_list))
+
+        print(set_color(
+            'info',
+            f"Success ratio: {success_ratio * 100.:.2f}%" \
+            f" on {len(test_score_list)} tests.\n")
+        )

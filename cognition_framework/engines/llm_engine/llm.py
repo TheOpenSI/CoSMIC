@@ -57,8 +57,11 @@ class LLMEngine:
         if self.back_end not in ['instance', 'chat']:
             set_color('error', f"Back-end {self.back_end} is not supported.")
 
-        # Login
-        self.login()
+        # Login only when the model is not downloaded to .cache
+        cache_model_name = "models--" + LLM_MODEL_DICT[self.llm_model].replace('/', '--')
+        cache_model_directory = os.path.join(os.path.expanduser("~"), '.cache/huggingface/hub')
+        cache_model_path = os.path.join(cache_model_directory, cache_model_name)
+        if not os.path.exists(cache_model_path): self.login()
 
         # Set a time stamp, day is not accurate, so remove
         self.time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
@@ -119,28 +122,33 @@ class LLMEngine:
         else:
             if self.llm_model.find('mistral') > -1:
                 # Set prompt templates for those without/with context
-                if self.prompt_example:
-                    # For Mistral, https://www.promptingguide.ai/models/mistral-7b
-                    prompt_template = \
-                        "<s> [INST] What is the capital of China? [/INST]\n" \
-                        "Beijing</s>\n" \
-                        "[INST] {question} [/INST]"
-
-                    prompt_template_context = \
-                        "<s> [INST] Given that 'Beijing is the capital of China'," \
-                        " what is the capital of China? [/INST]\n" \
-                        "Beijing</s>\n" \
-                        "[INST] Given that '{context}', {question} [/INST]"
-                else:
+                if self.llm_model.find('finetune') > -1:
+                    # For finetuned model, use vanilla prompt
                     prompt_template = prompt_template_context = \
-                        "<s>[INST] \n" \
-                        "Instruction: Always answer the question even if the context isn't useful. \n" \
-                        "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                        "Here is context to help -\n" \
-                        "{context}\n\n" \
-                        "### QUESTION:\n" \
-                        "{question} \n\n" \
-                        "[/INST]\n"
+                        "<s>Given that '{context}', answer the question briefly: '{question}'"
+                else:
+                    if self.prompt_example:
+                        # For Mistral, https://www.promptingguide.ai/models/mistral-7b
+                        prompt_template = \
+                            "<s> [INST] What is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] {question} [/INST]"
+
+                        prompt_template_context = \
+                            "<s> [INST] Given that 'Beijing is the capital of China'," \
+                            " what is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] Given that '{context}', {question} [/INST]"
+                    else:
+                        prompt_template = prompt_template_context = \
+                            "<s>[INST] \n" \
+                            "Instruction: Always answer the question even if the context isn't useful. \n" \
+                            "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                            "Here is context to help -\n" \
+                            "{context}\n\n" \
+                            "### QUESTION:\n" \
+                            "{question} \n\n" \
+                            "[/INST]\n"
             elif self.llm_model.find('gemma') > -1:
                 if self.prompt_example:
                     # https://medium.com/@coldstart_coder/
@@ -333,7 +341,7 @@ class LLMEngine:
             if False:
                 context = "\nExtracted documents:\n"
                 context += "".join(
-                    [f"Document {str(i)}:::\n" + doc for i, doc in enumerate(retrieved_docs_text)]
+                    [f"\nDocument {str(i)}:::\n" + doc for i, doc in enumerate(retrieved_docs_text)]
                 )
             else:
                 context = "".join([
@@ -379,7 +387,7 @@ class LLMEngine:
         analysis = self.llm_reader(prompt)
 
         # Extract the key answer
-        analysis = extract_chess_answer_from_response(self.llm_model, analysis)
+        analysis = extract_chess_answer_from_response(self.llm_model, analysis, self.prompt_example)
 
         return analysis
 

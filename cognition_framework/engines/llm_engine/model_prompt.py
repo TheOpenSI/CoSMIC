@@ -133,7 +133,7 @@ def extract_answer_from_response(llm_model, answer, prompt_example):
 
 # =============================================================================================================
 
-def extract_chess_answer_from_response(llm_model, answer):
+def extract_chess_answer_from_response(llm_model, answer, prompt_example):
     # Debug information
     if DEBUG: print('#### Chess', answer)
 
@@ -142,11 +142,20 @@ def extract_chess_answer_from_response(llm_model, answer):
         if llm_model.find('-instruct') > -1:
             answer = answer.split('[/INST]')[-1].split('</s>')[0].strip()
         else:
-            answer = answer.split('Answer')[1].split('Comment:')[0].replace('\n', ' ').strip()
+            if False:  # very uncertain keywords
+                if prompt_example:
+                    answer = answer.split('**Solution:**')[1].split('\n')[0].strip()
+                else:
+                    answer = answer.split('Answer')[1].split('Comment:')[0].replace('\n', ' ').strip()
+            else:
+                answer = answer.replace('\n', ' ').strip()
     elif llm_model.find('gemma') > -1:
         if llm_model.find('-it') > -1:
             answer = answer.split('model\n')[1].split('\n')[0].strip()
         else:
-            answer = answer.split('Answer:\n')[1].replace('\n', ' ').strip()
+            if False:  # very uncertain keywords
+                answer = answer.split('Answer:\n')[1].replace('\n', ' ').strip()
+            else:
+                answer = answer.replace('\n', ' ').strip()
 
     return answer
