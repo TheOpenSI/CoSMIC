@@ -1,11 +1,41 @@
-,Question,Answer
-0,How many UCL title does Real Madrid have?,14
-1,What is the record for the most F1 points in a single season?,454
-2,What is the record for highest number of race wins in a single season?,15
-4,,
-5,"__update__store__ Most F1 points in a single season was scored by Max Verstappen in 2023, he scored 575 points in",
-6,He also won 19 out of 22 races in that season which is the highest number of race wins,
-7,,
-9,How many UCL title does Real Madrid have?,15
-10,What is the record for the most F1 points in a single season?,575
-11,What is the record for highest number of race wins in a single season?,19
+Question,Answer
+What is the name of the piece that moves in an L shape?,Knight
+How many squares are there on a standard chessboard?,64
+What is the term for a situation where a king cannot escape check?,Checkmate
+Which piece is the most powerful in chess?,Queen
+What is the initial position of the white queen?,d1
+In a game of chess which player moves first?,white
+In a game of chess which player moves second?,black
+What is the only piece that can jump over others?,Knight
+What is it called when a pawn reaches the opposite side of the board?,Promotion
+Which two pieces are involved in castling?,King and Rook
+"What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?",Castling
+Which piece starts on e1 for White?,King
+How many ranks are there in a chess board?,8
+What is the term for a draw in chess?,Stalemate
+What is the maximum number of queens a player can have on the board?,9
+What are the names of the files on a chessboard?,"a, b, c, d, e, f, g, h"
+Which piece can only move diagonally?,Bishop
+What is the name of the notation system used to record chess moves?,"Algebraic Notation, PGN, FEN"
+Which piece starts on d8 for Black?,Queen
+"Which piece can move any number of squares along a rank, file, or diagonal?",Queen
+What is the starting position of the White's King side Bishop in algebraic notation?,c1
+What is it called when the king is in check and does not have any other legal move?,Checkmate
+What is the move called when a pawn captures an opposing piece by moving diagonally?,Pawn Capture
+Which piece can move one square in any direction?,King
+Which chess piece can move any number of squares along a rank and file only?,Rook
+Which chess pieces can participate in castling?,King and Rook
+What is the standard number of squares each pawn moves on its first move?,1 or 2
+"At the start of the game, how many chess pieces are present on the board?",32
+What a pawn that has advanced to the eighth rank gets promoted to?,Queen
+Which piece can only move horizontally or vertically?,Rook
+What is the starting position of the black king's knight?,g8
+What is the special move involving a king and a rook?,Castling
+How many pieces does each player start with?,16
+How many bishops does each player start with?,2
+How many knights does each player start with?,2
+How many rooks does each player start with?,2
+How many pawns does each player start with?,8
+How many queens does each player start with?,1
+Which chess piece is being moved when the chess move is e4 in Algebraic notation?,Pawn
+Which chess piece is being moved when the chess move is Na3 in Algebraic notation?,Knight
