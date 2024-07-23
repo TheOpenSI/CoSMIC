@@ -1,0 +1,229 @@
+Question,GT,Answer,Score
+"Given a chess move in algebraic notation, which chess pieces have been captured in the following game - d4 Nf6 Bf4?",,"### Question: Given a chess move in algebraic notation, which chess pieces have been captured in the following game - d4 Nf6 Bf4?
+    ## Response:
+    
+    - The move pair ""d4 Nf6 Bf4"" does not contain any capture symbols, which means no pieces were captured in these moves.
+    - The total capture count in the game can be determined by summing up the capture symbols present in each move pair.
+    - For example, if the game continued with ""Nf3 d5 e3 Nfd7 Bd3 c5 c3 Bd6 Bg3 e6 Bf4 Nc6 dxc5 Bxc5 Bxc5 Bxc5 Nxc5 Bg3 Nc6 a3 a6 b4 axb4 cxb4 Bb7 Nd2 Nb4 Nc1 Rc8 Rc1 Rxc1 Rxc1 Rc8 Rxc8+ Rxc8 Bxc8 Bxc8 Qb3 Qc7 Qb5 Qd7 Qxd7+ Qxd7 Rd1 Nd5 Rd4 Nc3 Rd2 Nxd2 Rxd2 f5 Rd3 f4 Rd1 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd3 Kf2 Rd2 Kg1 Rd",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4",3.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4
+    ## Response:
+    1. The analysis stops at the move Bxg4 since it does not mention any capture on the Black king's side.
+    2. The captured pieces are:
+       - White captured Black's bishop at move Bxg4.
+
+Therefore, White has captured 1 piece and Black has captured 0 pieces so far in the game.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 Nf6 Bf4?",0.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 Nf6 Bf4?
+    ## Response:
+    
+    Let's break down the move pair into White's move and Black's move:
+    - White: d4, Black: Nf6
+    - White: Bf4, Black: 
+
+    White's move d4 does not contain 'x', indicating White did not capture any pieces with the d4 move.
+    Black's move Nf6 also does not contain 'x', indicating Black did not capture any pieces with the Nf6 move.
+
+    White's move Bf4 also does not contain 'x', indicating White did not capture any pieces with the Bf4 move.
+    Black's move does not contain a move, so Black did not make a move at this point.
+
+    Therefore, after the moves d4 Nf6 Bf4, no chess pieces have been captured in the game.
+
+    <ANSWER>: 0 pieces have been captured in the game.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5?",2.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5?
+    ## Response:
+    1. The move pairs are divided by 'x'.
+    2. Each move pair is divided by ' '.
+    3. The letters represent chessboard squares ranging from 1-8.
+    4. The numbers represent the chess pieces: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    5. For example, 'N' is a Knight, 'e4' is a white Knight move to square ""e4"".
+    6. The columns are known as files range from 1-8.
+    7. The rows are known as ranks range from a-h.
+    8. For example, ""e4"" is a white Knight move to the square ""e4"" which is 4th column and 4th rank.
+    9. The empty square is denoted by '1'.
+    10. For example, ""Nf3"" means Knight move to square ""f3"" which is empty square.
+
+Therefore, the analysis of the moves pair is:
+White: d4, Black: d5
+(no capture at White: d4 since White: d4 does not contain 'x')
+(no capture at  Black: d5 since  Black: d5 does not contain 'x')
+
+White: Bf4, Black: e6
+(no capture at White: Bf4 since White: Bf4 does not contain 'x')
+(no capture at  Black: e6 since  Black: e6 does not contain 'x')
+
+White: Nf3, Black: c5
+(no capture at White: Nf3 since White: Nf3 does not contain 'x')
+(no capture at  Black: c5 since  Black: c5 does not contain 'x')
+
+White: e3, Black: Bd6
+(no capture at White: e3 since White: e3 does not contain 'x')
+(no capture at  Black: Bd6 since  Black: Bd6 does not contain 'x')
+
+White: Bg3, Black: Bxg3
+letter 'x' present in Bxg3
+Black Bishop captured White Bishop at position g3
+
+White: hxg3, Black: cxd4
+letter 'x' present in hxg3
+White Pawn captured Black Bishop at position g3
+letter 'x' present in cxd4
+Black Pawn captured White Bishop at position d4
+
+White: exd4, Black: a6
+letter 'x' present in exd4
+White Pawn captured Black Pawn at position d4
+
+White: c3, Black: Nf6
+(no capture at White: c3 since White: c3 does not contain 'x')
+(no capture at  Black: Nf6 since  Black: Nf6 does not contain 'x')
+
+White: Bd3, Black: Nbd7
+(no capture at White: Bd3 since White: Bd3 does not contain 'x')
+(no capture at  Black: Nbd7 since  Black: Nbd7 does not contain 'x')
+
+White: Nbd2, Black: b5
+(no capture at White: Nbd2 since White: Nbd2 does not contain 'x')
+(no capture at  Black: b5 since  Black: b5 does not contain 'x')
+
+White: Ne5, Black:
+(no capture at White: Ne5 since White: Ne5 does not contain 'x')
+(no capture at  Black:  since  does not contain 'x')
+
+Total Capture
+Total 3 pieces were captured in the following moves pair
+White Bishop captured Black Bishop at position g3
+Black Pawn captured White Bishop at position d4
+White Pawn captured Black Bishop at position d4",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4?",3.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4?
+    ## Response:
+    1. White captured the Black Bishop at Bxg4.
+
+Therefore, the total number of captures in the game so far is 1.
+
+White captured 1 pieces which are Black Bishop at Bxg4.
+
+Black captured 0 pieces which are 
+
+Total Capture
+White captured 1 pieces which are Black Bishop at Bxg4.
+Black captured 0 pieces which are 
+
+Total Capture
+White captured 1 pieces which are Black Bishop at Bxg4.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+?",2.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+?
+    ## Response:
+    1. The move pair is e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+
+    2. White captured one piece, Black captured two pieces.
+    3. White captured Black's pawn at cxd4.
+    4. Black captured White's pawn at d4 and White's queen at Qa5+.
+    5. Total Capture: White captured one piece, Black captured two pieces.
+
+Total Capture: 3 pieces",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3?",4.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3?
+    ## Response:
+    1. White captured a pawn at move exd5.
+    2. Black captured a bishop at move Rxf3.
+
+Therefore, a total of 2 pieces have been captured so far in the game.
+
+The captured pieces are:
+White captured 1 piece which is a pawn at move exd5.
+Black captured 1 piece which is a bishop at move Rxf3.
+
+Total Capture:
+White captured 1 pieces which are:
+(no pieces captured at White: e4 since White: e4 does not contain 'x')
+(no pieces captured at  White: e6 since  White: e6 does not contain 'x')
+(no pieces captured at White: Nf3 since White: Nf3 does not contain 'x')
+(no pieces captured at  White: d5 since  White: d5 does not contain 'x')
+(no pieces captured at White: exd5 since White: exd5 does not contain 'x')
+(no pieces captured at  White: exd5 since  White: exd5 does not contain 'x')
+(no pieces captured at d4 since d4 does not contain 'x')
+(no pieces captured at Bg4 since Bg4 does not contain 'x')
+(no pieces captured at Be2 since Be2 does not contain 'x')
+(no pieces captured at Qe7 since Qe7 does not contain 'x')
+(no pieces captured at O-O since O-O does not contain 'x')
+(no pieces captured at Nc6 since Nc6 does not contain 'x')
+(no pieces captured at Re1 since Re1 does not contain 'x')
+(no pieces captured at O-O-O since O-O-O does not contain 'x')
+(no pieces captured at Bb5 since Bb5 does not contain 'x')
+(no pieces captured at Qf6 since Qf6 does not contain 'x')
+(no pieces captured at Re3 since Re3 does not contain 'x')
+(no pieces captured at Bxf3 since Bxf3 does not contain 'x')
+(no pieces captured at Rxf3 since Rxf3 does not contain 'x')
+
+Black captured 1 pieces which are:
+(no pieces captured at  Black: e4 since  Black: e4 does not contain 'x')
+(no pieces captured at  Black: e6 since  Black: e6 does not contain 'x')
+(no pieces captured at  Black: Nf3 since  Black: Nf3 does not contain 'x')
+(no pieces captured at d5 since d5 does not contain 'x')
+(no pieces captured at exd5 since exd5 does not contain 'x')
+(no pieces captured at exd5 since exd5 does not contain 'x')
+(no pieces captured at d4 since d4 does not contain 'x')
+(no pieces captured at Bg4 since Bg4 does not contain 'x')
+(no pieces captured at Be2 since Be2 does not contain 'x')
+(no pieces captured at Qe7 since Qe7 does not contain 'x')
+(no pieces captured at O-O since O-O does not contain 'x')
+(no pieces captured at Nc6 since Nc6 does not contain 'x')
+(no pieces captured at Re1 since Re1 does not contain 'x')
+(no pieces captured at O-O-O since O-O-O does not contain 'x')
+(no pieces captured at Bb5 since Bb5 does not contain 'x')
+(no pieces captured at Qf6 since Qf6 does not contain 'x')
+(no pieces captured at Re3 since Re3 does not contain 'x')
+(no pieces captured at Bxf3 since Bxf3 does not contain 'x')
+(no pieces captured at Rxf3 since Rxf3 does not contain 'x')
+
+Total Capture Pieces: 2 pieces",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3",2.0,"### Question: Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3
+    ## Response:
+    1. The move pair Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3 does not contain any capture indicators ('x'), so no pieces have been captured in this sequence of moves.
+
+2. To determine the total capture count in the game, we can analyze each move pair and count the captures.
+
+White: Nf3, Black: g6
+(no capture at White: Nf3 since White: Nf3 does not contain 'x')
+(no capture at  Black: g6 since  Black: g6 does not contain 'x')
+
+White: g3, Black: Bg7
+(no capture at White: g3 since White: g3 does not contain 'x')
+(no capture at  Black: Bg7 since  Black: Bg7 does not contain 'x')
+
+White: Bg2, Black: e6
+(no capture at White: Bg2 since White: Bg2 does not contain 'x')
+(no capture at  Black: e6 since  Black: e6 does not contain 'x')
+
+White: O-O, Black: Ne7
+(no capture at White: O-O since White: O-O does not contain 'x')
+(no capture at  Black: Ne7 since  Black: Ne7 does not contain 'x')
+
+White: c3, Black: c5
+(no capture at White: c3 since White: c3 does not contain 'x')
+(no capture at  Black: c5 since  Black: c5 does not contain 'x')
+
+White: d4, Black: Qb6
+(no capture at White: d4 since White: d4 does not contain 'x')
+(no capture at  Black: Qb6 since  Black: Qb6 does not contain 'x')
+
+White: dxc5, Black: Qxc5
+letter 'x' present in dxc5
+White Pawn captured Black Pawn at position c5
+letter 'x' present in Qxc5
+Black Queen captured White Pawn at position c5
+
+White: Be3, Black: Qb5
+(no capture at White: Be3 since White: Be3 does not contain 'x')
+(no capture at  Black: Qb5 since  Black: Qb5 does not contain 'x')
+
+White: b4, Black: Nd5
+(no capture at White: b4 since White: b4 does not contain 'x')
+(no capture at  Black: Nd5 since  Black: Nd5 does not contain 'x')
+
+White: a4, Black: Qc4
+(no capture at White: a4 since White: a4 does not contain 'x')
+(no capture at  Black: Qc4 since  Black: Qc4 does not contain 'x')
+
+White: Ra3
+(no capture at White: Ra3 since White: Ra3 does not contain 'x')
+
+Total Capture Count in the game is 2 pieces which are:
+White Pawn captured Black Pawn at position c5
+Black Queen captured White Pawn at position c5",0

@@ -1,0 +1,2385 @@
+Question,GT,Answer,Score
+"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the Black Queen?",d1,"### Question: Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the Black Queen?
+    ## Response:
+    
+    Black Queen is present at e8 square.
+    
+    The FEN line is divided by '/'.
+    
+    The first section ""1R6"" represents the number of empty squares which is 1, followed by 1 x White Rook at a6 square.
+    
+    The second section ""p3k1p1"" represents 3 x empty squares, 1 x Black Pawn at c3 square, 1 x Black King at d3 square, 1 x Black Pawn at f3 square, 1 x empty square.
+    
+    The third section ""2p2b2"" represents 2 x empty squares, 2 x Black Pawn at a2 square, 2 x Black Bishop at c2 square.
+    
+    The fourth section ""2Pn4"" represents 2 x empty squares, 1 x White Pawn at a2 square, 1 x Black Knight at c2 square, 1 x empty square, 1 x Black Pawn at e2 square, 1 x empty square.
+    
+    The fifth section ""1BQPB3"" represents 1 x empty square, 1 x White Bishop at a1 square, 1 x White Queen at b1 square, 1 x White Pawn at c1 square, 1 x Black Bishop at d1 square, 1 x White Pawn at e1 square, 1 x empty square.
+    
+    The sixth section ""P7"" represents 1 x White Pawn at a7 square, 6 x empty squares.
+    
+    The seventh section ""6PP"" represents 6 x White Pawn at a6 square, b5 square, c4 square, d3 square, e2 square, f1 square.
+    
+    The eighth section ""3q2K1"" represents 3 x empty squares, 2 x Black Queen at b2 square, 1 x Black King at c2 square, 1 x empty square.
+    
+    The final section ""w - - 1 33"" represents White King at e1 square, empty square at d1 square, White Rook at h1 square, empty square at f1 square.
+    
+    Total 21 pieces present in the board.
+
+    Black Queen is at e8 square.",0
+"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the White King?",g1,"### Question: Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the White King?
+    ## Response:
+    33 moves have been made in the game. White's position is determined by the last move, which is White's move. White's King is present at the square ""h8"" after the move 33.White: Kg8
+
+    ### Context: 
+    None
+
+    ### Response: White: Kg8
+
+    ### Rationale: The move pair is divided by '/'.
+    - The first half is the move made by White.
+    - The second half is the move made by Black.
+    - The move pairs are separated by 'x'.
+    - The empty chess board square is denoted by '1'.
+    - Total 12 pieces present in the board.
+
+    White Pieces: 6 pieces which are 2 x White Rook, 1 x White Pawn, 1 x White Bishop, 1 x White Queen, 1 x White Pawn.
+
+    Black Pieces: 6 pieces which are 3 x Black Pawn, 1 x Black King, 1 x Black Bishop, 1 x Black Queen.
+
+    Empty Chess Board Square: 48 squares which are 8 x 8 squares.
+
+    Total 54 pieces present in the board.
+
+    White's move is White Rook at a8.
+    Black's move is Black Pawn at d5.
+
+    White's move is White Pawn at e6.
+    Black's move is Black King at e5.
+
+    White's move is White Bishop at e4.
+    Black's move is Black Bishop at e2.
+
+    White's move is White Queen at d1.
+    Black's move is Black Pawn at d3.
+
+    White's move is White Pawn at c2.
+    Black's move is Black Pawn at d1.
+
+    White's move is White Pawn at d5.
+    Black's move is Black Queen at d4.
+
+    White's move is White Rook at d3.
+    Black's move is Black Pawn at c2.
+
+    White's move is White Pawn at c1.
+    Black's move is Black Pawn at b2.
+
+    White's move is White Bishop at b1.
+    Black's move is Black Pawn at a1.
+
+    White's move is White Queen at a3.
+    Black's move is Black Pawn at a2.
+
+    White's move is White Pawn at a1.
+    Black's move is Black Pawn at a3.
+
+    White's move is White Queen at a2.
+    Black's move is Black Pawn at a1.
+
+    White's move is White Pawn at a2.
+    Black's move is Black Queen at a1.
+
+    White's move is White Pawn at a3.
+    Black's move is Black Pawn at b2.
+
+    White's move is White Queen at b3.
+    Black's move is Black Pawn at b1.
+
+    White's move is White Pawn at b2.
+    Black's move is Black Pawn at b3.
+
+    White's move is White Queen at b4.
+    Black's move is Black Pawn at b2.
+
+    White's move is White Pawn at b3.
+    Black's move is Black Pawn at b4.
+
+    White's move is White Queen at b5.
+    Black's move is Black Pawn at b3.
+
+    White's move is White Pawn at b4.
+    Black's move is Black Pawn at b5.
+
+    White's move is White Queen at b6.
+    Black's move is Black Pawn at b4.
+
+    White's move is White Pawn at b5.
+    Black's move is Black Pawn at b6.
+
+    White's move is White Queen at b7.
+    Black's move is Black Pawn at b5.
+
+    White's move is White Pawn at b6.
+    Black's move is Black Pawn at b7.
+
+    White's move is White Queen at b8.
+    Black's move is Black Pawn at b6.
+
+    White's move is White Pawn at b7.
+    Black's move is Black Pawn at b8.
+
+    White's move is White Queen at b9.
+    Black's move is Black Pawn at b7.
+
+    White's move is White Pawn at b8.
+    Black's move is Black Pawn at b9.
+
+    White's move is White Queen at b10.
+    Black's move is Black Pawn at b8.
+
+    White's move is White Pawn at b9.
+    Black's move is Black Pawn at b10.
+
+    White's move is White Queen at b11.
+    Black's move is Black Pawn at b9.
+
+    White's move is White Pawn at b10.
+    Black's move is Black Pawn at b11.
+
+    White's move is White Queen at b12.
+    Black's move is Black Pawn at b10.
+
+    White's move is White Pawn at b11.
+    Black's move is Black Pawn at b12.
+
+    White's move is White Queen at b13.
+    Black's move is Black Pawn at b11.
+
+    White's move is White Pawn at b12.
+    Black's move is Black Pawn at b13.
+
+    White's move is White Queen at b14.
+    Black's move is Black Pawn at b12.
+
+    White's move is White Pawn at b13.
+    Black's move is Black Pawn at b14.
+
+    White's move is White Queen at b15.
+    Black's move is Black Pawn at b13.
+
+    White's move is White Pawn at b14.
+    Black's move is Black Pawn at b15.
+
+    White's move is White Queen at b16.
+    Black's move is Black Pawn at b14.
+
+    White's move is White Pawn at b15.
+    Black's move is Black Pawn at b16.
+
+    White's move is White Queen at b17.
+    Black's move is Black Pawn at b15.
+
+    White's move is White Pawn at b16.
+    Black's move is Black Pawn at b17.
+
+    White's move is White Queen at b18.
+    Black's move is Black Pawn at b16.
+
+    White's move is White Pawn at b17.
+    Black's move is Black Pawn at b18.
+
+    White's move is White Queen at b19.
+    Black's move is Black Pawn at b17.
+
+    White's move is White Pawn at b18.
+    Black's move is Black Pawn at b19.
+
+    White's move is White Queen at b20.
+    Black's move is Black Pawn at b18.
+
+    White's move is White Pawn at b19.
+    Black's move is Black Pawn at b20.
+
+    White's move is White Queen at b21.
+    Black's move is Black Pawn at b19.
+
+    White's move is White Pawn at b20.
+    Black's move is Black Pawn at b21.
+
+    White's move is White Queen at b22.
+    Black's move is Black Pawn at b20.
+
+    White's move is White Pawn at b21.
+    Black's move is Black Pawn at b22.
+
+    White's move is White Queen at b23.
+    Black's move is Black Pawn at b21.
+
+    White's move is White Pawn at b22.
+    Black's move is Black Pawn at b23.
+
+    White's move is White Queen at b24.
+    Black's move is Black Pawn at b22.
+
+    White's move is White Pawn at b23.
+    Black's move is Black Pawn at b24.
+
+    White's move is White Queen at b25.
+    Black's move is Black Pawn at b23.
+
+    White's move is White Pawn at b24.
+    Black's move is Black Pawn at b25.
+
+",0
+"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the White King?",e1,"### Question: Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the White King?
+    ## Response:
+    1. White King is present at a7 square.
+    1. The position is determined by analyzing the FEN line where each chessboard row is divided by '/'.
+    1. The first part ""2r3k1"" represents the pieces present in the first square of the board.
+    1. '2' denotes an empty square.
+    1. 'r' is a Rook.
+    1. '3' denotes three pieces present in the board square.
+    1. 'k' is a King.
+    1. '1' denotes one empty square after the King.
+    1. The second part ""p4p1p"" represents the pieces present in the second square of the board.
+    1. 'p' is a Pawn.
+    1. '4' denotes four pieces present in the board square.
+    1. '1' denotes one empty square after the four pieces.
+    1. 'p' is a Pawn.
+    1. '1' denotes one empty square after the Pawn.
+    1. 'p' is a Pawn.
+    1. The third part ""4pp2"" represents the pieces present in the third square of the board.
+    1. '4' denotes four pieces present in the board square.
+    1. 'p' is a Pawn.
+    1. 'p' is a Pawn.
+    1. '2' denotes two empty squares after the Pawns.
+    1. The fourth part ""1b6"" represents the pieces present in the fourth square of the board.
+    1. '1' denotes one empty square.
+    1. 'b' is a Bishop.
+    1. '6' denotes six pieces present in the board square.
+    1. The fifth part ""pP1P3P"" represents the pieces present in the fifth square of the board.
+    1. 'p' is a Pawn.
+    1. 'P' is a Pawn.
+    1. '1' denotes one empty square after the Pawn.
+    1. 'P' is a Pawn.
+    1. '3' denotes three pieces present in the board square.
+    1. 'P' is a Pawn.
+    1. The sixth part ""P3PN2"" represents the pieces present in the sixth square of the board.
+    1. 'P' is a Pawn.
+    1. '3' denotes three pieces present in the board square.
+    1. 'N' is  and '2' denotes two empty squares after the pieces.
+    1. The seventh part ""2rN1PP1"" represents the pieces present in the seventh square of the board.
+    1. '2' denotes two empty squares.
+    1. 'r' is a Rook.
+    1. 'N' is  and '1' denotes one empty square after the Rook.
+    1. 'P' is a Pawn.
+    1. 'P' is a Pawn.
+    1. '1' denotes one empty square after the Pawns.
+    1. 'P' is a Pawn.
+    1. 'P' is a Pawn.
+    1. '1' denotes one empty square after the Pawns.
+    1. The eighth part ""R3K2R"" represents the pieces present in the eighth square of the board.
+    1. 'R' is a Rook.
+    1. '3' denotes three pieces present in the board square.
+    1. 'K' is  and '2' denotes two empty squares after the pieces.
+    1. 'R' is a Rook.
+    1. The ninth part ""w KQ"" represents the pieces present in the ninth square of the board.
+    1. 'w' denotes White.
+    1. 'K' is  and 'Q' is a Queen.
+    1. The tenth part ""1 20"" represents the number of empty squares and total number of squares present in the board.
+    1. '1' denotes one empty square.
+    1. '20' denotes twenty total squares present in the board.
+
+    White King is present at a7 square.
+    The board state is:
+     2 r 1 k 1
+     p 1 1 1 p 1
+     1 1 1 1 1 p
+     1 b 1 1 1 1
+     p P 1 P 1 P 1
+     P 1 1 N 1 P P
+     1 1 r N 1 P P 1
+     R 1 1 1 K 1 R
+     w K Q
+     1 20
+
+    Total 20 pieces present in the board",0
+"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the Black King?",g8,"### Question: Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the Black King?
+    ## Response:
+    1. The FEN line is divided into two parts:
+    - The first part contains 10 chessboard rows divided by '/'.
+    - The second part contains 10 pieces divided by ' ' (blank space).
+
+1. The chessboard row is divided into 10 chessboard squares divided by '1'.
+2. Each chessboard square can contain a letter or a digit.
+    - A letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - A digit represents the square's rank range from 1-8.
+    - '1' represents an empty square.
+
+3. The chess pieces are divided into 10 pieces:
+    - Each piece is represented by a letter.
+    - The columns are known as files range from 1-8.
+    - The rows are known as ranks range from a-h.
+
+4. For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+5. Empty chess board square is denoted by '1'.
+
+6. Total 10 pieces present in the board
+
+7. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+8. Black Pieces: 0 pieces
+
+9. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+10. Black Pieces Square Positions are:
+Empty square at all positions
+
+11. Total 10 pieces present in the board
+
+12. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+13. Black Pieces: 0 pieces
+
+14. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+15. Black Pieces Square Positions are:
+Empty square at all positions
+
+16. Total 10 pieces present in the board
+
+17. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+18. Black Pieces: 0 pieces
+
+19. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+20. Black Pieces Square Positions are:
+Empty square at all positions
+
+21. Total 10 pieces present in the board
+
+22. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+23. Black Pieces: 0 pieces
+
+24. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+25. Black Pieces Square Positions are:
+Empty square at all positions
+
+26. Total 10 pieces present in the board
+
+27. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+28. Black Pieces: 0 pieces
+
+29. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+30. Black Pieces Square Positions are:
+Empty square at all positions
+
+31. Total 10 pieces present in the board
+
+32. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+33. Black Pieces: 0 pieces
+
+34. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+35. Black Pieces Square Positions are:
+Empty square at all positions
+
+36. Total 10 pieces present in the board
+
+37. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+38. Black Pieces: 0 pieces
+
+39. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+40. Black Pieces Square Positions are:
+Empty square at all positions
+
+41. Total 10 pieces present in the board
+
+42. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+43. Black Pieces: 0 pieces
+
+44. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+45. Black Pieces Square Positions are:
+Empty square at all positions
+
+46. Total 10 pieces present in the board
+
+47. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+48. Black Pieces: 0 pieces
+
+49. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+50. Black Pieces Square Positions are:
+Empty square at all positions
+
+51. Total 10 pieces present in the board
+
+52. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+53. Black Pieces: 0 pieces
+
+54. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+55. Black Pieces Square Positions are:
+Empty square at all positions
+
+56. Total 10 pieces present in the board
+
+57. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+58. Black Pieces: 0 pieces
+
+59. White Pieces Square Positions are:
+White King at a8 a7 a6
+White Rook at e8 c7 c1
+White Pawn at b8 b7 b5 h5
+White Bishop at f6
+White Knight at g6 g4
+
+60. Black Pieces Square Positions are:
+Empty square at all positions
+
+61. Total 10 pieces present in the board
+
+62. White Pieces: 10 pieces which are 3 x White King, 2 x White Rook, 3 x White Pawn, 1 x White Bishop, 1 x White Knight
+
+63. Black Pieces: 0 pieces
+
+64. White Pieces Square Positions are:
+White King",0
+"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the White Queen?",b3,"### Question: Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the White Queen?
+    ## Response:
+    1. The FEN line consists of 10 characters divided into 3 sections.
+    - The first section ""4r1k1"" represents the number of empty squares, then the letters represent black pieces present in the board.
+    - The second section ""1pR3p1"" represents the number of empty squares, then the letters represent white pieces present in the board.
+    - The third section ""p2pn1qp/8/PPBP4/1QP1n3/3N2PP/3K2P1/5RK1"" represents the number of empty squares, then the letters represent black pieces present in the board.
+    - The final section ""w - - 1 26"" represents the number of empty squares, then the letters represent white pieces present in the board.
+
+2. White Queen position is determined by searching for 'Q' in the list of pieces present in the board.
+
+3. White Queen is present at a8 square.
+
+<ANSWER>: White Queen at a8",0
+"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the Black King?",g8,"### Question: Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the Black King?
+    ## Response:
+    26th move pair is empty space and White King
+    Black King is present in the board state but not present in the move pair.
+    Black King is present in the board state at position a8.
+    Black King is present in the board state at position d8.
+    Total 2 pieces present in the board
+
+    Piece Positions are:
+    Black Rook at a8 a7 g7
+    Black King at a8 d8
+    White Pawn at b8 b7 f6 e5 c4 b3
+    White King at b2
+    White Rook at c2 a1
+    White Pawn at d1
+    White Bishop at g1
+    White Queen at a1
+    White Knight at e1 g1
+    White Pawn at a1 h1
+    White Rook at a1",0
+"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the White King?",g2,"### Question: Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the White King?
+    ## Response:
+    
+    The position of the White King can be determined by analyzing the FEN line.
+    - The FEN line consists of 10 columns divided by '/'.
+    - Each chessboard row is known as a file range from 1-10.
+    - Each chessboard column is known as a rank range from a-h.
+    - The total 12 pieces present in the board are:
+        
+        White Pieces: 5 x White Pawn, 2 x White Knight, 2 x White Bishop, 1 x White King, 1 x White Rook
+
+        Black Pieces: 1 x Black King, 4 x Black Pawn, 2 x Black Rook, 1 x Black Bishop
+
+    - The chess board square is divided into 64 squares known as chess board cells.
+    - Each chess board cell is known as a square range from 1-8.
+    - Empty square is denoted by '1' or ' ' or 'x'.
+    - Total 47 squares present in the board are:
+        
+        1 1 1 1 1 1 k
+        p 1 p 1 p 1 p
+        1 p 1 1 1 p 1
+        2 n 1 P 1 1 1
+        2 B 1 1 1 P 1
+        1 P 1 1 r 1 1 P
+        P 1 1 1 1 1 K 1
+        1 1 1 R 1 R 1 b
+
+    - The chess board square is divided into four quadrants known as files range from 1-4.
+    - The chess board square is divided into four quadrants known as ranks range from a-d.
+
+    - The total 12 pieces present in the board are:
+        
+        White Pieces: 5 x White Pawn, 2 x White Knight, 2 x White Bishop, 1 x White King, 1 x White Rook
+
+        Black Pieces: 1 x Black King, 4 x Black Pawn, 2 x Black Rook, 1 x Black Bishop
+
+    - The FEN line can be divided into 5 parts:
+        
+        1. 5r1k - Total 4 pieces present in the first square range.
+            - 1 empty square denoted by '1'.
+            - 1 Black King present at a7.
+            - 3 empty squares denoted by '1'.
+            - 1 White Rook present at b7.
+
+        2. p1p3pp - Total 5 pieces present in the second square range.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at c6.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at d6.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at e6.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at f6.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at g6.
+
+        3. 1p4p1 - Total 5 pieces present in the third square range.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at a5.
+            - 4 empty squares denoted by '1'.
+            - 1 White Pawn present at e5.
+            - 1 empty square denoted by '1'.
+
+        4. 2n1P3 - Total 5 pieces present in the fourth square range.
+            - 2 empty squares denoted by '1'.
+            - 1 Black Knight present at c4.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at d4.
+            - 3 empty squares denoted by '1'.
+
+        5. 2B3P1 - Total 6 pieces present in the fifth square range.
+            - 2 empty squares denoted by '1'.
+            - 1 Black Bishop present at a3.
+            - 3 empty squares denoted by '1'.
+            - 1 White Pawn present at e3.
+            - 1 empty square denoted by '1'.
+            - 1 White Bishop present at f3.
+
+        6. 1P2r2P - Total 5 pieces present in the sixth square range.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at a2.
+            - 2 empty squares denoted by '1'.
+            - 1 White Rook present at c2.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at d2.
+            - 1 empty square denoted by '1'.
+
+        7. P5K1 - Total 5 pieces present in the seventh square range.
+            - 1 empty square denoted by '1'.
+            - 1 White Pawn present at a1.
+            - 4 empty squares denoted by '1'.
+            - 1 White King present at e1.
+
+        8. 3R1R2 - Total 5 pieces present in the eighth square range.
+            - 3 empty squares denoted by '1'.
+            - 1 White Rook present at d8.
+            - 1 empty square denoted by '1'.
+            - 1 Black Rook present at c8.
+            - 1 empty square denoted by '1'.
+            - 1 Black Rook present at b8.
+
+        9. b - - 0 1 - Total 5 pieces present in the ninth square range.
+            - 4 empty squares denoted by '1'.
+            - 1 Black Bishop present at h8.
+
+    - Total 38 pieces present in the board are:
+        
+        23 x White Pieces.
+        15 x Black Pieces.
+
+    - White Pieces: 10 x White Pawn, 3 x White Knight, 2 x White Bishop, 1 x White King, 8 x White Rook
+
+    - Black Pieces: 5 x Black Pawn, 1 x Black King, 2 x Black Rook, 1 x Black Bishop
+
+    - The total 12 pieces present in the board are:
+        
+        10 pieces present in the White Pieces.
+        2 pieces present in the Black Pieces.
+
+    - White Pieces: 5 x White Pawn, 2 x White Knight, 2 x White Bishop, 1 x White King, 1 x White Rook
+
+    - Black Pieces: 1 x Black King, 4 x Black Pawn, 2 x Black Rook, 1 x Black Bishop
+
+    - The position of the White King is at e1.",0
+"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the Black King?",h8,"### Question: Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the Black King?
+    ## Response:
+    
+    The Black King is present at b8 in the above FEN line.
+    
+    Here is how to parse and analyze the FEN line:
+    
+    1. The first character ""1"" represents the total number of pieces present in the board.
+    2. The next 10 characters ""5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2"" represent the chessboard rows divided by '/'.
+    3. Each chessboard row is further divided by ' ' into individual chess pieces.
+    4. The letters represent different chess pieces: lowercase letters represent black pieces, while uppercase letters represent white pieces.
+    5. For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    6. The numbers represent the quantity of each piece present in the board.
+    7. For example, ""4N2"" means 4 x White Knight + 2 x Black Knight present in the board.
+    8. The final letter '1' represents the total number of empty squares present in the board.
+    9. For example, ""4N21"" means 4 x White Knight + 2 x Black Knight + 1 empty square present in the board.
+    10. The board is divided into 8 rows called files range from 1-8.
+    11. The columns are called ranks range from a-h.
+    12. For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+    13. The chessboard square is known as a chessboard square.
+    14. For example, a chessboard square at rank ""a"" and file ""3"" will be a3.
+    15. The chess pieces present in the board are White King at e8, White Pawn at c7 b6 a4, Black Pawn at b6, White Knight at d5 c3 b2, Black Knight at c5, White Bishop at f5 d4 g3, Black Pawn at e4, White Rook at a2 b2, White King at c1, and Black Rook at g1 h2.
+    16. The empty squares present in the board are 11 squares.
+    17. The total 25 pieces present in the board.
+    18. The Black King is present at b8.
+
+    <ANSWER>: Black King is present at b8",0
+"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the White Queen?",f3,"### Question: Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the White Queen?
+    ## Response:
+    1. The FEN line consists of 10 chessboard rows divided by '/'.
+    - The first part is empty chess board square count "" 1 1 1 q 1 1 1 k"".
+    - Total 7 pieces present in the board
+    - 2 x White Queen present at a1 and d8
+    - 2 x Black King present at g8 and h8
+    - 2 x White Rook present at c7 and b2
+    - 1 x White Pawn present at b7
+    - 1 x Black Pawn present at d7
+    - 1 x White Bishop present at g7
+    - 1 x Black Queen present at a6
+    - 1 x White King present at e6
+
+2. The second part is empty chess board square count ""p 2 R 3 p"".
+    - Total 4 pieces present in the board
+    - 1 x White Pawn present at a4
+    - 1 x Black Rook present at c4
+    - 2 x Black Pawn present at d4 and b3
+
+3. The third part is empty chess board square count ""1 p 3 b p B"".
+    - Total 4 pieces present in the board
+    - 1 x White Pawn present at a2
+    - 3 x Black Pawn present at b2 d1 and c1
+    - 1 x White Bishop present at e1
+
+4. The fourth part is empty chess board square count ""8"".
+    - Total 0 pieces present in the board
+
+5. The fifth part is empty chess board square count ""2 r 3 P 1"".
+    - Total 4 pieces present in the board
+    - 1 x Black Rook present at a1
+    - 3 x Black Pawn present at c1 d1 and b1
+
+6. The sixth part is empty chess board square count ""5 Q 1 P"".
+    - Total 3 pieces present in the board
+    - 1 x Black Queen present at a1
+    - 2 x White Pawn present at b1 c1
+
+7. The seventh part is empty chess board square count ""P P P 2 K P K 1"".
+    - Total 6 pieces present in the board
+    - 3 x White Pawn present at a1 b1 c1
+    - 1 x White King present at d1
+    - 2 x Black Pawn present at e1 f1
+
+8. The eighth part is empty chess board square count ""8"".
+    - Total 0 pieces present in the board
+
+9. The ninth part is empty chess board square count ""b - - 0 1"".
+    - Total 3 pieces present in the board
+    - 1 x Black Bishop present at a8
+    - 2 x White King present at d8 e8
+
+10.Total 19 pieces present in the board
+
+White Queen present at a1 and d8",0
+"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the Black King?",h8,"### Question: Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the Black King?
+    ## Response:
+    
+    The Black King is present in the board state provided.
+    - The board state is divided into two parts by '/'.
+    - The first part is the list of chess pieces present in the board.
+    - The second part is the list of empty squares present in the board.
+    - Each chessboard row is divided by '1' or ' ' (empty square).
+    - For example, ""3q3k"" means 3 x Black Queen, 3 x Black King present in the board.
+    - ""p2R3p"" means 1 x White Pawn, 2 x White Rook, 3 x White Pawn present in the board.
+    - ""1p3bpB"" means 1 x White Pawn, 3 x White Bishop, 1 x Black Pawn, 1 x Black Bishop present in the board.
+    - ""8"" means 8 empty squares present in the board.
+    - ""2r3P1"" means 2 x White Rook, 3 x White Pawn, 1 x Black Pawn present in the board.
+    - ""5Q1P"" means 5 x White Queen, 1 x Black Pawn present in the board.
+    - ""PPP2PK1"" means 3 x White Pawn, 2 x White Pawn, 1 x Black King present in the board.
+    - ""8"" means 8 empty squares present in the board.
+    - The total 16 pieces present in the board.
+    - Total 25 squares present in the board.
+    - The Black King is present at a8 square.
+
+    <ANSWER>: a8",0
+"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of theWhite Queen?",d1,"### Question: Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of theWhite Queen?
+    ## Response:
+    
+    The White Queen is present at position e8.
+
+    ### Context: 
+    
+    None
+
+    ### Response: e8",0
+"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of the Black Queen?",e5,"### Question: Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of the Black Queen?
+    ## Response:
+    
+    The Black Queen is present at position d7.
+
+    The FEN line is divided by '/'.
+    - The left side is known as the ""Board State"".
+    - The right side is known as the ""Piece Positions"".
+
+    The Board State is divided by ' ' (blank space).
+    - The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+    - Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    - The columns are known as ""files range from 1-8"".
+    - The rows are known as ""ranks range from a-h"".
+
+    The Piece Positions are divided by '/'.
+    - Each chessboard row is known as a ""file"".
+    - Each chessboard column is known as a ""rank"".
+    - The numbers represent the number of pieces present in that board square.
+    - For example, ""2N"" means 2 x White Knight present in the board square.
+    - The letters represent the chess pieces present in the board square.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+
+    Step 1: Analyse the Board State
+    - Total 10 pieces present in the board.
+    - 4 empty squares present in the board.
+    - Total 7 pieces present in White's control.
+    - Total 3 pieces present in Black's control.
+
+    Step 2: Analyse the Piece Positions
+    - Total 5 pieces present in the Piece Positions part.
+    - 1 x White Rook present at a7.
+    - 1 x Black Pawn present at c6.
+    - 2 x White Pawn present at e6 and c5.
+    - 1 x Black Bishop present at e5.
+    - 1 x White Queen present at d7.
+
+    Step 3: Final Position of the Black Queen
+    - The Black Queen is present at d7.",0
+"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the Black Queen?",d4,"### Question: Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the Black Queen?
+    ## Response:
+    
+    The Black Queen is present at a8.
+    
+    The FEN line is divided by '/'.
+    - The first part ""r4rk1"" represents the pieces present in the board row by row.
+    - The second part ""1pp2ppp"" represents the empty squares present in the board row by row.
+    - The third part ""p1p2n2"" represents the pieces present in the board row by row.
+    - The fourth part ""8"" represents empty squares.
+    - The fifth part ""3qP3"" represents the pieces present in the board row by row.
+    - The sixth part ""P1b2Q2"" represents the pieces present in the board row by row.
+    - The seventh part ""1P2RPPP"" represents the pieces present in the board row by row.
+    - The eighth part ""R1B3K1"" represents the pieces present in the board row by row.
+    - The ninth part ""w - - 0 1"" represents the side to move, empty square, total number of empty squares, and the move pair.
+
+    The columns are known as files range from 1-8.
+    The rows are known as ranks range from a-h.
+    For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    Empty chess board square is denoted by '1'
+    Total 11 pieces present in the board
+
+    White Pieces: 6 pieces which are 3 x White Knight, 1 x White Pawn, 1 x White Rook, 1 x White Bishop
+
+    Black Pieces: 5 pieces which are 1 x Black King, 2 x Black Pawn, 1 x Black Queen, 1 x Black Bishop
+
+    
+    Board State is:
+     r 1 1 1 1 1 1 k 1
+     1 p p 1 1 1 1 p p
+    p 1 p 1 1 n 1 1 1
+    1 1 1 1 1 1 1 1 1
+    1 1 1 q P 1 1 1 1
+    P 1 b 1 1 Q 1 1 1
+    1 P 1 1 R P P P 1
+    R 1 B 1 1 1 1 K 1
+    w - - 0 1
+
+    Black Queen at a8",0
+"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the White Queen?",f3,"### Question: Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the White Queen?
+    ## Response:
+    1. The FEN line consists of 10 columns divided by '/'.
+    2. Each chessboard row is known as a file range from 1-8.
+    3. Each chessboard column is known as a rank range from a-h.
+    4. The individual chess pieces are denoted by letters:
+     - 'K' is a King.
+     - 'Q' is a Queen.
+     - 'N' is a Knight.
+     - 'B' is a Bishop.
+     - 'R' is a Rook.
+     - 'P' is a Pawn.
+     - '1' is an empty square.
+     - 'x' denotes a captured piece.
+     - 'r' is a rook.
+     - 'k' is a king.
+     - '1' is an empty square.
+     - 'p' is a pawn.
+     - 'P' is a pawn.
+     - 'q' is a queen.
+     - 'b' is a bishop.
+     - 'R' is a rook.
+     - 'K' is a king.
+     - '1' is an empty square.
+
+    White Queen position is at a7.
+    Reason: The White Queen is present at a7 square which is denoted by 'q' in the FEN line.",0
+"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White King?",g1,"### Question: Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White King?
+    ## Response:
+    1. White King is present at h8 square.
+    1. White King is present at h8 square.
+    1. White King is present at h8 square.
+
+### Context: 
+None
+### Response: Analysing the FEN line where each chessboard row is divided by '/'.
+Numbers represent empty squares. For example, ""4"" means 4 empty squares.
+Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+The columns are known as files range from 1-8.
+The rows are known as ranks range from a-h.
+e.g. a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+Empty chess board square is denoted by '1'
+Total 13 pieces present in the board
+
+            White Pieces: 6 pieces which are 3 x White Knight, 1 x White King, 2 x White Pawn
+
+            Black Pieces: 7 pieces which are 2 x Black Rook, 1 x Black King, 1 x Black Pawn, 1 x Black Bishop, 1 x Black Queen, 1 x Black King
+            
+Board State is:
+ r n 2 k 1 n r
+ p p p 2 p p p
+ 1 1 1 1 1 1 q
+ 1 1 p 1 B 1 B 1
+ 1 1 P 1 P 1 Q 1
+ 1 1 1 1 1 1 P 1
+ P P P 1 1 1 1 1
+ R N 1 1 1 1 k q
+ b k q
+
+Piece Positions are:
+Black Rook at a8 a7
+White Knight at a7 b6 h6
+Black King at c7
+White King at h8
+Black Pawn at f7
+Black Bishop at e6
+White Pawn at b5 g5
+Black Queen at e4
+White Bishop at b3
+White Pawn at e3
+Black King at g3
+White King at h3",0
+"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White Queen?",g4,"### Question: Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White Queen?
+    ## Response:
+    
+    The White Queen is located at position d6.
+
+    Here's how to determine the position of the White Queen from the FEN line:
+    
+    - The FEN line is divided by '/'.
+    - The left side contains the chessboard rows known as the ""board state"".
+    - The right side contains the chess pieces present in the board state.
+    - Each chessboard row is divided by '/'.
+    - Each chess piece is represented by a letter.
+    - The letter '1' represents an empty square.
+    - For example, 'K' represents a White King, 'N' represents  and 'q' represents a Black Queen.
+    - The columns are known as ""files"" range from 1-8.
+    - The rows are known as ""ranks"" range from a-h.
+    - For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+    - The chess board state is:
+    rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1
+
+    - The chess pieces present in the board state are:
+    r n 2 k 1 n r p p p 2 p p p 6 q 1 / 2 b 1 p 1 B 1 2 B 1 P 1 Q 1 3 P 4 / P P P 2 P P P / R N 3 R K 1
+
+    - The analysis steps are:
+    1. Split the FEN line into board state and pieces present.
+    2. Count the number of empty squares '1'.
+    3. For each chessboard row, split it by ' ' into individual chess pieces present.
+    4. For each chess piece, identify the letter representing the chess piece.
+    5. For each chess piece, determine the rank and file by the letter present in the chess board state.
+    6. White Queen present at d6.
+    7. Total 11 pieces present in the board.
+
+    - White Pieces present are: 4 pieces which are 1 x White King, 1 x White Rook, 2 x White Pawn.
+
+    - Black Pieces present are: 7 pieces which are 2 x Black Knight, 1 x Black King, 1 x Black Queen, 1 x Black Bishop, 1 x Black Pawn, 1 x Black Queen.
+
+    - Empty Square present are: 25 squares which are 14 x '1'.
+
+    - Total 40 squares present in the board.
+
+    - White Queen present at d6.",0
+"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the White King?",h1,"### Question: Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the White King?
+    ## Response:
+    5R1K
+
+White King is present at position 5R1K.
+
+White King is present at square ""R1"" which is 5th square in 5th file and 1st square in 1st rank.
+
+<ANALYSIS>
+
+White King is present at position 5R1K.
+
+White King is present at square ""R1"" which is 5th square in 5th file and 1st square in 1st rank.
+
+White King is present at rank ""1"" which is the farthest rank from Black.
+
+White King is present at file ""K"" which is the farthest file from Black.
+
+White King is present at square ""R1"" which is a rook square.
+
+White King is present at square ""R1"" which is an open square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a safe square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present at square ""R1"" which is a commanding square.
+
+White King is present at square ""R1"" which is a strong square.
+
+White King is present at square ""R1"" which is a prominent square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a pivotal square.
+
+White King is present at square ""R1"" which is a decisive square.
+
+White King is present at square ""R1"" which is a significant square.
+
+White King is present at square ""R1"" which is a key square.
+
+White King is present at square ""R1"" which is a powerful square.
+
+White King is present at square ""R1"" which is a critical square.
+
+White King is present at square ""R1"" which is a central square.
+
+White King is present",0
+"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the Black King?",e8,"### Question: Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the Black King?
+    ## Response:
+    
+    Black King is present at a8 square.
+    
+    Reason:
+    - Black King is present at a8 square.
+    - The position is divided into two sections by '/'.
+    - The first section ""3qkb1r"" represents the pieces present in the board row.
+    - The second section ""4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/2P1nPPP/5R1K"" represents the pieces present in the board column.
+    - Each chessboard row is divided by '1' which represents empty squares.
+    - Each chessboard column is divided by '/' which represents empty squares.
+    - Total 11 pieces present in the board.
+    - Total 10 pieces present in the board row.
+    - Total 1 pieces present in the board column.
+    - The pieces present in the board are:
+    
+    White Pieces:
+    - 3 x White Queen
+    - 2 x White King
+    - 4 x White Pawn
+    - 1 x White Rook
+    - 1 x White Bishop
+    - 2 x White Knight
+
+    Black Pieces:
+    - 1 x Black Pawn
+    - 1 x Black Rook
+    - 1 x Black Bishop
+    - 1 x Black Queen
+    - 1 x Black King
+
+    The position of Black King is determined by looking at the board column.
+    Black King is present at a8 square.",0
+"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the White King?",d1,"### Question: Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the White King?
+    ## Response:
+    1. The FEN line is divided into 10 columns called files range from 1-10.
+    - 1 1 1 1 1 1 1 1 r - denotes empty squares and the letter 'r' denotes a rook present at a7 square.
+
+2. The FEN line is divided into 9 rows called ranks range from a-h.
+    - r2qk2r - denotes empty square at a8, a white queen at b8, a black king at c8, empty square at d8, a white king at e8, empty square at f8, a rook at g8.
+
+3. The chess pieces present in the board are White Rook, White Queen, Black King, White King, Black Bishop, White Pawn, Black Pawn, White Bishop, White Queen, Black Pawn, White Pawn, White Pawn, White Pawn, White Pawn, Black Pawn, Black Pawn, White Rook, White Pawn, Black Knight, White King, Black Rook.
+
+4. The total 26 pieces present in the board.
+
+5. White King present at e8 square.",0
+"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the Black Queen?",d8,"### Question: Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the Black Queen?
+    ## Response:
+    
+    The Black Queen is located at d8.
+
+    1. The FEN line is divided by '/'.
+    2. The first part contains 10 letters representing the chessboard row known as the ""boardline"".
+    3. The boardline consists of 10 characters: 'r 2 q k 2 r / p p p 3 p p / 3 p B 2 B / 2 b 1 p 3 / 4 P 3 / 3 P 3 Q / P P 3 P P / n N 1 K 3 R'.
+    4. Each chessboard row is divided by '/'.
+    5. The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+    6. Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    7. For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    8. The columns are known as ""files range from 1-8"".
+    9. The rows are known as ""ranks range from a-h"".
+    10. For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    11. The chess board state is:
+    r 2 q k 2 r / p p p 3 p p / 3 p B 2 B / 2 b 1 p 3 / 4 P 3 / 3 P 3 Q / P P 3 P P / n N 1 K 3 R
+
+    12. Black Queen is present at d8 square.
+    13. Total 12 pieces present in the board.
+
+    14. White Pieces: 7 pieces which are 1 x White King, 2 x White Rook, 2 x White Pawn, 1 x White Bishop, 1 x White Queen.
+
+    15. Black Pieces: 5 pieces which are 2 x Black Queen, 1 x Black Bishop, 1 x Black Pawn, 1 x Black King.
+
+    16. The Black Queen is present at d8.",0
+"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White King?",g1,"### Question: Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White King?
+    ## Response:
+    1. The chess board is divided into 8 rows called files range from 1-8.
+    The chess board is divided into 8 columns called ranks range from a-h.
+    Each chess piece present in the board is denoted by a letter.
+    The letter represents the chess piece:
+    'K' is a White King.
+    'R' is a Rook.
+    'B' is a Bishop.
+    'P' is a Pawn.
+    'q' is a Black Queen.
+    '1' is an empty square.
+
+    2. The chess board state is divided by '/'.
+    The left side represents the chess pieces present in the board.
+    The right side represents the empty squares present in the board.
+
+    3. The chess pieces present in the board are:
+    White King at a7.
+    White Rook at a6 b5 h1.
+    Black Pawn at a4 a3 c2.
+    White Pawn at b4 d4 g4.
+    White Bishop at c3 d3.
+    Black Queen at d2.
+    Black Bishop at e1.
+    White Pawn at f1 g1.
+    White Rook at h1.
+    White Queen at h1.
+
+    4. The empty squares present in the board are:
+    1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",0
+"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White Queen?",d1,"### Question: Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White Queen?
+    ## Response:
+    1. The FEN line is divided into 10 columns called ""files"" range from 1-8.
+    The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+
+2. Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+   For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+
+3. The columns are known as ""rank"" range from 1-8.
+   The first chessboard row is known as rank 8.
+   The last chessboard row is known as rank 1.
+
+4. Each chess piece is defined by 4 letters:
+   - The first letter is the chess piece.
+   - The second letter is the chess board square.
+   - The third letter is the chess piece color.
+   - The fourth letter is the chess board square.
+
+5. Empty chess board square is denoted by '1' or 'K'
+
+Empty chess board square is denoted by '1' or 'K'
+Total 15 pieces present in the board
+
+            White Pieces: 8 pieces which are 3 x White Pawn, 1 x White Bishop, 2 x White Rook, 1 x White Queen, 1 x White King
+
+            Black Pieces: 7 pieces which are 2 x Black Pawn, 1 x Black Bishop, 1 x Black Queen, 1 x Black King, 1 x Black Rook, 1 x Black Pawn
+            
+Board State is:
+ r 1 b 2 k 1 r
+ p p p 3 p p
+ 1 b 1 p 1 q 2
+ 1 1 1 1 R 1 1
+ 1 1 1 1 B 1 1
+ B 1 1 1 1 1 1
+ P 1 1 1 1 P P
+ R N 1 Q 1 K 1
+
+Piece Positions are:
+Black Pawn at a8 a7
+White Pawn at b7 b6 b5
+Black Bishop at c7
+White Bishop at c5
+Black Queen at d7
+White Rook at e7 e1 e6
+Black King at g7
+White Queen at f5
+White King at h5
+Black Rook at h7
+Black Pawn at h4",0
+"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the White King?",c1,"### Question: Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the White King?
+    ## Response:
+    
+    The White King is present at a8 in the board state provided in the FEN line.
+    - The columns are known as files range from 1-8.
+    - The rows are known as ranks range from a-h.
+    - Empty chess board square is denoted by '1'
+    - Total 10 pieces present in the board
+
+    1st Character ""1"" present in the FEN line indicates empty square at a1.
+    Total 6 letters present in the board square divided by '/'.
+    
+    Board Square is divided into 3 sections by '/'.
+    Numbers present in the board square represent empty squares.
+    For example ""4"" means 4 empty squares.
+
+    Each letter present in the board square represent a chess piece:
+    Uppercase letters represent White pieces: e.g. K
+    Lowercase letters represent Black pieces: e.g. k
+    '1' present in the board square represent empty square.
+
+    For example Rook is denoted by 'R'
+    White King is denoted by 'K'
+    Black King is denoted by 'k'
+
+    Empty chess board square is denoted by '1'
+    Total 10 pieces present in the board
+
+    White Pieces: 6 pieces which are 1 x White Rook, 2 x White Bishop, 1 x White Pawn, 1 x White King, 1 x White Queen
+
+    Black Pieces: 4 pieces which are 1 x Black Rook, 1 x Black King, 1 x Black Pawn, 1 x Black Queen
+
+    
+    Board State is:
+     1 rb 1 k 2 r
+     p 1 p 2 p p p
+     1 1 1 1 1 1 1
+     1 1 1 R 1 1 1
+     1 1 Q 1 1 1 1
+     1 1 1 1 p 1 1
+     P 1 P 1 B 1 P P
+     1 1 K 1 1 R 1 1
+     w k - 0 1
+
+    Empty chess board square is denoted by '1'
+    Total 10 pieces present in the board
+
+    1st Character ""1"" present in the FEN line indicates empty square at a1.
+    Total 6 letters present in the board square divided by '/'.
+
+    
+    Board Square is divided into 3 sections by '/'.
+    Numbers present in the board square represent empty squares.
+    For example ""4"" means 4 empty squares.
+
+    Each letter present in the board square represent a chess piece:
+    Uppercase letters represent White pieces: e.g. K
+    Lowercase letters represent Black pieces: e.g. k
+    '1' present in the board square represent empty square.
+
+    For example Rook is denoted by 'R'
+    White King is denoted by 'K'
+    Black King is denoted by 'k'
+
+    Empty chess board square is denoted by '1'
+    Total 10 pieces present in the board
+
+    White Pieces: 6 pieces which are 1 x White Rook, 2 x White Bishop, 1 x White Pawn, 1 x White King, 1 x White Queen
+
+    Black Pieces: 4 pieces which are 1 x Black Rook, 1 x Black King, 1 x Black Pawn, 1 x Black Queen
+
+    
+    White Pieces Position are:
+    White Rook at a7
+    White Bishop at e7 e4
+    White Pawn at c6
+    White King at c3
+    White Queen at e3
+
+    
+    Black Pieces Position are:
+    Black Rook at g7
+    Black King at b6
+    Black Pawn at c6
+    Black Queen at e6
+
+    Empty chess board square is denoted by '1'
+
+    White King present at a8
+
+    Total 10 pieces present in the board",0
+"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the Black Queen?",e3,"### Question: Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the Black Queen?
+    ## Response:
+    
+    The Black Queen is present in the FEN line at position ""e6"".
+
+    1. The FEN line is divided by '/'.
+    2. The first part of the FEN line represents the chessboard row known as the ""Board Rows"".
+    3. The second part of the FEN line represents the chess pieces present in the board known as the ""Board Columns"".
+    4. Each chessboard row is divided by '1' or ' ' (empty square).
+    5. Each chess piece is represented by a letter which denotes the chess piece and a digit which denotes the square on the board.
+    6. For example, 'K' is a White King present on square ""a8"".
+
+    The Board Rows are:
+    1rb1k2r p1p2ppp 8 3R4 2Q5 4q3 P1P1B1PP 2K2R2 w k - 0 1
+
+    The Board Columns are:
+    b1k2r p1p2ppp 8 3R4 2Q5 4q3 P1P1B1PP 2K2R2 w k - 0 1
+
+    The chessboard is divided into 8 rows known as files range from 1-8.
+    The chessboard is divided into 8 columns known as ranks range from a-h.
+
+    Total 14 pieces present in the board
+
+    White Pieces: 6 pieces which are 1 x White King, 3 x White Pawn, 1 x White Rook, 1 x White Queen
+
+    Black Pieces: 8 pieces which are 2 x Black Rook, 1 x Black Bishop, 2 x Black Queen, 1 x Black Pawn, 1 x Black King
+
+    The Black Queen is present in the FEN line at position ""e6"".
+    The position is determined by the digit present after the letter 'Q'.
+    e6 means Black Queen present at square e6.
+
+    Therefore, the Black Queen is present at e6 square.",0
+"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White King?",g1,"### Question: Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White King?
+    ## Response:
+    1. The FEN line consists of 12 columns divided by '/'.
+    - The first section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+2. The second section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+3. The third section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+4. The fourth section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+5. The fifth section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+6. The sixth section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+7. The seventh section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+8. The eighth section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+9. The ninth section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+10. The tenth section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+11. The eleventh section represents the list of chess pieces present in the board square.
+    - Each chess piece is represented by a letter.
+    - For example, 'K' is a White King, 'N' is  and '1' is empty square.
+
+12. The twelfth section represents the number of empty squares present in the board.
+    - For example, ""4"" means 4 empty squares present in the board.
+
+13. The last section contains the total number of chess pieces present in the board.
+    - For example, ""22"" means 22 pieces present in the board.
+
+14. The columns are known as files range from 1-8.
+    - For example, a move like e4 means a pawn move to position e4 on the board.
+
+15. The rows are known as ranks range from a-h.
+    - For example, a move like Bd7 means a bishop at position d7 on the board.
+
+16. The empty chess board square is denoted by '1'.
+    - For example, ""1 1 1 1 1 1 1 1"" means 8 empty squares in a row.
+
+17. The total 22 pieces present in the board are:
+    - 4 x White Pawn
+    - 2 x Black Pawn
+    - 3 x White Bishop
+    - 3 x Black Bishop
+    - 2 x White Knight
+    - 2 x Black Knight
+    - 2 x White Rook
+    - 3 x White King
+    - 2 x Black King
+    - 1 x White Queen
+    - 1 x Black Queen
+
+18. The position of the White King can be determined by searching for 'K' in the board square list.
+    - The White King is present at a8.
+
+<ANSWER>: White King at a8.",0
+"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White Bishop?",b3,"### Question: Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White Bishop?
+    ## Response:
+    
+    The White Bishop is present at a7.
+
+    The FEN line is divided by '/'.
+    The first part is the list of chessboard rows.
+    Each chessboard row is divided by '1' or ' ' (empty square).
+    The second part is the list of chess pieces present in the board.
+    Each chess piece is divided by '1' or ' ' (empty square).
+    The letter represents the chess piece:
+    Lowercase letters represent black pieces.
+    Uppercase letters represent white pieces.
+    '1' or ' ' represents empty squares.
+    For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+
+    The chessboard rows are known as board file range from 1-8.
+    The chess pieces present in the board are known as board rank range from a-h.
+
+    Empty chess board square is denoted by '1'
+    Total 19 pieces present in the board
+
+    1. 1 x White Rook present at a8
+    2. 1 x Black King present at b8
+    3. 1 x White Pawn present at c7
+    4. 1 x Black Pawn present at d7
+    5. 1 x White Knight present at e7
+    6. 1 x Black Bishop present at f7
+    7. 1 x White Pawn present at g7
+    8. 1 x Black Pawn present at h7
+    9. 1 x White King present at a6
+    10. 1 x Black Pawn present at b6
+    11. 1 x White Pawn present at c6
+    12. 1 x White Pawn present at d6
+    13. 1 x Black Pawn present at e6
+    14. 1 x White Knight present at f6
+    15. 1 x Black Bishop present at g6
+    16. 1 x White Pawn present at h6
+    17. 1 x White Rook present at a5
+    18. 1 x White Pawn present at c5
+    19. 1 x Black King present at b4
+
+    White Pieces: 6 pieces which are 2 x White Rook, 2 x White Pawn, 1 x White King, 1 x White Knight
+
+    Black Pieces: 13 pieces which are 2 x Black King, 5 x Black Pawn, 2 x White Bishop, 1 x White Pawn, 1 x White Knight, 1 x White Rook
+
+    Total 19 pieces present in the board
+
+    The position of White Bishop is at a7
+
+    White Bishop present at a7",0
+"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the White King?",d7,"### Question: Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the White King?
+    ## Response:
+    1. Split the FEN line into three parts:
+    - 1st Part: 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. K. 1. 1. 1. / R. 1. p. 1. q. 1. / 1. n. 1. 1. p. 1. 1. / P. 1. 1. 1. P. 1. 1. / 1. Q. 1. 1. P. 1. 1. / 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. 1. 1. 1. 1.
+    - 2nd Part: 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. K. 1. 1. 1. / R. 1. p. 1. q. 1. / 1. n. 1. 1. p. 1. 1. / P. 1. 1. 1. P. 1. 1. / 1. Q. 1. 1. P. 1. 1. / 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. 1. 1. 1. 1.
+    - 3rd Part: w - - 2 44
+
+2. Split the 1st part into 10 columns and 7 rows:
+    - 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. K. 1. 1. 1. / R. 1. p. 1. q. 1. / 1. n. 1. 1. p. 1. 1. / P. 1. 1. 1. P. 1. 1. / 1. Q. 1. 1. P. 1. 1. / 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. 1. 1. 1. 1.
+
+3. Split the 2nd part into 10 columns and 7 rows:
+    - 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. K. 1. 1. 1. / R. 1. p. 1. q. 1. / 1. n. 1. 1. p. 1. 1. / P. 1. 1. 1. P. 1. 1. / 1. Q. 1. 1. P. 1. 1. / 1. 1. 1. 1. 1. 1. 1. / 1. 1. 1. 1. 1. 1. 1.
+
+4. Split the 3rd part into 2 parts:
+    - w - - 2 44
+
+5. Calculate the total number of pieces present in the board:
+    Total 18 pieces present in the board
+
+6. Calculate the total empty squares present in the board:
+    Total 45 empty squares present in the board
+
+7. Calculate the total number of White pieces present in the board:
+    Total 8 White pieces present in the board
+
+8. Calculate the total number of Black pieces present in the board:
+    Total 10 Black pieces present in the board
+
+9. Calculate the total empty columns present in the board:
+    Total 6 empty columns present in the board
+
+10. Calculate the total empty rows present in the board:
+    Total 8 empty rows present in the board
+
+11. Calculate the total number of pieces present in each column:
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 1
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 2
+
+    1. 1. 1. 1. 1. 1. q.
+    - Total 0 pieces present in column 3
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 4
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 5
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 6
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 7
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 8
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 9
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 10
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 11
+
+    1. 1. 1. 1. 1. 1. q.
+    - Total 0 pieces present in column 12
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 13
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 14
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 15
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 16
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 17
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 18
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 19
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 20
+
+    1. 1. 1. 1. 1. 1. q.
+    - Total 0 pieces present in column 21
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 22
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 23
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 24
+
+    1. 1. 1. P. 1. 1. 1.
+    - Total 1 pieces present in column 25
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 26
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 27
+
+    1. 1. 1. 1. 1. 1. 1.
+    - Total 0 pieces present in column 28
+
+    1. 1. 1. K. 1. 1. 1.
+    - Total 1 pieces present in column 29
+
+    1. 1. 1. 1. 1. 1. q.
+    - Total 0 pieces present in column 30
+
+    1. 1. 1. p. 1. 1. 1.
+    - Total 1 pieces present in column 31
+
+    1. 1. 1. p. 1.",0
+"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the Black King?",g7,"### Question: Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the Black King?
+    ## Response:
+    
+    The Black King is present in the board state provided in the FEN line.
+    - The FEN line consists of 12 columns divided by '/'.
+    - The first column is known as the 'File' range from 1-8.
+    - The second column is known as the 'Rank' range from a-h.
+    - Each chessboard row is known as a 'file'.
+    - Each chessboard column is known as a 'rank'.
+    - The numbers represent empty squares.
+    - Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    - The total 12 pieces present in the board are 2 x White King, 1 x Black King, 2 x White Rook, 1 x White Pawn, 1 x Black Pawn, 2 x White Knight, 1 x White Queen, 1 x Black Pawn, 1 x White Pawn.
+
+    Black King is present at a7.
+    - Black King at a7 is indicated by ""K"" present at a7.
+    - Total 12 pieces present in the board are 2 x White King, 1 x Black King, 2 x White Rook, 1 x White Pawn, 1 x Black Pawn, 2 x White Knight, 1 x White Queen, 1 x Black Pawn, 1 x White Pawn.
+
+    Board State is:
+     1 1 1 1 1 1 1 1
+    1 1 1 K 1 1 k 1
+    R 1 p 1 1 q 1 1
+    1 n 1 1 p p 1 1
+    P 1 1 1 P 1 1 1
+    1 Q 1 1 P 1 1 1
+    1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1
+
+    Piece Positions are:
+    White King at a6 b1
+    Black King at a7
+    White Rook at a3 c6
+    White Pawn at b4
+    Black Pawn at d4 g6
+    White Knight at d2 e1
+    White Queen at d1
+    Black Pawn at f1
+    White Pawn at h1 h6",0
+"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the White King?",h2,"### Question: Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the White King?
+    ## Response:
+    1. Split the FEN line into separate sections using ' ' as the delimiter.
+    - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1
+
+1. White pieces are denoted by '1' or 'K' or 'N' or 'Q' or 'R' or 'B' or 'P'
+2. Black pieces are denoted by '1' or 'K' or 'N' or 'Q' or 'R' or 'B' or 'P'
+3. Empty squares are denoted by '1'
+4. Total 12 pieces present in the board
+
+1. 2 pieces present in the first section
+    - 2 r 4 k
+    - 2 x 1 empty square
+    - r x 1 empty square
+    - 4 x 1 empty square
+    - k 1 empty square
+
+1. 8 pieces present in the second section
+    - p p 1 1 1 1 1 1
+    - 2 x 1 empty square
+    - p p 1 1 1 1 1 1
+
+1. 4 pieces present in the third section
+    - 1 1 1 1 1 1 1 1
+    - 1 x 1 empty square
+    - 1 1 1 1 1 1 1 1
+
+1. 1 piece present in the fourth section
+    - 1 P 1 q p R 1 N
+    - 1 x 1 empty square
+    - P 1 q p R 1 N
+
+1. 6 pieces present in the fifth section
+    - 1 1 1 1 1 1 P P
+    - 1 x 1 empty square
+    - 1 1 1 1 1 1 P P
+
+1. 1 piece present in the sixth section
+    - P 1 r 1 1 1 1 K
+    - 1 x 1 empty square
+    - r 1 1 1 1 1 K
+
+1. 1 piece present in the seventh section
+    - 1 1 1 1 1 1 1 1
+    - 1 x 1 empty square
+    - 1 1 1 1 1 1 1 1
+
+1. 1 piece present in the eighth section
+    - b 1 1 1 1 1 1 1
+    - 1 x 1 empty square
+    - 1 1 1 1 1 1 1 1
+
+1. Total 12 pieces present in the board
+
+1. White Pieces Present are 8 pieces which are 2 x White Rook, 2 x White Pawn, 2 x White Queen, 1 x White Pawn, 1 x White Knight
+2. Black Pieces Present are 4 pieces which are 1 x Black King, 1 x Black Pawn, 1 x Black Rook, 1 x Black Bishop
+
+1. White King present at a8 square
+
+<ANSWER>: White King present at a8 square",0
+"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the Black King?",h8,"### Question: Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the Black King?
+    ## Response:
+    
+    The Black King is present in the board state at a8.
+
+    The position can be determined by systematically analyzing the chessboard square by square.
+    
+    The chessboard is divided into 8 rows called files range from 1-8.
+    The chessboard is divided into 8 columns called ranks range from a-h.
+    
+    Each chessboard square is known as a cell and is identified by a letter and a number.
+    For example, a3 is the third square in the a file and the third square in the third rank.
+
+    The FEN line consists of 10 pieces of information divided by '/'.
+    - The first part ""2r4k"" represents the pieces present in the board square.
+    - The total 4 pieces present in the board are 2 x White Rook, 1 x Black King, and 1 x White King.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""2r4k"" means 2 empty squares, 1 x White Rook, 4 empty squares, and 1 x Black King.
+
+    - The second part ""pp3Qpp"" represents the pieces present in the White's side of the board.
+    - The total 8 pieces present in the board are 2 x White Pawn, 1 x Black Pawn, 1 x White Queen, 4 x White Pawn.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""pp3Qpp"" means 2 x White Pawn, 1 x Black Pawn, 1 x White Queen, 4 x White Pawn.
+
+    - The third part ""4pp2/8/"" represents the pieces present in the board square.
+    - The total 6 pieces present in the board are 4 x White Pawn, 2 x Empty Square.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""4pp2/8/"" means 4 x White Pawn, 2 x Empty Square.
+
+    - The fourth part ""/1P1qpR1N"" represents the pieces present in the Black's side of the board.
+    - The total 8 pieces present in the board are 1 x White Pawn, 1 x Black Queen, 1 x White Pawn, 1 x Black Rook, 1 x White Knight.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""/1P1qpR1N"" means 1 x White Pawn, 1 x Black Queen, 1 x White Pawn, 1 x Black Rook, 1 x White Knight.
+
+    - The fifth part ""6PP/P1r3PK"" represents the pieces present in the board square.
+    - The total 9 pieces present in the board are 6 x White Pawn, 1 x White Pawn, 1 x Black Rook, 1 x White King.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""6PP/P1r3PK"" means 6 x White Pawn, 1 x White Pawn, 1 x Black Rook, 1 x White King.
+
+    - The sixth part ""/P1r3PK/8"" represents the pieces present in the board square.
+    - The total 4 pieces present in the board are 1 x White Pawn, 1 x Black Rook, 1 x White King, 1 x Empty Square.
+    - The numbers represent the empty squares present in the board.
+    - For example, ""/P1r3PK/8"" means 1 x White Pawn, 1 x Black Rook, 1 x White King, 1 x Empty Square.
+
+    - The seventh part ""b - - 0 1"" represents the player who is in control of the board, the castling rights, and the move made.
+    - The letter 'b' denotes Black is the player in control.
+    - The ' - - ' indicates no castling has been performed.
+    - The '0 1' represents the move made by Black.
+
+    - The final board state is:
+    
+    2r4k
+    pp3Qpp
+    4pp2/8/
+    1P1qpR1N
+    6PP/P1r3PK
+    /P1r3PK/8
+    b - - 0 1
+
+    The Black King is present at a8.
+
+    <ANSWER>: a8",0
+"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the White King?",b2,"### Question: Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the White King?
+    ## Response:
+    1. The FEN line is divided into 10 sections.
+    1. The first section ""5R2"" represents empty squares, total 5 empty squares followed by 2 x White Rook present on board.
+    1. The second section ""1R6"" represents empty squares, total 1 empty square followed by White Rook present on board.
+    1. The third section ""5p2"" represents empty squares, total 5 empty squares followed by 2 x Black Pawn present on board.
+    1. The fourth section ""4n1pk"" represents empty squares, total 4 empty squares followed by Black Knight present on board, Black Pawn present on board, Black King present on board, and Black Pawn present on board.
+    1. The fifth section ""1p6"" represents empty squares, total 1 empty square followed by Black Pawn present on board.
+    1. The sixth section ""1P6"" represents empty squares, total 1 empty square followed by White Pawn present on board.
+    1. The seventh section ""PKP2r2"" represents empty squares, total 2 empty squares followed by White Pawn present on board, White King present on board, 2 x Black Pawn present on board, and 1 x Black Rook present on board.
+    1. The eighth section ""8"" represents empty squares, total 8 empty squares.
+    1. The ninth section ""w - - 8 43"" represents White King present on board, total 1 letter present in the section.
+    1. The tenth section ""1"" represents total 1 pieces present in the board.
+
+    2. Total 15 pieces present in the board.
+
+    3. White King present at a1 square.
+
+    <ANSWER>: a1",0
+"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the Black Rook?",f2,"### Question: Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the Black Rook?
+    ## Response:
+    
+    The Black Rook is present in the last row of the board, at position ""h8"".
+    - The Black Rook is present in the board since it is present in the FEN line.
+    - The position of each chess piece is divided by '/'.
+    - The columns are known as files range from 1-8.
+    - The rows are known as ranks range from a-h.
+    - e.g. a White Knight at rank ""a"" and file ""3"" will be N at a3.
+    - Empty chess board square is denoted by '1'
+    - Total 10 pieces present in the board
+
+    Piece Positions are:
+    5 pieces present in the 1st row
+    White Rook at a7 b7
+    1 pieces present in the 2nd row
+    White Rook at b6
+    4 pieces present in the 3rd row
+    White Pawn at c5 e5 a3
+    Black Knight at f5
+    1 pieces present in the 4th row
+    White Pawn at g4
+    1 pieces present in the 5th row
+    Black King at e2
+    1 pieces present in the 6th row
+    White Pawn at f1
+    1 pieces present in the 7th row
+    White Pawn at a1
+    1 pieces present in the 8th row
+    Black Rook at h8
+    1 pieces present in the 9th row
+    White Pawn at a7
+    1 pieces present in the 10th row
+    Black Pawn at b7
+
+    Total 10 pieces present in the board
+
+    Black Rook at h8",0
+"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White King?",h1,"### Question: Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White King?
+    ## Response:
+    
+    The position of the White King can be determined by examining the chessboard square where it is present.
+    
+    - The chessboard is divided into 8 rows called files range from 1-8.
+    - The chessboard is divided into 8 columns called ranks range from a-h.
+    
+    For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+    
+    - Empty chess board square is denoted by '1'
+    - Total 12 pieces present in the board
+
+    White Pieces: 4 pieces which are 1 x White Rook, 2 x White Pawn, 1 x White Queen
+
+    Black Pieces: 8 pieces which are 3 x Black Rook, 2 x Black Pawn, 1 x Black King, 1 x Black Bishop, 1 x Black Queen
+
+    Board State is:
+    r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K
+    
+    White Rook at a8
+    Black Rook at e8 c7 b6
+    White Pawn at b7 a5
+    Black Pawn at e5 b4
+    Black King at c4
+    Black Bishop at g4
+    Black Queen at c2
+    White Queen at e1
+    White Knight at g1
+    Black Rook at a1
+
+    White King present at h1",0
+"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White Queen?",b3,"### Question: Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White Queen?
+    ## Response:
+    1. White Queen at c8.
+    2. Reason: The FEN line is divided by '/'.
+    3. The first half of the FEN line represents the chessboard rows known as the ""boardline"".
+    4. The second half of the FEN line represents the chess pieces present in the board.
+    5. The chessboard row is divided by '1' which represents empty squares.
+    6. Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    7. For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    8. The columns are known as ""files"" range from 1-8.
+    9. The rows are known as ""ranks"" range from a-h.
+    10. For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+    11. Empty chess board square is denoted by '1'.
+    12. Total 11 pieces present in the board.
+    13. White Pieces: 6 pieces which are 2 x White Rook, 2 x White Pawn, 1 x White King, 1 x White Queen.
+    14. Black Pieces: 5 pieces which are 2 x Black Pawn, 1 x Black King, 1 x Black Queen, 1 x Black Rook.
+    15. White Queen at c8.
+    16. White Queen present at c8 square.
+    17. Total 11 pieces present in the board.
+    18. White Pieces: 6 pieces which are 2 x White Rook, 2 x White Pawn, 1 x White King, 1 x White Queen.
+    19. Black Pieces: 5 pieces which are 2 x Black Pawn, 1 x Black King, 1 x Black Queen, 1 x Black Rook.
+
+### Context: 
+None
+### Response: White Queen at c8.",0
+"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the White King?",g1,"### Question: Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the White King?
+    ## Response:
+    2k1r3
+White King at b8
+Total 10 pieces present in the board
+
+White Pieces: 6 pieces which are 3 x White Pawn, 1 x White King, 1 x White Rook, 1 x White Knight
+
+Black Pieces: 4 pieces which are 1 x Black King, 1 x Black Rook, 2 x Black Pawn
+
+Board State is:
+ 2 k 1 r 3
+ p p p 1 r 1
+ 1 1 1 1 1 1
+ 1 1 1 1 1 p
+ 1 1 1 P 1 P 1
+ 1 1 N 1 1 1 1
+ P P 1 P 1 P 1
+ R 1 Q 1 R K 1
+
+Empty chess board square is denoted by '1'
+Total 10 pieces present in the board
+
+White Pieces: 6 pieces which are 3 x White Pawn, 1 x White King, 1 x White Rook, 1 x White Knight
+
+Black Pieces: 4 pieces which are 1 x Black King, 1 x Black Rook, 2 x Black Pawn
+
+White King present at b8 square",0
+"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the Black King?",c8,"### Question: Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the Black King?
+    ## Response:
+    
+    The FEN line is divided into 10 columns called files range from 1-10.
+    The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+    
+    Each letter represents a chess piece:
+    Lowercase letters represent black pieces:
+    e.g. 'k' is a Black King
+
+    Uppercase letters represent white pieces:
+    e.g. 'N' is White Knight
+
+    The columns are known as files range from 1-10.
+    The rows are known as ranks range from a-h.
+    
+    For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    Empty chess board square is denoted by '1'
+    
+    Total 13 pieces present in the board
+
+    1 x White King at b8
+    1 x Black Rook at c8
+    3 x White Pawn at d8 e8 f8
+    1 x Black Pawn at g8
+    2 x White Rook at f7 b3
+    1 x Black King at h7
+    2 x White Knight at d6 h3
+    3 x White Pawn at d5 c4 e3
+    2 x Black Pawn at a5 g2
+    1 x White Queen at d2
+    1 x White King at h1
+
+    Black King at h7",0
+"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the White King?",g2,"### Question: Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the White King?
+    ## Response:
+    1. The FEN line is divided into seven columns called files range from 1-8.
+   
+    2. The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+
+    3. Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+   
+    4. The columns are known as files range from 1-8.
+    - For example, a White Knight at position a3 will be N at a3.
+
+    5. The rows are known as ranks range from a-h.
+    - For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    6. The chess board square is divided by '/'.
+    - The square before '/' is known as White's square.
+    - The square after '/' is known as Black's square.
+    - For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    7. The numbers represent empty squares. For example, ""4"" means 4 empty squares.
+
+    8. Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+
+    9. The columns are known as files range from 1-8.
+    - For example, a White Knight at position a3 will be N at a3.
+
+    10. The rows are known as ranks range from a-h.
+    - For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    11. The chess board square is divided by '/'.
+    - The square before '/' is known as White's square.
+    - The square after '/' is known as Black's square.
+    - For example, a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    12. Total 12 pieces present in the board
+
+    13. White Pieces: 7 pieces which are 3 x White Pawn, 2 x White Knight, 1 x White King, 1 x White Rook
+
+    14. Black Pieces: 5 pieces which are 1 x Black Rook, 1 x Black King, 1 x Black Pawn, 1 x Black Bishop, 1 x Black King
+
+    15. Empty Squares: 33 squares which are 8 x 8 empty square
+
+    16. White King present at a8
+    
+    White King at a8 square.",0
+"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the Black King?",f5,"### Question: Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the Black King?
+    ## Response:
+    36th move is White's move, which is '1' (letter '1' denotes White King).
+    Therefore, the Black King is present at b8 square.
+
+    The move list can be divided into two parts:
+    1. 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8
+    - The first part is the board state divided by '/'.
+    - The empty chess board square is denoted by '1' (White Square).
+    - Total 10 pieces present in the board.
+    - 7 pieces present in White's side.
+    - 3 pieces present in Black's side.
+    - The pieces present in the board are:
+        - 3 x White Rook present at a8, b7, and a2.
+        - 2 x White Pawn present at c6 and e6.
+        - 1 x White Bishop present at d6.
+        - 1 x White Knight present at c3.
+        - 1 x White King present at c2.
+        - 1 x Black Rook present at d3.
+        - 1 x Black King present at b8.
+
+    2. b - - 1 36
+    - The second part is the move list.
+    - 'b' denotes Black's move.
+    - '1' denotes White's move.
+    - '36' denotes the move number.
+
+    Black's move 'b' is empty move which indicates Black did not make any move.
+    White's move '1' is White King at c2 square.
+    Total 2 moves present in the move list.
+
+    The final board state is:
+    1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1
+    r 1 r 1 b 1 p
+    1 N 1 R 1 k 1 1
+    2 P 1 p p 1 1 1
+    1 1 1 1 1 R 1 1
+    1 1 1 1 1 P K P
+    1 1 1 1 1 1 1 1
+    b 1 1 1 1 1 1 1
+
+    The position of the Black King is at b8.",0
+"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the White King?",d1,"### Question: Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the White King?
+    ## Response:
+    1. Split the FEN line into seven fields using ' ' as the delimiter.
+    - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19
+
+2. The first field contains the total number of pieces present in the board.
+    - 11 pieces present in the board.
+
+3. The second field contains the list of white pieces present in the board.
+    - r, 3 pieces present.
+
+4. The third field contains the list of black pieces present in the board.
+    - k2r, 3 pieces present.
+
+5. The fourth field contains empty squares present in the board.
+    - /pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R
+
+6. The fifth field contains the list of white pieces present in the board.
+    - w, 1 pieces present.
+
+7. The sixth field contains the list of black pieces present in the board.
+    - kq, 2 pieces present.
+
+8. The seventh field contains the list of empty squares present in the board.
+    - - 0 19
+
+9. Total 11 pieces present in the board.
+
+10. White Pieces present are 4 pieces which are r, 3, w, 1.
+
+11. Black Pieces present are 7 pieces which are k2r, p, b, N, Q, P, kq.
+
+12. Empty Squares present are 10 pieces which are 5 pieces in the fourth field and 5 pieces in the seventh field.
+
+13. White King present at a8 square.
+    - White King present at a8 square.",0
+"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the Black Queen?",g2,"### Question: Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the Black Queen?
+    ## Response:
+    
+    The FEN line consists of 10 characters divided into 3 groups:
+    1. The first group ""r3k2r"" represents the chessboard row known as the ""boardline"".
+    2. The second group ""pp3p1p"" represents the chess pieces present in the board.
+    3. The third group ""2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19"" represents the empty squares, black pieces, white pieces, and the final move pair.
+
+    Empty chess board square is denoted by '1'
+    Total 15 pieces present in the board
+
+    
+    Boardline:
+    r 1 1 k 1 1 r
+    Total 4 pieces present in the boardline
+
+    1 x White Rook present at a8
+    1 x Black Pawn present at b7
+    1 x White King present at f7
+    1 x Black Rook present at h7
+
+    Piece list:
+    p 1 1 1 1 1 p
+    1 x White Pawn present at a6
+    1 x Black Pawn present at b6
+    1 x White Pawn present at c6
+    1 x White Pawn present at d6
+    1 x Black Pawn present at e6
+    1 x White Pawn present at f6
+
+    1 1 1 1 1 1 p
+    Total 6 pieces present in the piece list
+
+    
+    2 p P b 1 1 1
+    1 x Black Pawn present at a5
+    1 x White Pawn present at b5
+    1 x Black Pawn present at c5
+    1 x White Bishop present at d5
+    1 x Black Pawn present at f5
+
+    1 1 1 1 1 1 1
+    Total 3 pieces present in the empty square line
+
+    b 1 1 1 1 1 1
+    1 x Black Bishop present at a4
+
+    1 1 1 1 1 N 1
+    1 x White Knight present at e4
+
+    Q 1 1 1 1 1 N
+    1 x White Queen present at c3
+    1 x White Knight present at f3
+
+    P 1 1 1 1 1 1
+    1 x White Pawn present at a2
+
+    P 1 1 1 1 1 P
+    1 x White Pawn present at b2
+    1 x White Pawn present at c2
+    1 x White Pawn present at d2
+    1 x Black Pawn present at e2
+    1 x White Pawn present at f2
+
+    1 R B K 1 1 1
+    1 x White Rook present at a1
+    1 x White Bishop present at b1
+    1 x White King present at c1
+
+    w k q - 0 19
+    Total 5 pieces present in the final move pair
+
+    White King present at k7
+    Black Queen present at q7
+    White Rook present at b6
+
+    Summary
+    Total 15 pieces present in the board
+
+    Black Queen present at q7",0
+,,"### Question: nan
+    ## Response:
+    1. White: Nf3, Black: g6
+    - **White's move Nf3**: White develops a knight, targeting the center and preparing to castle kingside.
+    - **Black's move g6**: Black prepares to fianchetto the bishop, aiming for a solid kingside.
+
+    2. White: Bg5, Black: Bg7
+    - **White's move Bg5**: White pins the knight on f6, trying to create weaknesses in Black's position.
+    - **Black's move Bg7**: Black completes the fianchetto, aiming for a strong kingside presence.
+
+    3. White: O-O, Black: O-O
+    - **White's move O-O**: White castles kingside, ensuring king safety and connecting the rooks.
+    - **Black's move O-O**: Black castles queenside, mirroring White's move and securing the king.
+
+    4. White: d4, Black: Nf6
+    - **White's move d4**: White strikes in the center, aiming to control the center and prepare for a pawn majority.
+    - **Black's move Nf6**: Black develops a knight, aiming to contest White's center and prepare for kingside castling.
+
+    5. White: Nc3, Black: d6
+    - **White's move Nc3**: White develops another knight, adding pressure to the center and preparing for a pawn thrust.
+    - **Black's move d6**: Black solidifies the center, preparing to support the knight on f6 and free the bishop.
+
+    6. White: e4, Black: Nbd7
+    - **White's move e4**: White pushes the pawn, gaining space and attacking the knight on f6.
+    - **Black's move Nbd7**: Black prepares to castle kingside and develops a piece, aiming to neutralize White's center.
+
+    7. White: Nh4, Black: Nxh4
+    - **White's move Nh4**: White sacrifices a knight to attack the f7 pawn and disrupt Black's position.
+    - **Black's move Nxh4**: Black accepts the knight sacrifice, opening the f-file and doubling pawns.
+
+    8. White: Bxh4, Black: Bd7
+    - **White's move Bxh4**: White recaptures the knight, maintaining the initiative and attacking the f7 pawn.
+    - **Black's move Bd7**: Black develops the bishop, preparing to support the center and attack White's pawn on h4.
+
+    9. White: Qd2, Black: Nf6
+    - **White's move Qd2**: White centralizes the queen, preparing to castle queenside and support the center.
+    - **Black's move Nf6**: Black retreats the knight, aiming to reposition it to a better square.
+
+    10. White: Qf3, Black: Nc5
+    - **White's move Qf3**: White places the queen on a more aggressive square, targeting the center and preparing to attack.
+    - **Black's move Nc5**: Black develops a piece, attacking White's bishop on h4 and aiming to contest the center.
+
+    11. White: Nf1, Black: Bf5
+    - **White's move Nf1**: White retreats the knight, preparing to castle queenside and centralize the pieces.
+    - **Black's move Bf5**: Black develops the bishop, aiming to attack White's knight on f1 and support the center.
+
+    12. White: Qg3, Black: e6
+    - **White's move Qg3**: White centralizes the queen, increasing pressure on the center and preparing to attack.
+    - **Black's move e6**: Black prepares to support the center and free the bishop for more active play.
+
+    13. White: h3, Black: Nb6
+    - **White's move h3**: White prepares to drive away Black's bishop from f5 and opens the h-file for potential rook activity.
+    - **Black's move Nb6**: Black retreats the knight, aiming to reposition it for better defense.
+
+    14. White: Rb1, Black: Bf6
+    - **White's move Rb1**: White places a rook on the open file, preparing for potential central and queenside play.
+    - **Black's move Bf6**: Black develops the bishop, aiming to support the center and prepare for an attack.
+
+    15. White: e5, Black: dxe5
+    - **White's move e5**: White pushes the pawn, gaining space and attacking Black's center.
+    - **Black's move dxe5**: Black captures the pawn, opening the center and aiming to contest White's center.
+
+    16. White: Qxg7, Black: Kxg7
+    - **White's move Qxg7**: White captures the pawn, winning material and threatening Black's king.
+    - **Black's move Kxg7**: Black recaptures, accepting the material loss and centralizing the king.
+
+    17. White: Nf3+, Black: Kf8
+    - **White's move Nf3+**: White checks the king, forcing it to move and disrupting Black's position.
+    - **Black's move Kf8**: Black moves the king to safety, avoiding the check.
+
+    18. White: Nxe5, Black: Nxe5
+    - **White's move Nxe5**: White captures the pawn, maintaining the initiative and material advantage.
+    - **Black's move Nxe5**: Black recaptures, opening the center and aiming to contest White's pieces.
+
+    19. White: Rxb7, Black: Nd7
+    - **White's move Rxb7**: White captures the pawn, threatening the rook on b8 and gaining material.
+    - **Black's move Nd7**: Black moves the knight, aiming to defend the rook and prepare for counterplay.
+
+    20. White: Nc4, Black: Nxc4
+    - **White's move Nc4**: White centralizes the knight, attacking Black's pieces and preparing for a decisive attack.
+    - **Black's move Nxc4**: Black exchanges knights, hoping to simplify the position.
+
+    21. White: Bxc4, Black: Nf6
+    - **White's move Bxc4**: White captures the knight, maintaining the material advantage.
+    - **Black's move Nf6**: Black retreats the knight, aiming to reposition it for defense.
+
+    22. White: Rb1, Black: Bd6
+    - **White's move Rb1**: White places the rook on an open file, aiming to increase pressure on the b-file.
+    - **Black's move Bd6**: Black develops the bishop, aiming to support the center and prepare for counterplay.
+
+    23. White: Bb5, Black: a6
+    - **White's move Bb5**: White pins the knight on f6, aiming to create weaknesses in Black's position.
+    - **Black's move a6**: Black pushes the pawn, aiming to challenge White's bishop.
+
+    24. White: Bc6, Black: Bc7
+    - **White's move Bc6**: White pins the knight on c6, increasing the pressure on Black's position.
+    - **Black's move Bc7**: Black defends the knight, aiming to neutralize White's threat.
+
+    25. White: Rxb7, Black: Bb5
+    - **White's move Rxb7**: White captures the pawn, gaining material and maintaining the initiative.
+    - **Black's move Bb5**: Black attacks White's rook, aiming to disrupt White's position.
+
+    26. White: Rb1, Black: Bc7
+    - **White's move Rb1**: White retreats the rook, maintaining the material advantage and keeping the open file.
+    - **Black's move Bc7**: Black defends the bishop, aiming to maintain the position.
+
+    27. White: Rb8, Black: Bd6
+    - **White's move Rb8**: White places the rook on an open file, increasing the",0

@@ -1,0 +1,105 @@
+Question,GT,Response,Score
+What is the name of the piece that moves in an L shape?,Knight,"The piece that moves in an L shape in chess is called the knight. The knight moves in an L-shaped pattern: two squares in one direction (either vertically or horizontally) and then one square perpendicular to that, or one square in one direction and then two squares perpendicular to that. Additionally, the knight is the only piece in chess that can ""jump"" over other pieces on the board.",0
+How many squares are there on a standard chessboard?,64,"A standard chessboard has 64 squares, arranged in an 8x8 grid. However, if you are asking about the total number of squares of all possible sizes (1x1, 2x2, 3x3, etc.) on the chessboard, the calculation is different.
+
+The total number of squares can be calculated by summing the squares of the number of ways to place each size square on the board:
+
+- 1x1 squares: There are 8x8 = 64 of these.
+- 2x2 squares: There are 7x7 = 49 of these.
+- 3x3 squares: There are 6x6 = 36 of these.
+- 4x4 squares: There are 5x5 = 25 of these.
+- 5x5 squares: There are 4x4 = 16 of these.
+- 6x6 squares: There are 3x3 = 9 of these.
+- 7x7 squares: There are 2x2 = 4 of these.
+- 8x8 squares: There is 1x1 = 1 of these.
+
+Adding all these up: 
+64 + 49 + 36 + 25 + 16 + 9 + 4 + 1 = 204.
+
+So, there are a total of 204 squares of all sizes on a standard chessboard.",0
+What is the term for a situation where a king cannot escape check?,Checkmate,"The term for a situation where a king cannot escape check is called ""checkmate."" In chess, checkmate occurs when the king is in a position to be captured (in check) and there is no legal move to escape the threat. Checkmate ends the game, and the player whose king is checkmated loses.",0
+Which piece is the most powerful in chess?,Queen,"The most powerful piece in chess is the queen. The queen combines the moves of both the rook (moving any number of squares vertically or horizontally) and the bishop (moving any number of squares diagonally), making her extremely versatile and influential on the board.",0
+What is the initial position of the white queen?,d1,"In standard chess, the initial position of the white queen is on the d1 square. This is the fourth square from the left on the first rank (the row closest to the white player).",0
+In a game of chess which player moves first?,white,"In a game of chess, the player with the white pieces moves first. This is a standard rule in chess that applies to all formal and casual games.",0
+In a game of chess which player moves second?,black,"In a game of chess, the player with the black pieces moves second. The player with the white pieces always makes the first move.",0
+What is the only piece that can jump over others?,Knight,"In chess, the only piece that can jump over others is the knight. The knight moves in an L-shape: two squares in one direction (either vertically or horizontally) and then one square perpendicular to that direction. This unique movement allows the knight to bypass pieces that are obstructing its path.",0
+What is it called when a pawn reaches the opposite side of the board?,Promotion,"When a pawn reaches the opposite side of the chessboard, it is called ""promotion."" Upon reaching the eighth rank (the farthest row from the pawn's starting position), the pawn can be promoted to any other piece, except another pawn or a king. The most common choice is to promote the pawn to a queen, which is known as ""queening,"" but it can also be promoted to a knight, rook, or bishop.",0
+Which two pieces are involved in castling?,King and Rook,"In the game of chess, the two pieces involved in castling are the king and one of the rooks. Castling can occur on the kingside, involving the king and the kingside rook, or on the queenside, involving the king and the queenside rook.",0
+"What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?",Castling,"The move is called ""castling."" In castling, the king moves two squares towards a rook, and that rook moves to the square immediately next to the king on the opposite side. There are two types of castling: kingside castling (also known as ""short castling"") and queenside castling (also known as ""long castling"").",0
+Which piece starts on e1 for White?,King,"In chess, the piece that starts on e1 for White is the king.",0
+How many ranks are there in a chess board?,8,"A chessboard has 8 ranks. The ranks are the horizontal rows on the chessboard, numbered 1 through 8.",0
+What is the term for a draw in chess?,Stalemate,"The term for a draw in chess is simply called a ""draw."" There are several ways a game can end in a draw, including:
+
+1. **Stalemate**: When a player has no legal moves and their king is not in check.
+2. **Threefold Repetition**: When the same position occurs three times with the same player to move and all possible moves.
+3. **Fifty-Move Rule**: If fifty consecutive moves are played by each side without any pawn movement or capture.
+4. **Insufficient Material**: When neither player has enough pieces to force a checkmate (e.g., king versus king, king and bishops of the same color, etc.).
+5. **Mutual Agreement**: Both players agree to a draw at any point during the game.
+6. **Dead Position**: A position where neither player can checkmate the other's king by any series of legal moves.
+
+Any of these conditions can result in a drawn game.",0
+What is the maximum number of queens a player can have on the board?,9,"In chess, each player starts with one queen. However, through the process of pawn promotion, it is possible for a player to have more than one queen. The maximum number of queens a player can have on the board at one time is nine. This occurs if all eight of that player's pawns are promoted to queens in addition to the original queen.",0
+What are the names of the files on a chessboard?,"a, b, c, d, e, f, g, h","In a standard chessboard, the files are the vertical columns, labeled with the letters a through h from left to right from White's perspective. So the names of the files are:
+
+- a-file
+- b-file
+- c-file
+- d-file
+- e-file
+- f-file
+- g-file
+- h-file",0
+Which piece can only move diagonally?,Bishop,"In chess, the piece that can only move diagonally is the bishop. The bishop moves on the board in a straight line but only along the diagonals, meaning it remains on the same color square throughout the game. Each player starts with two bishops, one on a light-colored square and one on a dark-colored square.",0
+What is the name of the notation system used to record chess moves?,"Algebraic Notation, PGN, FEN","The notation system used to record chess moves is called Algebraic Notation. This system uses a combination of letters and numbers to describe each move. For example, ""e4"" describes a pawn move to the e4 square, and ""Nf3"" describes a knight move to the f3 square. Algebraic Notation is widely used in chess literature and by players to record and communicate games.",0
+Which piece starts on d8 for Black?,Queen,The piece that starts on d8 for Black is the queen.,0
+"Which piece can move any number of squares along a rank, file, or diagonal?",Queen,"The chess piece that can move any number of squares along a rank, file, or diagonal is the queen. The queen is the most powerful piece on the board because of its versatility in movement.",0
+What is the starting position of the White's King side Bishop in algebraic notation?,c1,The starting position of the White's King side Bishop in algebraic notation is f1.,0
+What is it called when the king is in check and does not have any other legal move?,Checkmate,"When the king is in check and does not have any other legal move, it is called ""checkmate."" This situation ends the game, as the king cannot escape the threat of capture.",0
+What is the move called when a pawn captures an opposing piece by moving diagonally?,Pawn Capture,"The move where a pawn captures an opposing piece by moving diagonally is called a ""pawn capture"" or simply ""capture."" In chess notation, this is typically represented by the letter of the pawn's file, followed by an ""x"" to denote the capture, and then the destination square. For example, if a pawn on e4 captures a piece on d5, it would be notated as ""exd5.""",0
+Which piece can move one square in any direction?,King,"In chess, the piece that can move one square in any direction (horizontally, vertically, or diagonally) is the king.
+
+",0
+Which chess piece can move any number of squares along a rank and file only?,Rook,The chess piece that can move any number of squares along a rank (horizontal) and file (vertical) only is the rook.,0
+Which chess pieces can participate in castling?,King and Rook,"In chess, the pieces involved in castling are the king and either one of the rooks. Castling is a special move that allows the player to move the king two squares towards either the kingside rook or the queenside rook, and then move that rook to the square that the king crossed over. The move has several conditions:
+
+1. Neither the king nor the chosen rook can have moved previously during the game.
+2. There must be no pieces between the king and the rook.
+3. The king must not be in check, nor can the squares that the king moves across, or lands on, be under attack. 
+
+There are two types of castling:
+- Kingside castling (also known as short castling), where the king moves two squares towards the kingside rook.
+- Queenside castling (also known as long castling), where the king moves two squares towards the queenside rook.",0
+What is the standard number of squares each pawn moves on its first move?,1 or 2,"In chess, each pawn can move forward either one or two squares on its first move. After the first move, pawns can only move forward one square at a time.",0
+"At the start of the game, how many chess pieces are present on the board?",32,"At the start of a game of chess, there are a total of 32 pieces on the board. Each player has 16 pieces, consisting of 1 king, 1 queen, 2 rooks, 2 bishops, 2 knights, and 8 pawns.",0
+What a pawn that has advanced to the eighth rank gets promoted to?,Queen,"When a pawn advances to the eighth rank in chess, it can be promoted to one of four pieces: a queen, rook, bishop, or knight, as chosen by the player moving the pawn. Typically, players choose to promote the pawn to a queen because it is the most powerful piece. However, promoting to a rook, bishop, or knight can sometimes be strategically advantageous depending on the specific position and circumstances of the game.",0
+Which piece can only move horizontally or vertically?,Rook,"In the game of chess, the rook is the piece that can only move horizontally or vertically. The rook can move any number of squares along a row or column but cannot move diagonally.",0
+What is the starting position of the black king's knight?,g8,"In chess, the starting position of the black king's knight is on the square g8.",0
+What is the special move involving a king and a rook?,Castling,"The special move involving a king and a rook is called ""castling."" Castling is the only move in chess where a player can move two pieces simultaneously. There are specific conditions that must be met for castling to be legal:
+
+1. Neither the king nor the rook involved in castling can have moved prior to castling.
+2. There must be no pieces between the king and the rook.
+3. The king cannot be in check before or after castling.
+4. The squares that the king moves through must not be under attack.
+
+There are two types of castling:
+- Kingside castling (short castling): The king moves two squares towards the rook on the kingside, and the rook moves to the square next to the king.
+- Queenside castling (long castling): The king moves two squares towards the rook on the queenside, and the rook moves to the square next to the king.
+
+Castling is a strategic move that often helps improve the safety of the king and connect the rooks.",0
+How many pieces does each player start with?,16,"Each player starts with 16 pieces in a standard game of chess. These pieces include:
+
+- 1 King
+- 1 Queen
+- 2 Rooks
+- 2 Knights
+- 2 Bishops
+- 8 Pawns
+
+Each type of piece has its own unique movement and role in the game.",0
+How many bishops does each player start with?,2,"In a standard game of chess, each player starts with two bishops. One bishop is positioned on a white square and the other on a black square. Their initial positions are c1 and f1 for White, and c8 and f8 for Black.",0
+How many knights does each player start with?,2,"In a standard game of chess, each player starts with two knights.",0
+How many rooks does each player start with?,2,"In a standard game of chess, each player starts with two rooks. One rook is placed on the a1 and h1 squares for the white player, and on the a8 and h8 squares for the black player.",0
+How many pawns does each player start with?,8,"In a standard game of chess, each player starts with 8 pawns.",0
+How many queens does each player start with?,1,"In a standard game of chess, each player starts with one queen.",0
+Which chess piece is being moved when the chess move is e4 in Algebraic notation?,Pawn,"In algebraic notation, the move ""e4"" indicates that the pawn on the e-file is being moved to the e4 square. This is a common opening move in chess, known as the King's Pawn Opening.",0
+Which chess piece is being moved when the chess move is Na3 in Algebraic notation?,Knight,"In Algebraic notation, the move ""Na3"" indicates that the knight is being moved. Specifically, this notation means that a knight is moving to the square a3.",0

@@ -1,0 +1,1030 @@
+Question,GT,Answer,Score
+What is the name of the piece that moves in an L shape?,Knight,"### Question: What is the name of the piece that moves in an L shape?
+    ## Response:
+    
+    The piece that moves in an L shape is called a Knight.
+
+    <ANSWER>: Knight",0
+How many squares are there on a standard chessboard?,64,"### Question: How many squares are there on a standard chessboard?
+    ## Response:
+    1. The standard chessboard is a square grid with 64 squares divided into eight rows (called files) and eight columns (called ranks).
+    2. Each square is identified by the rank and file numbers, ranging from 1 to 8.
+    3. The total number of squares on a standard chessboard is 64.
+
+<ANSWER>: 64 squares",0
+What is the term for a situation where a king cannot escape check?,Checkmate,"### Question: What is the term for a situation where a king cannot escape check?
+    ## Response:
+    1. **White: e4, Black: d6**
+       - **White's Rationale:** White aims to control the center with the pawn move e4, opening lines for the queen and bishop.
+       - **Black's Rationale:** Black responds with d6, signaling a possible Slav Defense, aiming to undermine White's central control.
+
+    2. **White: d4, Black: Nf6**
+       - **White's Rationale:** White continues to strengthen central control with d4, aiming for a potential c4 pawn push.
+       - **Black's Rationale:** Black develops a knight to f6, attacking the e4 pawn and controlling the center.
+
+    3. **White: Nc3, Black: g6**
+       - **White's Rationale:** White develops the knight to c3, adding more pressure to the d5 square and preparing for future developments.
+       - **Black's Rationale:** Black prepares to fianchetto the bishop to g7, aiming for a King-side attack.
+
+    4. **White: Be3, Black: Bg7**
+       - **White's Rationale:** White develops the bishop to e3, supporting the d4 pawn and aiming for potential kingside attack.
+       - **Black's Rationale:** Black completes the fianchetto, adding more weight to the h1-a8 diagonal.
+
+    5. **White: h3, Black: O-O**
+       - **White's Rationale:** White pushes h3 to prevent any potential Black knight or bishop from coming to g4.
+       - **Black's Rationale:** Black castles kingside for king safety and rook activation.
+
+    6. **White: Nf3, Black: Nfd7**
+       - **White's Rationale:** White develops the knight to f3, adding more control to the center and preparing for future tactical opportunities.
+       - **Black's Rationale:** Black repositions the knight to d7, aiming to reroute it to a more active square like c5 or f5.
+
+    7. **White: Bd3, Black: e5**
+       - **White's Rationale:** White develops the bishop to d3, supporting the e4 pawn and preparing to castle.
+       - **Black's Rationale:** Black pushes e5, challenging White's central control and opening lines for the pieces.
+
+    8. **White: dxe5, Black: Nxe5**
+       - **White's Rationale:** White captures the e5 pawn, opening up the center and aiming to exploit Black's doubled pawns.
+       - **Black's Rationale:** Black recaptures with the knight, maintaining central control and piece activity.
+
+    9. **White: Qxd7, Black: Qxd7**
+       - **White's Rationale:** White exchanges queens early to reduce Black's attacking potential and simplify the position.
+       - **Black's Rationale:** Black recaptures with the queen, aiming to maintain central control and keep the game balanced.
+
+    10. **White: Bc4, Black: Nc6**
+        - **White's Rationale:** White develops the bishop to c4, aiming to control the d-file and put pressure on Black's pawns.
+        - **Black's Rationale:** Black develops the knight to c6, adding more defense to the e5 pawn and controlling key squares.
+
+    11. **White: O-O, Black: Nb4**
+        - **White's Rationale:** White castles for king safety and rook activation.
+        - **Black's Rationale:** Black moves the knight to b4, aiming to invade White's territory and create tactical threats.
+
+    12. **White: Bb3, Black: a5**
+        - **White's Rationale:** White develops the bishop to b3, adding more pressure to the b7 pawn.
+        - **Black's Rationale:** Black pushes a5, aiming to challenge White's bishop and open up the b-file for counterplay.
+
+    13. **White: Bc2, Black: Nd5**
+        - **White's Rationale:** White retreats the bishop to c2, supporting the d4 pawn and preparing to reposition.
+        - **Black's Rationale:** Black places the knight on d5, creating tactical threats and aiming to disrupt White's pawn structure.
+
+    14. **White: Bxd5, Black: exd5**
+        - **White's Rationale:** White exchanges bishops to reduce Black's active pieces.
+        - **Black's Rationale:** Black recaptures with the pawn, maintaining central control and opening the e-file for the queen or rook.
+
+    15. **White: Nbd2, Black: Nf4**
+        - **White's Rationale:** White develops the knight to d2, adding more control to the center and preparing to challenge Black's knight.
+        - **Black's Rationale:** Black moves the knight to f4, aiming to attack White's king and create tactical opportunities.
+
+    16. **White: g4, Black: Nh5**
+        - **White's Rationale:** White pushes g4 to challenge the knight on f4 and open lines for the rook.
+        - **Black's Rationale:** Black moves the knight to h5, aiming to reposition it to a more active square like f7.
+
+    17. **White: Nf3, Black: Nf7**
+        - **White's Rationale:** White repositions the knight to f3, adding more defense to the kingside and preparing to castle.
+        - **Black's Rationale:** Black places the knight on f7, adding more defense to the kingside and preparing for potential counterattacks.
+
+    18. **White: Kg2, Black: Rg8**
+        - **White's Rationale:** White castles kingside for king safety and rook activation.
+        - **Black's Rationale:** Black places the rook on g8, aiming to launch a kingside attack or support the f-file.
+
+    19. **White: Ne5, Black: Nxe5**
+        - **White's Rationale:** White centralizes the knight to e5, creating tactical threats and aiming to exchange knights.
+        - **Black's Rationale:** Black exchanges knights to reduce White's active pieces.
+
+    20. **White: Bxe5, Black: Qe7**
+        - **White's Rationale:** White recaptures with the bishop, maintaining active piece control.
+        - **Black's Rationale:** Black places the queen on e7, adding more defense to the kingside and aiming to control the e-file.
+
+    21. **White: Bxg8, Black: Rxg8**
+        - **White's Rationale:** White exchanges bishops to reduce Black's active pieces.
+        - **Black's Rationale:** Black recaptures with the rook, maintaining rook activity and central control.
+
+    22. **White: f4, Black: Kf8**
+        - **White's Rationale:** White pushes f4, aiming to open the kingside and exploit Black's kingside weaknesses.
+        - **Black's Rationale:** Black moves the king to f8, adding more defense to the kingside and preparing for potential rook lifts.
+
+    23. **White: Rf3, Black: Qe3+**
+        - **White's Rationale:** White places the rook on f3, aiming to support the f4 push and control the f-file.
+        - **Black's Rationale:** Black moves the queen to e3, delivering a check and aiming to disrupt White's kingside pawn structure.
+
+    24. **White: Kf2, Black: Bf5**
+        - **White's Rationale:** White moves the king to f2, adding more defense to the kingside.
+        - **Black's Rationale:** Black places the bishop on f5, aiming to control the e-file and support potential attacks.
+
+    25. **White: Rf2, Black: Qe2+**
+        - **White's Rationale:** White places the rook on f2, aiming to support the f4 pawn and control the f-file.
+        - **Black's Rationale:** Black delivers another check with the queen, aiming to maintain pressure on White's kingside.
+
+    26. **White: Ke",0
+Which piece is the most powerful in chess?,Queen,"### Question: Which piece is the most powerful in chess?
+    ## Response:
+    
+    In chess, the most powerful piece is the human brain. The strategies and tactics employed by a skilled human player far outweigh the material advantage of any individual piece. However, if you are asking about the piece with the greatest intrinsic value, it would be the queen. The queen is the most powerful piece on the board, with the ability to move in any direction and capture any piece.
+
+<ANSWER>: The queen is the most powerful piece in chess.",0
+What is the initial position of the white queen?,d1,"### Question: What is the initial position of the white queen?
+    ## Response:
+    
+    The position of the white queen is not explicitly mentioned in the provided context.
+    However, from the move ""White: Qa4, Black: Bxc2"" in the game, it can be inferred that the white queen was previously positioned at a4.
+    
+    <ANSWER>: a4
+
+    <REASON>: The move ""White: Qa4"" indicates that the white queen was previously positioned at a4.",0
+In a game of chess which player moves first?,white,"### Question: In a game of chess which player moves first?
+    ## Response:
+    
+    In a game of chess, the player who moves first is typically designated as White, and the other player is Black. This designation is not based on the actual color of the players but on the pieces they control. White traditionally controls the pieces that are lighter in color, such as the white pawns and knights, while Black controls the darker pieces, such as the black pawns and knights.
+
+    The reason for this designation is historical. In the early days of chess, pieces were often represented by actual objects, such as pieces of ivory or wood. White pieces were typically made of lighter materials, such as ivory, while Black pieces were made of darker materials, such as ebony. This distinction carried over into the modern game, where White and Black represent the two sides.
+
+    To answer the question ""In a game of chess, which player moves first?"":
+    - **White** moves first.
+
+    <ANSWER>: White",0
+In a game of chess which player moves second?,black,"### Question: In a game of chess which player moves second?
+    ## Response:
+    1. **White: d4, Black: Nf6**
+    - **White:** d4 is a common opening move aiming to control the center and open lines for the bishop and queen.
+    - **Black:** Nf6 is a flexible response, aiming to contest the center and prepare for potential e5 or c5 pawn moves.
+
+2. **White: c4, Black: g6**
+    - **White:** c4 is another central control move, preparing for potential Nc3 and future queenside expansion.
+    - **Black:** g6 indicates a potential plan to fianchetto the bishop, aiming for a King-side attack.
+
+3. **White: Nc3, Black: Bg7**
+    - **White:** Nc3 develops a knight to a strong square, supporting the d4 pawn and increasing influence in the center.
+    - **Black:** Bg7 completes the fianchetto, putting pressure on the central squares and preparing for potential kingside pawn storms.
+
+4. **White: e4, Black: d6**
+    - **White:** e4 further controls the center and opens lines for the queen and bishop.
+    - **Black:** d6 supports the e5 pawn break and maintains flexibility in the center.
+
+5. **White: Be3, Black: O-O**
+    - **White:** Be3 develops the bishop to a strong square, supporting the d4 pawn and preparing for potential queenside castling.
+    - **Black:** O-O ensures king safety by castling and connects the rooks.
+
+6. **White: Qd2, Black: Nfd7**
+    - **White:** Qd2 connects the rooks and prepares to potentially support the b-file or d4 pawn.
+    - **Black:** Nfd7 repositions the knight, aiming to support the e5 pawn break or potentially reposition to a better square.
+
+7. **White: Bd3, Black: e5**
+    - **White:** Bd3 develops the bishop to an active square, targeting the weak e5 pawn.
+    - **Black:** e5 challenges the center and opens up lines for the dark-squared bishop.
+
+8. **White: O-O, Black: c6**
+    - **White:** O-O ensures king safety and connects the rooks.
+    - **Black:** c6 supports the d5 pawn break and prepares to potentially push c5.
+
+9. **White: h3, Black: a6**
+    - **White:** h3 prevents any potential Bg4 or Bh6 pins and prepares for a possible g4 push.
+    - **Black:** a6 prepares for potential b5 or b4 pawn moves by White.
+
+10. **White: Be2, Black: exd4**
+    - **White:** Be2 repositions the bishop to a safer square and prepares to potentially recapture on d4.
+    - **Black:** exd4 opens the center and invites White to recapture, potentially leading to an imbalance.
+
+11. **White: exd4, Black: Bxe2**
+    - **White:** exd4 recaptures the pawn, maintaining central control.
+    - **Black:** Bxe2 exchanges bishops, aiming to simplify the position and potentially create imbalance.
+
+12. **White: Qxe2, Black: Nc5**
+    - **White:** Qxe2 recaptures the bishop, maintaining piece activity.
+    - **Black:** Nc5 attacks the queen and aims to increase pressure in the center.
+
+13. **White: Qc3, Black: Nd3**
+    - **White:** Qc3 connects the rooks and eyes the c-file.
+    - **Black:** Nd3 centralizes the knight, attacking the queen and potentially preparing for tactical opportunities.
+
+14. **White: Qd1, Black: Nf4**
+    - **White:** Qd1 repositions the queen to a safer square while maintaining control over the c-file.
+    - **Black:** Nf4 aggressively positions the knight, threatening the queen and creating tactical threats.
+
+15. **White: Qxd6, Black: Qxd6**
+    - **White:** Qxd6 captures the knight, simplifying the position.
+    - **Black:** Qxd6 recaptures, maintaining piece activity and central control.
+
+16. **White: Rxd6, Black: Bd7**
+    - **White:** Rxd6 places the rook in an active position, controlling the open file.
+    - **Black:** Bd7 develops the bishop to a strong diagonal, aiming to control the center and prepare for potential c5.
+
+17. **White: Rd3, Black: c5**
+    - **White:** Rd3 places the rook on an open file, aiming to control the d-file.
+    - **Black:** c5 opens up the queenside and aims to create counterplay.
+
+18. **White: Rd2, Black: Rc8**
+    - **White:** Rd2 repositions the rook to potentially support the d-file or prepare for a pawn push.
+    - **Black:** Rc8 centralizes the rook, aiming to control the c-file and support potential c4 advances.
+
+19. **White: Rfd1, Black: Re8**
+    - **White:** Rfd1 doubles rooks on the d-file, aiming for a strong presence.
+    - **Black:** Re8 centralizes the rook, aiming to contest the d-file and support potential e4 advances.
+
+20. **White: b3, Black: b5**
+    - **White:** b3 prepares for potential queenside expansion and pawn chain stability.
+    - **Black:** b5 counters White's queenside plans and aims to open up the b-file.
+
+21. **White: a4, Black: a5**
+    - **White:** a4 aims to restrict Black's pawns and maintain queenside integrity.
+    - **Black:** a5 mirrors White's intentions, aiming to restrict White's pawns on the queenside.
+
+22. **White: Rd7, Black: Rc7**
+    - **White:** Rd7 places the rook on an open file, aiming to exert pressure.
+    - **Black:** Rc7 contests the d-file and aims to counter White's rook activity.
+
+23. **White: Rd3, Black: Rd7**
+    - **White:** Rd3 repositions the rook, aiming to support the center or potentially prepare for c4.
+    - **Black:** Rd7 centralizes the rook, aiming to control the d-file and support potential e4 advances.
+
+24. **White: Rdd1, Black: Rxd3**
+    - **White:** Rdd1 doubles rooks on the d-file, aiming for strong control.
+    - **Black:** Rxd3 exchanges rooks, aiming to simplify the position and reduce White's activity.
+
+25. **White: Rxd3, Black: Kf8**
+    - **White:** Rxd3 recaptures, maintaining rook activity.
+    - **Black:** Kf8 centralizes the king, aiming to connect the rooks and prepare for endgame play.
+
+26. **White: Kf1, Black: Ke8**
+    - **White:** Kf1 activates the king towards the center, preparing for endgame play.
+    - **Black:** Ke8 similarly centralizes the king, aiming to connect the rooks and prepare for potential pawn advances.
+
+27. **White: Kf2, Black: Kd7**
+    - **White:** Kf2 continues centralizing the king, aiming to support potential pawn advances.
+    - **Black:** Kd7 centralizes the king, aiming to support potential pawn advances and connect the rooks.
+
+28. **White: Kg3, Black: h6**
+    - **White:** Kg3 aims to support potential pawn advances on the kingside.
+    - **Black:** h6 prevents any potential g5 pawn advances by White.
+
+29. **White: Rd5, Black: Rc8**
+    - **White:** Rd5 places the rook on an open file, aiming to exert pressure.
+    - **Black:** Rc8 contests the d-file and aims to support potential c4 advances.
+
+30. **White: Rc5, Black: Rc7**
+    - **White:** Rc5 places the rook on an open file, aiming to exert pressure",0
+What is the only piece that can jump over others?,Knight,"### Question: What is the only piece that can jump over others?
+    ## Response:
+    
+    The only piece that can jump over other pieces is the knight.
+    
+    <ANSWER>: The knight.",0
+What is it called when a pawn reaches the opposite side of the board?,Promotion,"### Question: What is it called when a pawn reaches the opposite side of the board?
+    ## Response:
+    
+    The term for when a pawn reaches the opposite side of the board is called ""promotion.""
+
+    <ANSWER>: Promotion.",0
+Which two pieces are involved in castling?,King and Rook,"### Question: Which two pieces are involved in castling?
+    ## Response:
+    1. The king (White: ♔, Black: ♔)
+    2. The rook (White: ♜, Black: ♜)
+
+<ANSWER>: The king and the rook are involved in castling.
+
+<ANALYSIS>: Castling is a special move in chess that involves the king and a rook. The king moves two squares in the same file towards the rook, and then the rook moves to the other side of the king, landing on the square the king moved from. This move is typically done to safeguard the king and improve the position of the rook.
+
+In the provided FEN, the White King is at d1, and the White Rook is at c1.
+The Black King is at e8, and the Black Rook is at f8.
+
+Therefore, the king and the rook are involved in castling.",0
+"What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?",Castling,"### Question: What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?
+    ## Response:
+    
+    The term for this move is called a ""castling maneuver."" It is a special move allowed in standard chess that involves the king and a rook. Castling is a strategic move that strengthens the position of the king and rook, and can only be performed under specific conditions.
+
+    <ANSWER>: Castling.",0
+Which piece starts on e1 for White?,King,"### Question: Which piece starts on e1 for White?
+    ## Response:
+    1. White: e4, Black: e5
+    2. White: Nf3, Black: Nc6
+    3. White: Bb5, Black: a6
+    4. White: Ba4, Black: Nf6
+    5. White: O-O, Black: Nxe4
+    6. White: d4, Black: Nd6
+    7. White: Bg5, Black: Be7
+    8. White: Re1, Black: O-O
+    9. White: Bd3, Black: h6
+    10. White: Bc2, Black: Bg5
+    11. White: Bxg5, Black: hxg5
+    12. White: Nbd2, Black: Re8
+    13. White: c3, Black: Qe7
+    14. White: Qe2, Black: Nf5
+    15. White: Ncxe5, Black: Nxe5
+    16. White: Nxe5, Black: Qxe5
+    17. White: Nc3, Black: Qe8
+    18. White: Nd5, Black: Qd7
+    19. White: Nxf7, Black: Kf8
+    20. White: Nxh6, Black: Qe3
+    21. White: Nf5, Black: Qe8
+    22. White: Nxe7, Black: Qe4
+    23. White: Nxc8, Black: Qxc3
+    24. White: Qf3, Black: Qxa2
+    25. White: Rd1, Black: Qc3
+    26. White: Qd3, Black: Qxa1
+    27. White: Rd2, Black: Qc3
+    28. White: Qd5, Black: Qc1
+    29. White: Qxc1, Black: Bxc1
+    30. White: Rd1, Black: Bxa2
+    31. White: Rd2, Black: Bc3
+    32. White: Rd3, Black: Bxe4
+    33. White: Rd4, Black: Bxh1
+    34. White: Rd7, Black: Bc3
+    35. White: Rd3, Black: Bxe5
+    36. White: Rd8, Black: Bc3
+    37. White: Rd3, Black: Bxe5
+    38. White: Rd8, Black: Bc3
+    39. White: Rd3, Black: Bxe5
+    40. White: Rd8, Black: Bc3
+    41. White: Rd3, Black: Bxe5
+    42. White: Rd8, Black: Bc3
+    43. White: Rd3, Black: Bxe5
+    44. White: Rd8, Black: Bc3
+    45. White: Rd3, Black: Bxe5
+    46. White: Rd8, Black: Bc3
+    47. White: Rd3, Black: Bxe5
+    48. White: Rd8, Black: Bc3
+    49. White: Rd3, Black: Bxe5
+    50. White: Rd8, Black: Bc3
+    51. White: Rd3, Black: Bxe5
+    52. White: Rd8, Black: Bc3
+    53. White: Rd3, Black: Bxe5
+    54. White: Rd8, Black: Bc3
+    55. White: Rd3, Black: Bxe5
+    56. White: Rd8, Black: Bc3
+    57. White: Rd3, Black: Bxe5
+    58. White: Rd8, Black: Bc3
+    59. White: Rd3, Black: Bxe5
+    60. White: Rd8, Black: Bc3
+    61. White: Rd3, Black: Bxe5
+    62. White: Rd8, Black: Bc3
+    63. White: Rd3, Black: Bxe5
+    64. White: Rd8, Black: Bc3
+    65. White: Rd3, Black: Bxe5
+    66. White: Rd8, Black: Bc3
+    67. White: Rd3, Black: Bxe5
+    68. White: Rd8, Black: Bc3
+    69. White: Rd3, Black: Bxe5
+    70. White: Rd8, Black: Bc3
+    71. White: Rd3, Black: Bxe5
+    72. White: Rd8, Black: Bc3
+    73. White: Rd3, Black: Bxe5
+    74. White: Rd8, Black: Bc3
+    75. White: Rd3, Black: Bxe5
+    76. White: Rd8, Black: Bc3
+    77. White: Rd3, Black: Bxe5
+    78. White: Rd8, Black: Bc3
+    79. White: Rd3, Black: Bxe5
+    80. White: Rd8, Black: Bc3
+    81. White: Rd3, Black: Bxe5
+    82. White: Rd8, Black: Bc3
+    83. White: Rd3, Black: Bxe5
+    84. White: Rd8, Black: Bc3
+    85. White: Rd3, Black: Bxe5
+    86. White: Rd8, Black: Bc3
+    87. White: Rd3, Black: Bxe5
+    88. White: Rd8, Black: Bc3
+    89. White: Rd3, Black: Bxe5
+    90. White: Rd8, Black: Bc3
+    91. White: Rd3, Black: Bxe5
+    92. White: Rd8, Black: Bc3
+    93. White: Rd3, Black: Bxe5
+    94. White: Rd8, Black: Bc3
+    95. White: Rd3, Black: Bxe5
+    96. White: Rd8, Black: Bc3
+    97. White: Rd3, Black: Bxe5
+    98. White: Rd8, Black: Bc3
+    99. White: Rd3, Black: Bxe5
+    100. White: Rd8, Black: Bc3
+    101. White: Rd3, Black: Bxe5
+    102. White: Rd8, Black: Bc3
+    103. White: Rd3, Black: Bxe5
+    104. White: Rd8, Black: Bc3
+    105. White: Rd3, Black: Bxe5
+    106. White: Rd8, Black: Bc3
+    107. White: Rd3, Black: Bxe5
+    108. White: Rd8, Black: Bc3
+    109. White: Rd3, Black: Bxe5
+    110. White: Rd8, Black: Bc3
+    111. White: Rd3, Black: Bxe5
+    112. White: Rd8, Black: Bc3
+    113. White: Rd3, Black: Bxe5
+    114. White: Rd8, Black: Bc3
+    115. White: Rd3, Black: Bxe5
+    116. White: Rd8, Black: Bc3
+    117. White: Rd3, Black: Bxe5
+    118. White: Rd8, Black: Bc3
+    119. White: Rd3, Black: Bxe5
+    120. White: Rd8, Black: Bc3
+    121. White: Rd3, Black: Bxe5
+    122. White: Rd8, Black: Bc3
+    123. White: Rd3, Black: Bxe5
+    124. White: Rd8, Black: Bc3
+    125. White: Rd3, Black: Bxe5
+    126. White: Rd8, Black: Bc3
+    127. White: Rd3, Black: Bxe5
+    12",0
+How many ranks are there in a chess board?,8,"### Question: How many ranks are there in a chess board?
+    ## Response:
+    
+    On a standard chess board, each chessboard square is divided into 64 smaller squares known as cells. Each cell can hold one chess piece. The total number of cells on a chessboard is 64.
+
+    <ANSWER>: 64",0
+What is the term for a draw in chess?,Stalemate,"### Question: What is the term for a draw in chess?
+    ## Response:
+    
+    The term for a draw in chess is ""a draw.""
+
+    - **Context:**
+      ""If you haven't seen them, how do you know there is another class?"" demanded Peo. ""There is no evidence of any such situation.""  ""The evidence is well hidden. But if you think your stomach can take it now, I'll tell you. If you remember your history, colonizing ships 1000 years ago had no space to carry animals along. They had to depend on native animal life of the planet, and this planet had none.""  ""Saranta said that. But I don't see ...""
+
+    - **Reasoning:**
+      The context provided does not contain any information related to the term for a draw in chess.
+      Therefore, we will rely on general knowledge to answer the question.
+
+    - **Answer:**
+      The term for a draw in chess is ""a draw.""",0
+What is the maximum number of queens a player can have on the board?,9,"### Question: What is the maximum number of queens a player can have on the board?
+    ## Response:
+    1. **Context Analysis**:
+    - The context provided does not contain any relevant information about the maximum number of queens a player can have on the board.
+    - Therefore, we will rely on general knowledge and rules of chess to answer the question.
+
+2. **Reasoning**:
+    - In standard chess, each player starts with one queen.
+    - The maximum number of queens a player can have on the board is 10.
+    - This limit is set by the rules of chess and is not dependent on the number of pieces exchanged or captured during the game.
+
+3. **Final Answer**:
+    - The maximum number of queens a player can have on the board is 10.",0
+What are the names of the files on a chessboard?,"a, b, c, d, e, f, g, h","### Question: What are the names of the files on a chessboard?
+    ## Response:
+    
+    The files on a chessboard are denoted by letters ranging from 1-8.
+    The ranks on a chessboard are denoted by numbers ranging from 1-8.
+
+    For example, the top-left square on a chessboard is denoted as White: 
+    White: White Bishop
+    Black: Black Bishop
+
+    The above example shows that the White Bishop is present at the a8 square and the Black Bishop is present at the a7 square.
+
+    <ANSWER>: The files on a chessboard are denoted by letters ranging from 1-8. The ranks on a chessboard are denoted by numbers ranging from 1-8.",0
+Which piece can only move diagonally?,Bishop,"### Question: Which piece can only move diagonally?
+    ## Response:
+    
+    The piece that can only move diagonally is called a ""knight.""
+
+    <ANSWER>: Knight",0
+What is the name of the notation system used to record chess moves?,"Algebraic Notation, PGN, FEN","### Question: What is the name of the notation system used to record chess moves?
+    ## Response:
+    
+    The notation system used to record chess moves is called algebraic notation. Each chessboard square is divided into files ranging from 1-8 and ranks ranging from a-h. For example, e4 would represent a white pawn move to the square at the intersection of the fourth file and the second rank.
+
+    <ANSWER>: Algebraic Notation",0
+Which piece starts on d8 for Black?,Queen,"### Question: Which piece starts on d8 for Black?
+    ## Response:
+    
+    Black's pieces are not explicitly mentioned in the FEN line, which only provides information about White's pieces.
+    - The columns range from 1-8.
+    - The rows range from a-h.
+    - The empty chess board square is denoted by '1'.
+    - Each chess piece is represented by a letter: lowercase letters represent black pieces and uppercase letters represent white pieces.
+    - For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+    - The columns are known as files range from 1-8.
+    - The rows are known as ranks range from a-h.
+    - e.g. a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+    Empty chess board square is denoted by '1'
+    Total 5 pieces present in the board
+
+            White Pieces: 2 pieces which are 1 x White Bishop, 1 x White King
+
+            Black Pieces: 3 pieces which are 1 x Black Knight, 1 x Black Queen, 1 x Black Rook
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ B 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ K 1 1 1 1 1 1 1
+
+Piece Positions are:
+White Bishop at d8
+White King at h1
+Black Knight at c3
+Black Queen at h3
+Black Rook at a1",0
+"Which piece can move any number of squares along a rank, file, or diagonal?",Queen,"### Question: Which piece can move any number of squares along a rank, file, or diagonal?
+    ## Response:
+    
+    The piece that can move any number of squares along a rank, file, or diagonal is called a ""queen.""
+
+    <ANSWER>: Queen
+
+    ### Context: 
+    ""If you haven't seen them, how do you know there is another class?"" demanded Peo. ""There is no evidence of any such situation.""  ""The evidence is well hidden. But if you think your stomach can take it now, I'll tell you. If you remember your history, colonizing ships 1000 years ago had no space to carry animals along. They had to depend on native animal life of the planet, and this planet had none.""  ""Saranta said that. But I don't see ...""
+    
+    ### Response: The context provided does not contain information about chess pieces or their movements, so it is not relevant to answering the question about which piece can move any number of squares along a rank, file, or diagonal.
+
+    <ANSWER>: The piece that can move any number of squares along a rank, file, or diagonal is called a ""queen.""",0
+What is the starting position of the White's King side Bishop in algebraic notation?,c1,"### Question: What is the starting position of the White's King side Bishop in algebraic notation?
+    ## Response:
+    
+    The starting position of the White's King side Bishop is e3.
+
+    <ANSWER>: e3",0
+What is it called when the king is in check and does not have any other legal move?,Checkmate,"### Question: What is it called when the king is in check and does not have any other legal move?
+    ## Response:
+    1. The scenario described is called ""perpetual check.""
+    2. Perpetual check is a situation where the king is continuously in check and has no legal move to escape from it.
+    3. Perpetual check can be a winning strategy for the side creating it, as it forces the opponent into a losing position due to continual exposure and lack of defensive options.
+    4. To resolve perpetual check, the king must be moved out of check or the check must be blocked by another piece.
+    5. If the perpetual check cannot be resolved, it leads to a forced move or checkmate scenario.
+
+<ANSWER>: Perpetual check.",0
+What is the move called when a pawn captures an opposing piece by moving diagonally?,Pawn Capture,"### Question: What is the move called when a pawn captures an opposing piece by moving diagonally?
+    ## Response:
+    
+    The move where a pawn captures an opposing piece by moving diagonally is called a ""fork.""
+
+    <ANSWER>: Fork.
+
+    <REASON>: A fork occurs when a pawn or any other piece moves in a way that simultaneously attacks two or more opposing pieces, creating a tactical advantage for the player. The pawn's ability to move diagonally allows it to execute this tactic effectively.
+
+    <SUPPORTING TEXT>: ""If you were a chess master, what would you do?"" asked Tardo, peering at him keenly. ""Well, if I were a chess master, I suppose I should know how to answer a question like that without having to think about it,"" replied Peo modestly. ""But since I'm not, I'm afraid I must ask you to be more specific.""  Saranta apologized for their having to walk, explaining that there was no other means of transportation on the planet.
+
+    The above text does not mention anything relvant to answer the question -
+'What is the move called when a pawn captures an opposing piece by moving diagonally?'
+So ignoring the above text.
+
+Answer : The move where a pawn captures an opposing piece by moving diagonally is called a ""fork.""",0
+Which piece can move one square in any direction?,King,"### Question: Which piece can move one square in any direction?
+    ## Response:
+    
+    The piece that can move one square in any direction is called a knight.
+
+    <ANSWER>: Knight",0
+Which chess piece can move any number of squares along a rank and file only?,Rook,"### Question: Which chess piece can move any number of squares along a rank and file only?
+    ## Response:
+    
+    The chess piece that can move any number of squares along a rank and file only is called a Rook.
+
+    <ANSWER>: Rook",0
+Which chess pieces can participate in castling?,King and Rook,"### Question: Which chess pieces can participate in castling?
+    ## Response:
+    1. White: O-O, Black: O-O-O
+    2. White: O-O-O, Black: O-O
+    3. White: O-O-O-O, Black: O-O-O
+    4. White: O-O-O-O-O, Black: O-O-O-O
+
+In the above moves, the letters represent the chess pieces:
+- White: White Rook (R), White King (K), White Bishop (B), White Knight (N), White Pawn (P)
+- Black: Black Rook (R), Black King (K), Black Bishop (B), Black Knight (N), Black Pawn (P)
+
+Empty squares are denoted by '1'.
+
+The columns are known as files range from 1-8.
+The rows are known as ranks range from a-h.
+e.g. a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+Castling is a special move in chess that involves the king and a rook.
+The purpose of castling is to improve the king's position by moving it to a safer square and activating the rook.
+Castling is denoted by O-O for kingside castling and O-O-O for queenside castling.
+
+In the above moves, White and Black have both castled multiple times.
+The final position shows an intense strategic battle with both sides focusing on optimal piece positioning and control of the center and key squares.
+
+To answer the question, the relevant information is that both White and Black have castled multiple times, using Rooks and Kings to improve their positions.
+
+<ANSWER>: Both White and Black have castled multiple times.",0
+What is the standard number of squares each pawn moves on its first move?,1 or 2,"### Question: What is the standard number of squares each pawn moves on its first move?
+    ## Response:
+    
+    The standard number of squares each pawn moves on its first move is 2.
+    
+    <ANSWER>: 2",0
+"At the start of the game, how many chess pieces are present on the board?",32,"### Question: At the start of the game, how many chess pieces are present on the board?
+    ## Response:
+    1. White: 5 pieces which are 1 x White King, 1 x White Queen, 1 x White Bishop, 1 x White Knight, 1 x White Pawn.
+    2. Black: 5 pieces which are 1 x Black King, 1 x Black Queen, 1 x Black Bishop, 1 x Black Knight, 1 x Black Pawn.
+    3. Total: 10 pieces present in the board at the start of the game.
+
+    1 piece is White King, 1 piece is White Queen, 1 piece is White Bishop, 1 piece is White Knight, 1 piece is White Pawn, 1 piece is Black King, 1 piece is Black Queen, 1 piece is Black Bishop, 1 piece is Black Knight, 1 piece is Black Pawn.
+
+    <ANSWER>: 10 pieces",0
+What a pawn that has advanced to the eighth rank gets promoted to?,Queen,"### Question: What a pawn that has advanced to the eighth rank gets promoted to?
+    ## Response:
+    1. **White: e4, Black: e5**
+    - White's move e4 aims to control the center and open lines for the queen and bishop.
+    - Black's move e5 challenges White's central control and mirrors the strategy.
+
+2. **White: Nf3, Black: Nc6**
+    - White's move Nf3 develops a knight to control the center and prepare for kingside safety.
+    - Black's move Nc6 develops a knight to challenge White's central control and also supports the e5 pawn.
+
+3. **White: Bb5, Black: a6**
+    - White's move Bb5 is the Ruy López opening, aiming to pin the knight on c6.
+    - Black's move a6 prevents the bishop from advancing further and gaining a strong diagonal.
+
+4. **White: Bxc6, Black: dxc6**
+    - White's move Bxc6 exchanges the bishop for the knight, aiming to weaken Black's pawn structure.
+    - Black's move dxc6 recaptures and maintains pawn integrity but has weakened the e5 pawn.
+
+5. **White: d4, Black: exd4**
+    - White's move d4 aims to open the center and create a pawn majority.
+    - Black's move exd4 captures the pawn, maintaining pawn symmetry but opening lines.
+
+6. **White: Qxd4, Black: Be6**
+    - White's move Qxd4 captures the pawn, developing the queen to an active square.
+    - Black's move Be6 develops the bishop to an active diagonal, aiming to control the center.
+
+7. **White: Nbd2, Black: O-O**
+    - White's move Nbd2 develops the knight to support the e5 pawn and prepares for future maneuvers.
+    - Black's move O-O castles, ensuring king safety and connecting the rooks.
+
+8. **White: Nxe5, Black: Qxd4**
+    - White's move Nxe5 captures the central pawn, creating an imbalance in material.
+    - Black's move Qxd4 exchanges queens, reducing the tension in the center.
+
+9. **White: Nxf7, Black: Kxf7**
+    - White's move Nxf7 sacrifices the knight to attack the king directly.
+    - Black's move Kxf7 recaptures, but the king is now exposed in the center.
+
+10. **White: Bg5+, Black: Be6**
+    - White's move Bg5+ checks the king and puts pressure on Black's position.
+    - Black's move Be6 blocks the check and develops the bishop.
+
+11. **White: Bxe6, Black: Kxe6**
+    - White's move Bxe6 exchanges bishops, simplifying the position and keeping the king exposed.
+    - Black's move Kxe6 recaptures, keeping the king in the center.
+
+12. **White: Rd1, Black: c5**
+    - White's move Rd1 places the rook on an open file, increasing its activity.
+    - Black's move c5 pushes the pawn to create counterplay and open lines for the bishop.
+
+13. **White: Rd3, Black: b5**
+    - White's move Rd3 places the rook on a more aggressive file, increasing pressure.
+    - Black's move b5 pushes the pawn to challenge White's central control.
+
+14. **White: c3, Black: a5**
+    - White's move c3 supports the d4 pawn and prepares to push the pawn up the board.
+    - Black's move a5 pushes the pawn to challenge White's queenside.
+
+15. **White: Kc2, Black: c4**
+    - White's move Kc2 brings the king towards the center, preparing for endgame.
+    - Black's move c4 pushes the pawn to create a passed pawn and further displace White's pieces.
+
+16. **White: Rd8+, Black: Ke6**
+    - White's move Rd8+ checks the king and places the rook on an open file.
+    - Black's move Ke6 moves the king back to a safer square but still in the center.
+
+17. **White: Rd7, Black: Rd8**
+    - White's move Rd7 places the rook on an open file, increasing its activity.
+    - Black's move Rd8 counters with the same idea, aiming for rook activity.
+
+18. **White: Rxd8+, Black: Kxd8**
+    - White's move Rxd8+ exchanges rooks, simplifying the position.
+    - Black's move Kxd8 recaptures and centralizes the king.
+
+19. **White: Kc3, Black: Kc7**
+    - White's move Kc3 brings the king towards the queenside, preparing for pawn advances.
+    - Black's move Kc7 mirrors the same idea, centralizing the king.
+
+20. **White: Kb4, Black: b4**
+    - White's move Kb4 pushes the king towards the queenside, aiming to support pawns.
+    - Black's move b4 pushes the pawn to challenge White's pawn structure.
+
+21. **White: a3, Black: Kb6**
+    - White's move a3 supports the pawn, preventing it from advancing.
+    - Black's move Kb6 centralizes the king, preparing to support pawns.
+
+22. **White: Kc5, Black: a4**
+    - White's move Kc5 centralizes the king, aiming to support pawns.
+    - Black's move a4 pushes the pawn further, threatening to promote.
+
+23. **White: Kd6, Black: a3**
+    - White's move Kd6 aims to control the a-file and support the e4 pawn.
+    - Black's move a3 pushes the pawn closer to promotion.
+
+24. **White: e5, Black: a2**
+    - White's move e5 pushes the pawn to create space and support the king.
+    - Black's move a2 brings the pawn to the brink of promotion.
+
+25. **White: e6, Black: a1=Q**
+    - White's move e6 creates passed pawns and further dislodges Black's pieces.
+    - Black's move a1=Q promotes the pawn, ensuring a winning position.
+
+### Summary of strategy used and winner:
+
+#### Strategies Used:
+1. **Central Control**: Both players focused on controlling the center with moves like e4, e5, d4, and exchanges.
+2. **Piece Activity**: Both sides aimed to develop pieces to active squares and files, with moves like Nf3, Nc6, Bb5, and O-O.
+3. **Pawn Advancement**: Both sides pushed pawns to create open files and passed pawns, with moves like d4, c5, c3, and e5.
+4. **King Safety and Maneuvering**: Both players moved their kings to safer squares and centralized them for endgame, with moves like Kc2, Kc7, and Kd8.
+5. **Rook Activity**: Both sides aimed to place their rooks on open files, with moves like Rd3, Rd8, and Rd1.
+6. **Pawn Sacrifice**: White sacrificed material for tactical advantage with moves like Nxf7 and e5.
+7. **Promotion**: Black successfully promoted a pawn to a queen, ensuring victory.
+
+#### Winner:
+Black wins due to successful pawn promotion (a1=Q) and maintaining strategic superiority throughout the mid to endgame. White's tactical sacrifices and aggressive pawn advances were countered effectively, leading to Black's dominance.",0
+Which piece can only move horizontally or vertically?,Rook,"### Question: Which piece can only move horizontally or vertically?
+    ## Response:
+    
+    The piece that can only move horizontally or vertically is called a ""rook.""
+    
+    <ANSWER>: Rook
+
+    <REASON>: Rooks are tall, narrow pieces that are often depicted as having towers on their sides. They are known for their ability to move in a straight line, making them powerful defenders and attackers on the chessboard.
+
+    <ANSWER>: Rook
+    <REASON>: The context provided does not mention the pieces present in the game or their positions, so it is not possible to determine which pieces are present or their positions based on the information provided.
+    - Therefore, we can only answer the question based on general knowledge of chess pieces and their movements.
+    - The piece that can only move horizontally or vertically is called a rook.
+    - Rooks are typically depicted as tall, narrow pieces with towers on their sides.
+    - They are known for their ability to move in a straight line, making them powerful defenders and attackers on the chessboard.
+
+    <ANSWER>: Rook",0
+What is the starting position of the black king's knight?,g8,"### Question: What is the starting position of the black king's knight?
+    ## Response:
+    1. Black King's Knight is at e8.
+    2. Black King's Knight is not captured since it is present in the board.
+
+<ANSWER>: e8",0
+What is the special move involving a king and a rook?,Castling,"### Question: What is the special move involving a king and a rook?
+    ## Response:
+    
+    The special move involving a king and a rook is called ""castling."" Castling is a move that allows the king and a rook to exchange places, providing the king with better safety and the rook with a more active position.
+
+    In standard chess, there are two types of castling:
+    1. **King-side castling**: The king moves to the rook square (g1) and the rook moves to the king square (f1).
+    2. **Queen-side castling**: The king moves to the other rook square (c1) and the rook moves to the king square (d1).
+
+    Castling can only be done under specific conditions:
+    - The king and rook must not have moved before castling.
+    - There must not be any pieces between the king and the rook.
+    - The king cannot castle if it has already moved or if it is in check.
+    - The rook cannot castle if it has already moved or if it is under attack.
+
+    <ANSWER>: Castling is the special move involving a king and a rook. It improves the king's safety and the rook's position.",0
+How many pieces does each player start with?,16,"### Question: How many pieces does each player start with?
+    ## Response:
+    1. White: 16 pieces which are 1 x White King, 1 x White Queen, 2 x White Rook, 2 x White Knight, 2 x White Bishop, 4 x White Pawn, 1 x Black King, 1 x Black Queen, 1 x Black Rook, 1 x Black Knight, 1 x Black Bishop, 1 x Black Pawn.
+    2. Black: 14 pieces which are 1 x Black King, 1 x Black Queen, 1 x Black Rook, 1 x Black Knight, 1 x Black Bishop, 1 x Black Pawn, 6 x White Piece (4 x White Pawn, 1 x White Rook, 1 x White Knight).
+
+Total pieces present in the board are 30 pieces.
+
+<ANSWER>: White starts with 16 pieces and Black starts with 14 pieces. Total 30 pieces present in the board.",0
+How many bishops does each player start with?,2,"### Question: How many bishops does each player start with?
+    ## Response:
+    
+    - **White**: White starts with 2 bishops.
+    - **Black**: Black starts with 1 bishop.
+
+    **Reason**:
+    - **White**: White's starting position includes 2 bishops, which is standard in most opening variations.
+    - **Black**: Black's starting position includes 1 bishop, which is also common.
+
+    **Context**:
+    - **None**
+
+    **Final Answer**:
+    - **White**: 2 bishops.
+    - **Black**: 1 bishop.",0
+How many knights does each player start with?,2,"### Question: How many knights does each player start with?
+    ## Response:
+    1. **White:** 1 knight
+    2. **Black:** 1 knight
+
+### Context: 
+None
+### Response: Analysing the FEN line where each chessboard row is divided by '/'.
+Numbers represent empty squares. For example, ""4"" means 4 empty squares.
+Each letter represents a chess piece: lowercase letters represent black pieces and uppercase letters represent white pieces.
+For example, 'K' is a White King, 'N' is  and 'q' is a Black Queen.
+The columns are known as files range from 1-8.
+The rows are known as ranks range from a-h.
+e.g. a White Knight at rank ""a"" and file ""3"" will be N at a3.
+
+Empty chess board square is denoted by '1'
+Total 2 pieces present in the board
+
+            White Pieces: 1 pieces which are 1 x White Knight
+
+            Black Pieces: 1 pieces which are 1 x Black Knight
+            
+Board State is:
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 N
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1
+ N 1 1 1 1 1 1 1
+
+Piece Positions are:
+Black Knight at h8
+White Knight at e7",0
+How many rooks does each player start with?,2,"### Question: How many rooks does each player start with?
+    ## Response:
+    1. **White:** 1 rook.
+    2. **Black:** 1 rook.
+
+The starting position for each player includes one rook. The rook is a powerful piece that controls the center and long diagonals.
+
+<ANSWER>: White and Black each start with 1 rook.",0
+How many pawns does each player start with?,8,"### Question: How many pawns does each player start with?
+    ## Response:
+    1. **White**
+    - White starts with 1 king, 1 queen, 2 rooks, 2 knights, 6 pawns, and 1 bishop.
+    
+2. **Black**
+    - Black starts with 1 king, 1 queen, 2 rooks, 2 knights, 6 pawns, and 1 bishop.
+
+**Total Pieces**:
+- White: 11 pieces.
+- Black: 11 pieces.
+
+**Total Pawns**:
+- White: 6 pawns.
+- Black: 6 pawns.
+
+<ANSWER>: White and Black each start with 6 pawns.",0
+How many queens does each player start with?,1,"### Question: How many queens does each player start with?
+    ## Response:
+    1. **Context Analysis**:
+    - Tardo asked Saranta about the fields.
+    - Saranta mentioned that he had not seen Tardo since their morning inspection tour.
+    - Tardo apologized for not having time to inspect the fields personally.
+
+2. **Relevant Information**:
+    - The context provided does not contain information about the starting number of queens for each player.
+    - The context is focused on a conversation between Tardo and Saranta regarding their morning inspection tour.
+
+3. **Reasoning**:
+    - The context does not provide any information about the starting number of queens for each player.
+    - Therefore, we can rely on general knowledge to answer the question.
+    - Each player starts with one queen.
+    - **Final Answer**: Each player starts with one queen.",0
+Which chess piece is being moved when the chess move is e4 in Algebraic notation?,Pawn,"### Question: Which chess piece is being moved when the chess move is e4 in Algebraic notation?
+    ## Response:
+    
+    The move e4 in Algebraic Notation indicates that the White Pawn is being moved to the fourth rank.
+
+    <ANSWER>: White Pawn (White: e4).
+
+    <REASON>: The move e4 represents the White Pawn being moved to the position where the 'e' letter represents the White Pawn and '4' denotes the rank (file number).
+
+    <CONCLUSION>: The move e4 indicates White's intention to control the center of the board by advancing the pawn to e4.",0
+Which chess piece is being moved when the chess move is Na3 in Algebraic notation?,Knight,"### Question: Which chess piece is being moved when the chess move is Na3 in Algebraic notation?
+    ## Response:
+    1. Na3 is a move where White moves the Knight to position a3.
+    
+    In the FEN, each chessboard row is divided by '/'.
+    Each chessboard column is known as a file range from 1-8.
+    Each chess board row is known as a rank range from a-h.
+    Each chess piece is denoted by a letter representing the piece and
+    a number representing the quantity.
+    For example, ""K"" represents a White King, ""N"" represents 
+    and ""4"" represents 4 pieces.
+
+    Empty chess board square is denoted by '1'
+
+    For example, in the FEN ""4N3/1B6/8/K7/8/8/1k3P2/8""
+    
+    Total 11 pieces present in the board
+
+    Column or file range is 1 1 1 1 N 1 1 1
+    Row or rank range is a b c d e f g h
+
+    1 1 1 1 N 1 1 1
+    a b c d e f g h
+
+    1 empty square, 1 Knight present at d8
+    1 empty square, 6 Black Bishop present at c8 b7 g6 f5 e4
+    1 empty square, 1 White King present at a7
+    1 empty square, 1 empty square, 1 empty square, 1 empty square
+    1 empty square, 1 empty square, 1 empty square, 1 empty square
+    1 empty square, 1 White King present at h1
+    1 empty square, 1 White Pawn present at g1
+    1 empty square, 1 Black King present at f1
+    1 empty square, 1 empty square, 1 empty square, 1 empty square
+
+    Move Pair Analysis
+    
+    White: e4, Black: e5
+    (no capture at White: e4 since White: e4 does not contain 'x')
+    (no capture at  Black: e5 since  Black: e5 does not contain 'x')
+
+    White: Nf3, Black: Nc6
+    (no capture at White: Nf3 since White: Nf3 does not contain 'x')
+    (no capture at  Black: Nc6 since  Black: Nc6 does not contain 'x')
+
+    White: Bb5, Black: Nf6
+    (no capture at White: Bb5 since White: Bb5 does not contain 'x')
+    (no capture at  Black: Nf6 since  Black: Nf6 does not contain 'x')
+
+    White: O-O, Black: Nxe4
+    (no capture at White: O-O since White: O-O does not contain 'x')
+    (no capture at  Black: Nxe4 since  Black: Nxe4 does not contain 'x')
+
+    White: Bxc6, Black: bxc6
+    (no capture at White: Bxc6 since White: Bxc6 does not contain 'x')
+    (no capture at  Black: bxc6 since  Black: bxc6 does not contain 'x')
+
+    White: d3, Black: d5
+    (no capture at White: d3 since White: d3 does not contain 'x')
+    (no capture at  Black: d5 since  Black: d5 does not contain 'x')
+
+    White: Bg5, Black: h6
+    (no capture at White: Bg5 since White: Bg5 does not contain 'x')
+    (no capture at  Black: h6 since  Black: h6 does not contain 'x')
+
+    White: Bh4, Black: Be7
+    (no capture at White: Bh4 since White: Bh4 does not contain 'x')
+    (no capture at  Black: Be7 since  Black: Be7 does not contain 'x')
+
+    White: Nbd2, Black: O-O
+    (no capture at White: Nbd2 since White: Nbd2 does not contain 'x')
+    (no capture at  Black: O-O since  Black: O-O does not contain 'x')
+
+    White: c3, Black: Rad8
+    (no capture at White: c3 since White: c3 does not contain 'x')
+    (no capture at  Black: Rad8 since  Black: Rad8 does not contain 'x')
+
+    White: Qc2, Black: Nd7
+    (no capture at White: Qc2 since White: Qc2 does not contain 'x')
+    (no capture at  Black: Nd7 since  Black: Nd7 does not contain 'x')
+
+    White: Bd3, Black: Qh4
+    (no capture at White: Bd3 since White: Bd3 does not contain 'x')
+    (no capture at  Black: Qh4 since  Black: Qh4 does not contain 'x')
+
+    White: g3, Black: Nf6
+    (no capture at White: g3 since White: g3 does not contain 'x')
+    (no capture at  Black: Nf6 since  Black: Nf6 does not contain 'x')
+
+    White: Bxf6, Black: Qxf6
+    (no capture at White: Bxf6 since White: Bxf6 does not contain 'x')
+    (no capture at  Black: Qxf6 since  Black: Qxf6 does not contain 'x')
+
+    White: Rfe1, Black: Bg5
+    (no capture at White: Rfe1 since White: Rfe1 does not contain 'x')
+    (no capture at  Black: Bg5 since  Black: Bg5 does not contain 'x')
+
+    White: Rxe8+, Black: Bxe8
+    (no capture at White: Rxe8+ since White: Rxe8+ does not contain 'x')
+    (no capture at  Black: Bxe8 since  Black: Bxe8 does not contain 'x')
+
+    White: Nxe5, Black: Nxe5
+    (no capture at White: Nxe5 since White: Nxe5 does not contain 'x')
+    (no capture at  Black: Nxe5 since  Black: Nxe5 does not contain 'x')
+
+    White: Rxe5, Black: Bf5
+    (no capture at White: Rxe5 since White: Rxe5 does not contain 'x')
+    (no capture at  Black: Bf5 since  Black: Bf5 does not contain 'x')
+
+    White: Qe2, Black: Bxe2
+    (no capture at White: Qe2 since White: Qe2 does not contain 'x')
+    (no capture at  Black: Bxe2 since  Black: Bxe2 does not contain 'x')
+
+    White: Nxe2, Black: Nxc3
+    (no capture at White: Nxe2 since White: Nxe2 does not contain 'x')
+    (no capture at  Black: Nxc3 since  Black: Nxc3 does not contain 'x')
+
+    White: Nxc3, Black: Qg5
+    (no capture at White: Nxc3 since White: Nxc3 does not contain 'x')
+    (no capture at  Black: Qg5 since  Black: Qg5 does not contain 'x')
+
+    White: Nd5, Black: Qd7
+    (no capture at White: Nd5 since White: Nd5 does not contain 'x')
+    (no capture at  Black: Qd7 since  Black: Qd7 does not contain 'x')
+
+    White: Nb4, Black: Qc6
+    (no capture at White: Nb4 since White: Nb4 does not contain 'x')
+    (no capture at  Black: Qc6 since  Black: Qc6 does not contain 'x')
+
+    White: Qc3, Black: Qb5
+    (no capture at White: Qc3 since White: Qc3 does not contain 'x')
+    (no capture at  Black: Qb5 since  Black: Qb5 does not contain 'x')
+
+    White: Qc4, Black: Qb1
+    (no capture at White: Qc4 since White: Qc4 does not contain 'x')
+    (no capture at  Black: Qb1 since  Black: Qb1 does not contain 'x')
+
+    White: Qd3, Black: Qxd3
+    (no capture at White: Qd3 since White: Qd3 does not contain 'x')
+    (no capture at  Black: Qxd3 since  Black: Qxd3 does not contain 'x')
+
+    White: Rxd3, Black: Nc6
+    (no capture at White: Rxd3 since White: Rxd3 does not contain 'x')
+    (no capture at  Black: Nc",0

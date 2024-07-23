@@ -1,0 +1,361 @@
+Question,GT,Response,Score
+"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the Black Queen?",d1,"In the given FEN (Forsyth-Edwards Notation): 
+
+1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33
+
+To find the position of the Black Queen, we need to decode the FEN string. The setup of the pieces is as follows (by the rows from the top to the bottom):
+
+1. 1R6
+2. p3k1p1
+3. 2p2b2
+4. 2Pn4
+5. 1BQPB3
+6. P7
+7. 6PP
+8. 3q2K1
+
+The Black Queen is represented by the lowercase letter 'q'. According to the 8th row (3q2K1), the 'q' is located in the 'd' column.
+
+Therefore, the position of the Black Queen is on d1.",0
+"Given a chess board state in the following FEN - 1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33, what's the position of the White King?",g1,"In the given FEN ""1R6/p3k1p1/2p2b2/2Pn4/1BQPB3/P7/6PP/3q2K1 w - - 1 33"", the position of the White King is on g1. 
+
+In FEN notation, the position of the pieces is read from top to bottom, left to right. The capital 'K' represents the White King, and 'g1' means the seventh square in the eighth rank (from White's perspective).",0
+"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the White King?",e1,"In the given FEN (Forsyth-Edwards Notation) ""2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20"", the position of the White King is represented by the uppercase ""K"".
+
+Reading the FEN, the uppercase ""K"" is located in the sequence ""R3K2R"".
+
+This sequence refers to the first rank on the board and it indicates that the White King is on e1.",0
+"Given a chess board state in the following FEN - 2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20, what's the position of the Black King?",g8,"In the given FEN: `2r3k1/p4p1p/4pp2/1b6/pP1P3P/P3PN2/2rN1PP1/R3K2R w KQ - 1 20`, the Black King is denoted by the lowercase 'k'. 
+
+According to the FEN, the position of the Black King is on the g8 square.",0
+"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the White Queen?",b3,"In the given FEN string ""4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26"", the position of the White Queen can be found on the third rank (row), which is designated by the third segment of the FEN string ""1QP1n3"". 
+
+Here 'Q' represents the White Queen and according to the standard chess notation, the White Queen is on the square 'b3'.",0
+"Given a chess board state in the following FEN - 4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26, what's the position of the Black King?",g8,"In the given FEN ""4r1k1/1pR3p1/p2pn1qp/8/PPBP4/1QP1n3/3N2PP/5RK1 w - - 1 26,"" the position of the Black King is on g8.",0
+"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the White King?",g2,"In the given FEN (Forsyth-Edwards Notation) ""5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1"", the position of the White King is represented by the letter 'K'.
+
+To find the specific square, you can read the FEN string from left to right, top to bottom:
+- The 8th rank: 5r1k
+- The 7th rank: p1p3pp
+- The 6th rank: 1p4p1
+- The 5th rank: 2n1P3
+- The 4th rank: 2B3P1
+- The 3rd rank: 1P2r2P
+- The 2nd rank: P5K1 (Here we can see 'K')
+- The 1st rank: 3R1R2
+
+Therefore, the White King 'K' is located on the 'g2' square.",0
+"Given a chess board state in the following FEN - 5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1, what's the position of the Black King?",h8,"In the given FEN string ""5r1k/p1p3pp/1p4p1/2n1P3/2B3P1/1P2r2P/P5K1/3R1R2 b - - 0 1"", the position of each piece on the board is encoded.
+
+Here is the relevant part of the FEN string: ""5r1k"". The lowercase 'k' represents the Black King.
+
+Let's parse it row by row:
+
+8th rank: ""5r1k""
+
+This indicates:
+- 5 empty squares
+- A Black Rook ('r') on the 6th square
+- An empty square on the 7th square
+- The Black King ('k') on the 8th square
+
+Therefore, the Black King's position is on the 8th rank, 8th file, which corresponds to the square h8 in standard chess notation.",0
+"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the White Queen?",f3,The position of the White Queen in the given FEN is f3.,0
+"Given a chess board state in the following FEN - 3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1, what's the position of the Black King?",h8,"In the given FEN, which is ""3q3k/p2R3p/1p3bpB/8/2r3P1/5Q1P/PPP2PK1/8 b - - 0 1"", the position of the Black King is on square h8.",0
+"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of theWhite Queen?",d1,"In the given FEN (Forsyth-Edwards Notation) ""rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1"", each part represents a specific aspect of the chess board state. The piece placement data is given as the first part:
+
+""rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1"" 
+
+This sequence represents the board layout from the 8th rank (top) to the 1st rank (bottom).
+
+Here, ""1-8/8-1"" breakdown in rows:
+- 8th rank: rn2k2r
+- 7th rank: 1p3ppp
+- 6th rank: p2b1n2
+- 5th rank: 2p1q1Nb
+- 4th rank: 2P5
+- 3rd rank: 2NP3P
+- 2nd rank: PP2BPP1
+- 1st rank: R1BQ1RK1
+
+From the 1st rank ""R1BQ1RK1"", we notice that the uppercase letters indicate White Pieces, where:
+- 'R' is Rook
+- '1' is a blank square
+- 'B' is Bishop
+- 'Q' is Queen
+- '1' is a blank 
+- 'R' is Rook
+- 'K' is King
+- '1' is a blank.
+
+Thus, the placement of the White Queen is on the d1 square.",0
+"Given a chess board state in the following FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, what's the position of the Black Queen?",e5,"In the given FEN - rn2k2r/1p3ppp/p2b1n2/2p1q1Nb/2P5/2NP3P/PP2BPP1/R1BQ1RK1 w kq - 0 1, the Black Queen is located on the e5 square.",0
+"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the Black Queen?",d4,"In the provided FEN r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, the position of the Black Queen (denoted by 'q') is on the d4 square.",0
+"Given a chess board state in the following FEN - r4rk1/1pp2ppp/p1p2n2/8/3qP3/P1b2Q2/1P2RPPP/R1B3K1 w - - 0 1, what's the position of the White Queen?",f3,"In the given FEN (Forsyth-Edwards Notation) string, the position of the pieces on the chess board is described as follows:
+
+1. `r4rk1` - 1st rank
+2. `1pp2ppp` - 2nd rank
+3. `p1p2n2` - 3rd rank
+4. `8` - 4th rank
+5. `3qP3` - 5th rank
+6. `P1b2Q2` - 6th rank
+7. `1P2RPPP` - 7th rank
+8. `R1B3K1` - 8th rank
+
+The White Queen is represented by the letter 'Q' in the FEN. According to the string, 'Q' is located on the 6th rank and the 6th file (counting from the left). Therefore, the position of the White Queen is f3.",0
+"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White King?",g1,"In the given FEN ""rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8"", the position of the White King can be identified by looking at the last part of the FEN string where the placement of pieces in the 8th row (bottom-most row for White pieces) is given.
+
+The White King is represented by the uppercase letter 'K', and its position can be found in the last segment ""RN3RK1"". This indicates the presence of pieces on the squares in the following order:
+- Rook (R) on a1
+- Knight (N) on b1
+- Empty squares on c1, d1, and e1
+- Rook (R) on f1
+- King (K) on g1
+- Empty square on h1
+
+Therefore, the White King is positioned on g1.",0
+"Given a chess board state in the following FEN - rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8, what's the position of the White Queen?",g4,"In the given FEN, the position of the White Queen is detailed in the fourth rank, as 'Q'.
+
+The FEN string is:
+rn2k1nr/ppp2ppp/6q1/2b1p1B1/2B1P1Q1/3P4/PPP2PPP/RN3RK1 b kq - 0 8
+
+Let's break down the FEN:
+
+1. rn2k1nr (8th rank)
+2. ppp2ppp (7th rank)
+3. 6q1 (6th rank)
+4. 2b1p1B1 (5th rank)
+5. 2B1P1Q1 (4th rank) -> Here we see the 'Q' which indicates the position of the White Queen.
+6. 3P4 (3rd rank)
+7. PPP2PPP (2nd rank)
+8. RN3RK1 (1st rank)
+
+The White Queen is on the 4th rank and the 7th file, so the position is g4.",0
+"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the White King?",h1,"In the given FEN ""3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22"", the position of the White King is indicated by the ""K"" character in the FEN notation.
+
+The FEN notation lists the positions from top to bottom, from the 8th rank to the 1st rank, and from left to right, from the 'a' file to the 'h' file.
+
+In the final rank (the 1st rank), we see ""5R1K"". This indicates:
+- The first 5 squares (a1 to e1) are empty
+- The square f1 has a Rook ('R')
+- The square g1 is empty
+- The square h1 has the King ('K')
+
+Therefore, the White King is on the h1 square.",0
+"Given a chess board state in the following FEN - 3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22, what's the position of the Black King?",e8,"In the given FEN notation ""3qkb1r/4pppp/p7/1br1NQ2/8/RP6/2P1nPPP/5R1K b k - 1 22,"" let's break down to find the position of the Black King.
+
+The FEN string represents the rows of the board from top to bottom, with 'a8' being the top-left square and 'h1' being the bottom-right square.
+
+From the FEN:
+```
+3qkb1r/
+4pppp/
+p7/
+1br1NQ2/
+8/
+RP6/
+2P1nPPP/
+5R1K
+```
+
+1. **Row 1 (top): 3qkb1r**
+2. **Row 2: 4pppp**
+3. **Row 3: p7**
+4. **Row 4: 1br1NQ2**
+5. **Row 5: 8**
+6. **Row 6: RP6**
+7. **Row 7: 2P1nPPP**
+8. **Row 8 (bottom): 5R1K**
+
+Inspecting row 1 closely, we see 'k' in the notation. The 'k' represents the Black King. Since it is in row 1 and in the 5th column (since there are 3 empty squares before 'q' and we count columns as characters).
+
+So, the position of the Black King is on **e8**.",0
+"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the White King?",d1,"In the given FEN (Forsyth-Edwards Notation) - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, the position of the White King is indicated by 'K'. Since the FEN string indicates that the White King is on 'd1', the position of the White King is d1.",0
+"Given a chess board state in the following FEN - r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11, what's the position of the Black Queen?",d8,"In the given FEN:
+
+```
+r2qk2r/ppp3pp/3pB2B/2b1p3/4P3/3P3Q/PP3PPP/nN1K3R b kq - 0 11
+```
+
+The position of the Black Queen is 'd8'. In FEN notation, the lowercase 'q' represents the Black Queen, and 'd8' is indicated by the fourth character on the first rank (row).",0
+"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White King?",g1,"In the given FEN position `r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16`, the position of the White King is indicated by the letter 'K'. 
+
+The FEN string is divided into 8 segments (each corresponding to a rank of the chessboard from ranks 8 to 1). The segment `RN1Q2K1` represents rank 1 (the home rank for White). 
+
+In this segment:
+- 'R' is a Rook on the a1 square.
+- 'N' is a Knight on the b1 square.
+- '1' means an empty square on c1.
+- 'Q' is a Queen on the d1 square.
+- '2' means empty squares on e1 and f1.
+- 'K' is the King on the g1 square.
+- '1' means an empty square on h1.
+
+Thus, the position of the White King is g1.",0
+"Given a chess board state in the following FEN - r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, what's the position of the White Queen?",d1,"In the given FEN: r1b2k1r/ppp3pp/1b1p1q2/4R3/2B5/B7/P4PPP/RN1Q2K1 w - - 1 16, the position of the White Queen can be determined by reading the FEN notation from left to right, top to bottom. 
+
+Here’s the board layout based on the FEN:
+
+```
+8  r . b . . k . r
+7  p p p . . . p p
+6  . b . p . q . .
+5  . . . . R . . .
+4  . . B . . . . .
+3  B . . . . . . .
+2  P . . . . P P P
+1  R N . Q . . K .
+   a b c d e f g h
+```
+
+From the bottom left (a1) to top right (h8), the positions for the White Queen is at d1.
+
+So, the position of the White Queen is **d1**.",0
+"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the White King?",c1,"The position of the White King in the given FEN (Forsyth-Edwards Notation) ""1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1"" can be determined by analyzing the last line (rank) of the FEN:
+
+The last line ""2K2R2"" indicates the positions on the 8th rank of the board from a1 to h1. Here, ""K"" represents the White King. Thus, in the notation:
+- ""2"" means there are two empty squares.
+- ""K"" is on the third square.
+- ""2"" means two more empty squares follow.
+- ""R"" is the White Rook on the f1 square.
+- ""2"" is two more empty squares.
+
+Therefore, the White King is on the square c1.",0
+"Given a chess board state in the following FEN - 1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1, what's the position of the Black Queen?",e3,"In the given FEN: `1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2 w k - 0 1`, the position of the Black Queen is `e3`.
+
+This is identified by looking at the part of the FEN describing the position: `1rb1k2r/p1p2ppp/8/3R4/2Q5/4q3/P1P1B1PP/2K2R2`. 
+
+- The Black pieces are denoted by lowercase letters.
+- The Queen (denoted as `q`) appears in the segment `4q3`.
+
+Counting from the top left (a8) towards the bottom right (h1), the Black Queen is located on the sixth rank (3 from the top, so corresponds to the `e` file) and the fifth file (the fifth column from the left). This places the Black Queen on the e3 square.",0
+"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White King?",g1,"In the given FEN ""r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16"", the position of the White King is noted by the letter 'K'.
+
+The 'K' is located in the portion '3R1RK1', which represents the first rank (the 8th rank is the topmost with black pieces by standard view, so the 1st rank is the bottom-most where White pieces start). The 'K' is the 6th character in this rank, making the position e1 on the chessboard. Therefore, the White King is on e1.",0
+"Given a chess board state in the following FEN - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, what's the position of the White Bishop?",b3,"In the given FEN (Forsyth-Edwards Notation) - r3kb1r/pp3p1p/2n1p1p1/2p5/4N3/1B2P3/PPP3PP/3R1RK1 b kq - 1 16, the position of the White Bishop is b3.",0
+"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the White King?",d7,"The position of the White King in the given FEN (Forsyth-Edwards Notation) ""8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44"" is on the d7 square.",0
+"Given a chess board state in the following FEN - 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, what's the position of the Black King?",g7,"In the given FEN string 8/3K2k1/R1p2q2/1n2pp2/P3P3/1Q3P2/8/8 w - - 2 44, the position of the Black King is denoted by the lowercase letter 'k'. According to the standard FEN notation, the position of the Black King is on the g7 square.",0
+"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the White King?",h2,"The FEN string you provided is: `2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1`.
+
+In this FEN string, each rank (row) of the chess board is described from top to bottom. Here's the breakdown:
+
+- **8th rank (row)**:  `2r4k`
+- **7th rank (row)**:  `pp3Qpp`
+- **6th rank (row)**:  `4pp2`
+- **5th rank (row)**:  `8`
+- **4th rank (row)**:  `1P1qpR1N`
+- **3rd rank (row)**:  `6PP`
+- **2nd rank (row)**:  `P1r3PK`
+- **1st rank (row)**:  `8`
+
+To find the position of the White King (denoted as `K`), we look at the appropriate row and column:
+
+- In the 2nd rank, the White King (`K`) appears at the end of the string `P1r3PK`.
+
+Counting each position in the rank, where numbers denote empty squares:
+- `P` is at a2.
+- `1` means a3 (one empty square).
+- `r` is at a4.
+- `3` means a5, a6, a7 (three empty squares).
+- `P` is at a8.
+- Finally, `K` is at `h2`.
+
+So, the White King is located at h2.",0
+"Given a chess board state in the following FEN - 2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1, what's the position of the Black King?",h8,"In the given FEN (Forsyth-Edwards Notation) string:
+
+**2r4k/pp3Qpp/4pp2/8/1P1qpR1N/6PP/P1r3PK/8 b - - 0 1**
+
+The position of the Black King is indicated by the lowercase 'k'. In this FEN string, 'k' appears in the section ""2r4k"", which corresponds to rank 8 and file h.
+
+So, the Black King's position is on h8 (or 87 in coordinate notation: rank 8, file 7).",0
+"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the White King?",b2,"The FEN (Forsyth-Edwards Notation) notation for the given chess board state is ""5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43"".
+
+In FEN, the fields are ordered from the 8th rank (top) to the 1st rank (bottom) and from the 'a' file (left) to the 'h' file (right). The notation 'K' represents the position of the White King.
+
+From the given FEN:
+- “5R2” represents the 8th rank.
+- “1R6” represents the 7th rank.
+- “…”
+- “PKP2r2” represents the 2nd rank.
+
+The White King ('K') is located in the second rank, second file from the left. Therefore, the position of the White King is **b2**.",0
+"Given a chess board state in the following FEN - 5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43, what's the position of the Black Rook?",f2,"In the given FEN (Forsyth-Edwards Notation) ""5R2/1R6/5p2/4n1pk/1p6/1P6/PKP2r2/8 w - - 8 43,"" we need to decipher the position of the black rook. 
+
+In FEN, the pieces are represented as follows:
+- Uppercase letters for White pieces.
+- Lowercase letters for Black pieces.
+
+The rows are read from top (8th rank) to bottom (1st rank), and columns are read from left (a file) to right (h file).
+
+Reading through the rows:
+
+1. 8th rank: 5R2
+2. 7th rank: 1R6
+3. 6th rank: 5p2
+4. 5th rank: 4n1pk
+5. 4th rank: 1p6
+6. 3rd rank: 1P6
+7. 2nd rank: PKP2r2
+8. 1st rank: 8
+
+By observing the 7th row (2nd rank from the bottom in FEN), we find ""r"" in the 6th column. 
+
+Thus, the black rook is positioned at **f2** on the chess board.",0
+"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White King?",h1,"In the given FEN string ""r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21,"" the position of the White King is on h1. 
+
+FEN strings are read from the top left to the bottom right of the chessboard, with each rank (row) separated by a forward slash. The ""K"" in the last rank indicates the position of the White King.",0
+"Given a chess board state in the following FEN - r1b1r3/pp1p1kpp/3P4/6qn/5p2/1Q6/PP1N2PP/4R2K b - - 6 21, what's the position of the White Queen?",b3,"The position of the White Queen is b3.
+
+In Forsyth-Edwards Notation (FEN), the board is represented from the perspective of White, starting from the eighth rank (top of the board) down to the first rank (bottom of the board). The White Queen is indicated by a 'Q', and based on the FEN provided, 'Q' is situated in the sixth rank and second file, which corresponds to b3 on a standard chessboard.",0
+"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the White King?",g1,"In the given FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, the position of the White King can be determined by looking at the last part of the FEN string, which represents the positions of the pieces:
+
+The last part, ""R2Q1RK1"", corresponds to the 1st (bottom) rank of the chess board:
+- ""R"" represents a White Rook
+- ""2"" means two empty squares
+- ""Q"" represents a White Queen
+- ""1"" means one empty square
+- ""R"" represents another White Rook
+- ""K"" represents the White King
+- ""1"" means one empty square
+
+So, the White King is on the square g1.",0
+"Given a chess board state in the following FEN - 2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22, what's the position of the Black King?",c8,"In the given FEN (Forsyth-Edwards Notation) ""2k1r3/ppp5/2r5/5p2/3P2P1/2N5/PP3P2/R2Q1RK1 w - - 0 22"", the black king is represented by the lowercase letter 'k' on the chessboard. The notation ""2k1r3"" corresponds to the 8th rank (top rank) of the board. Therefore, the black king is located on the c8 square.",0
+"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the White King?",g2,"In the provided FEN string ""8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36"", the White King (denoted by 'K') is located on the square **g2**.",0
+"Given a chess board state in the following FEN - 8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36, what's the position of the Black King?",f5,"In the given Forsyth-Edwards Notation (FEN): 
+
+8/8/r1r2b1p/1N1R1k2/2P1pp2/5R2/5PKP/8 b - - 1 36
+
+The position of the Black King is denoted by the lowercase ""k"". Reading a FEN, we start from the top rank (rank 8) to the bottom rank (rank 1), and from file 'a' to file 'h' for each rank.
+
+From the FEN, ""1N1R1k2"" is the fifth rank (row).
+
+Thus, the Black King is positioned at square f5.",0
+"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the White King?",d1,"In the given FEN (Forsyth-Edwards Notation) ""r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19"", the White King is located at d1.
+
+Here’s a breakdown of how to determine this:
+
+1. The FEN consists of six fields separated by spaces.
+2. The first field represents the piece placement on the board.
+3. The chessboard is noted from the 8th rank to the 1st rank, each rank is noted from 'a' to 'h' files.
+4. Uppercase letters denote White pieces, and lowercase letters denote Black pieces.
+5. 'K' represents the White King.
+6. By examining the ranks one by one, we identify where the 'K' is located.
+
+The first field of the given FEN breaks down as follows:
+- 8th rank: r3k2r
+- 7th rank: pp3p1p
+- 6th rank: 6p1
+- 5th rank: 2pPb3
+- 4th rank: 2Bn4
+- 3rd rank: 2N1Q2N
+- 2nd rank: PP4qP
+- 1st rank: 1RBK3R
+
+In the 1st rank (""1RBK3R""), 'K' is in the 4th position. Each position corresponds to a file (a-h). The 4th file is d.
+
+Therefore, the White King is positioned at d1.",0
+"Given a chess board state in the following FEN - r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19, what's the position of the Black Queen?",g2,"In the given FEN:
+
+`r3k2r/pp3p1p/6p1/2pPb3/2Bn4/2N1Q2N/PP4qP/1RBK3R w kq - 0 19`
+
+The position of the Black Queen is at g2. This can be determined from the placement of pieces in the second-to-last rank (`PP4qP`), where `q` represents the Black Queen located on the g2 square.",0

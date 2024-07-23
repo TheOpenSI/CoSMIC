@@ -9,4 +9,5 @@ cognition_framework/__pycache__
 2nd_fine_tune/FEN_parsing/__pycache__/util.cpython-310.pyc
 data/test_framework/Untitled.ipynb
 data/test_framework/csv_convert.ipynb
-2nd_fine_tune/mistral_7b/
+2nd_fine_tune/finetune/mistral_7b/
+2nd_fine_tune/finetune/mistral_7b_sub_df/

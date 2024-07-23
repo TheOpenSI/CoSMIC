@@ -1,0 +1,143 @@
+Question,GT,Response,Score
+"Given a chess move in algebraic notation, which chess pieces have been captured in the following game - d4 Nf6 Bf4?",,"Based solely on the moves given in algebraic notation (1. d4 Nf6 2. Bf4), it is impossible to determine if any pieces have been captured. These moves simply describe the development of pieces in the opening stage of a game and do not inherently involve any captures. Here’s a breakdown:
+
+1. d4: This move advances the pawn from d2 to d4.
+2. Nf6: This move develops the knight from g8 to f6.
+3. Bf4: This moves the bishop from c1 to f4.
+
+No pieces are captured in these moves.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4",3.0,"Despite the move sequence you provided clearly depicting a series of legal moves in a chess game, it does not inherently provide any information about the actual count of captured pieces directly, other than the mentioned captures. To accurately determine the number of captured pieces, we can review the sequence for capturing moves:
+
+- exd5: White pawn captures a Black pawn.
+- Bxg4: Black bishop captures the White bishop on g4.
+
+So, from the provided sequence, the total number of captured pieces thus far in the game is **2**.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 Nf6 Bf4?",0.0,"In the given chess moves:
+1. d4
+2. Nf6
+3. Bf4
+
+No captures have been made. So, zero pieces have been captured so far in the game.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5?",2.0,"Let's break down the given moves and identify any captures that happened:
+
+1. d4 d5
+2. Bf4 e6
+3. Nf3 c5
+4. e3 Bd6
+5. Bg3 Bxg3+ 
+   - This is a capture: Black's bishop captures White's bishop on g3.
+6. hxg3 
+   - This is a recapture: White's h-pawn captures the bishop that Black had on g3.
+7. cxd4 
+   - Black's pawn captures White's pawn on d4.
+8. exd4 
+   - White's pawn recaptures Black's pawn on d4.
+
+Summarizing the captures:
+- Black captures White's bishop with Bxg3.
+- White captures Black's bishop with hxg3.
+- Black captures White's pawn with cxd4.
+- White captures Black's pawn with exd4.
+
+Thus, Black and White have each captured one piece and one pawn, making a total of 4 captures in the game so far.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4?",3.0,"To determine the number of chess pieces captured so far in the game given the moves in algebraic notation, we will go through each move and identify when a capture occurs. Captures in algebraic notation are indicated by the ""x"" symbol. Here are the moves given:
+
+1. d4  
+2. g6  
+3. e4  
+4. Bg7  
+5. Bf4  
+6. e6  
+7. Bc4  
+8. Ne7  
+9. Nf3  
+10. h6  
+11. Ne5  
+12. O-O  
+13. Qg4  
+14. d5  
+15. exd5  
+16. exd5  
+17. Bd3  
+18. Bxg4  
+
+We notice the captures indicated by ""x"":
+
+- **15. exd5**: Pawn on d5 captures something on d5.
+- **18. Bxg4**: Bishop on g4 captures something on g4.
+
+Since we have two capture moves here, the total number of chess pieces captured so far is **2**.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+?",2.0,"To determine how many chess pieces have been captured, we need to analyze the moves given in algebraic notation:
+
+1. e4 e6
+2. f4 d5
+3. e5 c5
+4. Nf3 Nc6
+5. c3 Nh6
+6. d4 cxd4
+7. cxd4 Qa5+
+
+In these moves:
+- No captures occur in the first five moves.
+- On move 6, Black plays cxd4: this captures a white pawn on d4.
+- Move 7, Qa5+, is a check move but does not involve any capture.
+
+So, from this sequence:
+- 1 pawn (the white pawn on d4) has been captured.
+
+Therefore, **1 chess piece** has been captured so far in the game.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in the game - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3?",4.0,"To determine how many chess pieces have been captured so far in the given sequence of moves in algebraic notation, we can look at the moves that involve captures. Captures in algebraic notation are indicated by the symbol ""x"".
+
+Here are the moves with captures explained:
+
+1. exd5 (e captures d5) - White captures a Black pawn.
+2. exd5 (e captures d5) - Black captures a White pawn.
+3. Bxf3 (Bishop captures on f3) - Black captures a White piece on f3. This move captures White's Knight that was on f3.
+4. Rxf3 (Rook captures on f3) - White's Rook captures the Black Bishop on f3.
+
+Counting these captures, we have:
+
+1. White pawn captures Black pawn (e4xd5).
+2. Black pawn captures White pawn (e6xd5).
+3. Black Bishop captures White Knight (Bxf3).
+4. White Rook captures Black Bishop (Rxf3).
+
+In total, there have been:
+- 2 pawn captures (one from each side).
+- 2 piece captures (Knight and Bishop).
+
+So, the total number of captured pieces so far in the game is 4.",0
+"Given a chess move in algebraic notation, how many chess pieces have been captured so far in this game - Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3",2.0,"The chess move sequence you provided in algebraic notation is:
+
+1. Nf3
+2. g6
+3. g3
+4. Bg7
+5. Bg2
+6. e6
+7. O-O
+8. Ne7
+9. c3
+10. c5
+11. d4
+12. Qb6
+13. dxc5
+14. Qxc5
+15. Be3
+16. Qb5
+17. b4
+18. Nd5
+19. a4
+20. Qc4
+21. Ra3
+
+To determine the number of pieces captured so far, we need to look at the specific moves where pieces were captured:
+
+1. **dxc5:** This move means that the pawn on d4 captured a piece on c5. Since this is early in the game, the captured piece would usually be a pawn.
+2. **Qxc5:** This move means that the queen on d8 captured something on c5, likely a pawn that just moved there with dxc5.
+
+Based on these moves, there have been 2 captures in the game so far: 
+- One pawn captured on c5 by White's pawn (d4 took c5).
+- One pawn captured by Black's queen on c5 (Qxc5).
+
+Therefore, there have been **2 pieces** (specifically, pawns) captured so far in the game.",0

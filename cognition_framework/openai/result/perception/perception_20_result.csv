@@ -1,0 +1,304 @@
+Question,GT,Response,Score
+How many pawns do white have after the following move - e4?,8,"In chess, at the starting position, each player (both white and black) starts with 8 pawns. The standard initial layout has pawns on the second rank (for white) and the seventh rank (for black).
+
+If white plays the move ""e4"", which involves advancing the pawn from e2 to e4, white still has 8 pawns but one of them has moved to the e4 square. So, after the move e4, white still has 8 pawns.",0
+How many pawns do black and white have after the following moves - e4 c5 Nf3 d6 d4 cxd4,"black 8, white 7","After the moves 1. e4 c5 2. Nf3 d6 3. d4 cxd4, the pawn structure for both sides is as follows:
+
+- White has pawns on e4 and f2, g2, h2, so White has 7 pawns.
+- Black has pawns on d6 and a7, b7, c5, e7, f7, g7, h7, so Black also has 7 pawns.
+
+Therefore, both Black and White have 7 pawns each after these moves.",0
+How many pawns do black and white have after the following moves - e4 c5 Nf3 d6 d4 cxd4 Nxd4,"black 7, white 7","After the given moves:
+
+1. e4 c5
+2. Nf3 d6
+3. d4 cxd4
+4. Nxd4
+
+The position of pawns for both sides is as follows:
+
+- White pawns: a2, b2, c2, f2, g2, h2, e4.
+- Black pawns: a7, b7, e7, f7, g7, h7, d6.
+
+Both sides have seven pawns each.",0
+How many pawns do white have after the following moves - d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6?,8,"After the given sequence of moves:
+1. d4 Nf6
+2. Bf4 d5
+3. Nf3 e6
+4. c4 Bd6
+5. Bg3 Bxg3
+6. hxg3 h6
+
+White still has all 8 pawns:
+- a2, b2, c4, d4, e2, f2, g3, and h2.
+
+None of the pawns have been captured or moved off the board.",0
+How many pawns do black have after the following moves - d4 Nf6 Bf4 d5 Nf3 e6 c4 Bd6 Bg3 Bxg3 hxg3 h6?,8,"After the given sequence of chess moves:
+
+1. d4 Nf6
+2. Bf4 d5
+3. Nf3 e6
+4. c4 Bd6
+5. Bg3 Bxg3
+6. hxg3 h6
+
+We need to determine how many pawns black has at this stage. Throughout these moves, no pawns have been captured. Therefore, black still has all 8 of their pawns.",0
+How many pawns do white have after the following moves - e4 e6 Qe2 c5 Nf3 Nc6 g3 g6 Bg2 Bg7 O-O Nge7 c3 O-O d3 b6 Na3 a6 Re1 d6 Nc4?,8,"In a standard chess game, each player starts with 8 pawns. The given moves do not indicate any captures of pawns by either side. Therefore, White still has all 8 pawns after the specified sequence of moves.",0
+"After the following moves - e4, how many chess piecess are left on the board?",32,"After the move 1. e4 in a game of chess, all the pieces are still on the board. Therefore, there would still be 32 chess pieces left - 16 for each player. The move 1. e4 simply advances the pawn in front of the king two squares, but no pieces are captured with this move alone.",0
+"After the following moves - d4 d5 Bf4 e6 Nf3 c5 c3 Nc6 e3 Nf6 Nbd2 Bd6 Bg3 cxd4 cxd4 Qb6 Bxd6 Nb4 Bxb4 Qxb4 b3 Bd7 Be2 h6 O-O g5 Ne5 O-O-O Nxf7 g4 Nxh8, how many chess pieces are left on the board?",25,"Let's go through the moves step-by-step and track the pieces to determine how many pieces remain on the board after the given sequence. 
+
+1. d4 d5
+   - No captures.
+
+2. Bf4 e6
+   - No captures.
+
+3. Nf3 c5
+   - No captures.
+
+4. c3 Nc6
+   - No captures.
+
+5. e3 Nf6
+   - No captures.
+
+6. Nbd2 Bd6
+   - No captures.
+
+7. Bg3 cxd4
+   - No captures (pawn captured).
+
+8. cxd4 Qb6
+   - No captures.
+
+9. Bxd6 Nb4
+   - No captures.
+
+10. Bxb4 Qxb4
+    - Bishop captures a pawn (1 capture) and the queen captures the bishop (another capture).
+
+11. b3 Bd7
+    - No captures.
+
+12. Be2 h6
+    - No captures.
+
+13. O-O g5
+    - No captures.
+
+14. Ne5 O-O-O
+    - No captures.
+
+15. Nxf7 g4
+    - Knight captures a pawn (1 capture).
+
+16. Nxh8
+    - Knight captures a rook (1 capture).
+
+Now let's count the pieces initially on the board and subtract the captured pieces to find the total pieces remaining.
+
+Initial pieces on the board:
+- 16 pawns (8 white, 8 black),
+- 2 white rooks, 2 black rooks,
+- 2 white knights, 2 black knights,
+- 2 white bishops, 2 black bishops,
+- 1 white queen, 1 black queen,
+- 1 white king, 1 black king.
+
+Total initial pieces: 32.
+
+Captured pieces:
+- 3 pawns (one by cxd4, one by Nxf7, and one assumed by pawn exchanges),
+- 1 bishop,
+- 1 rook.
+
+Total captured: 3 + 1 + 1 = 5.
+
+Therefore, total pieces left on the board: 32 - 5 = 27.
+
+So, there are 27 chess pieces left on the board.",0
+"After the following moves - e4 e6 Nc3 Bb4 Nge2 Ne7 a3 Bxc3, how many chess piecess are left on the board?",31,"Let's go through the moves and keep track of the pieces on the board:
+
+1. e4 e6
+2. Nc3 Bb4
+3. Nge2 Ne7
+4. a3 Bxc3
+
+After these moves, the capture move 4...Bxc3 means Black's bishop on b4 captures the White knight on c3.
+
+Initially, each player starts with 16 pieces:
+- 1 king
+- 1 queen
+- 2 rooks
+- 2 bishops
+- 2 knights
+- 8 pawns
+
+Before the capture, there were 32 pieces in total on the board (16 for each player).
+
+In the move 4...Bxc3, the Black bishop captures the White knight. Therefore, one piece has been removed from the board.
+
+So, the number of chess pieces remaining on the board is 32 - 1 = 31.",0
+"After the following moves - d4 d5 Bf4 Nf6 Nf3 h6 e3 e6 Bd3 Nc6 Nbd2 a6 c3 Bd6 Bg3 Bxg3 hxg3 O-O Qc2 g6 Rxh6 Re8 Nh4 e5 Nxg6 fxg6 Bxg6, how many chess piecess are left on the board?",26,"Let's go through the moves step by step and count the pieces that are captured:
+
+1. d4 d5
+2. Bf4 Nf6
+3. Nf3 h6
+4. e3 e6
+5. Bd3 Nc6
+6. Nbd2 a6
+7. c3 Bd6
+8. Bg3 Bxg3 (Black captures White's bishop on g3)
+9. hxg3 O-O
+10. Qc2 g6
+11. Rxh6 (White captures Black's pawn on h6)
+12. Re8
+13. Nh4 e5
+14. Nxg6 (White captures Black's pawn on g6)
+15. fxg6 (Black captures White's knight on g6)
+16. Bxg6 (White captures Black's pawn on g6)
+
+Now, let's count the captured pieces:
+- Black captured: 1 knight (N)
+- White captured: 1 bishop (B), 1 pawn (from h6), and 2 pawns (from g6)
+
+Total captured pieces are:
+- Black: 1 piece (knight)
+- White: 1 piece (bishop) + 3 pieces (pawns)
+
+Since in a standard chess game each player starts with 16 pieces (8 pawns + 2 knights + 2 bishops + 2 rooks + 1 queen + 1 king):
+Initial total pieces on the board = 16 (White) + 16 (Black) = 32
+
+Captured pieces = 4 (White captured) + 1 (Black captured) = 5
+
+Remaining pieces on the board = 32 - 5 = 27
+
+So, there are 27 pieces left on the board.",0
+"After the following moves - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3 Qxd4 Rd3 Qc5, how many chess piecess are left on the board?",27,"To determine how many pieces are left on the board after the described sequence of moves, we need to note the initial positions and then keep track of any captures that have occurred throughout the game.
+
+1. **e4 e6**
+2. **Nf3 d5**
+3. **exd5 exd5** (One pawn captured by White, one pawn captured by Black)
+4. **d4 Bg4**
+5. **Be2 Qe7**
+6. **O-O Nc6**
+7. **Re1 O-O-O**
+8. **Bb5 Qf6**
+9. **Re3 Bxf3** (Black bishop captures White knight)
+10. **Rxf3 Qxd4** (White rook captures Black bishop, Black queen captures White pawn)
+11. **Rd3 Qc5**
+
+In summary, from the initial board setup:
+- Each side starts with 16 pieces (8 pawns and 8 pieces).
+- One White pawn is captured by Black.
+- One Black pawn is captured by White.
+- One White knight is captured by Black.
+- One Black bishop is captured by White.
+
+So, there were 32 pieces initially. After the stated moves, the captures are:
+1. White pawn captured by Black.
+2. Black pawn captured by White.
+3. White knight captured by Black.
+4. Black bishop captured by White.
+
+This totals to 4 pieces captured.
+
+Therefore, the number of pieces left on the board is \( 32 - 4 = 28 \).
+
+So, there are 28 pieces left on the board.",0
+"After the following moves - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5 Nxe5 dxe5 Nd7 f4 Bb7 Rh2 Qb6 Nf3 g6 Qd2 Rc8 Rc1 O-O f5, how many chess piecess are left on the board?",26,"Let's break down the sequence of moves and track the pieces captured by each side:
+
+1. d4 d5
+2. Bf4 e6
+3. Nf3 c5
+4. e3 Bd6
+5. Bg3 Bxg3 (Black captures White's bishop with their bishop, -1 White)
+6. hxg3 (White recaptures)
+7. cxd4 (Black pawn captures White pawn, -1 White)
+8. exd4 (White recaptures)
+9. a6
+10. c3 Nf6
+11. Bd3 Nbd7
+12. Nbd2 b5
+13. Ne5 Nxe5 (Black knight captures White knight, -1 White)
+14. dxe5 (White recaptures)
+15. Nd7
+16. f4 Bb7
+17. Rh2 Qb6
+18. Nf3 g6
+19. Qd2 Rc8
+20. Rc1 O-O
+21. f5
+
+So far we have:
+
+- White has lost a bishop and two pawns (3 pieces).
+- Black has not lost any pieces by this stage.
+
+Starting with 32 pieces on the board (16 for each side), and after the given moves:
+
+32 - 3 = 29 pieces left on the board.
+
+Therefore, there are 29 pieces remaining on the board after the given sequence of moves.",0
+"After the following moves - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5, how many chess piecess are left on the board?",30,"Let's analyze the sequence of moves step by step to determine how many pieces are left on the board:
+
+1. d4 Nf6
+2. Bf4 d5
+3. Nf3 Bf5
+4. e3 c6
+5. Nbd2 Qb6
+6. b3 Nbd7
+7. h3 Be4
+8. Nxe4 Nxe4
+9. Bd3 Nc3
+10. Ne5
+
+No pieces have been captured during these moves. Therefore, the number of pieces on the board remains the same as it was at the start. 
+
+A standard chess game starts with 32 pieces (16 for each side: 8 pawns, 2 knights, 2 bishops, 2 rooks, 1 queen, and 1 king).
+
+Since no captures have been made, all 32 pieces are still on the board.",0
+What was the last chess piece that have been captured in the following game - d4 e6 Bf4 h6 Nf3 d6 e4 Qf6 Qd2 Nc6 Bb5 Bd7 Nc3 a6 Bxc6?,Black knight,"In the given game notation, the chess pieces captured are:
+
+1. White captures on c6 with the move Bxc6, taking Black's knight on c6.
+
+So, the last chess piece that was captured in this game was the Black knight on c6.",0
+What was the last chess piece that have been captured in the game - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4 Nxe4 Bd3 Nc3 Ne5?,White knight,"Based on the given sequence of moves in the chess game, the last piece that has been captured is the pawn on e4. This capture occurred when White's knight on f3 moved to e4 (Nxe4).",0
+What was the last chess piece that have been captured in the game - d4 Nf6 Bf4 d5 Nf3 Bf5 e3 c6 Nbd2 Qb6 b3 Nbd7 h3 Be4 Nxe4?,Black bishop,The last chess piece that was captured in the given sequence of moves is the **Bishop on e4**. The move sequence shows that the white knight (Nxe4) captures the black bishop that was on e4.,0
+What was the last chess piece that have been captured in the game - e4 e6 Nc3 d5 exd5 exd5 Nf3 Nf6 Bb5+ c6 Na4 cxb5 Qe2+ Be6 Qxb5+ Qd7 Nc3 a6 Qd3 Nc6 O-O Nb4 Qe2 d4 Ne4?,Black pawn,"The last chess piece that was captured in the provided sequence of moves is the knight on f6, captured by the move Ne4.",0
+What was the last chess piece that have been captured in the game - e4 e6 Nc3 d5 exd5 exd5 Nf3 Nf6 Bb5+ c6 Na4 cxb5?,Black bishop,"In the given chess sequence:
+
+1. e4 e6
+2. Nc3 d5
+3. exd5 exd5
+4. Nf3 Nf6
+5. Bb5+ c6
+6. Na4 cxb5
+
+The last move, ""cxb5,"" indicates that black's pawn on c6 captured a piece on b5. The only piece that could have been on b5 at that point is the white bishop that moved to b5 on move 5 (""Bb5+""). 
+
+Therefore, the last chess piece that was captured in the game is the white bishop on b5.",0
+What was the last chess piece that have been captured in the game - d4 d5 Bf4 c5 e3 cxd4 exd4 e6 Nf3 Nc6 c3 h6 Qa4 Bd7 Bb5?,Black pawn,"In the given chess game sequence:
+
+1. d4 d5
+2. Bf4 c5
+3. e3 cxd4
+4. exd4 e6
+5. Nf3 Nc6
+6. c3 h6
+7. Qa4 Bd7
+8. Bb5
+
+The last captured piece is the pawn on d4 by exd4 on move 4.",0
+What was the last chess piece that have been captured in the game - d4 d5 Bf4 Nf6 Nf3 c5 e3 Bg4 Nbd2 cxd4 Bb5+ Nc6 exd4 Qb6 Bxc6+ bxc6 Nb3 e6 c3 Be7 h3 Bh5?,white bishop,"In the given sequence of moves, the last chess piece captured was the black pawn on d4, captured by the white bishop with the move ""Bxc6+"". Here is the breakdown of the moves leading to the last capture:
+
+1. d4 d5
+2. Bf4 Nf6
+3. Nf3 c5
+4. e3 Bg4
+5. Nbd2 cxd4
+6. Bb5+ Nc6
+7. exd4 Qb6
+8. Bxc6+
+
+The move ""Bxc6+"" indicates that the white bishop on b5 captured the black pawn on c6.",0

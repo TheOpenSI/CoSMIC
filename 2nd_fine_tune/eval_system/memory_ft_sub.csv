@@ -1,0 +1,500 @@
+Question,GT,Answer,Score
+What is the name of the piece that moves in an L shape?,Knight,"### Question: What is the name of the piece that moves in an L shape?
+    ## Response:
+    
+    The piece that moves in an L shape is called a knight. The knight moves in an L shape on a chessboard, where each move consists of one step in any direction followed by two steps perpendicular to the first step.
+
+    For example, a knight move could be: e4 e5 Nf3 Nc6 d4 Nd4 Nxd4 Qxd4 c3 Qe5 b4 Bc5 Bg3 Bg6 Bf4 Bxf4 gxf4 Qf6 Qe2+ Kd1 Nd5 Bxd5 Qxd5 Qf3 Qxf3 gxf3 Rg8 Rg1 Rxg1#
+
+    In the above sequence, the knight moves from Nf3 to Nxd4, making an L-shaped move.
+
+    Therefore, the piece that moves in an L shape is called a knight.",0
+How many squares are there on a standard chessboard?,64,"### Question: How many squares are there on a standard chessboard?
+    ## Response:
+    1. The total number of squares on a standard chessboard is 64.
+    2. This is because a chessboard is divided into eight rows and eight columns, and each square is one unit.
+    3. Therefore, the total number of squares is 8 x 8 = 64.
+    4. For example, if you count the squares on a chessboard, you will see that there are 64 squares, with each square being one unit in size.
+
+<ANSWER>: 64",0
+What is the term for a situation where a king cannot escape check?,Checkmate,"### Question: What is the term for a situation where a king cannot escape check?
+    ## Response:
+    
+    - **Checkmate:** When a king is in a situation where it cannot escape from being attacked by the opponent's pieces.
+    - **Example:**
+        - White: Q#h8+, Black: Kg7
+        - (White checks the king with a check that cannot be avoided, forcing the black king into a corner where it is trapped.)
+
+Therefore, the term for a situation where a king cannot escape check is ""checkmate.""",0
+Which piece is the most powerful in chess?,Queen,"### Question: Which piece is the most powerful in chess?
+    ## Response:
+    
+    ### Analysing the reason for the choice:
+    - The reason for choosing the queen as the most powerful piece is that it has the ability to move in any direction on the chessboard, making it a versatile and powerful piece. The queen can control large areas of the board and can be used to deliver a decisive attack or defense.
+    - The bishop and rook are also powerful pieces, but the queen's ability to move in any direction gives it an edge over these pieces.
+    - The king is not mentioned as a powerful piece because it is not designed to be a powerful attacking piece. The king is more focused on survival and ensuring the safety of the board.
+    - The knight is a powerful piece, especially in the opening and middle game, but it is not as versatile as the queen.
+    - The pawn is a powerful piece in endgame positions, but it is not as powerful as the queen or other pieces in the opening and middle game.
+    - The reason for choosing the queen as the most powerful piece is based on its ability to control large areas of the board and its versatility in movement.
+
+    ### Final Reason:
+    The queen is the most powerful piece in chess due to its ability to move in any direction on the chessboard, making it a versatile and powerful piece.",0
+What is the initial position of the white queen?,d1,"### Question: What is the initial position of the white queen?
+    ## Response:
+    
+    The initial position of the White Queen is d1, as stated in the chessboard setup provided.
+   
+    White: c4, d4, Nc3, e3, Bd3, O-O, Nge2, Bd2, O-O, Nf3, Bc4, e5, dxe5, Qxd8, Rxd8, Nxe5, Bxe5, Rxd1, Rxd1, Rd7, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1, Bxe5, Rd1, Bf4, Rd1",0
+In a game of chess which player moves first?,white,"### Question: In a game of chess which player moves first?
+    ## Response:
+    
+    In a game of chess, the player who moves first is traditionally known as White. This is because in the earliest versions of the game, the pieces were carved from ivory and White pieces were typically lighter in color than Black pieces. Over time, this convention has been maintained and White is still the first to move in most modern chess games.
+
+<ANSWER>: White",0
+In a game of chess which player moves second?,black,"### Question: In a game of chess which player moves second?
+    ## Response:
+    
+    The player who moves second in a game of ches is called Black. This is because in traditional chess, the pieces are arranged in such a way that the player with the dark pieces (Black) moves second.
+
+    For example, in the following chessboard setup, White moves first with the move Nf3 since the White Knight is the first piece mentioned in the move. Black then responds with the move g6 since the Black Bishop is the first piece mentioned in the move.
+
+    White: Nf3, Black: g6
+
+    Therefore, in this case, Black moves second since the Black Bishop is the first piece mentioned in the response move (g6).",0
+What is the only piece that can jump over others?,Knight,"### Question: What is the only piece that can jump over others?
+    ## Response:
+    
+    The only piece that can jump over others is the knight.
+
+    - The knight is the only piece that can move in an ""L"" shape, allowing it to jump over other pieces.
+    - Other pieces, such as the bishop, rook, and queen, move in straight lines and cannot jump over other pieces.
+    - The king and pawn do not have the ability to jump over other pieces.
+
+Therefore, the knight is the only piece that can jump over others.",0
+What is it called when a pawn reaches the opposite side of the board?,Promotion,"### Question: What is it called when a pawn reaches the opposite side of the board?
+    ## Response:
+    
+    - When a pawn reaches the opposite side of the board, it is called promotion.
+    - The promotion process occurs when a pawn reaches the eighth rank (the farthest rank from the player who controls it).
+    - The promoted pawn can be exchanged for a more powerful piece, such as a queen, rook, bishop, or knight.
+
+For example, if White's pawn reaches the eighth rank, it can be exchanged for a queen:
+
+White: e8=Q
+Black: Qxq
+
+White's pawn promoted to a queen, and Black captured it with the queen.",0
+Which two pieces are involved in castling?,King and Rook,"### Question: Which two pieces are involved in castling?
+    ## Response:
+    1. The king and the rook are the pieces involved in castling.
+    2. Castling is a move where the king moves two squares in the same direction as the rook, and the rook moves to the opposite side of the king.
+    3. For example, in the following FEN, the king and rook are positioned for castling on the king's side:
+    
+    e7/8/8/8/8/8/8/KR3r1/
+
+    The empty squares before the pieces represent the board columns, and each chessboard square is divided by '/'.
+
+    Therefore, the pieces involved in castling are the king and the rook.",0
+"What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?",Castling,"### Question: What is the term for a move where the king moves two squares towards a rook, and the rook moves to the square next to the king?
+    ## Response:
+    1. The king move is known as a king's move.
+    2. The rook move is known as a rook's move.
+    3. The sequence of moves is known as a king's move and a rook's move.
+    4. The term for this move sequence is ""King's move and Rook's move.""
+
+<ANSWER>: King's move and Rook's move.
+
+<REASON>: The moves are described as a king's move and a rook's move, indicating the specific pieces involved in the move sequence.",0
+Which piece starts on e1 for White?,King,"### Question: Which piece starts on e1 for White?
+    ## Response:
+    1. White's first move is Nf3, which does not involve the e1 square since Nf3 does not contain the letter 'e'.
+    2. White's second move is Bf4, which also does not involve the e1 square since Bf4 does not contain the letter 'e'.
+    3. White's third move is e3, which involves the e1 square since e3 contains the letter 'e'.
+
+Therefore, the piece that starts on e1 for White is the White Pawn on move 3 (e3).
+
+<ANSWER>: White Pawn on move 3 (e3).",0
+How many ranks are there in a chess board?,8,"### Question: How many ranks are there in a chess board?
+    ## Response:
+    1. The chess board consists of 64 squares arranged in an 8x8 grid.
+2. Each square on the chess board is referred to by its rank and file coordinates.
+3. The ranks range from 1 to 8, with rank 1 being the closest to the player and rank 8 being the farthest.
+4. The files range from a to h, with a being the leftmost file and h being the rightmost file.
+5. Therefore, there are 8 ranks on a chess board.
+
+<ANSWER>: 8",0
+What is the term for a draw in chess?,Stalemate,"### Question: What is the term for a draw in chess?
+    ## Response:
+    
+    The term for a draw in chess is a stalemate. 
+
+    ### Context: 
+    None
+
+    ### Response: A stalemate is a situation where one player has no legal moves left, but the other player does not have a checkmate. This results in a draw, as neither player is able to win the game due to the lack of strategic options. 
+
+    <ANSWER>: A stalemate is the term for a draw in chess.",0
+What is the maximum number of queens a player can have on the board?,9,"### Question: What is the maximum number of queens a player can have on the board?
+    ## Response:
+    1. The maximum number of queens a player can have on the board is 16.
+    2. This is because each player starts with 1 queen, and can capture enemy pieces, including other queens, which increases the total number of queens on the board.
+    3. For example, if White captures 3 Black queens, the total number of queens on the board would be 16 (1 White queen + 3 captured Black queens).
+
+Therefore, the maximum number of queens on the board is 16, which is reached when each player has 8 queens present.
+
+<ANSWER>: 16 queens on the board.",0
+What are the names of the files on a chessboard?,"a, b, c, d, e, f, g, h","### Question: What are the names of the files on a chessboard?
+    ## Response:
+    1. White's pieces are denoted by letters ranging from 'a' to 'h' and numbers ranging from 1 to 8. For example, 'N' is a Knight, 'B' is a Bishop, 'K' is a King, 'Q' is a Queen, 'R' is a Rook, and 'P' is a Pawn.
+    2. Black's pieces are denoted by letters ranging from 'a' to 'h' and numbers ranging from 1 to 8, with the letter 'b' prefixed to each letter. For example, 'bN' is a Black Knight, 'bB' is a Black Bishop, 'bK' is a Black King, 'bQ' is a Black Queen, 'bR' is a Black Rook, and 'bP' is a Black Pawn.
+
+Therefore, the files on a chessboard are divided into 8 columns, known as files, ranging from 1-8. Each chessboard square is identified by the letter of the file and the number of the rank.
+
+For example, a White Knight at square ""a3"" would be denoted as N at a3.
+A Black Bishop at square ""e6"" would be denoted as bB at e6.
+
+Total 3 letters and 8 numbers were used in the response.",0
+Which piece can only move diagonally?,Bishop,"### Question: Which piece can only move diagonally?
+    ## Response:
+    
+    The piece that can only move diagonally is the bishop.
+
+    The bishop is a piece in the game of chess that moves diagonally across the board. It is one of the most powerful pieces in the game due to its ability to control large areas of the board and attack from a distance.
+
+    The bishop is typically developed early in the game, often to a square where it can influence the center or control important diagonals. It is often exchanged later in the game when it becomes a threat to the opponent's position.
+
+    The bishop is unique among chess pieces in that it is the only piece that can control the full range of squares on the board. This makes it a valuable asset in strategic play and endgame positions.
+
+    In summary, the bishop is the only piece in chess that can only move diagonally. Its ability to control large areas of the board and attack from a distance makes it a powerful piece in strategic and tactical play.",0
+What is the name of the notation system used to record chess moves?,"Algebraic Notation, PGN, FEN","### Question: What is the name of the notation system used to record chess moves?
+    ## Response:
+    
+    The notation system used to record chess moves is known as algebraic notation. Each chessboard square is divided into a set of columns called files ranging from 1-8, and a set of rows called ranks ranging from a-h. Each chess piece has a letter representing it, such as N for Knight, and each move consists of the letter representing the piece that moved, followed by the square where it moved to. For example, Nf3 indicates that the Knight moved to the square f3.
+
+    <ANSWER>: Algebraic notation is used to record chess moves.",0
+Which piece starts on d8 for Black?,Queen,"### Question: Which piece starts on d8 for Black?
+    ## Response:
+    1. Black's opening move is d5, which challenges White's center control.
+    2. White responds with c4, aiming to support the d-pawn and develop the knight.
+    3. Black plays Nf6, developing a knight and preparing to challenge the center.
+    4. White develops the knight with Nc3, supporting the d-pawn and preparing to castle.
+    5. Black plays e6, preparing to develop the bishop and potentially play dxc4.
+    6. White develops the bishop with Bg5, targeting the knight on f6 and preparing to castle.
+    7. Black castles with O-O, ensuring king safety and connecting the rooks.
+    8. White develops the queen with Qc2, preparing to support the bishop on g5 and prepare for kingside development.
+    9. Black plays Bg4, developing the bishop and attacking the bishop on g5.
+    10. White plays h3, driving away the bishop and preparing to castle.
+    11. Black castles with O-O-O, bringing the rook into the game and ensuring control of the queenside.
+    12. White develops the rook with Rf1, preparing to castle and connect the rooks.
+    13. Black plays Nbd7, developing the knight and preparing to support the c-pawn.
+    14. White castles with O-O, ensuring king safety and connecting the rooks.
+    15. Black plays c5, challenging White's center and preparing to develop the knight to c6.
+    16. White plays cxd5, capturing the pawn and opening the center.
+    17. Black recaptures with cxd5, maintaining the center tension.
+    18. White plays Bxf6, capturing the knight and gaining a material advantage.
+    19. Black recaptures with Bxf6, developing the bishop and maintaining pressure on the knight on c3.
+    20. White plays Qb3, targeting the bishop on f6 and preparing to support the bishop on g5.
+    21. Black plays Nc6, developing the knight and supporting the bishop on f6.
+    22. White plays Nd2, preparing to support the bishop on g5 and potentially castle kingside.
+    23. Black plays Nb4, attacking the bishop on g5 and aiming to disrupt White's position.
+    24. White plays Bd3, defending the bishop and preparing to castle kingside.
+    25. Black castles with O-O-O, bringing the rook into the game and ensuring control of the queenside.
+    26. White plays Bc4, developing the bishop and attacking the knight on b4.
+    27. Black plays e5, challenging White's center and preparing to develop the light-squared bishop.
+    28. White plays dxe5, capturing the pawn and opening the center.
+    29. Black recaptures with dxe5, maintaining the center tension.
+    30. White plays Bb3, developing the bishop and attacking the bishop on f6.
+    31. Black plays f6, driving away the bishop and preparing to develop the knight.
+    32. White plays Bc2, developing the bishop and preparing to castle kingside.
+    33. Black plays Nd7, developing the knight and supporting the bishop on f6.
+    34. White plays O-O-O, casting the king and bringing the rook into play.
+    35. Black plays Bxc4, capturing the bishop and gaining a material advantage.
+    36. White recaptures with Bxc4, maintaining pressure on the knight on d7.
+    37. Black plays Nf6, developing the knight and attacking the bishop on c4.
+    38. White plays Bd3, defending the bishop and preparing to castle kingside.
+    39. Black plays Qe8, preparing to support the bishop on f6 and develop the rook.
+    40. White plays Bf4, developing the bishop and attacking the knight on f6.
+    41. Black plays Qd8, defending the knight and preparing to castle queenside.
+    42. White plays Bxe5, capturing the pawn and gaining a material advantage.
+    43. Black recaptures with Qxe5, maintaining pressure on the bishop on f4.
+    44. White plays Qb1, preparing to support the bishop on f4 and prepare for kingside development.
+    45. Black castles with O-O-O, bringing the rook into the game and ensuring control of the queenside.
+    46. White plays Rfd1, developing the rook and preparing to support the bishop on f4.
+    47. Black plays Nd5, attacking the bishop and preparing to develop the rook.
+    48. White plays Qb3, targeting the queen and preparing to support the bishop on f4.
+    49. Black plays Nc3, developing the knight and supporting the queen.
+    50. White plays Rd2, preparing to support the bishop on f4 and prepare for kingside development.
+    51. Black plays Qb5, putting pressure on the bishop and preparing to develop the rook.
+    52. White plays Bd3, defending the bishop and preparing to castle kingside.
+    53. Black plays Bg4, developing the bishop and attacking the bishop on f4.
+    54. White plays Bf1, defending the bishop and preparing to castle kingside.
+    55. Black plays Bxf1, capturing the bishop and gaining a material advantage.
+    56. White recaptures with Bxf1, maintaining pressure on the knight on d5.
+    57. Black plays Qb4, putting pressure on the bishop and preparing to develop the rook.
+    58. White plays Rd3, developing the rook and preparing to support the bishop.
+    59. Black plays Qb5, putting pressure on the bishop and preparing to develop the rook.
+    60. White plays Bd2, defending the bishop and preparing to castle kingside.
+    61. Black plays Bf8, developing the bishop and attacking the rook on d3.
+    62. White plays Bxf8, capturing the bishop and gaining a material advantage.
+    63. Black recaptures with Bxf8, maintaining pressure on the rook on d3.
+    64. White plays Qb1, preparing to support the rook on d3 and prepare for kingside development.
+    65. Black plays Rac8, developing the rook and preparing to attack the rook on d3.
+    66. White plays Bd2, defending the rook and preparing to castle kingside.
+    67. Black plays Rxd3, capturing the rook and gaining a material advantage.
+    68. White recaptures with Rxd3, maintaining pressure on the queenside.
+    69. Black plays Qb4, putting pressure on the rook and preparing to develop the knight.
+    70. White plays Rd1, developing the rook and preparing to support the rook on d3.
+    71. Black plays Nd7, developing the knight and supporting the queen.
+    72. White plays Qb1, preparing to support the rook on d3 and prepare for kingside development.
+    73. Black plays Qb4, putting pressure on the rook and preparing to develop the knight.
+    74. White plays Rd2, developing the rook and preparing to support the rook on d3.
+    75. Black plays Nf6, developing the knight and attacking the rook on d2.
+    76. White plays Qb1, preparing to support the rook on d2 and prepare for kingside development.
+    77. Black plays Qb4, putting pressure on the rook and preparing to develop the knight.
+    78. White plays Rd1, developing the rook and preparing to support the rook on d2.
+    79. Black plays Nd5, attacking the rook and preparing to develop the knight.
+    80. White plays Qb1, preparing to support the rook on d2 and prepare for kingside development.
+    81. Black plays Qb4, putting pressure on the rook and preparing to develop the knight.
+    82. White plays Rd2, developing the rook and preparing to support the rook on d2.
+    83. Black plays Nf6, developing the knight and attacking the rook on d2.
+    84. White plays Qb1, preparing to support the rook on d2 and prepare for kingside development.
+    85. Black plays Q",0
+"Which piece can move any number of squares along a rank, file, or diagonal?",Queen,"### Question: Which piece can move any number of squares along a rank, file, or diagonal?
+    ## Response:
+    
+    The piece that can move any number of squares along a rank, file, or diagonal is the queen.
+
+    The queen is the most powerful piece in the game of chess, as it can move any number of squares along a rank, file, or diagonal. This makes it a versatile piece that can control a large area of the board.
+
+    For example, if the queen is at square d4, it can move to any square on the board that is four squares away on a rank, file, or diagonal. This includes squares like c6, e6, b5, and f5.
+
+    The ability of the queen to move along ranks, files, and diagonals makes it a critical piece in strategic and tactical play. It can be used to control large areas of the board, attack weakened positions, and coordinate with other pieces to create effective attacks and defenses.
+
+    <ANSWER>: The queen is the piece that can move any number of squares along a rank, file, or diagonal.",0
+What is the starting position of the White's King side Bishop in algebraic notation?,c1,"### Question: What is the starting position of the White's King side Bishop in algebraic notation?
+    ## Response:
+    1. White's King side Bishop starts at the square b3.
+    
+    White: B, Black: b3
+
+    1. White Bishop at b3
+
+    The White Bishop is located at the square b3, which is a square on the board where a White Bishop can be placed. The letter 'b' represents the file range (0-7), where 0 is the left edge of the board and 7 is the right edge of the board. The number '3' represents the rank range (1-8), where 1 is the bottom edge of the board and 8 is the top edge of the board.
+
+    Therefore, the White Bishop is at the square b3, which is a square on the board where a White Bishop can be placed.",0
+What is it called when the king is in check and does not have any other legal move?,Checkmate,"### Question: What is it called when the king is in check and does not have any other legal move?
+    ## Response:
+    1. The situation where the king is in check and does not have any other legal move is known as ""checkmate"".
+    2. The reason for this is that the king is the most important piece in the game and its safety is critical.
+    3. If the king is in check and has no legal move, it means that the opponent has effectively captured the king and won the game.
+    4. Therefore, the term used for this situation is ""checkmate.""
+
+<ANSWER>: Checkmate.",0
+What is the move called when a pawn captures an opposing piece by moving diagonally?,Pawn Capture,"### Question: What is the move called when a pawn captures an opposing piece by moving diagonally?
+    ## Response:
+    
+    The move where a pawn captures an opposing piece by moving diagonally is known as a diagonal capture.
+
+    For example, in the following chess moves, the pawn captured the knight on d5 by moving diagonally:
+
+    White: e4, Black: d5
+    White: Nf3, Black: Nf6
+    White: Bc4, Black: c6
+    White: c3, Black: dxc3
+    White: Nxc3, Black: e5
+    White: Nd5, Black: Bc5
+    White: Nxe5, Black: Bxe5
+
+    In the above sequence, White's knight captured Black's knight on d5 by moving diagonally. The capture involved a piece exchange, where White's knight captured Black's knight, and Black's bishop captured White's knight.
+
+    The move where a pawn captures an opposing piece by moving diagonally is called a diagonal capture.",0
+Which piece can move one square in any direction?,King,"### Question: Which piece can move one square in any direction?
+    ## Response:
+    1. The knight is the only piece that can move one square in any direction.
+    
+    
+    - White Knight at e3 can move to c2, d1, d4, d5, d6, d7, f1, f2, f3, f4, f5, f6, f7, b1, b2, b3, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5, c6, c7, d1, d2, d4, d5, d6, d7, f1, f2, f4, f5, f6, f7, b1, b2, b4, b5, b6, b7, c1, c2, c4, c5",0
+Which chess piece can move any number of squares along a rank and file only?,Rook,"### Question: Which chess piece can move any number of squares along a rank and file only?
+    ## Response:
+    
+    The chess piece that can move any number of squares along a rank and file only is the Rook.
+
+    <ANSWER>: Rook
+
+    <REASON>: The Rook is the only chess piece that can move any number of squares along a rank or file. It is the most powerful piece in terms of control over the board.",0
+Which chess pieces can participate in castling?,King and Rook,"### Question: Which chess pieces can participate in castling?
+    ## Response:
+    
+    In chess, castling is a move that involves the king and a rook. The king moves two squares in the same direction as the rook, and the rook moves to the other side of the board.
+
+    - The king and rook must not have moved before castling.
+    - The squares between the king and rook must be empty.
+    - The king cannot be in check before or after castling.
+    - The rook cannot have been involved in any capture before castling.
+
+    Therefore, in a game of chess, only the king and rook can participate in castling.",0
+What is the standard number of squares each pawn moves on its first move?,1 or 2,"### Question: What is the standard number of squares each pawn moves on its first move?
+    ## Response:
+    4
+
+The standard number of squares each pawn moves on its first move is 4.
+
+<ANSWER>: 4
+
+<ANALYSIS>:
+- The question asks for the standard number of squares each pawn moves on its first move.
+- The context provided does not contain information relevant to the answer.
+- The answer is based on general knowledge that a pawn can move 1 or 2 squares on its first move, which totals to 4 squares.
+- The answer is a specific number (4) that satisfies the requirement of the question.
+
+Therefore, the standard number of squares each pawn moves on its first move is 4.",0
+"At the start of the game, how many chess pieces are present on the board?",32,"### Question: At the start of the game, how many chess pieces are present on the board?
+    ## Response:
+    1. Total 12 pieces present on the board at the start of the game:
+    - 1 x White King
+    - 1 x Black King
+    - 8 x White Pawns
+    - 8 x Black Pawns
+
+Total 12 pieces present on the board at the start of the game.",0
+What a pawn that has advanced to the eighth rank gets promoted to?,Queen,"### Question: What a pawn that has advanced to the eighth rank gets promoted to?
+    ## Response:
+    1. The pawn that has advanced to the eighth rank does not get promoted.
+    2. The reason for this is that promotion is triggered when a pawn reaches the last rank, but it is not necessary for the pawn to promote.
+    3. The pawn can continue to exert pressure on the opponent's position without promoting.
+    4. For example, if White's pawn reaches the eighth rank, Black's king may be in a vulnerable position, and White can use the pawn to create threats or potential mates.
+    5. The promotion process is triggered when the pawn reaches the last rank and the player chooses a piece to promote the pawn to.
+    6. The promotion options are queen, rook, bishop, or knight.
+    7. Therefore, the pawn that has advanced to the eighth rank does not get promoted unless the player decides to promote it.
+
+<ANSWER>: The pawn that has advanced to the eighth rank does not get promoted.",0
+Which piece can only move horizontally or vertically?,Rook,"### Question: Which piece can only move horizontally or vertically?
+    ## Response:
+    
+    The piece that can only move horizontally or vertically is the Rook.
+
+    <ANSWER>: Rook
+
+    ### Context: 
+    None
+
+    ### Response Strategy:
+    - The context provided does not contain any information relevant to the question about which piece can only move horizontally or vertically.
+    - Therefore, the response strategy is to rely on general knowledge of chess pieces and their movements.
+    - The Rook is the piece that can only move horizontally or vertically.",0
+What is the starting position of the black king's knight?,g8,"### Question: What is the starting position of the black king's knight?
+    ## Response:
+    1. The starting position of the black king's knight is e8.
+    2. The context provided does not contain any information related to the position of the black king's knight, so the response is based on general knowledge.
+    3. The black king's knight starts at e8, which is a common starting position for knights in chess.
+    4. The black king's knight aims to control the center and exert pressure on the opponent's pieces.
+    5. The black king's knight can move to various squares, including d7, f6, g5, and h4, to exert influence on the board.
+    6. The black king's knight can also participate in attacks and defenses, depending on the strategic and tactical considerations of the game.
+
+Therefore, the starting position of the black king's knight is e8.",0
+What is the special move involving a king and a rook?,Castling,"### Question: What is the special move involving a king and a rook?
+    ## Response:
+    
+    - The special move involving a king and a rook is called castling.
+    - Castling is a move where the king moves two squares in one direction and the rook moves to the other side of the board, connecting the king to the rook.
+    - The purpose of castling is to improve the king's safety and control over the board.
+    - Castling can only be done if certain conditions are met, such as the king and rook not having moved yet, no pieces being between them, and no chessboard square between them being under attack.
+    - Castling is denoted by Kc1 or Kg1, where ""c"" stands for ""castle king-side"" and ""g"" stands for ""castle queen-side.""
+
+<ANSWER>: Castling is the special move involving a king and a rook.",0
+How many pieces does each player start with?,16,"### Question: How many pieces does each player start with?
+    ## Response:
+    
+    In the game of chess, each player starts with 16 pieces:
+    - 1 king
+    - 1 queen
+    - 2 rooks
+    - 2 knights
+    - 2 bishops
+    - 8 pawns
+
+    For example, White's pieces would be:
+    - 1 x White King
+    - 1 x White Queen
+    - 2 x White Rooks
+    - 2 x White Knights
+    - 2 x White Bishops
+    - 8 x White Pawns
+
+    Similarly, Black's pieces would be:
+    - 1 x Black King
+    - 1 x Black Queen
+    - 2 x Black Rooks
+    - 2 x Black Knights
+    - 2 x Black Bishops
+    - 8 x Black Pawns
+
+    Therefore, the total number of pieces in the game is 32 pieces (16 pieces per player).",0
+How many bishops does each player start with?,2,"### Question: How many bishops does each player start with?
+    ## Response:
+    
+    - The starting setup in chess typically includes one bishop for each player, which is known as a standard chessboard setup.
+    - Therefore, each player starts with one bishop.
+
+<ANSWER>: Each player starts with one bishop.",0
+How many knights does each player start with?,2,"### Question: How many knights does each player start with?
+    ## Response:
+    1. The question does not provide any context or game state, so we will assume a standard chess setup.
+
+2. In a standard chess game, each player starts with 1 knight.
+
+Therefore, the answer is:
+- Each player starts with 1 knight.",0
+How many rooks does each player start with?,2,"### Question: How many rooks does each player start with?
+    ## Response:
+    1. Each player starts with one rook.
+
+The starting setup in chess consists of each player having 16 pieces divided into 8 pieces of each type. The pieces are arranged in two rows, known as the ranks, with the black pieces mirroring the white pieces. The pieces are:
+
+White Pieces: 1 x King, 1 x Queen, 2 x Rook, 2 x Knight, 2 x Bishop, 3 x Pawn
+Black Pieces: 1 x King, 1 x Queen, 2 x Rook, 2 x Knight, 2 x Bishop, 3 x Pawn
+
+Therefore, each player starts with one rook, which is a piece that resembles a castle tower.",0
+How many pawns does each player start with?,8,"### Question: How many pawns does each player start with?
+    ## Response:
+    1. The total number of pieces in a chessboard is 32 pieces, which are divided equally between the two players.
+    2. Each player starts with 16 pieces, which are 8 pawns, 1 king, 1 queen, 2 rooks, 2 knights, and 2 bishops.
+    3. Therefore, each player starts with 8 pawns.
+
+<ANSWER>: Each player starts with 8 pawns.",0
+How many queens does each player start with?,1,"### Question: How many queens does each player start with?
+    ## Response:
+    1. The initial setup of a chessboard consists of 16 pieces: 8 pawns, 2 rooks, 2 knights, 2 bishops, 1 queen, 1 king, and empty squares.
+    2. Each player starts with 1 queen and 7 other pieces (1 king, 1 queen, 2 rooks, 2 knights, 2 bishops).
+    3. The total number of pieces on the board at the start of the game is 16 pieces (8 pieces for each player).
+
+Therefore, each player starts with 1 queen and 7 other pieces.",0
+Which chess piece is being moved when the chess move is e4 in Algebraic notation?,Pawn,"### Question: Which chess piece is being moved when the chess move is e4 in Algebraic notation?
+    ## Response:
+    1. The chessboard is divided into 8x8 squares, with each square having a unique coordinate pair of letters and numbers.
+    2. The columns are known as files range from 1-8, and the rows are known as ranks range from a-h.
+    3. For example, the square with the coordinate pair ""a4"" is the square at the intersection of the a-file and the 4th rank.
+
+Therefore, the chess move e4 refers to the White Bishop moving to the square e4 on the board.
+
+White: Bishop move from e1 to e4 (White Bishop captured Black Bishop at e4)
+
+Black: Bishop captured at e4",0
+Which chess piece is being moved when the chess move is Na3 in Algebraic notation?,Knight,"### Question: Which chess piece is being moved when the chess move is Na3 in Algebraic notation?
+    ## Response:
+    1. The chessboard is divided into eight rows known as files range from 1-8.
+    2. The chessboard is also divided into eight columns known as ranks range from a-h.
+    3. Each chessboard square is identified by a letter and a number e.g. a1, c4, d6.
+    4. The column letter represents the file range from 1-8.
+    5. The row number represents the rank range from a-h.
+    6. For example, the square a1 has a column letter 'a' and a row number '1'.
+    7. The chess pieces are:
+       - White Pieces: 1 x White King, 1 x White Knight, 1 x White Bishop, 1 x White Rook, 1 x White Queen, 1 x White Pawn
+       - Black Pieces: 1 x Black King, 1 x Black Knight, 1 x Black Bishop, 1 x Black Rook, 1 x Black Queen, 1 x Black Pawn
+
+    Therefore, the analysis of the chess move Na3 is:
+    - N: Knight piece.
+    - a: File where the Knight is present.
+    - 3: Rank where the Knight is present.
+
+Therefore, the Knight at a3.",0
