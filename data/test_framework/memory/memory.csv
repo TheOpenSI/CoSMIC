@@ -19,7 +19,7 @@ Which piece can only move diagonally?,Bishop
 What is the name of the notation system used to record chess moves?,"Algebraic Notation, PGN, FEN"
 Which piece starts on d8 for Black?,Queen
 "Which piece can move any number of squares along a rank, file, or diagonal?",Queen
-What is the starting position of the White's King side Bishop in algebraic notation?,c1
+What is the starting position of the White's King side Bishop in algebraic notation?,f1
 What is it called when the king is in check and does not have any other legal move?,Checkmate
 What is the move called when a pawn captures an opposing piece by moving diagonally?,Pawn Capture
 Which piece can move one square in any direction?,King
@@ -31,11 +31,11 @@ What a pawn that has advanced to the eighth rank gets promoted to?,Queen
 Which piece can only move horizontally or vertically?,Rook
 What is the starting position of the black king's knight?,g8
 What is the special move involving a king and a rook?,Castling
-How many pieces does each player start with?,16
-How many bishops does each player start with?,2
-How many knights does each player start with?,2
-How many rooks does each player start with?,2
-How many pawns does each player start with?,8
-How many queens does each player start with?,1
+In a game of chess how many pieces does each player start with?,16
+In a game of chess how many bishops does each player start with?,2
+In a game of chess how many knights does each player start with?,2
+In a game of chess how many rooks does each player start with?,2
+In a game of chess how many pawns does each player start with?,8
+In a game of chess how many queens does each player start with?,1
 Which chess piece is being moved when the chess move is e4 in Algebraic notation?,Pawn
 Which chess piece is being moved when the chess move is Na3 in Algebraic notation?,Knight
