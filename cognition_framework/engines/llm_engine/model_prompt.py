@@ -1,4 +1,5 @@
 from transformers import pipeline
+from .load_model_test import generate_response
 
 
 # =============================================================================================================
@@ -19,11 +20,17 @@ def get_llm_reader(llm_model, tokenizer, model, has_context=False):
         {"role": "user", "content": query}
     ]
 
-    chat_template_context = lambda query: [
-        {"role": "user", "content": "Given that 'Beijing is the capital of China.', what is the capital of China?"},
-        {"role": "assistant", "content": "Beijing"},
-        {"role": "user", "content": query}
-    ]
+    if llm_model.find('gpt') > -1:
+        chat_template_context = lambda query: [
+            {"role": "system", "content": "You are a helpful assistant. Always answer the question even if the context is not helpful"},
+            {"role": "user", "content": query}
+        ]
+    else:
+        chat_template_context = lambda query: [
+            {"role": "user", "content": "Given that 'Beijing is the capital of China.', what is the capital of China?"},
+            {"role": "assistant", "content": "Beijing"},
+            {"role": "user", "content": query}
+        ]
 
     # This user-assisant chat instance could be more accessable
     # Mistral: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.1
@@ -58,6 +65,8 @@ def get_llm_reader(llm_model, tokenizer, model, has_context=False):
                 return_full_text=False,
                 max_new_tokens=500,
             )(query)[0]["generated_text"]
+
+            # llm_reader = lambda query: generate_response(model, tokenizer, query)
     elif llm_model.find('gemma') > -1:
         # https://medium.com/@coldstart_coder/
         # getting-started-with-googles-gemma-llm-using-huggingface-libraries-a0d826c552ae
@@ -102,6 +111,15 @@ def get_llm_reader(llm_model, tokenizer, model, has_context=False):
                     )[0],
                     skip_special_tokens=True
                 )
+    elif llm_model.find('gpt') > -1:
+        # This OpenAI model is actually Client
+        llm_reader = lambda query: \
+            model.chat.completions.create(
+                model=llm_model,
+                max_tokens=2048,
+                temperature=0.0,
+                messages=chat_template_context(query)
+            ).choices[0].message.content
 
     return llm_reader
 
@@ -111,23 +129,26 @@ def extract_answer_from_response(llm_model, answer, prompt_example):
     # Debug information
     if DEBUG: print('####', answer)
 
-    # Parse the answer, corresponding to get_llm_reader()
-    if llm_model.find('mistral') > -1:
-        if llm_model.find('-instruct') > -1:
-            answer = answer.split('[/INST]')[-1].split('</s>')[0].strip()
-        else:
-            if prompt_example:  # with an example in the prompt, can always parse by [INST]
-                answer = answer.split('[INST]')[0].strip()
-            else:  # keyword is uncertain, so return the entire response
-                answer = answer.strip()
-    elif llm_model.find('gemma') > -1:
-        if llm_model.find('-it') > -1:
-            answer = answer.split('model\n')[1].split('\n')[0].strip()
-        else:
-            if prompt_example:
-                answer = answer.split('model\n')[2].split('\n')[0].strip()
+    try:  # TODO
+        # Parse the answer, corresponding to get_llm_reader()
+        if llm_model.find('mistral') > -1:
+            if llm_model.find('-instruct') > -1:
+                answer = answer.split('[/INST]')[-1].split('</s>')[0]
             else:
-                answer = answer.split('### ANSWER:\n')[-1].split('\n')[0].strip()
+                if prompt_example:  # with an example in the prompt, can always parse by [INST]
+                    answer = answer.split('[INST]')[0]
+        elif llm_model.find('gemma') > -1:
+            if llm_model.find('-it') > -1:
+                answer = answer.split('model\n')[1].split('\n')[0]
+            else:
+                if prompt_example:
+                    answer = answer.split('model\n')[2].split('\n')[0]
+                else:
+                    answer = answer.split('### ANSWER:\n')[-1].split('\n')[0]
+    except:
+        answer = answer
+
+    answer = answer.replace('\n', ' ').strip()
 
     return answer
 
@@ -137,25 +158,26 @@ def extract_chess_answer_from_response(llm_model, answer, prompt_example):
     # Debug information
     if DEBUG: print('#### Chess', answer)
 
-    # Parse the answer, corresponding to get_llm_reader()
-    if llm_model.find('mistral') > -1:
-        if llm_model.find('-instruct') > -1:
-            answer = answer.split('[/INST]')[-1].split('</s>')[0].strip()
-        else:
-            if False:  # very uncertain keywords
+    try:  # TODO
+        # Parse the answer, corresponding to get_llm_reader()
+        if llm_model.find('mistral') > -1:
+            if llm_model.find('-instruct') > -1:
+                answer = answer.split('[/INST]')[-1].split('</s>')[0]
+            else:
+                # very uncertain keywords
                 if prompt_example:
-                    answer = answer.split('**Solution:**')[1].split('\n')[0].strip()
+                    answer = answer.split('**Solution:**')[1].split('\n')[0]
                 else:
-                    answer = answer.split('Answer')[1].split('Comment:')[0].replace('\n', ' ').strip()
+                    answer = answer.split('Answer')[1].split('Comment:')[0]
+        elif llm_model.find('gemma') > -1:
+            if llm_model.find('-it') > -1:
+                answer = answer.split('model\n')[1].split('\n')[0]
             else:
-                answer = answer.replace('\n', ' ').strip()
-    elif llm_model.find('gemma') > -1:
-        if llm_model.find('-it') > -1:
-            answer = answer.split('model\n')[1].split('\n')[0].strip()
-        else:
-            if False:  # very uncertain keywords
-                answer = answer.split('Answer:\n')[1].replace('\n', ' ').strip()
-            else:
-                answer = answer.replace('\n', ' ').strip()
+                # very uncertain keywords
+                answer = answer.split('Answer:\n')[1]
+    except:
+        answer = answer
+
+    answer = answer.replace('\n', ' ').strip()
 
     return answer

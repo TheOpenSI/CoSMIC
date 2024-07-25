@@ -4,6 +4,7 @@ import numpy as np
 
 # from difflib import SequenceMatcher
 from engines.chess_engine.chess import ChessEngine
+from engines.chess_engine.chess_gpt import ChessEngineGPT
 from engines.llm_engine.llm import LLMEngine
 from utils.log_tool import set_color
 from utils.num2word import convert_number2word
@@ -20,12 +21,14 @@ class OpenSIEvalSystem:
         document_dir='',
         document_paths='',  # can be a list
         retrieve_score_threshold=0,
-        chess_back_end='stockfish'
+        chess_back_end='stockfish',
+        chess_best_move_predictor='stockfish',
+        seed=0
     ):
         # Set root for the location of this file relative to the repository
         self.root = f"{os.path.dirname(os.path.abspath(__file__))}/.."
         self.chess_back_end = chess_back_end
-        self.prompt_example = True  # whether show an example in the prompt or not
+        self.chess_best_move_predictor = chess_best_move_predictor
 
         # Set up chess engine for __next_move__
         self.chess_engine = ChessEngine(back_end=chess_back_end)
@@ -35,8 +38,14 @@ class OpenSIEvalSystem:
             llm_model=llm_model,
             document_analyser_model='gte-small',
             retrieve_score_threshold=retrieve_score_threshold,
-            prompt_example=self.prompt_example
+            seed=seed
         )
+
+        # Set up the best move predictor
+        if chess_best_move_predictor == 'stockfish':
+            self.chess_best_move_engine = self.chess_engine
+        else:
+            self.chess_best_move_engine = ChessEngineGPT(llm_model=chess_best_move_predictor)
 
         # Update database through all .pdf in a folder
         self.add_document_directory(document_dir)
@@ -46,6 +55,7 @@ class OpenSIEvalSystem:
 
     def quit(self):
         self.chess_engine.quit()
+        self.llm_engine.quit()
 
     def add_documents(self, document_paths):
         self.llm_engine.add_documents(document_paths)
@@ -102,7 +112,12 @@ class OpenSIEvalSystem:
 
         return info
 
-    def __call__(self, query, context='', topk=1, log_file=None):
+    def __call__(self, query, context='', topk=1, log_file=None, is_rag=False):
+        # Since all questions will go to context retriever as RAG first,
+        # check the retriever score for visualization
+        retriever_score = None
+        raw_result = None
+
         if query.find('exit') > -1:
             result = 'exit'
         elif query.find('skip') > -1:
@@ -182,20 +197,29 @@ class OpenSIEvalSystem:
                         current_fen = fen
                         next_moves = []
 
+                        # Set the fen
+                        self.chess_engine.set_fen(current_fen)
+
                         for idx_move, gt_move in enumerate(gt_moves):
-                            # Stockfish only returns the best move, so push FEN to get the best move
-                            next_move = self.chess_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
-
-                            # Remove # for the checkmate next_move, in case the model just analyse the move by #
-                            next_move = next_move.replace('#', '')
-
                             # Even step is the opponent, odd step is the player
                             # Only push next_move for the player, and gt_move for the opponent
                             if idx_move % 2 == 0:
                                 next_move = gt_move
                             else:
-                                # interaction between LLM and Chess engine
-                                analysis = self.llm_engine.chess_analysis(player=player, move=next_move, fen=current_fen)
+                                # Stockfish only returns the best move, so push FEN to get the best move
+                                next_move = self.chess_best_move_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
+
+                                # 20240723 Remove for the checkmate next_move, in case the model just analyse the move by #
+                                # next_move = next_move.replace('#', '')
+
+                                # Interaction between LLM and Chess engine
+                                analysis = self.llm_engine.chess_analysis(
+                                    player=player,
+                                    move=next_move,
+                                    fen=current_fen,
+                                    is_rag=is_rag,
+                                    topk=topk
+                                )
 
                                 # Display the analysis
                                 print(set_color(
@@ -213,17 +237,28 @@ class OpenSIEvalSystem:
                                         analysis
                                     ])
 
-                            # Push the estimate move to the board
-                            self.chess_engine.push_single(next_move, move_mode=move_mode)
+                            try:
+                                # Push the estimate move to the board
+                                status = self.chess_engine.push_single(next_move, move_mode=move_mode)
+                            except:
+                                # If any error raised, the next move is invalid
+                                print(set_color('fail', f"Move {next_move} for FEN {current_fen} is invalid."))
+                                status = -1
 
-                            # Then update the FEN in chess engine
-                            current_fen = self.chess_engine.get_fen()
+                            # If it is illegal, then stop the program
+                            if status < 0:
+                                next_moves.append(next_move)
+                                break
+                            else:
+                                # Then update the FEN in chess engine
+                                current_fen = self.chess_engine.get_fen()
 
-                            # Save the actual move to next_moves
-                            next_moves.append(next_move)
+                                # Save the actual move to next_moves
+                                next_moves.append(next_move)
 
-                        # Check if next moves are the same as GT moves
-                        score_per = np.prod(np.array([float(next_v == gt_v) for next_v, gt_v in zip(next_moves, gt_moves)]))
+                        # Check if next moves are the same as GT moves, remove # only for scoring because the GT has no #
+                        comparison_list = [float(next_v.replace('#', '').replace('+', '') == gt_v.replace('+', '')) for next_v, gt_v in zip(next_moves, gt_moves)]
+                        score_per = np.prod(np.array(comparison_list))
                     else:
                         # Call to solve each puzzle, not yet to be used for score calculation
                         next_moves = self.chess_engine.puzzle_solve(fen, move_mode)
@@ -271,7 +306,12 @@ class OpenSIEvalSystem:
                         print(set_color("info", f"Solving {quality_tag} {idx + 1}/{num_questions}..."))
 
                     # Inner loop to call self.__call__ for update
-                    result = self.__call__(question, log_file=log_file, topk=topk)
+                    result, retriever_score, raw_result = self.__call__(
+                        question,
+                        log_file=log_file,
+                        topk=topk,
+                        is_rag=is_rag
+                    )
 
                     # For __update__store__, the result is None
                     if result is None: continue
@@ -281,20 +321,20 @@ class OpenSIEvalSystem:
                         gt_answer = 'N/A'
 
                     # Case insensitive and remove line change for better readability
-                    if isinstance(gt_answer, str):
-                        gt_answer = gt_answer.lower()
-                        gt_answer = gt_answer.replace('\n', ' ')
-                    elif isinstance(gt_answer, numbers.Number):
+                    if isinstance(gt_answer, numbers.Number) or gt_answer.isdigit():
                         # Convert number to word and compare both number and string format answer
                         gt_answer = [str(int(gt_answer)), str(convert_number2word(int(gt_answer)))]
+                    elif isinstance(gt_answer, str):
+                        # A number can be read as a string, so convert it to a number
+                        gt_answer = gt_answer.lower().replace('\n', '\newline')
 
                     if isinstance(result, str):
-                        result = result.lower()
-                        result = result.replace('\n', ' ')
+                        result = result.lower().replace('\n', '\newline')
+                        raw_result = raw_result.lower().replace('\n', '\newline')
 
                     # Check if the answer word is in the prediction
                     if isinstance(gt_answer, list):
-                        score_per = len(np.nonzero([float(result.find(v) > -1) for v in gt_answer])[0])
+                        score_per = float(len(np.nonzero([float(result.find(v) > -1) for v in gt_answer])[0]) > 0)
                     else:
                         score_per = float(result.find(gt_answer) > -1)
 
@@ -303,7 +343,11 @@ class OpenSIEvalSystem:
 
                     # Save to log
                     if log_file is not None:
-                        log_file.writerow([question, result, gt_answer, score_per])
+                        log_file.writerow([question, result, gt_answer, score_per, retriever_score[0], raw_result])
+                        print(set_color(
+                            'info',
+                            f'Question: {question}, Result: {result}, Retrieve score: {retriever_score[0]:.4f}.')
+                        )
 
                 # Average the score
                 average_score = np.mean(np.array(score_list))
@@ -324,15 +368,16 @@ class OpenSIEvalSystem:
             is_context_a_document = context.find('.pdf') > -1
 
             # Run the LLM engine to get the answer
-            result = self.llm_engine(
+            result, retriever_score, raw_result = self.llm_engine(
                 query,
                 context,
                 is_cotext_a_document=is_context_a_document,
                 update_database_only=update_database_only,
-                topk=topk
+                topk=topk,
+                is_rag=is_rag
             )
 
-        return result
+        return result, retriever_score, raw_result
 
 # =============================================================================================================
 
@@ -340,17 +385,26 @@ if __name__ == '__main__':
     # Switch on this to avoid massive warning
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+    # Whether use GPT or Stockfish to predict the next move
+    chess_best_move_predictor = 'stockfish'
+
+    # Only support certain best move predictors
+    assert chess_best_move_predictor in ['gpt4', 'stockfish'], \
+        print(set_color('error', f'Unknown best move predictor: {chess_best_move_predictor}'))
+
     # Get the file's absolute path
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root = f"{current_dir}/.."
 
     # Set llm_model_list to run all at once
     llm_model_list = [
-        "mistral-7b-v0.1",
-        "mistral-7b-instruct-v0.1",
-        "gemma-7b",
+        # "mistral-7b-v0.1",
+        # "mistral-7b-instruct-v0.1",
+        # "gemma-7b",
         "gemma-7b-it",
-        "mistral-7b-finetuned"
+        # "mistral-7b-finetuned",
+        # "mistral-7b-finetuned-new",
+        # "gpt-4o"
     ]
 
     # Run all models at once
@@ -362,6 +416,7 @@ if __name__ == '__main__':
         qa_system = OpenSIEvalSystem(
             llm_model=llm_model,
             retrieve_score_threshold=0.7,  # filter out low-confidence retrieved context
+            chess_best_move_predictor=chess_best_move_predictor
         )
 
         # Externally add a document directory
@@ -382,29 +437,36 @@ if __name__ == '__main__':
 
             # Create a log file
             if query.find(".csv") > -1:
+                # 20240725 For other qualities, which excludes the reasoning (puzzle analysis), use RAG
+                # For puzzle analysis, switch off RAG because from the experiments, adding RAG ruins the analysis
+                if query.find('puzzle') > -1:
+                    is_rag = False
+                else:
+                    is_rag = True
+
                 query = f"{root}/{query.replace(' ', '')}"
 
                 # Change the data folder to results for log file
-                log_file = query.replace('/data/', '/results/')
+                log_file = query.replace('/data/', f'/results/{llm_model}/')
 
                 # Create a folder
                 log_file_name = log_file.split('/')[-1]
-                log_dir = os.path.join(log_file.replace(log_file_name, ''), llm_model)
+                log_dir = log_file.replace(log_file_name, '')
                 os.makedirs(log_dir, exist_ok=True)
 
                 # Open a log file and pass the instance
-                log_file = os.path.join(log_dir, log_file_name)
+                log_file = log_file.replace('.csv', '_isragTrue.csv') if is_rag else log_file.replace('.csv', '_isragFalse.csv')
                 log_file_pt = open(log_file, 'w')
                 log_file = csv.writer(log_file_pt)
 
                 # Write heads
-                log_file.writerow(["Question", "Answer", "Label", "Score", "Comment"])
+                log_file.writerow(["Question", "Answer", "Label", "Score", "Comment", "Raw Answer"])
             else:
                 log_file_pt = None
                 log_file = None
 
             # Solve the problem
-            answer = qa_system(query, topk=5, log_file=log_file)
+            answer, _, _ = qa_system(query, topk=5, log_file=log_file, is_rag=is_rag)
 
             # Print the answer
             if answer is not None:
@@ -420,8 +482,8 @@ if __name__ == '__main__':
                     print(set_color(status, f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n"))
                 else:
                     # The answer can be the average score from a .csv test file
-                    if isinstance(answer, numbers.Number):
-                        test_score_list.append(answer)
+                    if isinstance(answer, numbers.Number) or answer.isdigit():
+                        test_score_list.append(float(answer))
                         status = 'success' if answer == 1 else 'fail'
                     else:
                         status = 'info'

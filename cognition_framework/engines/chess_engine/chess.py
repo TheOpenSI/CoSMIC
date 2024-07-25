@@ -160,26 +160,30 @@ class ChessEngine:
         # Check if the move is legal
         is_legal = self.check_is_legal_move(current_move, move_mode)
 
-        if is_legal:
-            # Convert from algebraic to coordinate
-            if move_mode == 'algebric':
-                current_move = self.convert_algebric_to_coordinate(current_move)
-
-            # If the current move is valid, then push to the board
-            self.board.push(chess.Move.from_uci(current_move))
-
-            # Also push the move to stockfish
-            if self.back_end == 'stockfish':
-                self.engine.make_moves_from_current_position([current_move])
-
-            # Add one to valid move count
-            self.move_count += 1
-        else:
+        if not is_legal:
             print(set_color('error', f"\nMove {current_move} is illegal on FEN {self.board.fen}."))
 
-    def puzzle_solve(self, fen, move_mode):
-        # Clean the current board and restart the game
-        self.initialize_engine()
+            return -1
+
+        # Convert from algebraic to coordinate
+        if move_mode == 'algebric':
+            current_move = self.convert_algebric_to_coordinate(current_move)
+
+        # If the current move is valid, then push to the board
+        self.board.push(chess.Move.from_uci(current_move))
+
+        # Also push the move to stockfish
+        if self.back_end == 'stockfish':
+            self.engine.make_moves_from_current_position([current_move])
+
+        # Add one to valid move count
+        self.move_count += 1
+
+        return 0
+
+    def set_fen(self, fen):
+        # Reset the board to set a fen
+        self.reset_board()
 
         # Set the FEN
         self.board.set_fen(fen)
@@ -187,6 +191,10 @@ class ChessEngine:
         # Set FEN to stockfish
         if self.back_end == 'stockfish':
             self.engine.set_fen_position(fen)
+
+    def puzzle_solve(self, fen, move_mode):
+        # Clean the current board and restart the game
+        self.set_fen(fen)
 
         # Estimate the next moves for the current FEN then automatic till game over
         next_move_list = self.__call__(

@@ -14,7 +14,8 @@ info_dict = {
     'success': {'color': bcolors.OKGREEN, 'comment': 'Success'},
     'fail': {'color': bcolors.FAIL, 'comment': 'Fail'},
     'warning': {'color': bcolors.WARNING, 'comment': 'Warning'},
-    'info': {'color': bcolors.HEADER, 'comment': 'Info'}
+    'info': {'color': bcolors.HEADER, 'comment': 'Info'},
+    'error': {'color': bcolors.FAIL, 'comment': 'Error'},
 }
 
 

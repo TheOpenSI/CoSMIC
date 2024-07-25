@@ -11,8 +11,10 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
 from peft import PeftModel
+from openai import OpenAI
 from utils.log_tool import set_color
 from .model_prompt import get_llm_reader, extract_answer_from_response, extract_chess_answer_from_response
+# from .load_model_test import load_model_external
 
 
 # =============================================================================================================
@@ -23,7 +25,9 @@ LLM_MODEL_DICT = {
     "mistral-7b-instruct-v0.1": "mistralai/Mistral-7B-Instruct-v0.1",
     "gemma-7b": "google/gemma-7b",
     "gemma-7b-it": "google/gemma-7b-it",  # bad
-    "mistral-7b-finetuned": "adnaan525/opensi_mistral_3tasks"
+    "mistral-7b-finetuned": "adnaan525/opensi_mistral_3tasks",
+    "mistral-7b-finetuned-new": "OpenSI/cognitive_AI",
+    "gpt-4o": "gpt-4o"
 }
 
 # =============================================================================================================
@@ -34,20 +38,22 @@ class LLMEngine:
         llm_model='mistral-7b-v0.1',
         document_analyser_model='gte-small',
         retrieve_score_threshold=0.,
-        prompt_example=True
+        seed=0
     ):
         # Set config
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../../.."
         self.retrieve_score_threshold = retrieve_score_threshold
         self.llm_model = llm_model.lower()
-        self.prompt_example = prompt_example
+        self.seed = seed
 
-        # Automatically set back_end
-        if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it"]:
+        # Automatically set back_end and whether use prompt example
+        if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it", "gpt-4o"]:
             self.back_end = "chat"
+            self.prompt_example = False  # this will not affect chat mode which has no prompt
         else:
             self.back_end = "instance"
+            self.prompt_example = True  # changable, better to switch on to truncate the the response with keywords
 
         # Check if LLM model is supported
         assert self.llm_model in LLM_MODEL_DICT.keys(), \
@@ -58,10 +64,11 @@ class LLMEngine:
             set_color('error', f"Back-end {self.back_end} is not supported.")
 
         # Login only when the model is not downloaded to .cache
-        cache_model_name = "models--" + LLM_MODEL_DICT[self.llm_model].replace('/', '--')
-        cache_model_directory = os.path.join(os.path.expanduser("~"), '.cache/huggingface/hub')
-        cache_model_path = os.path.join(cache_model_directory, cache_model_name)
-        if not os.path.exists(cache_model_path): self.login()
+        if self.llm_model.find('gpt') <= -1:
+            cache_model_name = "models--" + LLM_MODEL_DICT[self.llm_model].replace('/', '--')
+            cache_model_directory = os.path.join(os.path.expanduser("~"), '.cache/huggingface/hub')
+            cache_model_path = os.path.join(cache_model_directory, cache_model_name)
+            if not os.path.exists(cache_model_path): self.login()
 
         # Set a time stamp, day is not accurate, so remove
         self.time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
@@ -83,33 +90,56 @@ class LLMEngine:
             base_model = AutoModelForCausalLM.from_pretrained(
                 LLM_MODEL_DICT[base_llm_model],
                 quantization_config=bnb_config,
-                low_cpu_mem_usage=True
+                # low_cpu_mem_usage=True
+                use_cache=True,
+                device_map="auto"
             )
 
-            model = PeftModel.from_pretrained(
+            self.model = PeftModel.from_pretrained(
                 base_model,
                 LLM_MODEL_DICT[self.llm_model]
             )
 
             # Set tokenizer
             tokenizer_cls = LLM_MODEL_DICT[base_llm_model]
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer_cls)
+        elif self.llm_model.find('gpt') > -1:
+            # Cannot hard-code this key, as forbidden by GitHub
+            api_key = ""
+            self.model = OpenAI(api_key=api_key)
+            tokenizer = None
         else:
-            model = AutoModelForCausalLM.from_pretrained(
+            # bnb_config = BitsAndBytesConfig(
+            #     load_in_4bit=True,
+            #     bnb_4bit_use_double_quant=True,
+            #     bnb_4bit_quant_type="nf4",
+            #     bnb_4bit_compute_dtype=torch.bfloat16,
+            # )
+
+            # self.model = AutoModelForCausalLM.from_pretrained(
+            #     LLM_MODEL_DICT[self.llm_model],
+            #     quantization_config=bnb_config,
+            #     # low_cpu_mem_usage=True
+            #     use_cache=True,
+            #     device_map="cuda"
+            # )
+
+            self.model = AutoModelForCausalLM.from_pretrained(
                 LLM_MODEL_DICT[self.llm_model],
-                torch_dtype=torch.bfloat16,
+                # low_cpu_mem_usage=True
+                use_cache=True,
                 device_map="cuda",
+                torch_dtype=torch.bfloat16,
             )
 
             # Set tokenizer
             tokenizer_cls = LLM_MODEL_DICT[self.llm_model]
-
-        # Set tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(tokenizer_cls)
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer_cls)
 
         # Suppress the warning from
         # https://stackoverflow.com/questions/74682597/
         # fine-tuning-gpt2-attention-mask-and-pad-token-id-errors
-        if tokenizer.pad_token is None:
+        if tokenizer is not None and tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
         # Set LLM model for different uses
@@ -118,37 +148,38 @@ class LLMEngine:
             prompt_template = "{question}"
 
             prompt_template_context = \
-                "Given context: '{context}', {question}"
+                "Given that '{context}', {question}"
         else:
             if self.llm_model.find('mistral') > -1:
                 # Set prompt templates for those without/with context
-                if self.llm_model.find('finetune') > -1:
-                    # For finetuned model, use vanilla prompt
-                    prompt_template = prompt_template_context = \
-                        "<s>Given that '{context}', answer the question briefly: '{question}'"
-                else:
-                    if self.prompt_example:
-                        # For Mistral, https://www.promptingguide.ai/models/mistral-7b
-                        prompt_template = \
-                            "<s> [INST] What is the capital of China? [/INST]\n" \
-                            "Beijing</s>\n" \
-                            "[INST] {question} [/INST]"
+                if self.prompt_example:
+                    # For Mistral, https://www.promptingguide.ai/models/mistral-7b
+                    prompt_template = \
+                        "<s> [INST] What is the capital of China? [/INST]\n" \
+                        "Beijing</s>\n" \
+                        "[INST] {question} [/INST]"
 
-                        prompt_template_context = \
-                            "<s> [INST] Given that 'Beijing is the capital of China'," \
-                            " what is the capital of China? [/INST]\n" \
-                            "Beijing</s>\n" \
-                            "[INST] Given that '{context}', {question} [/INST]"
-                    else:
-                        prompt_template = prompt_template_context = \
-                            "<s>[INST] \n" \
-                            "Instruction: Always answer the question even if the context isn't useful. \n" \
-                            "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                            "Here is context to help -\n" \
-                            "{context}\n\n" \
-                            "### QUESTION:\n" \
-                            "{question} \n\n" \
-                            "[/INST]\n"
+                    prompt_template_context = \
+                        "<s> [INST] Given that 'Beijing is the capital of China'," \
+                        " what is the capital of China? [/INST]\n" \
+                        "Beijing</s>\n" \
+                        "[INST] Given that '{context}', {question} [/INST]"
+                else:
+                    # prompt_template = prompt_template_context = \
+                    #     "<s>[INST] \n" \
+                    #     "Instruction: Always answer the question even if the context isn't useful. \n" \
+                    #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                    #     "Here is context to help -\n" \
+                    #     "{context}\n\n" \
+                    #     "### QUESTION:\n" \
+                    #     "{question} \n\n" \
+                    #     "[/INST]\n"
+                    prompt_template = prompt_template_context = \
+                        "<s> Always answer the question briefly even if the context isn't useful.\n" \
+                        "Given the context: '{context}', the question is '{question}'"
+
+                    # prompt_template = prompt_template_context = \
+                    #     "<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
             elif self.llm_model.find('gemma') > -1:
                 if self.prompt_example:
                     # https://medium.com/@coldstart_coder/
@@ -173,15 +204,19 @@ class LLMEngine:
                         "Given that '{context}', {question}<end_of_turn>\n" \
                         "<start_of_turn>model"
                 else:
+                    # prompt_template = prompt_template_context = \
+                    #     "<bos><start_of_turn>user\n" \
+                    #     "Always answer the question even if the context isn't useful. \n" \
+                    #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                    #     "Here is context to help -\n" \
+                    #     "{context}\n\n" \
+                    #     "### QUESTION:\n" \
+                    #     "{question} \n\n<end_of_turn>" \
+                    #     "<start_of_turn>model"
+
                     prompt_template = prompt_template_context = \
-                        "<bos><start_of_turn>user\n" \
-                        "Always answer the question even if the context isn't useful. \n" \
-                        "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                        "Here is context to help -\n" \
-                        "{context}\n\n" \
-                        "### QUESTION:\n" \
-                        "{question} \n\n<end_of_turn>" \
-                        "<start_of_turn>model"
+                        "<bos> Always answer the question briefly even if the context isn't useful.\n" \
+                        "Given the context: '{context}', the question is '{question}'"
 
         # Set prompt instances for those without/with context
         # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
@@ -200,14 +235,23 @@ class LLMEngine:
         chess_prompt_template = \
             "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
 
+        chess_prompt_context_template = \
+            "Given chess board FEN '{fen}' and context that '{context}', explain briefly why {player} takes {move}?" \
+            " If the context is useless, ignore it"
+
         self.chess_prompt = PromptTemplate(
             input_variables=['player', 'move', 'fen'],
             template=chess_prompt_template,
         )
 
+        self.chess_prompt_context = PromptTemplate(
+            input_variables=['player', 'move', 'fen', 'context'],
+            template=chess_prompt_context_template,
+        )
+
         # -----------------------------------------------------------------------------------------------------
         # Get LLM reader with inbuilt query encoder
-        self.llm_reader = get_llm_reader(self.llm_model, tokenizer, model)
+        self.llm_reader = get_llm_reader(self.llm_model, tokenizer, self.model)
 
         # -----------------------------------------------------------------------------------------------------
         # For document analysis and knowledge database generation/update
@@ -247,6 +291,10 @@ class LLMEngine:
             distance_strategy=DistanceStrategy.COSINE
         )
 
+    def set_seed(self, seed):
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+
     def get_back_end(self):
         return self.back_end
 
@@ -258,6 +306,17 @@ class LLMEngine:
 
     def get_retrieve_score_threshold(self):
         return self.retrieve_score_threshold
+
+    def quit(self):
+        if self.llm_model.find('gpt') > -1:
+            # No model is loaded for OpenAI but simply call the API
+            self.model.close()
+        else:
+            self.model = self.model.to('cpu')
+
+        del self.model
+        del self.database_update_embedding
+        torch.cuda.empty_cache()
 
     def login(self):
         # Set the token stored file
@@ -328,11 +387,17 @@ class LLMEngine:
 
         # Store the retrieved page contents and page scores
         retrieved_docs_text = []
+        retrieved_docs_score = []
 
         for doc, score in retrieved_contents:
             # Filter out low confidence context
             if score >= self.retrieve_score_threshold:
                 retrieved_docs_text.append(doc.page_content)
+            else:
+                retrieved_docs_text.append(None)
+
+            # Store all the scores
+            retrieved_docs_score.append(score)
 
         if len(retrieved_docs_text) == 0:
             context = ''
@@ -346,18 +411,26 @@ class LLMEngine:
             else:
                 context = "".join([
                     f"Document {str(i)}: " + doc.replace('\n', ' ') + '. ' \
-                    for i, doc in enumerate(retrieved_docs_text)
+                    for i, doc in enumerate(retrieved_docs_text) if (doc is not None)
                 ])
 
-        return context
+        return context, retrieved_docs_score
 
-    def generate_chess_analysis_prompt(self, player, move, fen):
+    def generate_chess_analysis_prompt(self, player, move, fen, context=''):
         # Chess analysis has specific prompt template and instance
-        prompt = self.chess_prompt.format(
-            player=player,
-            move=move,
-            fen=fen
-        )
+        if context == '':
+            prompt = self.chess_prompt.format(
+                player=player,
+                move=move,
+                fen=fen
+            )
+        else:
+            prompt = self.chess_prompt_context.format(
+                player=player,
+                move=move,
+                fen=fen,
+                context=context
+            )
 
         return prompt
 
@@ -373,15 +446,23 @@ class LLMEngine:
                 )
         else:  # without example, always use prompt with context, although context is useless
             prompt = self.prompt_context.format(
-                    question=question,
-                    context=context
-                )
+                question=question,
+                context=context
+            )
 
         return prompt
 
-    def chess_analysis(self, player, move, fen):
-        # Specific to chess move analysis due to predefined prompt template
+    def chess_analysis(self, player, move, fen, is_rag, topk=1):
+        # Get the question
         prompt = self.generate_chess_analysis_prompt(player, move, fen)
+
+        # Retrieve context from stored database
+        if is_rag:
+            context, _ = self.retrieve_context(prompt, topk=topk)
+            prompt = self.generate_chess_analysis_prompt(player, move, fen, context=context)
+
+        # Set seed to make the response deterministric
+        self.set_seed(self.seed)
 
         # Generate the answer
         analysis = self.llm_reader(prompt)
@@ -397,7 +478,8 @@ class LLMEngine:
             context,
             topk=1,
             is_cotext_a_document=False,
-            update_database_only=False
+            update_database_only=False,
+            is_rag=False
         ):
         # Get context from database
         if context != '':
@@ -411,17 +493,26 @@ class LLMEngine:
         if update_database_only:
             # __update__store__ only updates the database without QA
             answer = None
+            context_score = None
+            raw_answer = None
         else:
             # Retrieve context from stored database
-            context = self.retrieve_context(user_query, topk=topk)
+            if is_rag:
+                context, context_score = self.retrieve_context(user_query, topk=topk)
+            else:
+                context = ''
+                context_score = [-1]
 
             # Generate prompt
             prompt = self.generate_prompt(question=user_query, context=context)
 
+            # Set seed
+            self.set_seed(self.seed)
+
             # Generate the answer
-            answer = self.llm_reader(prompt)
+            raw_answer = self.llm_reader(prompt)
 
             # Parse answer
-            answer = extract_answer_from_response(self.llm_model, answer, self.prompt_example)
+            answer = extract_answer_from_response(self.llm_model, raw_answer, self.prompt_example)
 
-        return answer
+        return answer, context_score, raw_answer
