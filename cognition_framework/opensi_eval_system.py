@@ -326,11 +326,11 @@ class OpenSIEvalSystem:
                         gt_answer = [str(int(gt_answer)), str(convert_number2word(int(gt_answer)))]
                     elif isinstance(gt_answer, str):
                         # A number can be read as a string, so convert it to a number
-                        gt_answer = gt_answer.lower().replace('\n', '\newline')
+                        gt_answer = gt_answer.lower().replace('\n', '#newline')
 
                     if isinstance(result, str):
-                        result = result.lower().replace('\n', '\newline')
-                        raw_result = raw_result.lower().replace('\n', '\newline')
+                        result = result.lower().replace('\n', '#newline')
+                        raw_result = raw_result.lower().replace('\n', '#newline')
 
                     # Check if the answer word is in the prediction
                     if isinstance(gt_answer, list):
@@ -401,9 +401,9 @@ if __name__ == '__main__':
         # "mistral-7b-v0.1",
         # "mistral-7b-instruct-v0.1",
         # "gemma-7b",
-        "gemma-7b-it",
+        # "gemma-7b-it",
         # "mistral-7b-finetuned",
-        # "mistral-7b-finetuned-new",
+        "mistral-7b-finetuned-new",
         # "gpt-4o"
     ]
 

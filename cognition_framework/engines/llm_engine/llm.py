@@ -53,7 +53,12 @@ class LLMEngine:
             self.prompt_example = False  # this will not affect chat mode which has no prompt
         else:
             self.back_end = "instance"
-            self.prompt_example = True  # changable, better to switch on to truncate the the response with keywords
+
+            if self.llm_model.find('finetune') > -1:
+                # Finetuned model always input question and context even if context is empty
+                self.prompt_example = False
+            else:
+                self.prompt_example = True  # changable, better to switch on to truncate the the response with keywords
 
         # Check if LLM model is supported
         assert self.llm_model in LLM_MODEL_DICT.keys(), \
@@ -76,7 +81,7 @@ class LLMEngine:
 
         # -----------------------------------------------------------------------------------------------------
         # For LoRA finetuned model
-        if self.llm_model == 'mistral-7b-finetuned':
+        if self.llm_model.find('mistral') > -1 and self.llm_model.find('finetune') > -1:
             # Model and tokenizer need to be based model config
             base_llm_model = "mistral-7b-v0.1"
 
@@ -102,7 +107,10 @@ class LLMEngine:
 
             # Set tokenizer
             tokenizer_cls = LLM_MODEL_DICT[base_llm_model]
-            tokenizer = AutoTokenizer.from_pretrained(tokenizer_cls)
+            tokenizer = AutoTokenizer.from_pretrained(
+                tokenizer_cls,
+                add_bos_token=True
+            )
         elif self.llm_model.find('gpt') > -1:
             # Cannot hard-code this key, as forbidden by GitHub
             api_key = ""
@@ -151,35 +159,37 @@ class LLMEngine:
                 "Given that '{context}', {question}"
         else:
             if self.llm_model.find('mistral') > -1:
-                # Set prompt templates for those without/with context
-                if self.prompt_example:
-                    # For Mistral, https://www.promptingguide.ai/models/mistral-7b
-                    prompt_template = \
-                        "<s> [INST] What is the capital of China? [/INST]\n" \
-                        "Beijing</s>\n" \
-                        "[INST] {question} [/INST]"
-
-                    prompt_template_context = \
-                        "<s> [INST] Given that 'Beijing is the capital of China'," \
-                        " what is the capital of China? [/INST]\n" \
-                        "Beijing</s>\n" \
-                        "[INST] Given that '{context}', {question} [/INST]"
-                else:
-                    # prompt_template = prompt_template_context = \
-                    #     "<s>[INST] \n" \
-                    #     "Instruction: Always answer the question even if the context isn't useful. \n" \
-                    #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                    #     "Here is context to help -\n" \
-                    #     "{context}\n\n" \
-                    #     "### QUESTION:\n" \
-                    #     "{question} \n\n" \
-                    #     "[/INST]\n"
+                if self.llm_model.find('finetune') > -1:
                     prompt_template = prompt_template_context = \
-                        "<s> Always answer the question briefly even if the context isn't useful.\n" \
-                        "Given the context: '{context}', the question is '{question}'"
+                        "<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
+                else:
+                    # Set prompt templates for those without/with context
+                    if self.prompt_example:
+                        # For Mistral, https://www.promptingguide.ai/models/mistral-7b
+                        prompt_template = \
+                            "<s> [INST] What is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] {question} [/INST]"
 
-                    # prompt_template = prompt_template_context = \
-                    #     "<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
+                        prompt_template_context = \
+                            "<s> [INST] Given that 'Beijing is the capital of China'," \
+                            " what is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] Given that '{context}', {question} [/INST]"
+                    else:
+                        # prompt_template = prompt_template_context = \
+                        #     "<s>[INST] \n" \
+                        #     "Instruction: Always answer the question even if the context isn't useful. \n" \
+                        #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                        #     "Here is context to help -\n" \
+                        #     "{context}\n\n" \
+                        #     "### QUESTION:\n" \
+                        #     "{question} \n\n" \
+                        #     "[/INST]\n"
+
+                        prompt_template = prompt_template_context = \
+                            "<s> Always answer the question briefly even if the context isn't useful.\n" \
+                            "Given the context: '{context}', the question is '{question}'"
             elif self.llm_model.find('gemma') > -1:
                 if self.prompt_example:
                     # https://medium.com/@coldstart_coder/
@@ -232,12 +242,17 @@ class LLMEngine:
         )
 
         # Set prompt template and instance for chess move analysis
-        chess_prompt_template = \
-            "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
+        if (self.llm_model.find('mistral') > -1) and (self.llm_model.find('finetune') > -1):
+            chess_prompt_template = chess_prompt_context_template = \
+                "<s>### Instruction:\nExplain the rationale behind {player}'s {move}? " \
+                "\n### Context: \n### Response:"
+        else:
+            chess_prompt_template = \
+                "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
 
-        chess_prompt_context_template = \
-            "Given chess board FEN '{fen}' and context that '{context}', explain briefly why {player} takes {move}?" \
-            " If the context is useless, ignore it"
+            chess_prompt_context_template = \
+                "Given chess board FEN '{fen}' and context that '{context}', explain briefly why {player} takes {move}?" \
+                " If the context is useless, ignore it."
 
         self.chess_prompt = PromptTemplate(
             input_variables=['player', 'move', 'fen'],
@@ -418,12 +433,20 @@ class LLMEngine:
 
     def generate_chess_analysis_prompt(self, player, move, fen, context=''):
         # Chess analysis has specific prompt template and instance
-        if context == '':
-            prompt = self.chess_prompt.format(
-                player=player,
-                move=move,
-                fen=fen
-            )
+        if self.prompt_example:
+            if context == '':
+                prompt = self.chess_prompt.format(
+                    player=player,
+                    move=move,
+                    fen=fen
+                )
+            else:
+                prompt = self.chess_prompt_context.format(
+                    player=player,
+                    move=move,
+                    fen=fen,
+                    context=context
+                )
         else:
             prompt = self.chess_prompt_context.format(
                 player=player,
@@ -465,10 +488,10 @@ class LLMEngine:
         self.set_seed(self.seed)
 
         # Generate the answer
-        analysis = self.llm_reader(prompt)
+        raw_analysis = self.llm_reader(prompt)
 
         # Extract the key answer
-        analysis = extract_chess_answer_from_response(self.llm_model, analysis, self.prompt_example)
+        analysis = extract_chess_answer_from_response(self.llm_model, raw_analysis, self.prompt_example)
 
         return analysis
 
