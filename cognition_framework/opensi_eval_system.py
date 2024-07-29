@@ -408,10 +408,10 @@ if __name__ == '__main__':
         # "mistral-7b-v0.1",
         "mistral-7b-instruct-v0.1",
         # "gemma-7b",
-        "gemma-7b-it",
+        # "gemma-7b-it",
         # "mistral-7b-finetuned",
         # "mistral-7b-finetuned-new",
-        "gpt-4o"
+        # "gpt-4o"
     ]
 
     # Run all models at once
