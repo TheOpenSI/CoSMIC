@@ -2,10 +2,8 @@ import os, csv, numbers
 import pandas as pd
 import numpy as np
 
-# from difflib import SequenceMatcher
 from engines.chess_engine.chess import ChessEngine
-from engines.chess_engine.chess_gpt import ChessEngineGPT
-from engines.llm_engine.llm import LLMEngine
+from engines.llm_engine.llm import LLMEngine, LLM_MODEL_DICT
 from utils.log_tool import set_color
 from utils.num2word import convert_number2word
 
@@ -42,10 +40,10 @@ class OpenSIEvalSystem:
         )
 
         # Set up the best move predictor
-        if chess_best_move_predictor == 'stockfish':
-            self.chess_best_move_engine = self.chess_engine
+        if self.chess_best_move_predictor == 'stockfish':
+            self.chess_best_move_fnc = lambda fen, move_mode: self.chess_engine.puzzle_solve(fen, move_mode=move_mode)[0]
         else:
-            self.chess_best_move_engine = ChessEngineGPT(llm_model=chess_best_move_predictor)
+            self.chess_best_move_fnc = lambda fen, move_mode: self.llm_engine.chess_best_move(fen)
 
         # Update database through all .pdf in a folder
         self.add_document_directory(document_dir)
@@ -214,10 +212,7 @@ class OpenSIEvalSystem:
                                 next_move = gt_move
                             else:
                                 # Stockfish only returns the best move, so push FEN to get the best move
-                                next_move = self.chess_best_move_engine.puzzle_solve(current_fen, move_mode=move_mode)[0]
-
-                                # 20240723 Remove for the checkmate next_move, in case the model just analyse the move by #
-                                # next_move = next_move.replace('#', '')
+                                next_move = self.chess_best_move_fnc(current_fen, move_mode=move_mode)
 
                                 # Interaction between LLM and Chess engine
                                 analysis = self.llm_engine.chess_analysis(
@@ -392,13 +387,6 @@ if __name__ == '__main__':
     # Switch on this to avoid massive warning
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-    # Whether use GPT or Stockfish to predict the next move
-    chess_best_move_predictor = 'stockfish'
-
-    # Only support certain best move predictors
-    assert chess_best_move_predictor in ['gpt4', 'stockfish'], \
-        print(set_color('error', f'Unknown best move predictor: {chess_best_move_predictor}'))
-
     # Get the file's absolute path
     current_dir = os.path.dirname(os.path.abspath(__file__))
     root = f"{current_dir}/.."
@@ -408,7 +396,7 @@ if __name__ == '__main__':
         # "mistral-7b-v0.1",
         "mistral-7b-instruct-v0.1",
         # "gemma-7b",
-        # "gemma-7b-it",
+        "gemma-7b-it",
         # "mistral-7b-finetuned",
         # "mistral-7b-finetuned-new",
         # "gpt-4o"
@@ -416,6 +404,15 @@ if __name__ == '__main__':
 
     # Run all models at once
     for llm_model in llm_model_list:
+        # Whether use a trained model or Stockfish to predict the next move
+        # Cannot set a seperate llm model for best move prediction due to the memory limitation
+        chess_best_move_predictor = llm_model
+
+        # Only support certain best move predictors
+        valid_best_move_predictor = ['stockfish'] + [v for v in LLM_MODEL_DICT.keys()]
+        assert chess_best_move_predictor in valid_best_move_predictor, \
+            print(set_color('error', f'Unknown best move predictor: {chess_best_move_predictor}'))
+
         # Print head information
         print(set_color('info', f"\n######## Evaluation with {llm_model} ########\n"))
 

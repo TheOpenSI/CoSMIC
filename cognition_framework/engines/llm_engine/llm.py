@@ -13,7 +13,8 @@ from langchain_community.document_loaders import PyPDFLoader
 from peft import PeftModel
 from openai import OpenAI
 from utils.log_tool import set_color
-from .model_prompt import get_llm_reader, extract_answer_from_response, extract_chess_answer_from_response
+from .model_prompt import get_llm_reader, extract_answer_from_response
+from .model_prompt import extract_chess_analysis_from_response, extract_chess_best_move_from_response
 # from .load_model_test import load_model_external
 
 
@@ -46,6 +47,9 @@ class LLMEngine:
         self.retrieve_score_threshold = retrieve_score_threshold
         self.llm_model = llm_model.lower()
         self.seed = seed
+
+        # To get the full player name from the shortname
+        self.PLAYER_DICT = {'w': 'White', 'b': 'Black'}
 
         # Automatically set back_end and whether use prompt example
         if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it", "gpt-4o"]:
@@ -150,119 +154,14 @@ class LLMEngine:
         if tokenizer is not None and tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
-        # Set LLM model for different uses
-        if self.back_end == 'chat':
-            # Set prompt templates for those without/with context
-            prompt_template = "{question}"
+        # Get general prompt with/without context
+        self.prompt, self.prompt_context = self.get_general_prompt()
 
-            prompt_template_context = \
-                "Given that '{context}', {question}"
-        else:
-            if self.llm_model.find('mistral') > -1:
-                if self.llm_model.find('finetune') > -1:
-                    prompt_template = prompt_template_context = \
-                        "<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
-                else:
-                    # Set prompt templates for those without/with context
-                    if self.prompt_example:
-                        # For Mistral, https://www.promptingguide.ai/models/mistral-7b
-                        prompt_template = \
-                            "<s> [INST] What is the capital of China? [/INST]\n" \
-                            "Beijing</s>\n" \
-                            "[INST] {question} [/INST]"
+        # Get chess analysis prompt with/without context
+        self.chess_analysis_prompt, self.chess_analysis_prompt_context = self.get_chess_analysis_prompt()
 
-                        prompt_template_context = \
-                            "<s> [INST] Given that 'Beijing is the capital of China'," \
-                            " what is the capital of China? [/INST]\n" \
-                            "Beijing</s>\n" \
-                            "[INST] Given that '{context}', {question} [/INST]"
-                    else:
-                        # prompt_template = prompt_template_context = \
-                        #     "<s>[INST] \n" \
-                        #     "Instruction: Always answer the question even if the context isn't useful. \n" \
-                        #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                        #     "Here is context to help -\n" \
-                        #     "{context}\n\n" \
-                        #     "### QUESTION:\n" \
-                        #     "{question} \n\n" \
-                        #     "[/INST]\n"
-
-                        prompt_template = prompt_template_context = \
-                            "<s> Always answer the question briefly even if the context isn't useful.\n" \
-                            "Given the context: '{context}', the question is '{question}'"
-            elif self.llm_model.find('gemma') > -1:
-                if self.prompt_example:
-                    # https://medium.com/@coldstart_coder/
-                    # getting-started-with-googles-gemma-llm-using-huggingface-libraries-a0d826c552ae
-                    # https://www.promptingguide.ai/models/gemma
-                    prompt_template = \
-                        "<bos><start_of_turn>user\n" \
-                        "What is the capital of China?<end_of_turn>\n" \
-                        "<start_of_turn>model\n" \
-                        "Beijing<end_of_turn><eos>\n" \
-                        "<start_of_turn>user\n" \
-                        "{question}<end_of_turn>\n" \
-                        "<start_of_turn>model"
-
-                    prompt_template_context = \
-                        "<bos><start_of_turn>user\n" \
-                        "Given that 'Beijing is the capital of China'," \
-                        " what is the capital of China?<end_of_turn>\n" \
-                        "<start_of_turn>model\n" \
-                        "Beijing<end_of_turn><eos>\n" \
-                        "<start_of_turn>user\n" \
-                        "Given that '{context}', {question}<end_of_turn>\n" \
-                        "<start_of_turn>model"
-                else:
-                    # prompt_template = prompt_template_context = \
-                    #     "<bos><start_of_turn>user\n" \
-                    #     "Always answer the question even if the context isn't useful. \n" \
-                    #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
-                    #     "Here is context to help -\n" \
-                    #     "{context}\n\n" \
-                    #     "### QUESTION:\n" \
-                    #     "{question} \n\n<end_of_turn>" \
-                    #     "<start_of_turn>model"
-
-                    prompt_template = prompt_template_context = \
-                        "<bos> Always answer the question briefly even if the context isn't useful.\n" \
-                        "Given the context: '{context}', the question is '{question}'"
-
-        # Set prompt instances for those without/with context
-        # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
-        # https://medium.com/@thakermadhav/build-your-own-rag-with-mistral-7b-and-langchain-97d0c92fa146
-        self.prompt = PromptTemplate(
-            input_variables=['question'],
-            template=prompt_template,
-        )
-
-        self.prompt_context = PromptTemplate(
-            input_variables=['question', 'context'],
-            template=prompt_template_context,
-        )
-
-        # Set prompt template and instance for chess move analysis
-        if (self.llm_model.find('mistral') > -1) and (self.llm_model.find('finetune') > -1):
-            chess_prompt_template = chess_prompt_context_template = \
-                "<s>### Instruction:\nGiven chess board FEN '{fen}', explain the rationale of {player} taking {move}? " \
-                "\n### Context: \n \n### Response:"
-        else:
-            chess_prompt_template = \
-                "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
-
-            chess_prompt_context_template = \
-                "Given chess board FEN '{fen}' and context that '{context}', explain briefly why {player} takes {move}?" \
-                " If the context is useless, ignore it."
-
-        self.chess_prompt = PromptTemplate(
-            input_variables=['player', 'move', 'fen'],
-            template=chess_prompt_template,
-        )
-
-        self.chess_prompt_context = PromptTemplate(
-            input_variables=['player', 'move', 'fen', 'context'],
-            template=chess_prompt_context_template,
-        )
+        # Get chess best move prompt without context
+        self.chess_best_move_prompt = self.get_chess_best_move_prompt()
 
         # -----------------------------------------------------------------------------------------------------
         # Get LLM reader with inbuilt query encoder
@@ -270,9 +169,7 @@ class LLMEngine:
 
         # -----------------------------------------------------------------------------------------------------
         # For document analysis and knowledge database generation/update
-        EMBEDDING_MODEL_DICT = {
-            'gte-small': "thenlper/gte-small"
-        }
+        EMBEDDING_MODEL_DICT = {'gte-small': "thenlper/gte-small"}
 
         # Set page separators
         MARKDOWN_SEPARATORS = ["\n\n", "\n", ""]
@@ -440,24 +337,168 @@ class LLMEngine:
 
         return context, retrieved_docs_score
 
+    def get_general_prompt(self):
+        # Set LLM model for different uses
+        if self.back_end == 'chat':
+            # Set prompt templates for those without/with context
+            prompt_template = "{question}"
+
+            prompt_template_context = \
+                "Given that '{context}', {question}"
+        else:
+            if self.llm_model.find('mistral') > -1:
+                if self.llm_model.find('finetune') > -1:
+                    prompt_template = prompt_template_context = \
+                        "<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
+                else:
+                    # Set prompt templates for those without/with context
+                    if self.prompt_example:
+                        # For Mistral, https://www.promptingguide.ai/models/mistral-7b
+                        prompt_template = \
+                            "<s> [INST] What is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] {question} [/INST]"
+
+                        prompt_template_context = \
+                            "<s> [INST] Given that 'Beijing is the capital of China'," \
+                            " what is the capital of China? [/INST]\n" \
+                            "Beijing</s>\n" \
+                            "[INST] Given that '{context}', {question} [/INST]"
+                    else:
+                        # prompt_template = prompt_template_context = \
+                        #     "<s>[INST] \n" \
+                        #     "Instruction: Always answer the question even if the context isn't useful. \n" \
+                        #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                        #     "Here is context to help -\n" \
+                        #     "{context}\n\n" \
+                        #     "### QUESTION:\n" \
+                        #     "{question} \n\n" \
+                        #     "[/INST]\n"
+
+                        prompt_template = prompt_template_context = \
+                            "<s> Always answer the question briefly even if the context isn't useful.\n" \
+                            "Given the context: '{context}', the question is '{question}'"
+            elif self.llm_model.find('gemma') > -1:
+                if self.prompt_example:
+                    # https://medium.com/@coldstart_coder/
+                    # getting-started-with-googles-gemma-llm-using-huggingface-libraries-a0d826c552ae
+                    # https://www.promptingguide.ai/models/gemma
+                    prompt_template = \
+                        "<bos><start_of_turn>user\n" \
+                        "What is the capital of China?<end_of_turn>\n" \
+                        "<start_of_turn>model\n" \
+                        "Beijing<end_of_turn><eos>\n" \
+                        "<start_of_turn>user\n" \
+                        "{question}<end_of_turn>\n" \
+                        "<start_of_turn>model"
+
+                    prompt_template_context = \
+                        "<bos><start_of_turn>user\n" \
+                        "Given that 'Beijing is the capital of China'," \
+                        " what is the capital of China?<end_of_turn>\n" \
+                        "<start_of_turn>model\n" \
+                        "Beijing<end_of_turn><eos>\n" \
+                        "<start_of_turn>user\n" \
+                        "Given that '{context}', {question}<end_of_turn>\n" \
+                        "<start_of_turn>model"
+                else:
+                    # prompt_template = prompt_template_context = \
+                    #     "<bos><start_of_turn>user\n" \
+                    #     "Always answer the question even if the context isn't useful. \n" \
+                    #     "Write a response that appropriately completes the request. Do not say anything unnecessary.\n" \
+                    #     "Here is context to help -\n" \
+                    #     "{context}\n\n" \
+                    #     "### QUESTION:\n" \
+                    #     "{question} \n\n<end_of_turn>" \
+                    #     "<start_of_turn>model"
+
+                    prompt_template = prompt_template_context = \
+                        "<bos> Always answer the question briefly even if the context isn't useful.\n" \
+                        "Given the context: '{context}', the question is '{question}'"
+
+        # Set prompt instances for those without/with context
+        # May check out this https://huggingface.co/jondurbin/bagel-34b-v0.2#prompt-formatting
+        # https://medium.com/@thakermadhav/build-your-own-rag-with-mistral-7b-and-langchain-97d0c92fa146
+        prompt = PromptTemplate(
+            input_variables=['question'],
+            template=prompt_template,
+        )
+
+        prompt_context = PromptTemplate(
+            input_variables=['question', 'context'],
+            template=prompt_template_context,
+        )
+
+        return prompt, prompt_context
+
+    def get_player(self, fen):
+        # Get player shortname from FEN
+        color_to_be_checked = fen.split(' ')[1]
+        assert color_to_be_checked in ['w', 'b']
+
+        return self.PLAYER_DICT[color_to_be_checked]
+
+    def get_chess_best_move_prompt(self):
+        # Set up query prompt
+        chess_best_move_prompt_template = "Given chess board FEN '{fen}'," \
+            " give the next move of player {player} in algebraic notation indexed by ** without any analysis?"
+
+        prompt = PromptTemplate(
+            input_variables=['player', 'fen'],
+            template=chess_best_move_prompt_template,
+        )
+
+        return prompt
+
+    def get_chess_analysis_prompt(self):
+        # Set prompt template and instance for chess move analysis
+        if (self.llm_model.find('mistral') > -1) and (self.llm_model.find('finetune') > -1):
+            chess_prompt_template = chess_prompt_context_template = \
+                "<s>### Instruction:\nGiven chess board FEN '{fen}', explain the rationale of {player} taking {move}? " \
+                "\n### Context: \n \n### Response:"
+        else:
+            chess_prompt_template = \
+                "Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
+
+            chess_prompt_context_template = \
+                "Given chess board FEN '{fen}' and context that '{context}', explain briefly why {player} takes {move}?" \
+                " If the context is useless, ignore it."
+
+        chess_prompt = PromptTemplate(
+            input_variables=['player', 'move', 'fen'],
+            template=chess_prompt_template,
+        )
+
+        chess_prompt_context = PromptTemplate(
+            input_variables=['player', 'move', 'fen', 'context'],
+            template=chess_prompt_context_template,
+        )
+
+        return chess_prompt, chess_prompt_context
+
+    def generate_chess_best_move_prompt(self, player, fen):
+        prompt = self.chess_best_move_prompt.format(fen=fen, player=player)
+
+        return prompt
+
     def generate_chess_analysis_prompt(self, player, move, fen, context=''):
         # Chess analysis has specific prompt template and instance
         if self.prompt_example:
             if context == '':
-                prompt = self.chess_prompt.format(
+                prompt = self.chess_analysis_prompt.format(
                     player=player,
                     move=move,
                     fen=fen
                 )
             else:
-                prompt = self.chess_prompt_context.format(
+                prompt = self.chess_analysis_prompt_context.format(
                     player=player,
                     move=move,
                     fen=fen,
                     context=context
                 )
         else:
-            prompt = self.chess_prompt_context.format(
+            prompt = self.chess_analysis_prompt_context.format(
                 player=player,
                 move=move,
                 fen=fen,
@@ -484,6 +525,24 @@ class LLMEngine:
 
         return prompt
 
+    def chess_best_move(self, fen):
+        # Get the player name
+        player = self.get_player(fen)
+
+        # Generate the question
+        prompt = self.generate_chess_best_move_prompt(player, fen)
+
+        # Set seed to make the response deterministric
+        self.set_seed(self.seed)
+
+        # Generate the answer
+        raw_analysis = self.llm_reader(prompt)
+
+        # Extract the key answer
+        next_move = extract_chess_best_move_from_response(self.llm_model, raw_analysis)
+
+        return next_move
+
     def chess_analysis(self, player, move, fen, is_rag, topk=1):
         # Get the question
         prompt = self.generate_chess_analysis_prompt(player, move, fen)
@@ -500,7 +559,7 @@ class LLMEngine:
         raw_analysis = self.llm_reader(prompt)
 
         # Extract the key answer
-        analysis = extract_chess_answer_from_response(self.llm_model, raw_analysis, self.prompt_example)
+        analysis = extract_chess_analysis_from_response(self.llm_model, raw_analysis, self.prompt_example)
 
         return analysis
 

@@ -180,9 +180,9 @@ def extract_answer_from_response(llm_model, answer, prompt_example):
 
 # =============================================================================================================
 
-def extract_chess_answer_from_response(llm_model, answer, prompt_example):
+def extract_chess_analysis_from_response(llm_model, answer, prompt_example):
     # Debug information
-    if DEBUG: print('#### Chess', answer)
+    if DEBUG: print('#### Chess analysis', answer)
 
     try:  # TODO
         # Parse the answer, corresponding to get_llm_reader()
@@ -208,5 +208,29 @@ def extract_chess_answer_from_response(llm_model, answer, prompt_example):
         answer = answer
 
     answer = answer.replace('\n', '#linechange').strip()
+
+    return answer
+
+# =============================================================================================================
+
+def extract_chess_best_move_from_response(llm_model, answer):
+    # Debug information
+    if DEBUG: print('#### Chess best move', answer)
+
+    try:
+        if llm_model in ['gpt-4o']:
+            answer = answer.split('**')[1].replace('.', '').split(' ')[-1]
+        elif llm_model.find('mistral') > -1:
+            if llm_model.find('-instruct') > -1:
+                answer = answer.split('[/INST]')[1].split('** is')[-1].split('.</s>')[0].split('</s>')[0] \
+                    .split('.')[-1].replace(' ', '').replace('*', '').replace(':', '')
+        elif llm_model.find('gemma') > -1:
+            if llm_model.find('-it') > -1:
+                answer = answer.split('model\n')[-1].split('** is')[-1].split('is **')[-1] \
+                    .replace(' ', '').replace('*', '').replace('.', '')
+    except:
+        answer = answer.split('** is')[-1]
+
+    answer = answer.replace('\n', '').strip()
 
     return answer
