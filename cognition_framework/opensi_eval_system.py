@@ -88,7 +88,14 @@ class OpenSIEvalSystem:
         best_move_updated = []
 
         for best_moves in best_move_list:
-            best_move_updated.append([v for v in best_moves.split(' ') if v.find('.') <= -1])
+            # Truncate to best the moves only
+            best_move_updated_per = [v for v in best_moves.split(' ') if v.find('.') <= -1]
+
+            # Always add # to the last move
+            best_move_updated_per[-1] += '#'
+
+            # Assign to the entire question list
+            best_move_updated.append(best_move_updated_per)
 
         # Set a dictionary
         info = {
@@ -256,9 +263,9 @@ class OpenSIEvalSystem:
                                 # Save the actual move to next_moves
                                 next_moves.append(next_move)
 
-                        # Check if next moves are the same as GT moves, remove # only for scoring because the GT has no #
-                        comparison_list = [float(next_v.replace('#', '').replace('+', '') == gt_v.replace('+', '')) for next_v, gt_v in zip(next_moves, gt_moves)]
-                        score_per = np.prod(np.array(comparison_list))
+                        # Check if next moves are the same as GT moves, only on the player which is odd
+                        comparison_list = [float(next_v == gt_v) for idx_inner, (next_v, gt_v) in enumerate(zip(next_moves, gt_moves)) if idx_inner % 2 == 1]
+                        score_per = np.mean(np.array(comparison_list))
                     else:
                         # Call to solve each puzzle, not yet to be used for score calculation
                         next_moves = self.chess_engine.puzzle_solve(fen, move_mode)
@@ -326,11 +333,11 @@ class OpenSIEvalSystem:
                         gt_answer = [str(int(gt_answer)), str(convert_number2word(int(gt_answer)))]
                     elif isinstance(gt_answer, str):
                         # A number can be read as a string, so convert it to a number
-                        gt_answer = gt_answer.lower().replace('\n', '\newline')
+                        gt_answer = gt_answer.lower().replace('\n', '#newline')
 
                     if isinstance(result, str):
-                        result = result.lower().replace('\n', '\newline')
-                        raw_result = raw_result.lower().replace('\n', '\newline')
+                        result = result.lower().replace('\n', '#newline')
+                        raw_result = raw_result.lower().replace('\n', '#newline')
 
                     # Check if the answer word is in the prediction
                     if isinstance(gt_answer, list):
@@ -399,12 +406,12 @@ if __name__ == '__main__':
     # Set llm_model_list to run all at once
     llm_model_list = [
         # "mistral-7b-v0.1",
-        # "mistral-7b-instruct-v0.1",
+        "mistral-7b-instruct-v0.1",
         # "gemma-7b",
         "gemma-7b-it",
         # "mistral-7b-finetuned",
         # "mistral-7b-finetuned-new",
-        # "gpt-4o"
+        "gpt-4o"
     ]
 
     # Run all models at once
@@ -456,6 +463,11 @@ if __name__ == '__main__':
 
                 # Open a log file and pass the instance
                 log_file = log_file.replace('.csv', '_isragTrue.csv') if is_rag else log_file.replace('.csv', '_isragFalse.csv')
+
+                # Add a tag to the log file to distinguish Stockfish or GPT as best move predictor for Chess games
+                if query.find('puzzle') > -1:
+                    log_file = log_file.replace('.csv', f'_{chess_best_move_predictor}AsBestMovePredictor.csv')
+
                 log_file_pt = open(log_file, 'w')
                 log_file = csv.writer(log_file_pt)
 

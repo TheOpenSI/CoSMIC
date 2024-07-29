@@ -1,6 +1,7 @@
 import sys, os
 
 from openai import OpenAI
+from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from utils.log_tool import set_color
 
@@ -31,8 +32,17 @@ class ChessEngineGPT:
 
         # Login OpenAI
         # Cannot hard-code this key as it is forbidden by GitHub
-        api_key = ""
-        self.model = OpenAI(api_key=api_key)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        self.root = f"{current_dir}/../../.."
+
+        # Set the key stored file
+        load_dotenv(f"{self.root}/.env")
+
+        # Variable openai_key stores OpenAI key
+        openai_key = os.getenv('openai_key')
+
+        # Login OpenAI account
+        self.model = OpenAI(api_key=openai_key)
 
         # Set up GPT chat template
         chat_template_context = lambda query: [

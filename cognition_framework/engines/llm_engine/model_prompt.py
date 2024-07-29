@@ -1,5 +1,7 @@
+import torch
+
 from transformers import pipeline
-from .load_model_test import generate_response
+# from .load_model_test import generate_response
 
 
 # =============================================================================================================
@@ -9,6 +11,10 @@ DEBUG = False
 # =============================================================================================================
 
 def get_llm_reader(llm_model, tokenizer, model, has_context=False):
+    # Set model to the evaluation mode
+    if hasattr(model, 'eval'):  # OpenAI API has no eval, just trained models
+        model.eval()
+
     # Get LLM model
     llm_model = llm_model.lower()
 
@@ -43,7 +49,7 @@ def get_llm_reader(llm_model, tokenizer, model, has_context=False):
                     chat_template_context(query) if has_context else chat_template(query),
                     return_tensors="pt"
                 ).to('cuda')
-            
+
             llm_reader = lambda query: \
                 tokenizer.decode(
                     model.generate(
@@ -55,18 +61,35 @@ def get_llm_reader(llm_model, tokenizer, model, has_context=False):
                     )[0]
                 )
         else:
-            llm_reader = lambda query: pipeline(
-                task="text-generation",
-                model=model,
-                tokenizer=tokenizer,
-                do_sample=False,
-                # temperature=0.2,  # block do_sample thus remove this
-                repetition_penalty=1.1,
-                return_full_text=False,
-                max_new_tokens=500,
-            )(query)[0]["generated_text"]
+            if llm_model.find('finetune') > -1:
+                input_ids = lambda query: tokenizer(
+                    query,
+                    return_tensors='pt'
+                ).input_ids.to("cuda")
 
-            # llm_reader = lambda query: generate_response(model, tokenizer, query)
+                llm_reader = lambda query: \
+                    tokenizer.decode(
+                        model.generate(
+                            input_ids=input_ids(query),
+                            attention_mask=torch.where(input_ids(query) == 2, 0, 1),
+                            max_new_tokens=2048,
+                            do_sample=False,
+                            # top_p=0.9,
+                            # temperature=0.5
+                        )[0],
+                        skip_special_tokens=True
+                    )
+            else:
+                llm_reader = lambda query: pipeline(
+                    task="text-generation",
+                    model=model,
+                    tokenizer=tokenizer,
+                    do_sample=False,
+                    # temperature=0.2,  # block do_sample thus remove this
+                    repetition_penalty=1.1,
+                    return_full_text=False,
+                    max_new_tokens=500,
+                )(query)[0]["generated_text"]
     elif llm_model.find('gemma') > -1:
         # https://medium.com/@coldstart_coder/
         # getting-started-with-googles-gemma-llm-using-huggingface-libraries-a0d826c552ae
@@ -135,20 +158,23 @@ def extract_answer_from_response(llm_model, answer, prompt_example):
             if llm_model.find('-instruct') > -1:
                 answer = answer.split('[/INST]')[-1].split('</s>')[0]
             else:
-                if prompt_example:  # with an example in the prompt, can always parse by [INST]
-                    answer = answer.split('[INST]')[0]
+                if llm_model.find('finetune') > -1:
+                    answer = answer.split('###')[-1]
+                else:
+                    if prompt_example:  # with an example in the prompt, can always parse by [INST]
+                        answer = answer.split('[INST]')[0]
         elif llm_model.find('gemma') > -1:
             if llm_model.find('-it') > -1:
-                answer = answer.split('model\n')[1].split('\n')[0]
+                answer = answer.split('model\n')[1]
             else:
                 if prompt_example:
-                    answer = answer.split('model\n')[2].split('\n')[0]
+                    answer = answer.split('model\n')[2]
                 else:
-                    answer = answer.split('### ANSWER:\n')[-1].split('\n')[0]
+                    answer = answer.split('### ANSWER:\n')[-1]
     except:
         answer = answer
 
-    answer = answer.replace('\n', ' ').strip()
+    answer = answer.replace('\n', '#linechange').strip()
 
     return answer
 
@@ -164,20 +190,23 @@ def extract_chess_answer_from_response(llm_model, answer, prompt_example):
             if llm_model.find('-instruct') > -1:
                 answer = answer.split('[/INST]')[-1].split('</s>')[0]
             else:
-                # very uncertain keywords
-                if prompt_example:
-                    answer = answer.split('**Solution:**')[1].split('\n')[0]
+                if llm_model.find('finetune') > -1:
+                    answer = answer.split('\n')[-1]
                 else:
-                    answer = answer.split('Answer')[1].split('Comment:')[0]
+                    # very uncertain keywords
+                    if prompt_example:
+                        answer = answer.split('**Solution:**')[1]
+                    else:
+                        answer = answer.split('Answer')[1].split('Comment:')[0]
         elif llm_model.find('gemma') > -1:
             if llm_model.find('-it') > -1:
-                answer = answer.split('model\n')[1].split('\n')[0]
+                answer = answer.split('model\n')[1]
             else:
                 # very uncertain keywords
                 answer = answer.split('Answer:\n')[1]
     except:
         answer = answer
 
-    answer = answer.replace('\n', ' ').strip()
+    answer = answer.replace('\n', '#linechange').strip()
 
     return answer
