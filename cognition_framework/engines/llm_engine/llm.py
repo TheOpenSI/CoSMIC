@@ -13,9 +13,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from peft import PeftModel
 from openai import OpenAI
 from utils.log_tool import set_color
-from .model_prompt import get_llm_reader, extract_answer_from_response
-from .model_prompt import extract_chess_analysis_from_response, extract_chess_best_move_from_response
-# from .load_model_test import load_model_external
+from .model_prompt import LLMPrompter
 
 
 # =============================================================================================================
@@ -28,7 +26,9 @@ LLM_MODEL_DICT = {
     "gemma-7b-it": "google/gemma-7b-it",  # bad
     "mistral-7b-finetuned": "adnaan525/opensi_mistral_3tasks",
     "mistral-7b-finetuned-new": "OpenSI/cognitive_AI",
-    "gpt-4o": "gpt-4o"
+    "mistral-7b-finetuned-20240801": "OpenSI/cognitive_AI_finetune_3",
+    "gpt-4o": "gpt-4o",
+    "gpt-3.5-turbo": "gpt-3.5-turbo"
 }
 
 # =============================================================================================================
@@ -52,7 +52,7 @@ class LLMEngine:
         self.PLAYER_DICT = {'w': 'White', 'b': 'Black'}
 
         # Automatically set back_end and whether use prompt example
-        if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it", "gpt-4o"]:
+        if self.llm_model in ["mistral-7b-instruct-v0.1", "gemma-7b-it", "gpt-4o", "gpt-3.5-turbo"]:
             self.back_end = "chat"
             self.prompt_example = False  # this will not affect chat mode which has no prompt
         else:
@@ -164,8 +164,11 @@ class LLMEngine:
         self.chess_best_move_prompt = self.get_chess_best_move_prompt()
 
         # -----------------------------------------------------------------------------------------------------
+        # Set a prompter for LLM
+        self.llm_prompter = LLMPrompter(self.llm_model, tokenizer, self.model)
+
         # Get LLM reader with inbuilt query encoder
-        self.llm_reader = get_llm_reader(self.llm_model, tokenizer, self.model)
+        self.llm_reader = self.llm_prompter.get_llm_reader()
 
         # -----------------------------------------------------------------------------------------------------
         # For document analysis and knowledge database generation/update
@@ -539,7 +542,7 @@ class LLMEngine:
         raw_analysis = self.llm_reader(prompt)
 
         # Extract the key answer
-        next_move = extract_chess_best_move_from_response(self.llm_model, raw_analysis)
+        next_move = self.llm_prompter.extract_chess_best_move_from_response(raw_analysis)
 
         return next_move
 
@@ -559,9 +562,53 @@ class LLMEngine:
         raw_analysis = self.llm_reader(prompt)
 
         # Extract the key answer
-        analysis = extract_chess_analysis_from_response(self.llm_model, raw_analysis, self.prompt_example)
+        analysis = self.llm_prompter.extract_chess_analysis_from_response(raw_analysis, self.prompt_example)
 
-        return analysis
+        return analysis, raw_analysis
+
+    # TODO
+    def chess_cot_analysis(self, fen, best_move):
+        chess_analysis_query_template = \
+            "Given chess board FEN '{fen}' and context that '', explain briefly why {player} takes {best_move}?" \
+            " If the context is useless, ignore it."
+
+        chess_cot_analysis_query_template = \
+            "Question: 'Given chess board FEN '{fen}' and context that '', explain briefly why {player} takes {best_move}?" \
+            " If the context is useless, ignore it.'\n" \
+            "- Provide step-by-step reasoning to answer the question.\n" \
+            "- Give a succinct answer starting with <ANSWER>: $answer." \
+
+        for idx, prompt_template in enumerate([chess_analysis_query_template, chess_cot_analysis_query_template]):
+            chess_cot_analysis_prompt_template = PromptTemplate(
+                input_variables=['fen', 'player', 'best_move'],
+                template=prompt_template,
+            )
+
+            player = self.get_player(fen)
+
+            chess_cot_analysis_prompt = chess_cot_analysis_prompt_template.format(
+                fen=fen,
+                player=player,
+                best_move=best_move
+            )
+
+            raw_analysis = self.llm_reader(chess_cot_analysis_prompt)
+
+            if idx == 1:
+                # Remove the first point of FEN analysis
+                fen_analysis = raw_analysis.split('\n1.')[-1].split('\n2.')[0]
+                analysis = raw_analysis.replace('\n1.', '')
+                analysis = analysis.replace(fen_analysis, '')
+
+                for i in range(10):
+                    analysis = analysis.replace(f'\n{i}.', f'\n{i-1}.')
+
+                raw_cot_analysis = raw_analysis
+                cot_analysis = analysis
+            else:
+                gpt_analysis = raw_analysis
+
+        return cot_analysis, raw_cot_analysis, gpt_analysis
 
     def __call__(
             self,
@@ -604,6 +651,6 @@ class LLMEngine:
             raw_answer = self.llm_reader(prompt)
 
             # Parse answer
-            answer = extract_answer_from_response(self.llm_model, raw_answer, self.prompt_example)
+            answer = self.llm_prompter.extract_answer_from_response(raw_answer, self.prompt_example)
 
         return answer, context_score, raw_answer

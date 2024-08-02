@@ -82,6 +82,7 @@ class ChessEngine:
         # Reset stockfish
         if self.back_end == 'stockfish':
             self.engine.reset_engine_parameters()
+            self.engine.set_fen_position("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", True)
 
         # Initialize all global parameters for the current board
         self.is_game_over = False

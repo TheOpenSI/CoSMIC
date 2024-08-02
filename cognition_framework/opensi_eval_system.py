@@ -186,6 +186,12 @@ class OpenSIEvalSystem:
                 fens = puzzle_info['fen']
                 gt_move_lists = puzzle_info['moves']
                 players = puzzle_info['player']
+
+                # fens = pd.read_csv(query)['FEN']
+                # gt_move_lists = [[None]] * len(fens)
+                # players = [None] * len(fens)
+                # move_mode = 'algebric'
+
                 num_fens = len(fens)
                 score_list = []
 
@@ -215,7 +221,7 @@ class OpenSIEvalSystem:
                                 next_move = self.chess_best_move_fnc(current_fen, move_mode=move_mode)
 
                                 # Interaction between LLM and Chess engine
-                                analysis = self.llm_engine.chess_analysis(
+                                analysis, raw_analysis = self.llm_engine.chess_analysis(
                                     player=player,
                                     move=next_move,
                                     fen=current_fen,
@@ -228,7 +234,8 @@ class OpenSIEvalSystem:
                                     'info',
                                     f"Puzzle {idx + 1} at step {idx_move + 1}:" \
                                     f" player {player} takes {next_move} given FEN '{current_fen}'.\n" \
-                                    f"Analysis: {analysis}\n")
+                                    f"Analysis: {analysis}\n"
+                                    f"Raw Analysis: {raw_analysis}\n")
                                 )
 
                                 # Save to csv
@@ -236,7 +243,11 @@ class OpenSIEvalSystem:
                                     log_file.writerow([
                                         f"Puzzle {idx + 1} at step {idx_move + 1}: " \
                                         f"player {player} takes {next_move} given FEN '{current_fen}'",
-                                        analysis
+                                        analysis,
+                                        '',
+                                        '',
+                                        '',
+                                        raw_analysis
                                     ])
 
                             try:
@@ -358,6 +369,58 @@ class OpenSIEvalSystem:
                 # Save to log
                 if log_file is not None:
                     log_file.writerow([query, "", "", f"{average_score:.4f}"])
+            elif query.find('finetune_dataset') > -1:  # TODO
+                # This is to generate CoT analysis from OpenAI for model finetuning on reasoning
+                df = pd.read_csv(query)
+                raw_fen = df['Question']
+                raw_best_move = df['Answer']
+                fens = []
+                best_moves = []
+
+                for fen_per, best_move_per in zip(raw_fen, raw_best_move):
+                    # The move has ['{best_move}'] so extract it from these keywords
+                    if isinstance(best_move_per, str) and best_move_per.find('[') > -1 and best_move_per.find(']') > -1:
+                        fens.append(fen_per)
+                        best_moves.append(best_move_per.replace("['", '').replace("']", ''))
+
+                for idx, (fen, best_move) in enumerate(zip(fens, best_moves)):
+                    # Print the progress
+                    if idx % 10 == 0 or idx == len(fens) - 1:
+                        print(set_color("info", f"Generating finetune dataset for reasoning {idx + 1}/{len(fens)}..."))
+
+                    # Run OpenAI API with CoT-type question and direct question, returning comparable analysis
+                    cot_analysis, raw_cot_analysis, gpt_analysis = self.llm_engine.chess_cot_analysis(fen, best_move)
+
+                    # Save to log
+                    if log_file is not None:
+                        log_file.writerow([fen, best_move, cot_analysis, raw_cot_analysis, gpt_analysis])
+            elif query.find('checkmate_moves') > -1:
+                # This is to generate FEN with a sequence of moves to chess engine for model finetuning on reasoning checkmate
+                df = pd.read_csv(query)
+                raw_moves = df['moves']
+
+                for idx, raw_move_per in enumerate(raw_moves):
+                    # Print the progress
+                    if idx % 10 == 0 or idx == len(raw_moves) - 1:
+                        print(set_color("info", f"Generating FEN with moves for reasoning on checkmate {idx + 1}/{len(raw_moves)}..."))
+
+                    # Remain the last checkmate move with the rest to generate FEN
+                    moves = [str(v.replace('.', '')) for v in raw_move_per.split(' ') if v != '']
+                    next_move = moves[-1]
+
+                    # Reset the chess board
+                    self.chess_engine.reset_board()
+
+                    # Push a bunch of moves
+                    for current_move in moves[:-1]:
+                        self.chess_engine.push_single(current_move, move_mode='algebric')
+
+                    # Get the FEN
+                    current_fen = self.chess_engine.get_fen()
+
+                    # Write to .csv file
+                    if log_file is not None:
+                        log_file.writerow([current_fen, f"['{next_move}']"])
         else:
             # Update context from text has no question, thus updating the database only
             if query.find('__update__store__') > -1:
@@ -394,19 +457,21 @@ if __name__ == '__main__':
     # Set llm_model_list to run all at once
     llm_model_list = [
         # "mistral-7b-v0.1",
-        "mistral-7b-instruct-v0.1",
+        # "mistral-7b-instruct-v0.1",
         # "gemma-7b",
-        "gemma-7b-it",
+        # "gemma-7b-it",
         # "mistral-7b-finetuned",
         # "mistral-7b-finetuned-new",
-        # "gpt-4o"
+        "mistral-7b-finetuned-20240801",
+        # "gpt-4o",
+        # "gpt-3.5-turbo"
     ]
 
     # Run all models at once
     for llm_model in llm_model_list:
         # Whether use a trained model or Stockfish to predict the next move
         # Cannot set a seperate llm model for best move prediction due to the memory limitation
-        chess_best_move_predictor = llm_model
+        chess_best_move_predictor = 'stockfish'  # stockfish or llm_model
 
         # Only support certain best move predictors
         valid_best_move_predictor = ['stockfish'] + [v for v in LLM_MODEL_DICT.keys()]
@@ -443,7 +508,7 @@ if __name__ == '__main__':
             if query.find(".csv") > -1:
                 # 20240725 For other qualities, which excludes the reasoning (puzzle analysis), use RAG
                 # For puzzle analysis, switch off RAG because from the experiments, adding RAG ruins the analysis
-                if query.find('puzzle') > -1:
+                if query.find('puzzle') > -1 or query.find('finetune') > -1:
                     is_rag = False
                 else:
                     is_rag = True
@@ -469,7 +534,12 @@ if __name__ == '__main__':
                 log_file = csv.writer(log_file_pt)
 
                 # Write heads
-                log_file.writerow(["Question", "Answer", "Label", "Score", "Comment", "Raw Answer"])
+                if query.find('finetune_dataset') > -1:
+                    log_file.writerow(["FEN", "Best Move", "CoT Analysis", "Raw CoT Analysis", "GPT Analysis"])
+                elif query.find('checkmate_moves') > -1:
+                    log_file.writerow(["FEN", "Next Move"])
+                else:
+                    log_file.writerow(["Question", "Answer", "Label", "Score", "Comment", "Raw Answer"])
             else:
                 log_file_pt = None
                 log_file = None
