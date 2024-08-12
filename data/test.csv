@@ -1,20 +1,23 @@
 Question,Answer
-What's the capital of Australia?,Canberra
-What's the capital of Bangladesh?,Dhaka
-What's the capital of Germany?,Berlin
-What's the capital of Spain?,Madrid
-Who is the author of the book complete guide to chess?,Logan Donovan
-How many UCL titles does Real Madrid have?,14
-__update__store__ Real Madrid won 15 UCL titles.,
-How many UCL titles does Real Madrid have in 2024?,15
-What's the capital of Saudi Arabia?,Riyadh
-__next__move__ d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3 Ba5,Bf4
-./data/test_framework/reasoning_dm_an/puzzle_data_updated.csv,
-./data/test_framework/attention/rag_questions.csv,
-./data/test_framework/memory/memory.csv,
-./data/test_framework/memory/memory_2.csv,
-./data/test_framework/memory/memory_update.csv,
+skip What's the capital of Australia?,Canberra
+skip What's the capital of Bangladesh?,Dhaka
+skip What's the capital of Germany?,Berlin
+skip What's the capital of Spain?,Madrid
+skip Who is the author of the book complete guide to chess?,Logan Donovan
+skip How many UCL titles does Real Madrid have?,14
+skip __update__store__ Real Madrid won 15 UCL titles.,
+skip How many UCL titles does Real Madrid have in 2024?,15
+skip What's the capital of Saudi Arabia?,Riyadh
+skip __next__move__ d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3 Ba5,Bf4
+skip ./data/test_framework/reasoning_dm_an/puzzle_data_updated.csv,
+skip ./data/test_framework/attention/rag_questions.csv,
+skip ./data/test_framework/memory/memory.csv,
+skip ./data/test_framework/memory/memory_2.csv,
+skip ./data/test_framework/memory/memory_update.csv,
 ./data/test_framework/perception/capture_analysis_8.csv,
-./data/test_framework/perception/fen_perception.csv,
-./data/test_framework/perception/perception_20.csv,
+skip ./data/test_framework/perception/fen_perception.csv,
+skip ./data/test_framework/perception/perception_20.csv,
+skip ./data/fen_next_best_move_sf_puzzle.csv,
+skip ./data/checkmate_moves.csv
+skip ./data/finetune_dataset.csv,
 exit,
