@@ -1,152 +1,166 @@
-# Cognitive AI
+# Official Implementation
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the implementation of a Cognitive AI experiments
+This is the official implementation of OpenSI AI System-v1.0.0.
 
-## Workflow
+## Installation
 
-### 1. Progressive Move Dataset
-
-- [x] **Collect Data**: LICHESS dataset from [Kaggle](https://www.kaggle.com/datasets/datasnaek/chess)
-- [x] **Preprocess Data**: Create the progressive move dataset
-
-### 2. Prompt Engineering Template
-
-- [x] **Design Prompt Templates**: Create chain-of-thought prompt template
-- [x] **Test Prompts**: Validate the prompts with OPENAI API
-
-### 3. Generate Explanation
-
-- [x] **Explanation Dataset**: Use OPENAI API and the template to generate the dataset with move explanation
-- [x] **Validate Dataset**: Valdiate the generated dataset.
-
-### 4. Select LLM
-
-- [x] **Evaluate Options**: Review available open source Large Language Models with **System Prompt** compatibility
-- [x] **Select Model**: Choose the most appropriate LLM. Selected model/s so far - **Mistral 7B instruct**, **Orca 2**  
-
-### 5. Load LLM
-
-- [x] **Load Model**: Quantization
-
-### 6. Finetune
-
-- [x] **Finetune Model:** LoRA, DoRA (Used LoRA for now)
-- [x] **Evaluate Performance**: [OpenSI Finetuned Mistral](adnaan525/opensi_mistral_3tasks)
-
-### 7. Retrieval-Augmented Generation (RAG)
-
-- [x] **Setup RAG**: Implement the Retrieval-Augmented Generation process (learn new knowledge)
-- [x] **Collect Documents**: Feed the model a comprehensive collection of chess books
-- [x] **Vectore Store Sync**: Update vector store on the fly, **Inserting new document**
-- [x] **Test and Validate**: Conduct thorough testing to validate the integration and performance of the RAG system.
-
-![Updating vector index on a new thread to gather new information](https://github.com/TheOpenSI/cognitive_AI_experiments/blob/RAG/RAG/RAG.png)
-
-## Setup
-
-### Docker
-I used a docker image with all necessary libraries including jupyter-lab, torch, llama_index, langchain, bits_and_bytes, accelerate, transformers for local development.
-```bash
-docker pull ghost525/llm_finetune:latest
-``` 
-
-### Progressive Move Dataset
-From Kaggle Lichess dataset, we created progessive move dataset to support a typical NLP training pipeline. Target dataset shape is ```(5000, 3)``` which had been splitted into 10 files, each with 500 rows.
-
-### Explanation Data Generation
-The ```generate_data.py``` will generate explanation data and save in a CSV file automatically. The repo contains a codespace with all dependencies preinstalled on the master branch. For local development please follow the follwing procedures -   
-- Resolve dependencies
-    ```bash
-    pip install -r requirements.txt
-    ```
-- OpenAI API key - We can pass our API key using a **txt file, .env file or manually pasting it as an argument in the terminal.** Example use cases-  
-    Follwing options have been added to the ```generate_data.py```
-    ```bash
-    $ python generate_data.py --help
-    usage: generate_data.py [-h] --file FILE [-i I] [-mI]
-
-    options:
-    -h, --help  show this help message and exit
-    --file      [Required] path to the input data cluster(csv file), range 0-9(inclusive)
-    -i          use a .txt file to pass token
-    -mI         manually enter your token
-    ```
-    example use cases:
-    ```
-    python generate_data.py -i txt_file_path --file 0
-    python generate_data.py -mI --file 0 # you will be prompted to paste your api key
-    python generate_data.py --file 0 # default, use .env file, create .env file and add the openai API token using the variable "openai_api_key"
-    ```
-    example output:
-    ```
-    $ python generate_data.py -mI --file 9
-    [Info] User will be requested for token
-    Please enter your OpenAI token.
-    __________paste_token__________
-    [Info] Generating explanation for row 0
-    [Info] Generating explanation for row 1
-    [Info] Generating explanation for row 2
-    [Info] Generating explanation for row 3
-    [Info] Generating explanation for row 4
-    [Info] CSV generated
-    ```
-## Cognition Framework test
-The congnition_test script requires an argument to specify the model, currently 3 models are supported.
 ```
-$ python cognition_test.py --help
-usage: cognition_test.py [-h] --model MODEL
+git clone -b release1.0.0 git@github.com:TheOpenSI/cognitive_AI_experiments.git
+```
+Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2) for chess-game queries
+and store as "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
 
-optional arguments:
-  -h, --help     show this help message and exit
-  --model MODEL  [Required] mistral or gemma or llama
+## Requirements
+Please install the following packages before using this code, which is also provided in requirements.txt.
+Users need to register for a Hugging Face account to download base LLMs and an OpenAI account to use the API if applicable.
+
 ```
-Example use
-```
-$ python cognition_test.py --model gemma
+huggingface_hub==0.24.0
+imageio==2.34.2
+langchain==0.2.14
+langchain_community==0.2.12
+langchain_huggingface==0.0.3
+llama_index==0.11.1
+matplotlib==3.7.5
+numpy==1.24.4
+numpy==1.24.3
+openai==1.42.0
+pandas==2.0.3
+peft==0.11.1
+Pillow==9.5.0
+Pillow==10.4.0
+python-dotenv==1.0.1
+pytz==2024.1
+torch==2.2.0
+transformers==4.42.4
 ```
 
-## OpenSI Evaluation System
-The prototype of the evaluation system is showcased by running
-```
-cd cognition_framework;
-python opensi_eval_system.py
-```
-It will return the success ratio of testing samplings given in
-```
-cognition_framework/tests/test.csv
-```
-Questions with keyword "skip" will be ignored during evaluation.
+## Framework
+This code has 3 base services, including
 
-**Functions supported**
-- General question answering
-- Question answering with context parsed from documents
-- Next move prediction for chess games
-- Solution prediction for chess puzzles
+- [Chess-game next move predication and analyse](src/services/chess.py)
+- [Vector database for text-based and document-base information update](src/services/vector_database.py)
+- [Context retrieving through the vector database](src/services/rag.py) if applicable
 
-**Engines of the evaluation system**
-- Large language model engine in [`llm.py`](./cognition_framework/engines/llm_engine/llm.py)
-- Chess engine (with API of Stockfish) in [`chess.py`](./cognition_framework/engines/chess_engine/chess.py)
+Upper-level chess-game services include
+- [Puzzle next move prediction and analyse](src/modules/chess_qa_puzzle.py)
+- [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
+- [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
-**API demo**
-```
-# Filter out low-confidence retrieved context if context document/text is provided, default retrieve_score_threshold=0.0
-qa_system = OpenSIEvalSystem(retrieve_score_threshold=0.7)
 
-# Provide a document path, .pdf only
-qa_system.add_documents([document path])
+## User Guide
+We demonstrate the use of OpenSI AI System through the following code and [the main example](main.py) by running "python main.py".
+The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
+```python
+from src.opensi_ai_system import OpenSIAISystem
+from utils.log_tool import set_color
 
-# Provide a document directory containing multiple .pdf files
-qa_system.add_document_directory([document directory])
+# Build the system with a given base LLM.
+llm_name = "mistral-7b-instruct-v0.1"
+opensi_eval_system = OpenSIAISystem(llm_name=llm_name)
 
-# Set up a question
+# Set the question.
+# One can set each question with "[question],[reference answer (optional)]" in a .csv file.
 query = "What is the capital of Australia?"
 
-# Call the evaluation system entry with up to topk tokens from the context document(s) provided
-answer = qa_system(query, topk=5)
+# Get the answer, raw_answer for response without truncation, retrieve_score (if switched on) for
+# the similarity score to context in the system's vector database.
+answer, raw_answer, retrieve_score = opensi_eval_system(query, log_file=None)
 
-# Print out the testing sample with answer
-print(set_color('info', f"Query: {query}.\n==> Answer: {answer}."))
+# Print the answer.
+print(set_color("info", f"Question: {query}\nAnswer: {answer}."))
 
-# Release the system
-qa_system.quit()
+# Remove memory cached in the system.
+opensi_eval_system.quit()
 ```
+More example questions are provided in [test.csv](data/test.csv), which can be used as
+```python
+import os, csv
+import pandas as pd
+
+from src.opensi_ai_system import OpenSIAISystem
+from utils.log_tool import set_color
+
+# Build the system with a given base LLM.
+llm_name = "mistral-7b-instruct-v0.1"
+opensi_eval_system = OpenSIAISystem(llm_name=llm_name)
+
+# Get the file's absolute path.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+root = f"{current_dir}"
+
+# Set a bunch of questions, can also read from .csv.
+df = pd.read_csv(f"{root}/data/test.csv")
+queries = df["Question"]
+answers = df["Answer"]
+
+# Loop over questions to get the answers.
+for idx, (query, gt) in enumerate(zip(queries, answers)):
+    # Skip marked questions.
+    if query.find("skip") > -1: continue
+
+    # Create a log file.
+    if query.find(".csv") > -1:
+        # Remove all namespace.
+        query = query.replace(" ", "")
+
+        # Return if file is invalid.
+        if not os.path.exists(query):
+            set_color("error", f"!!! Error, {query} not exist.")
+            continue
+
+        # Change the data folder to results for log file.
+        log_file = query.replace("/data/", f"/results/{llm_name}/")
+
+        # Create a folder to store log file.
+        log_file_name = log_file.split("/")[-1]
+        log_dir = log_file.replace(log_file_name, "")
+        os.makedirs(log_dir, exist_ok=True)
+        log_file_pt = open(log_file, "w")
+        log_file = csv.writer(log_file_pt)
+    else:
+        log_file_pt = None
+        log_file = None
+
+    # Run for each question/query, return the truncated response if applicable.
+    answer, _, _ = opensi_eval_system(query, log_file=log_file)
+
+    # Print the answer.
+    if isinstance(gt, str):  # compare with GT string
+        # Assign to q variables.
+        status = "success" if (answer.find(gt) > -1) else "fail"
+
+        print(set_color(
+            status,
+            f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n")
+        )
+
+    # Close log file pointer.
+    if log_file_pt is not None:
+        log_file_pt.close()
+    
+# Remove memory cached in the system.
+opensi_eval_system.quit()
+```
+
+## Reference
+If this repository is useful for you, please cite the paper below.
+```
+@misc{Adnan2024,
+    author = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
+    title  = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
+    year   = {2024},
+    url    = {https://arxiv.org/abs/2408.04910},
+}
+```
+
+## Contact
+For technical supports, please contact [Danny Xu](danny.xu@canberra.edu.au) or [Muntasir Adnan](adnan.adnan@canberra.edu.au).
+For project supports, please contact [Carlos C. N. Kuhn](carlos.noschangkuhn@canberra.edu.au).
+
+## License
+This code is distributed under [the MIT license](LICENSE).
+
+## Funding
+This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
