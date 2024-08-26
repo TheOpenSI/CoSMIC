@@ -63,9 +63,10 @@ class ChessBase(ServiceBase):
         if binary_path == "":
             binary_path = f"{self.root}/third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
 
-        # This will kill the entire program, better just alert, but so far use assert.
-        assert os.path.exists(binary_path), \
-            set_color("error", f"!!!Error, stockfish binary file not exist: {binary_path}.")
+        # Kill the entire program.
+        if not os.path.exists(binary_path):
+            print(set_color("error", f"!!!Error, stockfish binary file not exist: {binary_path}."))
+            sys.exit()
 
         # Set chess engine.
         self.stockfish = Stockfish(
@@ -223,8 +224,9 @@ class ChessBase(ServiceBase):
             move_mode (str): move mode.
         """
         # Only support algebric mode and coordinate mode.
-        assert move_mode in self.valid_move_modes, \
-            f"!!!Error, unknown move mode: {move_mode}, only support {self.valid_move_modes}."
+        if move_mode not in self.valid_move_modes:
+            print(set_color("error", f"!!!Error, unknown move mode: {move_mode}, only support {self.valid_move_modes}."))
+            sys.exit()
 
     def __call__(
         self,
@@ -408,8 +410,9 @@ class GPTFENNextMove(ChessBase):
         # Get player shortname from FEN
         color_to_be_checked = fen.split(" ")[1]
 
-        assert color_to_be_checked in ["w", "b"], \
-            set_color("error", f"Unsupported player: {color_to_be_checked}.")
+        if color_to_be_checked not in ["w", "b"]:
+            print(set_color("error", f"Player name is wrong, either w or b, but not {color_to_be_checked}."))
+            sys.exit()
 
         return self.PLAYER_DICT[color_to_be_checked]
 

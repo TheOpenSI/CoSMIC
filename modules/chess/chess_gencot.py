@@ -73,7 +73,9 @@ class CotGenerator(ChessBase):
         color_to_be_checked = fen.split(" ")[1]
 
         # Ensure only w or b.
-        assert color_to_be_checked in ["w", "b"]
+        if color_to_be_checked not in ["w", "b"]:
+            print(set_color("error", f"Player name is wrong, either w or b, but not {color_to_be_checked}."))
+            sys.exit()
 
         # Return the full name of player.
         return self.PLAYER_DICT[color_to_be_checked]

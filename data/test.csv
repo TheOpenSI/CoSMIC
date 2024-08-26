@@ -3,9 +3,7 @@ What's the capital of Australia?,Canberra
 What's the capital of Bangladesh?,Dhaka
 What's the capital of Germany?,Berlin
 What's the capital of Spain?,Madrid
-__update__store__ docs/logan_donovan_complete_guide_to_chess.pdf,
 Who is the author of the book complete guide to chess?,Logan Donovan
-__update__store__ docs/ucl_2023.pdf,
 How many UCL titles does Real Madrid have?,14
 __update__store__ Real Madrid won 15 UCL titles.,
 How many UCL titles does Real Madrid have?,15
@@ -20,7 +18,6 @@ __update__store__ docs/memory_update_test.pdf,
 ./data/test_framework/perception/capture_analysis_8.csv,
 ./data/test_framework/perception/fen_perception.csv,
 ./data/test_framework/perception/perception_20.csv,
-./data/fen_next_best_move_sf_puzzle.csv,
 ./data/checkmate_moves.csv
 ./data/finetune_dataset.csv,
 exit,

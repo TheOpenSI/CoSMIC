@@ -23,47 +23,77 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import os, sys
+import os, sys, yaml
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 
 from src.llms import llm as llm_instances
 from src.llms.llm import get_instance
-from src.modules.chess_qa_puzzle import PuzzleAnalyse
-from src.modules.chess_qa_quality import QualityEval
-from src.modules.chess_genfen import FENGenerator
-from src.modules.chess_gencot import CotGenerator
 from src.maps import LLM_INSTANCE_DICT
 from src.services.vector_database import VectorDatabase
 from src.services.qa import QABase
 from src.services.rag import RAGBase
+from modules.chess.chess_qa_puzzle import PuzzleAnalyse
+from modules.chess.chess_qa_quality import QualityEval
+from modules.chess.chess_genfen import FENGenerator
+from modules.chess.chess_gencot import CotGenerator
+from utils.log_tool import set_color
+from box import Box
 
 # =============================================================================================================
 
 class OpenSIAISystem:
     def __init__(
         self,
-        llm_name: str,
+        llm_name: str="",
+        config_path: str="configs/config.yaml"
     ):
         """ Construct OpenSI AI System instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
         Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
 
         Args:
-            llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py.
+            llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
+            is self.config.llm_name.
+            config_path (str): path of configuration file.
         """
+        # Check if required config file exists.
+        if not os.path.exists(config_path):
+            print(set_color("error", f"Config file {config_path} not exist."))
+            sys.exit()
+
+        # Load yaml file to get the config.
+        self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
+
+        # If llm_name is not specified, read it from the config file.
+        if llm_name == "":
+            llm_name = self.config.llm_name
+
+        # Check if llm_name is supported.
+        if llm_name not in LLM_INSTANCE_DICT.keys():
+            print(set_color("error", f"Unsupported LLM: {llm_name}."))
+            sys.exit()
+
         # Build LLM instance from class defined in .py
-        self.llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(seed=0)
+        self.llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(seed=self.config.seed)
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
         vector_database = VectorDatabase()
+
+        # Add a directory of documents.
+        if os.path.exists(self.config.doc_directory):
+            vector_database.add_document_directory(self.config.doc_directory)
+
+        # Add documents.
+        if self.config.document_path != "" or len(self.config.document_path) > 0:
+            vector_database.add_documents(self.config.document_path)
 
         # Base RAG service with vector_database, the database can be changed using
         # self.rag.set_vector_database().
         self.rag = RAGBase(
             vector_database=vector_database,
-            retrieve_score_threshold=0.7,
-            topk=5
+            retrieve_score_threshold=self.config.rag.retrieve_score_threshold,
+            topk=self.config.rag.topk
         )
 
         # QA module to handle basic types of questions, such __next__move__, __update__store__, and

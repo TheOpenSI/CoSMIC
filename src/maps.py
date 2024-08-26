@@ -28,8 +28,6 @@ LLM_MODEL_DICT = {
     "gemma-7b": "google/gemma-7b",
     "gemma-7b-it": "google/gemma-7b-it",
     "mistral-7b-finetuned": "OpenSI/cognitive_AI_finetune_3",
-    "mistral-7b-finetuned-old": "adnaan525/opensi_mistral_3tasks",
-    "mistral-7b-finetuned-new": "OpenSI/cognitive_AI",
     "gpt-3.5-turbo": "gpt-3.5-turbo",
     "gpt-4o": "gpt-4o"
 }
@@ -42,8 +40,6 @@ LLM_INSTANCE_DICT = {
     "gemma-7b": "Gemma7b",
     "gemma-7b-it": "Gemma7bIt",
     "mistral-7b-finetuned": "MistralFinetuned",
-    "mistral-7b-finetuned-old": "MistralFinetuned",
-    "mistral-7b-finetuned-new": "MistralFinetuned",
     "gpt-3.5-turbo": "GPT35Turbo",
     "gpt-4o": "GPT4o"
 }
