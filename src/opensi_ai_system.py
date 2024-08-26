@@ -37,6 +37,7 @@ from modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from modules.chess.chess_qa_quality import QualityEval
 from modules.chess.chess_genfen import FENGenerator
 from modules.chess.chess_gencot import CotGenerator
+from modules.code_generation.code_generation import CodeGenerator
 from utils.log_tool import set_color
 from box import Box
 
@@ -208,6 +209,14 @@ class OpenSIAISystem:
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
+            elif question.find("code_generation") > -1:
+                # Build code_generator in modules/code_generation/code_generation.py
+                code_generator = CodeGenerator(
+                    log_file=log_file,
+                )
+
+                # Batch process the question file.
+                response = code_generator(question)
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)
