@@ -6,7 +6,11 @@ This is the official implementation of OpenSI AI System-v1.0.0.
 ## Installation
 
 ```
+# For users using SSH on GitHub
 git clone -b release1.0.0 git@github.com:TheOpenSI/cognitive_AI_experiments.git
+
+# For users using GitHub account and token
+git clone -b release1.0.0 https://github.com/TheOpenSI/cognitive_AI_experiments.git
 ```
 Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2) for chess-game queries
 and store as "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
@@ -163,8 +167,8 @@ If this repository is useful for you, please cite the paper below.
 ```
 
 ## Contact
-For technical supports, please contact [Danny Xu](danny.xu@canberra.edu.au) or [Muntasir Adnan](adnan.adnan@canberra.edu.au).
-For project supports, please contact [Carlos C. N. Kuhn](carlos.noschangkuhn@canberra.edu.au).
+For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
+For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
 ## License
 This code is distributed under [the MIT license](LICENSE).
