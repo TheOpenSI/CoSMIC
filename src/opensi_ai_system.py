@@ -216,7 +216,7 @@ class OpenSIAISystem:
                 )
 
                 # Batch process the question file.
-                response = code_generator(question)
+                response = code_generator.batch_process(question)
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)
