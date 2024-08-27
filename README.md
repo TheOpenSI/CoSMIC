@@ -1,5 +1,7 @@
 # Official Implementation
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
+[![arXiv](https://img.shields.io/badge/arXiv-2408.04910-oliver.svg)](https://arxiv.org/abs/2408.04910)
+[![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 
 This is the official implementation of OpenSI AI System-v1.0.0.
 
@@ -32,7 +34,6 @@ numpy==1.24.3
 openai==1.42.0
 pandas==2.0.3
 peft==0.11.1
-Pillow==9.5.0
 Pillow==10.4.0
 python-dotenv==1.0.1
 pytz==2024.1
@@ -157,12 +158,13 @@ opensi_eval_system.quit()
 
 ## Reference
 If this repository is useful for you, please cite the paper below.
-```
+```bibtex
 @misc{Adnan2024,
-    author = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
-    title  = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
-    year   = {2024},
-    url    = {https://arxiv.org/abs/2408.04910},
+    title         = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
+    author        = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
+    year          = {2024},
+    eprint        = {2408.04910},
+    archivePrefix = {arXiv}
 }
 ```
 
