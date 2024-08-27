@@ -63,7 +63,7 @@ class QABase(ServiceBase):
 
         Args:
             query (str): a question.
-            context (str, optional): contex associated with the question. Defaults to "".
+            context (str|dict, optional): contex associated with the question. Defaults to "".
             is_rag (bool, optional): if retrieve context for the question. Defaults to False.
 
         Returns:
@@ -124,7 +124,14 @@ class QABase(ServiceBase):
                 user_prompt = self.llm.user_prompter(query, context=context)
 
                 # Get the retrieved context.
-                context, retrieve_score = self.rag(query)
+                context_retrieved, retrieve_score = self.rag(query)
+
+                # Remain the other variables in context if it is a dictionary,
+                # otherwise overwrite it.
+                if isinstance(context, dict):
+                    context["context"] = context_retrieved
+                else:
+                    context = context_retrieved
             else:
                 user_prompt = query
                 retrieve_score = -1

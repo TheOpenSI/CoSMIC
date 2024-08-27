@@ -29,6 +29,27 @@ class UserPromptBase:
         """
         pass
 
+    def get_context(
+        self,
+        context: str=""
+    ):
+        """Get context based on the input type.
+
+        Args:
+            context (str|dict, optional): context, string or dictionary.
+            Defaults to "".
+
+        Returns:
+            context: extract context or an empty string.
+        """
+        if isinstance(context, dict):
+            if "context" in context:
+                context = context["context"]
+            else:
+                context = ""
+
+        return context
+
 # =============================================================================================================
 
 class GeneralUserPrompt(UserPromptBase):
@@ -46,11 +67,14 @@ class GeneralUserPrompt(UserPromptBase):
 
         Args:
             question (str): user question.
-            context (str, optional): external context. Defaults to "".
+            context (str|dict, optional): external context. Defaults to "".
 
         Returns:
             user_prompt (str): user prompt.
         """
+        # Get context.
+        context = self.get_context(context)
+
         if context == "":
             user_prompt = question
         else:
@@ -75,7 +99,6 @@ class FENNextMovePredict(UserPromptBase):
 
         Args:
             question (str): user question.
-            context (str, optional): external context. Defaults to "".
 
         Returns:
             user_prompt (str): user prompt.
@@ -107,11 +130,14 @@ class FENNextMoveAnalyse(UserPromptBase):
             fen (str): Chess FEN.
             player (str): White or Black for the next move.
             move (str): next move taken by player given FEN.
-            context (str, optional): context retrieved if applicable. Defaults to "".
+            context (str|dict, optional): context retrieved if applicable. Defaults to "".
 
         Returns:
             user_prompt (str): user prompt.
         """
+        # Get context.
+        context = self.get_context(context)
+
         if context == "":
             user_prompt = \
                 f"Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"
@@ -143,11 +169,14 @@ class FENNextMoveAnalyseMistralFinetuned(UserPromptBase):
             fen (str): Chess FEN.
             player (str): White or Black for the next move.
             move (str): next move taken by player given FEN.
-            context (str, optional): context retrieved if applicable. Defaults to "".
+            context (str|dict, optional): context retrieved if applicable. Defaults to "".
 
         Returns:
             user_prompt (str): user prompt.
         """
+        # Get context.
+        context = self.get_context(context)
+
         if context == "":
             user_prompt = \
                 f"Given chess board FEN '{fen}', explain briefly why {player} takes {move}?"

@@ -36,6 +36,27 @@ class SystemPromptBase:
         """
         self.use_example = use_example
 
+    def get_context(
+        self,
+        context: str=""
+    ):
+        """Get context based on the input type.
+
+        Args:
+            context (str|dict, optional): context, string or dictionary.
+            Defaults to "".
+
+        Returns:
+            context: extract context or an empty string.
+        """
+        if isinstance(context, dict):
+            if "context" in context:
+                context = context["context"]
+            else:
+                context = ""
+
+        return context
+
     def set_use_example(
         self,
         use_example: bool
@@ -56,7 +77,7 @@ class SystemPromptBase:
 
         Args:
             user_prompt (str): user prompt.
-            context (str, optional): context retrieved if applicable. Defaults to "".
+            context (str|dict, optional): context retrieved if applicable. Defaults to "".
         """
         # Need to be implemented, otherwise raise error.
         raise NotImplementedError
@@ -78,11 +99,14 @@ class Mistral7bv01(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
         """
+        # Get context.
+        context = self.get_context(context)
+
         system_prompt = "<s>"
 
         if self.use_example:
@@ -122,11 +146,14 @@ class Mistral7bInstructv01(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
         """
+        # Get context.
+        context = self.get_context(context)
+
         system_prompt = []
 
         if self.use_example:
@@ -161,11 +188,14 @@ class Gemma7b(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
         """
+        # Get context.
+        context = self.get_context(context)
+
         system_prompt = "<bos>"
         if self.use_example:
             if context == "":
@@ -218,7 +248,7 @@ class GPT35Turbo(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -259,11 +289,14 @@ class MistralFinetuned(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
         """
+        # Get context.
+        context = self.get_context(context)
+
         system_prompt = \
             f"<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
 
@@ -286,11 +319,14 @@ class FENNextMoveAnalyse(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
         """
+        # Get context.
+        context = self.get_context(context)
+
         if context == "":
             system_prompt = user_prompt
         else:
@@ -315,7 +351,7 @@ class FENNextMoveAnalyseMistralFinetuned(SystemPromptBase):
 
         Args:
             user_prompt (str): question with context.
-            context (str, optional): context retrieved. Defaults to "".
+            context (str|dict, optional): context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.

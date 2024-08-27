@@ -335,7 +335,7 @@ class Mistral7bv01(LLMBase):
 
         Args:
             question (str): user question in string.
-            context (str, optional): context retrieved externally if applicable. Defaults to "".
+            context (str|dict, optional): context retrieved externally if applicable. Defaults to "".
 
         Returns:
             response: truncated response.
@@ -554,6 +554,7 @@ class MistralFinetuned(Mistral7bv01):
     def __init__(
         self,
         llm_name: str="mistral-7b-finetuned",
+        use_example=False,
         **kwargs
     ):
         """For Mistral 7B finetuned model.
@@ -561,7 +562,7 @@ class MistralFinetuned(Mistral7bv01):
         Args:
             llm_name (str, optional): LLM name in src/maps.py. Defaults to "mistral-7b-finetuned".
         """
-        super().__init__(llm_name=llm_name, use_example=False, **kwargs)
+        super().__init__(llm_name=llm_name, use_example=use_example, **kwargs)
 
         # Use the base model to build model.
         base_llm_model = "mistral-7b-v0.1"
