@@ -74,14 +74,14 @@ class LLMBase:
             user_prompt_instance_name = "GeneralUserPrompt"
 
         # Build user prompter.
-        self.set_user_prompter(user_prompt_instance_name)
+        self.set_user_prompter_by_instance_name(user_prompt_instance_name)
 
         # Use system prompt by LLM type.
         if system_prompt_instance_name == "":
             system_prompt_instance_name = LLM_INSTANCE_DICT[llm_name]
 
         # Build system prompter.
-        self.set_system_prompter(
+        self.set_system_prompter_by_instance_name(
             system_prompt_instance_name,
             use_example=use_example
         )
@@ -96,37 +96,57 @@ class LLMBase:
         self.model = None
         self.llm = None
 
-    def set_user_prompter(
+    def set_user_prompter_by_instance_name(
         self,
         user_prompt_instance_name: str,
-        *args,
         **kwargs
     ):
-        """Change user prompter externally.
+        """Change user prompter by instance name externally.
 
         Args:
-            user_prompt_instance_name (str): set an user prompt instance name.
+            user_prompt_instance_name (str): set an user prompter instance name.
         """
         self.user_prompter = get_instance(
             user_prompt_instances,
             user_prompt_instance_name
-        )(*args, **kwargs)
+        )(**kwargs)
 
-    def set_system_prompter(
+    def set_user_prompter(
         self,
-        system_prompt_instance_name: str,
-        *args,
-        **kwargs
+        user_prompt_instance: user_prompt_instances.UserPromptBase,
     ):
-        """Change system prompter externally.
+        """Change user prompter externally.
 
         Args:
-            system_prompt_instance_name (str): set a system prompt instance name.
+            user_prompt_instance (UserPromptBase): set an user prompter instance.
+        """
+        self.user_prompter = user_prompt_instance
+
+    def set_system_prompter_by_instance_name(
+        self,
+        system_prompt_instance_name: str,
+        **kwargs
+    ):
+        """Change system prompter by instance name externally.
+
+        Args:
+            system_prompt_instance_name (str): set a system prompter instance name.
         """
         self.system_prompter = get_instance(
             system_prompt_instances,
             system_prompt_instance_name
-        )(*args, **kwargs)
+        )(**kwargs)
+
+    def set_system_prompter(
+        self,
+        system_prompt_instance: system_prompt_instances.SystemPromptBase,
+    ):
+        """Change system prompter externally.
+
+        Args:
+            system_prompt_instance (SystemPromptBase): set a system prompter instance.
+        """
+        self.system_prompter = system_prompt_instance
 
     def set_seed(
         self,
