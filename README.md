@@ -9,10 +9,10 @@ This is the official implementation of the Open Source Institute-Cognition Syste
 
 ```
 # For users using SSH on GitHub
-git clone -b release1.0.0 git@github.com:TheOpenSI/cognitive_AI_experiments.git
+git clone -b release-v1.0.0 git@github.com:TheOpenSI/cognitive_AI_experiments.git
 
 # For users using GitHub account and token
-git clone -b release1.0.0 https://github.com/TheOpenSI/cognitive_AI_experiments.git
+git clone -b release-v1.0.0 https://github.com/TheOpenSI/cognitive_AI_experiments.git
 ```
 Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2) for chess-game queries
 and store as "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
@@ -174,6 +174,8 @@ For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangk
 
 ## License
 This code is distributed under [the MIT license](LICENSE).
+If Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B It from Hugging Face is used, please also follow the license of Hugging Face;
+if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow the licence of OpenAI.
 
 ## Funding
 This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
