@@ -172,6 +172,14 @@ If this repository is useful for you, please cite the paper below.
 For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
+## Contributing
+
+We welcome contributions from the community! Whether you’re a researcher, developer, or enthusiast, there are many ways to get involved:
+
+ - Report Issues: Found a bug or have a feature request? Open an issue on our GitHub page.
+ - Submit Pull Requests: Contribute code by submitting pull requests. Please follow our contribution guidelines.
+ - Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
+
 ## License
 This code is distributed under [the MIT license](LICENSE).
 If Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B It from Hugging Face is used, please also follow the license of Hugging Face;
