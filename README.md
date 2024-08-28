@@ -3,7 +3,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2408.04910-oliver.svg)](https://arxiv.org/abs/2408.04910)
 [![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 
-This is the official implementation of OpenSI AI System-v1.0.0.
+This is the official implementation of the Open Source Institute-Cognition System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0.
 
 ## Installation
 
