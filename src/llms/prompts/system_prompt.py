@@ -26,15 +26,29 @@
 class SystemPromptBase:
     def __init__(
         self,
-        use_example: bool=False
+        use_example: bool=False,
+        prefix: str=""
     ):
         """System prompt base.
 
         Args:
             use_example (bool, optional): use example in system prompt to detect keywords for
-            response truncation. Defaults to False.
+                response truncation. Defaults to False.
+            prefix (str): prefix to start the prompt. Default to "".
         """
         self.use_example = use_example
+        self.prefix = prefix
+
+    def set_prefix(
+        self,
+        prefix: str
+    ):
+        """Set prefix externally.
+
+        Args:
+            prefix (str): prefix for system prompt.
+        """
+        self.prefix = prefix
 
     def get_context(
         self,
@@ -85,10 +99,17 @@ class SystemPromptBase:
 # =============================================================================================================
 
 class Mistral7bv01(SystemPromptBase):
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        prefix="<s>",
+        **kwargs
+    ):
         """For Mistral 7B.
+
+        Args:
+            prefix (str): prompt prefix. Default to "<s>".
         """
-        super().__init__(**kwargs)
+        super().__init__(prefix=prefix, **kwargs)
 
     def __call__(
         self,
@@ -107,7 +128,7 @@ class Mistral7bv01(SystemPromptBase):
         # Get context.
         context = self.get_context(context)
 
-        system_prompt = "<s>"
+        system_prompt = self.prefix
 
         if self.use_example:
             if context == "":
@@ -174,10 +195,17 @@ class Mistral7bInstructv01(SystemPromptBase):
 # =============================================================================================================
 
 class Gemma7b(SystemPromptBase):
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        prefix="<bos>",
+        **kwargs
+    ):
         """For Gemma 7B.
+
+        Args:
+            prefix (str): prompt prefix. Default to "<bos>".
         """
-        super().__init__(**kwargs)
+        super().__init__(prefix=prefix, **kwargs)
 
     def __call__(
         self,
@@ -196,7 +224,8 @@ class Gemma7b(SystemPromptBase):
         # Get context.
         context = self.get_context(context)
 
-        system_prompt = "<bos>"
+        system_prompt = self.prefix
+
         if self.use_example:
             if context == "":
                 system_prompt += \
@@ -275,10 +304,17 @@ class GPT4o(GPT35Turbo):
 # =============================================================================================================
 
 class MistralFinetuned(SystemPromptBase):
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        prefix="<s>",
+        **kwargs
+    ):
         """For Mistral 7B Finetuned LLM.
+
+        Args:
+            prefix (str): prompt prefix. Default to "<s>".
         """
-        super().__init__(**kwargs)
+        super().__init__(prefix=prefix, **kwargs)
 
     def __call__(
         self,
@@ -298,17 +334,17 @@ class MistralFinetuned(SystemPromptBase):
         context = self.get_context(context)
 
         system_prompt = \
-            f"<s>### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
+            f"{self.prefix}### Instruction:\n{question}\n### Context: \n{context}\n### Response:"
 
         return system_prompt
 
 # =============================================================================================================
 
 class FENNextMoveAnalyse(SystemPromptBase):
-    def __init__(self):
+    def __init__(self, **kwargs):
         """For analysis of next move prediction given a FEN.
         """
-        super().__init__()
+        super().__init__(**kwargs)
 
     def __call__(
         self,
@@ -337,8 +373,15 @@ class FENNextMoveAnalyse(SystemPromptBase):
 # =============================================================================================================
 
 class FENNextMoveAnalyseMistralFinetuned(SystemPromptBase):
-    def __init__(self):
+    def __init__(
+        self,
+        prefix="<s>",
+        **kwargs
+    ):
         """For analysis of next move prediction given a FEN and a finetuned LLM.
+
+        Args:
+            prefix (str): prompt prefix. Default to "<s>".
         """
         super().__init__()
 
@@ -357,6 +400,6 @@ class FENNextMoveAnalyseMistralFinetuned(SystemPromptBase):
             system_prompt (str): system prompt with question and context under LLM query format.
         """
         system_prompt = \
-            f"<s>### Instruction:\n{user_prompt}\n### Context: \n \n### Response:"
+            f"{self.prefix}### Instruction:\n{user_prompt}\n### Context: \n \n### Response:"
 
         return system_prompt
