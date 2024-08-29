@@ -1,0 +1,4 @@
+Question,Answer
+Generate a python function that can multipy 2 matrices,"import numpy as np
+def matrix_multiplication(matrix1, matrix2):
+    return np.matmul(matrix1, matrix2)"

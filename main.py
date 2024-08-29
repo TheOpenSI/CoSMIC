@@ -47,10 +47,10 @@ if __name__ == "__main__":
     # The list model name corresponding to src/maps.py.
     llm_names = [
         "mistral-7b-v0.1",
-        "mistral-7b-instruct-v0.1",
-        "gemma-7b",
-        "gemma-7b-it",
-        "mistral-7b-finetuned-20240801",
+        # "mistral-7b-instruct-v0.1",
+        # "gemma-7b",
+        # "gemma-7b-it",
+        # "mistral-7b-finetuned-20240801",
         # "gpt-3.5-turbo",
         # "gpt-4o"
     ]

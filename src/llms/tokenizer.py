@@ -51,6 +51,9 @@ class TokenizerBase:
             if (self.tokenizer is not None) and (self.tokenizer.pad_token is None):
                 self.tokenizer.pad_token = self.tokenizer.eos_token
 
+    # def get_tokenizer_id(self):
+    #     return self.tokenizer.bos_token
+
     def encode(
         self,
         system_prompt: str

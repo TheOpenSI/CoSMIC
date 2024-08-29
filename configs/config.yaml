@@ -2,7 +2,7 @@
 # mistral-7b-v0.1, mistral-7b-instruct-v0.1, mistral-7b-finetuned,
 # gemma-7b, gemma-7b-it,
 # gpt-3.5-turbo, gpt-4o.
-llm_name: "mistral-7b-v0.1"
+llm_name: "mistral-7b-instruct-v0.1"
 seed: 0  # seed of response generation by base LLM.
 doc_directory: ""  # directory containing .pdf documents to build the system's vector database.
 document_path: [
