@@ -40,7 +40,7 @@ class GeneralUserPrompt(UserPromptBase):
     def __call__(
         self,
         question: str,
-        context: str=""
+        context: dict={}
     ):
         """Build user prompt.
 
@@ -51,10 +51,11 @@ class GeneralUserPrompt(UserPromptBase):
         Returns:
             user_prompt (str): user prompt.
         """
-        if context == "":
-            user_prompt = question
+        if "context" in context.keys() and context["context"] != "":
+            temp = context["context"]
+            user_prompt = f"Given that '{temp}', {question}"
         else:
-            user_prompt = f"Given that '{context}', {question}"
+            user_prompt = question
 
         return user_prompt
 

@@ -138,6 +138,7 @@ class OpenSIAISystem:
 
         # Check if the question is a string or a .csv file containing multiple sub-questions.
         if question.find(".csv") > -1:
+
             # Batch process for puzzles (move prediction and analysis) and 4 other quality evaluations.
             if question.find("puzzle") > -1:
                 # Do not truncate from the LLM base class but instead using
@@ -209,14 +210,17 @@ class OpenSIAISystem:
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
+
             elif question.find("code_generation") > -1:
-                # Build code_generator in modules/code_generation/code_generation.py
                 code_generator = CodeGenerator(
+                    llm=self.llm,
+
+                    rag=None,
                     log_file=log_file,
                 )
 
                 # Batch process the question file.
-                response = code_generator.batch_process(question)
+                code_generator.batch_process(question)
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)

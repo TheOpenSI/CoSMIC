@@ -81,7 +81,7 @@ class LLMBase:
             system_prompt_instance_name = LLM_INSTANCE_DICT[llm_name]
 
         # Build system prompter.
-        self.set_system_prompter(
+        self.set_system_prompter_by_instance_name(
             system_prompt_instance_name,
             use_example=use_example
         )
@@ -112,7 +112,7 @@ class LLMBase:
             user_prompt_instance_name
         )(*args, **kwargs)
 
-    def set_system_prompter(
+    def set_system_prompter_by_instance_name(
         self,
         system_prompt_instance_name: str,
         *args,
@@ -127,6 +127,12 @@ class LLMBase:
             system_prompt_instances,
             system_prompt_instance_name
         )(*args, **kwargs)
+
+    def set_system_prompter(
+        self,
+        system_prompt_instance: system_prompt_instances.SystemPromptBase,
+    ):
+        self.system_prompter = system_prompt_instance
 
     def set_seed(
         self,
@@ -184,7 +190,7 @@ class LLMBase:
     def __call__(
         self,
         question: str,
-        context: str=""
+        context: dict = {}
     ):
         """Process the question answering.
 
@@ -201,9 +207,15 @@ class LLMBase:
 
         # Generate user prompt with question and context.
         user_prompt = self.user_prompter(question, context=context)
+        # print("="*50)
+        # print(f"[User Prompt] {user_prompt}")
+        # print("="*50)
 
         # Merge user prompt to system prompt by LLM type.
         system_prompt = self.system_prompter(user_prompt, context=context)
+        # print("="*50)
+        # print(f"[System Prompt/Full prompt] {system_prompt}")
+        # print("="*50)
 
         # Encode system prompt for LLM.
         system_prompt_encoded = self.tokenizer.encode(system_prompt)
@@ -213,9 +225,14 @@ class LLMBase:
 
         # Decode response since some are torch.tensor.
         raw_response = self.tokenizer.decode(response_encoded)
+        # print("="*50)
+        # print(f"[Raw Response] {raw_response}")
+        # print("="*50)
+
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
         response = self.truncate_response(raw_response)
+        # print(response)
 
         # Return response with and without truncation.
         return response, raw_response
@@ -284,7 +301,7 @@ class Mistral7bv01(LLMBase):
         if self.use_example:  # with an example in the prompt, can always parse by [INST]
             response = response.split("[/INST]")[0].split("[INST]")[0]
 
-        response = response.replace("\n", "").strip()
+        # response = response.replace("\n", "").strip()
 
         return response
 
