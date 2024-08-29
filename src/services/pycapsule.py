@@ -24,6 +24,8 @@
 
 import subprocess, os, re
 
+from utils.log_tool import set_color
+
 """
 IMPORTANT:
 This service will use docker containers
@@ -53,21 +55,21 @@ class PyCapsule:
         """
         images = subprocess.run(f"docker images | grep {self.IMAGE_NAME}", shell=True, capture_output=True, text=True)
         if images.stdout.strip() == "":
-            print("[INFO] Image does not exist")
-            print("[INFO] Pulling image...")
+            print(set_color("info", "Image does not exist"))
+            print(set_color("info", "Pulling image..."))
             subprocess.run(f"docker pull {image_url}", shell=True)
-            print("[INFO] Image built")
+            print(set_color("success", "Image built"))
             # raise Exception("[ERROR] Image does not exist")
         else:
-            print("[INFO] Image found")
+            print(set_color("success", "Image found"))
     
 
     def check_if_container_exists(self) -> bool:
         containers = subprocess.run(f"docker ps -a | grep {self.container_name}", shell=True, capture_output=True, text=True)
         if containers.stdout.strip() == "":
-             print("[INFO] Container does not exist")
+             print(set_color("info", "Container does not exist"))
         else:
-            print("[INFO] Container found")
+            print(set_color("info", "Container found"))
 
         return not containers.stdout.strip() == ""
 
@@ -76,26 +78,17 @@ class PyCapsule:
         """
         Create the container and run the shell script which will install requirements and run main.py
         """
-        print("[INFO] Creating container...")
-        # response = subprocess.run(f"docker run --name {self.container_name} -v {source_path}:/usr/src/app {self.IMAGE_NAME}", shell=True)
-        # response = subprocess.run(f"docker run --name {self.container_name} --entrypoint /bin/bash -v $PWD:/usr/src/app sandbox_python", shell=True)
-        # response = subprocess.run(f"docker run -it --name {self.container_name} --entrypoint /bin/bash -v /home/s448780/workspace/sandbox/opensi_ai_system:/usr/src/app sandbox_python", shell=True)
+        print(set_color("info", "Creating container..."))
         response = subprocess.run(f"docker run --name {self.container_name} -v {self.container_mount_path}:/usr/src/app {self.IMAGE_NAME}", shell=True)
-        print("[INFO] Container created")
-        print(f"[PYCAPSULE-RESPONSE] {response.stdout}")
-        print(f"[PYCAPSULE-EXIT CODE] {response.returncode}")
-        error_response = "No error" if response.stderr == "" else response.stderr
-        print(f"[PYCAPSULE-ERROR] {error_response}")
+        print(set_color("success", "Container created"))
+        print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
         return response.returncode, response.stdout, response.stderr
     
     def start_container(self):
         """
         Start the container and run the shell script which will install requirements and run main.py
         """
-        print("[INFO] Starting container...")
+        print(set_color("info", "Starting container..."))
         response = subprocess.run(f"docker start -i {self.container_name}", shell=True, capture_output=True, text=True)
-        print(f"[PYCAPSULE-RESPONSE] {response.stdout}")
-        print(f"[PYCAPSULE-EXIT CODE] {response.returncode}")
-        error_response = "No error" if response.stderr == "" else response.stderr
-        print(f"[PYCAPSULE-ERROR] {error_response}")
+        print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
         return response.returncode, response.stdout, response.stderr

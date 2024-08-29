@@ -3,6 +3,8 @@ import os
 import regex as re
 from typing import List
 
+from utils.log_tool import set_color
+
 def create_py_file(file_name: str, code: str):
     """
     this will create a python file with the given code
@@ -12,7 +14,6 @@ def create_py_file(file_name: str, code: str):
     """
     with open(f"{file_name}.py", "w") as file:
         file.write(code)
-    print(f"[INFO] {file_name}.py file created")
 
 def create_requirements_file(file_name: str, requirements: List[str]) -> bool:
     """
@@ -27,7 +28,6 @@ def create_requirements_file(file_name: str, requirements: List[str]) -> bool:
         with open(f"{file_name}.txt", "w") as file:
             for requirement in requirements:
                 file.write(requirement + "\n")
-        print("[INFO] Requirements file created")
         return True
 
 def clean(mount_path: str, files=None):
@@ -41,7 +41,7 @@ def clean(mount_path: str, files=None):
         if file in os.listdir(mount_path):
             subprocess.run(["rm", f"{mount_path}/{file}"])
 
-    print("[INFO] Volume cleaned up")
+    print(set_color("success", "Volume cleaned up"))
 
 def parse_library_names(code: str) -> List[str]:
     """

@@ -24,15 +24,16 @@
 
 import os, sys
 import pandas as pd
+from typing import List
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from src.services.pycapsule import PyCapsule
-from modules.code_generation.system_prompt import CodeGeneratorSystemPrompt
 from src.services.qa import QABase
+from modules.code_generation.system_prompt import CodeGeneratorSystemPrompt
 from utils.code_parser import parse_input
 from utils.pycapsule_util import create_requirements_file, create_py_file, get_context, clean
-from typing import List
+from utils.log_tool import set_color
 
 # =============================================================================================================
 class CodeGenerator(QABase):
@@ -44,8 +45,9 @@ class CodeGenerator(QABase):
         """
         super().__init__(**kwargs)
         self.container = PyCapsule()
-        self.KEEP_HISTORY = 1
+        self.KEEP_HISTORY = 1 # Conversation pair
         self.llm.system_prompter.set_use_example(False)
+        # Tokenizer instance to dynamically collect the 'bos_token'
         self.tokenizer = self.llm.tokenizer.tokenizer
 
         # Put code container here, self.container(*args,option **kwargs).
@@ -64,7 +66,7 @@ class CodeGenerator(QABase):
         # For each question, call the container to generate code; then, pass the code to llm by
         # super().__call__(query_per) if applicable.
 
-        # extracting questions from query_csv
+        # Extracting questions from query_csv
         df = pd.read_csv(query_csv)
         queries = df["Question"]
 
@@ -76,67 +78,82 @@ class CodeGenerator(QABase):
             ])
 
         for query in queries:
+            # This is to change the fix mode, it will be activated when the code has an error
             context = {"fix_mode": False}
 
             response = super().__call__(query=query, context= context)
+            # Using parser utility
             requirements, code, example = parse_input(response[1]) # response[1] is the code section with raw response
             
-            # create requirements file
+            # Create requirements file
+            # This will create requirements.txt file in the container, which gets executed by the container shell script
             create_requirements_file(self.container.container_mount_path + "/requirements", requirements)
-            # create main.py file
+
+            # Create main.py file
+            # This will create main.py file in the container, which gets from src.services.qa import QABaseexecuted by the container shell script
             create_py_file(self.container.container_mount_path + "/main", code + "\n" + example)
             
-            # pycapsule
+            # Pycapsule service
             pycapsule_return_code = -1
             pycapsule_response = ""
             pycapsule_error = ""
 
-            # first run
+            # First run, will change exit code to 1 if code has an error
             if not self.container.check_if_container_exists():
                 pycapsule_return_code, pycapsule_response, pycapsule_error = self.container.create_container()
             else:
                 pycapsule_return_code, pycapsule_response, pycapsule_error = self.container.start_container()
 
-            # the following is only relevant if retrun code is not 0
-            # history
+            # The following is only relevant if retrun code is not 0
+            # Conversation history
             question_history:List[str] = []
             response_history:List[str] = []
 
-            # attempt count, will break after 5
+            # attempt count, will break after 2
             attempt_count = 0
             
-            while pycapsule_return_code != 0 and attempt_count < 2:
-                print("[OPENSI PYCAPSULE] Generated code had an error, starting PYCAPSULE service")
+            while pycapsule_return_code != 0 and attempt_count < 2: # Set attempt count here
+                print(set_color("error", "Generated code had an error, starting PYCAPSULE service"))
 
                 response_history.append(response[1])
                 question_history.append(query)
 
+                # Genertating contetxt using conversation history
                 conv_history = get_context(query, question_history, response_history)
-                new_question = f"### Question - Your code had the following error: {pycapsule_error}.\n\nPlease correct your code and response with:\n- the corrected code in the same format, and \n- an example."
+                # New question in fix mode
+                new_question = (f"### Question - Your code had the following error: {pycapsule_error}.\n\n"
+                "Please correct your code and respond with:\n"
+                "- the corrected code in the same format, and \n"
+                "- an example."
+                )
                 fix_context = {"fix_mode": True} # gets activated when the code has an error
+                
+                # Fix mode attempt
                 mistral_response_update = super().__call__(query=new_question + "\n\n" + conv_history, context=fix_context)
-                line_gap = "\n\n"
-                print(f"[SENDING QUESTION] {new_question + line_gap + conv_history}")
-                print(f"[MISTRAL-RESPONSE]\n{mistral_response_update}")
 
+                # Appeding conversation history
                 response_history.append(mistral_response_update)
                 question_history.append(new_question)
 
+                # Parsing response
                 requirements, code, example = parse_input(mistral_response_update[1])
-                print(f"[MISTRAL-RESPONSE] Updated code -{code, example}")
 
                 if len(response_history) > self.KEEP_HISTORY:
                     # keeping a limited number of conversation history
                     response_history.pop(0)
                     question_history.pop(0)
 
+                # Running in fix mode
                 create_py_file(self.container.container_mount_path + "/main", code + "\n" + example)
                 create_requirements_file(self.container.container_mount_path + "/requirements", requirements)
                 pycapsule_return_code, pycapsule_error, pycapsule_error = self.container.start_container()
 
                 attempt_count += 1
             
-            # clean(self.container.container_mount_path, ["main.py", "requirements.txt"])
+            # Cleaning up the volume
+            # This will remove the main.py and requirements.txt file from the container
+            # Ouput will be saved in results
+            clean(self.container.container_mount_path, ["main.py", "requirements.txt"])
             
             # saving to csv file
             if self.log_file is not None:
@@ -144,3 +161,5 @@ class CodeGenerator(QABase):
                     query,
                     code
                 ])
+
+# =============================================================================================================
