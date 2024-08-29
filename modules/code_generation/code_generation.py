@@ -136,7 +136,7 @@ class CodeGenerator(QABase):
 
                 attempt_count += 1
             
-            clean(self.container.container_mount_path, ["main.py", "requirements.txt"])
+            # clean(self.container.container_mount_path, ["main.py", "requirements.txt"])
             
             # saving to csv file
             if self.log_file is not None:
