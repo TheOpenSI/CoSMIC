@@ -1,8 +1,4 @@
 Question,Answer
-Generate a python function to calculate sum of 2 numbers,"### Corrected Code:
-
-def sum_of_two_numbers(a, b):
-    return a + b
-
-### Example
-print(sum_of_two_numbers(10, 20))"
+Generate a python function that can multipy 2 matrices,"import numpy as np
+def matrix_multiplication(matrix1, matrix2):
+    return np.matmul(matrix1, matrix2)"

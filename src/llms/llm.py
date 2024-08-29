@@ -148,6 +148,12 @@ class LLMBase:
         """
         self.system_prompter = system_prompt_instance
 
+    def set_system_prompter(
+        self,
+        system_prompt_instance: system_prompt_instances.SystemPromptBase,
+    ):
+        self.system_prompter = system_prompt_instance
+
     def set_seed(
         self,
         seed: int
