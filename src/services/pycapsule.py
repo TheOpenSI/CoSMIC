@@ -3,6 +3,10 @@
 # Project: OpenSI AI System
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
+#
+# IMPORTANT:
+# - This service will use docker containers
+# - So user will have to be have permission to run docker commands
 # 
 # Copyright (c) 2024 Open Source Institute
 # 
@@ -23,49 +27,49 @@
 # -------------------------------------------------------------------------------------------------------------
 
 import subprocess, os, re
-
 from utils.log_tool import set_color
 
-"""
-IMPORTANT:
-This service will use docker containers
-So user will have to be have permission to run docker commands
-"""
-
 class PyCapsule:
-    def __init__(self, IMAGE_NAME: str = "ghost525/sandbox_python", container_name: str = "opensi_sandbox_service"):
+    def __init__(self, 
+                 IMAGE_NAME: str = "ghost525/sandbox_python", 
+                 container_name: str = "opensi_sandbox_service"):
         """
         Args:
-            IMAGE_NAME (str, optional): Default
-            container_name (str, optional): Defaults
-
-            countainer_mount_path will be /results/container_mount/ which has a shell script to run the main file
+            IMAGE_NAME (str, optional): Default.
+            container_name (str, optional): Default.
+            countainer_mount_path will be /results/container_mount/ which has a shell script 
+            to run the main file.
+            ** Users can change the container_mount_path if needed.
         """
         self.IMAGE_NAME = IMAGE_NAME
         self.container_name = container_name
-        self.container_mount_path = re.sub(r"/src.*", "/results/container_mount", os.path.abspath(__file__))
-        self.check_if_image_exists() # this will pull image if not found
+        self.container_mount_path = re.sub(r"/src.*", "/results/container_mount", 
+                                           os.path.abspath(__file__)) # chnage here to mount a different path.
+        self.check_if_image_exists() # this will pull image if not found.
 
-
-    def check_if_image_exists(self, image_url:str = "ghost525/sandbox_python"):
+    def check_if_image_exists(self, 
+                              image_url:str = "ghost525/sandbox_python"):
         """
         Args:
             image_url (str, optional): Defaults to "ghost525/sandbox_python".
-            TODO: Build image from docker file
         """
-        images = subprocess.run(f"docker images | grep {self.IMAGE_NAME}", shell=True, capture_output=True, text=True)
+        images = subprocess.run(f"docker images | grep {self.IMAGE_NAME}", 
+                                shell=True, 
+                                capture_output=True, 
+                                text=True)
         if images.stdout.strip() == "":
             print(set_color("info", "Image does not exist"))
             print(set_color("info", "Pulling image..."))
             subprocess.run(f"docker pull {image_url}", shell=True)
             print(set_color("success", "Image built"))
-            # raise Exception("[ERROR] Image does not exist")
         else:
             print(set_color("success", "Image found"))
     
-
     def check_if_container_exists(self) -> bool:
-        containers = subprocess.run(f"docker ps -a | grep {self.container_name}", shell=True, capture_output=True, text=True)
+        containers = subprocess.run(f"docker ps -a | grep {self.container_name}", 
+                                    shell=True, 
+                                    capture_output=True, 
+                                    text=True)
         if containers.stdout.strip() == "":
              print(set_color("info", "Container does not exist"))
         else:
@@ -73,22 +77,28 @@ class PyCapsule:
 
         return not containers.stdout.strip() == ""
 
-
     def create_container(self):
         """
-        Create the container and run the shell script which will install requirements and run main.py
+        Create the container and run the shell script which will install requirements and run main.py.
         """
         print(set_color("info", "Creating container..."))
-        response = subprocess.run(f"docker run --name {self.container_name} -v {self.container_mount_path}:/usr/src/app {self.IMAGE_NAME}", shell=True)
+        command = (
+            f"docker run --name {self.container_name} "
+            f"-v {self.container_mount_path}:/usr/src/app {self.IMAGE_NAME}"
+        )
+        response = subprocess.run(command, shell=True)
         print(set_color("success", "Container created"))
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
         return response.returncode, response.stdout, response.stderr
     
     def start_container(self):
         """
-        Start the container and run the shell script which will install requirements and run main.py
+        Start the container and run the shell script which will install requirements and run main.py.
         """
         print(set_color("info", "Starting container..."))
-        response = subprocess.run(f"docker start -i {self.container_name}", shell=True, capture_output=True, text=True)
+        response = subprocess.run(f"docker start -i {self.container_name}", 
+                                  shell=True, 
+                                  capture_output=True, 
+                                  text=True)
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
         return response.returncode, response.stdout, response.stderr

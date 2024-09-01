@@ -23,6 +23,11 @@
 # -------------------------------------------------------------------------------------------------------------
 
 def parse_input(response: str):
+    """
+    Parse the input response to extract requirements, code, and example.
+    Args:
+        response (str): raw response from the model.
+    """
     requirements = []
     code = ""
     example = ""
@@ -32,7 +37,11 @@ def parse_input(response: str):
     
     lines = response.strip().splitlines()
 
+    # A flag to keep track of the current section - requirements, code, or example.
     current_section = None
+
+    # Depending on the output format, the response may contain multiple sections.
+    # The flag current_section is used to keep track of the parsed output destination.
     for line in lines:
         if "### Requirements" in line:
             current_section = "requirements"
@@ -51,6 +60,8 @@ def parse_input(response: str):
                     if current_section == "code":
                         code += line + "\n"
                     elif current_section == "example":
+                        # Sometimes LLMs generate the example to be used in a different file.
+                        # In that case, the example will contain an import statement.
                         if "import" not in line.strip():
                             example += line + "\n"
     
@@ -58,22 +69,3 @@ def parse_input(response: str):
     example = example.strip()
     
     return requirements, code, example
-
-# if __name__ == "__main__":
-#     test_response = '''
-
-#         Response -
-#         ### Requirements
-#         none
-        
-#         ### Code
-#         def sum_numbers(a, b):
-#             return a + b
-        
-#         ### Example
-#         result = sum_numbers(5, 10)
-#         print(result)'''
-#     requirements, code, example = parse_input(test_response)
-#     print("Requirements:", requirements)
-#     print("Code:", code)
-#     print("Example:", example)

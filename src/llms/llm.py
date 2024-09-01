@@ -227,15 +227,9 @@ class LLMBase:
 
         # Generate user prompt with question and context.
         user_prompt = self.user_prompter(question, context=context)
-        # print("="*50)
-        # print(f"[User Prompt] {user_prompt}")
-        # print("="*50)
 
         # Merge user prompt to system prompt by LLM type.
         system_prompt = self.system_prompter(user_prompt, context=context)
-        # print("="*50)
-        # print(f"[System Prompt/Full prompt] {system_prompt}")
-        # print("="*50)
 
         # Encode system prompt for LLM.
         system_prompt_encoded = self.tokenizer.encode(system_prompt)
@@ -245,14 +239,10 @@ class LLMBase:
 
         # Decode response since some are torch.tensor.
         raw_response = self.tokenizer.decode(response_encoded)
-        # print("="*50)
-        # print(f"[Raw Response] {raw_response}")
-        # print("="*50)
 
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
         response = self.truncate_response(raw_response)
-        # print(response)
 
         # Return response with and without truncation.
         return response, raw_response
