@@ -26,7 +26,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import subprocess, os, re
+import subprocess, os, re, shutil
 from utils.log_tool import set_color
 
 class PyCapsule:
@@ -43,6 +43,15 @@ class PyCapsule:
         """
         self.IMAGE_NAME = IMAGE_NAME
         self.container_name = container_name
+        # Creating the container mount directory.
+        os.makedirs(f"{os.path.abspath(__file__).replace('pycapsule.py', '')}../../results/container_mount", 
+                    exist_ok=True)
+        # Copying the shell script to the container mount directory.
+        source_folder = os.path.abspath(__file__).replace('pycapsule.py', '')+"../../scripts/start.sh"
+        destination_folder = os.path.abspath(__file__).replace('pycapsule.py', '')+"../../results/container_mount/start.sh"
+        shutil.copyfile(source_folder, destination_folder)
+        # Add -x to the shell script.
+        subprocess.run(f"chmod +x {destination_folder}", shell=True)
         self.container_mount_path = re.sub(r"/src.*", "/results/container_mount", 
                                            os.path.abspath(__file__)) # chnage here to mount a different path.
         self.check_if_image_exists() # this will pull image if not found.

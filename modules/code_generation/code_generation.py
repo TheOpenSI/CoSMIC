@@ -31,8 +31,8 @@ from typing import List
 from src.services.pycapsule import PyCapsule
 from src.services.qa import QABase
 from modules.code_generation.system_prompt import CodeGeneratorSystemPrompt
-from modules.code_generation.code_generation_utility.code_parser import parse_input
-from modules.code_generation.code_generation_utility.pycapsule_util import create_requirements_file, create_py_file, get_context, clean
+from modules.code_generation.utils.code_parser import parse_input
+from modules.code_generation.utils.pycapsule_util import create_requirements_file, create_py_file, get_context, clean
 from utils.log_tool import set_color
 
 # =============================================================================================================

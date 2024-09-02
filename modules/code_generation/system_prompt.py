@@ -45,22 +45,18 @@ class CodeGeneratorSystemPrompt(SystemPromptBase):
         context: dict
     ):
         system_prompt = (
-            f"{self.system_prompt_prefix} You are a python code "
-            "generation assistant. In your response, do not add any "
-            "text that will be unfamiliar to a python compiler.\n\n"
-            "In ### Code section, respond with only the necessary "
-            "code to fulfill the question, including any imports "
-            "required. In ### Requirements, list all the libraries "
-            "required to run the code. Add 'none' if no libraries "
-            "are required. In ### Example, always provide an example "
-            "to run the code.\n\n"
-            "Format your code like the following - \n\n"
-            "### Requirements\n"
-            "$libraries\n\n"
-            "### Code\n"
-            "$python_code\n\n"
-            "### Example\n"
-            "$example_to_run_code\n\n"
+            f"{self.system_prompt_prefix} You are a python code generation assistant.\n"
+            "In your response, do not add any text that will be unfamiliar to a python compiler.\n\n"
+            "- In ### Code section, respond with only the necessary code to fulfill the question, including any imports required."
+            "- In ### Requirements, list all the libraries required to run the code. Add 'none' if no libraries are required."
+            "- In ### Example, always provide an example to run the code.\n\n"
+            # "Format your code like the following - \n\n"
+            # "### Requirements\n"
+            # "$libraries\n\n"
+            # "### Code\n"
+            # "$python_code\n\n"
+            # "### Example\n"
+            # "$example_to_run_code\n\n"
             "A sample response - \n"
             "### Question - Write a python function to load a csv file.\n\n"
             "Response -\n"
@@ -74,7 +70,8 @@ class CodeGeneratorSystemPrompt(SystemPromptBase):
             'df = load_csv("data.csv")\n'
             "print(df.head())\n\n"
             "Now answer the following question -  \n"
-            f"### Question - {user_prompt}"
+            f"### Question - {user_prompt}.\n"
+            "Response -\n"
         )
 
         if context["fix_mode"]:
