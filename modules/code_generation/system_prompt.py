@@ -22,8 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import os
-import sys
+import os, sys
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
@@ -32,23 +31,42 @@ from src.llms.prompts.system_prompt import SystemPromptBase
 
 
 class CodeGeneratorSystemPrompt(SystemPromptBase):
+    def __init__(
+        self,
+        tokenizer: AutoTokenizer,
+        use_example: bool = False,
+        **kwargs
+    ):
+        """System prompter for code generation.
 
-    def __init__(self, tokenizer: AutoTokenizer, use_example: bool = False):
-        super().__init__()
-        self.system_prompt_prefix = tokenizer.bos_token
-
-    # ====
+        Args:
+            tokenizer (AutoTokenizer): tokenizer instance set externally.
+            use_example (bool, optional): use example in system prompt for key words.
+                Defaults to False.
+        """
+        super().__init__(use_example=use_example, **kwargs)
+        self.prefix = tokenizer.bos_token
 
     def __call__(
         self,
         user_prompt: str,
         context: dict
     ):
+        """Generate system prompt.
+
+        Args:
+            user_prompt (str): user prompt.
+            context (dict|str): context with information indicating code error.
+
+        Returns:
+            system_prompt: system prompt for code generation or correction.
+        """
         system_prompt = (
-            f"{self.system_prompt_prefix} You are a python code generation assistant.\n"
+            f"{self.prefix} You are a python code generation assistant.\n"
             "In your response, do not add any text that will be unfamiliar to a python compiler.\n\n"
-            "- In ### Code section, respond with only the necessary code to fulfill the question, including any imports required."
-            "- In ### Requirements, list all the libraries required to run the code. Add 'none' if no libraries are required."
+            "- In ### Code section, respond with only the necessary code to fulfill the question, "
+            "including any imports required.\n- In ### Requirements, list all the libraries required to "
+            "run the code. Add 'none' if no libraries are required.\n"
             "- In ### Example, always provide an example to run the code.\n\n"
             # "Format your code like the following - \n\n"
             # "### Requirements\n"
@@ -74,7 +92,9 @@ class CodeGeneratorSystemPrompt(SystemPromptBase):
             "Response -\n"
         )
 
+        # "fix_mode"=True indicates code error, i.e., exit code!=0.,
+        # use the new system prompt to enquire the code correctness.
         if context["fix_mode"]:
-            return self.system_prompt_prefix + user_prompt
+            system_prompt = self.prefix + user_prompt
         
         return system_prompt

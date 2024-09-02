@@ -311,7 +311,7 @@ class Mistral7bv01(LLMBase):
         if self.use_example:  # with an example in the prompt, can always parse by [INST]
             response = response.split("[/INST]")[0].split("[INST]")[0]
 
-        # response = response.replace("\n", "").strip()
+        response = response.replace("\n", "").strip()
 
         return response
 

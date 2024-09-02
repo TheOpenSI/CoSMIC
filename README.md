@@ -9,10 +9,10 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 
 ```
 # For users using SSH on GitHub
-git clone -b release-v1.0.0 git@github.com:TheOpenSI/cognitive_AI_experiments.git
+git clone git@github.com:TheOpenSI/CoSMIC.git
 
 # For users using GitHub account and token
-git clone -b release-v1.0.0 https://github.com/TheOpenSI/cognitive_AI_experiments.git
+git clone https://github.com/TheOpenSI/CoSMIC.git
 ```
 Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2) for chess-game queries
 and store as "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
@@ -42,12 +42,19 @@ transformers==4.42.4
 python-box==7.2.0
 ```
 
+To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service,
+users need to install [docker](https://docs.docker.com/engine/install/) following
+```bash
+apt install docker.io
+```
+
 ## Framework
 This code has 3 base services, including
 
 - [Chess-game next move predication and analyse](src/services/chess.py)
 - [Vector database for text-based and document-base information update](src/services/vector_database.py)
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
+- [Code generation and evalution (python)](src/services/pycapsule.py)
 
 Upper-level chess-game services include
 - [Puzzle next move prediction and analyse](src/modules/chess_qa_puzzle.py)
@@ -56,7 +63,7 @@ Upper-level chess-game services include
 
 
 ## User Guide
-We demonstrate the use of OpenSI AI System through the following code and [the main example](main.py) by running "python main.py".
+We demonstrate the use of OpenSI-CoSMIC through the following code and [the main example](main.py) by running "python main.py".
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 ```python
 from src.opensi_ai_system import OpenSIAISystem
@@ -66,7 +73,7 @@ from utils.log_tool import set_color
 use_config_file = True
 
 if use_config_file:
-    config_path = "configs/config.yaml"
+    config_path = "scripts/configs/config.yaml"
     opensi_eval_system = OpenSIAISystem(config_path=config_path)
 else:
     llm_name = "mistral-7b-instruct-v0.1"

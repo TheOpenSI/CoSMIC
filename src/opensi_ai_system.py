@@ -47,7 +47,7 @@ class OpenSIAISystem:
     def __init__(
         self,
         llm_name: str="",
-        config_path: str="configs/config.yaml"
+        config_path: str="scripts/configs/config.yaml"
     ):
         """ Construct OpenSI AI System instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
