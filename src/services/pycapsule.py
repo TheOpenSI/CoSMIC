@@ -26,34 +26,38 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import subprocess, os, re, shutil
+import subprocess, os, shutil, sys
 from utils.log_tool import set_color
 
 class PyCapsule:
     def __init__(self, 
                  IMAGE_NAME: str = "ghost525/sandbox_python", 
                  container_name: str = "opensi_sandbox_service"):
-        """
+        """Code generation entry.
+
+        self.countainer_mount_path contains a shell script to run the main file.
+        Users can change the container_mount_path if needed.
+
         Args:
             IMAGE_NAME (str, optional): Default.
             container_name (str, optional): Default.
-            countainer_mount_path will be /results/container_mount/ which has a shell script 
-            to run the main file.
-            ** Users can change the container_mount_path if needed.
         """
         self.IMAGE_NAME = IMAGE_NAME
         self.container_name = container_name
+
         # Creating the container mount directory.
-        os.makedirs(f"{os.path.abspath(__file__).replace('pycapsule.py', '')}../../results/container_mount", 
-                    exist_ok=True)
+        root = sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+        self.container_mount_path = os.path.join(root, "results/code_generation/container_mount")
+        os.makedirs(self.container_mount_path, exist_ok=True)
+
         # Copying the shell script to the container mount directory.
-        source_folder = os.path.abspath(__file__).replace('pycapsule.py', '')+"../../scripts/start.sh"
-        destination_folder = os.path.abspath(__file__).replace('pycapsule.py', '')+"../../results/container_mount/start.sh"
-        shutil.copyfile(source_folder, destination_folder)
+        source_bash_file = os.path.join(root, "scripts/code_generation/start.sh")
+        destination_bash_file = os.path.join(self.container_mount_path, "start.sh")
+        shutil.copyfile(source_bash_file, destination_bash_file)
+
         # Add -x to the shell script.
-        subprocess.run(f"chmod +x {destination_folder}", shell=True)
-        self.container_mount_path = re.sub(r"/src.*", "/results/container_mount", 
-                                           os.path.abspath(__file__)) # chnage here to mount a different path.
+        subprocess.run(f"chmod +x {destination_bash_file}", shell=True)
+
         self.check_if_image_exists() # this will pull image if not found.
 
     def check_if_image_exists(self, 
@@ -84,7 +88,9 @@ class PyCapsule:
         else:
             print(set_color("info", "Container found"))
 
-        return not containers.stdout.strip() == ""
+        status = not containers.stdout.strip() == ""
+
+        return status
 
     def create_container(self):
         """
@@ -98,6 +104,7 @@ class PyCapsule:
         response = subprocess.run(command, shell=True)
         print(set_color("success", "Container created"))
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
+
         return response.returncode, response.stdout, response.stderr
     
     def start_container(self):
@@ -110,4 +117,5 @@ class PyCapsule:
                                   capture_output=True, 
                                   text=True)
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
+
         return response.returncode, response.stdout, response.stderr
