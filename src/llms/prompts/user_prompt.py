@@ -61,7 +61,7 @@ class GeneralUserPrompt(UserPromptBase):
     def __call__(
         self,
         question: str,
-        context: str=""
+        context: dict={}
     ):
         """Build user prompt.
 

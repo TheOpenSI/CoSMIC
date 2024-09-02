@@ -209,14 +209,16 @@ class OpenSIAISystem:
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
+
             elif question.find("code_generation") > -1:
-                # Build code_generator in modules/code_generation/code_generation.py
                 code_generator = CodeGenerator(
+                    llm=self.llm,
+                    rag=None,
                     log_file=log_file,
                 )
 
                 # Batch process the question file.
-                response = code_generator.batch_process(question)
+                code_generator.batch_process(question)
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)

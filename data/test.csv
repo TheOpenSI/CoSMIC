@@ -20,4 +20,5 @@ __update__store__ docs/memory_update_test.pdf,
 ./data/test_framework/perception/perception_20.csv,
 ./data/checkmate_moves.csv
 ./data/finetune_dataset.csv,
+./data/code_generation.csv,
 exit,

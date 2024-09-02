@@ -148,6 +148,12 @@ class LLMBase:
         """
         self.system_prompter = system_prompt_instance
 
+    def set_system_prompter(
+        self,
+        system_prompt_instance: system_prompt_instances.SystemPromptBase,
+    ):
+        self.system_prompter = system_prompt_instance
+
     def set_seed(
         self,
         seed: int
@@ -204,7 +210,7 @@ class LLMBase:
     def __call__(
         self,
         question: str,
-        context: str=""
+        context: dict = {}
     ):
         """Process the question answering.
 
@@ -233,6 +239,7 @@ class LLMBase:
 
         # Decode response since some are torch.tensor.
         raw_response = self.tokenizer.decode(response_encoded)
+
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
         response = self.truncate_response(raw_response)
@@ -304,7 +311,7 @@ class Mistral7bv01(LLMBase):
         if self.use_example:  # with an example in the prompt, can always parse by [INST]
             response = response.split("[/INST]")[0].split("[INST]")[0]
 
-        response = response.replace("\n", "").strip()
+        # response = response.replace("\n", "").strip()
 
         return response
 
