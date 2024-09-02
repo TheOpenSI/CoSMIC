@@ -29,7 +29,6 @@ langchain_community==0.2.12
 langchain_huggingface==0.0.3
 llama_index==0.11.1
 matplotlib==3.7.5
-numpy==1.24.4
 numpy==1.24.3
 openai==1.42.0
 pandas==2.0.3
