@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: rag.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>

@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: maps.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 # 
@@ -21,6 +21,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
+
+# =============================================================================================================
 
 LLM_MODEL_DICT = {
     "mistral-7b-v0.1": "mistralai/Mistral-7B-v0.1",

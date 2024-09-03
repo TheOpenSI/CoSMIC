@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: system_prompt.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
 # 
@@ -29,6 +29,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 from transformers import AutoTokenizer
 from src.llms.prompts.system_prompt import SystemPromptBase
 
+# =============================================================================================================
 
 class CodeGeneratorSystemPrompt(SystemPromptBase):
     def __init__(

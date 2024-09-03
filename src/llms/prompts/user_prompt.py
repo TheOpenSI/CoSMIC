@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: user_prompt.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -23,6 +23,8 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
+# =============================================================================================================
+
 class UserPromptBase:
     def __init__(self):
         """Initialize the instance.
@@ -37,7 +39,7 @@ class UserPromptBase:
 
         Args:
             context (str|dict, optional): context, string or dictionary.
-            Defaults to "".
+                Defaults to "".
 
         Returns:
             context: extract context or an empty string.

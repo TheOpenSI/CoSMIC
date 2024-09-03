@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: tokenizer.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -41,7 +41,7 @@ class TokenizerBase:
 
         Args:
             llm_name (str, optional): LLM name, see src/maps.py, adapting tokenizer to different models.
-            Defaults to "".
+                Defaults to "".
         """
         if (llm_name == "") or (llm_name not in LLM_MODEL_DICT.keys()):
             self.tokenizer = None

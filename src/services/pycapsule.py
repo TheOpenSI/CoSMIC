@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: pycapsule.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
 #
@@ -27,22 +27,30 @@
 # -------------------------------------------------------------------------------------------------------------
 
 import subprocess, os, shutil, sys
-from utils.log_tool import set_color
 
-class PyCapsule:
-    def __init__(self, 
-                 IMAGE_NAME: str = "ghost525/sandbox_python", 
-                 container_name: str = "opensi_sandbox_service"):
+from utils.log_tool import set_color
+from src.services.base import ServiceBase
+
+# =============================================================================================================
+
+class PyCapsule(ServiceBase):
+    def __init__(
+        self, 
+        image_name: str="ghost525/sandbox_python", 
+        container_name: str="opensi_sandbox_service",
+        **kwargs
+    ):
         """Code generation entry.
 
         self.countainer_mount_path contains a shell script to run the main file.
         Users can change the container_mount_path if needed.
 
         Args:
-            IMAGE_NAME (str, optional): Default.
-            container_name (str, optional): Default.
+            image_name (str, optional): Default to "ghost525/sandbox_python".
+            container_name (str, optional): Default to "opensi_sandbox_service".
         """
-        self.IMAGE_NAME = IMAGE_NAME
+        super().__init__(self, **kwargs)
+        self.image_name = image_name
         self.container_name = container_name
 
         # Creating the container mount directory.
@@ -60,16 +68,21 @@ class PyCapsule:
 
         self.check_if_image_exists() # this will pull image if not found.
 
-    def check_if_image_exists(self, 
-                              image_url:str = "ghost525/sandbox_python"):
+    def check_if_image_exists(
+        self, 
+        image_url: str="ghost525/sandbox_python"
+    ):
         """
         Args:
             image_url (str, optional): Defaults to "ghost525/sandbox_python".
         """
-        images = subprocess.run(f"docker images | grep {self.IMAGE_NAME}", 
-                                shell=True, 
-                                capture_output=True, 
-                                text=True)
+        images = subprocess.run(
+            f"docker images | grep {self.image_name}",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
         if images.stdout.strip() == "":
             print(set_color("info", "Image does not exist"))
             print(set_color("info", "Pulling image..."))
@@ -78,13 +91,16 @@ class PyCapsule:
         else:
             print(set_color("success", "Image found"))
     
-    def check_if_container_exists(self) -> bool:
-        containers = subprocess.run(f"docker ps -a | grep {self.container_name}", 
-                                    shell=True, 
-                                    capture_output=True, 
-                                    text=True)
+    def check_if_container_exists(self):
+        containers = subprocess.run(
+            f"docker ps -a | grep {self.container_name}",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
         if containers.stdout.strip() == "":
-             print(set_color("info", "Container does not exist"))
+            print(set_color("info", "Container does not exist"))
         else:
             print(set_color("info", "Container found"))
 
@@ -97,11 +113,14 @@ class PyCapsule:
         Create the container and run the shell script which will install requirements and run main.py.
         """
         print(set_color("info", "Creating container..."))
+
         command = (
             f"docker run --name {self.container_name} "
-            f"-v {self.container_mount_path}:/usr/src/app {self.IMAGE_NAME}"
+            f"-v {self.container_mount_path}:/usr/src/app {self.image_name}"
         )
+
         response = subprocess.run(command, shell=True)
+
         print(set_color("success", "Container created"))
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
 
@@ -112,10 +131,14 @@ class PyCapsule:
         Start the container and run the shell script which will install requirements and run main.py.
         """
         print(set_color("info", "Starting container..."))
-        response = subprocess.run(f"docker start -i {self.container_name}", 
-                                  shell=True, 
-                                  capture_output=True, 
-                                  text=True)
+
+        response = subprocess.run(
+            f"docker start -i {self.container_name}",
+            shell=True,
+            capture_output=True,
+            text=True
+        )
+
         print(set_color("info", f"[PYCAPSULE-EXIT CODE] {response.returncode}"))
 
         return response.returncode, response.stdout, response.stderr

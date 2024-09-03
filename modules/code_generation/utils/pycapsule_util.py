@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: pycapsule_util.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
 # 
@@ -22,15 +22,13 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-# modules/code_generation.py
-
-import subprocess
-import os
+import subprocess, os
 import regex as re
-from typing import List
 
+from typing import List
 from utils.log_tool import set_color
 
+# =============================================================================================================
 
 def create_py_file(file_name: str, code: str):
     """
@@ -43,6 +41,7 @@ def create_py_file(file_name: str, code: str):
     with open(f"{file_name}.py", "w") as file:
         file.write(code)
 
+# =============================================================================================================
 
 def create_requirements_file(file_name: str, requirements: List[str]) -> bool:
     """
@@ -60,6 +59,7 @@ def create_requirements_file(file_name: str, requirements: List[str]) -> bool:
                 file.write(requirement + "\n")
         return True
 
+# =============================================================================================================
 
 def clean(mount_path: str, files=None):
     """
@@ -78,6 +78,7 @@ def clean(mount_path: str, files=None):
 
     print(set_color("success", "Volume cleaned up"))
 
+# =============================================================================================================
 
 def parse_library_names(code: str) -> List[str]:
     """
@@ -89,6 +90,7 @@ def parse_library_names(code: str) -> List[str]:
     return [library.split(" ")[-1].strip()
             for library in re.findall(r"(import\s\w+|from\s\w+)", code)]
 
+# =============================================================================================================
 
 def install_requirements():
     """
@@ -99,6 +101,7 @@ def install_requirements():
     subprocess.run(["pip", "install", "-r", "requirements.txt"], shell=True)
     print("[INFO] Requirements installed")
 
+# =============================================================================================================
 
 def get_context(original_question: str, 
                 question_history: List[str], 

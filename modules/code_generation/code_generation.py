@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: code_generation.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
 # 
@@ -36,6 +36,7 @@ from modules.code_generation.utils.pycapsule_util import create_requirements_fil
 from utils.log_tool import set_color
 
 # =============================================================================================================
+
 class CodeGenerator(QABase):
     def __init__(
         self,

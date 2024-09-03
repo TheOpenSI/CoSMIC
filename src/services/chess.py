@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: chess.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -377,7 +377,7 @@ class GPTFENNextMove(ChessBase):
         Args:
             llm_name (str, optional): LLM name. Defaults to "gpt-4o".
             is_truncate_response (bool, optional): truncate response for next move prediction.
-            Defaults to True.
+                Defaults to True.
         """
         # Set config.
         self.llm_name = llm_name

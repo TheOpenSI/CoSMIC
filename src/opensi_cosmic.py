@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
-# File: opensi_ai_system.py
-# Project: OpenSI AI System
+# File: opensi_cosmic.py
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -43,19 +43,19 @@ from box import Box
 
 # =============================================================================================================
 
-class OpenSIAISystem:
+class OpenSICoSMIC:
     def __init__(
         self,
         llm_name: str="",
         config_path: str="scripts/configs/config.yaml"
     ):
-        """ Construct OpenSI AI System instance. It contains LLM and services including vector database
+        """ Construct OpenSICoSMIC instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
         Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
 
         Args:
             llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
-            is self.config.llm_name.
+                is self.config.llm_name.
             config_path (str): path of configuration file.
         """
         # Check if required config file exists.
@@ -113,7 +113,7 @@ class OpenSIAISystem:
         context: str="",
         log_file: str=None
     ):
-        """Execute QA
+        """Execute QA.
 
         Args:
             question (str): a question or a .csv containing multiple questions.

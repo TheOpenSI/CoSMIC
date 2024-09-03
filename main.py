@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: main.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -26,7 +26,7 @@
 import os, csv
 import pandas as pd
 
-from src.opensi_ai_system import OpenSIAISystem
+from src.opensi_cosmic import OpenSICoSMIC
 from utils.log_tool import set_color
 
 # =============================================================================================================
@@ -47,10 +47,10 @@ if __name__ == "__main__":
     # The list model name corresponding to src/maps.py.
     llm_names = [
         "mistral-7b-v0.1",
-        "mistral-7b-instruct-v0.1",
-        "gemma-7b",
-        "gemma-7b-it",
-        "mistral-7b-finetuned-20240801",
+        # "mistral-7b-instruct-v0.1",
+        # "gemma-7b",
+        # "gemma-7b-it",
+        # "mistral-7b-finetuned-20240801",
         # "gpt-3.5-turbo",
         # "gpt-4o"
     ]
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         print(f"Testing {llm_name}.")
 
         # Build the system for a specific LLM.
-        opensi_eval_system = OpenSIAISystem(llm_name=llm_name)
+        opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
 
         # Loop over questions to get the answers.
         for idx, (query, gt) in enumerate(zip(queries, answers)):
@@ -92,7 +92,7 @@ if __name__ == "__main__":
                 log_file = None
 
             # Run for each question/query, return the truncated response if applicable.
-            answer, _, _ = opensi_eval_system(query, log_file=log_file)
+            answer, _, _ = opensi_cosmic(query, log_file=log_file)
 
             # Print the answer.
             if isinstance(gt, str):  # compare with GT string
@@ -109,4 +109,4 @@ if __name__ == "__main__":
                 log_file_pt.close()
         
         # Remove memory cached in the system.
-        opensi_eval_system.quit()
+        opensi_cosmic.quit()

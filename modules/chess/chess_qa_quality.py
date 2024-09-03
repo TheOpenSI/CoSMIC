@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: chess_qa_quality.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -39,7 +39,7 @@ class QualityEval(QABase):
         is_rag: bool=False,
         **kwargs
     ):
-        """Evaluate OpenSI AI System's qualities except for the reasoning which is evaluated in
+        """Evaluate OpenSI-CoSMIC's qualities except for the reasoning which is evaluated in
         src/modules/chess_qa_puzzle.py.
 
         Args:

@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------------------------------------------
 # File: base.py
-# Project: OpenSI AI System
+# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
@@ -32,11 +32,11 @@ class ServiceBase:
         self,
         log_file: str=None,
     ):
-        """Base class for the services in OpenSI AI System.
+        """Base class for the services in OpenSI-CoSMIC.
 
         Args:
             log_file (str, optional): (relative) log file path for storing printed information.
-            Defaults to None.
+                Defaults to None.
         """
         # Set log file path.
         self.log_file = log_file

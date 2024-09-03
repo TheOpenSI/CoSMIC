@@ -65,7 +65,7 @@ Upper-level chess-game services include
 We demonstrate the use of OpenSI-CoSMIC through the following code and [the main example](main.py) by running "python main.py".
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 ```python
-from src.opensi_ai_system import OpenSIAISystem
+from src.opensi_cosmic import OpenSICoSMIC
 from utils.log_tool import set_color
 
 # Build the system with a config file, which contains LLM name, or a given base LLM name.
@@ -73,10 +73,10 @@ use_config_file = True
 
 if use_config_file:
     config_path = "scripts/configs/config.yaml"
-    opensi_eval_system = OpenSIAISystem(config_path=config_path)
+    opensi_cosmic = OpenSICoSMIC(config_path=config_path)
 else:
     llm_name = "mistral-7b-instruct-v0.1"
-    opensi_eval_system = OpenSIAISystem(llm_name=llm_name)
+    opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
 
 # Set the question.
 # One can set each question with "[question],[reference answer (optional)]" in a .csv file.
@@ -84,25 +84,25 @@ query = "What is the capital of Australia?"
 
 # Get the answer, raw_answer for response without truncation, retrieve_score (if switched on) for
 # the similarity score to context in the system's vector database.
-answer, raw_answer, retrieve_score = opensi_eval_system(query, log_file=None)
+answer, raw_answer, retrieve_score = opensi_cosmic(query, log_file=None)
 
 # Print the answer.
 print(set_color("info", f"Question: {query}\nAnswer: {answer}."))
 
 # Remove memory cached in the system.
-opensi_eval_system.quit()
+opensi_cosmic.quit()
 ```
 More example questions are provided in [test.csv](data/test.csv), which can be used as
 ```python
 import os, csv
 import pandas as pd
 
-from src.opensi_ai_system import OpenSIAISystem
+from src.opensi_cosmic import OpenSICoSMIC
 from utils.log_tool import set_color
 
 # Build the system with a given base LLM.
 llm_name = "mistral-7b-instruct-v0.1"
-opensi_eval_system = OpenSIAISystem(llm_name=llm_name)
+opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
 
 # Get the file's absolute path.
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -142,7 +142,7 @@ for idx, (query, gt) in enumerate(zip(queries, answers)):
         log_file = None
 
     # Run for each question/query, return the truncated response if applicable.
-    answer, _, _ = opensi_eval_system(query, log_file=log_file)
+    answer, _, _ = opensi_cosmic(query, log_file=log_file)
 
     # Print the answer.
     if isinstance(gt, str):  # compare with GT string
@@ -159,7 +159,7 @@ for idx, (query, gt) in enumerate(zip(queries, answers)):
         log_file_pt.close()
     
 # Remove memory cached in the system.
-opensi_eval_system.quit()
+opensi_cosmic.quit()
 ```
 
 ## Reference
