@@ -50,7 +50,7 @@ if __name__ == "__main__":
         # "mistral-7b-instruct-v0.1",
         # "gemma-7b",
         # "gemma-7b-it",
-        # "mistral-7b-finetuned-20240801",
+        # "mistral-7b-finetuned",
         # "gpt-3.5-turbo",
         # "gpt-4o"
     ]

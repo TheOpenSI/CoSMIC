@@ -25,7 +25,7 @@
 
 import torch, os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
@@ -34,14 +34,15 @@ from transformers import pipeline
 from huggingface_hub import login
 from dotenv import load_dotenv
 from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
-from src.llms.prompts import system_prompt as system_prompt_instances
-from src.llms.prompts import user_prompt as user_prompt_instances
-from src.llms import tokenizer as tokenizer_instances
+from src.services.llms.prompts import system_prompt as system_prompt_instances
+from src.services.llms.prompts import user_prompt as user_prompt_instances
+from src.services.llms import tokenizer as tokenizer_instances
+from src.services.base import ServiceBase
 from utils.module import get_instance
 
 # =============================================================================================================
 
-class LLMBase:
+class LLMBase(ServiceBase):
     def __init__(
         self,
         llm_name: str,
@@ -50,8 +51,9 @@ class LLMBase:
         use_example: bool=True,
         seed: int=0,
         is_truncate_response: bool=True,
+        **kwargs
     ):
-        """LLM Base Class. Check the names from src/maps.py
+        """LLM Base Class as a Service. Check the names from src/maps.py
 
         Args:
             llm_name (str): LLM base model name.
@@ -61,7 +63,9 @@ class LLMBase:
             seed (int, optional): seed for response generation. Defaults to 0.
             is_truncate_response (bool, optional): truncate the raw response. Defaults to True.
         """
-        # Set config
+        super().__init__(**kwargs)
+
+        # Set config.
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../.."
         self.llm_name = llm_name
@@ -239,7 +243,6 @@ class LLMBase:
 
         # Decode response since some are torch.tensor.
         raw_response = self.tokenizer.decode(response_encoded)
-
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
         response = self.truncate_response(raw_response)
@@ -439,7 +442,7 @@ class Gemma7b(Mistral7bv01):
             return response
 
         if self.use_example:
-            response = response.split("model\n")[-1].split("\n")[0]
+            response = response.split("model\n")[2].split("\n")[0]
         else:
             response = response.split("### ANSWER:\n")[-1]
 

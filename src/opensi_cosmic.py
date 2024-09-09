@@ -27,8 +27,8 @@ import os, sys, yaml
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 
-from src.llms import llm as llm_instances
-from src.llms.llm import get_instance
+from src.services.llms import llm as llm_instances
+from src.services.llms.llm import get_instance
 from src.maps import LLM_INSTANCE_DICT
 from src.services.vector_database import VectorDatabase
 from src.services.qa import QABase

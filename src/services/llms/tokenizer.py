@@ -25,7 +25,7 @@
 
 import os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 from transformers import AutoTokenizer
 from src.maps import LLM_MODEL_DICT
@@ -46,14 +46,17 @@ class TokenizerBase:
         if (llm_name == "") or (llm_name not in LLM_MODEL_DICT.keys()):
             self.tokenizer = None
         else:
-            self.tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_DICT[llm_name])
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                LLM_MODEL_DICT[llm_name],
+                add_eos_token=False,
+            )
 
-            if (self.tokenizer is not None) and (self.tokenizer.pad_token is None):
-                self.tokenizer.pad_token = self.tokenizer.eos_token
+            self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def encode(
         self,
-        system_prompt: str
+        system_prompt: str,
+        **kwargs
     ):
         """Encode prompt for LLM.
 
@@ -67,7 +70,8 @@ class TokenizerBase:
 
     def decode(
         self,
-        response: str
+        response: str,
+        **kwargs
     ):
         """Decode response according to the encoder.
 
@@ -109,7 +113,8 @@ class Mistral7bInstructv01(TokenizerBase):
 
     def encode(
         self,
-        system_prompt: str
+        system_prompt: str,
+        **kwargs
     ):
         """Encode prompt for LLM.
 
@@ -121,12 +126,14 @@ class Mistral7bInstructv01(TokenizerBase):
         """
         return self.tokenizer.apply_chat_template(
             system_prompt,
-            return_tensors="pt"
+            return_tensors="pt",
+            **kwargs
         ).to("cuda")
 
     def decode(
         self,
-        response: str
+        response: str,
+        **kwargs
     ):
         """Decode response according to the encoder.
 
@@ -136,7 +143,7 @@ class Mistral7bInstructv01(TokenizerBase):
         Returns:
             response: decoded response.
         """
-        return self.tokenizer.decode(response)
+        return self.tokenizer.decode(response, **kwargs)
 
 # =============================================================================================================
 
@@ -154,7 +161,8 @@ class Gemma7b(TokenizerBase):
 
     def encode(
         self,
-        system_prompt: str
+        system_prompt: str,
+        **kwargs
     ):
         """Encode prompt for LLM.
 
@@ -167,13 +175,15 @@ class Gemma7b(TokenizerBase):
         return self.tokenizer(
             system_prompt,
             return_tensors="pt",
+            **kwargs,
             # max_length=30,
             # truncation=True
         ).input_ids.to("cuda")
 
     def decode(
         self,
-        response: str
+        response: str,
+        **kwargs
     ):
         """Decode response according to the encoder.
 
@@ -183,7 +193,11 @@ class Gemma7b(TokenizerBase):
         Returns:
             response: decoded response.
         """
-        return self.tokenizer.decode(response, skip_special_tokens=True)
+        return self.tokenizer.decode(
+            response,
+            skip_special_tokens=True,
+            **kwargs
+        )
 
 # =============================================================================================================
 
@@ -201,7 +215,8 @@ class Gemma7bIt(TokenizerBase):
 
     def encode(
         self,
-        system_prompt: str
+        system_prompt: str,
+        **kwargs
     ):
         """Encode prompt for LLM.
 
@@ -215,12 +230,14 @@ class Gemma7bIt(TokenizerBase):
             system_prompt,
             tokenize=True,
             add_generation_prompt=True,
-            return_tensors="pt"
+            return_tensors="pt",
+            **kwargs
         ).to("cuda")
 
     def decode(
         self,
-        response: str
+        response: str,
+        **kwargs
     ):
         """Decode response according to the encoder.
 
@@ -230,7 +247,11 @@ class Gemma7bIt(TokenizerBase):
         Returns:
             response: decoded response.
         """
-        return self.tokenizer.decode(response, skip_special_tokens=True)
+        return self.tokenizer.decode(
+            response,
+            skip_special_tokens=True,
+            **kwargs
+        )
 
 # =============================================================================================================
 
@@ -285,7 +306,8 @@ class MistralFinetuned(TokenizerBase):
 
     def encode(
         self,
-        system_prompt: str
+        system_prompt: str,
+        **kwargs
     ):
         """Encode prompt for LLM.
 
@@ -297,12 +319,14 @@ class MistralFinetuned(TokenizerBase):
         """
         return self.tokenizer(
             system_prompt,
-            return_tensors="pt"
+            return_tensors="pt",
+            **kwargs
         ).input_ids.to("cuda")
 
     def decode(
         self,
-        response: str
+        response: str,
+        **kwargs
     ):
         """Decode response according to the encoder.
 
@@ -312,4 +336,8 @@ class MistralFinetuned(TokenizerBase):
         Returns:
             response: decoded response.
         """
-        return self.tokenizer.decode(response, skip_special_tokens=True)
+        return self.tokenizer.decode(
+            response,
+            skip_special_tokens=True,
+            **kwargs
+        )

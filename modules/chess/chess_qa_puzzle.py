@@ -30,8 +30,8 @@ import numpy as np
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from src.services import chess as chess_instances
-from src.llms.prompts import user_prompt as user_prompter_instances
-from src.llms.prompts import system_prompt as system_prompter_instances
+from src.services.llms.prompts import user_prompt as user_prompter_instances
+from src.services.llms.prompts import system_prompt as system_prompter_instances
 from src.services.qa import QABase
 from utils.log_tool import set_color
 from utils.module import get_instance

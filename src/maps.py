@@ -29,7 +29,7 @@ LLM_MODEL_DICT = {
     "mistral-7b-instruct-v0.1": "mistralai/Mistral-7B-Instruct-v0.1",
     "gemma-7b": "google/gemma-7b",
     "gemma-7b-it": "google/gemma-7b-it",
-    "mistral-7b-finetuned": "OpenSI/cognitive_AI_finetune_3",
+    "mistral-7b-finetuned": "OpenSI/cognitive_AI_chess",
     "gpt-3.5-turbo": "gpt-3.5-turbo",
     "gpt-4o": "gpt-4o"
 }

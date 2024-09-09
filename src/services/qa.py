@@ -29,7 +29,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from src.services import chess as chess_instances
 from src.services.base import ServiceBase
-from src.llms.llm import LLMBase
+from src.services.llms.llm import LLMBase
 from src.services.rag import RAGBase
 
 # =============================================================================================================

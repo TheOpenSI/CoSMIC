@@ -29,8 +29,8 @@ import pandas as pd
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from utils.log_tool import set_color
-from src.llms.prompts import user_prompt as user_prompt_instances
-from src.llms.llm import GPT4o
+from src.services.llms.prompts import user_prompt as user_prompt_instances
+from src.services.llms.llm import GPT4o
 from src.services.chess import ChessBase
 
 # =============================================================================================================

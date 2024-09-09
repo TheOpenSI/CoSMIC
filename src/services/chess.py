@@ -29,7 +29,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from stockfish import Stockfish
 from utils.log_tool import set_color
-from src.llms.llm import GPT35Turbo, GPT4o
+from src.services.llms.llm import GPT35Turbo, GPT4o
 from src.services.base import ServiceBase
 
 # =============================================================================================================
