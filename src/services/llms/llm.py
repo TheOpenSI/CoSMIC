@@ -600,9 +600,10 @@ class MistralFinetuned(Mistral7bv01):
         # Set up LLM.
         self.llm = lambda system_prompt: self.model.generate(
             system_prompt,
-            attention_mask=torch.where(system_prompt == 2, 0, 1),
+            attention_mask=torch.where(system_prompt==2,0,1),
             max_new_tokens=2048,
             do_sample=False,
+            pad_token_id=self.tokenizer.tokenizer.eos_token_id,
             # top_p=0.9,
             # temperature=0.5
         )[0]
