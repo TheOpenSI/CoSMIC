@@ -37,9 +37,10 @@ from modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from modules.chess.chess_qa_quality import QualityEval
 from modules.chess.chess_genfen import FENGenerator
 from modules.chess.chess_gencot import CotGenerator
-from modules.code_generation.code_generation import CodeGenerator
+from modules.code_generation.llm_solver.code_generation import CodeGenerator as LLMCodeGenerator
 from utils.log_tool import set_color
 from box import Box
+from modules.code_generation.ollama_solver.code_generation import CodeGenerator as OllamaCodeGenerator
 
 # =============================================================================================================
 
@@ -211,7 +212,7 @@ class OpenSICoSMIC:
                 cot_generator.batch_process(question)
 
             elif question.find("code_generation") > -1:
-                code_generator = CodeGenerator(
+                code_generator = LLMCodeGenerator(
                     llm=self.llm,
                     rag=None,
                     log_file=log_file,
@@ -219,6 +220,10 @@ class OpenSICoSMIC:
 
                 # Batch process the question file.
                 code_generator.batch_process(question)
+        elif question.find("code") > -1 \
+            and (question.find("generation") > -1 or question.find("generate") > -1):
+            code_generator = OllamaCodeGenerator(model="mistral", enable_chat_history=True)
+            code_generator(question)
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)

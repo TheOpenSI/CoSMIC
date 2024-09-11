@@ -1,0 +1,12 @@
+{%- for message in messages %}
+    {%- if message['role'] == 'System' %}
+        {{- bos_token + 'System: ' + message['content'] + '\n\n' }}
+    {%- elif message['role'] == 'User' %}
+        {{- 'User: ' + message['content'] + "\n\n"}}
+    {%- elif message['role'] == 'Context' %}
+        {{- 'Context: ' + message['content'] + "\n\n"}}
+    {%- elif message['role'] == 'Conversation' %}
+        {{- 'Previous Conversation History: ' + message['content'] + "\n\n"}}
+    {%- endif %}
+{%- endfor %}
+{{- 'Assistant: '}}

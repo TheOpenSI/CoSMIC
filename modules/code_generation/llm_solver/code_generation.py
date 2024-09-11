@@ -25,14 +25,15 @@
 import os, sys
 import pandas as pd
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 from typing import List
 from src.services.pycapsule import PyCapsule
 from src.services.qa import QABase
-from modules.code_generation.system_prompt import CodeGeneratorSystemPrompt
-from modules.code_generation.utils.code_parser import parse_input
-from modules.code_generation.utils.pycapsule_util import create_requirements_file, create_py_file, get_context, clean
+from modules.code_generation.llm_solver.system_prompt import CodeGeneratorSystemPrompt
+from modules.code_generation.llm_solver.utils.code_parser import parse_input
+from modules.code_generation.llm_solver.utils.pycapsule_util import create_requirements_file
+from modules.code_generation.llm_solver.utils.pycapsule_util import create_py_file, get_context, clean
 from utils.log_tool import set_color
 
 # =============================================================================================================

@@ -37,8 +37,8 @@ from src.services.rag import RAGBase
 class QABase(ServiceBase):
     def __init__(
         self,
-        llm: LLMBase,
-        rag: RAGBase,
+        llm: LLMBase=None,
+        rag: RAGBase=None,
         **kwargs
     ):
         """Base class for QA.

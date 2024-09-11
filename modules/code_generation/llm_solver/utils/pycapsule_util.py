@@ -22,8 +22,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import subprocess, os
+import subprocess, os, sys
 import regex as re
+
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../../..")
 
 from typing import List
 from utils.log_tool import set_color

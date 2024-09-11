@@ -24,7 +24,7 @@
 
 import os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 from transformers import AutoTokenizer
 from src.services.llms.prompts.system_prompt import SystemPromptBase

@@ -28,6 +28,8 @@
 
 import subprocess, os, shutil, sys
 
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+
 from utils.log_tool import set_color
 from src.services.base import ServiceBase
 
