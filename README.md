@@ -48,20 +48,23 @@ apt install docker.io
 ```
 
 ## Framework
-This code has 3 base services, including
+The system is configurated through [a .yaml file](scripts/configs/config.yaml).
+Currently, it has 5 base services, including
 
 - [Chess-game next move predication and analyse](src/services/chess.py)
 - [Vector database for text-based and document-base information update](src/services/vector_database.py)
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
 - [Code generation and evalution (python)](src/services/pycapsule.py)
+- [General question answering and reasoning](src/services/qa.py)
 
 Upper-level chess-game services include
+
 - [Puzzle next move prediction and analyse](src/modules/chess_qa_puzzle.py)
 - [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
 
-## User Guide
+## Get Started
 We demonstrate the use of OpenSI-CoSMIC through the following code and [the main example](main.py) by running "python main.py".
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 ```python
@@ -183,7 +186,7 @@ For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangk
 We welcome contributions from the community! Whether you’re a researcher, developer, or enthusiast, there are many ways to get involved:
 
  - Report Issues: Found a bug or have a feature request? Open an issue on our GitHub page.
- - Submit Pull Requests: Contribute code by submitting pull requests. Please follow our contribution guidelines.
+ - Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING).
  - Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
 
 ## License
