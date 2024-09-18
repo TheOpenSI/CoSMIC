@@ -186,7 +186,7 @@ For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangk
 We welcome contributions from the community! Whether you’re a researcher, developer, or enthusiast, there are many ways to get involved:
 
  - Report Issues: Found a bug or have a feature request? Open an issue on our GitHub page.
- - Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING).
+ - Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING.md).
  - Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
 
 ## License
