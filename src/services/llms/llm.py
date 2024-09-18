@@ -51,6 +51,7 @@ class LLMBase(ServiceBase):
         use_example: bool=True,
         seed: int=0,
         is_truncate_response: bool=True,
+        is_quantized: bool=False,
         **kwargs
     ):
         """LLM Base Class as a Service. Check the names from src/maps.py
@@ -72,6 +73,7 @@ class LLMBase(ServiceBase):
         self.use_example = use_example
         self.is_truncate_response = is_truncate_response
         self.seed = seed
+        self.is_quantized = is_quantized
 
         # Use user prompt for general questions if not specified.
         if user_prompt_instance_name == "":
@@ -95,6 +97,17 @@ class LLMBase(ServiceBase):
             tokenizer_instances,
             LLM_INSTANCE_DICT[llm_name]
         )(llm_name=llm_name)
+
+        # Set quantization configs.
+        if is_quantized:
+            self.quantization_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.bfloat16,
+            )
+        else:
+            self.quantization_config = None
 
         # Model and LLM are set from the children class by LLM type.
         self.model = None
@@ -271,11 +284,11 @@ class Mistral7bv01(LLMBase):
         # Load model to GPU.
         self.model = AutoModelForCausalLM.from_pretrained(
             LLM_MODEL_DICT[llm_name],
-            # low_cpu_mem_usage=True
             use_cache=True,
             device_map="cuda",
             torch_dtype=torch.bfloat16,
-        )
+            quantization_config=self.quantization_config
+        )  # low_cpu_mem_usage=True
 
         # Build QA pipeline.
         self.llm = lambda system_prompt: pipeline(
@@ -283,7 +296,6 @@ class Mistral7bv01(LLMBase):
             model=self.model,
             tokenizer=self.tokenizer.tokenizer,
             do_sample=False,
-            # temperature=0.2,  # block do_sample thus remove this
             repetition_penalty=1.1,
             return_full_text=False,
             max_new_tokens=500,
@@ -292,7 +304,9 @@ class Mistral7bv01(LLMBase):
     def quit(self):
         """Release model memory and instance.
         """
-        self.model = self.model.to("cpu")
+        if not self.is_quantized:
+            self.model = self.model.to("cpu")
+
         del self.model
         torch.cuda.empty_cache()
 
@@ -470,7 +484,6 @@ class Gemma7bIt(Mistral7bv01):
             system_prompt,
             max_new_tokens=1000,
             do_sample=False,
-            # temperature=0.2,
             pad_token_id=self.tokenizer.tokenizer.pad_token_id
         )[0]
 
@@ -565,32 +578,27 @@ class MistralFinetuned(Mistral7bv01):
         self,
         llm_name: str="mistral-7b-finetuned",
         use_example=False,
+        is_quantized=True,
         **kwargs
     ):
         """For Mistral 7B finetuned model.
 
         Args:
             llm_name (str, optional): LLM name in src/maps.py. Defaults to "mistral-7b-finetuned".
+            use_example (bool, optional): use example instance. Defaults to False.
+            is_quantized (bool, optional): use quantized model, always true. Default to True.
         """
-        super().__init__(llm_name=llm_name, use_example=use_example, **kwargs)
+        super().__init__(llm_name=llm_name, use_example=use_example, is_quantized=True, **kwargs)
 
         # Use the base model to build model.
         base_llm_model = "mistral-7b-v0.1"
 
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16,
-        )
-
         base_model = AutoModelForCausalLM.from_pretrained(
             LLM_MODEL_DICT[base_llm_model],
-            quantization_config=bnb_config,
-            # low_cpu_mem_usage=True
+            quantization_config=self.quantization_config,
             use_cache=True,
             device_map="auto"
-        )
+        )  # low_cpu_mem_usage=True
 
         self.model = PeftModel.from_pretrained(
             base_model,

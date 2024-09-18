@@ -67,16 +67,12 @@ class OpenSICoSMIC:
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
 
         # If llm_name is not specified, read it from the config file.
-        if llm_name == "":
-            llm_name = self.config.llm_name
-
-        # Check if llm_name is supported.
-        if llm_name not in LLM_INSTANCE_DICT.keys():
-            print(set_color("error", f"Unsupported LLM: {llm_name}."))
-            sys.exit()
-
-        # Build LLM instance from class defined in .py
-        self.llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(seed=self.config.seed)
+        if llm_name == "": llm_name = self.config.llm_name
+        self.llm = self.get_llm(
+            llm_name,
+            seed=self.config.seed,
+            is_quantized=self.config.is_quantized
+        )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
         vector_database = VectorDatabase()
@@ -100,6 +96,37 @@ class OpenSICoSMIC:
         # QA module to handle basic types of questions, such __next__move__, __update__store__, and
         # general questions.
         self.qa = QABase(self.llm, self.rag)
+
+    def get_llm(
+        self,
+        llm_name,
+        seed: int=0,
+        is_quantized: bool=False,
+        **kwargs
+    ):
+        """ Construct LLM give an LLM name.
+
+        Args:
+            llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py.
+            seed (int): LLM content generation seed. Default to 0.
+            is_quantized (bool): use quantized LLM. Default to False.
+
+        Return:
+            llm (LLMBase): LLM instance.
+        """
+        # Check if llm_name is supported.
+        if llm_name not in LLM_INSTANCE_DICT.keys():
+            print(set_color("error", f"Unsupported LLM: {llm_name}."))
+            sys.exit()
+
+        # Build LLM instance from class defined in .py
+        llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(
+            seed=seed,
+            is_quantized=is_quantized,
+            **kwargs
+        )
+
+        return llm
 
     def quit(self):
         """ Release memory of LLM and vector embedding model in vector_database.
