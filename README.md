@@ -39,6 +39,8 @@ pytz==2024.1
 torch==2.2.0
 transformers==4.42.4
 python-box==7.2.0
+PyYAML==6.0.2
+regex==2024.5.15
 ```
 
 To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service,
@@ -56,6 +58,8 @@ Currently, it has 5 base services, including
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
 - [Code generation and evalution (python)](src/services/pycapsule.py)
 - [General question answering and reasoning](src/services/qa.py)
+
+Each query will be parsed by [an LLM-based analyser](src/query_analyser/query_analyser.py) to select the most relevant service.
 
 Upper-level chess-game services include
 

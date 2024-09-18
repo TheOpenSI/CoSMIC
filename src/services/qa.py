@@ -37,6 +37,7 @@ from src.services.rag import RAGBase
 class QABase(ServiceBase):
     def __init__(
         self,
+        query_analyser: LLMBase,
         llm: LLMBase,
         rag: RAGBase,
         **kwargs
@@ -44,12 +45,14 @@ class QABase(ServiceBase):
         """Base class for QA.
 
         Args:
+            query_analyser (LLMBase): query analyser.
             llm (LLMBase): LLM instance.
             rag (RAGBase): RAG instance containing vector database service.
         """
         super().__init__( **kwargs)
 
         # Set config globally.
+        self.query_analyser = query_analyser
         self.llm = llm
         self.rag = rag
 
@@ -76,47 +79,64 @@ class QABase(ServiceBase):
         raw_response = None
         retrieve_score = -1
 
-        # Process query with keyword recogintion.
-        if query.find("exit") > -1:
-            response = "exit"
-        elif query.find("skip") > -1:
-            response = None
-        elif query.find("__next__move__") > -1:
-            # Parse move string
-            current_move = query.split("__next__move__")[-1]
+        # Get service option through query analyser.
+        service_option, service_info_dict = self.query_analyser(query)
 
-            if context == "":
-                move_mode = "algebric"
-            else:
-                move_mode = context
+        # Skip query as required or unknown service option.
+        if query.find("skip") > -1 or service_option is None:
+            return response, raw_response, retrieve_score
+
+        # Process query with service parsing.
+        if service_option == "0.0":
+            # Set game move mode.
+            if context == "": move_mode = "algebric"
+            else: move_mode = context
+
+            # Get chess FEN.
+            current_fen = service_info_dict["fen"]
+
+            # Set up next move predictor as Stockfish.
+            next_move_predictor = chess_instances.StockfishFENNextMove()
+
+            # Predict the next move.
+            next_move = next_move_predictor(fen=current_fen, move_mode=move_mode, topk=5)
+
+            # Set the response with question and next move.
+            response = f"The next move of {[current_fen]} is one of {next_move}."
+        elif service_option == "0.1":
+            # Set game move mode.
+            if context == "": move_mode = "algebric"
+            else: move_mode = context
+
+            # Get moves.
+            current_moves = service_info_dict["moves"]
 
             # Set up next move predictor as Stockfish.
             next_move_predictor = chess_instances.StockfishSequenceNextMove()
 
             # Predict the next move.
-            next_move = next_move_predictor(current_move, move_mode=move_mode, topk=5)
+            next_move = next_move_predictor(current_moves, move_mode=move_mode, topk=5)
 
             # Set the response with question and next move.
-            response = f"The next move of {[current_move]} is one of {next_move}."
-        elif query.find("__update__store__") > -1:
-            context = query.split("__update__store__")[-1]
-
+            response = f"The next move of {[current_moves]} is one of {next_move}."
+        elif service_option == "1":
             # Check if context is a .pdf.
-            is_context_a_document = context.find(".pdf") > -1
+            is_a_document = service_info_dict["is_a_document"]
 
-            if is_context_a_document:
-                # Remove empty space to generate the absolute document path.
-                context = context.replace(" ", "")
+            if is_a_document:
+                # Get absolute document path.
+                document_path = service_info_dict["document_path"]
 
-                # Check if not an absolute path, convert to an absoluate path.
-                if not os.path.isabs(context):
-                    context = os.path.join(self.root, context)
-
-                # Update the knowledge database and return the status.
-                self.rag.vector_database.update_database_from_document(document_path=context)
+                if document_path is not None:
+                    # Update the knowledge database and return the status.
+                    self.rag.vector_database.update_database_from_document(document_path=document_path)
             else:
-                # Add text to database.
-                self.rag.vector_database.update_database_from_text(text=context)
+                # Get text.
+                text = service_info_dict["text"]
+
+                if text is not None:
+                    # Add text to database.
+                    self.rag.vector_database.update_database_from_text(text=text)
         else:
             if is_rag:
                 # If retrieving context, first generate the user prompt given the

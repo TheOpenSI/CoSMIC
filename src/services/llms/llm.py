@@ -109,6 +109,10 @@ class LLMBase(ServiceBase):
         else:
             self.quantization_config = None
 
+        # Set attention_mask.
+        self.attention_mask = lambda system_prompt: \
+            torch.any(torch.stack([system_prompt==v for v in [0,1,2]], dim=-1), dim=-1).logical_not()
+
         # Model and LLM are set from the children class by LLM type.
         self.model = None
         self.llm = None
@@ -392,8 +396,8 @@ class Mistral7bInstructv01(Mistral7bv01):
             system_prompt,
             max_new_tokens=1000,
             do_sample=False,
-            # temperature=0.2,
-            pad_token_id=self.tokenizer.tokenizer.pad_token_id
+            attention_mask=self.attention_mask(system_prompt),
+            pad_token_id=self.tokenizer.tokenizer.pad_token_id,
         )[0]
 
     def truncate_response(
@@ -436,8 +440,7 @@ class Gemma7b(Mistral7bv01):
             system_prompt,
             max_new_tokens=500,
             do_sample=False,
-            # temperature=0.2,
-            # pad_token_id=tokenizer.pad_token_id
+            pad_token_id=self.tokenizer.tokenizer.pad_token_id
         )[0]
 
     def truncate_response(
@@ -608,12 +611,10 @@ class MistralFinetuned(Mistral7bv01):
         # Set up LLM.
         self.llm = lambda system_prompt: self.model.generate(
             system_prompt,
-            attention_mask=torch.where(system_prompt==2,0,1),
+            attention_mask=self.attention_mask(system_prompt),
             max_new_tokens=2048,
             do_sample=False,
-            pad_token_id=self.tokenizer.tokenizer.eos_token_id,
-            # top_p=0.9,
-            # temperature=0.5
+            pad_token_id=self.tokenizer.tokenizer.eos_token_id
         )[0]
 
     def truncate_response(

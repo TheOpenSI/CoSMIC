@@ -2,6 +2,7 @@
 # mistral-7b-v0.1, mistral-7b-instruct-v0.1, mistral-7b-finetuned,
 # gemma-7b, gemma-7b-it,
 # gpt-3.5-turbo, gpt-4o.
+
 llm_name: "mistral-7b-v0.1"
 is_quantized: True
 seed: 0  # seed of response generation by base LLM.
@@ -10,6 +11,11 @@ document_path: [
     "docs/logan_donovan_complete_guide_to_chess.pdf",
     "docs/ucl_2023.pdf"
   ]  # a string or a list of .pdf to add context to the vector database.
+
+query_analyser:
+  llm_name: "gemma-7b-it"
+  seed: 0
+  is_quantized: True
 
 rag: # RAG-related config.
   topk: 5  # retrieve topk documents.

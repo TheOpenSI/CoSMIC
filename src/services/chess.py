@@ -342,13 +342,15 @@ class StockfishFENNextMove(ChessBase):
     def __call__(
         self,
         fen: str,
-        move_mode: str=""
+        move_mode: str="",
+        topk: int=1
     ):
         """Predict the next move for a query.
 
         Args:
             fen (str): a chess FEN.
             move_mode (str, optional): move mode. Defaults to "".
+            topk (int, optional): number of next moves. Default to 1.
 
         Returns:
             next_move_list (list): a list of topk next move(s).
@@ -359,7 +361,7 @@ class StockfishFENNextMove(ChessBase):
         # Estimate the next moves for puzzle
         next_move_list = super().__call__(
             move_mode=move_mode,
-            topk=1
+            topk=topk
         )
 
         return next_move_list

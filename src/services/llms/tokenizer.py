@@ -51,7 +51,9 @@ class TokenizerBase:
                 add_eos_token=False,
             )
 
-            self.tokenizer.pad_token = self.tokenizer.eos_token
+            # Set tokenizer pad_token.
+            if self.tokenizer.pad_token is None:
+                self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def encode(
         self,
@@ -127,6 +129,7 @@ class Mistral7bInstructv01(TokenizerBase):
         return self.tokenizer.apply_chat_template(
             system_prompt,
             return_tensors="pt",
+            padding=True,
             **kwargs
         ).to("cuda")
 
@@ -175,9 +178,8 @@ class Gemma7b(TokenizerBase):
         return self.tokenizer(
             system_prompt,
             return_tensors="pt",
-            **kwargs,
-            # max_length=30,
-            # truncation=True
+            padding=True,
+            **kwargs
         ).input_ids.to("cuda")
 
     def decode(
@@ -231,6 +233,7 @@ class Gemma7bIt(TokenizerBase):
             tokenize=True,
             add_generation_prompt=True,
             return_tensors="pt",
+            padding=True,
             **kwargs
         ).to("cuda")
 

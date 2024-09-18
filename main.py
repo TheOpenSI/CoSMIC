@@ -46,8 +46,8 @@ if __name__ == "__main__":
 
     # The list model name corresponding to src/maps.py.
     llm_names = [
-        "mistral-7b-v0.1",
-        # "mistral-7b-instruct-v0.1",
+        # "mistral-7b-v0.1",
+        "mistral-7b-instruct-v0.1",
         # "gemma-7b",
         # "gemma-7b-it",
         # "mistral-7b-finetuned",
@@ -95,14 +95,13 @@ if __name__ == "__main__":
             answer, _, _ = opensi_cosmic(query, log_file=log_file)
 
             # Print the answer.
-            if isinstance(gt, str):  # compare with GT string
+            if answer is not None and isinstance(gt, str):  # compare with GT string
                 # Assign to q variables.
                 status = "success" if (answer.find(gt) > -1) else "fail"
 
-                print(set_color(
-                    status,
-                    f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n")
-                )
+                print(set_color(status, f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'."))
+            elif answer is not None and answer != '':
+                print(set_color("info", f"\nQuestion: '{query}'.\nAnswer: '{answer}'."))
 
             # Close log file pointer.
             if log_file_pt is not None:

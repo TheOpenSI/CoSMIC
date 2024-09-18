@@ -174,7 +174,6 @@ class VectorDatabase(ServiceBase):
         for document_path in document_paths:
             if not os.path.exists(document_path): continue
             self.update_database_from_document(document_path)
-            print(set_color('info', f"Add {document_path} to database."))
 
     def add_document_directory(
         self,
@@ -191,9 +190,6 @@ class VectorDatabase(ServiceBase):
 
             # Add these documents.
             self.add_documents(document_paths)
-
-            # Print the progress.
-            print(set_color('info', f"Add documents in {document_dir} to database."))
 
     def update_database_catalogue(
         self,
@@ -270,8 +266,12 @@ class VectorDatabase(ServiceBase):
 
                 # Save to local database.
                 self.database.save_local(self.local_database_path)
+
+                print(set_color("info", f"Add '{document_path}'."))
+            else:
+                print(set_color("warning", f"Contents of '{document_path}' exist."))
         else:
-            print(set_color('warning', f"Document {document_path} not exists."))
+            print(set_color("warning", f"Document {document_path} not exists."))
 
     def update_database_from_text(
         self,
@@ -288,9 +288,15 @@ class VectorDatabase(ServiceBase):
         if text != '':
             # Skip for high-similar text.
             content_retrieved, _ = self.similarity_search_with_relevance_scores(text, k=1)[0]
+            content_retrieved = content_retrieved.page_content
 
             # If the same as existing contents, skip the text.
-            if content_retrieved.page_content.find(text) > -1:
+            if content_retrieved.find(text) > -1:
+                print(set_color(
+                    "warning",
+                    f"Similar contents found: '{content_retrieved}' for '{text}'."
+                ))
+
                 return -1
 
             # Update the text with timestamp.
@@ -306,6 +312,6 @@ class VectorDatabase(ServiceBase):
             self.database.save_local(self.local_database_path)
 
             # Print the progress.
-            print(set_color('info', f"Update database from text."))
+            print(set_color('info', f"Update database with '{text}'."))
 
             return 0

@@ -23,6 +23,10 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
+import os, sys
+
+sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../../..")
+
 # =============================================================================================================
 
 class UserPromptBase:

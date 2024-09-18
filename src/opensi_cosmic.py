@@ -40,12 +40,14 @@ from modules.chess.chess_gencot import CotGenerator
 from modules.code_generation.code_generation import CodeGenerator
 from utils.log_tool import set_color
 from box import Box
+from src.query_analyser.query_analyser import QueryAnalyser
 
 # =============================================================================================================
 
 class OpenSICoSMIC:
     def __init__(
         self,
+        query_llm_name: str="",
         llm_name: str="",
         config_path: str="scripts/configs/config.yaml"
     ):
@@ -54,6 +56,8 @@ class OpenSICoSMIC:
         Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
 
         Args:
+            query_llm_name (str): Query analyser LLM name, check LLM_MODEL_DICT in src/maps.py,
+                if it is empty, the entry is self.config.query_llm_name.
             llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
                 is self.config.llm_name.
             config_path (str): path of configuration file.
@@ -72,6 +76,14 @@ class OpenSICoSMIC:
             llm_name,
             seed=self.config.seed,
             is_quantized=self.config.is_quantized
+        )
+
+        # Set LLM for query analysis.
+        if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
+        self.query_analyser = QueryAnalyser(
+            query_llm_name,
+            seed=self.config.query_analyser.seed,
+            user_prompt_instance_name="QueryAnalyser"
         )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
@@ -95,7 +107,7 @@ class OpenSICoSMIC:
 
         # QA module to handle basic types of questions, such __next__move__, __update__store__, and
         # general questions.
-        self.qa = QABase(self.llm, self.rag)
+        self.qa = QABase(self.query_analyser, self.llm, self.rag)
 
     def get_llm(
         self,
@@ -131,6 +143,7 @@ class OpenSICoSMIC:
     def quit(self):
         """ Release memory of LLM and vector embedding model in vector_database.
         """
+        self.query_analyser.quit()
         self.llm.quit()
         self.rag.vector_database.quit()
 
@@ -140,7 +153,7 @@ class OpenSICoSMIC:
         context: str="",
         log_file: str=None
     ):
-        """Execute QA.
+        """ Execute QA.
 
         Args:
             question (str): a question or a .csv containing multiple questions.
