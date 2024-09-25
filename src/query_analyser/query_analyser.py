@@ -122,9 +122,9 @@ class QueryAnalyser:
             if option not in full_services.keys():
                 print(set_color("error", f"Unknown option '{option}' from '{response}'."))
 
-                return None
+                return "-1"
         else:
-            return None
+            return "-1"
 
         return option
 
@@ -164,7 +164,7 @@ class QueryAnalyser:
             service_info_dict (dict): updated information dictionary.
         """
         # Default service option.
-        service_option = "0"
+        service_option = "-1"
 
         # Parse move string.
         move_match = re.search('[\[,\:](.*?[,\s].*?)[\.,\]]?$', query)
@@ -189,8 +189,8 @@ class QueryAnalyser:
         else:
             # Invalid inputs.
             print(set_color(
-                "error",
-                f"Invalid query: '{query}'. [tip: index a sequence of moves or FEN with :]")
+                "warning",
+                f"Chess query: '{query}'. [tip: index a sequence of moves or FEN with :]")
             )
 
         return service_option, service_info_dict

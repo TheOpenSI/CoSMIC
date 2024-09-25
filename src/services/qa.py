@@ -83,7 +83,7 @@ class QABase(ServiceBase):
         service_option, service_info_dict = self.query_analyser(query)
 
         # Skip query as required or unknown service option.
-        if query.find("skip") > -1 or service_option is None:
+        if query.find("skip") > -1:
             return response, raw_response, retrieve_score
 
         # Process query with service parsing.
