@@ -53,10 +53,10 @@ class QueryAnalyser:
 
         # Set a list of services.
         self.services = {
-            "0": "predict the next or the best move in a chess game",
-            "1": "add a statement or a document to vector database",
-            "2": "answer a question or provide a reasoning",
-            "3": "generate code in any programming language"
+            "0": "predict the next move or the best move given a sequence of moves or a FEN in a chess game",
+            "1": "add a content or a document to vector database, the added content should not be a question",
+            "2": "answer a question or provide a reasoning analysis",
+            "3": "generate code in a programming language"
         }
 
         # Set chess services.
@@ -231,7 +231,7 @@ class QueryAnalyser:
             if document_path:
                 document_path = document_path.group()
             else:
-                print(set_color("error", f"Invalid query: {query}"))
+                print(set_color("warning", f"Invalid query: {query} [top: pdf file(s) should be provided.]"))
 
                 return service_option, service_info_dict
 
@@ -253,7 +253,7 @@ class QueryAnalyser:
                 service_info_dict["text"] = text
             else:
                 print(set_color(
-                    "error",
+                    "warning",
                     f"Invalid query: {query} [tip: index the text with :]"
                 ))
 
@@ -338,7 +338,6 @@ class QueryAnalyser:
             # Add the system information if it is related to the question.
             if relevance:
                 service_info_dict["system_information"] = \
-                    f"The system information is" \
-                    f" '{self.user_prompter_system_info.system_information}'."
+                    self.user_prompter_system_info.system_information
 
         return service_option, service_info_dict

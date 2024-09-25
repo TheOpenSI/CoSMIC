@@ -1,17 +1,21 @@
 Question,Answer
 What services can you provide?,
 Tell me something about this system.,
-Who creates this system?,
+Who built this system?,
+How many services do you provide?,
 What's the capital of Australia?,Canberra
 What's the capital of Bangladesh?,Dhaka
 What's the capital of Germany?,Berlin
 What's the capital of Spain?,Madrid
+add the following book to the system: data/docs/logan_donovan_complete_guide_to_chess.pdf,
 Who is the author of the book complete guide to chess?,Logan Donovan
+add the following book to the system: data/docs/ucl_2023.pdf,
 How many UCL titles does Real Madrid have?,14
 update the following information to the vector database: Real Madrid won 15 UCL titles.,
 How many UCL titles does Real Madrid have?,15
 What's the capital of Saudi Arabia?,Riyadh
 predict the next move given moves: d4 d5 c4 c6 cxd5 e6 dxe6 fxe6 Nf3 Bb4+ Nc3 Ba5,Bf4
+predict the next move given FEN: rn1qkbr1/p1p1pppp/5n2/1p1p1b2/2P1P3/1Q1B1N2/PP1P1PPP/RNB1K2R w KQq - 4 6,exf5
 skip ./data/test_framework/reasoning_dm_an/puzzle_data_updated.csv,
 skip ./data/test_framework/attention/rag_questions.csv,
 skip ./data/test_framework/memory/memory.csv,

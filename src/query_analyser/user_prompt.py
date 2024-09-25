@@ -81,8 +81,8 @@ class QueryAnalyserService(UserPromptBase):
         """
         user_prompt = f"Given {self.num_services} services:" \
             f" '{self.service_string}'," \
-            f" which service is the question '{question}' highly related to?" \
-            f" Just return {self.option_string}."
+            f" which service is the question '{question}' most closely related to?" \
+            f" Just return {self.option_string} without any explainations."
 
         return user_prompt
 
@@ -122,9 +122,12 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             system_information (str): system information.
         """
         system_information = \
-            f"This system is built and maintained by the team of the Open Source" \
-            f" Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)." \
-            f" It provides {len(self.services)} services," \
+            f"This system is called OpenSI-CoSMIC." \
+            f" OpenSI-CoSMIC stands for the Open Source" \
+            f" Institute-Cognitive System of Machine Intelligent Computing." \
+            f" OpenSI-CoSMIC is created, developed, and maintained by a team working" \
+            f" with University of Canberra and NetApp." \
+            f" OpenSI-CoSMIC provides {len(self.services)} services," \
             f" including {self.service_string}."
 
         return system_information
@@ -143,9 +146,9 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given the system information" \
+        user_prompt = f"Given the context" \
             f" '{self.system_information}'," \
-            f" is the question '{question}' highly related to the system information?" \
-            f" Just return yes or no without any explainations."
+            f" is the question '{question}' related to the context?" \
+            f" Just answer yes or no without any explainations."
 
         return user_prompt
