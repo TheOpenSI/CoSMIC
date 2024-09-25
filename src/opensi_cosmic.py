@@ -82,8 +82,7 @@ class OpenSICoSMIC:
         if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
         self.query_analyser = QueryAnalyser(
             query_llm_name,
-            seed=self.config.query_analyser.seed,
-            user_prompt_instance_name="QueryAnalyser"
+            seed=self.config.query_analyser.seed
         )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
@@ -270,7 +269,8 @@ class OpenSICoSMIC:
             response, raw_response, retrieve_score = self.qa(
                 question,
                 context=context,
-                is_rag=True
+                is_rag=True,
+                verbose=False,
             )
 
         # Return answers with and without truncation, and retrieve score if applicable otherwise -1.

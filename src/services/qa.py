@@ -60,7 +60,8 @@ class QABase(ServiceBase):
         self,
         query: str,
         context: str="",
-        is_rag: bool=False
+        is_rag: bool=False,
+        verbose: bool=False
     ):
         """Process each QA.
 
@@ -68,6 +69,7 @@ class QABase(ServiceBase):
             query (str): a question.
             context (str|dict, optional): contex associated with the question. Defaults to "".
             is_rag (bool, optional): if retrieve context for the question. Defaults to False.
+            verbose (bool, optional): debug mode. Default to False.
 
         Returns:
             response (str): truncated answer if applicable.
@@ -81,6 +83,9 @@ class QABase(ServiceBase):
 
         # Get service option through query analyser.
         service_option, service_info_dict = self.query_analyser(query)
+
+        # Whether this query is related to system information.
+        system_information_relevance = service_info_dict["system_information_relevance"]
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
@@ -156,7 +161,26 @@ class QABase(ServiceBase):
                 user_prompt = query
                 retrieve_score = -1
 
+            # If the question is related to system information,
+            # add system information to context.
+            if system_information_relevance:
+                # Get system information.
+                system_information = service_info_dict["system_information"]
+
+                # Add the information to existing context.
+                if isinstance(context, dict):
+                    context["context"] += system_information
+                else:
+                    context += system_information
+
             # Get the response with retrieved context if applicable.
             response, raw_response = self.llm(user_prompt, context=context)
+
+        # Print service name.
+        if verbose \
+            and (response is not None) \
+            and (service_option in self.query_analyser.full_services.keys()):
+            response += f" [service: {self.query_analyser.full_services[service_option]}" \
+                f"; system info relevance: {system_information_relevance}]"
 
         return response, raw_response, retrieve_score

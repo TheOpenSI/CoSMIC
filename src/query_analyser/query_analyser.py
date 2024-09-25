@@ -39,14 +39,12 @@ class QueryAnalyser:
     def __init__(
         self,
         llm_name: str="mistral-7b-instruct-v0.1",
-        user_prompt_instance_name: str="QueryAnalyser",
         seed: int=0,
     ):
         """Query analyser to select a service.
 
         Args:
             llm_name (str, optional): LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
-            user_prompt_instance_name (str, optional): user prompter name. Defaults to "QueryAnalyser".
             seed (int, optional): response generation seed. Defaults to 0.
         """
         # Set config.
@@ -67,6 +65,9 @@ class QueryAnalyser:
             "0.1": "predict next move given a sequence of moves"
         }
 
+        # Get full services.
+        self.full_services = {**self.services, **self.chess_services}
+
         # Get the number of services.
         self.num_services = len(self.services)
 
@@ -83,13 +84,17 @@ class QueryAnalyser:
             is_truncate_response=True,
         )
 
-        # Set user prompt with services to LLM.
-        user_prompter = get_instance(
+        # Set user prompter for service option.
+        self.user_prompter_service = get_instance(
             query_user_prompt_instances,
-            user_prompt_instance_name
+            "QueryAnalyserService"
         )(services=self.services)
 
-        self.llm.set_user_prompter(user_prompter)
+        # Set user prompter for system information.
+        self.user_prompter_system_info = get_instance(
+            query_user_prompt_instances,
+            "QueryAnalyserSystemInfo"
+        )(services=self.services)
 
     def quit(self):
         """Quit by releasing model memory and instance.
@@ -113,14 +118,13 @@ class QueryAnalyser:
         response = response.lower()
 
         # Truncate to get the option index.
-        option = re.search('option (\d{1,3}\.\d{1,3}|\d{1,3})', response)
+        option = re.search('service (\d{1,3}\.\d{1,3}|\d{1,3})', response)
 
         if option:
             option = option.group(1)
-            full_services = {**self.services, **self.chess_services}
 
-            if option not in full_services.keys():
-                print(set_color("error", f"Unknown option '{option}' from '{response}'."))
+            if option not in self.full_services.keys():
+                print(set_color("error", f"Unknown service '{option}' from '{response}'."))
 
                 return "-1"
         else:
@@ -140,10 +144,8 @@ class QueryAnalyser:
         Returns:
             service (str): description of the service.
         """
-        full_services = {**self.services, **self.chess_services}
-
         # Option not found.
-        if index not in full_services.keys():
+        if index not in self.full_services.keys():
             return None
 
         return self.services[index]
@@ -257,6 +259,22 @@ class QueryAnalyser:
 
         return service_option, service_info_dict
 
+    def get_system_information_relevance(
+        self,
+        response: str
+    ):
+        """Get whether the question is related to system information from response.
+
+        Args:
+            response (str): LLM response.
+
+        Returns:
+            relevance (bool): whether being related to.
+        """
+        relevance = response.lower().find("yes") > -1
+
+        return relevance
+
     def __call__(
         self,
         query: str,
@@ -273,7 +291,14 @@ class QueryAnalyser:
             service_info_dict (dict): updated information dictionary.
         """
         # Create an initial information dictionary.
-        service_info_dict = {"query": query}
+        service_info_dict = {
+            "query": query,
+            "system_information_relevance": False,
+            "system_information": ""
+        }
+
+        # Set the user prompter for service option.
+        self.llm.set_user_prompter(self.user_prompter_service)
 
         # Get raw anlysis from LLM to select a service.
         service_analysis = self.llm(query)[0]
@@ -297,5 +322,23 @@ class QueryAnalyser:
                 query,
                 service_info_dict
             )
+        else:
+            # Set the user prompter for system information relevance.
+            self.llm.set_user_prompter(self.user_prompter_system_info)
+
+            # Get the response for whether the query is related to system information.
+            relevance_analysis = self.llm(query)[0]
+
+            # Get whether the question is related to system information.
+            relevance = self.get_system_information_relevance(relevance_analysis)
+
+            # Update system information relevance.
+            service_info_dict["system_information_relevance"] = relevance
+
+            # Add the system information if it is related to the question.
+            if relevance:
+                service_info_dict["system_information"] = \
+                    f"The system information is" \
+                    f" '{self.user_prompter_system_info.system_information}'."
 
         return service_option, service_info_dict
