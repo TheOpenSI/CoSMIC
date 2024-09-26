@@ -122,13 +122,17 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             system_information (str): system information.
         """
         system_information = \
-            f"This system is called OpenSI-CoSMIC." \
+            f"I am an AI system called OpenSI-CoSMIC." \
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
-            f" OpenSI-CoSMIC is created, developed, and maintained by a team working" \
-            f" with University of Canberra and NetApp." \
-            f" OpenSI-CoSMIC provides {len(self.services)} services," \
-            f" including {self.service_string}."
+            f" I am created, developed, and maintained by OpenSI," \
+            f" which is an institute at the University of Canberra." \
+            f" At the moment, I can provide {len(self.services)} services," \
+            f" including {self.service_string}." \
+            f" I can design and provide more services under an agreement." \
+            f" To request more services, please find the contact information in my profile." \
+            f" My profile and project repository can be found at" \
+            f" <https://github.com/TheOpenSI/CoSMIC>."
 
         return system_information
 
