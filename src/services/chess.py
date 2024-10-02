@@ -108,7 +108,13 @@ class ChessBase(ServiceBase):
         Returns:
             move (str): a chess move in coodinate mode.
         """
-        return str(self.board.parse_san(move))
+        # Illegal san will raise error and kill the entire program.
+        try:
+            move_san = self.board.parse_san(move)
+        except:
+            return None
+
+        return str(move_san)
 
     def convert_coordinate_to_algebric(
         self,
@@ -146,8 +152,12 @@ class ChessBase(ServiceBase):
         if move_mode == "algebric":
             move = self.convert_algebric_to_coordinate(move)
 
-        # Check if the move is in the legal moves on the current board.
-        is_legal = move in [str(v) for v in self.board.legal_moves]
+        # Move can be illegal with wrong inputs.
+        if move is None:
+            is_legal = False
+        else:
+            # Check if the move is in the legal moves on the current board.
+            is_legal = move in [str(v) for v in self.board.legal_moves]
 
         return is_legal
 
@@ -255,7 +265,9 @@ class ChessBase(ServiceBase):
 
             # If push a list with multiple moves in advance.
             for current_move_per in current_move:
-                self.push_single(current_move_per, move_mode)
+                state = self.push_single(current_move_per, move_mode)
+
+                if state < 0: return []
 
         # Check if game over.
         is_game_over = self.board.is_game_over()
