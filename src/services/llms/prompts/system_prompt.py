@@ -134,14 +134,14 @@ class Mistral7bv01(SystemPromptBase):
 
         if self.use_example:
             if context == "":
-                system_prompt += " [INST] What is the capital of China? [/INST]\n"
+                system_prompt += " [INST] What is the capital of Australia? [/INST]\n"
             else:
                 system_prompt += \
-                    " [INST] Given that 'Beijing is the capital of China'," \
-                    " what is the capital of China? [/INST]\n"
+                    " [INST] Given that 'Canberra is the capital of Australia'," \
+                    " what is the capital of Australia? [/INST]\n"
 
             system_prompt += \
-                "Beijing</s>\n" \
+                "Canberra</s>\n" \
                 f"[INST] {user_prompt} [/INST]"
         else:
             if context != "":
@@ -181,14 +181,14 @@ class Mistral7bInstructv01(SystemPromptBase):
 
         if self.use_example:
             if context == "":
-                system_prompt.append({"role": "user", "content": "What is the capital of China?"})
+                system_prompt.append({"role": "user", "content": "What is the capital of Australia?"})
             else:
                 system_prompt.append({
                     "role": "user",
-                    "content": "Given that 'Beijing is the capital of China', what is the capital of China?"
+                    "content": "Given that 'Canberra is the capital of Australia', what is the capital of Australia?"
                 })
 
-            system_prompt.append({"role": "assistant", "content": "Beijing"})
+            system_prompt.append({"role": "assistant", "content": "Canberra"})
 
         system_prompt.append({"role": "user", "content": user_prompt})
 
@@ -232,16 +232,16 @@ class Gemma7b(SystemPromptBase):
             if context == "":
                 system_prompt += \
                     "<start_of_turn>user\n" \
-                    "What is the capital of China?<end_of_turn>\n"
+                    "What is the capital of Australia?<end_of_turn>\n"
             else:
                 system_prompt += \
                     "<start_of_turn>user\n" \
-                    "Given that 'Beijing is the capital of China'," \
-                    " what is the capital of China?<end_of_turn>\n"
+                    "Given that 'Canberra is the capital of Australia'," \
+                    " what is the capital of Australia?<end_of_turn>\n"
 
             system_prompt += \
                 "<start_of_turn>model\n" \
-                "Beijing<end_of_turn><eos>\n" \
+                "Canberra<end_of_turn><eos>\n" \
                 "<start_of_turn>user\n" \
                 f"{user_prompt}<end_of_turn>\n" \
                 "<start_of_turn>model"
