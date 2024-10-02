@@ -79,10 +79,11 @@ class QueryAnalyserService(UserPromptBase):
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given {self.num_services} services:" \
-            f" '{self.service_string}'," \
-            f" which service is the question '{question}' most closely related to?" \
-            f" Just return {self.option_string} without any explainations."
+        user_prompt = f"Given {self.num_services} services: '{self.service_string}'," \
+            f" which service can answer the following query? The query is '{question}'." \
+            f" For instance, if the query is to predict the next chess move, then select service 0;"\
+            f" otherwise, if the query is to generate or modify a code, then select service 2." \
+            f" Just return which service without any explainations."
 
         return user_prompt
 
@@ -132,7 +133,8 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             f" I can design and provide more services under an agreement." \
             f" To request more services, please find the contact information in my profile." \
             f" My profile and project repository can be found at" \
-            f" <https://github.com/TheOpenSI/CoSMIC>."
+            f" <https://github.com/TheOpenSI/CoSMIC>." \
+            f" You take my role."
 
         return system_information
 
@@ -150,9 +152,9 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given the context" \
-            f" '{self.system_information}'," \
-            f" is the question '{question}' related to the context?" \
+        user_prompt = f"Given that '{self.system_information}'," \
+            f" is the question '{question}' a general question related to the system" \
+            f" information or OpenSI-CoSMIC?" \
             f" Just answer yes or no without any explainations."
 
         return user_prompt

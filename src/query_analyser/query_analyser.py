@@ -40,12 +40,14 @@ class QueryAnalyser:
         self,
         llm_name: str="mistral-7b-instruct-v0.1",
         seed: int=0,
+        is_quantized: bool=False
     ):
         """Query analyser to select a service.
 
         Args:
             llm_name (str, optional): LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
             seed (int, optional): response generation seed. Defaults to 0.
+            is_quantized (bool, optional): use quantized LLM. Defaults to False.
         """
         # Set config.
         current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -53,10 +55,10 @@ class QueryAnalyser:
 
         # Set a list of services.
         self.services = {
-            "0": "predict the next move or the best move given a sequence of moves or a FEN in a chess game",
-            "1": "add a content or a document to vector database, the added content should not be a question",
-            "2": "answer a question or provide a reasoning analysis",
-            "3": "generate code in a programming language"
+            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
+            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
+            "2": "generate or improve a code or answer a question in order to generate or improve a code",
+            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services"
         }
 
         # Set chess services.
@@ -79,7 +81,7 @@ class QueryAnalyser:
         # Build LLM instance from class defined in .py
         self.llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(
             seed=seed,
-            is_quantized=True,
+            is_quantized=is_quantized,
             use_example=False,
             is_truncate_response=True,
         )
@@ -192,7 +194,7 @@ class QueryAnalyser:
             # Invalid inputs.
             print(set_color(
                 "warning",
-                f"Chess query: '{query}'. [tip: index a sequence of moves or FEN with :]")
+                f"Invalid chess query. [tip: index a sequence of moves or FEN with :]")
             )
 
         return service_option, service_info_dict
@@ -231,7 +233,10 @@ class QueryAnalyser:
             if document_path:
                 document_path = document_path.group()
             else:
-                print(set_color("warning", f"Invalid query: {query} [top: pdf file(s) should be provided.]"))
+                print(set_color(
+                    "warning",
+                    f"Invalid document query [top: pdf file(s) is required.]")
+                )
 
                 return service_option, service_info_dict
 
@@ -254,8 +259,8 @@ class QueryAnalyser:
             else:
                 print(set_color(
                     "warning",
-                    f"Invalid query: {query} [tip: index the text with :]"
-                ))
+                    f"Invalid text query [tip: index the text with :]")
+                )
 
         return service_option, service_info_dict
 

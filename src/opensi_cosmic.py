@@ -82,7 +82,8 @@ class OpenSICoSMIC:
         if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
         self.query_analyser = QueryAnalyser(
             query_llm_name,
-            seed=self.config.query_analyser.seed
+            seed=self.config.query_analyser.seed,
+            is_quantized=self.config.query_analyser.is_quantized
         )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.

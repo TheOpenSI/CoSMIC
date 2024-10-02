@@ -1,0 +1,46 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.92s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.32s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.41s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.83s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.28s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.36s/it]
+[92m[Success][0m Load /home/s448842/WorkSpace/github/CoSMIC/src/services/../../database/vector_database to vector database.
+1/340, fail list: [].
+51/340, fail list: [3, 29, 31].
+101/340, fail list: [3, 29, 31].
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+151/340, fail list: [3, 29, 31, 140, 141, 142, 143, 145, 148].
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+201/340, fail list: [3, 29, 31, 140, 141, 142, 143, 145, 148, 150, 152, 153, 158, 159, 161, 163, 166, 167, 168, 169, 170, 173, 175, 177, 178, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 193, 197].
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+251/340, fail list: [3, 29, 31, 140, 141, 142, 143, 145, 148, 150, 152, 153, 158, 159, 161, 163, 166, 167, 168, 169, 170, 173, 175, 177, 178, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 193, 197, 204, 206, 210, 219, 220, 224, 231, 238, 243, 247].
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+301/340, fail list: [3, 29, 31, 140, 141, 142, 143, 145, 148, 150, 152, 153, 158, 159, 161, 163, 166, 167, 168, 169, 170, 173, 175, 177, 178, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 193, 197, 204, 206, 210, 219, 220, 224, 231, 238, 243, 247, 254, 257, 270, 271, 286, 287, 288, 289, 293, 299].
+[93m[Warning][0m Invalid text query [tip: index the text with :]
+340/340, fail list: [3, 29, 31, 140, 141, 142, 143, 145, 148, 150, 152, 153, 158, 159, 161, 163, 166, 167, 168, 169, 170, 173, 175, 177, 178, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 193, 197, 204, 206, 210, 219, 220, 224, 231, 238, 243, 247, 254, 257, 270, 271, 286, 287, 288, 289, 293, 299, 305, 309, 311, 326, 328, 332].
+[95m[Info][0m {'0.0': {'success': 37, 'fail': 3, 'success_rate': 92.5}, '0.1': {'success': 0, 'fail': 0, 'success_rate': 0}, '1': {'success': 100, 'fail': 0, 'success_rate': 100.0}, '2': {'success': 56, 'fail': 44, 'success_rate': 56.0}, '3': {'success': 82, 'fail': 18, 'success_rate': 82.0}}.
+Average success rate: 82.625.
+Error list: [3, 29, 31, 140, 141, 142, 143, 145, 148, 150, 152, 153, 158, 159, 161, 163, 166, 167, 168, 169, 170, 173, 175, 177, 178, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 193, 197, 204, 206, 210, 219, 220, 224, 231, 238, 243, 247, 254, 257, 270, 271, 286, 287, 288, 289, 293, 299, 305, 309, 311, 326, 328, 332].
