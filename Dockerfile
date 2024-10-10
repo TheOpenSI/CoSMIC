@@ -5,7 +5,7 @@ FROM python:3.8.10
 WORKDIR /app
 
 # Copy all necessary files/folders to container folder.
-# COPY . /app  # uncomment for dynamic compiling; otherwise static
+# COPY . /app  # comment for dynamic compiling; otherwise static
 COPY requirements.txt /app
 
 # Build environment.
