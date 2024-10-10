@@ -1,4 +1,9 @@
 huggingface_hub==0.24.0
+setuptools==75.1.0
+chess==1.10.0
+stockfish==3.28.0
+bitsandbytes==0.43.1
+faiss-cpu==1.8.0.post1
 imageio==2.34.2
 langchain==0.2.14
 langchain_community==0.2.12
@@ -12,7 +17,7 @@ peft==0.11.1
 Pillow==10.4.0
 python-dotenv==1.0.1
 pytz==2024.1
-torch==2.2.0
+torch==2.3.0
 transformers==4.42.4
 python-box==7.2.0
 PyYAML==6.0.2

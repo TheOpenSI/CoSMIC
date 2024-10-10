@@ -31,13 +31,13 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 from openai import OpenAI
 from transformers import pipeline
-from huggingface_hub import login
 from dotenv import load_dotenv
 from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
 from src.services.llms.prompts import system_prompt as system_prompt_instances
 from src.services.llms.prompts import user_prompt as user_prompt_instances
 from src.services.llms import tokenizer as tokenizer_instances
 from src.services.base import ServiceBase
+from src.services.llms.login import LLMLogin
 from utils.module import get_instance
 
 # =============================================================================================================
@@ -68,7 +68,7 @@ class LLMBase(ServiceBase):
 
         # Set config.
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        self.root = f"{current_dir}/../.."
+        self.root = f"{current_dir}/../../.."
         self.llm_name = llm_name
         self.use_example = use_example
         self.is_truncate_response = is_truncate_response
@@ -282,8 +282,8 @@ class Mistral7bv01(LLMBase):
         """
         super().__init__(llm_name=llm_name, **kwargs)
 
-        # Login if model is not downloaded locally.
-        self.login()
+        # Login if model has been downloaded locally.
+        LLMLogin(llm_name).login()
 
         # Load model to GPU.
         self.model = AutoModelForCausalLM.from_pretrained(
@@ -335,23 +335,6 @@ class Mistral7bv01(LLMBase):
         response = response.replace("\n", "").strip()
 
         return response
-
-    def login(self):
-        """Login huggingface if no local model found.
-        """
-        cache_model_name = "models--" + LLM_MODEL_DICT[self.llm_name].replace("/", "--")
-        cache_model_directory = os.path.join(os.path.expanduser("~"), ".cache/huggingface/hub")
-        cache_model_path = os.path.join(cache_model_directory, cache_model_name)
-
-        if not os.path.exists(cache_model_path):
-            # Set the token stored file.
-            load_dotenv(f"{self.root}/.env")
-
-            # Required token for huggingface login.
-            if self.llm_name.find("finetune") > -1:
-                login(os.getenv("hf_token_finetune"), add_to_git_credential=True)
-            else:
-                login(os.getenv("hf_token"), add_to_git_credential=True)
 
     def __call__(
         self,

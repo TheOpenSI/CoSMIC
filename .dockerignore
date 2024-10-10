@@ -1,0 +1,14 @@
+Dockerfile
+.git
+.gitignore
+.dockerignore
+*.md
+*.sh
+**/models
+**/database
+**/data
+**/dataset
+**/checkpoints
+**/logs
+**/results
+**/__pycache__

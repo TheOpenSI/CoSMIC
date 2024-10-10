@@ -29,31 +29,22 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 from transformers import AutoTokenizer
 from src.maps import LLM_MODEL_DICT
+from src.services.llms.login import LLMLogin
 
 # =============================================================================================================
 
 class TokenizerBase:
     def __init__(
         self,
-        llm_name: str=""
+        llm_name
     ):
         """Base class for tokenizer.
 
         Args:
-            llm_name (str, optional): LLM name, see src/maps.py, adapting tokenizer to different models.
-                Defaults to "".
+            llm_name (str): LLM name, see src/maps.py, adapting tokenizer to different models.
         """
-        if (llm_name == "") or (llm_name not in LLM_MODEL_DICT.keys()):
-            self.tokenizer = None
-        else:
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                LLM_MODEL_DICT[llm_name],
-                add_eos_token=False,
-            )
-
-            # Set tokenizer pad_token.
-            if self.tokenizer.pad_token is None:
-                self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.llm_name = llm_name
+        self.tokenizer = None
 
     def encode(
         self,
@@ -99,9 +90,22 @@ class Mistral7bv01(TokenizerBase):
         """
         super().__init__(llm_name)
 
+        # Login if model is not downloaded locally.
+        LLMLogin(llm_name).login()
+
+        # Load tokenizer.
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            LLM_MODEL_DICT[llm_name],
+            add_eos_token=False
+        )
+
+        # Set tokenizer pad_token.
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+
 # =============================================================================================================
 
-class Mistral7bInstructv01(TokenizerBase):
+class Mistral7bInstructv01(Mistral7bv01):
     def __init__(
         self,
         llm_name: str="mistral-7b-instruct-v0.1"
@@ -150,7 +154,7 @@ class Mistral7bInstructv01(TokenizerBase):
 
 # =============================================================================================================
 
-class Gemma7b(TokenizerBase):
+class Gemma7b(Mistral7bv01):
     def __init__(
         self,
         llm_name: str="gemma-7b"
@@ -203,7 +207,7 @@ class Gemma7b(TokenizerBase):
 
 # =============================================================================================================
 
-class Gemma7bIt(TokenizerBase):
+class Gemma7bIt(Mistral7bv01):
     def __init__(
         self,
         llm_name: str="gemma-7b-it"
@@ -269,7 +273,7 @@ class GPT35Turbo(TokenizerBase):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name="")
+        super().__init__(llm_name)
 
 # =============================================================================================================
 
@@ -284,11 +288,11 @@ class GPT4o(TokenizerBase):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name="")
+        super().__init__(llm_name)
 
 # =============================================================================================================
 
-class MistralFinetuned(TokenizerBase):
+class MistralFinetuned(Mistral7bv01):
     def __init__(
         self,
         llm_name: str=""
@@ -299,7 +303,7 @@ class MistralFinetuned(TokenizerBase):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name="")
+        super().__init__(llm_name)
         base_llm_name = "mistral-7b-v0.1"
 
         self.tokenizer = AutoTokenizer.from_pretrained(
