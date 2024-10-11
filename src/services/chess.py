@@ -61,7 +61,9 @@ class ChessBase(ServiceBase):
 
         # Set initial path for stockfish.
         if binary_path == "":
-            binary_path = f"{self.root}/third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
+            binary_path = os.path.join(self.root, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2")
+        elif not os.path.isabs(binary_path):
+            binary_path = os.path.join(self.root, binary_path)
 
         # Kill the entire program.
         if not os.path.exists(binary_path):

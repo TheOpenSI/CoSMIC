@@ -123,7 +123,8 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             system_information (str): system information.
         """
         system_information = \
-            f"I am an AI system called OpenSI-CoSMIC." \
+            f"My name is OpenSI-CoSMIC." \
+            f" I am an AI system." \
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
             f" I am created, developed, and maintained by OpenSI," \

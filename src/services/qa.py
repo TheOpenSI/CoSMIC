@@ -31,6 +31,7 @@ from src.services import chess as chess_instances
 from src.services.base import ServiceBase
 from src.services.llms.llm import LLMBase
 from src.services.rag import RAGBase
+from box import Box
 
 # =============================================================================================================
 
@@ -40,6 +41,7 @@ class QABase(ServiceBase):
         query_analyser: LLMBase,
         llm: LLMBase,
         rag: RAGBase,
+        config: Box=None,
         **kwargs
     ):
         """Base class for QA.
@@ -48,6 +50,7 @@ class QABase(ServiceBase):
             query_analyser (LLMBase): query analyser.
             llm (LLMBase): LLM instance.
             rag (RAGBase): RAG instance containing vector database service.
+            config (Box): config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
 
@@ -55,6 +58,7 @@ class QABase(ServiceBase):
         self.query_analyser = query_analyser
         self.llm = llm
         self.rag = rag
+        self.config = config
 
     def __call__(
         self,
@@ -101,7 +105,8 @@ class QABase(ServiceBase):
             current_fen = service_info_dict["fen"]
 
             # Set up next move predictor as Stockfish.
-            next_move_predictor = chess_instances.StockfishFENNextMove()
+            binary_path = self.config.chess.stockfish_path if self.config else ""
+            next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
 
             # Predict the next move.
             next_move = next_move_predictor(fen=current_fen, move_mode=move_mode, topk=5)
@@ -117,7 +122,8 @@ class QABase(ServiceBase):
             current_moves = service_info_dict["moves"]
 
             # Set up next move predictor as Stockfish.
-            next_move_predictor = chess_instances.StockfishSequenceNextMove()
+            binary_path = self.config.chess.stockfish_path if self.config else ""
+            next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
 
             # Predict the next move.
             next_move = next_move_predictor(current_moves, move_mode=move_mode, topk=5)

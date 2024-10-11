@@ -107,7 +107,7 @@ class OpenSICoSMIC:
 
         # QA module to handle basic types of questions, such __next__move__, __update__store__, and
         # general questions.
-        self.qa = QABase(self.query_analyser, self.llm, self.rag)
+        self.qa = QABase(self.query_analyser, self.llm, self.rag, config=self.config)
 
     def get_llm(
         self,
