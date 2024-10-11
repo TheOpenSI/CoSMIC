@@ -14,15 +14,25 @@ git clone git@github.com:TheOpenSI/CoSMIC.git
 # For users using GitHub account and token
 git clone https://github.com/TheOpenSI/CoSMIC.git
 ```
-Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2) for chess-game queries
-and store as "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
+Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for linux) for chess-game queries
+and store it as default, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
+The path of this binary file can be changed in [config.yaml](scripts/configs/config.yaml) as
+```python
+chess:
+  stockfish_path: ""  # add the path in ""; otherwise, it will be default.
+```
 
 ## Requirements
 Please install the following packages before using this code, which is also provided in requirements.txt.
-Users need to register for a Hugging Face account to download base LLMs and an OpenAI account to use the API if applicable.
+Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
 ```
 huggingface_hub==0.24.0
+setuptools==75.1.0
+chess==1.10.0
+stockfish==3.28.0
+bitsandbytes==0.43.1
+faiss-cpu==1.8.0
 imageio==2.34.2
 langchain==0.2.14
 langchain_community==0.2.12
@@ -36,7 +46,7 @@ peft==0.11.1
 Pillow==10.4.0
 python-dotenv==1.0.1
 pytz==2024.1
-torch==2.2.0
+torch==2.3.0
 transformers==4.42.4
 python-box==7.2.0
 PyYAML==6.0.2
@@ -50,7 +60,7 @@ apt install docker.io
 ```
 
 ## Framework
-The system is configurated through [a .yaml file](scripts/configs/config.yaml).
+The system is configurated through [config.yaml](scripts/configs/config.yaml).
 Currently, it has 5 base services, including
 
 - [Chess-game next move predication and analyse](src/services/chess.py)
@@ -69,8 +79,16 @@ Upper-level chess-game services include
 
 
 ## Get Started
-We demonstrate the use of OpenSI-CoSMIC through the following code and [the main example](main.py) by running "python main.py".
+The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
+
+We demonstrate the use of OpenSI-CoSMIC below.
+```python
+# Quit by entering quit or exit.
+python demo.py
+```
+
+Alternatively, one can use the following development instruction.
 ```python
 from src.opensi_cosmic import OpenSICoSMIC
 from utils.log_tool import set_color
@@ -175,9 +193,8 @@ If this repository is useful for you, please cite the paper below.
 @misc{Adnan2024,
     title         = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
     author        = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
-    year          = {2024},
-    eprint        = {2408.04910},
-    archivePrefix = {arXiv}
+    howpublished  = {Australasian Conference on Information Systems},
+    year          = {2024}
 }
 ```
 

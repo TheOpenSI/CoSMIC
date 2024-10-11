@@ -3,7 +3,7 @@ setuptools==75.1.0
 chess==1.10.0
 stockfish==3.28.0
 bitsandbytes==0.43.1
-faiss-cpu==1.8.0.post1
+faiss-cpu==1.8.0
 imageio==2.34.2
 langchain==0.2.14
 langchain_community==0.2.12
