@@ -262,12 +262,12 @@ class Gemma7bIt(Mistral7bv01):
 
 # =============================================================================================================
 
-class GPT35Turbo(TokenizerBase):
+class GPT(TokenizerBase):
     def __init__(
         self,
         llm_name: str=""
     ):
-        """For GPT 3.5-turbo.
+        """For OpenAI GPT.
         GPT does not require tokenizer, just keep the interface.
 
         Args:
@@ -277,13 +277,13 @@ class GPT35Turbo(TokenizerBase):
 
 # =============================================================================================================
 
-class GPT4o(TokenizerBase):
+class Ollama(GPT):
     def __init__(
         self,
         llm_name: str=""
     ):
-        """For GPT 4-o.
-        GPT does not require tokenizer, just keep the interface.
+        """For Ollama model.
+        Ollama model does not require tokenizer, just keep the interface.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "".

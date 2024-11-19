@@ -29,7 +29,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from stockfish import Stockfish
 from utils.log_tool import set_color
-from src.services.llms.llm import GPT35Turbo, GPT4o
+from src.services.llms.llm import GPT, Ollama
 from src.services.base import ServiceBase
 
 # =============================================================================================================
@@ -399,11 +399,11 @@ class GPTFENNextMove(ChessBase):
         self.llm_name = llm_name
         self.is_truncate_response = is_truncate_response
 
-        # Use GPT 4o or 3.5-turbo.
-        if llm_name == "gpt-4o":
-            self.llm = GPT4o(user_prompt_instance_name="FenNextMovePredict")
+        # Use GPT model.
+        if llm_name.find("ollama") > -1:
+            self.llm = Ollama(llm_name, user_prompt_instance_name="FenNextMovePredict")
         else:
-            self.llm = GPT35Turbo(user_prompt_instance_name="FenNextMovePredict")
+            self.llm = GPT(llm_name, user_prompt_instance_name="FenNextMovePredict")
 
     def quit(self):
         """Release LLM memory cached on GPU and LLM instannce.

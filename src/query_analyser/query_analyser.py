@@ -73,13 +73,20 @@ class QueryAnalyser:
         # Get the number of services.
         self.num_services = len(self.services)
 
-        # Check if llm_name is supported.
-        if llm_name not in LLM_INSTANCE_DICT.keys():
+        # Build LLM instance from class defined in .py if llm_name is supported.
+        if llm_name in LLM_INSTANCE_DICT.keys():
+            llm_instance_name = LLM_INSTANCE_DICT[llm_name]
+        elif llm_name.find("gpt") > -1:
+            llm_instance_name = "GPT"
+        elif llm_name.find("ollama") > -1:
+            llm_instance_name = "Ollama"
+        else:
             print(set_color("error", f"Unsupported LLM: {llm_name}."))
             sys.exit()
 
         # Build LLM instance from class defined in .py
-        self.llm = get_instance(llm_instances, LLM_INSTANCE_DICT[llm_name])(
+        self.llm = get_instance(llm_instances, llm_instance_name)(
+            llm_name=llm_name,
             seed=seed,
             is_quantized=is_quantized,
             use_example=False,

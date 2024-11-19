@@ -264,9 +264,9 @@ class Gemma7bIt(Mistral7bInstructv01):
 
 # =============================================================================================================
 
-class GPT35Turbo(SystemPromptBase):
+class GPT(SystemPromptBase):
     def __init__(self, **kwargs):
-        """For GPT 3.5-Turbo API.
+        """For GPT API.
         """
         super().__init__(**kwargs)
 
@@ -297,9 +297,9 @@ class GPT35Turbo(SystemPromptBase):
 
 # =============================================================================================================
 
-class GPT4o(GPT35Turbo):
+class Ollama(GPT):
     def __init__(self, **kwargs):
-        """For GPT 4-o API.
+        """For Ollama model.
         """
         super().__init__(**kwargs)
 

@@ -30,7 +30,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from utils.log_tool import set_color
 from src.services.llms.prompts import user_prompt as user_prompt_instances
-from src.services.llms.llm import GPT4o
+from src.services.llms.llm import GPT
 from src.services.chess import ChessBase
 
 # =============================================================================================================
@@ -52,7 +52,7 @@ class CotGenerator(ChessBase):
         self.user_prompter = user_prompt_instances.CoTGeneration()
 
         # Use GPT 4-o as default because GPT 3.5-turbo performs bad on Chess analysis.
-        self.llm = GPT4o()
+        self.llm = GPT(llm_name="gpt-4o")
 
         # Set truncate response bool flag globally.
         self.is_truncate_response = is_truncate_response

@@ -23,7 +23,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import torch, os, sys
+import torch, os, sys, ollama
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
@@ -82,9 +82,17 @@ class LLMBase(ServiceBase):
         # Build user prompter.
         self.set_user_prompter_by_instance_name(user_prompt_instance_name)
 
+        # Get LLM instance name.
+        if llm_name in LLM_INSTANCE_DICT.keys():
+            llm_instance_name = LLM_INSTANCE_DICT[llm_name]
+        elif llm_name.find("ollama") > -1:
+            llm_instance_name = "Ollama"
+        else:
+            llm_instance_name = "GPT"
+
         # Use system prompt by LLM type.
         if system_prompt_instance_name == "":
-            system_prompt_instance_name = LLM_INSTANCE_DICT[llm_name]
+            system_prompt_instance_name = llm_instance_name
 
         # Build system prompter.
         self.set_system_prompter_by_instance_name(
@@ -95,7 +103,7 @@ class LLMBase(ServiceBase):
         # Build tokenizer by LLM type.
         self.tokenizer = get_instance(
             tokenizer_instances,
-            LLM_INSTANCE_DICT[llm_name]
+            llm_instance_name
         )(llm_name=llm_name)
 
         # Set quantization configs.
@@ -495,13 +503,13 @@ class Gemma7bIt(Mistral7bv01):
 
 # =============================================================================================================
 
-class GPT35Turbo(LLMBase):
+class GPT(LLMBase):
     def __init__(
         self,
         llm_name: str="gpt-3.5-turbo",
         **kwargs
     ):
-        """For GPT 3.5-turbo.
+        """For OpenAI API.
 
         Args:
             llm_name (str, optional): LLM name in src/maps.py. Defaults to "gpt-3.5-turbo".
@@ -517,7 +525,7 @@ class GPT35Turbo(LLMBase):
         # OpenAI API call.
         self.llm = lambda system_prompt: \
             self.model.chat.completions.create(
-                model=LLM_MODEL_DICT[llm_name],
+                model=llm_name,
                 max_tokens=2048,
                 temperature=0.0,
                 messages=system_prompt
@@ -544,18 +552,33 @@ class GPT35Turbo(LLMBase):
 
 # =============================================================================================================
 
-class GPT4o(GPT35Turbo):
+class Ollama(LLMBase):
     def __init__(
         self,
-        llm_name: str="gpt-4o",
+        llm_name: str="llama3.1",
         **kwargs
     ):
-        """For GPT 4-o.
+        """For Ollama supported LLMs.
 
         Args:
-            llm_name (str, optional): LLM name in src/maps.py. Defaults to "gpt-4-o".
+            llm_name (str, optional): Ollama supported LLMs available at https://ollama.com/library.
         """
         super().__init__(llm_name=llm_name, **kwargs)
+
+        # Ollama model name will be in "ollama:[llm_name]", so truncate it to get the exact one.
+        llm_name = llm_name.replace("ollama:", "").replace(":", "")
+
+        # Ollama API call.
+        self.llm = lambda system_prompt: \
+            ollama.chat(
+                model=llm_name,
+                messages=system_prompt
+            )['message']['content']
+
+    def quit(self):
+        """Close OpenAI API model entry.
+        """
+        self.model.close()
 
 # =============================================================================================================
 
