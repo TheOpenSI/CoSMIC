@@ -566,7 +566,10 @@ class Ollama(LLMBase):
         super().__init__(llm_name=llm_name, **kwargs)
 
         # Ollama model name will be in "ollama:[llm_name]", so truncate it to get the exact one.
-        llm_name = llm_name.replace("ollama:", "").replace(":", "")
+        llm_name = llm_name.replace("ollama:", "")
+
+        # Pull model.
+        ollama.pull(llm_name)
 
         # Ollama API call.
         self.llm = lambda system_prompt: \
