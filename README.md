@@ -26,6 +26,9 @@ chess:
 Please install the following packages before using this code, which is also provided in requirements.txt.
 Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
+To use [Ollama models](https://ollama.com/library), in [config.yaml](scripts/configs/config.yaml) set the LLM name indexed by "ollama:" as **llm_name: ollama:[your ollama model name]**.
+If an Ollama model has not yet been pulled to a local directory, it might take a few minutes, depending on the model size.
+
 ```
 huggingface_hub==0.24.0
 setuptools==75.1.0
