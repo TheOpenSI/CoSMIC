@@ -29,6 +29,7 @@
 import subprocess, os, shutil, sys
 
 from utils.log_tool import set_color
+from utils.sanitise_input import sanitise_input
 from src.services.base import ServiceBase
 
 # =============================================================================================================
@@ -36,8 +37,8 @@ from src.services.base import ServiceBase
 class PyCapsule(ServiceBase):
     def __init__(
         self, 
-        image_name: str="ghost525/sandbox_python", 
-        container_name: str="opensi_sandbox_service",
+        image_name: str="cosmic_pycapsule", 
+        container_name: str="cosmic_pycapsule_alpha",
         **kwargs
     ):
         """Code generation entry.
@@ -46,12 +47,12 @@ class PyCapsule(ServiceBase):
         Users can change the container_mount_path if needed.
 
         Args:
-            image_name (str, optional): Default to "ghost525/sandbox_python".
+            image_name (str, optional): Default to "cosmic_pycapsule".
             container_name (str, optional): Default to "opensi_sandbox_service".
         """
         super().__init__(self, **kwargs)
-        self.image_name = image_name
-        self.container_name = container_name
+        self.image_name = sanitise_input(image_name)
+        self.container_name = sanitise_input(container_name)
 
         # Creating the container mount directory.
         root = sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
@@ -63,33 +64,26 @@ class PyCapsule(ServiceBase):
         destination_bash_file = os.path.join(self.container_mount_path, "start.sh")
         shutil.copyfile(source_bash_file, destination_bash_file)
 
-        # Add -x to the shell script.
+        # Make the shell script executable.
         subprocess.run(f"chmod +x {destination_bash_file}", shell=True)
 
         self.check_if_image_exists() # this will pull image if not found.
 
-    def check_if_image_exists(
-        self, 
-        image_url: str="ghost525/sandbox_python"
-    ):
+    def _check_if_image_exists(self):
         """
-        Args:
-            image_url (str, optional): Defaults to "ghost525/sandbox_python".
+        Check if docker imahe exists, if not build from Dockerfile
         """
-        images = subprocess.run(
-            f"docker images | grep {self.image_name}",
-            shell=True,
-            capture_output=True,
-            text=True
-        )
-
+        images = subprocess.run(f"docker images | grep {self.IMAGE_NAME}", shell=True, capture_output=True, text=True)
         if images.stdout.strip() == "":
             print(set_color("info", "Image does not exist"))
-            print(set_color("info", "Pulling image..."))
-            subprocess.run(f"docker pull {image_url}", shell=True)
+            print(set_color("info", "Building image..."))
+            docker_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                            "../../modules/code_generation/docker/Dockerfile")
+            subprocess.run(f"docker build -t {self.IMAGE_NAME} {docker_file_path}", shell=True)
             print(set_color("success", "Image built"))
         else:
             print(set_color("success", "Image found"))
+            
     
     def check_if_container_exists(self):
         containers = subprocess.run(
