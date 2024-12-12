@@ -83,11 +83,12 @@ class OpenSICoSMIC:
         self.query_analyser = QueryAnalyser(
             query_llm_name,
             seed=self.config.seed,
-            is_quantized=self.config.query_analyser.is_quantized
+            is_quantized=self.config.query_analyser.is_quantized,
+            service_index=self.config.service
         )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
-        vector_database = VectorDatabase()
+        vector_database = VectorDatabase(local_database_path=self.config.rag.vector_db_path)
 
         # Add a directory of documents.
         if os.path.exists(self.config.doc_directory):

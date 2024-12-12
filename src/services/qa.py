@@ -148,6 +148,8 @@ class QABase(ServiceBase):
                 if text is not None:
                     # Add text to database.
                     self.rag.vector_database.update_database_from_text(text=text)
+
+            response = raw_response = "Vector database updated."
         elif False and service_option == "2":
             response = "Code generation to be implemented."
         else:

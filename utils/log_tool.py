@@ -43,6 +43,7 @@ INFOR_DICT = {
     "warning": {"color": BCOLORS.WARNING, "comment": "Warning"},
     "info": {"color": BCOLORS.HEADER, "comment": "Info"},
     "error": {"color": BCOLORS.FAIL, "comment": "Error"},
+    "hint": {"color": BCOLORS.OKGREEN, "comment": "Hint"},
 }
 
 # =============================================================================================================

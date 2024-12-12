@@ -40,7 +40,8 @@ class QueryAnalyser:
         self,
         llm_name: str="mistral-7b-instruct-v0.1",
         seed: int=0,
-        is_quantized: bool=False
+        is_quantized: bool=False,
+        service_index: int=-1
     ):
         """Query analyser to select a service.
 
@@ -48,6 +49,7 @@ class QueryAnalyser:
             llm_name (str, optional): LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
             seed (int, optional): response generation seed. Defaults to 0.
             is_quantized (bool, optional): use quantized LLM. Defaults to False.
+            service_index(int, optional): use selected service, otherwise automatically select.
         """
         # Set config.
         current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -72,6 +74,9 @@ class QueryAnalyser:
 
         # Get the number of services.
         self.num_services = len(self.services)
+
+        # Set provided service.
+        self.service_index = service_index
 
         # Build LLM instance from class defined in .py if llm_name is supported.
         if llm_name in LLM_INSTANCE_DICT.keys():
@@ -109,7 +114,7 @@ class QueryAnalyser:
         """Quit by releasing model memory and instance.
         """
         # Release memory of LLM.
-        self.llm.quit()
+        if self.llm: self.llm.quit()
 
     def mapping(
         self,
@@ -199,10 +204,13 @@ class QueryAnalyser:
             service_info_dict.update({"moves": current_moves})
         else:
             # Invalid inputs.
-            print(set_color(
-                "warning",
-                f"Invalid chess query. [tip: index a sequence of moves or FEN with :]")
-            )
+            if query.find("predict") > -1 or query.find("next move") > -1:
+                print(
+                    set_color(
+                        "hint",
+                        f"For chess move prediction, index a sequence of moves or FEN with \":\"."
+                    )
+                )
 
         return service_option, service_info_dict
 
@@ -309,14 +317,17 @@ class QueryAnalyser:
             "system_information": ""
         }
 
-        # Set the user prompter for service option.
-        self.llm.set_user_prompter(self.user_prompter_service)
+        if self.service_index >= 0:
+            service_option = str(self.service_index)
+        else:
+            # Set the user prompter for service option.
+            self.llm.set_user_prompter(self.user_prompter_service)
 
-        # Get raw anlysis from LLM to select a service.
-        service_analysis = self.llm(query)[0]
+            # Get raw anlysis from LLM to select a service.
+            service_analysis = self.llm(query)[0]
 
-        # Get the service option.
-        service_option = self.mapping(service_analysis)
+            # Get the service option.
+            service_option = self.mapping(service_analysis)
 
         # Analysis information.
         if verbose:

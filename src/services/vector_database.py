@@ -60,8 +60,21 @@ class VectorDatabase(ServiceBase):
 
         # Set config.
         # Set to absolute path.
-        if not os.path.isabs(local_database_path):
+        if local_database_path != "" and not os.path.isabs(local_database_path):
             local_database_path = os.path.join(self.root, local_database_path)
+
+        # Use default one.
+        if not os.path.exists(local_database_path):
+            if local_database_path != "":
+                print(
+                    set_color(
+                        "warning",
+                        f"Vector database \"{local_database_path}\" not exist" \
+                        f", use default \"database/vector_database\"."
+                    )
+                )
+
+            local_database_path = os.path.join(self.root, "database/vector_database")
 
         # Get the catalogue path and threshold.
         self.local_database_path = local_database_path
@@ -122,7 +135,12 @@ class VectorDatabase(ServiceBase):
                 allow_dangerous_deserialization=True
             )
 
-            print(set_color("success", f"Load {local_database_path} to vector database."))
+            print(
+                set_color(
+                    "success",
+                    f"Load \"{os.path.abspath(local_database_path)}\" to vector database."
+                )
+            )
         else:
             self.database = FAISS.from_texts(
                 ["Use FAISS as database updater"],
