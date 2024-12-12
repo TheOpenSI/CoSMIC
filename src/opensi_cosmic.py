@@ -82,7 +82,7 @@ class OpenSICoSMIC:
         if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
         self.query_analyser = QueryAnalyser(
             query_llm_name,
-            seed=self.config.query_analyser.seed,
+            seed=self.config.seed,
             is_quantized=self.config.query_analyser.is_quantized
         )
 
