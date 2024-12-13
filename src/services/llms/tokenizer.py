@@ -36,15 +36,18 @@ from src.services.llms.login import LLMLogin
 class TokenizerBase:
     def __init__(
         self,
-        llm_name
+        llm_name: str,
+        device: str="cuda"
     ):
         """Base class for tokenizer.
 
         Args:
             llm_name (str): LLM name, see src/maps.py, adapting tokenizer to different models.
+            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
         """
         self.llm_name = llm_name
         self.tokenizer = None
+        self.device = device
 
     def encode(
         self,
@@ -81,14 +84,15 @@ class TokenizerBase:
 class Mistral7bv01(TokenizerBase):
     def __init__(
         self,
-        llm_name: str="mistral-7b-v0.1"
+        llm_name: str="mistral-7b-v0.1",
+        **kwargs
     ):
         """For Mistral 7B.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-7b-v0.1".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
         # Login if model is not downloaded locally.
         LLMLogin(llm_name).login()
@@ -108,14 +112,15 @@ class Mistral7bv01(TokenizerBase):
 class Mistral7bInstructv01(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="mistral-7b-instruct-v0.1"
+        llm_name: str="mistral-7b-instruct-v0.1",
+        **kwargs
     ):
         """For Mistral 7B Instruction.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-7b-instruct-v0.1".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
     def encode(
         self,
@@ -135,7 +140,7 @@ class Mistral7bInstructv01(Mistral7bv01):
             return_tensors="pt",
             padding=True,
             **kwargs
-        ).to("cuda")
+        ).to(self.device)
 
     def decode(
         self,
@@ -157,14 +162,15 @@ class Mistral7bInstructv01(Mistral7bv01):
 class Gemma7b(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="gemma-7b"
+        llm_name: str="gemma-7b",
+        **kwargs
     ):
         """For Gemma 7B.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-gemma-7b".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
     def encode(
         self,
@@ -184,7 +190,7 @@ class Gemma7b(Mistral7bv01):
             return_tensors="pt",
             padding=True,
             **kwargs
-        ).input_ids.to("cuda")
+        ).input_ids.to(self.device)
 
     def decode(
         self,
@@ -210,14 +216,15 @@ class Gemma7b(Mistral7bv01):
 class Gemma7bIt(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="gemma-7b-it"
+        llm_name: str="gemma-7b-it",
+        **kwargs
     ):
         """For Gemma 7B Instruction.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "gemma-7b-instruct".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
     def encode(
         self,
@@ -239,7 +246,7 @@ class Gemma7bIt(Mistral7bv01):
             return_tensors="pt",
             padding=True,
             **kwargs
-        ).to("cuda")
+        ).to(self.device)
 
     def decode(
         self,
@@ -265,7 +272,8 @@ class Gemma7bIt(Mistral7bv01):
 class GPT(TokenizerBase):
     def __init__(
         self,
-        llm_name: str=""
+        llm_name: str="",
+        **kwargs
     ):
         """For OpenAI GPT.
         GPT does not require tokenizer, just keep the interface.
@@ -273,14 +281,15 @@ class GPT(TokenizerBase):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
 # =============================================================================================================
 
 class Ollama(GPT):
     def __init__(
         self,
-        llm_name: str=""
+        llm_name: str="",
+        **kwargs
     ):
         """For Ollama model.
         Ollama model does not require tokenizer, just keep the interface.
@@ -288,14 +297,15 @@ class Ollama(GPT):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
 
 # =============================================================================================================
 
 class MistralFinetuned(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str=""
+        llm_name: str="",
+        **kwargs
     ):
         """For Mistral 7B finetuned.
         Since the tokenizer depends on base model, not finetuned model, remaining the definition internally.
@@ -303,7 +313,7 @@ class MistralFinetuned(Mistral7bv01):
         Args:
             llm_name (str, optional): LLM name. Defaults to "".
         """
-        super().__init__(llm_name)
+        super().__init__(llm_name, **kwargs)
         base_llm_name = "mistral-7b-v0.1"
 
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -328,7 +338,7 @@ class MistralFinetuned(Mistral7bv01):
             system_prompt,
             return_tensors="pt",
             **kwargs
-        ).input_ids.to("cuda")
+        ).input_ids.to(self.device)
 
     def decode(
         self,

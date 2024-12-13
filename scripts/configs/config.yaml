@@ -5,7 +5,7 @@
 # ollama:[ollama model] from https://ollama.com/library.
 
 llm_name: "gpt-4o"
-is_quantized: True
+is_quantized: False
 seed: 0  # seed of response generation by base LLM.
 doc_directory: ""  # directory containing .pdf documents to build the system's vector database.
 document_path: []  # a string or a list of .pdf to add context to the vector database.
@@ -13,13 +13,13 @@ service: -1  # service selection: -1 [auto], 0 [chess], 1 [update vector databas
 
 query_analyser:
   llm_name: "gpt-4o"
-  is_quantized: True
+  is_quantized: False
 
 chess:
   stockfish_path: ""  # if empty, default to "third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
 
 rag: # RAG-related config.
-  topk: 5  # retrieve topk documents.
+  topk: 1  # retrieve topk documents.
   retrieve_score_threshold: 0.7  # similarity score under this threshold will not be used in prompt.
   vector_db_path: ""  # vector database path, if not exist, use default database/vector_database.
 

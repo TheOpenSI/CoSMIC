@@ -52,6 +52,7 @@ class LLMBase(ServiceBase):
         seed: int=0,
         is_truncate_response: bool=True,
         is_quantized: bool=False,
+        device: str="cuda",
         **kwargs
     ):
         """LLM Base Class as a Service. Check the names from src/maps.py
@@ -63,6 +64,8 @@ class LLMBase(ServiceBase):
             use_example (bool, optional): use an example in system prompt. Defaults to True.
             seed (int, optional): seed for response generation. Defaults to 0.
             is_truncate_response (bool, optional): truncate the raw response. Defaults to True.
+            is_quantized (bool, optional): whether use quantized model. Defaults to False.
+            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
         """
         super().__init__(**kwargs)
 
@@ -74,6 +77,7 @@ class LLMBase(ServiceBase):
         self.is_truncate_response = is_truncate_response
         self.seed = seed
         self.is_quantized = is_quantized
+        self.device = device
 
         # Use user prompt for general questions if not specified.
         if user_prompt_instance_name == "":
@@ -104,7 +108,11 @@ class LLMBase(ServiceBase):
         self.tokenizer = get_instance(
             tokenizer_instances,
             llm_instance_name
-        )(llm_name=llm_name)
+        )(llm_name=llm_name, device=self.device)
+
+        # CPU model cannot support quantization.
+        if self.device.find("cpu") > -1:
+            is_quantized = False
 
         # Set quantization configs.
         if is_quantized:
@@ -297,9 +305,9 @@ class Mistral7bv01(LLMBase):
         self.model = AutoModelForCausalLM.from_pretrained(
             LLM_MODEL_DICT[llm_name],
             use_cache=True,
-            device_map="cuda",
+            device_map=self.device,
             torch_dtype=torch.bfloat16,
-            quantization_config=self.quantization_config
+            quantization_config=self.quantization_config,
         )  # low_cpu_mem_usage=True
 
         # Build QA pipeline.

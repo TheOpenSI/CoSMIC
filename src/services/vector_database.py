@@ -41,19 +41,21 @@ from src.services.base import ServiceBase
 class VectorDatabase(ServiceBase):
     def __init__(
         self,
-        document_analyser_model="gte-small",
-        local_database_path="database/vector_database",
-        vector_database_update_threshold=0.98,
+        document_analyser_model: str="gte-small",
+        local_database_path: str="database/vector_database",
+        vector_database_update_threshold: float=0.98,
+        device: str="cuda",
         **kwargs
     ):
         """Vector database service.
 
         Args:
             document_analyser_model (str, optional): document analyser/process model.
-            local_database_path (str): path of local vector database on disk.
+            local_database_path (str, optional): path of local vector database on disk.
                 Default to "database/vector_database".
-            vector_database_update_threshold (float): contents with similarity >= this threshold
+            vector_database_update_threshold (float, optional): contents with similarity >= this threshold
                 will be skipped. Default to 0.98.
+            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
             Defaults to "gte-small".
         """
         super().__init__(**kwargs)
@@ -118,7 +120,7 @@ class VectorDatabase(ServiceBase):
         self.database_update_embedding = HuggingFaceEmbeddings(
             model_name=EMBEDDING_MODEL_NAME,
             multi_process=False,  # TODO
-            model_kwargs={"device": "cuda"},
+            model_kwargs={"device": device},
             encode_kwargs={"normalize_embeddings": True},
         )
 

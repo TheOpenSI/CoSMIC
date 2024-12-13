@@ -23,7 +23,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import os, sys, yaml
+import os, sys, yaml, torch
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 
@@ -56,7 +56,7 @@ class OpenSICoSMIC:
         Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
 
         Args:
-            query_llm_name (str): Query analyser LLM name, check LLM_MODEL_DICT in src/maps.py,
+            query_llm_name (str): query analyser LLM name, check LLM_MODEL_DICT in src/maps.py,
                 if it is empty, the entry is self.config.query_llm_name.
             llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
                 is self.config.llm_name.
@@ -70,12 +70,15 @@ class OpenSICoSMIC:
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
 
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+
         # If llm_name is not specified, read it from the config file.
         if llm_name == "": llm_name = self.config.llm_name
         self.llm = self.get_llm(
             llm_name,
             seed=self.config.seed,
-            is_quantized=self.config.is_quantized
+            is_quantized=self.config.is_quantized,
+            device=device
         )
 
         # Set LLM for query analysis.
@@ -84,11 +87,15 @@ class OpenSICoSMIC:
             query_llm_name,
             seed=self.config.seed,
             is_quantized=self.config.query_analyser.is_quantized,
-            service_index=self.config.service
+            service_index=self.config.service,
+            device=device
         )
 
         # Create vector database service which will be included in RAG for retrieve and information updates.
-        vector_database = VectorDatabase(local_database_path=self.config.rag.vector_db_path)
+        vector_database = VectorDatabase(
+            local_database_path=self.config.rag.vector_db_path,
+            device=device
+        )
 
         # Add a directory of documents.
         if os.path.exists(self.config.doc_directory):

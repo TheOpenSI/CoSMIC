@@ -41,7 +41,8 @@ class QueryAnalyser:
         llm_name: str="mistral-7b-instruct-v0.1",
         seed: int=0,
         is_quantized: bool=False,
-        service_index: int=-1
+        service_index: int=-1,
+        device: str="cuda"
     ):
         """Query analyser to select a service.
 
@@ -50,10 +51,12 @@ class QueryAnalyser:
             seed (int, optional): response generation seed. Defaults to 0.
             is_quantized (bool, optional): use quantized LLM. Defaults to False.
             service_index(int, optional): use selected service, otherwise automatically select.
+            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
         """
         # Set config.
         current_dir = os.path.dirname(os.path.abspath(__file__))
         self.root = f"{current_dir}/../.."
+        self.device = device
 
         # Set a list of services.
         self.services = {
@@ -96,6 +99,7 @@ class QueryAnalyser:
             is_quantized=is_quantized,
             use_example=False,
             is_truncate_response=True,
+            device=device
         )
 
         # Set user prompter for service option.
