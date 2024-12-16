@@ -10,10 +10,10 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 
 ```
 # For users using SSH on GitHub
-git clone git@github.com:TheOpenSI/CoSMIC.git
+git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
 
 # For users using GitHub account and token
-git clone https://github.com/TheOpenSI/CoSMIC.git
+git clone --recursive https://github.com/TheOpenSI/CoSMIC.git
 ```
 Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for linux) for chess-game queries
 and store it as default, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
@@ -86,110 +86,129 @@ Upper-level chess-game services include
 The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 
-We demonstrate the use of OpenSI-CoSMIC below.
+### [General User] Chatbot
+
+We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
+The backend program is exected in a docker container.
+The program is started by running
 ```python
-# Quit by entering quit or exit.
-python demo.py
+bash run_openwebui.sh
 ```
 
-Alternatively, one can use the following development instruction.
-```python
-from src.opensi_cosmic import OpenSICoSMIC
-from utils.log_tool import set_color
+![screenshot](assets/openwebui-cosmic_ui.png)
 
-# Build the system with a config file, which contains LLM name, or a given base LLM name.
-use_config_file = True
+with **the configuration settings** in
 
-if use_config_file:
-    config_path = "scripts/configs/config.yaml"
-    opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-else:
+![screenshot](assets/openwebui-cosmic_setting.png)
+
+This chatbot is developed on the open-source [Open-WebUI](https://github.com/open-webui/open-webui) under the MIT license.
+
+### Development
+
+- We demonstrate the use of OpenSI-CoSMIC below.
+    ```python
+    # Quit by entering quit or exit.
+    python demo.py
+    ```
+
+- Alternatively, one can use the following development instruction.
+    ```python
+    from src.opensi_cosmic import OpenSICoSMIC
+    from utils.log_tool import set_color
+
+    # Build the system with a config file, which contains LLM name, or a given base LLM name.
+    use_config_file = True
+
+    if use_config_file:
+        config_path = "scripts/configs/config.yaml"
+        opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+    else:
+        llm_name = "mistral-7b-instruct-v0.1"
+        opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
+
+    # Set the question.
+    # One can set each question with "[question],[reference answer (optional)]" in a .csv file.
+    query = "What is the capital of Australia?"
+
+    # Get the answer, raw_answer for response without truncation, retrieve_score (if switched on) for
+    # the similarity score to context in the system's vector database.
+    answer, raw_answer, retrieve_score = opensi_cosmic(query, log_file=None)
+
+    # Print the answer.
+    print(set_color("info", f"Question: {query}\nAnswer: {answer}."))
+
+    # Remove memory cached in the system.
+    opensi_cosmic.quit()
+    ```
+    More example questions are provided in [test.csv](data/test.csv), which can be used as
+    ```python
+    import os, csv
+    import pandas as pd
+
+    from src.opensi_cosmic import OpenSICoSMIC
+    from utils.log_tool import set_color
+
+    # Build the system with a given base LLM.
     llm_name = "mistral-7b-instruct-v0.1"
     opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
 
-# Set the question.
-# One can set each question with "[question],[reference answer (optional)]" in a .csv file.
-query = "What is the capital of Australia?"
+    # Get the file's absolute path.
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    root = f"{current_dir}"
 
-# Get the answer, raw_answer for response without truncation, retrieve_score (if switched on) for
-# the similarity score to context in the system's vector database.
-answer, raw_answer, retrieve_score = opensi_cosmic(query, log_file=None)
+    # Set a bunch of questions, can also read from .csv.
+    df = pd.read_csv(f"{root}/data/test.csv")
+    queries = df["Question"]
+    answers = df["Answer"]
 
-# Print the answer.
-print(set_color("info", f"Question: {query}\nAnswer: {answer}."))
+    # Loop over questions to get the answers.
+    for idx, (query, gt) in enumerate(zip(queries, answers)):
+        # Skip marked questions.
+        if query.find("skip") > -1: continue
 
-# Remove memory cached in the system.
-opensi_cosmic.quit()
-```
-More example questions are provided in [test.csv](data/test.csv), which can be used as
-```python
-import os, csv
-import pandas as pd
+        # Create a log file.
+        if query.find(".csv") > -1:
+            # Remove all namespace.
+            query = query.replace(" ", "")
 
-from src.opensi_cosmic import OpenSICoSMIC
-from utils.log_tool import set_color
+            # Return if file is invalid.
+            if not os.path.exists(query):
+                set_color("error", f"!!! Error, {query} not exist.")
+                continue
 
-# Build the system with a given base LLM.
-llm_name = "mistral-7b-instruct-v0.1"
-opensi_cosmic = OpenSICoSMIC(llm_name=llm_name)
+            # Change the data folder to results for log file.
+            log_file = query.replace("/data/", f"/results/{llm_name}/")
 
-# Get the file's absolute path.
-current_dir = os.path.dirname(os.path.abspath(__file__))
-root = f"{current_dir}"
+            # Create a folder to store log file.
+            log_file_name = log_file.split("/")[-1]
+            log_dir = log_file.replace(log_file_name, "")
+            os.makedirs(log_dir, exist_ok=True)
+            log_file_pt = open(log_file, "w")
+            log_file = csv.writer(log_file_pt)
+        else:
+            log_file_pt = None
+            log_file = None
 
-# Set a bunch of questions, can also read from .csv.
-df = pd.read_csv(f"{root}/data/test.csv")
-queries = df["Question"]
-answers = df["Answer"]
+        # Run for each question/query, return the truncated response if applicable.
+        answer, _, _ = opensi_cosmic(query, log_file=log_file)
 
-# Loop over questions to get the answers.
-for idx, (query, gt) in enumerate(zip(queries, answers)):
-    # Skip marked questions.
-    if query.find("skip") > -1: continue
+        # Print the answer.
+        if isinstance(gt, str):  # compare with GT string
+            # Assign to q variables.
+            status = "success" if (answer.find(gt) > -1) else "fail"
 
-    # Create a log file.
-    if query.find(".csv") > -1:
-        # Remove all namespace.
-        query = query.replace(" ", "")
+            print(set_color(
+                status,
+                f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n")
+            )
 
-        # Return if file is invalid.
-        if not os.path.exists(query):
-            set_color("error", f"!!! Error, {query} not exist.")
-            continue
-
-        # Change the data folder to results for log file.
-        log_file = query.replace("/data/", f"/results/{llm_name}/")
-
-        # Create a folder to store log file.
-        log_file_name = log_file.split("/")[-1]
-        log_dir = log_file.replace(log_file_name, "")
-        os.makedirs(log_dir, exist_ok=True)
-        log_file_pt = open(log_file, "w")
-        log_file = csv.writer(log_file_pt)
-    else:
-        log_file_pt = None
-        log_file = None
-
-    # Run for each question/query, return the truncated response if applicable.
-    answer, _, _ = opensi_cosmic(query, log_file=log_file)
-
-    # Print the answer.
-    if isinstance(gt, str):  # compare with GT string
-        # Assign to q variables.
-        status = "success" if (answer.find(gt) > -1) else "fail"
-
-        print(set_color(
-            status,
-            f"\nQuestion: '{query}' with GT: {gt}.\nAnswer: '{answer}'.\n")
-        )
-
-    # Close log file pointer.
-    if log_file_pt is not None:
-        log_file_pt.close()
-    
-# Remove memory cached in the system.
-opensi_cosmic.quit()
-```
+        # Close log file pointer.
+        if log_file_pt is not None:
+            log_file_pt.close()
+        
+    # Remove memory cached in the system.
+    opensi_cosmic.quit()
+    ```
 
 ## Reference
 If this repository is useful for you, please cite the paper below.
