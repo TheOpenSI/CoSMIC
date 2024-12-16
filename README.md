@@ -83,8 +83,6 @@ Upper-level chess-game services include
 
 
 ## Get Started
-The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
-The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 
 ### [General User] Chatbot
 
@@ -92,18 +90,21 @@ We provide a website based chatbot for the interaction between user and OpenSI-C
 The backend program is exected in a docker container.
 The program is started by running
 ```python
-bash run_openwebui.sh
+bash run_chatbot.sh
 ```
 
-![screenshot](assets/openwebui-cosmic_ui.png)
+[<img src="assets/chatbot_ui.png" width="600"/>](assets/chatbot_ui.png)
 
 with **the configuration settings** in
 
-![screenshot](assets/openwebui-cosmic_setting.png)
+[<img src="assets/chatbot_setting.png" width="600"/>](assets/chatbot_setting.png)
 
 This chatbot is developed on the open-source [Open-WebUI](https://github.com/open-webui/open-webui) under the MIT license.
 
 ### Development
+
+The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
+The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 
 - We demonstrate the use of OpenSI-CoSMIC below.
     ```python
