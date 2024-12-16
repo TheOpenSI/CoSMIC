@@ -1,0 +1,3 @@
+[submodule "modules/open_webui"]
+	path = modules/open_webui
+	url = https://github.com/TheOpenSI/OpenWebUI-CoSMIC.git
