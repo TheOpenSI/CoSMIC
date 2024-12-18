@@ -23,7 +23,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import torch, os, sys, ollama
+import torch, os, sys, ollama, dotenv
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
@@ -31,7 +31,6 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 from openai import OpenAI
 from transformers import pipeline
-from dotenv import load_dotenv
 from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
 from src.services.llms.prompts import system_prompt as system_prompt_instances
 from src.services.llms.prompts import user_prompt as user_prompt_instances
@@ -551,10 +550,11 @@ class GPT(LLMBase):
             openai_key (str): API key.
         """
         # Set the key stored file.
-        load_dotenv(f"{self.root}/.env")
+        openai_key = os.getenv("OPENAI_API_KEY", "")
 
-        # Variable openai_key stores OpenAI key.
-        openai_key = os.getenv("openai_key")
+        if openai_key == "":
+            envs = dotenv.dotenv_values(f"{self.root}/.env")
+            openai_key = envs["OPENAI_API_KEY"]
 
         return openai_key
 
@@ -563,7 +563,7 @@ class GPT(LLMBase):
 class Ollama(LLMBase):
     def __init__(
         self,
-        llm_name: str="llama3.1",
+        llm_name: str="mistral",
         **kwargs
     ):
         """For Ollama supported LLMs.
@@ -589,7 +589,7 @@ class Ollama(LLMBase):
     def quit(self):
         """Close OpenAI API model entry.
         """
-        self.model.close()
+        if self.model: self.model.close()
 
 # =============================================================================================================
 
