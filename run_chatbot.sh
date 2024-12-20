@@ -24,6 +24,5 @@ docker run -d -p "$host_port":"$container_port" \
 docker image prune -f
 
 cd ${SCRIPT_DIR}/modules/chatbot/pipelines
-# cd pipelines
 bash start.sh
 cd ${SCRIPT_DIR}
