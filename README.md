@@ -90,6 +90,7 @@ We provide a website based chatbot for the interaction between user and OpenSI-C
 The backend program is exected in a docker container.
 The program is started by running
 ```python
+touch .env   # then if OpenAI GPT API is used, please add OPENAI_API_KEY="[your API key]" in .env.
 bash run_chatbot.sh
 ```
 
