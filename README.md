@@ -38,9 +38,6 @@ stockfish==3.28.0
 bitsandbytes==0.43.1
 faiss-cpu==1.8.0
 imageio==2.34.2
-langchain==0.2.14
-langchain_community==0.2.12
-langchain_huggingface==0.0.3
 llama_index==0.11.1
 matplotlib==3.7.5
 numpy==1.24.3
@@ -55,6 +52,16 @@ transformers==4.42.4
 python-box==7.2.0
 PyYAML==6.0.2
 regex==2024.5.15
+langchain==0.2.14
+langchain_community==0.2.12
+langchain_huggingface==0.0.3
+ollama==0.4.7
+httpx==0.27.2
+uvicorn==0.33.0
+fastapi==0.115.7
+passlib==1.7.4
+jwt==1.3.1
+python-multipart==0.0.20
 ```
 
 To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service,
