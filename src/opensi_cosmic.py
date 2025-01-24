@@ -117,6 +117,41 @@ class OpenSICoSMIC:
         # general questions.
         self.qa = QABase(self.query_analyser, self.llm, self.rag, config=self.config)
 
+        # Check OpenAI API key.
+        self.openai_api_status = self.check_openai_key()
+
+    def check_openai_key(self):
+        """ Check OpenAI API key valid.
+
+        Returns:
+            answer: status information.
+        """
+        llm_name = self.config.llm_name
+        query_analyser_llm_name = self.config.query_analyser.llm_name
+
+        is_llm_name_gpt = llm_name.find("gpt") > -1
+        is_query_analyser_llm_name_gpt = query_analyser_llm_name.find("gpt") > -1
+
+        llm_name_list = []
+        if is_llm_name_gpt: llm_name_list.append(llm_name)
+        if is_query_analyser_llm_name_gpt and (query_analyser_llm_name not in llm_name_list):
+            llm_name_list.append(query_analyser_llm_name)
+
+        count = len(llm_name_list)
+
+        if is_llm_name_gpt: openai_api_key = self.llm.get_openai_key()
+        elif is_query_analyser_llm_name_gpt: openai_api_key = self.query_analyser.llm.get_openai_key()
+        else: openai_api_key = ""
+
+        if (count > 0) and (openai_api_key == ""):
+            if count == 1: answer = f"{llm_name_list[0]} is"
+            elif count == 2: answer = f"{llm_name_list[0]} and {llm_name_list[1]} are"
+            answer = f"Since {answer} used, please add valid OPENAI_API_KEY in .env."
+        else:
+            answer = ""
+
+        return answer
+
     def get_llm(
         self,
         llm_name,
@@ -183,6 +218,10 @@ class OpenSICoSMIC:
         response = None
         raw_response = None
         retrieve_score = -1
+
+        # Check if OpenAI API key is valid.
+        if self.openai_api_status != "":
+            return self.openai_api_status, self.openai_api_status, -1
 
         # Chat-mode LLM do not need example in the system prompt.
         if self.llm.llm_name in ["mistral-7b-instruct-v0.1", "gemma-7b-it"]:

@@ -38,6 +38,7 @@ from src.services.llms import tokenizer as tokenizer_instances
 from src.services.base import ServiceBase
 from src.services.llms.login import LLMLogin
 from utils.module import get_instance
+from utils.log_tool import set_color
 
 # =============================================================================================================
 
@@ -554,7 +555,16 @@ class GPT(LLMBase):
 
         if openai_key == "":
             envs = dotenv.dotenv_values(f"{self.root}/.env")
-            openai_key = envs["OPENAI_API_KEY"]
+
+            if "OPENAI_API_KEY" in envs.keys():
+                openai_key = envs["OPENAI_API_KEY"]
+            else:
+                print(set_color("warning", "OPENAI_API_KEY is required in .env."))
+                openai_key = ""
+
+        # Get warning for invalid API key.
+        if openai_key == "":
+            print(set_color("warning", "The OPENAI_API_KEY in .env is invalid."))
 
         return openai_key
 
