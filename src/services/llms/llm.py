@@ -240,6 +240,10 @@ class LLMBase(ServiceBase):
         if not self.is_truncate_response:
             return response
 
+        # Remove DeepSeek model reasoning part in the response.
+        if self.llm_name.find("deepseek") > -1:
+            response = response.split("</think>")[-1]
+
         response = response.replace("\n", "").strip()
 
         return response
