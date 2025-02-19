@@ -12,3 +12,4 @@ Dockerfile
 **/logs
 **/results
 **/__pycache__
+!scripts/demo/run_demo.sh
