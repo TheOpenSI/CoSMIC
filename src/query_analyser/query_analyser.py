@@ -341,6 +341,9 @@ class QueryAnalyser:
             ))
 
         if service_option == "0":
+            # Remove last symbol.
+            if query[-1] in [",", ".", "!", "?"]: query = query[:-1]
+
             # Predict the next move in chess game.
             service_option, service_info_dict = self.chess_parse(query, service_info_dict)
         elif service_option == "1":
