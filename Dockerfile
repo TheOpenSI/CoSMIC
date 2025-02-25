@@ -9,7 +9,6 @@ EXPOSE 3000
 
 # Copy all necessary files/folders to container folder.
 COPY . . 
-# COPY requirements.txt /app
 
 RUN apt-get update && apt-get install -y \
     python3 \
