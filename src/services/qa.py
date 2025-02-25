@@ -96,40 +96,49 @@ class QABase(ServiceBase):
             return response, raw_response, retrieve_score
 
         # Process query with service parsing.
-        if service_option == "0.0":
-            # Set game move mode.
-            if context == "": move_mode = "algebric"
-            else: move_mode = context
+        if service_option.find("0.") > -1:
+            if service_option == "0.0":
+                # Set game move mode.
+                if context == "": move_mode = "algebric"
+                else: move_mode = context
 
-            # Get chess FEN.
-            current_fen = service_info_dict["fen"]
+                # Get chess FEN.
+                current_fen = service_info_dict["fen"]
 
-            # Set up next move predictor as Stockfish.
-            binary_path = self.config.chess.stockfish_path if self.config else ""
-            next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
+                # Set up next move predictor as Stockfish.
+                binary_path = self.config.chess.stockfish_path if self.config else ""
+                next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
 
-            # Predict the next move.
-            next_move = next_move_predictor(fen=current_fen, move_mode=move_mode, topk=5)
+                # Predict the next move.
+                next_move = next_move_predictor(fen=current_fen, move_mode=move_mode, topk=5)
 
-            # Set the response with question and next move.
-            response = f"The next move of {[current_fen]} is one of {next_move}."
-        elif service_option == "0.1":
-            # Set game move mode.
-            if context == "": move_mode = "algebric"
-            else: move_mode = context
+                # Set the response with question and next move.
+                move_prediction_context = f"The current chess FEN is {[current_fen]}."
+            else:  # this is for prediction given moves, service_option == "0.1":
+                # Set game move mode.
+                if context == "": move_mode = "algebric"
+                else: move_mode = context
 
-            # Get moves.
-            current_moves = service_info_dict["moves"]
+                # Get moves.
+                current_moves = service_info_dict["moves"]
 
-            # Set up next move predictor as Stockfish.
-            binary_path = self.config.chess.stockfish_path if self.config else ""
-            next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
+                # Set up next move predictor as Stockfish.
+                binary_path = self.config.chess.stockfish_path if self.config else ""
+                next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
 
-            # Predict the next move.
-            next_move = next_move_predictor(current_moves, move_mode=move_mode, topk=5)
+                # Predict the next move.
+                next_move = next_move_predictor(current_moves, move_mode=move_mode, topk=5)
 
-            # Set the response with question and next move.
-            response = f"The next move of {[current_moves]} is one of {next_move}."
+                # Set the response with question and next move.
+                move_prediction_context = f"The previous chess moves are {[current_moves]}."
+
+            # Explain why these moves are feasible.
+            user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
+            response, raw_response = self.llm(user_prompt, context=move_prediction_context)
+
+            # Attach all the moves in case LLM cannot select the best one.
+            response = f"The next moves are from {next_move}.\n{response}"
+            raw_response = f"The next moves are from {next_move}.\n{raw_response}"
         elif service_option == "1":
             # Check if context is a .pdf.
             is_a_document = service_info_dict["is_a_document"]
