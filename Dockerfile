@@ -4,17 +4,29 @@ FROM python:3.8.10
 # Work directory in container.
 WORKDIR /app
 
-# Copy all necessary files/folders to container folder.
-COPY . /app
+#port expose
+EXPOSE 3000
 
-# Install Ollama.
-RUN apt-get update
-RUN apt-get -y install lshw
-RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
-RUN ollama --version
+# Copy all necessary files/folders to container folder.
+COPY . . 
+# COPY requirements.txt /app
+
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    git \
+    curl \
+    wget \
+    vim \
+    build-essential \
+    docker.io \
+    && ln -sf /usr/bin/python3 /usr/bin/python \
+    && rm -rf /var/lib/apt/lists/*
 
 # Build environment.
 RUN pip install -r requirements.txt
 
 # Run main file.
-CMD ["bash", "scripts/demo/run_demo.sh"]
+# CMD ["python", "modules/docker/main_docker.py"]
+# CMD ["bash", "run_chatbot.sh"]
+CMD ["/bin/bash"]
