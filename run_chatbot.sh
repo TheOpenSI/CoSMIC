@@ -47,5 +47,5 @@ docker image prune -f
 
 # run the pipeline script
 cd ${SCRIPT_DIR}/modules/chatbot/pipelines
-bash start.sh
+bash start_docker.sh
 cd ${SCRIPT_DIR}
