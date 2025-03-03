@@ -1,34 +1,74 @@
-# Official Implementation
+# OpenSI-CoSMIC - Cognitive System of Machine Intelligent Computing
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
 [![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![Media](https://img.shields.io/badge/Media-2024-purple.svg)](https://www.canberra.edu.au/about-uc/media/newsroom/2024/november/ucs-opensi-researchers-develop-framework-to-integrate-and-interpret-ai-tools)
+[![DebianBadge](https://badges.debian.net/badges/debian/stable/docker/version.svg)](https://www.docker.com/)
 
-This is the official implementation of the Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0.
+## Overview
 
-## Installation
+**OpenSI-CoSMIC** (Open Source Institute - Cognitive System of Machine Intelligent Computing) is an open-source, AI-driven framework designed to enhance machine intelligence by integrating iterative feedback mechanisms, multi-agent collaboration, and specialized expert services. It provides a modular, containerized environment for research and development, making it easier to experiment with advanced AI-driven computing workflows.
 
-```
+This is the official implementation of OpenSI-CoSMIC v1.0.0.
+
+## Installation Options
+
+### Option 1: Clone and Set Up Repository
+
+```bash
 # For users using SSH on GitHub
 git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
 
 # For users using GitHub account and token
 git clone --recursive https://github.com/TheOpenSI/CoSMIC.git
 ```
-Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for linux) for chess-game queries
-and store it as default, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
-The path of this binary file can be changed in [config.yaml](scripts/configs/config.yaml) as
-```python
+
+Chess-game queries require the Stockfish binary file:
+- [Download Stockfish](https://stockfishchess.org/download/linux/) (stockfish-ubuntu-x86-64-avx2 for Linux)
+- Store it as default at: `third_party/stockfish/stockfish-ubuntu-x86-64-avx2`
+- Alternatively, the path can be changed in [config.yaml](scripts/configs/config.yaml):
+
+```yaml
 chess:
   stockfish_path: ""  # add the path in ""; otherwise, it will be default.
 ```
 
-## Requirements
-Please install the following packages before using this code, which is also provided in requirements.txt.
-Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
+### Option 2: Docker Installation
 
-To use [Ollama models](https://ollama.com/library), in [config.yaml](scripts/configs/config.yaml) set the LLM name indexed by "ollama:" as **llm_name: ollama:[your ollama model name]**.
-If an Ollama model has not yet been pulled to a local directory, it might take a few minutes, depending on the model size.
+Pull the latest CoSMIC image:
+
+```bash
+docker pull opensicbr/cosmic:demo
+```
+
+Create an `.env` file to store your OpenAI API key:
+
+```bash
+echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
+```
+
+Run the container:
+
+```bash
+docker run --name cosmic \
+  --network=host \
+  -v /absolute/path/to/your/.env:/app/.env \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  --privileged \
+  opensicbr/cosmic:demo
+```
+
+**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
+
+## Requirements
+
+### For Repository Installation
+
+Please install the following packages before using this code (also provided in requirements.txt):
+
+- Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs 
+- An OpenAI account (set **openai_token=[your token]** in .env) is required to use the API if applicable
 
 ```
 huggingface_hub==0.24.0
@@ -64,39 +104,48 @@ jwt==1.3.1
 python-multipart==0.0.20
 ```
 
-To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service,
-users need to install [docker](https://docs.docker.com/engine/install/) following
+To use [Ollama models](https://ollama.com/library), in [config.yaml](scripts/configs/config.yaml) set the LLM name indexed by "ollama:" as **llm_name: ollama:[your ollama model name]**.
+If an Ollama model has not yet been pulled to a local directory, it might take a few minutes, depending on the model size.
+
+To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service, users need to install [docker](https://docs.docker.com/engine/install/):
+
 ```bash
 apt install docker.io
 ```
 
-## Framework
-The system is configurated through [config.yaml](scripts/configs/config.yaml).
-Currently, it has 5 base services, including
+### For Docker Installation
 
-- [Chess-game next move predication and analyse](src/services/chess.py)
+- Docker must be installed on your local machine
+- An OpenAI API key is required for full functionality
+
+## Framework
+
+The system is configured through [config.yaml](scripts/configs/config.yaml).
+Currently, it has 5 base services:
+
+- [Chess-game next move prediction and analysis](src/services/chess.py)
 - [Vector database for text-based and document-base information update](src/services/vector_database.py)
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
-- [Code generation and evalution (python)](src/services/pycapsule.py)
+- [Code generation and evaluation (python)](src/services/pycapsule.py)
 - [General question answering and reasoning](src/services/qa.py)
 
-Each query will be parsed by [an LLM-based analyser](src/query_analyser/query_analyser.py) to select the most relevant service.
+Each query will be parsed by [an LLM-based analyzer](src/query_analyser/query_analyser.py) to select the most relevant service.
 
-Upper-level chess-game services include
+Upper-level chess-game services include:
 
-- [Puzzle next move prediction and analyse](src/modules/chess_qa_puzzle.py)
+- [Puzzle next move prediction and analysis](src/modules/chess_qa_puzzle.py)
 - [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
+## Getting Started
 
-## Get Started
+### Web-based Chatbot
 
-### [General User] Chatbot
+We provide a website-based chatbot for interaction between users and OpenSI-CoSMIC.
+The backend program is executed in a Docker container.
+To start the program:
 
-We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
-The backend program is exected in a docker container.
-The program is started by running
-```python
+```bash
 touch .env   # then if OpenAI GPT API is used, please add OPENAI_API_KEY="[your API key]" in .env.
 bash run_chatbot.sh
 ```
@@ -111,16 +160,16 @@ This chatbot is developed on the open-source [Open-WebUI](https://github.com/ope
 
 ### Development
 
-The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
+The default LLMs for QA and query analyzer are "gpt-4o" while you can change them in [config.yaml](scripts/configs/config.yaml).
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
 
-- We demonstrate the use of OpenSI-CoSMIC below.
+- Basic usage demonstration:
     ```python
     # Quit by entering quit or exit.
     python demo.py
     ```
 
-- Alternatively, one can use the following development instruction.
+- Alternatively, use the following development instructions:
     ```python
     from src.opensi_cosmic import OpenSICoSMIC
     from utils.log_tool import set_color
@@ -149,7 +198,8 @@ The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
     # Remove memory cached in the system.
     opensi_cosmic.quit()
     ```
-    More example questions are provided in [test.csv](data/test.csv), which can be used as
+
+- For batch processing of questions:
     ```python
     import os, csv
     import pandas as pd
@@ -219,8 +269,18 @@ The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
     opensi_cosmic.quit()
     ```
 
+## Contributing
+
+We welcome contributions from the community! Whether you're a researcher, developer, or enthusiast, there are many ways to get involved:
+
+- Report Issues: Found a bug or have a feature request? Open an issue on our GitHub page.
+- Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING.md).
+- Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
+
 ## Reference
-If this repository is useful for you, please cite the paper below.
+
+If this repository is useful for you, please cite the paper below:
+
 ```bibtex
 @misc{Adnan2024,
     title         = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
@@ -230,22 +290,22 @@ If this repository is useful for you, please cite the paper below.
 }
 ```
 
-## Contact
-For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
-For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
-
-## Contributing
-
-We welcome contributions from the community! Whether you’re a researcher, developer, or enthusiast, there are many ways to get involved:
-
- - Report Issues: Found a bug or have a feature request? Open an issue on our GitHub page.
- - Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING.md).
- - Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
-
 ## License
+
 This code is distributed under [the MIT license](LICENSE).
 If Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B It from Hugging Face is used, please also follow the license of Hugging Face;
-if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow the licence of OpenAI.
+if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow the license of OpenAI.
 
 ## Funding
+
 This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
+
+## Contact
+
+- For technical support: 
+  - [Danny Xu](mailto:danny.xu@canberra.edu.au)
+  - [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au)
+- For project support: 
+  - [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au)
+- General inquiries: 
+  - [opensi@canberra.edu.au](mailto:opensi@canberra.edu.au)
