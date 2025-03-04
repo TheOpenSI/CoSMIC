@@ -237,14 +237,9 @@ class LLMBase(ServiceBase):
         Returns:
             response (str): truncated response.
         """
-        if not self.is_truncate_response:
-            return response
-
         # Remove DeepSeek model reasoning part in the response.
         if self.llm_name.find("deepseek") > -1:
             response = response.split("</think>")[-1]
-
-        response = response.replace("\n", "").strip()
 
         return response
 
@@ -352,8 +347,6 @@ class Mistral7bv01(LLMBase):
         if self.use_example:  # with an example in the prompt, can always parse by [INST]
             response = response.split("[/INST]")[0].split("[INST]")[0]
 
-        response = response.replace("\n", "").strip()
-
         return response
 
     def __call__(
@@ -419,7 +412,6 @@ class Mistral7bInstructv01(Mistral7bv01):
             return response
 
         response = response.split("[/INST]")[-1].split("</s>")[0]
-        response = response.replace("\n", "").strip()
 
         return response
 
@@ -466,8 +458,6 @@ class Gemma7b(Mistral7bv01):
         else:
             response = response.split("### ANSWER:\n")[-1]
 
-        response = response.replace("\n", "").strip()
-
         return response
 
 # =============================================================================================================
@@ -509,7 +499,6 @@ class Gemma7bIt(Mistral7bv01):
             return response
 
         response = response.split("model\n")[-1]
-        response = response.replace("\n", "").strip()
 
         return response
 
@@ -668,7 +657,5 @@ class MistralFinetuned(Mistral7bv01):
 
         if response.find("<answer>:") > -1 or response.find("<ANSWER>:") > -1:
             response = response.split("<answer>:")[-1].split("<ANSWER>:")[-1]
-
-        response = response.replace("\n", "").strip()
 
         return response

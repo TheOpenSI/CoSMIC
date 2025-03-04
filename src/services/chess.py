@@ -457,8 +457,6 @@ class GPTFENNextMove(ChessBase):
         except:
             response = response.split("** is")[-1]
 
-        response = response.replace("\n", "").strip()
-
         return response
 
     def __call__(
