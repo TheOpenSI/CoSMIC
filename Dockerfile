@@ -13,6 +13,7 @@ COPY . .
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    lshw \
     git \
     curl \
     wget \
@@ -22,9 +23,10 @@ RUN apt-get update && apt-get install -y \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
 
+# Ollama
+RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
+
 # Build environment.
 RUN pip install -r requirements.txt
 
-# Run chatbot.
-CMD ["bash", "run_chatbot.sh"]
-# CMD ["/bin/bash"]
+CMD ["bash", "scripts/chatbot/cosmic.sh"]
