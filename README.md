@@ -26,7 +26,7 @@ docker pull opensicbr/cosmic:demo
 echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
 ```
 
-3. Run the container:
+3. Run the container, Open Web-UI with CoSMIC pipeline will be available at port 8080:
 
 ```bash
 docker run -it --name cosmic \
@@ -137,7 +137,7 @@ Upper-level chess-game services include
 
 We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
 The backend program is exected in a docker container.
-The program is started by running
+The program is either started automatically from the container or, by running -
 ```python
 touch .env   # then if OpenAI GPT API is used, please add OPENAI_API_KEY="[your API key]" in .env.
 bash run_chatbot.sh
