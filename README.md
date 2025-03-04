@@ -39,6 +39,13 @@ docker run -it --name cosmic \
 
 **Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
 
+### Requirements for Docker Installation
+- [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
+```bash
+apt install docker.io
+```
+- An OpenAI API key is optional (only required if you plan to use OpenAI models)
+
 ### Option 2: Clone and Set Up Repository
 
 ```bash
@@ -56,16 +63,7 @@ chess:
   stockfish_path: ""  # add the path in ""; otherwise, it will be default.
 ```
 
-## Requirements
-
-### For Docker Installation
-- [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
-```bash
-apt install docker.io
-```
-- An OpenAI API key is optional (only required if you plan to use OpenAI models)
-
-### For Repository Installation
+### Requirements for Repository Installation
 Please install the following packages before using this code, which is also provided in requirements.txt.
 Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
