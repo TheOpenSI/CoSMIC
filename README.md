@@ -39,7 +39,7 @@ docker run -it --name cosmic \
 
 **Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
 
-### Option 2: Clone and Set Up Repository (For Development)
+### Option 2: Clone and Set Up Repository
 
 ```bash
 # For users using SSH on GitHub
