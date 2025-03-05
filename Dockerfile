@@ -29,4 +29,8 @@ RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
 # Build environment.
 RUN pip install -r requirements.txt
 
-CMD ["bash", "scripts/chatbot/cosmic.sh"]
+# Fix cosmic permission
+RUN chmod +x /app/scripts/chatbot/cosmic.sh
+
+# Entry point.
+CMD ["bash", "/app/scripts/chatbot/cosmic.sh"]
