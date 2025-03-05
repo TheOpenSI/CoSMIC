@@ -29,12 +29,12 @@ echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
 3. Run the container, Open Web-UI with CoSMIC pipeline will be available at port 8080:
 
 ```bash
-docker run -it --name cosmic \
-  --network=host \
-  -v /absolute/path/to/your/.env:/app/.env \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  --privileged \
-  opensicbr/cosmic:demo
+docker run -it --name cosmic --network=host -v /absolute/path/to/your/.env:/app/.env -v /var/run/docker.sock:/var/run/docker.sock --privileged opensicbr/cosmic:demo
+```
+
+4. (Optional) Compile the docker image, run
+```bash
+bash compile_docker_image.sh
 ```
 
 **Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
