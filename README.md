@@ -1,14 +1,54 @@
-# Official Implementation
+# OpenSI-CoSMIC - Cognitive System of Machine Intelligent Computing
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
 [![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![Media](https://img.shields.io/badge/Media-2024-purple.svg)](https://www.canberra.edu.au/about-uc/media/newsroom/2024/november/ucs-opensi-researchers-develop-framework-to-integrate-and-interpret-ai-tools)
+[![DebianBadge](https://badges.debian.net/badges/debian/stable/docker/version.svg)](https://www.docker.com/)
 
 This is the official implementation of the Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0.
 
-## Installation
+## Installation Options
 
+### Option 1: Docker Installation (Quick Start)
+
+The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
+
+1. Pull the latest CoSMIC image:
+
+```bash
+docker pull opensicbr/cosmic:demo
 ```
+
+2. (Optional) Create an `.env` file to store your OpenAI API key if you plan to use OpenAI models:
+
+```bash
+echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
+```
+
+3. Run the container, Open Web-UI with CoSMIC pipeline will be available at port 8080:
+
+```bash
+docker run -it --name cosmic --network=host -v /absolute/path/to/your/.env:/app/.env -v /var/run/docker.sock:/var/run/docker.sock --privileged opensicbr/cosmic:demo
+```
+
+4. (Optional) Compile the docker image, run
+```bash
+bash compile_docker_image.sh
+```
+
+**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
+
+### Requirements for Docker Installation
+- [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
+```bash
+apt install docker.io
+```
+- An OpenAI API key is optional (only required if you plan to use OpenAI models)
+
+### Option 2: Clone and Set Up Repository
+
+```bash
 # For users using SSH on GitHub
 git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
 
@@ -23,7 +63,7 @@ chess:
   stockfish_path: ""  # add the path in ""; otherwise, it will be default.
 ```
 
-## Requirements
+### Requirements for Repository Installation
 Please install the following packages before using this code, which is also provided in requirements.txt.
 Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
@@ -64,8 +104,8 @@ jwt==1.3.1
 python-multipart==0.0.20
 ```
 
-To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service,
-users need to install [docker](https://docs.docker.com/engine/install/) following
+To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service, users need to install [docker](https://docs.docker.com/engine/install/):
+
 ```bash
 apt install docker.io
 ```
@@ -95,7 +135,7 @@ Upper-level chess-game services include
 
 We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
 The backend program is exected in a docker container.
-The program is started by running
+The program is either started automatically from the container or, by running -
 ```python
 touch .env   # then if OpenAI GPT API is used, please add OPENAI_API_KEY="[your API key]" in .env.
 bash run_chatbot.sh
