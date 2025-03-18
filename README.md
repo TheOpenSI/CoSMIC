@@ -26,15 +26,15 @@ docker pull opensicbr/cosmic:demo
 echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
 ```
 
-3. Run the container, Open Web-UI with CoSMIC pipeline will be available at port 8080:
+3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will be available at port 8080:
 
 ```bash
-docker run -it --name cosmic --network=host -v /absolute/path/to/your/.env:/app/.env -v /var/run/docker.sock:/var/run/docker.sock --privileged opensicbr/cosmic:demo
+bash docker_run.sh
 ```
 
 4. (Optional) Compile the docker image, run
 ```bash
-bash compile_docker_image.sh
+bash docker_compile.sh
 ```
 
 **Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
@@ -131,14 +131,23 @@ Upper-level chess-game services include
 
 ## Get Started
 
-### [General User] Chatbot
+### [Local User] Chatbot
 
 We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
 The backend program is exected in a docker container.
-The program is either started automatically from the container or, by running -
-```python
+To run the chatbot on a local machine, the user needs to compile the docker container first as below.
+This is exected for once only.
+
+**Note**: whenever this shell file is executed, the user registration information will be cleaned, requiring a new registration of an admin user, followed by general users.
+This is restricted by [Open-WebUI](https://github.com/open-webui/open-webui).
+```bash
 touch .env   # then if OpenAI GPT API is used, please add OPENAI_API_KEY="[your API key]" in .env.
-bash run_chatbot.sh
+bash local_compile.sh  # This is executed once only to reserve the user registration information.
+```
+
+Then, to enable CoSMIC pipeline, the user needs to start the pipeline as below so that the chatbot can detect the pipeline.
+```bash
+bash local_run.sh
 ```
 
 [<img src="assets/chatbot_ui.png" width="600"/>](assets/chatbot_ui.png)

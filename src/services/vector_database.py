@@ -80,7 +80,7 @@ class VectorDatabase(ServiceBase):
 
         # Get the catalogue path and threshold.
         self.local_database_path = local_database_path
-        self.local_database_catalogue_path = local_database_path + ".csv"
+        self.local_database_catalogue_path = os.path.join(local_database_path, "file_list.csv")
         self.vector_database_update_threshold = vector_database_update_threshold
 
         # Create local database directory.
@@ -130,7 +130,7 @@ class VectorDatabase(ServiceBase):
         # Build a processor to handle a sentence for database updates.
 
         # Load a local database from a file
-        if os.path.exists(local_database_path):
+        if os.path.exists(f"{local_database_path}/index.faiss"):
             self.database = FAISS.load_local(
                 local_database_path,
                 self.database_update_embedding,
@@ -175,7 +175,8 @@ class VectorDatabase(ServiceBase):
     def quit(self):
         """Release document analyser model.
         """
-        del self.database_update_embedding
+        if self.database_update_embedding:
+            del self.database_update_embedding
 
     def add_documents(
         self,
