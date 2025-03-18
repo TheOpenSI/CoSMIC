@@ -247,14 +247,14 @@ class QueryAnalyser:
 
         if is_a_document:
             # Parse move string
-            document_path = re.search('(\S+\.pdf)', query)
+            document_path = re.search('(?<=\:\s)(.*?)+\.pdf', query)
 
             if document_path:
                 document_path = document_path.group()
             else:
                 print(set_color(
                     "warning",
-                    f"Invalid document query [top: pdf file(s) is required.]")
+                    f"Invalid document query [tip: pdf file(s) is required.]")
                 )
 
                 return service_option, service_info_dict

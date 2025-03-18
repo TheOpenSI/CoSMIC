@@ -13,7 +13,8 @@ HOST_IP=$(hostname -i | awk '{print $1}')
 echo "[INFO] Using host IP: $HOST_IP"
 
 # Create a shared volume for the container
-docker volume create ${container_name}-shared 2>/dev/null || true
+docker volume create volume_configs
+docker volume create volume_uploads
 
 ENV_CONTENT=""
 if [[ -e ${ROOT}/.env ]]; then
@@ -32,11 +33,12 @@ echo "[WARNING] This is not recommended for production deployments."
 docker run -d \
     --network=host \
     --add-host=host.docker.internal:$HOST_IP \
-    -v "${image_name}:/app/backend/data" \
-    -v "${container_name}-shared:/app/backend/shared" \
     --name "$container_name" \
     --restart always \
-    -e ENV_CONTENT="$ENV_CONTENT" \
+    -v volume_configs:/app/backend/configs \
+    -v volume_uploads:/app/backend/data/uploads \
+    -e OPENAI_API_BASE_URL=http://host.docker.internal:9099 \
+    -e OPENAI_API_KEY=0p3n-w3bu! \
     "$image_name"
 
 docker image prune -f

@@ -49,7 +49,8 @@ class OpenSICoSMIC:
         self,
         query_llm_name: str="",
         llm_name: str="",
-        config_path: str="scripts/configs/config.yaml"
+        config_path: str="scripts/configs/config.yaml",
+        user: dict=None
     ):
         """ Construct OpenSICoSMIC instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
@@ -61,6 +62,7 @@ class OpenSICoSMIC:
             llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
                 is self.config.llm_name.
             config_path (str): path of configuration file.
+            user (dict): user information including ID, name, etc. Default to None.
         """
         # Check if required config file exists.
         if not os.path.exists(config_path):
@@ -69,8 +71,15 @@ class OpenSICoSMIC:
 
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
+        self.user_id = str(user["id"]) \
+            if ((user is not None) and ("id" in user) and user["id"] != "") \
+            else None
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        # Set model device.
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+
+        # Initialize QA instance.
+        self.qa = None
 
         # If llm_name is not specified, read it from the config file.
         if llm_name == "": llm_name = self.config.llm_name
@@ -78,8 +87,11 @@ class OpenSICoSMIC:
             llm_name,
             seed=self.config.seed,
             is_quantized=self.config.is_quantized,
-            device=device
+            device=self.device
         )
+
+        # Check OpenAI API key.
+        self.openai_api_status = self.check_openai_key()
 
         # Set LLM for query analysis.
         if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
@@ -88,37 +100,75 @@ class OpenSICoSMIC:
             seed=self.config.seed,
             is_quantized=self.config.query_analyser.is_quantized,
             service_index=self.config.service,
-            device=device
+            device=self.device
         )
 
-        # Create vector database service which will be included in RAG for retrieve and information updates.
-        vector_database = VectorDatabase(
-            local_database_path=self.config.rag.vector_db_path,
-            device=device
-        )
+        # Set up QA instance.
+        self.set_up_qa(self.user_id)
 
-        # Add a directory of documents.
-        if os.path.exists(self.config.doc_directory):
-            vector_database.add_document_directory(self.config.doc_directory)
+    def set_up_qa(
+        self,
+        user_id: str,
+        user_name: str=None
+    ):
+        """ Set up QA instance by user ID.
 
-        # Add documents.
-        if self.config.document_path != "" or len(self.config.document_path) > 0:
-            vector_database.add_documents(self.config.document_path)
+        Args:
+            user_id (str): user ID through OpenWebUI.
+            user_name (str, optional): user name. Defaults to None.
+        """
+        # Invalid user ID.
+        if user_id == "" and not isinstance(user_id, str):
+            self.user_id = None
 
-        # Base RAG service with vector_database, the database can be changed using
-        # self.rag.set_vector_database().
-        self.rag = RAGBase(
-            vector_database=vector_database,
-            retrieve_score_threshold=self.config.rag.retrieve_score_threshold,
-            topk=self.config.rag.topk
-        )
+        # For a default user (no user ID), always use the same QA instance.
+        if (user_id is None) and (self.qa is not None):
+            return -1
 
-        # QA module to handle basic types of questions, such __next__move__, __update__store__, and
-        # general questions.
-        self.qa = QABase(self.query_analyser, self.llm, self.rag, config=self.config)
+        if (user_id != self.user_id) or (self.qa is None):
+            # Change the global user ID.
+            self.user_id = user_id
 
-        # Check OpenAI API key.
-        self.openai_api_status = self.check_openai_key()
+            # Create vector database service which will be included in RAG for retrieve and information updates.
+            vector_db_path = self.config.rag.vector_db_path
+
+            # If index.faiss exists, it is user selected path; do not change the path.
+            # Otherwise, create a new directory.
+            if not os.path.exists(os.path.join(vector_db_path, "index.faiss")):
+                if self.user_id is not None:
+                    # User ID specific.
+                    vector_db_path = os.path.join(vector_db_path, self.user_id)
+                else:
+                    # Set to default folder for easy management.
+                    vector_db_path = os.path.join(vector_db_path, "default")
+
+                # Create the data folder if not exist.
+                os.makedirs(vector_db_path, exist_ok=True)
+
+            vector_database = VectorDatabase(
+                local_database_path=vector_db_path,
+                device=self.device
+            )
+
+            # Add a directory of documents.
+            if os.path.exists(self.config.doc_directory):
+                vector_database.add_document_directory(self.config.doc_directory)
+
+            # Add documents.
+            if self.config.document_path != "" or len(self.config.document_path) > 0:
+                vector_database.add_documents(self.config.document_path)
+
+            # Base RAG service with vector_database, the database can be changed using
+            # self.rag.set_vector_database().
+            self.rag = RAGBase(
+                vector_database=vector_database,
+                retrieve_score_threshold=self.config.rag.retrieve_score_threshold,
+                topk=self.config.rag.topk
+            )
+
+            # QA module to handle basic types of questions, such __next__move__, __update__store__, and
+            # general questions.
+            self.qa = QABase(self.query_analyser, self.llm, self.rag, config=self.config)
 
     def check_openai_key(self):
         """ Check OpenAI API key valid.
