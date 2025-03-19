@@ -352,16 +352,7 @@ class OpenSICoSMIC:
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
-
-            elif question.find("code_generation") > -1:
-                code_generator = CodeGenerator(
-                    llm=self.llm,
-                    rag=None,
-                    log_file=log_file,
-                )
-
-                # Batch process the question file.
-                code_generator.batch_process(question)
+                
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)
