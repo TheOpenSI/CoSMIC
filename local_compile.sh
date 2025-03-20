@@ -16,9 +16,10 @@ docker build -t "${image_name}" "${SCRIPT_DIR}/modules/chatbot"
 docker stop ${container_name}
 docker rm ${container_name}
 
-mkdir -p ${SCRIPT_DIR}/data/backend/data/shared
-mkdir -p ${SCRIPT_DIR}/data/backend/data/uploads
-mkdir -p ${SCRIPT_DIR}/data/backend/data/vector_db_cosmic
+mkdir -p ${SCRIPT_DIR}/data/cosmic/shared
+mkdir -p ${SCRIPT_DIR}/data/cosmic/backend/uploads
+mkdir -p ${SCRIPT_DIR}/data/cosmic/vector_db_cosmic
+mkdir -p ${SCRIPT_DIR}/data/cosmic/statistic
 
 docker run -d \
     -p "$host_port":"$container_port" \
@@ -27,8 +28,8 @@ docker run -d \
     --restart always \
     -v ${SCRIPT_DIR}/.env:/app/backend/.env \
     -v ${SCRIPT_DIR}/scripts/configs:/app/backend/configs \
-    -v ${SCRIPT_DIR}/data/backend/data/shared:/app/backend/data/shared \
-    -v ${SCRIPT_DIR}/data/backend/data/uploads:/app/backend/data/uploads \
+    -v ${SCRIPT_DIR}/data/cosmic/shared:/app/backend/data/shared \
+    -v ${SCRIPT_DIR}/data/cosmic/backend/uploads:/app/backend/data/uploads \
     -e OPENAI_API_BASE_URL=http://host.docker.internal:9099 \
     -e OPENAI_API_KEY=0p3n-w3bu! \
     "$image_name"
