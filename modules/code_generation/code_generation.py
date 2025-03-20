@@ -28,14 +28,14 @@ import requests
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from typing import List
-from src.services.qa import QABase
+from src.services.base import ServiceBase
 from utils.log_tool import set_color
 
 # =============================================================================================================
 
-class CodeGenerator(QABase):
+class CodeGenerator(ServiceBase):
     def __init__(self,
-                 service_container_name: str = "loaclhost",
+                 service_container_name: str = "localhost",
                  model_name: str = "qwen2.5-coder",
                  **kwargs):
         """
@@ -86,10 +86,10 @@ class CodeGenerator(QABase):
                                  f"Status code: {pycaspsule_response.status_code}"))
             
             # Extract respone.
-            full_response: str = pycaspsule_response.json().get("response", "")
-            error: str = pycaspsule_response.json().get("error", "")
-            code: str = pycaspsule_response.json().get("code", "")
-            status: str = pycaspsule_response.json().get("status", "")
+            full_response: str = pycaspsule_response.json()[0].get("response", "")
+            error: str = pycaspsule_response.json()[0].get("error", "")
+            code: str = pycaspsule_response.json()[0].get("code", "")
+            status: str = pycaspsule_response.json()[0].get("status", "")
 
             raw_response, response = ((full_response, code)
                                       if status == "success"

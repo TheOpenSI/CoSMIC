@@ -42,6 +42,7 @@ class QABase(ServiceBase):
         query_analyser: LLMBase,
         llm: LLMBase,
         rag: RAGBase,
+        code_generator: CodeGenerator,
         config: Box=None,
         **kwargs
     ):
@@ -51,6 +52,7 @@ class QABase(ServiceBase):
             query_analyser (LLMBase): query analyser.
             llm (LLMBase): LLM instance.
             rag (RAGBase): RAG instance containing vector database service.
+            code_generator (CodeGenerator): code generation service.
             config (Box): config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
@@ -59,6 +61,7 @@ class QABase(ServiceBase):
         self.query_analyser = query_analyser
         self.llm = llm
         self.rag = rag
+        self.code_generator = code_generator
         self.config = config
 
     def __call__(
@@ -161,8 +164,7 @@ class QABase(ServiceBase):
 
             response = raw_response = "Vector database updated."
         elif service_option == "2":
-            code_generation_service = CodeGenerator()
-            raw_response, response = code_generation_service(query)
+            raw_response, response = self.code_generator(query)
         else:
             if is_rag:
                 # If retrieving context, first generate the user prompt given the

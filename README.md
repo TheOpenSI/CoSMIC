@@ -8,9 +8,9 @@
 
 This is the official implementation of the Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0.
 
-## Installation Options
+# Installation Options
 
-### Option 1: Docker Installation (Quick Start)
+## Option 1: Docker Installation (Quick Start) [Under development, please follow [OPTION 2](#option-2-clone-and-set-up-repository)]
 
 The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
 
@@ -26,7 +26,8 @@ docker pull opensicbr/cosmic:demo
 echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
 ```
 
-3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will be available at port 8080:
+3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will 
+be available at port 8080:
 
 ```bash
 bash docker_run.sh
@@ -37,7 +38,8 @@ bash docker_run.sh
 bash docker_compile.sh
 ```
 
-**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
+**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to 
+the host network and is **not recommended for production environments**.
 
 ### Requirements for Docker Installation
 - [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
@@ -46,21 +48,41 @@ apt install docker.io
 ```
 - An OpenAI API key is optional (only required if you plan to use OpenAI models)
 
-### Option 2: Clone and Set Up Repository
+[//]: # (============================================================================================================)
 
+## Option 2: Clone and Set Up Repository
+1. Download the [PyCapsule](https://github.com/TheOpenSI/PyCapsule) service in a separate directory of your work directory.
+This is the Python code generation service for CoSMIC.
+
+```bash
+git clone https://github.com/TheOpenSI/PyCapsule.git
+cd PyCapsule
+```
+
+2. Run the `start_pc.sh` script to start the PyCapsule service.
+```bash
+bash start_pc.sh # may take a few minutes
+```
+> **Note:** [Docker](https://docs.docker.com/engine/install/) is required for this service. See [requirements](#requirements-for-repository-installation) for more details.
+
+By default, the LLM model for this service is set to `Qwen2.5-Coder-Instruct`, which is made available using the official Ollama docker image. 
+The corresponding Ollama container serves at port `11434`. 
+To change the service configuration, please follow the instructions in the [PyCapsule repository](https://github.com/TheOpenSI/PyCapsule).
+
+3. Once the PyCapsule service is running, download CoSMIC in a separate directory in your work directory:
 ```bash
 # For users using SSH on GitHub
 git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
 
-# For users using GitHub account and token
+# For users using HTTPS
 git clone --recursive https://github.com/TheOpenSI/CoSMIC.git
 ```
-Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for linux) for chess-game queries
-and store it as default, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
-The path of this binary file can be changed in [config.yaml](scripts/configs/config.yaml) as
-```python
+
+4. For chess-game queries, users need to [download](https://stockfishchess.org/download/linux/) the Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for Linux) and store it at the default location: `third_party/stockfish/stockfish-ubuntu-x86-64-avx2`.
+The path of this binary file can be customized in [config.yaml](scripts/configs/config.yaml):
+```yaml
 chess:
-  stockfish_path: ""  # add the path in ""; otherwise, it will be default.
+    stockfish_path: ""  # add the path in ""; otherwise, the default path will be used.
 ```
 
 ### Requirements for Repository Installation
@@ -104,20 +126,18 @@ jwt==1.3.1
 python-multipart==0.0.20
 ```
 
-To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service, users need to install [docker](https://docs.docker.com/engine/install/):
+To use the [PyCapsule](modules/code_generation/code_generation.py) service, users need to install [Docker](https://docs.docker.com/engine/install/). Follow the instructions provided in the Docker documentation for your specific operating system.
 
-```bash
-apt install docker.io
-```
+[//]: # (============================================================================================================)
 
-## Framework
+# Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
 Currently, it has 5 base services, including
 
 - [Chess-game next move predication and analyse](src/services/chess.py)
 - [Vector database for text-based and document-base information update](src/services/vector_database.py)
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
-- [Code generation and evalution (python)](src/services/pycapsule.py)
+- [PyCapsule (python code generation)](https://github.com/TheOpenSI/PyCapsule)
 - [General question answering and reasoning](src/services/qa.py)
 
 Each query will be parsed by [an LLM-based analyser](src/query_analyser/query_analyser.py) to select the most relevant service.
@@ -128,10 +148,11 @@ Upper-level chess-game services include
 - [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
+[//]: # (============================================================================================================)
 
-## Get Started
+# Get Started
 
-### [Local User] Chatbot
+## [Local User] Chatbot
 
 We provide a website based chatbot for the interaction between user and OpenSI-CoSMIC.
 The backend program is exected in a docker container.
@@ -158,7 +179,7 @@ with **the configuration settings** in
 
 This chatbot is developed on the open-source [Open-WebUI](https://github.com/open-webui/open-webui) under the MIT license.
 
-### Development
+## Development
 
 The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
@@ -268,7 +289,9 @@ The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
     opensi_cosmic.quit()
     ```
 
-## Reference
+[//]: # (============================================================================================================)
+
+# Reference
 If this repository is useful for you, please cite the paper below.
 ```bibtex
 @misc{Adnan2024,
@@ -279,11 +302,15 @@ If this repository is useful for you, please cite the paper below.
 }
 ```
 
-## Contact
+[//]: # (============================================================================================================)
+
+# Contact
 For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
-## Contributing
+[//]: # (============================================================================================================)
+
+# Contributing
 
 We welcome contributions from the community! Whether you’re a researcher, developer, or enthusiast, there are many ways to get involved:
 
@@ -291,10 +318,16 @@ We welcome contributions from the community! Whether you’re a researcher, deve
  - Submit Pull Requests: Contribute code by submitting pull requests. Please follow [our contribution guidelines](CONTRIBUTING.md).
  - Make a Donation: Support our project by making a donation [here](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
 
-## License
+[//]: # (============================================================================================================)
+
+# License
 This code is distributed under [the MIT license](LICENSE).
 If Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B It from Hugging Face is used, please also follow the license of Hugging Face;
 if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow the licence of OpenAI.
 
-## Funding
+[//]: # (============================================================================================================)
+
+# Funding
 This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
+
+[//]: # (============================================================================================================)

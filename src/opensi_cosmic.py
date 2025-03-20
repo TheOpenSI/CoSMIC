@@ -103,6 +103,9 @@ class OpenSICoSMIC:
             device=self.device
         )
 
+        # Code generation service.
+        self.code_generator = CodeGenerator()
+
         # Set up QA instance.
         self.set_up_qa(self.user_id)
 
@@ -168,7 +171,13 @@ class OpenSICoSMIC:
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
-            self.qa = QABase(self.query_analyser, self.llm, self.rag, config=self.config)
+            self.qa = QABase(
+                self.query_analyser,
+                self.llm,
+                self.rag,
+                self.code_generator,
+                config=self.config
+            )
 
     def check_openai_key(self):
         """ Check OpenAI API key valid.
