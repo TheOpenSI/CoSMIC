@@ -39,7 +39,7 @@ class CodeGenerator(ServiceBase):
         service_container_name: str = "localhost",
         model_name: str = "qwen2.5-coder",
         **kwargs
-    ):
+    ) -> None:
         """
         Code generation module.
         Sends http requests at port 8780 to the PyCapsule service.
@@ -54,10 +54,6 @@ class CodeGenerator(ServiceBase):
         self.PORT = 8780 # PyCapsule service default port
         self.service_url = f"http://{service_container_name}:{self.PORT}"
         
-        # Check service availability
-        self._check_service_status()
-        
-        
     def _check_service_status(self):
         """
         Check if the PyCapsule service is running.
@@ -69,8 +65,7 @@ class CodeGenerator(ServiceBase):
                 raise Exception(f"PyCapsule service is not running. Status code: {response.status_code}")
         except requests.exceptions.RequestException as e:
             raise Exception(f"Failed to connect to PyCapsule service: {str(e)}")
-        
-    
+
     def __call__(
         self, 
         query:str, 
@@ -84,13 +79,16 @@ class CodeGenerator(ServiceBase):
             timeout (int): Timeout for the request. Defaults to 30 seconds.
         """
         try:
+            # Check service availability
+            self._check_service_status()
+
             # Send the user query to the PyCapsule service
             pycaspsule_response: requests.Response = requests.post(
                 f"{self.service_url}/query", 
                 json={"query": query},
                 timeout=timeout
             )
-            
+
             if pycaspsule_response.status_code != 200:
                 raise Exception(
                     (f"PyCapsule service returned error. "
@@ -109,8 +107,8 @@ class CodeGenerator(ServiceBase):
                 if status == "success"
                 else (full_response, code + "\n\n" + error)
             )
-            
-            return raw_response, response
-        
-        except requests.exceptions.RequestException as e:
-            raise Exception(f"Failed to connect to PyCapsule service: {str(e)}")
+        except Exception as e:
+            raw_response = response = "PyCapsule service encountered an error."
+            print(str(e))
+
+        return raw_response, response
