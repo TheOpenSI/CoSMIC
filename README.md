@@ -11,6 +11,7 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 ## Installation
 
 ### Option 1: Docker Installation (Quick Start)
+**Note:** Under development, please follow [Option 2](#option-2-clone-and-set-up-repository).
 
 The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
 
@@ -26,7 +27,8 @@ docker pull opensicbr/cosmic:demo
 echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
 ```
 
-3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will be available at port 8080:
+3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will 
+be available at port 8080:
 
 ```bash
 bash docker_run.sh
@@ -37,9 +39,10 @@ bash docker_run.sh
 bash docker_compile.sh
 ```
 
-**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to the host network and is **not recommended for production environments**.
+**Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to 
+the host network and is **not recommended for production environments**.
 
-### Requirements for Docker Installation
+#### Requirements for Docker Installation
 - [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
 ```bash
 apt install docker.io
@@ -47,23 +50,42 @@ apt install docker.io
 - An OpenAI API key is optional (only required if you plan to use OpenAI models)
 
 ### Option 2: Clone and Set Up Repository
-
+1. Download CoSMIC in a separate directory in your work directory:
 ```bash
 # For users using SSH on GitHub
 git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
 
-# For users using GitHub account and token
+# For users using HTTPS
 git clone --recursive https://github.com/TheOpenSI/CoSMIC.git
 ```
-Users need to [download](https://stockfishchess.org/download/linux/) Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for linux) for chess-game queries
-and store it as default, "third_party/stockfish/stockfish-ubuntu-x86-64-avx2".
-The path of this binary file can be changed in [config.yaml](scripts/configs/config.yaml) as
-```python
+
+2. For chess-game queries, users need to [download](https://stockfishchess.org/download/linux/) the Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for Linux) and store it at the default location: `third_party/stockfish/stockfish-ubuntu-x86-64-avx2`.
+The path of this binary file can be customized in [config.yaml](scripts/configs/config.yaml):
+```yaml
 chess:
-  stockfish_path: ""  # add the path in ""; otherwise, it will be default.
+    stockfish_path: ""  # add the path in ""; otherwise, the default path will be used.
 ```
 
-### Requirements for Repository Installation
+3. For code generation queries, users need to
+  - Download the [PyCapsule](https://github.com/TheOpenSI/PyCapsule) service in a separate directory of your work directory.
+This is the Python code generation service for CoSMIC.
+
+```bash
+git clone https://github.com/TheOpenSI/PyCapsule.git
+cd PyCapsule
+```
+
+  - Run the `start_pc.sh` script to start the PyCapsule service.
+```bash
+bash start_pc.sh
+```
+**Note:** [Docker](https://docs.docker.com/engine/install/) is required for this service. See [requirements](#requirements-for-repository-installation) for more details.
+
+By default, the LLM model for this service is set to `Qwen2.5-Coder-Instruct`, which is made available using the official Ollama docker image. 
+The corresponding Ollama container serves at port `11434`. 
+To change the service configuration, please follow the instructions in the [PyCapsule repository](https://github.com/TheOpenSI/PyCapsule).
+
+#### Requirements for Repository Installation
 Please install the following packages before using this code, which is also provided in requirements.txt.
 Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
@@ -104,11 +126,7 @@ jwt==1.3.1
 python-multipart==0.0.20
 ```
 
-To use ["code generation and evaluation"](modules/code_generation/code_generation.py) service, users need to install [docker](https://docs.docker.com/engine/install/):
-
-```bash
-apt install docker.io
-```
+To use the [PyCapsule](modules/code_generation/code_generation.py) service, users need to install [Docker](https://docs.docker.com/engine/install/). Follow the instructions provided in the Docker documentation for your specific operating system.
 
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
@@ -117,7 +135,7 @@ Currently, it has 5 base services, including
 - [Chess-game next move predication and analyse](src/services/chess.py)
 - [Vector database for text-based and document-base information update](src/services/vector_database.py)
 - [Context retrieving through the vector database](src/services/rag.py) if applicable
-- [Code generation and evalution (python)](src/services/pycapsule.py)
+- [PyCapsule (python code generation)](https://github.com/TheOpenSI/PyCapsule)
 - [General question answering and reasoning](src/services/qa.py)
 
 Each query will be parsed by [an LLM-based analyser](src/query_analyser/query_analyser.py) to select the most relevant service.
@@ -127,6 +145,7 @@ Upper-level chess-game services include
 - [Puzzle next move prediction and analyse](src/modules/chess_qa_puzzle.py)
 - [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
+
 
 ## Use on a Local Machine
 
