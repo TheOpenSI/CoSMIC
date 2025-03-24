@@ -8,7 +8,7 @@
 
 This is the official implementation of the Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0.
 
-## Installation Options
+## Installation
 
 ### Option 1: Docker Installation (Quick Start)
 **Note:** Under development, please follow [Option 2](#option-2-clone-and-set-up-repository).
@@ -146,7 +146,8 @@ Upper-level chess-game services include
 - [FEN generation given a sequence of moves](src/modules/chess_genfen.py)
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
-## Get Started
+
+## Use on a Local Machine
 
 ### [Local User] Chatbot
 
@@ -175,7 +176,7 @@ with **the configuration settings** in
 
 This chatbot is developed on the open-source [Open-WebUI](https://github.com/open-webui/open-webui) under the MIT license.
 
-### Development
+### [Local User] Development
 
 The default LLMs for QA and query analyser are "gpt-4o" while one can change them in [config.yaml](scripts/configs/config.yaml).
 The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
@@ -284,6 +285,11 @@ The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
     # Remove memory cached in the system.
     opensi_cosmic.quit()
     ```
+
+## Access Statistic
+For Chatbot users, the user access information including the user ID, email, visit dates, average token length, and the number of queries are stored monthly.
+- For local users: data/cosmic/statistic/[month]-[year].csv on the local machine.
+- For docker image users: /app/data/cosmic/statistic/[month]-[year].csv in the cosmic container.
 
 ## Reference
 If this repository is useful for you, please cite the paper below.
