@@ -34,10 +34,12 @@ from utils.log_tool import set_color
 # =============================================================================================================
 
 class CodeGenerator(ServiceBase):
-    def __init__(self,
-                 service_container_name: str = "localhost",
-                 model_name: str = "qwen2.5-coder",
-                 **kwargs):
+    def __init__(
+        self,
+        service_container_name: str = "localhost",
+        model_name: str = "qwen2.5-coder",
+        **kwargs
+    ):
         """
         Code generation module.
         Sends http requests at port 8780 to the PyCapsule service.
@@ -90,8 +92,10 @@ class CodeGenerator(ServiceBase):
             )
             
             if pycaspsule_response.status_code != 200:
-                raise Exception((f"PyCapsule service returned error. "
-                                 f"Status code: {pycaspsule_response.status_code}"))
+                raise Exception(
+                    (f"PyCapsule service returned error. "
+                    f"Status code: {pycaspsule_response.status_code}")
+                )
             
             # Extract respone, error, code and status from the response
             full_response: str = pycaspsule_response.json()[0].get("response", "")
@@ -100,9 +104,11 @@ class CodeGenerator(ServiceBase):
             status: str = pycaspsule_response.json()[0].get("status", "")
 
             # Check if status is success or error
-            raw_response, response = ((full_response, code) # Success will not have error
-                                      if status == "success"
-                                      else (full_response, code + "\n\n" + error))
+            raw_response, response = (
+                (full_response, code) # Success will not have error
+                if status == "success"
+                else (full_response, code + "\n\n" + error)
+            )
             
             return raw_response, response
         
