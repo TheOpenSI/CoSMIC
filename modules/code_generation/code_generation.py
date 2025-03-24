@@ -49,8 +49,10 @@ class CodeGenerator(ServiceBase):
         """
         super().__init__(**kwargs)
         self.model_name = model_name
-        self.PORT = 8780
+        self.PORT = 8780 # PyCapsule service default port
         self.service_url = f"http://{service_container_name}:{self.PORT}"
+        
+        # Check service availability
         self._check_service_status()
         
         
@@ -59,6 +61,7 @@ class CodeGenerator(ServiceBase):
         Check if the PyCapsule service is running.
         """
         try:
+            # Send a health check request to the service
             response: requests.Response = requests.post(f"{self.service_url}/health")
             if response.status_code != 200:
                 raise Exception(f"PyCapsule service is not running. Status code: {response.status_code}")
@@ -66,9 +69,11 @@ class CodeGenerator(ServiceBase):
             raise Exception(f"Failed to connect to PyCapsule service: {str(e)}")
         
     
-    def __call__(self, 
-                 query:str, 
-                 timeout: int = 30) -> tuple[str, str]:
+    def __call__(
+        self, 
+        query:str, 
+        timeout: int = 30
+    ) -> tuple[str, str]:
         """
         Send the user query to the PyCapsule service.
 
@@ -77,21 +82,25 @@ class CodeGenerator(ServiceBase):
             timeout (int): Timeout for the request. Defaults to 30 seconds.
         """
         try:
-            pycaspsule_response: requests.Response = requests.post(f"{self.service_url}/query", 
-                                                                      json={"query": query},
-                                                                      timeout=timeout)
+            # Send the user query to the PyCapsule service
+            pycaspsule_response: requests.Response = requests.post(
+                f"{self.service_url}/query", 
+                json={"query": query},
+                timeout=timeout
+            )
             
             if pycaspsule_response.status_code != 200:
                 raise Exception((f"PyCapsule service returned error. "
                                  f"Status code: {pycaspsule_response.status_code}"))
             
-            # Extract respone.
+            # Extract respone, error, code and status from the response
             full_response: str = pycaspsule_response.json()[0].get("response", "")
             error: str = pycaspsule_response.json()[0].get("error", "")
             code: str = pycaspsule_response.json()[0].get("code", "")
             status: str = pycaspsule_response.json()[0].get("status", "")
 
-            raw_response, response = ((full_response, code)
+            # Check if status is success or error
+            raw_response, response = ((full_response, code) # Success will not have error
                                       if status == "success"
                                       else (full_response, code + "\n\n" + error))
             
