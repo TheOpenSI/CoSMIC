@@ -11,7 +11,6 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 ## Installation
 
 ### Option 1: Docker Installation (Quick Start)
-**Note:** Under development, please follow [Option 2](#option-2-clone-and-set-up-repository).
 
 The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
 
@@ -21,20 +20,23 @@ The Docker installation provides the fastest way to get started with OpenSI-CoSM
 docker pull opensicbr/cosmic:demo
 ```
 
-2. (Optional) Create an `.env` file to store your OpenAI API key if you plan to use OpenAI models:
-
-```bash
-echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
-```
-
-3. Run the container, [Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will 
+2. To start the container, users need to run the commands in [docker_run.sh](docker_run.sh).
+[Open-WebUI](https://github.com/open-webui/open-webui) with CoSMIC pipeline will 
 be available at port 8080:
 
 ```bash
 bash docker_run.sh
 ```
 
-4. (Optional) Compile the docker image, run
+3. (Optional) Create an `.env` file to store your OpenAI API key if you plan to use OpenAI models:
+
+```bash
+echo "OPENAI_API_KEY='your_api_key'" > /path/to/save/.env
+```
+
+4. (Optional) To compile your own docker image, users need to git clone this repository with *--recursive* to include all submodules,
+see **Optional 2**.
+Then, run
 ```bash
 bash docker_compile.sh
 ```
