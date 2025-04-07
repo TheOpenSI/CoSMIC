@@ -10,32 +10,20 @@ services:
   #   tty: true
   #   restart: unless-stopped
 
-  db:
+  cosmic_db_server:
     image: postgres:14
     container_name: postgres
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: opeuser
+      POSTGRES_USER: opensi
       POSTGRES_PASSWORD: data101
-      POSTGRES_DB: opeweb
+      POSTGRES_DB: cosmic_db
     volumes:
       - postgres-data:/var/lib/postgresql/data
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    ports:
-      - "5051:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: cosmic@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: data101
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - db
+    # networks:
+    #   -  cosmic
 
   open-webui:
     build:
@@ -48,21 +36,64 @@ services:
     volumes:
       - open-webui:/app/backend/data
     depends_on:
-      - db
+      - cosmic_db_server
       # - ollama
     ports:
       - "${OPEN_WEBUI_PORT:-3000}:8080"
     environment:
       - ENABLE_SIGNUP=true
-      - OLLAMA_BASE_URL=http://ollama:11434
+      # - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
-      - DATABASE_URL=postgresql://opeuser:data101@db:5432/opeweb
+      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+    # networks:
+    #   -  cosmic
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5051:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
+      PGADMIN_DEFAULT_PASSWORD: data101
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - cosmic_db_server
+      - open-webui
+    configs:
+      - source: servers.json
+        target: /pgadmin4/servers.json
+    # networks:
+    #   -  cosmic
+
+configs:
+  servers.json:
+    content: |
+      {
+        "Servers": {
+            "1": {
+                "Name": " cosmic_db",
+                "Group": "Servers",
+                "Port": 5432,
+                "Username": "opensi",
+                "Host": "cosmic_db_server",
+                "SSLMode": "prefer",
+                "MaintenanceDB": "postgres"
+            }
+          }
+      }
+
 
 volumes:
   #ollama: {}
   open-webui: {}
   postgres-data: {}
   pgadmin-data: {}
+
+# networks:
+#   cosmic:
