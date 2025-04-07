@@ -22,16 +22,16 @@ services:
       POSTGRES_DB: cosmic_db
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    # networks:
-    #   -  cosmic
+    networks:
+      - cosmic_net
 
   open-webui:
     build:
-      context: .
+      context: ./modules/chatbot/
       dockerfile: Dockerfile
       args:
         OLLAMA_BASE_URL: '/ollama'
-    image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
+    # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data
@@ -48,8 +48,8 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
-    # networks:
-    #   -  cosmic
+    networks:
+      - cosmic_net
   
   pgadmin:
     image: dpage/pgadmin4
@@ -68,8 +68,8 @@ services:
     configs:
       - source: servers.json
         target: /pgadmin4/servers.json
-    # networks:
-    #   -  cosmic
+    networks:
+      - cosmic_net
 
 configs:
   servers.json:
@@ -95,5 +95,5 @@ volumes:
   postgres-data: {}
   pgadmin-data: {}
 
-# networks:
-#   cosmic:
+networks:
+  cosmic_net:
