@@ -1,19 +1,21 @@
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-    container_name: ollama
-    volumes:
-      - ollama:/root/.ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
+  # ollama:
+  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
+  #   container_name: ollama
+  #   volumes:
+  #     - ollama:/root/.ollama
+  #   pull_policy: always
+  #   tty: true
+  #   restart: unless-stopped
 
   db:
     image: postgres:14
     container_name: postgres
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: opeuser
       POSTGRES_PASSWORD: data101
@@ -26,7 +28,7 @@ services:
     container_name: pgadmin
     restart: always
     ports:
-      - "5050:80"
+      - "5051:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: cosmic@gmail.com
       PGADMIN_DEFAULT_PASSWORD: data101
@@ -47,10 +49,11 @@ services:
       - open-webui:/app/backend/data
     depends_on:
       - db
-      - ollama
+      # - ollama
     ports:
       - "${OPEN_WEBUI_PORT:-3000}:8080"
     environment:
+      - ENABLE_SIGNUP=true
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
       - DATABASE_URL=postgresql://opeuser:data101@db:5432/opeweb
@@ -59,7 +62,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  ollama: {}
+  #ollama: {}
   open-webui: {}
   postgres-data: {}
   pgadmin-data: {}
