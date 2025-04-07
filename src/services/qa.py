@@ -31,6 +31,7 @@ from src.services import chess as chess_instances
 from src.services.base import ServiceBase
 from src.services.llms.llm import LLMBase
 from src.services.rag import RAGBase
+from modules.code_generation.code_generation import CodeGenerator
 from box import Box
 
 # =============================================================================================================
@@ -41,6 +42,7 @@ class QABase(ServiceBase):
         query_analyser: LLMBase,
         llm: LLMBase,
         rag: RAGBase,
+        code_generator: CodeGenerator,
         config: Box=None,
         **kwargs
     ):
@@ -50,6 +52,7 @@ class QABase(ServiceBase):
             query_analyser (LLMBase): query analyser.
             llm (LLMBase): LLM instance.
             rag (RAGBase): RAG instance containing vector database service.
+            code_generator (CodeGenerator): code generation service.
             config (Box): config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
@@ -58,6 +61,7 @@ class QABase(ServiceBase):
         self.query_analyser = query_analyser
         self.llm = llm
         self.rag = rag
+        self.code_generator = code_generator
         self.config = config
 
     def __call__(
@@ -159,8 +163,8 @@ class QABase(ServiceBase):
                     self.rag.vector_database.update_database_from_text(text=text)
 
             response = raw_response = "Vector database updated."
-        elif False and service_option == "2":
-            response = "Code generation to be implemented."
+        elif service_option == "2":
+            raw_response, response = self.code_generator(query)
         else:
             if is_rag:
                 # If retrieving context, first generate the user prompt given the
