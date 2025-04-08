@@ -1,0 +1,15 @@
+chess:
+  stockfish_path: ''
+doc_directory: ''
+document_path: []
+is_quantized: false
+llm_name: ollama:llama3.2
+query_analyser:
+  is_quantized: false
+  llm_name: ollama:llama3.2
+rag:
+  retrieve_score_threshold: 0.7
+  topk: 1
+  vector_db_path: /home/opensi/CoSMIC/data/cosmic/vector_db_cosmic
+seed: 0
+service: -1
