@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "cosmic_db",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "opensi",
+      "Host": "cosmic_db_server",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}
