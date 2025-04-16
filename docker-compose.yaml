@@ -1,4 +1,4 @@
-# version: '3.8'
+version: '3.8'
 
 services:
   ollama:
@@ -9,35 +9,38 @@ services:
     pull_policy: always
     tty: true
     restart: unless-stopped
-
-  cosmic_db_server:
-    image: postgres:14
-    container_name: postgres
-    restart: always
-    ports:
-      - "8081:5432"
-    environment:
-      POSTGRES_USER: opensi
-      POSTGRES_PASSWORD: data101
-      POSTGRES_DB: cosmic_db
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     networks:
       - cosmic_net
 
-  open-webui:
+  # cosmic_db_server:
+  #   image: postgres:14
+  #   container_name: postgres
+  #   restart: always
+  #   ports:
+  #     - "8081:5432"
+  #   environment:
+  #     POSTGRES_USER: opensi
+  #     POSTGRES_PASSWORD: data101
+  #     POSTGRES_DB: cosmic_db
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - cosmic_net
+
+  open-webui-z:
     build:
-      context: ./modules/chatbot/
+      context: ./../OpenWebUI-CoSMIC
       dockerfile: Dockerfile
       args:
         OLLAMA_BASE_URL: '/ollama'
     # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
-    container_name: open-webui
+    container_name: open-webui-z
     volumes:
-      - open-webui:/app/backend/data
+      - open-webui-z:/app/backend/data
     depends_on:
-      - cosmic_db_server
+      # - cosmic_db_server
       - ollama
+      - pipelines-z
     ports:
       - "${OPEN_WEBUI_PORT:-8080}:8080"
       # - "8080:8080"
@@ -45,56 +48,99 @@ services:
       - ENABLE_SIGNUP=true
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
-      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
+      - OPENAI_API_KEY=0p3n-w3bu!
+      - OPENAI_API_BASE_URL=http://pipelines-z:9099
+      # - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
     networks:
       - cosmic_net
-  
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    ports:
-      - "8082:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
-      PGADMIN_DEFAULT_PASSWORD: data101
+
+  pipelines-z:
+    build:
+      context: ./../pipelines-openwebui
+      dockerfile: Dockerfile
+    container_name: pipelines-z
     volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - cosmic_db_server
-      - open-webui
-    configs:
-      - source: servers.json
-        target: /pgadmin4/servers.json
+      - pipelines-z:/app/pipelines
+    #    pull_policy: always
+    ports:
+      - '9099:9099'
+    tty: true
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+    #    image: pipelines/pipelines:latest
     networks:
       - cosmic_net
 
-configs:
-  servers.json:
-    content: |
-      {
-        "Servers": {
-            "1": {
-                "Name": " cosmic_db",
-                "Group": "Servers",
-                "Port": 5432,
-                "Username": "opensi",
-                "Host": "cosmic_db_server",
-                "SSLMode": "prefer",
-                "MaintenanceDB": "postgres"
-            }
-          }
-      }
+  # cosmic-z:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: cosmic-z
+  #   volumes:
+  #     - volume_uploads:/app/data/cosmic/backend/uploads
+  #     - volume_configs:/app/scripts/configs
+  #   # pull_policy: always
+  #   # ports:
+  #   #   - '9099:9099'
+  #   tty: true
+  #   # extra_hosts:
+  #   #   - host.docker.internal:host-gateway
+  #   restart: unless-stopped
+  #   #    image: pipelines/pipelines:latest
+  #   networks:
+  #     - cosmic_net
+
+  
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: pgadmin
+  #   restart: always
+  #   ports:
+  #     - "8082:80"
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
+  #     PGADMIN_DEFAULT_PASSWORD: data101
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   depends_on:
+  #     - cosmic_db_server
+  #     - open-webui
+  #   configs:
+  #     - source: servers.json
+  #       target: /pgadmin4/servers.json
+  #   networks:
+  #     - cosmic_net
+
+# configs:
+#   servers.json:
+#     content: |
+#       {
+#         "Servers": {
+#             "1": {
+#                 "Name": " cosmic_db",
+#                 "Group": "Servers",
+#                 "Port": 5432,
+#                 "Username": "opensi",
+#                 "Host": "cosmic_db_server",
+#                 "SSLMode": "prefer",
+#                 "MaintenanceDB": "postgres"
+#             }
+#           }
+#       }
 
 
 volumes:
   ollama: {}
-  open-webui: {}
-  postgres-data: {}
-  pgadmin-data: {}
+  open-webui-z: {}
+  pipelines-z: {}
+  # volume_uploads: {}
+  # volume_configs: {}
+  # postgres-data: {}
+  # pgadmin-data: {}
 
 networks:
   cosmic_net:

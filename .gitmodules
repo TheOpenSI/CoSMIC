@@ -1,3 +1,0 @@
-[submodule "modules/chatbot"]
-	path = modules/chatbot
-	url = https://github.com/TheOpenSI/OpenWebUI-CoSMIC.git
