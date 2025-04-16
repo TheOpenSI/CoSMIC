@@ -1,21 +1,21 @@
 # version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-    container_name: ollama
-    volumes:
-      - ollama:/root/.ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
+  # ollama:
+  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
+  #   container_name: ollama
+  #   volumes:
+  #     - ollama:/root/.ollama
+  #   pull_policy: always
+  #   tty: true
+  #   restart: unless-stopped
 
   cosmic_db_server:
     image: postgres:14
     container_name: postgres
     restart: always
     ports:
-      - "8081:5432"
+      - "5433:5432"
     environment:
       POSTGRES_USER: opensi
       POSTGRES_PASSWORD: data101
@@ -31,27 +31,27 @@ services:
       dockerfile: Dockerfile
       args:
         OLLAMA_BASE_URL: '/ollama'
-    # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data
     depends_on:
       - cosmic_db_server
-      - ollama
     ports:
-      - "${OPEN_WEBUI_PORT:-8080}:8080"
-      # - "8080:8080"
+      - "8080:8080"
     environment:
       - ENABLE_SIGNUP=true
       - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=
+      - WEBUI_SECRET_KEY=fcadb1e645cd4a28a7b2c41c43925ea3a8e650ea963a194b55dd94b6cfd6c987
       - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
+      - WEBUI_AUTH_PROVIDER=oauth2
+      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=X-Forwarded-Email
+      - WEBUI_AUTH_TRUSTED_NAME_HEADER=X-Forwarded-User
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
     networks:
       - cosmic_net
-  
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -65,10 +65,31 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - cosmic_db_server
-      - open-webui
     configs:
       - source: servers.json
         target: /pgadmin4/servers.json
+    networks:
+      - cosmic_net
+
+  oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+    container_name: oauth2-proxy
+    ports:
+      - "4180:4180"
+    environment:
+      - OAUTH2_PROXY_PROVIDER=github
+      - OAUTH2_PROXY_CLIENT_ID=0v23liL5kQ7ho5EpfAEt
+      - OAUTH2_PROXY_CLIENT_SECRET=ed95c655348e84cf4e729c497f68bff673a291e
+      - OAUTH2_PROXY_COOKIE_SECRET=0om45bNYZJr0MduPVe6vENIIo1533wdJ5KEeb3qXjuI=
+      - OAUTH2_PROXY_COOKIE_SECURE=false
+      - OAUTH2_PROXY_REDIRECT_URL=http://20.40.80.18:4180/oauth2/callback
+      - OAUTH2_PROXY_UPSTREAMS=http://open-webui:8080
+      - OAUTH2_PROXY_EMAIL_DOMAINS=*
+      - OAUTH2_PROXY_PASS_USER_HEADERS=true
+      - OAUTH2_PROXY_SET_XAUTHREQUEST=true
+      - OAUTH2_PROXY_PASS_ACCESS_TOKEN=true
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
       - cosmic_net
 
@@ -78,7 +99,7 @@ configs:
       {
         "Servers": {
             "1": {
-                "Name": " cosmic_db",
+                "Name": "cosmic_db",
                 "Group": "Servers",
                 "Port": 5432,
                 "Username": "opensi",
@@ -86,9 +107,8 @@ configs:
                 "SSLMode": "prefer",
                 "MaintenanceDB": "postgres"
             }
-          }
+        }
       }
-
 
 volumes:
   ollama: {}
