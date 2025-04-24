@@ -7,8 +7,9 @@ WORKDIR /app
 # Port
 EXPOSE 3000
 
-# Copy all necessary files/folders to container folder.
-COPY . . 
+# Copy application files and requirements.txt explicitly.
+COPY requirements.txt /app/requirements.txt
+COPY . /app
 
 RUN apt-get update && apt-get install -y \
     python3 \
@@ -29,8 +30,8 @@ RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
 # Build environment.
 RUN pip install -r requirements.txt
 
-# Fix cosmic permission
-RUN chmod +x /app/scripts/chatbot/cosmic.sh
+# # Fix cosmic permission
+# RUN chmod +x /app/scripts/chatbot/cosmic.sh
 
 # Entry point.
 CMD ["bash", "/app/scripts/chatbot/cosmic.sh"]
