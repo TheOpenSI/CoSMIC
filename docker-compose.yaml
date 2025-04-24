@@ -27,20 +27,21 @@ services:
   #   networks:
   #     - cosmic_net
 
-  open-webui-z:
+  open-webui:
     build:
       context: ./../OpenWebUI-CoSMIC
       dockerfile: Dockerfile
       args:
         OLLAMA_BASE_URL: '/ollama'
     # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
-    container_name: open-webui-z
+    container_name: open-webui
     volumes:
-      - open-webui-z:/app/backend/data
+      - open-webui:/app/backend/data
     depends_on:
       # - cosmic_db_server
       - ollama
-      - pipelines-z
+      - pipelines
+      - cosmic
     ports:
       - "${OPEN_WEBUI_PORT:-8080}:8080"
       # - "8080:8080"
@@ -49,7 +50,7 @@ services:
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
       - OPENAI_API_KEY=0p3n-w3bu!
-      - OPENAI_API_BASE_URL=http://pipelines-z:9099
+      - OPENAI_API_BASE_URL=http://pipelines:9099
       # - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
@@ -57,16 +58,20 @@ services:
     networks:
       - cosmic_net
 
-  pipelines-z:
+  pipelines:
     build:
       context: ./../pipelines-openwebui
       dockerfile: Dockerfile
-    container_name: pipelines-z
+    container_name: pipelines
     volumes:
-      - pipelines-z:/app/pipelines
+      - pipelines:/app/pipelines
+    depends_on:
+      - cosmic
     #    pull_policy: always
     ports:
       - '9099:9099'
+    environment:
+    - COSMIC_API_BASE_URL=http://cosmic:3000
     tty: true
     extra_hosts:
       - host.docker.internal:host-gateway
@@ -75,24 +80,24 @@ services:
     networks:
       - cosmic_net
 
-  # cosmic-z:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   container_name: cosmic-z
-  #   volumes:
-  #     - volume_uploads:/app/data/cosmic/backend/uploads
-  #     - volume_configs:/app/scripts/configs
-  #   # pull_policy: always
-  #   # ports:
-  #   #   - '9099:9099'
-  #   tty: true
-  #   # extra_hosts:
-  #   #   - host.docker.internal:host-gateway
-  #   restart: unless-stopped
-  #   #    image: pipelines/pipelines:latest
-  #   networks:
-  #     - cosmic_net
+  cosmic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cosmic
+    # volumes:
+    #   - volume_uploads:/app/data/cosmic/backend/uploads
+    #   - volume_configs:/app/scripts/configs
+    # pull_policy: always
+    ports:
+      - '3000:3000'
+    tty: true
+    # extra_hosts:
+    #   - host.docker.internal:host-gateway
+    restart: unless-stopped
+    #    image: pipelines/pipelines:latest
+    networks:
+      - cosmic_net
 
   
   # pgadmin:
@@ -135,8 +140,8 @@ services:
 
 volumes:
   ollama: {}
-  open-webui-z: {}
-  pipelines-z: {}
+  open-webui: {}
+  pipelines: {}
   # volume_uploads: {}
   # volume_configs: {}
   # postgres-data: {}

@@ -1,5 +1,5 @@
 # Set Python environment.
-FROM python:3.11.11
+FROM python:3.11.12-slim
 
 # Work directory in container.
 WORKDIR /app
