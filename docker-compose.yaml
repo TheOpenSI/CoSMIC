@@ -72,6 +72,8 @@ services:
       - '9099:9099'
     environment:
     - COSMIC_API_BASE_URL=http://cosmic:3000
+    - OPENAI_API_KEY=0p3n-w3bu!
+    - MAX_QUERIES_PER_USER=5
     tty: true
     extra_hosts:
       - host.docker.internal:host-gateway
