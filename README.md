@@ -305,7 +305,7 @@ If this repository is useful for you, please cite the paper below.
 ```
 
 ## Contact
-For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
+For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au),  [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au) or [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au)
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
 ## Contributing
