@@ -1,16 +1,14 @@
-version: '3.8'
-
 services:
-  ollama:
-    image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-    container_name: ollama
-    volumes:
-      - ollama:/root/.ollama
-    pull_policy: always
-    tty: true
-    restart: unless-stopped
-    networks:
-      - cosmic_net
+  # ollama:
+  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
+  #   container_name: ollama
+  #   volumes:
+  #     - ollama:/root/.ollama
+  #   pull_policy: always
+  #   tty: true
+  #   restart: unless-stopped
+  #   networks:
+  #     - cosmic_net
 
   # cosmic_db_server:
   #   image: postgres:14
@@ -39,7 +37,7 @@ services:
       - open-webui:/app/backend/data
     depends_on:
       # - cosmic_db_server
-      - ollama
+      # - ollama
       - pipelines
       - cosmic
     ports:
