@@ -49,6 +49,7 @@ services:
       - WEBUI_SECRET_KEY=
       - OPENAI_API_KEY=0p3n-w3bu!
       - OPENAI_API_BASE_URL=http://pipelines:9099
+      - COSMIC_CONFIG_API_BASE_URL=http://localhost:3000
       # - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
