@@ -1,3 +1,11 @@
+# =====================Debugging=====================
+import debugpy
+print("Waiting for debugger attach...")
+debugpy.listen(("0.0.0.0", 5678))
+debugpy.wait_for_client()
+print("Debugger attached!")
+# =======================================================
+
 from datetime import datetime
 import re
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
@@ -8,6 +16,8 @@ import yaml, os, shutil
 import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
+
+from utils.chat_history import build_context_from_messages
 
 app = FastAPI()
 
