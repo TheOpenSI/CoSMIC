@@ -335,7 +335,10 @@ async def process_cosmic(data: CosmicAPI):
         user_role = data.body["user"]["role"]
         user_email = data.body["user"]["email"]
 
-        print(data.body)
+        chat_history_context = build_context_from_messages(
+            data.body.get("messages", []),
+            num_pairs=5
+        )
 
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
@@ -381,7 +384,8 @@ async def process_cosmic(data: CosmicAPI):
                     # answer = opensi_cosmic(user_message_vector_db_update)[0]
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
-            answer = opensi_cosmic(data.user_message)[0]
+            answer = opensi_cosmic.__call__(question=data.user_message,
+                                            context=chat_history_context)[0]
         return {"status": "success", "result": answer}
     except Exception as e:
         return {"status": "error", "message": str(e)}

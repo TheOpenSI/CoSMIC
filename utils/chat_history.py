@@ -1,4 +1,17 @@
 def build_context_from_messages(messages: list, num_pairs: int) -> str:
+    """
+    Build a chat hostory from the given number of conversation pairs.
+
+    Args:
+        messages (list): List of messages in the chat history.
+        num_pairs (int): Number of conversation pairs to include in the context.
+
+    Returns:
+        str: Formatted string representing the chat history.
+    """
+    if messages == []:
+        return ""
+    
     pairs = []
     i = 0
     while i < len(messages) - 1:
