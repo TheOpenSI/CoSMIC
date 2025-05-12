@@ -288,8 +288,10 @@ async def upload_file(file: UploadFile = File(...)):
             yaml.safe_dump(config_data, file)
 
         return {"status": "success", "message": f"File saved to {save_path}"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/quit")
 async def quit():
