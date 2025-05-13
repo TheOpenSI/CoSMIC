@@ -1,10 +1,11 @@
-# # =====================Debugging=====================
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging
 # import debugpy
 # print("Waiting for debugger attach...")
 # debugpy.listen(("0.0.0.0", 5678))
 # debugpy.wait_for_client()
 # print("Debugger attached!")
-# # =======================================================
+# =======================================================
 
 from datetime import datetime
 import re
@@ -384,8 +385,8 @@ async def process_cosmic(data: CosmicAPI):
                     # answer = opensi_cosmic(user_message_vector_db_update)[0]
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
-            answer = opensi_cosmic.__call__(question=data.user_message,
-                                            context=chat_history_context)[0]
+            answer = opensi_cosmic(question=data.user_message,
+                                   context=chat_history_context)[0]
         return {"status": "success", "result": answer}
     except Exception as e:
         return {"status": "error", "message": str(e)}

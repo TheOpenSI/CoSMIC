@@ -91,7 +91,7 @@ services:
     # pull_policy: always
     ports:
       - '3000:3000'
-      - '5678:5678' # debugpy
+      # - '5678:5678' # debugpy
     tty: true
     # extra_hosts:
     #   - host.docker.internal:host-gateway
