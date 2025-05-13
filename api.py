@@ -149,7 +149,7 @@ with open(config_path, "r") as file:
     config = yaml.safe_load(file)
 
 if not os.path.exists(config["rag"]["vector_db_path"]):
-    config["rag"]["vector_db_path"] = "data/cosmic/vector_db_cosmic"
+    config["rag"]["vector_db_path"] = "backend/data"
 
 with open(config_path, "w") as file:
     yaml.safe_dump(config, file)
@@ -327,7 +327,8 @@ async def process_cosmic(data: CosmicAPI):
         user_role = data.body["user"]["role"]
         user_email = data.body["user"]["email"]
 
-        print(data.body)
+        print(data)
+    
 
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
@@ -358,7 +359,9 @@ async def process_cosmic(data: CosmicAPI):
                 data.user_message = splits[1]
 
                 # The directory storing uploaded files.
-                file_dir = f"data/cosmic/backend/uploads/{user_id}"
+                file_dir = f"backend/data/uploads/{user_id}"
+
+                # file_dir = f"../OpenWebUI-CoSMIC/backend/data/uploads/{user_id}"
 
                 # Extract the files.
                 files = splits[0].split("<files>")[-1]
@@ -370,7 +373,6 @@ async def process_cosmic(data: CosmicAPI):
                         f"Add the following file to the vector database: {file}"
 
                     # Update vector database.
-                    # answer = opensi_cosmic(user_message_vector_db_update)[0]
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
             answer = opensi_cosmic(data.user_message)[0]

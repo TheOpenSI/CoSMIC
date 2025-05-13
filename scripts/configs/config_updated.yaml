@@ -10,7 +10,7 @@ query_analyser:
 rag:
   retrieve_score_threshold: 0.7
   topk: 1
-  vector_db_path: data/cosmic/vector_db_cosmic
+  vector_db_path: ""
 sameasabove: false
 seed: 0
 service: -1
