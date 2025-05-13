@@ -4,3 +4,6 @@
 env/
 venv/
 *__pycache__*
+data
+third_party
+database
