@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 from typing import List
 from main import reload
 
-baseUrl = os.environ.get("COSMIC_API_BASE_URL", "http://localhost:8000")
+baseUrl = os.environ.get("OPENSI_COSMIC_API_BASE_URL", "http://cosmic:3000")
 
 class Pipeline:
     class Valves(BaseModel):
