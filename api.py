@@ -160,7 +160,7 @@ with open(config_path, "r") as file:
     config = yaml.safe_load(file)
 
 if not os.path.exists(config["rag"]["vector_db_path"]):
-    config["rag"]["vector_db_path"] = "data/cosmic/vector_db_cosmic"
+    config["rag"]["vector_db_path"] = "backend/data/vector_db_cosmic"
 
 with open(config_path, "w") as file:
     yaml.safe_dump(config, file)
@@ -299,8 +299,10 @@ async def upload_file(file: UploadFile = File(...)):
             yaml.safe_dump(config_data, file)
 
         return {"status": "success", "message": f"File saved to {save_path}"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/quit")
 async def quit():
@@ -370,7 +372,9 @@ async def process_cosmic(data: CosmicAPI):
                 data.user_message = splits[1]
 
                 # The directory storing uploaded files.
-                file_dir = f"data/cosmic/backend/uploads/{user_id}"
+                file_dir = f"backend/data/uploads/{user_id}"
+
+                # file_dir = f"../OpenWebUI-CoSMIC/backend/data/uploads/{user_id}"
 
                 # Extract the files.
                 files = splits[0].split("<files>")[-1]
@@ -382,7 +386,6 @@ async def process_cosmic(data: CosmicAPI):
                         f"Add the following file to the vector database: {file}"
 
                     # Update vector database.
-                    # answer = opensi_cosmic(user_message_vector_db_update)[0]
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
             answer = opensi_cosmic(question=data.user_message,
