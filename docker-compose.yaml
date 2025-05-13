@@ -73,7 +73,7 @@ services:
     environment:
     - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
     - MAX_QUERIES_PER_USER=5
-    - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/feat/cosmic-20/pipelines/cosmic_pipeline.py
+    - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
     tty: true
     extra_hosts:
       - host.docker.internal:host-gateway
