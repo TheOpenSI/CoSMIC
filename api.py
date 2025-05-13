@@ -149,7 +149,7 @@ with open(config_path, "r") as file:
     config = yaml.safe_load(file)
 
 if not os.path.exists(config["rag"]["vector_db_path"]):
-    config["rag"]["vector_db_path"] = "backend/data"
+    config["rag"]["vector_db_path"] = "backend/data/vector_db_cosmic"
 
 with open(config_path, "w") as file:
     yaml.safe_dump(config, file)
