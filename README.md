@@ -10,11 +10,33 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 
 ## Installation
 
+### Pre-requirements
+
+Before proceeding with the installation, ensure that the following tools are installed on your local machine:
+
+1. **Git**: Used for cloning repositories. You can install it by following the [official Git installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+
+2. **Docker**: Required for containerized environments. You can install it by following the [official Docker installation guide](https://docs.docker.com/get-docker/).
+
+3. **Docker Compose**: Facilitates defining and running multi-container Docker applications. You can install it by following the [official Docker Compose installation guide](https://docs.docker.com/compose/install/).
+
 ### Option 1: Docker Installation (Quick Start)
 
 The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
 
-1. Pull the latest CoSMIC image:
+1. Download the `docker-compose.yaml` file from the official CoSMIC GitHub repository:
+
+```bash
+wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
+```
+
+2. Once the file is downloaded, open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
+
+```bash
+docker compose up -d
+```
+
+<!-- 1. Pull the latest CoSMIC image:
 
 ```bash
 docker pull opensicbr/cosmic:demo
@@ -44,31 +66,47 @@ bash docker_compile.sh
 **Note**: While the Docker setup offers a streamlined environment for testing, it grants direct access to 
 the host network and is **not recommended for production environments**.
 
-#### Requirements for Docker Installation
-- [Docker](https://docs.docker.com/engine/install/) must be installed on your local machine.
-```bash
-apt install docker.io
-```
-- An OpenAI API key is optional (only required if you plan to use OpenAI models)
+- An OpenAI API key is optional (only required if you plan to use OpenAI models) -->
 
 ### Option 2: Clone and Set Up Repository
-1. Download CoSMIC in a separate directory in your work directory:
+1. Clone the CoSMIC repository in your work directory:
 ```bash
 # For users using SSH on GitHub
-git clone --recursive git@github.com:TheOpenSI/CoSMIC.git
+git clone git@github.com:TheOpenSI/CoSMIC.git
 
 # For users using HTTPS
-git clone --recursive https://github.com/TheOpenSI/CoSMIC.git
+git clone https://github.com/TheOpenSI/CoSMIC.git
 ```
 
-2. For chess-game queries, users need to [download](https://stockfishchess.org/download/linux/) the Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for Linux) and store it at the default location: `third_party/stockfish/stockfish-ubuntu-x86-64-avx2`.
+2. Clone the Open-WebUI repository in your work directory:
+```bash
+# For users using SSH on GitHub
+git clone git@github.com:TheOpenSI/OpenWebUI-CoSMIC.git
+
+# For users using HTTPS
+git clone https://github.com/TheOpenSI/OpenWebUI-CoSMIC.git
+```
+
+**Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
+
+
+3. (Optional) For chess-game queries, users need to [download](https://stockfishchess.org/download/linux/) the Stockfish binary file (stockfish-ubuntu-x86-64-avx2 for Linux) and store it at the default location: `third_party/stockfish/stockfish-ubuntu-x86-64-avx2`.
 The path of this binary file can be customized in [config.yaml](scripts/configs/config.yaml):
 ```yaml
 chess:
     stockfish_path: ""  # add the path in ""; otherwise, the default path will be used.
 ```
 
-3. For code generation queries, users need to
+4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
+
+```bash
+cd CoSMIC
+docker compose up -d --build
+```
+
+The application will initialize on port 8080. To access it, open a web browser and navigate to `http://localhost:8080`.
+
+<!-- 4. For code generation queries, users need to
   - Download the [PyCapsule](https://github.com/TheOpenSI/PyCapsule) service in a separate directory of your work directory.
 This is the Python code generation service for CoSMIC.
 
@@ -85,9 +123,9 @@ bash start_pc.sh
 
 By default, the LLM model for this service is set to `Qwen2.5-Coder-Instruct`, which is made available using the official Ollama docker image. 
 The corresponding Ollama container serves at port `11434`. 
-To change the service configuration, please follow the instructions in the [PyCapsule repository](https://github.com/TheOpenSI/PyCapsule).
+To change the service configuration, please follow the instructions in the [PyCapsule repository](https://github.com/TheOpenSI/PyCapsule). -->
 
-#### Requirements for Repository Installation
+<!-- #### Requirements for Repository Installation
 Please install the following packages before using this code, which is also provided in requirements.txt.
 Users need to register for a Hugging Face account (set **hf_token=[your token]** in .env) to download base LLMs and an OpenAI account (set **openai_token=[your token]** in .env) to use the API if applicable.
 
@@ -128,7 +166,7 @@ jwt==1.3.1
 python-multipart==0.0.20
 ```
 
-To use the [PyCapsule](modules/code_generation/code_generation.py) service, users need to install [Docker](https://docs.docker.com/engine/install/). Follow the instructions provided in the Docker documentation for your specific operating system.
+To use the [PyCapsule](modules/code_generation/code_generation.py) service, users need to install [Docker](https://docs.docker.com/engine/install/). Follow the instructions provided in the Docker documentation for your specific operating system. -->
 
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
@@ -149,7 +187,7 @@ Upper-level chess-game services include
 - [Chain-of-Thought generation for next move prediction](src/modules/chess_gencot.py)
 
 
-## Use on a Local Machine
+<!-- ## Use on a Local Machine
 
 ### [Local User] Chatbot
 
@@ -286,7 +324,7 @@ The full list of supported LLMs is provided in [LLM_MODEL_DICT](src/maps.py).
         
     # Remove memory cached in the system.
     opensi_cosmic.quit()
-    ```
+    ``` -->
 
 ## Access Statistic
 For Chatbot users, the user access information including the user ID, email, visit dates, average token length, and the number of queries are stored monthly.
@@ -296,7 +334,7 @@ For Chatbot users, the user access information including the user ID, email, vis
 ## Reference
 If this repository is useful for you, please cite the paper below.
 ```bibtex
-@misc{Adnan2024,
+@misc{
     title         = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
     author        = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
     howpublished  = {Australasian Conference on Information Systems},
@@ -305,7 +343,7 @@ If this repository is useful for you, please cite the paper below.
 ```
 
 ## Contact
-For technical supports, please contact [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
+For technical supports, please contact [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au), [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
 ## Contributing
