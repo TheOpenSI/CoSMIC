@@ -7,3 +7,6 @@ venv/
 data
 third_party
 database
+database
+./scripts/configs/config_updated.yaml
+.idea

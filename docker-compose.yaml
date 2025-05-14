@@ -58,9 +58,9 @@ services:
       - cosmic_net
 
   pipelines:
-    build:
-      context: ./../pipelines-openwebui
-      dockerfile: Dockerfile
+    # build:
+    #   context: ./../pipelines-openwebui
+    #   dockerfile: Dockerfile
     image: ghcr.io/open-webui/pipelines:main
     container_name: pipelines
     volumes:
