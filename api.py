@@ -1,10 +1,10 @@
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
-# import debugpy
-# print("Waiting for debugger attach...")
-# debugpy.listen(("0.0.0.0", 5678))
-# debugpy.wait_for_client()
-# print("Debugger attached!")
+import debugpy
+print("Waiting for debugger attach...")
+debugpy.listen(("0.0.0.0", 5678))
+debugpy.wait_for_client()
+print("Debugger attached!")
 # =======================================================
 
 from datetime import datetime
@@ -338,11 +338,16 @@ async def process_cosmic(data: CosmicAPI):
         user_role = data.body["user"]["role"]
         user_email = data.body["user"]["email"]
 
+        # Chat history context.
         chat_history_context = build_context_from_messages(
             data.body.get("messages", []),
             num_pairs=5
         )
-
+        # Check if Chat History is empty.
+        chat_history_context = "" \
+            if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============\n' \
+            else chat_history_context
+                               
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
         opensi_cosmic.set_up_qa(str(user_id))
