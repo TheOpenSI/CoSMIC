@@ -14,9 +14,9 @@ This is the official implementation of the Open Source Institute-Cognitive Syste
 
 Before proceeding with the installation, ensure that the following tools are installed on your local machine:
 
-2. **Docker**: Required for containerized environments. You can install it by following the [official Docker installation guide](https://docs.docker.com/get-docker/).
+1. **Docker**: Required for containerized environments. You can install it by following the [official Docker installation guide](https://docs.docker.com/get-docker/).
 
-3. **Docker Compose**: Facilitates defining and running multi-container Docker applications. You can install it by following the [official Docker Compose installation guide](https://docs.docker.com/compose/install/).
+2. **Docker Compose**: Facilitates defining and running multi-container Docker applications. You can install it by following the [official Docker Compose installation guide](https://docs.docker.com/compose/install/).
 
 ### Option 1: Docker Installation (Quick Start)
 
@@ -58,7 +58,7 @@ git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
 
-3. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
+4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
 
 ```bash
 cd CoSMIC
