@@ -372,7 +372,7 @@ class OpenSICoSMIC:
             # Process each question.
             response, raw_response, retrieve_score = self.qa(
                 question,
-                context=context,
+                context=context, # The context that we are passing here is chat history. See api.py
                 is_rag=True,
                 verbose=False,
             )

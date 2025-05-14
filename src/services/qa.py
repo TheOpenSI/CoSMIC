@@ -166,20 +166,28 @@ class QABase(ServiceBase):
         elif service_option == "2":
             raw_response, response = self.code_generator(query)
         else:
-            if is_rag:
+            if is_rag:# General question has RAG activated
+                # Check if context is chat hostory
+                chat_history_context = context if "Conversation History:" in context else ""
+                rag_context = "" if "Conversation History:" in context else context
+                
                 # If retrieving context, first generate the user prompt given the
                 # user prompter format.
-                user_prompt = self.llm.user_prompter(query, context=context)
+                user_prompt = self.llm.user_prompter(query, context=rag_context)
 
                 # Get the retrieved context.
                 context_retrieved, retrieve_score = self.rag(query)
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.
-                if isinstance(context, dict):
-                    context["context"] = context_retrieved
-                else:
-                    context = context_retrieved
+                suffix = "" \
+                    if context_retrieved == "" \
+                    else "\nContext:\n" + context_retrieved 
+                
+                context = context.update({"context": chat_history_context + suffix}) \
+                          if isinstance(context, dict) \
+                          else chat_history_context + suffix
+                
             else:
                 user_prompt = query
                 retrieve_score = -1
@@ -191,10 +199,11 @@ class QABase(ServiceBase):
                 system_information = service_info_dict["system_information"]
 
                 # Add the information to existing context.
+                # This context is likely to be chat history.
                 if isinstance(context, dict):
-                    context["context"] += system_information
+                    context["context"] = "OpenSI System Information:\n" + system_information + "\n\n" + context["context"]
                 else:
-                    context += system_information
+                    context = "OpenSI System Information:\n" + system_information + "\n\n" + context
 
             # Get the response with retrieved context if applicable.
             response, raw_response = self.llm(user_prompt, context=context)

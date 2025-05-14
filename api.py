@@ -1,3 +1,12 @@
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging
+# import debugpy
+# print("Waiting for debugger attach...")
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# print("Debugger attached!")
+# =======================================================
+
 from datetime import datetime
 import re
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
@@ -8,6 +17,8 @@ import yaml, os, shutil
 import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
+
+from utils.chat_history import build_context_from_messages
 
 app = FastAPI()
 
@@ -26,7 +37,7 @@ class CosmicAPI(BaseModel):
     body: dict
     user_message: str
 
-config_path = "scripts/configs/config_updated.yaml"
+config_path = "scripts/configs/config.yaml"
 statistic_dir = "data/cosmic/statistic"
 statistic_dict = {
             "user_id": "unknown",
@@ -327,9 +338,16 @@ async def process_cosmic(data: CosmicAPI):
         user_role = data.body["user"]["role"]
         user_email = data.body["user"]["email"]
 
-        print(data)
-    
-
+        # Chat history context.
+        chat_history_context = build_context_from_messages(
+            data.body.get("messages", []),
+            num_pairs=5
+        )
+        # Check if Chat History is empty.
+        chat_history_context = "" \
+            if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============' \
+            else chat_history_context
+                               
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
         opensi_cosmic.set_up_qa(str(user_id))
@@ -361,8 +379,6 @@ async def process_cosmic(data: CosmicAPI):
                 # The directory storing uploaded files.
                 file_dir = f"backend/data/uploads/{user_id}"
 
-                # file_dir = f"../OpenWebUI-CoSMIC/backend/data/uploads/{user_id}"
-
                 # Extract the files.
                 files = splits[0].split("<files>")[-1]
                 files = [os.path.join(file_dir, v) for v in files.split(',') if v != ""]
@@ -375,7 +391,8 @@ async def process_cosmic(data: CosmicAPI):
                     # Update vector database.
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
-            answer = opensi_cosmic(data.user_message)[0]
+            answer = opensi_cosmic(question=data.user_message,
+                                   context=chat_history_context)[0]
         return {"status": "success", "result": answer}
     except Exception as e:
         return {"status": "error", "message": str(e)}
