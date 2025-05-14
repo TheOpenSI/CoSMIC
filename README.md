@@ -87,8 +87,7 @@ Upper-level chess-game services include
 
 ## Access Statistic
 For Chatbot users, the user access information including the user ID, email, visit dates, average token length, and the number of queries are stored monthly.
-- For local users: data/cosmic/statistic/[month]-[year].csv on the local machine.
-- For docker image users: /app/data/cosmic/statistic/[month]-[year].csv in the cosmic container.
+- For docker users: /app/data/cosmic/statistic/[month]-[year].csv in the cosmic container.
 
 ## Reference
 If this repository is useful for you, please cite the paper below.
