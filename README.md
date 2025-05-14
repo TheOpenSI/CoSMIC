@@ -34,7 +34,7 @@ wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
 docker compose up -d
 ```
 
-### Option 2: Clone and Set Up Repository
+### Option 2: Clone and Set Up Repository (For Development)
 
 1. Install Git on your local machine if it is not already installed. You can follow the [official Git installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
@@ -59,9 +59,28 @@ git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
 
 4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
-
 ```bash
 cd CoSMIC
+```
+
+5. Open docker-compose.yaml and comment the following lines:
+
+```bash
+    # image: opensicbr/cosmic:latest
+    # pull_policy: always
+```
+
+6. Make sure this lines are not commented
+
+```bash
+    build:
+      context: .
+      dockerfile: Dockerfile
+```
+
+6. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
+
+```bash
 docker compose up -d --build
 ```
 
