@@ -289,7 +289,9 @@ class GPT(SystemPromptBase):
                 "role": "system",
                 # "content": "You are a helpful assistant. Always answer the question " \
                 "content": "You are OpenSI-CoSMIC, a helpful assistant developed at OpenSI." \
-                    "Always answer the question even if the context is not helpful"
+                    "Always answer the question even if the context is not helpful. " \
+                        "You would have access to conversation history, this is for your context only. "\
+                            "Do not mention conversation history unless you are specidically asked to do so."
             },
             {"role": "user", "content": user_prompt}
         ]

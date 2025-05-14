@@ -345,7 +345,7 @@ async def process_cosmic(data: CosmicAPI):
         )
         # Check if Chat History is empty.
         chat_history_context = "" \
-            if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============\n' \
+            if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============' \
             else chat_history_context
                                
         # Set user ID to use a specific vector database.
@@ -378,8 +378,6 @@ async def process_cosmic(data: CosmicAPI):
 
                 # The directory storing uploaded files.
                 file_dir = f"backend/data/uploads/{user_id}"
-
-                # file_dir = f"../OpenWebUI-CoSMIC/backend/data/uploads/{user_id}"
 
                 # Extract the files.
                 files = splits[0].split("<files>")[-1]
