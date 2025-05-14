@@ -120,7 +120,7 @@ If this repository is useful for you, please cite the paper below.
 ```
 
 ## Contact
-For technical supports, please contact [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au), [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
+For technical supports, please contact [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au), [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au) or [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au).
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
 ## Contributing

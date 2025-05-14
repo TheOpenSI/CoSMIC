@@ -82,12 +82,12 @@ services:
       - cosmic_net
 
   cosmic:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     container_name: cosmic
-    # image: opensicbr/cosmic:latest
-    # pull_policy: always
+    image: opensicbr/cosmic:latest
+    pull_policy: always
     volumes:
       - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
