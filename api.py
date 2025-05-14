@@ -1,10 +1,10 @@
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
-import debugpy
-print("Waiting for debugger attach...")
-debugpy.listen(("0.0.0.0", 5678))
-debugpy.wait_for_client()
-print("Debugger attached!")
+# import debugpy
+# print("Waiting for debugger attach...")
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# print("Debugger attached!")
 # =======================================================
 
 from datetime import datetime
@@ -37,7 +37,7 @@ class CosmicAPI(BaseModel):
     body: dict
     user_message: str
 
-config_path = "scripts/configs/config_updated.yaml"
+config_path = "scripts/configs/config.yaml"
 statistic_dir = "data/cosmic/statistic"
 statistic_dict = {
             "user_id": "unknown",
