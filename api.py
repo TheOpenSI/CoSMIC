@@ -1,3 +1,12 @@
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging
+# import debugpy
+# print("Waiting for debugger attach...")
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# print("Debugger attached!")
+# =======================================================
+
 from datetime import datetime
 import re
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
@@ -8,6 +17,8 @@ import yaml, os, shutil
 import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
+
+from utils.chat_history import build_context_from_messages
 
 app = FastAPI()
 
@@ -327,8 +338,10 @@ async def process_cosmic(data: CosmicAPI):
         user_role = data.body["user"]["role"]
         user_email = data.body["user"]["email"]
 
-        print(data)
-    
+        chat_history_context = build_context_from_messages(
+            data.body.get("messages", []),
+            num_pairs=5
+        )
 
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
@@ -375,7 +388,8 @@ async def process_cosmic(data: CosmicAPI):
                     # Update vector database.
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
-            answer = opensi_cosmic(data.user_message)[0]
+            answer = opensi_cosmic(question=data.user_message,
+                                   context=chat_history_context)[0]
         return {"status": "success", "result": answer}
     except Exception as e:
         return {"status": "error", "message": str(e)}
