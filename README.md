@@ -34,7 +34,7 @@ wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
 docker compose up -d
 ```
 
-### Option 2: Clone and Set Up Repository
+### Option 2: Clone and Set Up Repository (For Development)
 
 1. Install Git on your local machine if it is not already installed. You can follow the [official Git installation guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
@@ -59,9 +59,28 @@ git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
 
 4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
-
 ```bash
 cd CoSMIC
+```
+
+5. Open docker-compose.yaml and comment the following lines:
+
+```bash
+    # image: opensicbr/cosmic:latest
+    # pull_policy: always
+```
+
+6. Make sure this lines are not commented
+
+```bash
+    build:
+      context: .
+      dockerfile: Dockerfile
+```
+
+6. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
+
+```bash
 docker compose up -d --build
 ```
 
@@ -101,7 +120,7 @@ If this repository is useful for you, please cite the paper below.
 ```
 
 ## Contact
-For technical supports, please contact [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au), [Danny Xu](mailto:danny.xu@canberra.edu.au) or [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au).
+For technical supports, please contact [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au), [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au) or [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au).
 For project supports, please contact [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au).
 
 ## Contributing
