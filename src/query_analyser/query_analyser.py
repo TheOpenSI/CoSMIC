@@ -357,10 +357,10 @@ class QueryAnalyser:
             self.llm.set_user_prompter(self.user_prompter_system_info)
 
             # Get the response for whether the query is related to system information.
-            relevance_analysis = self.llm(query)[0]
+            relevance_analysis: str = self.llm(query)[0]
 
             # Get whether the question is related to system information.
-            relevance = self.get_system_information_relevance(relevance_analysis)
+            relevance: bool = self.get_system_information_relevance(relevance_analysis)
 
             # Update system information relevance.
             service_info_dict["system_information_relevance"] = relevance

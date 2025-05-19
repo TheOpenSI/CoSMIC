@@ -26,15 +26,16 @@ services:
   #     - cosmic_net
 
   open-webui:
-    build:
-      context: ./../OpenWebUI-CoSMIC
-      dockerfile: Dockerfile
-      args:
-        OLLAMA_BASE_URL: '/ollama'
-    # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
+    # build:
+    #   context: ./../OpenWebUI-CoSMIC
+    #   dockerfile: Dockerfile
+      # args:
+      #   OLLAMA_BASE_URL: '/ollama'
+    image: opensicbr/cosmic_openwebui:latest
+    pull_policy: always
     container_name: open-webui
     volumes:
-      - open-webui:/app/backend/data
+      - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
     depends_on:
       # - cosmic_db_server
       # - ollama
@@ -42,7 +43,6 @@ services:
       - cosmic
     ports:
       - "${OPEN_WEBUI_PORT:-8080}:8080"
-      # - "8080:8080"
     environment:
       - ENABLE_SIGNUP=true
       - OLLAMA_BASE_URL=http://ollama:11434
@@ -62,12 +62,12 @@ services:
     #   context: ./../pipelines-openwebui
     #   dockerfile: Dockerfile
     image: ghcr.io/open-webui/pipelines:main
+    pull_policy: always
     container_name: pipelines
     volumes:
       - pipelines:/app/pipelines
     depends_on:
       - cosmic
-    pull_policy: always
     ports:
       - '9099:9099'
     environment:
@@ -82,22 +82,20 @@ services:
       - cosmic_net
 
   cosmic:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     container_name: cosmic
+    image: opensicbr/cosmic:latest
+    pull_policy: always
     volumes:
       - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
-    # pull_policy: always
     ports:
       - '3000:3000'
-      # - '5678:5678' # debugpy
+      - '5678:5678' # debupy
     tty: true
-    # extra_hosts:
-    #   - host.docker.internal:host-gateway
     restart: unless-stopped
-    #    image: pipelines/pipelines:latest
     networks:
       - cosmic_net
 

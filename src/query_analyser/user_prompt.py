@@ -153,9 +153,14 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given that '{self.system_information}'," \
-            f" is the question '{question}' a general question related to the system" \
-            f" information or OpenSI-CoSMIC?" \
-            f" Just answer yes or no without any explainations."
+        # user_prompt = f"Given that '{self.system_information}'," \
+        #     f" is the question '{question}' a general question related to the system" \
+        #     f" information or OpenSI-CoSMIC?" \
+        #     f" Just answer yes or no without any explainations."
+        
+        user_prompt = f"A user has asked the following question - '{question}', " \
+                      f"is the user asking information about you (the AI assistant called OpenSI-CoSMIC) or " \
+                      f"requesting information about how you work/what you can do? " \
+                      f"Answer only 'YES' or 'NO' without any explanations."
 
         return user_prompt
