@@ -63,22 +63,7 @@ git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 cd CoSMIC
 ```
 
-5. Open docker-compose.yaml and comment the following lines:
-
-```bash
-    # image: opensicbr/cosmic:latest
-    # pull_policy: always
-```
-
-6. Make sure this lines are not commented
-
-```bash
-    build:
-      context: .
-      dockerfile: Dockerfile
-```
-
-6. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
+5. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
 
 ```bash
 docker compose up -d --build
