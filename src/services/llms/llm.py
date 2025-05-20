@@ -32,7 +32,7 @@ from openai import OpenAI
 from transformers import pipeline
 from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
 from src.services.llms.LLMBase import LLMBase
-from CoSMIC.src.services.llms.Ollama import Ollama
+from src.services.llms.Ollama import Ollama
 from src.services.llms.prompts import system_prompt as system_prompt_instances
 from src.services.llms.prompts import user_prompt as user_prompt_instances
 from src.services.llms import tokenizer as tokenizer_instances
