@@ -68,7 +68,7 @@ class Ollama(LLMBase):
         Set the local client for the Ollama container.
 
         Args:
-            container_name (str): Name of the Ollama container.        self._check_model_availability()
+            container_name (str): Name of the Ollama container.
         """
         client = ollama.Client(
             host = f"http://{container_name}:{port}",
@@ -141,7 +141,9 @@ class Ollama(LLMBase):
         raw_response = chat_response["message"]["content"]
         
         # Apply truncation if enabled
-        response = self.truncate_response(raw_response) if self.is_truncate_response else raw_response
+        response = self.truncate_response(raw_response) \
+            if self.is_truncate_response \
+            else raw_response
         
         return response, raw_response    
             
