@@ -1,14 +1,18 @@
 services:
-  # ollama:
-  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-  #   container_name: ollama
-  #   volumes:
-  #     - ollama:/root/.ollama
-  #   pull_policy: always
-  #   tty: true
-  #   restart: unless-stopped
-  #   networks:
-  #     - cosmic_net
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ollama:/root/.ollama
+    networks:
+      - cosmic_net
 
   # cosmic_db_server:
   #   image: postgres:14
@@ -82,11 +86,11 @@ services:
       - cosmic_net
 
   cosmic:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: cosmic
-    image: opensicbr/cosmic:latest
+    # image: opensicbr/cosmic:latest
     pull_policy: always
     volumes:
       - open-webui:/app/backend/data
@@ -94,6 +98,8 @@ services:
     ports:
       - '3000:3000'
       - '5678:5678' # debupy
+    depends_on:
+      - ollama
     tty: true
     restart: unless-stopped
     networks:

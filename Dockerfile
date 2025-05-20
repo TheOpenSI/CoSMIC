@@ -20,12 +20,11 @@ RUN apt-get update && apt-get install -y \
     wget \
     vim \
     build-essential \
-    docker.io \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
 
 # Ollama
-RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
+# RUN curl -fsSL https://ollama.com/install.sh | sh -s /root/.ollama
 
 # Build environment.
 RUN pip install -r requirements.txt

@@ -28,7 +28,10 @@ import os
 import sys
 import requests
 import subprocess
-from typing import Optional, List, Dict, Any, Union
+import ollama
+
+from typing import List, Dict, Any, Union
+from ollama import Client
 
 from src.services.llms.llm import LLMBase
 
@@ -46,153 +49,70 @@ class Ollama(LLMBase):
             container_name (str, optional): Name of the Ollama container. Defaults to "ollama".
             local_port (int, optional): Local port for the ollama container. Defaults to 11434.
         """
-        # Extract the model name from "ollama:model_name" format if needed
         model_name = llm_name.replace("ollama:", "")
         super().__init__(llm_name=model_name, **kwargs)
-        self.container_name = container_name
-        self.local_port = local_port
-        # self.api_url = f"http://{self.container_name}:{self.local_port}/api"
-        # https://github.com/ollama/ollama/blob/main/docs/api.md
-        self.api_url = f"http://localhost:{self.local_port}/api/generate"
+        self._tag_model() # adds :latest if not present
+        self.ollama_client = self._set_local_client(container_name, local_port) # local client instance
+        self.available_models = self._get_available_models() # will need to refresh periodically
+        self._check_availability()
         
-        self._check_model_availability()
-
-
-    def _process_model_list(self, model_list: str) -> List[str]:
+    def _tag_model(self) -> None:
+        if ":" not in self.llm_name:
+            self.llm_name = f"{self.llm_name}:latest"
+        
+        
+    def _set_local_client(self,
+                          container_name: str,
+                          port: int) -> Client:
         """
-        Process the model list to extract model names.
+        Set the local client for the Ollama container.
 
         Args:
-            model_list (str): The output of the model list command.
-            
+            container_name (str): Name of the Ollama container.        self._check_model_availability()
+        """
+        client = ollama.Client(
+            host = f"http://{container_name}:{port}",
+            headers = {"Content-Type": "application/json"}
+        )
+        return client
+
+
+    def _get_available_models(self) -> List[str]:
+        """
+        Get the list of available models in the Ollama container.
+
         Returns:
-            List[str]: A list of model names.
+            List[str]: List of available model names.
         """
-        models = []
-        # Skip header line and get just the names
-        for line in model_list.strip().split('\n')[1:]:  # Skip header
-            if line:  # Skip empty lines
-                # Split by whitespace and take the first column
-                parts = line.split()
-                if parts:
-                    # Extract model name without tag if present
-                    model_name = parts[0].split(':')[0]
-                    models.append(model_name)
-            
-        return models
+        available_models = self.ollama_client.list()
+        return [model.model for model in available_models.models]
     
     
-    def _get_model_list(self) -> List[str]:
+    def _is_model_available(self, model_name: str) -> bool:
         """
-        Get the list of models available on the ollama container.
-        
+        Check if a specific model is available in the Ollama container.
+
+        Args:
+            model_name (str): Name of the model to check.
+
         Returns:
-            List[str]: A list of model names available on the ollama server.
+            bool: True if the model is available, False otherwise.
         """
-        shell_command = ["docker", "exec", self.container_name, "ollama", "list"]
-        
-        model_list = subprocess.run(shell_command,
-                                    text=True,
-                                    capture_output=True)
-        
-        if model_list.returncode != 0:
-            print("Error fetching the model list.")
-            return []
-            
-        # Process
-        return self._process_model_list(model_list.stdout)
+        return model_name in self.available_models
     
     
-    def _pull_model(self) -> None:
+    def _check_availability(self) -> None:
         """
-        Pull the model from the server using secure subprocess execution
+        Check if the Ollama container is available and the specified model is available.
+        Raises an exception if the container or model is not available.
         """
-        print(f"{self.llm_name} not found on the ollama server. Pulling the model...")
-        
-        pull_command = ["docker", "exec", self.container_name, "ollama", "pull", self.llm_name]
-        
-        pull_process = subprocess.run(pull_command, 
-                                      text=True, 
-                                      capture_output=True)
-        
-        if pull_process.returncode != 0:
-            print(f"Error pulling model: {pull_process.stderr}")
-            raise RuntimeError(f"Failed to pull model {self.llm_name}")
-        
-        print(f"Model {self.llm_name} pulled successfully.")
-    
-    
-    def _check_model_availability(self) -> None:
-        """
-        Check if the model is available on the ollama server.
-        """
-        available_models = self._get_model_list()
-        
-        if self.llm_name in available_models:
-            print(f"{self.llm_name} already exists on the ollama server.")
+        is_available = self._is_model_available(self.llm_name)
+        if is_available:
+            print(f"Model {self.llm_name} is available in the Ollama container.")
         else:
-            self._pull_model()
-    
-    
-    def _format_messages(self, messages: List[Dict[str, str]]) -> str:
-        """
-        Format messages into a single prompt string for /generate.
-        
-        Args:
-            messages: List of message dictionaries with 'role' and 'content' keys.
-            Only 'system' and 'user' roles are considered.
+            print(f"Pulling model {self.llm_name} from Ollama.")
+            self.ollama_client.pull(self.llm_name)
             
-        Returns:
-            A formatted string combining all messages
-        """
-        prompt = ""
-        
-        for message in messages:
-            role = message.get('role', '').lower()
-            content = message.get('content', '')
-            
-            # Skip empty messages
-            if not content or not content.strip():
-                continue
-            
-            # Format based on role
-            if role == 'system':
-                prompt += f"System:\n{content.strip()}\n"
-            elif role == 'user':
-                prompt += f"User:\n{content.strip()}\n\n"
-        
-        # Add the assistant response prompt
-        prompt += "Assistant Response: "
-        
-        return prompt
-    
-    
-    def _send_chat_request(self, prompt: str) -> Dict[str, Any]:
-        """
-        Send a chat request to the Ollama API.
-        
-        Args:
-            messages: List of message dictionaries
-            
-        Returns:
-            The API response as a dictionary
-        """
-        # 'messages' for /chat endpoint
-        payload = {
-            "model": self.llm_name,
-            "prompt": prompt,
-            "stream": False
-        }
-        
-        try:
-            response = requests.post(f"{self.api_url}", json=payload)
-            # Raise exception for HTTP errors
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.RequestException as e:
-            print(f"Error communicating with Ollama API: {e}")
-            raise RuntimeError(f"Failed to get response from Ollama: {e}")
-        
     
     def __call__(self,
                  question: str,
@@ -213,19 +133,18 @@ class Ollama(LLMBase):
         # Combine system prompt with user prompt
         combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context)
         
-        # Convert prompt to string
-        prompt: str = self._format_messages(combined_prompt)
-        # Send request to Ollama
-        response_data: dict = self._send_chat_request(prompt)
-        
-        # Extract the response content
-        # raw_response = response_data.get('message', {}).get('content', '')
-        raw_response = response_data.get('response', '')
+        # Chat
+        chat_response = self.ollama_client.chat(
+            model = self.llm_name,
+            messages = combined_prompt,
+        )
+        raw_response = chat_response["message"]["content"]
         
         # Apply truncation if enabled
         response = self.truncate_response(raw_response) if self.is_truncate_response else raw_response
         
-        return response, raw_response
+        return response, raw_response    
+            
     
     def quit(self):
         """
@@ -233,9 +152,8 @@ class Ollama(LLMBase):
         """
         pass  # No resources to clean up for REST API implementation
     
-
-if __name__ == "__main__":
-    ollama = Ollama(local_port=11433)
-    response, raw_response = ollama.__call__("What is the capital of France?")
-    print(response)
-    print(raw_response)
+# if __name__ == "__main__":
+#     ollama_instance = OllamaContainer(container_name = "localhost")
+#     response, raw_respose = ollama_instance.__call__("what is the capital of greece?")
+#     print("Response:", response)
+#     print("Raw Response:", raw_respose)

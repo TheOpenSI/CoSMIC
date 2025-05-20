@@ -6,6 +6,6 @@ ollama serve > ollama.log 2>&1 &
 # bash /app/scripts/chatbot/run_chatbot_docker.sh
 
 # https://www.uvicorn.org/settings/#configuration-methods
-# uvicorn api:app --host 0.0.0.0 --port 3000
+uvicorn api:app --host 0.0.0.0 --port 3000
 
-uvicorn api:app --host 0.0.0.0 --port 3000 --reload
+# uvicorn api:app --host 0.0.0.0 --port 3000 --reload

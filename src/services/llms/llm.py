@@ -32,8 +32,13 @@ from openai import OpenAI
 from transformers import pipeline
 from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
 from src.services.llms.LLMBase import LLMBase
-from src.services.llms.Ollama import Ollama
+from CoSMIC.src.services.llms.Ollama import Ollama
+from src.services.llms.prompts import system_prompt as system_prompt_instances
+from src.services.llms.prompts import user_prompt as user_prompt_instances
+from src.services.llms import tokenizer as tokenizer_instances
+from src.services.base import ServiceBase
 from src.services.llms.login import LLMLogin
+from utils.module import get_instance
 from utils.log_tool import set_color
 
 
