@@ -37,7 +37,7 @@ class CosmicAPI(BaseModel):
     body: dict
     user_message: str
 
-config_path = "scripts/configs/config.yaml"
+config_path = "scripts/configs/config_updated.yaml"
 statistic_dir = "data/cosmic/statistic"
 statistic_dict = {
             "user_id": "unknown",

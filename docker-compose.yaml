@@ -26,13 +26,12 @@ services:
   #     - cosmic_net
 
   open-webui:
-    # build:
-    #   context: ./../OpenWebUI-CoSMIC
-    #   dockerfile: Dockerfile
-      # args:
-      #   OLLAMA_BASE_URL: '/ollama'
+    build:
+      context: ./../OpenWebUI-CoSMIC
+      dockerfile: Dockerfile
+      args:
+        OLLAMA_BASE_URL: '/ollama'
     image: opensicbr/cosmic_openwebui:latest
-    pull_policy: always
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
@@ -82,12 +81,11 @@ services:
       - cosmic_net
 
   cosmic:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: cosmic
     image: opensicbr/cosmic:latest
-    pull_policy: always
     volumes:
       - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
@@ -139,7 +137,7 @@ services:
 
 
 volumes:
-  ollama: {}
+  # ollama: {}
   open-webui: {}
   pipelines: {}
   volume_uploads: {}
