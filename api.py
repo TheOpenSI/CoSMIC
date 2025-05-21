@@ -8,6 +8,7 @@
 # =======================================================
 
 from datetime import datetime
+import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from src.opensi_cosmic import OpenSICoSMIC
@@ -18,6 +19,7 @@ from zoneinfo import ZoneInfo
 from typing import Optional
 
 from utils.chat_history import build_context_from_messages
+from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 
 app = FastAPI()
@@ -38,13 +40,29 @@ class CosmicAPI(BaseModel):
     user_message: str
 
 config_path = "scripts/configs/config_updated.yaml"
-openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
+openai_api_key = os.environ.get("OPENAI_API_KEY", "")
 
 
 def update_openai_key():
     global openai_api_key
     # Set up OPENAI_API_KEY globally through root's .env.
-    openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
+    openai_api_key = os.environ.get("OPENAI_API_KEY", "")
+
+    if openai_api_key == "":
+        envs = dotenv.dotenv_values(".env")
+
+        if "OPENAI_API_KEY" in envs.keys():
+            openai_api_key = envs["OPENAI_API_KEY"]
+        else:
+            print(set_color("warning", "OPENAI_API_KEY is required in .env."))
+            openai_api_key = ""
+
+    # Get warning for invalid API key.
+    if openai_api_key == "":
+        print(set_color("warning", "The OPENAI_API_KEY in .env is invalid."))
+
+
+update_openai_key()
 
 if not os.path.exists(config_path):
     shutil.copyfile("scripts/configs/config.yaml", config_path)
@@ -109,7 +127,7 @@ async def read_root():
 async def get_config():
     try:
         result = opensi_cosmic.config
-        config["OPENAI_API_KEY"] = openai_api_key
+        result["OPENAI_API_KEY"] = openai_api_key
 
         return result
     except Exception as e:
@@ -149,17 +167,14 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
             config_data["chess"]["stockfish_path"] = form_data.chess.stockfish_path
 
         # # Save OpenAI API key to .env instead of displaying in config_updated.yaml.
-        # env_path = "/app/backend/.env"
+        env_path = ".env"
 
         # This might not be useful as it is in docker container.
         if form_data.openai.api_key:
             os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
-
-        # # Change the root's .env which is shared with .env in this backend container.
-        # dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
-
-        # request.app.config = config_data
-        # request.app.config["OPENAI_API_KEY"] = form_data.openai.api_key
+            # Change the root's .env which is shared with .env in this backend container.
+            dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
+            update_openai_key()
 
         # Save updated configs to config_updated.yaml, instead of overwriting config.yaml.
         with open(config_path, "w") as file:
@@ -216,7 +231,7 @@ async def process_cosmic(data: CosmicAPI):
     global openai_api_status
     try:
         current_config_modify_timestamp = str(os.path.getmtime(config_path))
-        current_openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
+        current_openai_api_key = os.environ.get("OPENAI_API_KEY", "")
 
         if (current_config_modify_timestamp != config_modify_timestamp) \
             or (current_openai_api_key != openai_api_key):
