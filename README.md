@@ -58,16 +58,33 @@ git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
 
-4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
+4. **Important**: If you're running on a machine without an NVIDIA GPU or CUDA support, you need to modify the `docker-compose.yaml` file. Open the file and comment out the GPU resource allocation section:
+```yaml
+# Comment out these lines if you don't have an NVIDIA GPU
+ deploy:
+   resources:
+     reservations:
+       devices:
+         - driver: nvidia
+           count: all
+           capabilities: [gpu]
+```
+
+5. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
 ```bash
 cd CoSMIC
 ```
 
-5. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
-
+6. Now you can build from your local clone using the command below:
 ```bash
 docker compose up -d --build
 ```
+
+7. **Important**: During the first run, the system will automatically download the Llama3.1 model, which may take some time depending on your internet connection. You can monitor the progress by checking the Docker logs:
+```bash
+docker compose logs -f cosmic
+```
+Wait until you see the message: `cosmic | Model Llama3.1 is available in the Ollama container.` before attempting to use the application.
 
 The application will initialize on port 8080. To access it, open a web browser and navigate to `http://localhost:8080`.
 
