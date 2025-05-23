@@ -41,7 +41,7 @@ services:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
     depends_on:
       # - cosmic_db_server
-      # - ollama
+      - ollama
       - pipelines
       - cosmic
     ports:

@@ -27,8 +27,20 @@ The Docker installation provides the fastest way to get started with OpenSI-CoSM
 ```bash
 wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
 ```
+2. **Important**: If you're running on a machine without an NVIDIA GPU or CUDA support, you need to modify the `docker-compose.yaml` file. Open the file and comment out the GPU resource allocation section:
+```yaml
+# Comment out these lines if you don't have an NVIDIA GPU
+ deploy:
+   resources:
+     reservations:
+       devices:
+         - driver: nvidia
+           count: all
+           capabilities: [gpu]
+```
 
-2. Once the file is downloaded, open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
+
+3. Open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
 
 ```bash
 docker compose up -d
