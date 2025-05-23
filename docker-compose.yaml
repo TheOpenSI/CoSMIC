@@ -1,14 +1,18 @@
 services:
-  # ollama:
-  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-  #   container_name: ollama
-  #   volumes:
-  #     - ollama:/root/.ollama
-  #   pull_policy: always
-  #   tty: true
-  #   restart: unless-stopped
-  #   networks:
-  #     - cosmic_net
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ollama:/root/.ollama
+    networks:
+      - cosmic_net
 
   # cosmic_db_server:
   #   image: postgres:14
@@ -37,7 +41,7 @@ services:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
     depends_on:
       # - cosmic_db_server
-      # - ollama
+      - ollama
       - pipelines
       - cosmic
     ports:
@@ -92,6 +96,8 @@ services:
     ports:
       - '3000:3000'
       - '5678:5678' # debupy
+    depends_on:
+      - ollama
     tty: true
     restart: unless-stopped
     networks:
@@ -137,7 +143,7 @@ services:
 
 
 volumes:
-  # ollama: {}
+  ollama: {}
   open-webui: {}
   pipelines: {}
   volume_uploads: {}
