@@ -31,6 +31,7 @@ RUN pip install -r requirements.txt
 
 # Fix cosmic permission
 RUN chmod +x /app/scripts/chatbot/cosmic.sh
-
+RUN pip install --upgrade "huggingface_hub[hf_xet]"
 # Entry point.
 CMD ["bash", "/app/scripts/chatbot/cosmic.sh"]
+

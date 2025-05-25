@@ -1,123 +1,72 @@
-# version: '3.8'
+version: '3.8'
 
 services:
-  # ollama:
-  #   image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
-  #   container_name: ollama
-  #   volumes:
-  #     - ollama:/root/.ollama
-  #   pull_policy: always
-  #   tty: true
-  #   restart: unless-stopped
-
-  cosmic_db_server:
+  postgres:
     image: postgres:14
     container_name: postgres
     restart: always
-    ports:
-    - "5433:5432"
     environment:
-      POSTGRES_USER: opensi
+      POSTGRES_USER: opeuser
       POSTGRES_PASSWORD: data101
-      POSTGRES_DB: cosmic_db
+      POSTGRES_DB: openwebui
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-      - cosmic_net
+      - webnet
 
-  open-webui:
-    build:
-      context: ./modules/chatbot/
-      dockerfile: Dockerfile
-      args:
-        OLLAMA_BASE_URL: '/ollama'
-    # image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG:-main}
-    container_name: open-webui
-    volumes:
-      - open-webui:/app/backend/data
-    depends_on:
-      - cosmic_db_server
-      # - ollama
-    ports:
-      - "${OPEN_WEBUI_PORT:-8080}:8080"
-      # - "8080:8080"
-    environment:
-      - ENABLE_SIGNUP=true
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=
-      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
-      - WEBUI_AUTH_PROVIDER=oauth2-proxy
-      - WEBUI_AUTH_TRUSTED_EMAIL_HEADER=X-Forwarded-Email
-      - WEBUI_AUTH_TRUSTED_NAME_HEADER=X-Forwarded-User
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: unless-stopped
-    networks:
-      - cosmic_net
-  
   pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4
     restart: always
-    ports:
-      - "8082:80"
     environment:
-      PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
-      PGADMIN_DEFAULT_PASSWORD: data101
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - cosmic_db_server
-      - open-webui
-    configs:
-      - source: servers.json
-      
-        target: /pgadmin4/servers.json
     networks:
-      - cosmic_net
+      - webnet
 
-  oauth2-proxy:
-    image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
-    container_name: oauth2-proxy
-    ports:
-      - "4180:4180"
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: always
+    env_file:
+      - .env
     environment:
-      - OAUTH2_PROXY_PROVIDER=google
-      - OAUTH2_PROXY_CLIENT_ID=1057370350803-g5av7k076o8c9llsk2hh89rkkfe12ksj.apps.googleusercontent.com
-      - OAUTH2_PROXY_CLIENT_SECRET=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
-      - OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32)
-      - OAUTH2_PROXY_REDIRECT_URL=http://localhost:4180/oauth2/callback
-      - OAUTH2_PROXY_UPSTREAMS=http://open-webui:8080
-      - OAUTH2_PROXY_EMAIL_DOMAINS=*
-      - OAUTH2_PROXY_PASS_USER_HEADERS=true
-      - OAUTH2_PROXY_SET_XAUTHREQUEST=true
+      # debug logging
+      - LOG_LEVEL=debug
+      # reset persisted config
+      - ENABLE_PERSISTENT_CONFIG=false
+      # show local form and OAuth
+      - ENABLE_LOGIN_FORM=true
+      - ENABLE_OAUTH_SIGNUP=true
+      - ENABLE_OAUTH_LOGIN=true
+
+      # built-in Microsoft OAuth provider
+      - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+      - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
+
+      # merge by email
+      - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
+
+      # database and public URL
+      - DATABASE_URL=postgresql://opeuser:data101@postgres:5432/openwebui
+      - WEBUI_URL=http://localhost:8080
+      - OPENID_PROVIDER_URL=https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
+
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
     networks:
-      - cosmic_net
-
-configs:
-  servers.json:
-    content: |
-      {
-        "Servers": {
-            "1": {
-                "Name": " cosmic_db",
-                "Group": "Servers",
-                "Port": 5432,
-                "Username": "opensi",
-                "Host": "cosmic_db_server",
-                "SSLMode": "prefer",
-                "MaintenanceDB": "postgres"
-            }
-          }
-      }
-
+      - webnet
 
 volumes:
-  ollama: {}
-  open-webui: {}
-  postgres-data: {}
-  pgadmin-data: {}
+  postgres-data:
+  pgadmin-data:
 
 networks:
-  cosmic_net:
-    driver: bridge
+  webnet:
