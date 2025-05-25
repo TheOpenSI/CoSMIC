@@ -35,24 +35,15 @@ services:
     env_file:
       - .env
     environment:
-      # debug logging
       - LOG_LEVEL=debug
-      # reset persisted config
       - ENABLE_PERSISTENT_CONFIG=false
-      # show local form and OAuth
       - ENABLE_LOGIN_FORM=true
       - ENABLE_OAUTH_SIGNUP=true
       - ENABLE_OAUTH_LOGIN=true
-
-      # built-in Microsoft OAuth provider
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
       - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
-
-      # merge by email
       - OAUTH_MERGE_ACCOUNTS_BY_EMAIL=true
-
-      # database and public URL
       - DATABASE_URL=postgresql://opeuser:data101@postgres:5432/openwebui
       - WEBUI_URL=http://localhost:8080
       - OPENID_PROVIDER_URL=https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
