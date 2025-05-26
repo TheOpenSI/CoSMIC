@@ -119,6 +119,24 @@ class ConfigUpdateForm(BaseModel):
 
 openai_api_status = opensi_cosmic.check_openai_key()
 
+def rebuild_cosmic():
+    global config_modify_timestamp
+    global openai_api_key
+    global opensi_cosmic
+    global openai_api_status
+
+    current_config_modify_timestamp = str(os.path.getmtime(config_path))
+    current_openai_api_key = os.environ.get("OPENAI_API_KEY", "")
+
+    opensi_cosmic.quit()
+    openai_api_key = current_openai_api_key
+    config_modify_timestamp = current_config_modify_timestamp
+    os.environ["OPENAI_API_KEY"] = openai_api_key
+    opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+    print('Reconstruct OpenSICoSMIC due to changed configs.')
+    update_openai_key()
+    openai_api_status = opensi_cosmic.check_openai_key()
+
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the OpenSICoSMIC API"}
@@ -181,6 +199,7 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
             yaml.safe_dump(config_data, file)
 
         # return request.app.config
+        rebuild_cosmic()
         return {"status": "success", "message": "Configuration updated successfully"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
@@ -235,14 +254,7 @@ async def process_cosmic(data: CosmicAPI):
 
         if (current_config_modify_timestamp != config_modify_timestamp) \
             or (current_openai_api_key != openai_api_key):
-            opensi_cosmic.quit()
-            openai_api_key = current_openai_api_key
-            config_modify_timestamp = current_config_modify_timestamp
-            os.environ["OPENAI_API_KEY"] = openai_api_key
-            opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-            print('Reconstruct OpenSICoSMIC due to changed configs.')
-            update_openai_key()
-            openai_api_status = opensi_cosmic.check_openai_key()
+            rebuild_cosmic()
 
         # Extract user_id from body. Adjust if user_id is available elsewhere.
         user_id = data.body["user"]["id"]
