@@ -110,7 +110,7 @@ class ConfigUpdateForm(BaseModel):
     seed: int
     doc_directory: str
     document_path: str
-    service: int
+    service: list[int]
     sameasabove: Optional[bool] = False
     query_analyser: QueryQnalyserConfig
     rag: RAGConfig
