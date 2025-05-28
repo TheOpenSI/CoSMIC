@@ -40,28 +40,15 @@ class CosmicAPI(BaseModel):
     user_message: str
 
 config_path = "scripts/configs/config_updated.yaml"
-openai_api_key = os.environ.get("OPENAI_API_KEY", "")
-
 
 def update_openai_key():
     global openai_api_key
-    # Set up OPENAI_API_KEY globally through root's .env.
-    openai_api_key = os.environ.get("OPENAI_API_KEY", "")
-
-    if openai_api_key == "":
-        envs = dotenv.dotenv_values(".env")
-
-        if "OPENAI_API_KEY" in envs.keys():
-            openai_api_key = envs["OPENAI_API_KEY"]
-        else:
-            print(set_color("warning", "OPENAI_API_KEY is required in .env."))
-            openai_api_key = ""
-
-    # Get warning for invalid API key.
-    if openai_api_key == "":
-        print(set_color("warning", "The OPENAI_API_KEY in .env is invalid."))
+    openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
+    if not openai_api_key:
+        print(set_color("warning", "OPENAI_API_KEY is required in .env or environment variables."))
 
 
+# Initialize the OPENAI_API_KEY on startup.
 update_openai_key()
 
 if not os.path.exists(config_path):
@@ -119,23 +106,27 @@ class ConfigUpdateForm(BaseModel):
 
 openai_api_status = opensi_cosmic.check_openai_key()
 
+
 def rebuild_cosmic():
+    """
+    Rebuilds the OpenSICoSMIC instance if the configuration file or OpenAI API key changes.
+    """
     global config_modify_timestamp
     global openai_api_key
     global opensi_cosmic
     global openai_api_status
 
     current_config_modify_timestamp = str(os.path.getmtime(config_path))
-    current_openai_api_key = os.environ.get("OPENAI_API_KEY", "")
+    current_openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
 
-    opensi_cosmic.quit()
-    openai_api_key = current_openai_api_key
-    config_modify_timestamp = current_config_modify_timestamp
-    os.environ["OPENAI_API_KEY"] = openai_api_key
-    opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-    print('Reconstruct OpenSICoSMIC due to changed configs.')
-    update_openai_key()
-    openai_api_status = opensi_cosmic.check_openai_key()
+    if (current_config_modify_timestamp != config_modify_timestamp) \
+            or (current_openai_api_key != openai_api_key):
+        opensi_cosmic.quit()
+        update_openai_key()
+        config_modify_timestamp = current_config_modify_timestamp
+        opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+        print('Reconstruct OpenSICoSMIC due to changed configs.')
+        openai_api_status = opensi_cosmic.check_openai_key()
 
 @app.get("/")
 async def read_root():
@@ -144,10 +135,11 @@ async def read_root():
 @app.get("/config")
 async def get_config():
     try:
-        result = opensi_cosmic.config
-        result["OPENAI_API_KEY"] = openai_api_key
+        with open(config_path, "r") as file:  # was config_default_path
+            config_data = yaml.safe_load(file)
+        config_data["OPENAI_API_KEY"] = openai_api_key
 
-        return result
+        return config_data
     except Exception as e:
         return {"status": "error", "message": str(e)}
     
@@ -199,7 +191,7 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
             yaml.safe_dump(config_data, file)
 
         # return request.app.config
-        rebuild_cosmic()
+        # rebuild_cosmic()
         return {"status": "success", "message": "Configuration updated successfully"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
@@ -249,12 +241,7 @@ async def process_cosmic(data: CosmicAPI):
     global opensi_cosmic
     global openai_api_status
     try:
-        current_config_modify_timestamp = str(os.path.getmtime(config_path))
-        current_openai_api_key = os.environ.get("OPENAI_API_KEY", "")
-
-        if (current_config_modify_timestamp != config_modify_timestamp) \
-            or (current_openai_api_key != openai_api_key):
-            rebuild_cosmic()
+        rebuild_cosmic()
 
         # Extract user_id from body. Adjust if user_id is available elsewhere.
         user_id = data.body["user"]["id"]
@@ -298,6 +285,7 @@ async def process_cosmic(data: CosmicAPI):
 
                 # Extract the original question.
                 data.user_message = splits[1]
+                
 
                 # The directory storing uploaded files.
                 file_dir = f"backend/data/uploads/{user_id}"
