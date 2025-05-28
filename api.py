@@ -20,6 +20,7 @@ from zoneinfo import ZoneInfo
 from typing import Optional
 
 from utils.chat_history import build_context_from_messages
+from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 
@@ -181,12 +182,19 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
         # # Save OpenAI API key to .env instead of displaying in config_updated.yaml.
         env_path = ".env"
 
+        is_llm_name_gpt = form_data.llm_name.find("gpt") > -1
+        is_query_analyser_llm_name_gpt = form_data.query_analyser.llm_name.find("gpt") > -1
+
         # This might not be useful as it is in docker container.
-        if form_data.openai.api_key:
-            os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
-            # Change the root's .env which is shared with .env in this backend container.
-            dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
-            update_openai_key()
+
+        if is_llm_name_gpt or is_query_analyser_llm_name_gpt:
+            if not form_data.openai.api_key == "" and validate_openai_api_key(form_data.openai.api_key):
+                os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
+                # Change the root's .env which is shared with .env in this backend container.
+                dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
+                update_openai_key()
+            else:
+                raise HTTPException(status_code=400, detail="Invalid OpenAI API key provided.")
 
         # Save updated configs to config_updated.yaml, instead of overwriting config.yaml.
         with open(config_path, "w") as file:
