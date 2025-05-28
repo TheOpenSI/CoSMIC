@@ -11,6 +11,7 @@ from datetime import datetime
 import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from numpy import int64
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
@@ -97,7 +98,8 @@ class ConfigUpdateForm(BaseModel):
     seed: int
     doc_directory: str
     document_path: str
-    service: list[int]
+    # service: list[int] # TODO: Change to a list of integers.
+    service: int
     sameasabove: Optional[bool] = False
     query_analyser: QueryQnalyserConfig
     rag: RAGConfig
