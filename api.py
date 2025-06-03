@@ -143,8 +143,10 @@ async def get_config():
         config_data["OPENAI_API_KEY"] = openai_api_key
 
         return config_data
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/config/update")
 async def update_config(request: Request, form_data: ConfigUpdateForm):
@@ -203,8 +205,10 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
         # return request.app.config
         # rebuild_cosmic()
         return {"status": "success", "message": "Configuration updated successfully"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/chess/upload")
 async def upload_file(file: UploadFile = File(...)):
@@ -241,8 +245,10 @@ async def quit():
     try:
         opensi_cosmic.quit()
         return {"status": "success", "message": "Application is shutting down"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/cosmic")
 async def process_cosmic(data: CosmicAPI):
@@ -315,5 +321,7 @@ async def process_cosmic(data: CosmicAPI):
             answer = opensi_cosmic(question=data.user_message,
                                    context=chat_history_context)[0]
         return {"status": "success", "result": answer}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
