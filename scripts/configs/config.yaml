@@ -19,6 +19,6 @@ chess:
   stockfish_path: ""  # if empty, default to "third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
 
 rag: # RAG-related config.
-  topk: 1  # retrieve topk documents.
+  topk: 10  # retrieve topk documents.
   retrieve_score_threshold: 0.7  # similarity score under this threshold will not be used in prompt.
   vector_db_path: ""  # vector database path, if not exist, use default database/vector_database.
