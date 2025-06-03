@@ -7,5 +7,3 @@ ollama serve > ollama.log 2>&1 &
 
 # https://www.uvicorn.org/settings/#configuration-methods
 uvicorn api:app --host 0.0.0.0 --port 3000
-
-# uvicorn api:app --host 0.0.0.0 --port 3000 --reload

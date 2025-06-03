@@ -8,9 +8,10 @@
 # =======================================================
 
 from datetime import datetime
-import re
+import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from numpy import int64
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
@@ -19,6 +20,9 @@ from zoneinfo import ZoneInfo
 from typing import Optional
 
 from utils.chat_history import build_context_from_messages
+from utils.general import validate_openai_api_key
+from utils.log_tool import set_color
+from utils.statistics import update_statistic_per_query
 
 app = FastAPI()
 
@@ -38,117 +42,16 @@ class CosmicAPI(BaseModel):
     user_message: str
 
 config_path = "scripts/configs/config_updated.yaml"
-statistic_dir = "data/cosmic/statistic"
-statistic_dict = {
-            "user_id": "unknown",
-            "email": "unknown",
-            "start_date": -1,
-            "last_date": -1,
-            "average_token_length": 0,
-            "query_count": 0
-        }
-openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
-
-def update_statistic_table(statistic_dict):
-    global statistic_dir
-
-    os.makedirs(statistic_dir, exist_ok=True)
-    current_time = statistic_dict["last_date"]
-    time_split = current_time.split(",")[0].split("-")
-    current_month_year = f"{time_split[1]}-{time_split[2]}"
-    statistic_path = os.path.join(
-        statistic_dir,
-        f"{current_month_year}.csv"
-    )
-
-    if os.path.exists(statistic_path):
-        data = pd.read_csv(statistic_path)
-        user_emails = data["email"].tolist()
-    else:
-        user_emails = []
-
-    if statistic_dict["email"] in user_emails:
-        idx = [idx for idx, user_email in enumerate(user_emails) if user_email == statistic_dict["email"]][0]
-        data.loc[idx, "last_date"] = statistic_dict["last_date"]
-        history_total_token_length = data["average_token_length"][idx] * data["query_count"][idx]
-        current_total_token_length = statistic_dict["average_token_length"] * statistic_dict["query_count"]
-        total_query_count = data["query_count"][idx] + statistic_dict["query_count"]
-        data.loc[idx, "average_token_length"] = (history_total_token_length + current_total_token_length) / total_query_count
-        data.loc[idx, "query_count"] = total_query_count
-    else:
-        df = pd.DataFrame([{
-            "user_id": statistic_dict["user_id"],
-            "email": statistic_dict["email"],
-            "start_date": statistic_dict["start_date"],
-            "last_date": statistic_dict["last_date"],
-            "average_token_length": statistic_dict["average_token_length"],
-            "query_count": statistic_dict["query_count"]
-        }])
-        if len(user_emails) > 0: df = pd.concat([data, df], axis=0)
-        data = df
-
-    data.to_csv(
-        statistic_path,
-        header=[
-            "user_id",
-            "email",
-            "start_date",
-            "last_date",
-            "average_token_length",
-            "query_count"
-        ],
-        index=False
-    )
-
-def update_statistic_per_query(
-        query,
-        user_id,
-        user_email,
-        current_time
-    ):
-        global statistic_dict
-        if False:
-            # Save for the previous user (when the user_id changed).
-            pre_user_id = statistic_dict["user_id"]
-            pre_query_count = statistic_dict["query_count"]
-            token_length = len(query)
-
-            # Accumulate for the same user.
-            if pre_user_id == user_id:
-                pre_average_token_length = statistic_dict["average_token_length"]
-                statistic_dict["last_date"] = current_time
-                statistic_dict["average_token_length"] = \
-                    (pre_average_token_length * pre_query_count + token_length) \
-                    / (pre_query_count + 1)
-                statistic_dict["query_count"] = pre_query_count + 1
-
-            if pre_user_id != user_id:
-                # Save previous user statistic.
-                if pre_user_id != "unknown":
-                    update_statistic_table(statistic_dict)
-
-                # Initialize for a different user.
-                statistic_dict["user_id"] = user_id
-                statistic_dict["email"] = user_email
-                statistic_dict["start_date"] = current_time
-                statistic_dict["last_date"] = current_time
-                statistic_dict["average_token_length"] = token_length
-                statistic_dict["query_count"] = 1
-        else:
-            # Save every query for the current user.
-            token_length = len(query)
-            statistic_dict["user_id"] = user_id
-            statistic_dict["email"] = user_email
-            statistic_dict["start_date"] = current_time
-            statistic_dict["last_date"] = current_time
-            statistic_dict["average_token_length"] = token_length
-            statistic_dict["query_count"] = 1
-            update_statistic_table(statistic_dict)
 
 def update_openai_key():
     global openai_api_key
-    # Set up OPENAI_API_KEY globally through root's .env.
-    openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
+    openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
+    if not openai_api_key:
+        print(set_color("warning", "OPENAI_API_KEY is required in .env or environment variables."))
+
+
+# Initialize the OPENAI_API_KEY on startup.
+update_openai_key()
 
 if not os.path.exists(config_path):
     shutil.copyfile("scripts/configs/config.yaml", config_path)
@@ -196,6 +99,7 @@ class ConfigUpdateForm(BaseModel):
     seed: int
     doc_directory: str
     document_path: str
+    # service: list[int] # TODO: Change to a list of integers.
     service: int
     sameasabove: Optional[bool] = False
     query_analyser: QueryQnalyserConfig
@@ -205,6 +109,28 @@ class ConfigUpdateForm(BaseModel):
 
 openai_api_status = opensi_cosmic.check_openai_key()
 
+
+def rebuild_cosmic():
+    """
+    Rebuilds the OpenSICoSMIC instance if the configuration file or OpenAI API key changes.
+    """
+    global config_modify_timestamp
+    global openai_api_key
+    global opensi_cosmic
+    global openai_api_status
+
+    current_config_modify_timestamp = str(os.path.getmtime(config_path))
+    current_openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
+
+    if (current_config_modify_timestamp != config_modify_timestamp) \
+            or (current_openai_api_key != openai_api_key):
+        opensi_cosmic.quit()
+        update_openai_key()
+        config_modify_timestamp = current_config_modify_timestamp
+        opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+        print('Reconstruct OpenSICoSMIC due to changed configs.')
+        openai_api_status = opensi_cosmic.check_openai_key()
+
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the OpenSICoSMIC API"}
@@ -212,12 +138,15 @@ async def read_root():
 @app.get("/config")
 async def get_config():
     try:
-        result = opensi_cosmic.config
-        config["OPENAI_API_KEY"] = openai_api_key
+        with open(config_path, "r") as file:  # was config_default_path
+            config_data = yaml.safe_load(file)
+        config_data["OPENAI_API_KEY"] = openai_api_key
 
-        return result
+        return config_data
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/config/update")
 async def update_config(request: Request, form_data: ConfigUpdateForm):
@@ -253,26 +182,33 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
             config_data["chess"]["stockfish_path"] = form_data.chess.stockfish_path
 
         # # Save OpenAI API key to .env instead of displaying in config_updated.yaml.
-        # env_path = "/app/backend/.env"
+        env_path = ".env"
+
+        is_llm_name_gpt = form_data.llm_name.find("gpt") > -1
+        is_query_analyser_llm_name_gpt = form_data.query_analyser.llm_name.find("gpt") > -1
 
         # This might not be useful as it is in docker container.
-        if form_data.openai.api_key:
-            os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
 
-        # # Change the root's .env which is shared with .env in this backend container.
-        # dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
-
-        # request.app.config = config_data
-        # request.app.config["OPENAI_API_KEY"] = form_data.openai.api_key
+        if is_llm_name_gpt or is_query_analyser_llm_name_gpt:
+            if not form_data.openai.api_key == "" and validate_openai_api_key(form_data.openai.api_key):
+                os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
+                # Change the root's .env which is shared with .env in this backend container.
+                dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
+                update_openai_key()
+            else:
+                raise HTTPException(status_code=400, detail="Invalid OpenAI API key provided.")
 
         # Save updated configs to config_updated.yaml, instead of overwriting config.yaml.
         with open(config_path, "w") as file:
             yaml.safe_dump(config_data, file)
 
         # return request.app.config
+        # rebuild_cosmic()
         return {"status": "success", "message": "Configuration updated successfully"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/chess/upload")
 async def upload_file(file: UploadFile = File(...)):
@@ -309,8 +245,10 @@ async def quit():
     try:
         opensi_cosmic.quit()
         return {"status": "success", "message": "Application is shutting down"}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/cosmic")
 async def process_cosmic(data: CosmicAPI):
@@ -319,19 +257,7 @@ async def process_cosmic(data: CosmicAPI):
     global opensi_cosmic
     global openai_api_status
     try:
-        current_config_modify_timestamp = str(os.path.getmtime(config_path))
-        current_openai_api_key = os.environ.get("OPENAI_API_KEY", "0p3n-w3bu!")
-
-        if (current_config_modify_timestamp != config_modify_timestamp) \
-            or (current_openai_api_key != openai_api_key):
-            opensi_cosmic.quit()
-            openai_api_key = current_openai_api_key
-            config_modify_timestamp = current_config_modify_timestamp
-            os.environ["OPENAI_API_KEY"] = openai_api_key
-            opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-            print('Reconstruct OpenSICoSMIC due to changed configs.')
-            update_openai_key()
-            openai_api_status = opensi_cosmic.check_openai_key()
+        rebuild_cosmic()
 
         # Extract user_id from body. Adjust if user_id is available elsewhere.
         user_id = data.body["user"]["id"]
@@ -375,6 +301,7 @@ async def process_cosmic(data: CosmicAPI):
 
                 # Extract the original question.
                 data.user_message = splits[1]
+                
 
                 # The directory storing uploaded files.
                 file_dir = f"backend/data/uploads/{user_id}"
@@ -394,5 +321,7 @@ async def process_cosmic(data: CosmicAPI):
             answer = opensi_cosmic(question=data.user_message,
                                    context=chat_history_context)[0]
         return {"status": "success", "result": answer}
+    except HTTPException as http_exc:
+        raise http_exc
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
