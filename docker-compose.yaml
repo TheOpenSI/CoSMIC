@@ -14,20 +14,20 @@ services:
     networks:
       - cosmic_net
 
-  # cosmic_db_server:
-  #   image: postgres:14
-  #   container_name: postgres
-  #   restart: always
-  #   ports:
-  #     - "8081:5432"
-  #   environment:
-  #     POSTGRES_USER: opensi
-  #     POSTGRES_PASSWORD: data101
-  #     POSTGRES_DB: cosmic_db
-  #   volumes:
-  #     - postgres-data:/var/lib/postgresql/data
-  #   networks:
-  #     - cosmic_net
+  cosmic_db_server:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: opensi
+      POSTGRES_PASSWORD: data101
+      POSTGRES_DB: cosmic_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - cosmic_net
 
   open-webui:
     build:
@@ -40,7 +40,7 @@ services:
     volumes:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
     depends_on:
-      # - cosmic_db_server
+      - cosmic_db_server
       - ollama
       - pipelines
       - cosmic
@@ -59,7 +59,7 @@ services:
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
       - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
-      # - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
+      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
@@ -110,42 +110,41 @@ services:
       - cosmic_net
 
   
-  # pgadmin:
-  #   image: dpage/pgadmin4
-  #   container_name: pgadmin
-  #   restart: always
-  #   ports:
-  #     - "8082:80"
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
-  #     PGADMIN_DEFAULT_PASSWORD: data101
-  #   volumes:
-  #     - pgadmin-data:/var/lib/pgadmin
-  #   depends_on:
-  #     - cosmic_db_server
-  #     - open-webui
-  #   configs:
-  #     - source: servers.json
-  #       target: /pgadmin4/servers.json
-  #   networks:
-  #     - cosmic_net
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
+      PGADMIN_DEFAULT_PASSWORD: data101
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - cosmic_db_server
+    configs:
+      - source: servers.json
+        target: /pgadmin4/servers.json
+    networks:
+      - cosmic_net
 
-# configs:
-#   servers.json:
-#     content: |
-#       {
-#         "Servers": {
-#             "1": {
-#                 "Name": " cosmic_db",
-#                 "Group": "Servers",
-#                 "Port": 5432,
-#                 "Username": "opensi",
-#                 "Host": "cosmic_db_server",
-#                 "SSLMode": "prefer",
-#                 "MaintenanceDB": "postgres"
-#             }
-#           }
-#       }
+configs:
+  servers.json:
+    content: |
+      {
+        "Servers": {
+            "1": {
+                "Name": " cosmic_db",
+                "Group": "Servers",
+                "Port": 5432,
+                "Username": "opensi",
+                "Host": "cosmic_db_server",
+                "SSLMode": "prefer",
+                "MaintenanceDB": "postgres"
+            }
+          }
+      }
 
 
 volumes:
@@ -154,8 +153,8 @@ volumes:
   pipelines: {}
   volume_uploads: {}
   volume_configs: {}
-  # postgres-data: {}
-  # pgadmin-data: {}
+  postgres-data: {}
+  pgadmin-data: {}
 
 networks:
   cosmic_net:
