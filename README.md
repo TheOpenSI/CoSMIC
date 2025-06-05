@@ -100,6 +100,9 @@ Wait until you see the message: `cosmic | Model Llama3.1 is available in the Oll
 
 The application will initialize on port 8080. To access it, open a web browser and navigate to `http://localhost:8080`.
 
+## OAuth Implementation
+You can integrate OAuth authentication into this application to enhance security and manage user access. For detailed instructions on setting up OAuth, please refer to our [OAuth guide](OAuth.md).
+
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
 Currently, it has 5 base services, including
