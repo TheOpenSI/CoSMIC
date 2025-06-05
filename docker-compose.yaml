@@ -46,14 +46,19 @@ services:
       - cosmic
     ports:
       - "${OPEN_WEBUI_PORT:-8080}:8080"
+    env_file:
+      - .env
     environment:
-      - ENABLE_SIGNUP=true
       - CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
       - OPENAI_API_KEY=0p3n-w3bu!
       - OPENAI_API_BASE_URL=http://pipelines:9099
       - OPENSI_COSMIC_API_BASE_URL=http://localhost:3000
+      - ENABLE_OAUTH_SIGNUP=true
+      - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
+      - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+      - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
       # - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/cosmic_db
     extra_hosts:
       - host.docker.internal:host-gateway
