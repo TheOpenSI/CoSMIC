@@ -103,6 +103,25 @@ The application will initialize on port 8080. To access it, open a web browser a
 ## OAuth Implementation
 You can integrate OAuth authentication into this application to enhance security and manage user access. For detailed instructions on setting up OAuth, please refer to our [OAuth guide](OAuth.md).
 
+## Postgres Implementation
+
+By default, OpenSI-CoSMIC uses SQLite as its database. However, if you prefer to use Postgres for enhanced scalability and performance, you can configure it by following these steps:
+
+1. Open the `.env` file in the root directory of the project and set the following variables:
+  - `DATABASE_USER`: Specify the username for the Postgres database.
+  - `DATABASE_PASSWORD`: Specify the password for the Postgres database.
+  - `PGADMIN_USER`: Specify the username for PGAdmin.
+  - `PGADMIN_PASSWORD`: Specify the password for PGAdmin.
+
+2. Once the `.env` file is configured, run the following command to start the services with Postgres:
+```bash
+docker compose -f docker-compose.postgres.yaml up -d
+```
+
+This will initialize the application with Postgres as the database backend.
+
+**Note**: Configuring the `.env` file is mandatory for the Postgres setup to work correctly. Ensure all variables are properly set before starting the services.
+
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
 Currently, it has 5 base services, including
