@@ -10,6 +10,7 @@ class UserModel(BaseModel):
 class ServiceModel(BaseModel):
     id: str
     title: str
+    value: int
 
 class ConfigModel(BaseModel):
     id: str

@@ -7,11 +7,13 @@
 # print("Debugger attached!")
 # =======================================================
 
+from typing import List
 from datetime import datetime
 import dotenv
-from fastapi import FastAPI, Request, File, UploadFile, HTTPException
+from fastapi import Depends, FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from numpy import int64
+from internal.schemas import ServiceModel
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
@@ -25,6 +27,8 @@ from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 from internal.models import Base
 from internal.db import SessionLocal, engine
+from sqlalchemy.orm import Session
+from src.controllers.general import get_all_services
 
 app = FastAPI()
 
@@ -259,6 +263,16 @@ async def upload_file(file: UploadFile = File(...)):
             yaml.safe_dump(config_data, file)
 
         return {"status": "success", "message": f"File saved to {save_path}"}
+    except HTTPException as http_exc:
+        raise http_exc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/services")
+async def get_services(db: Session = Depends(get_db)):
+    try:
+        services = get_all_services(db)
+        return {"status": "success", "services": services}
     except HTTPException as http_exc:
         raise http_exc
     except Exception as e:
