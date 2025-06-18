@@ -25,7 +25,7 @@ from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
-from internal.models import Base
+from internal.models import Base, Config
 from internal.db import SessionLocal, engine
 from sqlalchemy.orm import Session
 from src.controllers.general import get_all_services
@@ -164,8 +164,15 @@ async def read_root():
     return {"message": "Welcome to the OpenSICoSMIC API"}
 
 @app.get("/config")
-async def get_config():
+async def get_config(db: Session = Depends(get_db)):
     try:
+        config = db.query(Config).order_by(Config.id.desc()).first()
+
+        if config:
+            # If config is found in the database, return it.
+            config["OPENAI_API_KEY"] = openai_api_key
+            return config
+
         with open(config_path, "r") as file:  # was config_default_path
             config_data = yaml.safe_load(file)
         config_data["OPENAI_API_KEY"] = openai_api_key
@@ -268,11 +275,11 @@ async def upload_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.get("/services")
+@app.get("/services", response_model=List[ServiceModel])
 async def get_services(db: Session = Depends(get_db)):
     try:
         services = get_all_services(db)
-        return {"status": "success", "services": services}
+        return services
     except HTTPException as http_exc:
         raise http_exc
     except Exception as e:
