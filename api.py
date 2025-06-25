@@ -132,6 +132,10 @@ class ConfigUpdateForm(BaseModel):
     chess: ChessConfig
     openai: OpenAIConfig
 
+class ConfigUpdatePayload(BaseModel):
+    config: ConfigUpdateForm
+    user: dict
+
 openai_api_status = opensi_cosmic.check_openai_key()
 
 
@@ -181,8 +185,12 @@ async def get_config(db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/config/update")
-async def update_config(request: Request, form_data: ConfigUpdateForm):
+async def update_config(request: Request, body: ConfigUpdatePayload):
     try:
+
+        user = body.user
+        form_data = body.config
+
         # Update all the variables to /app/backend/configs/config_default.yaml.
         # This will be used by CoSMIC pipeline.
         # Step 1: read config.yaml
