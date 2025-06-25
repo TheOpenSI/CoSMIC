@@ -12,21 +12,18 @@ from datetime import datetime
 import dotenv
 from fastapi import Depends, FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from numpy import int64
 from internal.schemas import ServiceModel
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
-import pandas as pd
-from zoneinfo import ZoneInfo
 from typing import Optional
 
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
-from utils.statistics import update_statistic_per_query
-from internal.models import Base, Config
-from internal.db import SessionLocal, engine
+from src.controllers.statistics import update_statistic_table
+from internal.models import Config
+from internal.db import SessionLocal
 from sqlalchemy.orm import Session
 from src.controllers.general import get_all_services
 
@@ -296,7 +293,7 @@ async def quit():
         raise HTTPException(status_code=500, detail=str(e))
     
 @app.post("/cosmic")
-async def process_cosmic(data: CosmicAPI):
+async def process_cosmic(data: CosmicAPI, db: Session = Depends(get_db)):
     global config_modify_timestamp
     global openai_api_key
     global opensi_cosmic
@@ -323,17 +320,11 @@ async def process_cosmic(data: CosmicAPI):
         # For the same user, the QA instance will not change.
         opensi_cosmic.set_up_qa(str(user_id))
 
-        # Compute statistic information.
-        current_time = datetime.strftime(
-            datetime.now(tz=ZoneInfo("Australia/Sydney")),
-            '%d-%m-%Y,%H:%M:%S'
-        )
-
-        update_statistic_per_query(
+        update_statistic_table(
             data.user_message,
             user_id,
             user_email,
-            current_time
+            db
         )
 
         # Proceed as normal

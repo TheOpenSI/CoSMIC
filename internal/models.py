@@ -1,4 +1,3 @@
-from google_crc32c import value
 from sqlalchemy import Column, Integer, String, Boolean, Float, DateTime, ForeignKey
 from internal.db import Base
 
