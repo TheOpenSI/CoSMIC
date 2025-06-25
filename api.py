@@ -183,7 +183,8 @@ async def get_config(db: Session = Depends(get_db)):
         raise http_exc
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+# TODO: Handle config and User update part. 
 @app.post("/config/update")
 async def update_config(request: Request, body: ConfigUpdatePayload):
     try:
@@ -250,6 +251,7 @@ async def update_config(request: Request, body: ConfigUpdatePayload):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
+# TODO: Handle file upload and save it to database.
 @app.post("/chess/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
