@@ -44,7 +44,7 @@ docker compose up -d
 git clone git@github.com:TheOpenSI/CoSMIC.git
 
 # For users using HTTPS
-git clone https://github.com:TheOpenSI/CoSMIC.git
+git clone https://github.com/TheOpenSI/CoSMIC.git
 ```
 
 3. Clone the Open-WebUI repository in your work directory:
@@ -53,7 +53,7 @@ git clone https://github.com:TheOpenSI/CoSMIC.git
 git clone git@github.com:TheOpenSI/OpenWebUI-CoSMIC.git
 
 # For users using HTTPS
-git clone https://github.com:TheOpenSI/OpenWebUI-CoSMIC.git
+git clone https://github.com/TheOpenSI/OpenWebUI-CoSMIC.git
 ```
 
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
