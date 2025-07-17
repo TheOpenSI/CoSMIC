@@ -14,6 +14,23 @@ services:
     networks:
       - cosmic_net
 
+  cosmic_db_server:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: openwebui_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - cosmic_net
+
   open-webui:
     build:
       context: ./../OpenWebUI-CoSMIC
@@ -25,6 +42,7 @@ services:
     volumes:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
     depends_on:
+      - cosmic_db_server
       - ollama
       - pipelines
       - cosmic
@@ -43,6 +61,7 @@ services:
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
       - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
+      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/openwebui_db
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
@@ -92,11 +111,53 @@ services:
     networks:
       - cosmic_net
 
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    env_file:
+      - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - cosmic_db_server
+    configs:
+      - source: servers.json
+        target: /pgadmin4/servers.json
+    networks:
+      - cosmic_net
+
+configs:
+  servers.json:
+    content: |
+      {
+        "Servers": {
+            "1": {
+                "Name": " openwebui_db",
+                "Group": "Servers",
+                "Port": 5432,
+                "Username": "${DB_USER}",
+                "Host": "cosmic_db_server",
+                "SSLMode": "prefer",
+                "MaintenanceDB": "postgres"
+            }
+          }
+      }
+
+
 volumes:
   ollama: {}
   open-webui: {}
   pipelines: {}
   volume_configs: {}
+  postgres-data: {}
+  pgadmin-data: {}
 
 networks:
   cosmic_net:

@@ -27,8 +27,20 @@ The Docker installation provides the fastest way to get started with OpenSI-CoSM
 ```bash
 wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
 ```
+2. **Important**: If you're running on a machine without an NVIDIA GPU or CUDA support, you need to modify the `docker-compose.yaml` file. Open the file and comment out the GPU resource allocation section:
+```yaml
+# Comment out these lines if you don't have an NVIDIA GPU
+ deploy:
+   resources:
+     reservations:
+       devices:
+         - driver: nvidia
+           count: all
+           capabilities: [gpu]
+```
 
-2. Once the file is downloaded, open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
+
+3. Open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
 
 ```bash
 docker compose up -d
@@ -58,33 +70,57 @@ git clone https://github.com/TheOpenSI/OpenWebUI-CoSMIC.git
 
 **Note**: Ensure that both repositories are cloned into the same directory to maintain compatibility.
 
-4. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
+4. **Important**: If you're running on a machine without an NVIDIA GPU or CUDA support, you need to modify the `docker-compose.yaml` file. Open the file and comment out the GPU resource allocation section:
+```yaml
+# Comment out these lines if you don't have an NVIDIA GPU
+ deploy:
+   resources:
+     reservations:
+       devices:
+         - driver: nvidia
+           count: all
+           capabilities: [gpu]
+```
+
+5. Navigate to the CoSMIC repository directory and start the services using Docker Compose:
 ```bash
 cd CoSMIC
 ```
 
-5. Open docker-compose.yaml and comment the following lines:
-
-```bash
-    # image: opensicbr/cosmic:latest
-    # pull_policy: always
-```
-
-6. Make sure this lines are not commented
-
-```bash
-    build:
-      context: .
-      dockerfile: Dockerfile
-```
-
-6. Now you can build from your local clone using the command bellow (Be aware it can take a bit to build cosmic.)
-
+6. Now you can build from your local clone using the command below:
 ```bash
 docker compose up -d --build
 ```
 
+7. **Important**: During the first run, the system will automatically download the Llama3.1 model, which may take some time depending on your internet connection. You can monitor the progress by checking the Docker logs:
+```bash
+docker compose logs -f cosmic
+```
+Wait until you see the message: `cosmic | Model Llama3.1 is available in the Ollama container.` before attempting to use the application.
+
 The application will initialize on port 8080. To access it, open a web browser and navigate to `http://localhost:8080`.
+
+## OAuth Implementation
+You can integrate OAuth authentication into this application to enhance security and manage user access. For detailed instructions on setting up OAuth, please refer to our [OAuth guide](OAuth.md).
+
+## Postgres Implementation
+
+By default, OpenSI-CoSMIC uses SQLite as its database. However, if you prefer to use Postgres for enhanced scalability and performance, you can configure it by following these steps:
+
+1. Open the `.env` file in the root directory of the project and set the following variables:
+  - `DATABASE_USER`: Specify the username for the Postgres database.
+  - `DATABASE_PASSWORD`: Specify the password for the Postgres database.
+  - `PGADMIN_USER`: Specify the username for PGAdmin.
+  - `PGADMIN_PASSWORD`: Specify the password for PGAdmin.
+
+2. Once the `.env` file is configured, run the following command to start the services with Postgres:
+```bash
+docker compose -f docker-compose.postgres.yaml up -d
+```
+
+This will initialize the application with Postgres as the database backend.
+
+**Note**: Configuring the `.env` file is mandatory for the Postgres setup to work correctly. Ensure all variables are properly set before starting the services.
 
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
