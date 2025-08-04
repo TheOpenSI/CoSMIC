@@ -36,7 +36,8 @@ class OllamaPullManager:
                  interventions: list = [80, 90, 95], 
                  min_speed_kbps: float = 200.0, 
                  max_retries: int = 5,
-                 fall_back_interval: int = 60):
+                 fall_back_interval: int = 60,
+                 ollama_client: ollama.Client = None):
         """
         OllamaPullManager to mange fail-safe model pulling
 
@@ -54,6 +55,10 @@ class OllamaPullManager:
         self.min_speed_kbps = min_speed_kbps
         self.max_retries = max_retries
         self.fall_back_interval = fall_back_interval
+        if ollama_client is None:
+            self.ollama_client = ollama.Client()
+        else:
+            self.ollama_client = ollama_client
         
         # Limit interventions to 5 (for Stochastic mode)
         if len(self.interventions) > 5:
@@ -95,7 +100,7 @@ class OllamaPullManager:
         Returns:
             List[str]: List of available model names.
         """
-        available_models = ollama.list()
+        available_models = self.ollama_client.list()
         return [model.get("model") for model in available_models.get("models", [])]
     
     
@@ -232,7 +237,7 @@ class OllamaPullManager:
         """
         try:
             self._is_pulling = True
-            stream = ollama.pull(self.model_name, stream=True)
+            stream = self.ollama_client.pull(self.model_name, stream=True)
             
             for chunk in stream:
                 if self._should_stop:

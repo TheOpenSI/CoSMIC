@@ -1,9 +1,7 @@
-echo "Starting Cosmic Chatbot"
-echo "========================"
-echo "Starting Ollama"
-ollama serve > ollama.log 2>&1 &
-# echo "Starting Chatbot"
-# bash /app/scripts/chatbot/run_chatbot_docker.sh
+#!/bin/bash
 
-# https://www.uvicorn.org/settings/#configuration-methods
-uvicorn api:app --host 0.0.0.0 --port 3000
+echo "Starting CoSMIC"
+echo "========================"
+
+# Start the backend server
+python -Xfrozen_modules=off demo.py --host 0.0.0.0 --port 3000

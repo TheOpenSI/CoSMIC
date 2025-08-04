@@ -1,5 +1,6 @@
 # Set Python environment.
 FROM python:3.11.12-slim
+RUN apt-get update && apt-get upgrade -y && apt-get clean
 
 # Work directory in container.
 WORKDIR /app

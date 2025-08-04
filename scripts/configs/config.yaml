@@ -12,7 +12,7 @@ document_path: []  # a string or a list of .pdf to add context to the vector dat
 service: -1  # service selection: -1 [auto], 0 [chess], 1 [update vector database], 2 [code generation], 3 [general QA]
 
 query_analyser:
-  llm_name: "ollama:llama3.1:8b"
+  llm_name: "ollama:qwen2.5:7b"
   is_quantized: False
 
 chess:
