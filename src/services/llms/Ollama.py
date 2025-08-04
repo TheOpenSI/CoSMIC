@@ -49,14 +49,15 @@ class Ollama(LLMBase):
         model_name = llm_name.replace("ollama:", "")
         super().__init__(llm_name=model_name, **kwargs)
         self._tag_model() # adds :latest if not present
+        self.ollama_client = self._set_local_client(container_name, local_port) # local client instance
         self.ollama_pull_manager = OllamaPullManager(
             model_name = self.llm_name,
             mode = "stochastic",
             interventions = [85, 95],
             max_retries = 3,
-            fall_back_interval= 60
+            fall_back_interval= 60,
+            ollama_client = self.ollama_client
         )
-        self.ollama_client = self._set_local_client(container_name, local_port) # local client instance
         self._check_availability()
         
         
