@@ -1,10 +1,10 @@
 # -------------------------------------------------------------------------------------------------------------
-# File: Ollama.py
+# File: OllamaPullManager.py
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
 # 
-# Copyright (c) 2024 Open Source Institute
+# Copyright (c) 2025 Open Source Institute
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -24,16 +24,13 @@
 import os, sys
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
-import os
-import sys
-import requests
-import subprocess
 import ollama
 
 from typing import List, Dict, Any, Union
 from ollama import Client
 
 from src.services.llms.llm import LLMBase
+from src.services.llms.OllamaPullManager import OllamaPullManager
 
 class Ollama(LLMBase):
     def __init__(self,
@@ -53,8 +50,16 @@ class Ollama(LLMBase):
         super().__init__(llm_name=model_name, **kwargs)
         self._tag_model() # adds :latest if not present
         self.ollama_client = self._set_local_client(container_name, local_port) # local client instance
-        self.available_models = self._get_available_models() # will need to refresh periodically
+        self.ollama_pull_manager = OllamaPullManager(
+            model_name = self.llm_name,
+            mode = "stochastic",
+            interventions = [85, 95],
+            max_retries = 3,
+            fall_back_interval= 60,
+            ollama_client = self.ollama_client
+        )
         self._check_availability()
+        
         
     def _tag_model(self) -> None:
         if ":" not in self.llm_name:
@@ -75,30 +80,6 @@ class Ollama(LLMBase):
             headers = {"Content-Type": "application/json"}
         )
         return client
-
-
-    def _get_available_models(self) -> List[str]:
-        """
-        Get the list of available models in the Ollama container.
-
-        Returns:
-            List[str]: List of available model names.
-        """
-        available_models = self.ollama_client.list()
-        return [model.model for model in available_models.models]
-    
-    
-    def _is_model_available(self, model_name: str) -> bool:
-        """
-        Check if a specific model is available in the Ollama container.
-
-        Args:
-            model_name (str): Name of the model to check.
-
-        Returns:
-            bool: True if the model is available, False otherwise.
-        """
-        return model_name in self.available_models
     
     
     def _check_availability(self) -> None:
@@ -106,12 +87,7 @@ class Ollama(LLMBase):
         Check if the Ollama container is available and the specified model is available.
         Raises an exception if the container or model is not available.
         """
-        is_available = self._is_model_available(self.llm_name)
-        if is_available:
-            print(f"Model {self.llm_name} is available in the Ollama container.")
-        else:
-            print(f"Pulling model {self.llm_name} from Ollama.")
-            self.ollama_client.pull(self.llm_name)
+        self.ollama_pull_manager.pull_model()
             
     
     def __call__(self,
@@ -146,9 +122,9 @@ class Ollama(LLMBase):
             else raw_response
         
         return response, raw_response    
-            
-    
-    def quit(self):
+
+
+    def quit(self) -> None:
         """
         Clean up any resources. No specific cleanup needed for API-based implementation.
         """
