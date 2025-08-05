@@ -28,6 +28,7 @@ services:
       - ollama
       - pipelines
       - cosmic
+      - pycapsule
     ports:
       - "${OPEN_WEBUI_PORT:-8080}:8080"
     env_file:
@@ -70,6 +71,18 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+    
+  pycapsule:
+    image: opensicbr/pycapsule:latest
+    privileged: true
+    container_name: pycapsule
+    ports:
+      - '8780:8780'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - shared_mount:/app/services/Container/mount_dir/synk_mount
+    depends_on:
+      - ollama
     networks:
       - cosmic_net
 
@@ -84,9 +97,10 @@ services:
       - volume_configs:/app/scripts/configs
     ports:
       - '3000:3000'
-      - '5678:5678' # debupy
+      # - '5678:5678' # debupy
     depends_on:
       - ollama
+      - pycapsule
     tty: true
     restart: unless-stopped
     networks:
@@ -97,6 +111,8 @@ volumes:
   open-webui: {}
   pipelines: {}
   volume_configs: {}
+  shared_mount:
+    external: true
 
 networks:
   cosmic_net:

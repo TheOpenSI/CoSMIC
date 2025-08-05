@@ -31,12 +31,10 @@ from typing import List
 from src.services.base import ServiceBase
 from utils.log_tool import set_color
 
-# =============================================================================================================
-
 class CodeGenerator(ServiceBase):
     def __init__(
         self,
-        service_container_name: str = "localhost",
+        service_container_name: str = "pycapsule",
         model_name: str = "qwen2.5-coder",
         **kwargs
     ) -> None:
@@ -69,7 +67,7 @@ class CodeGenerator(ServiceBase):
     def __call__(
         self, 
         query:str, 
-        timeout: int = 30
+        timeout: int = 60
     ) -> tuple[str, str]:
         """
         Send the user query to the PyCapsule service.
@@ -96,19 +94,11 @@ class CodeGenerator(ServiceBase):
                 )
             
             # Extract respone, error, code and status from the response
-            full_response: str = pycaspsule_response.json()[0].get("response", "")
-            error: str = pycaspsule_response.json()[0].get("error", "")
-            code: str = pycaspsule_response.json()[0].get("code", "")
-            status: str = pycaspsule_response.json()[0].get("status", "")
+            response: str = pycaspsule_response.json()[0].get("code", "")
+            raw_response: str = pycaspsule_response.json()[0].get("response", "") + "\n\n" + response
 
-            # Check if status is success or error
-            raw_response, response = (
-                (full_response, code) # Success will not have error
-                if status == "success"
-                else (full_response, code + "\n\n" + error)
-            )
         except Exception as e:
             raw_response = response = "PyCapsule service encountered an error."
             print(str(e))
 
-        return raw_response, response
+        return response, raw_response # Order changed
