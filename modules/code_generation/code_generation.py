@@ -31,12 +31,10 @@ from typing import List
 from src.services.base import ServiceBase
 from utils.log_tool import set_color
 
-# =============================================================================================================
-
 class CodeGenerator(ServiceBase):
     def __init__(
         self,
-        service_container_name: str = "localhost",
+        service_container_name: str = "pycapsule",
         model_name: str = "qwen2.5-coder",
         **kwargs
     ) -> None:

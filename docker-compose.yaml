@@ -14,12 +14,26 @@ services:
     networks:
       - cosmic_net
 
+  pycapsule:
+    image: opensicbr/pycapsule:latest
+    privileged: true
+    container_name: pycapsule
+    ports:
+      - '8780:8780'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - shared_mount:/app/services/Container/mount_dir/synk_mount
+    depends_on:
+      - ollama
+    networks:
+      - cosmic_net
+
   cosmic:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: cosmic
-    # image: opensicbr/cosmic:latest
+    # image: opensicbr/cosmic:cli
     volumes:
       - volume_configs:/app/scripts/configs
     ports:
@@ -27,6 +41,7 @@ services:
       - '5678:5678' # debugpy
     depends_on:
       - ollama
+      - pycapsule
     stdin_open: true
     tty: true
     restart: unless-stopped
@@ -36,6 +51,8 @@ services:
 volumes:
   ollama: {}
   volume_configs: {}
+  shared_mount:
+    external: true
 
 networks:
   cosmic_net:
