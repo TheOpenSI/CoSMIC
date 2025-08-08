@@ -1,9 +1,12 @@
+# ==============================================DEBUGGING======================================================
 # import debugpy
 # debugpy.listen(("0.0.0.0", 5678))
 # print("Waiting for debugger attach")
 # debugpy.wait_for_client()
 # debugpy.breakpoint()
 # print('break on this line')
+# ==============================================DEBUGGING======================================================
+
 # -------------------------------------------------------------------------------------------------------------
 # File: demo.py
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
@@ -31,8 +34,6 @@
 import os
 
 from src.opensi_cosmic import OpenSICoSMIC
-
-# =============================================================================================================
 
 if __name__ == "__main__":
     # Switch on this to avoid massive warning.

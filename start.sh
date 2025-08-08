@@ -10,13 +10,13 @@ show_usage(){
     echo ""
     echo "Options:"
     echo "  --help                    Show this help message"
-    echo "  --docker_build            Build the Docker image before starting the services"
-    echo "  --cosmic_cli              Keep Cosmic interactive CLI running"
+    echo "  --docker_build            Runs docker compose with --build"
+    echo "  --cosmic_cli              Starts the cosmic service in CLI mode"
     echo ""
     echo "Examples:"
     echo "  $0                                    # Default"
-    echo "  $0 --docker_build                     # Build Docker image first"
-    echo "  $0 --cosmic_cli                       # Keep Cosmic CLI running"
+    echo "  $0 --docker_build                     # Build Docker images from Dockerfile"
+    echo "  $0 --cosmic_cli                       # Start Cosmic CLI, will start all dependencies"
 }
 
 # Parse command line arguments
@@ -44,19 +44,25 @@ done
 
 echo "Configuration:"
 echo "  Docker build: $DOCKER_BUILD"
-echo "  Keep Cosmic CLI running: $KEEP_COSMIC"
+echo "  Cosmic in CLI mode: $KEEP_COSMIC"
 echo ""
 
 # Create Docker volume
-echo "Creating Docker volume for Ollama..."
+echo "Creating Docker volume for PyCapsule..."
 docker volume create shared_mount
 
 # Start Docker Compose
 echo "Starting Docker Compose services..."
 if [[ "$DOCKER_BUILD" == true ]]; then
-    docker compose up --build
+    if [[ "$KEEP_COSMIC" == true ]]; then
+        docker compose run --rm --build cosmic
+    else
+        docker compose up --build
+    fi
 elif [[ "$KEEP_COSMIC" == true ]]; then
-    docker compose run --rm cosmic
+    # docker compose run --rm cosmic
+    docker compose run --service-ports cosmic
+
 else
     docker compose up
 fi
