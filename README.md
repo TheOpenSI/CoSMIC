@@ -89,8 +89,9 @@ cd CoSMIC
 
 6. Now you can build from your local clone using the command below:
 ```bash
-docker compose up -d --build
+bash start.sh --docker_build
 ```
+This will create an external volume required for [PyCapsule](https://github.com/TheOpenSI/PyCapsule) and run the `docker compose up` or `docker compose up --build` command. For details, run `bash start.sh --help`.
 
 7. **Important**: During the first run, the system will automatically download the Llama3.1 model, which may take some time depending on your internet connection. You can monitor the progress by checking the Docker logs:
 ```bash
