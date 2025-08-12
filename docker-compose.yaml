@@ -44,6 +44,7 @@ services:
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
       - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
+      - ENABLE_WEBSOCKET_SUPPORT=false # https://github.com/open-webui/open-webui/discussions/11071
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
@@ -99,7 +100,7 @@ services:
       - volume_configs:/app/scripts/configs
     ports:
       - '3000:3000'
-      # - '5678:5678' # debupy
+      - '5678:5678' # debupy
     depends_on:
       - ollama
       - pycapsule
