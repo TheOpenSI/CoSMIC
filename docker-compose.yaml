@@ -15,11 +15,11 @@ services:
       - cosmic_net
 
   open-webui:
-    build:
-      context: ./../OpenWebUI-CoSMIC
-      dockerfile: Dockerfile
-      args:
-        OLLAMA_BASE_URL: '/ollama'
+    # build:
+    #   context: ./../OpenWebUI-CoSMIC
+    #   dockerfile: Dockerfile
+    #   args:
+    #     OLLAMA_BASE_URL: '/ollama'
     image: opensicbr/cosmic_openwebui:latest
     container_name: open-webui
     volumes:
@@ -71,6 +71,8 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+    networks:
+      - cosmic_net
     
   pycapsule:
     image: opensicbr/pycapsule:latest
