@@ -111,7 +111,7 @@ By default, OpenSI-CoSMIC uses SQLite as its database. However, if you prefer to
 1. Open the `.env` file in the root directory of the project and set the following variables:
   - `DATABASE_USER`: Specify the username for the Postgres database.
   - `DATABASE_PASSWORD`: Specify the password for the Postgres database.
-  - `PGADMIN_USER`: Specify the username for PGAdmin.
+  - `PGADMIN_USER`: Specify the username for PGAdmin. Ex. root@root.com
   - `PGADMIN_PASSWORD`: Specify the password for PGAdmin.
 
 2. Once the `.env` file is configured, run the following command to start the services with Postgres:
