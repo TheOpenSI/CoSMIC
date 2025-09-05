@@ -25,7 +25,7 @@ The Docker installation provides the fastest way to get started with OpenSI-CoSM
 1. Download the `docker-compose.yaml` file from the official CoSMIC GitHub repository:
 
 ```bash
-wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
+wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml https://github.com/TheOpenSI/CoSMIC/blob/dev/start.sh
 ```
 2. **Important**: If you're running on a machine without an NVIDIA GPU or CUDA support, you need to modify the `docker-compose.yaml` file. Open the file and comment out the GPU resource allocation section:
 ```yaml
@@ -40,10 +40,10 @@ wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml
 ```
 
 
-3. Open the directory containing the `docker-compose.yaml` file in a terminal and run the following command to start the services:
+3. Open the directory containing the downloaded files in a terminal and run the following command to start the services:
 
 ```bash
-docker compose up -d
+bash start.sh # bash start.sh --help for details
 ```
 
 ### Option 2: Clone and Set Up Repository (For Development)
@@ -89,8 +89,9 @@ cd CoSMIC
 
 6. Now you can build from your local clone using the command below:
 ```bash
-docker compose up -d --build
+bash start.sh --docker_build
 ```
+This will create an external volume required for [PyCapsule](https://github.com/TheOpenSI/PyCapsule) and run the `docker compose up` or `docker compose up --build` command. For details, run `bash start.sh --help`.
 
 7. **Important**: During the first run, the system will automatically download the Llama3.1 model, which may take some time depending on your internet connection. You can monitor the progress by checking the Docker logs:
 ```bash
@@ -110,7 +111,7 @@ By default, OpenSI-CoSMIC uses SQLite as its database. However, if you prefer to
 1. Open the `.env` file in the root directory of the project and set the following variables:
   - `DATABASE_USER`: Specify the username for the Postgres database.
   - `DATABASE_PASSWORD`: Specify the password for the Postgres database.
-  - `PGADMIN_USER`: Specify the username for PGAdmin.
+  - `PGADMIN_USER`: Specify the username for PGAdmin. Ex. root@root.com
   - `PGADMIN_PASSWORD`: Specify the password for PGAdmin.
 
 2. Once the `.env` file is configured, run the following command to start the services with Postgres:
