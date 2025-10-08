@@ -81,7 +81,8 @@ services:
     image: opensicbr/cosmic:latest
     volumes:
       - open-webui:/app/backend/data
-      - volume_configs:/app/scripts/configs
+      - ./scripts/configs:/app/scripts/configs
+      - ./src:/app/src
     ports:
       - '3000:3000'
       - '5678:5678' # debupy

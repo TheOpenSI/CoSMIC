@@ -122,20 +122,25 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         Returns:
             system_information (str): system information.
         """
+        # Build a dynamic bullet list of available services
+        service_bullets = []
+        for service_id, service_desc in self.services.items():
+            service_bullets.append(f"- Service {service_id}: {service_desc}")
+        
+        services_list = "\n".join(service_bullets)
+        
         system_information = \
-            f"My name is OpenSI-CoSMIC." \
-            f" I am an AI system." \
+            f"My name is OpenSI-CoSMIC. I am an AI system." \
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
             f" I am created, developed, and maintained by OpenSI," \
             f" which is an institute at the University of Canberra." \
-            f" At the moment, I can provide {len(self.services)} services," \
-            f" including {self.service_string}." \
-            f" I can design and provide more services under an agreement." \
+            f" At the moment, I can provide {len(self.services)} services:\n{services_list}" \
+            f"\nI can design and provide more services under an agreement." \
             f" To request more services, please find the contact information in my profile." \
             f" My profile and project repository can be found at" \
             f" <https://github.com/TheOpenSI/CoSMIC>." \
-            f" You take my role."
+            f"\nWhen users ask what I can do or how I can help, I should enumerate exactly these services."
 
         return system_information
 
@@ -158,9 +163,21 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         #     f" information or OpenSI-CoSMIC?" \
         #     f" Just answer yes or no without any explainations."
         
-        user_prompt = f"A user has asked the following question - '{question}', " \
-                      f"is the user asking information about you (the AI assistant called OpenSI-CoSMIC) or " \
-                      f"requesting information about how you work/what you can do? " \
+        # With the simple filtering method, always answer YES for capability questions!
+        question_lower = question.lower().strip()
+        capability_phrases = [
+            'how can you help', 'what can you do', 'what are your capabilities',
+            'what services', 'list your services', 'your services', 'help me',
+            'what do you do', 'what are you capable of', 'what can you offer',
+            'can you help'
+        ]
+        
+        # If any capability phrase is found, definitely return YES
+        if any(phrase in question_lower for phrase in capability_phrases):
+            return "YES"  # Direct answer - no LLM needed!
+        
+        # For other questions, use LLM detection
+        user_prompt = f"A user has asked: '{question}'. " \
+                      f"Is this question asking about your capabilities, services, what you can do, or how you can help? " \
                       f"Answer only 'YES' or 'NO' without any explanations."
-
         return user_prompt

@@ -89,8 +89,11 @@ class QABase(ServiceBase):
         raw_response = None
         retrieve_score = -1
 
-        # Get service option through query analyser.
-        service_option, service_info_dict = self.query_analyser(query)
+        # Get service options through query analyser.
+        selected_services, service_info_dict = self.query_analyser(query)
+
+        # Get the first service option (assuming single service selection for now).
+        service_option = list(selected_services.keys())[0] if selected_services else "-1"
 
         # Whether this query is related to system information.
         system_information_relevance = service_info_dict["system_information_relevance"]
