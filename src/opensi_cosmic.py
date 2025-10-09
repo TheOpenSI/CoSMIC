@@ -41,6 +41,11 @@ from modules.code_generation.code_generation import CodeGenerator
 from utils.log_tool import set_color
 from box import Box
 from src.query_analyser.query_analyser import QueryAnalyser
+try:
+    # Prefer OpenWebUI DB model id if available
+    from internal.openwebui_db import get_latest_model_id
+except Exception:
+    get_latest_model_id = None  # type: ignore
 
 # =============================================================================================================
 
@@ -81,8 +86,14 @@ class OpenSICoSMIC:
         # Initialize QA instance.
         self.qa = None
 
-        # If llm_name is not specified, read it from the config file.
-        if llm_name == "": llm_name = self.config.llm_name
+        # If llm_name is not specified, prefer OpenWebUI DB; otherwise fall back to the config file.
+        if llm_name == "":
+            if get_latest_model_id is not None:
+                model_id = get_latest_model_id()
+                if model_id:
+                    llm_name = model_id
+            if llm_name == "":
+                llm_name = self.config.llm_name
         self.llm = self.get_llm(
             llm_name,
             seed=self.config.seed,

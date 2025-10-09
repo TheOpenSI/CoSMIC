@@ -2,13 +2,13 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    #deploy:
+      #resources:
+        #reservations:
+          #devices:
+            #- driver: nvidia
+              #count: all
+              #capabilities: [gpu]
     volumes:
       - ollama:/root/.ollama
     networks:

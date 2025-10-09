@@ -23,13 +23,38 @@ from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from src.controllers.statistics import update_statistic_table
 from internal.models import Config
-from internal.db import SessionLocal
+from internal.openwebui_db import get_latest_model_id
+from internal.db import SessionLocal, Base, engine
 from sqlalchemy.orm import Session
 from src.controllers.general import get_all_services
 
+# Sync imports
+SYNC_ON_START = os.getenv("COSMIC_SYNC_ON_START", "1") == "1"
+try:
+    from internal.sync import sync_users, sync_llms
+except Exception as e:  # pragma: no cover - ignore if sync module missing
+    sync_users = None  # type: ignore
+    sync_llms = None  # type: ignore
+
 app = FastAPI()
 
-# Base.metadata.create_all(bind=engine)
+# Ensure DB tables exist (safe no-op if already created)
+Base.metadata.create_all(bind=engine)
+
+# Run initial sync if enabled
+if SYNC_ON_START and sync_users:
+    try:
+        summary = sync_users()
+        print(f"[cosmic-sync] Users synchronized: {summary}")
+    except Exception as sync_e:  # pragma: no cover
+        print(f"[cosmic-sync] Startup user sync failed: {sync_e}")
+
+if SYNC_ON_START and sync_llms:
+    try:
+        summary = sync_llms()
+        print(f"[cosmic-sync] LLMs synchronized: {summary}")
+    except Exception as sync_e:  # pragma: no cover
+        print(f"[cosmic-sync] Startup LLM sync failed: {sync_e}")
 
 def get_db():
     db = SessionLocal()
@@ -164,18 +189,83 @@ def rebuild_cosmic():
 async def read_root():
     return {"message": "Welcome to the OpenSICoSMIC API"}
 
+@app.post("/admin/sync/users")
+async def admin_sync_users():
+    if not sync_users:
+        raise HTTPException(status_code=503, detail="Sync unavailable")
+    try:
+        summary = sync_users()
+        return {"status": "ok", "summary": summary}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"User sync failed: {e}")
+
+@app.post("/admin/sync/llms")
+async def admin_sync_llms():
+    if not sync_llms:
+        raise HTTPException(status_code=503, detail="Sync unavailable")
+    try:
+        summary = sync_llms()
+        return {"status": "ok", "summary": summary}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LLM sync failed: {e}")
+
 @app.get("/config")
 async def get_config(db: Session = Depends(get_db)):
     try:
-        config = db.query(Config).order_by(Config.id.desc()).first()
+        db_config = db.query(Config).order_by(Config.id.desc()).first()
 
-        if config:
-            # If config is found in the database, return it.
-            config["OPENAI_API_KEY"] = openai_api_key
-            return config
-
+        # Always start from file defaults to guarantee expected structure
         with open(config_path, "r") as file:  # was config_default_path
             config_data = yaml.safe_load(file)
+
+        if db_config:
+            # Overlay DB values onto file defaults with appropriate key mapping
+            if db_config.llm_name is not None:
+                config_data["llm_name"] = db_config.llm_name
+            if db_config.is_quantized is not None:
+                config_data["is_quantized"] = db_config.is_quantized
+            if db_config.seed is not None:
+                config_data["seed"] = db_config.seed
+            if db_config.doc_directory is not None:
+                config_data["doc_directory"] = db_config.doc_directory
+            if db_config.service_id is not None:
+                # UI expects integer service id directly
+                config_data["service"] = db_config.service_id
+
+            # Nested: query_analyser
+            if "query_analyser" not in config_data or config_data["query_analyser"] is None:
+                config_data["query_analyser"] = {}
+            if db_config.qa_llm_name is not None:
+                config_data["query_analyser"]["llm_name"] = db_config.qa_llm_name
+            if db_config.qa_is_quantized is not None:
+                config_data["query_analyser"]["is_quantized"] = db_config.qa_is_quantized
+
+            # Nested: rag
+            if "rag" not in config_data or config_data["rag"] is None:
+                config_data["rag"] = {}
+            if db_config.rag_topk is not None:
+                config_data["rag"]["topk"] = db_config.rag_topk
+            if db_config.rag_retrieve_score_threshold is not None:
+                config_data["rag"]["retrieve_score_threshold"] = db_config.rag_retrieve_score_threshold
+            if db_config.rag_vector_db_path is not None:
+                config_data["rag"]["vector_db_path"] = db_config.rag_vector_db_path
+
+            # Nested: chess
+            if "chess" not in config_data or config_data["chess"] is None:
+                config_data["chess"] = {}
+            if db_config.chess_path is not None:
+                config_data["chess"]["stockfish_path"] = db_config.chess_path
+
+            # Same-as-above flag mapping
+            if db_config.same_as_above is not None:
+                config_data["sameasabove"] = db_config.same_as_above
+
+        # Prefer OpenWebUI DB model id for llm_name (override YAML/DB setting)
+        ow_model_id = get_latest_model_id()
+        if ow_model_id:
+            config_data["llm_name"] = ow_model_id
+
+        # Include the current OPENAI_API_KEY separately for UI use
         config_data["OPENAI_API_KEY"] = openai_api_key
 
         return config_data

@@ -122,6 +122,36 @@ This will initialize the application with Postgres as the database backend.
 
 **Note**: Configuring the `.env` file is mandatory for the Postgres setup to work correctly. Ensure all variables are properly set before starting the services.
 
+### (New) Separate Cosmic Application Database
+
+The `cosmic` service can now use its own dedicated Postgres database (separate from `openwebui_db`) for internal tables (`users`, `services`, `configs`, `statistics`, etc.).
+
+By default, if no Postgres settings are provided, it falls back to a local SQLite file (`cosmic.db`). To enable a separate Postgres database for Cosmic:
+
+1. Ensure you are using the Postgres compose file:
+  ```bash
+  docker compose -f docker-compose.postgres.yaml up -d --build
+  ```
+2. The following environment variables (already added to `docker-compose.postgres.yaml`) control the Cosmic DB connection:
+  - `COSMIC_DB_HOST` (defaults to `cosmic_db_server` in compose)
+  - `COSMIC_DB_PORT` (default `5432`)
+  - `COSMIC_DB_USER` (defaults to `${DATABASE_USER}`)
+  - `COSMIC_DB_PASSWORD` (defaults to `${DATABASE_PASSWORD}`)
+  - `COSMIC_DB_NAME` (default `cosmic_db`)
+  - `CREATE_COSMIC_DB` (set to `1` to auto-create the database if it does not exist)
+
+3. Optional: You can override everything with a full SQLAlchemy URL via `COSMIC_DB_URL`.
+
+4. On startup, if `CREATE_COSMIC_DB=1`, the service attempts to create `COSMIC_DB_NAME` (connecting first to the `postgres` maintenance DB). Errors in auto-creation are non-fatal and logged.
+
+5. To inspect the new database after startup:
+  ```bash
+  docker exec -it postgres psql -U $DATABASE_USER -lqt | grep cosmic_db
+  docker exec -it postgres psql -U $DATABASE_USER -d cosmic_db -c '\dt'
+  ```
+
+If you need migrations in the future, integrate Alembic against the new `COSMIC_DB_URL`.
+
 ## Framework
 The system is configurated through [config.yaml](scripts/configs/config.yaml).
 Currently, it has 5 base services, including
@@ -174,3 +204,33 @@ if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow t
 
 ## Funding
 This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
+
+### OpenWebUI -> Cosmic Data Synchronization
+
+A lightweight one-way synchronization copies user records from the OpenWebUI database into the Cosmic application database.
+
+What is synced currently:
+- Users: email, name, role, and the OpenWebUI user id (stored as `openweb_id`).
+
+How it works:
+- On service startup the environment variable `COSMIC_SYNC_ON_START` (default `1`) enables a user sync run.
+- Users are matched by email. If a matching email exists, role/name are updated (idempotent). If not, a new user row is inserted.
+
+Environment variables for source (in addition to those already used by OpenWebUI service):
+- `OPENWEBUI_DATABASE_URL` (preferred) OR individual `OPENWEBUI_DB_HOST`, `OPENWEBUI_DB_PORT`, `OPENWEBUI_DB_USER`, `OPENWEBUI_DB_PASSWORD`, `OPENWEBUI_DB_NAME`.
+
+Manual sync:
+Inside the running `cosmic` container you can trigger a manual sync:
+```bash
+python -c "from internal.sync import sync_users; print(sync_users())"
+```
+
+Disable automatic sync:
+```bash
+COSMIC_SYNC_ON_START=0 docker compose -f docker-compose.postgres.yaml up -d --build
+```
+
+Planned extensions (not yet implemented):
+- Service usage/statistics mirroring.
+- Incremental sync based on updated timestamps.
+- Admin endpoint to trigger sync via HTTP.

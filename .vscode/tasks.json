@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run smoke DB sync test",
+			"type": "shell",
+			"command": "python scripts/test/smoke_db_sync_fk.py",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		}
+	]
+}

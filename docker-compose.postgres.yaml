@@ -2,13 +2,13 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    #deploy:
+      #resources:
+        #reservations:
+          #devices:
+            #- driver: nvidia
+              #count: all
+              #capabilities: [gpu]
     volumes:
       - ollama:/root/.ollama
     networks:
@@ -106,10 +106,21 @@ services:
       - '5678:5678' # debupy
     depends_on:
       - ollama
+      - cosmic_db_server
     tty: true
     restart: unless-stopped
     networks:
       - cosmic_net
+    environment:
+      # Separate Cosmic application database (distinct from openwebui_db)
+      COSMIC_DB_HOST: cosmic_db_server
+      COSMIC_DB_PORT: 5432
+      COSMIC_DB_USER: ${DATABASE_USER}
+      COSMIC_DB_PASSWORD: ${DATABASE_PASSWORD}
+      COSMIC_DB_NAME: cosmic_db
+      CREATE_COSMIC_DB: "1"
+      # Source OpenWebUI database (for sync)
+      OPENWEBUI_DATABASE_URL: postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@cosmic_db_server:5432/openwebui_db
 
   
   pgadmin:
@@ -138,16 +149,25 @@ configs:
     content: |
       {
         "Servers": {
-            "1": {
-                "Name": "openwebui_db",
-                "Group": "Servers",
-                "Port": 5432,
-                "Username": "${DATABASE_USER}",
-                "Host": "cosmic_db_server",
-                "SSLMode": "prefer",
-                "MaintenanceDB": "postgres"
-            }
+          "1": {
+            "Name": "Postgres Server",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "${DATABASE_USER}",
+            "Host": "cosmic_db_server",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
+          },
+          "2": {
+            "Name": "Cosmic DB (same server)",
+            "Group": "Servers",
+            "Port": 5432,
+            "Username": "${DATABASE_USER}",
+            "Host": "cosmic_db_server",
+            "SSLMode": "prefer",
+            "MaintenanceDB": "postgres"
           }
+        }
       }
 
 

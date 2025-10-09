@@ -8,9 +8,10 @@ class UserModel(BaseModel):
     role: str
 
 class ServiceModel(BaseModel):
-    id: int
-    title: str
-    value: int
+    id: int  # Primary key
+    title: str  # Human readable service title
+    description: Optional[str] = None  # Short description of service purpose
+    active: bool = True  # Whether service is currently enabled/visible
 
 class ConfigModel(BaseModel):
     id: int
