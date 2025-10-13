@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import os, sys
+import os, sys, re
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
@@ -140,6 +140,7 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             f" To request more services, please find the contact information in my profile." \
             f" My profile and project repository can be found at" \
             f" <https://github.com/TheOpenSI/CoSMIC>." \
+            f" You take my role." \
             f"\nWhen users ask what I can do or how I can help, I should enumerate exactly these services."
 
         return system_information
@@ -163,18 +164,43 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         #     f" information or OpenSI-CoSMIC?" \
         #     f" Just answer yes or no without any explainations."
         
-        # With the simple filtering method, always answer YES for capability questions!
+        # Improved capability detection with intent-based patterns
         question_lower = question.lower().strip()
-        capability_phrases = [
-            'how can you help', 'what can you do', 'what are your capabilities',
-            'what services', 'list your services', 'your services', 'help me',
-            'what do you do', 'what are you capable of', 'what can you offer',
-            'can you help'
+        
+        # Define patterns that indicate direct capability inquiries
+        # These patterns look for capability phrases at the start or as complete questions
+        direct_capability_patterns = [
+            r'^how can you help(\s+me)?\??$',  # "how can you help" or "how can you help me?"
+            r'^what can you do\??$', r'^what are your capabilities\??$',
+            r'^what services', r'^list your services', r'^your services', 
+            r'^what do you do\??$', r'^what are you capable of\??$', r'^what can you offer(\s+me)?\??$',
+            r'^can you help\??$', r'^can you help me\??$',  # Only if standalone or with "me"
+            r'^help me$', r'^help$',
+            # Common variations and question patterns
+            r'^tell me what you can do', r'^show me your capabilities',
+            r'^what functionality do you provide', r'^what features do you have',
         ]
         
-        # If any capability phrase is found, definitely return YES
-        if any(phrase in question_lower for phrase in capability_phrases):
-            return "YES"  # Direct answer - no LLM needed!
+        # Also check for standalone questions (short queries that are likely capability questions)
+        standalone_capability_phrases = [
+            'how can you help me', 'what can you do', 'what are your capabilities',
+            'what services do you provide', 'list your services', 'what services do you offer',
+            'what do you do', 'what are you capable of', 'what can you offer me',
+            'can you help me', 'help', 'help me', 'capabilities', 'services',
+            'what functionality', 'your features', 'your services'
+        ]
+        
+        # Check for direct patterns (questions starting with capability phrases)
+        for pattern in direct_capability_patterns:
+            if re.search(pattern, question_lower):
+                return "YES"  # Direct capability question - no LLM needed!
+        
+        # For short queries, check if they match standalone capability phrases
+        # Only do this for relatively short queries to avoid false positives
+        if len(question_lower.split()) <= 8:  # 8 words or fewer
+            for phrase in standalone_capability_phrases:
+                if question_lower == phrase or (question_lower.endswith('?') and phrase in question_lower):
+                    return "YES"
         
         # For other questions, use LLM detection
         user_prompt = f"A user has asked: '{question}'. " \

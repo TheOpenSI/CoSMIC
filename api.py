@@ -112,8 +112,7 @@ class ConfigUpdateForm(BaseModel):
     seed: int
     doc_directory: str
     document_path: str
-    service: list[int] # TODO: Change to a list of integers.
-    # service: int
+    service: list[int] 
     sameasabove: Optional[bool] = False
     query_analyser: QueryQnalyserConfig
     rag: RAGConfig
