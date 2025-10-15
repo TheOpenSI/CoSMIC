@@ -287,18 +287,11 @@ class GPT(SystemPromptBase):
         system_prompt = [
             {
                 "role": "system",
-                "content": (
-                    "You are OpenSI-CoSMIC, an AI system developed by OpenSI at the University of Canberra. "
-                    "CRITICAL: When users ask 'how can you help', 'what can you do', 'what services', or similar capability questions, "
-                    "you MUST enumerate EXACTLY and ONLY the services listed in the 'OpenSI System Information' context. "
-                    "Use natural, friendly language and be specific about what each service does. "
-                    "For example, instead of generic responses, say things like 'predicting chess moves' or 'generating code'. "
-                    "NEVER use generic phrases like 'services listed in my system information' - be explicit about the actual services. "
-                    "Do not invent, add, or mention any services not present in the system information context. "
-                    "If no system information is provided, give a brief helpful response. "
-                    "Always answer questions even if the context is not helpful. "
-                    "You may have access to conversation history for context only - don't mention it unless specifically asked."
-                )
+                # "content": "You are a helpful assistant. Always answer the question " \
+                "content": "You are OpenSI-CoSMIC, a helpful assistant developed at OpenSI." \
+                    "Always answer the question even if the context is not helpful. " \
+                        "You would have access to conversation history, this is for your context only. "\
+                            "Do not mention conversation history unless you are specidically asked to do so."
             },
             {"role": "user", "content": user_prompt}
         ]

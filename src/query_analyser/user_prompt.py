@@ -22,7 +22,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
-import os, sys, re
+import os, sys
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
@@ -122,26 +122,20 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         Returns:
             system_information (str): system information.
         """
-        # Build a dynamic bullet list of available services
-        service_bullets = []
-        for service_id, service_desc in self.services.items():
-            service_bullets.append(f"- Service {service_id}: {service_desc}")
-        
-        services_list = "\n".join(service_bullets)
-        
         system_information = \
-            f"My name is OpenSI-CoSMIC. I am an AI system." \
+            f"My name is OpenSI-CoSMIC." \
+            f" I am an AI system." \
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
             f" I am created, developed, and maintained by OpenSI," \
             f" which is an institute at the University of Canberra." \
-            f" At the moment, I can provide {len(self.services)} services:\n{services_list}" \
-            f"\nI can design and provide more services under an agreement." \
+            f" At the moment, I can provide {len(self.services)} services," \
+            f" including {self.service_string}." \
+            f" I can design and provide more services under an agreement." \
             f" To request more services, please find the contact information in my profile." \
             f" My profile and project repository can be found at" \
             f" <https://github.com/TheOpenSI/CoSMIC>." \
-            f" You take my role." \
-            f"\nWhen users ask what I can do or how I can help, I should enumerate exactly these services."
+            f" You take my role."
 
         return system_information
 
@@ -164,46 +158,9 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         #     f" information or OpenSI-CoSMIC?" \
         #     f" Just answer yes or no without any explainations."
         
-        # Improved capability detection with intent-based patterns
-        question_lower = question.lower().strip()
-        
-        # Define patterns that indicate direct capability inquiries
-        # These patterns look for capability phrases at the start or as complete questions
-        direct_capability_patterns = [
-            r'^how can you help(\s+me)?\??$',  # "how can you help" or "how can you help me?"
-            r'^what can you do\??$', r'^what are your capabilities\??$',
-            r'^what services', r'^list your services', r'^your services', 
-            r'^what do you do\??$', r'^what are you capable of\??$', r'^what can you offer(\s+me)?\??$',
-            r'^can you help\??$', r'^can you help me\??$',  # Only if standalone or with "me"
-            r'^help me$', r'^help$',
-            # Common variations and question patterns
-            r'^tell me what you can do', r'^show me your capabilities',
-            r'^what functionality do you provide', r'^what features do you have',
-        ]
-        
-        # Also check for standalone questions (short queries that are likely capability questions)
-        standalone_capability_phrases = [
-            'how can you help me', 'what can you do', 'what are your capabilities',
-            'what services do you provide', 'list your services', 'what services do you offer',
-            'what do you do', 'what are you capable of', 'what can you offer me',
-            'can you help me', 'help', 'help me', 'capabilities', 'services',
-            'what functionality', 'your features', 'your services'
-        ]
-        
-        # Check for direct patterns (questions starting with capability phrases)
-        for pattern in direct_capability_patterns:
-            if re.search(pattern, question_lower):
-                return "YES"  # Direct capability question - no LLM needed!
-        
-        # For short queries, check if they match standalone capability phrases
-        # Only do this for relatively short queries to avoid false positives
-        if len(question_lower.split()) <= 8:  # 8 words or fewer
-            for phrase in standalone_capability_phrases:
-                if question_lower == phrase or (question_lower.endswith('?') and phrase in question_lower):
-                    return "YES"
-        
-        # For other questions, use LLM detection
-        user_prompt = f"A user has asked: '{question}'. " \
-                      f"Is this question asking about your capabilities, services, what you can do, or how you can help? " \
+        user_prompt = f"A user has asked the following question - '{question}', " \
+                      f"is the user asking information about you (the AI assistant called OpenSI-CoSMIC) or " \
+                      f"requesting information about how you work/what you can do? " \
                       f"Answer only 'YES' or 'NO' without any explanations."
+
         return user_prompt
