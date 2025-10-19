@@ -205,6 +205,73 @@ if the API of GPT 3.5-Turbo or GPT 4-o from OpenAI is used, please also follow t
 ## Funding
 This project is funded under the agreement with the ACT Government for Future Jobs Fund with Open Source Institute (OpenSI)-R01553 and NetApp Technology Alliance Agreement with OpenSI-R01657.
 
+## Database Schema and ERD (Latest)
+
+Below is the current database schema for the CoSMIC application database (separate from OpenWebUI). This reflects the latest changes: `users.name` added, `services` enhanced (description, active), `llms` table added, and foreign keys/indexes ensured.
+
+```mermaid
+erDiagram
+  USERS ||--o{ CONFIGS : "1-to-many"
+  USERS ||--o{ STATISTICS : "1-to-many"
+  SERVICES ||--o{ CONFIGS : "1-to-many"
+
+  USERS {
+    int id PK
+    varchar openweb_id  "OpenWebUI user.id (string), unique"
+    varchar name
+    varchar email UK
+    varchar role
+  }
+
+  SERVICES {
+    int id PK
+    varchar title
+    varchar(255) description
+    boolean active
+  }
+
+  CONFIGS {
+    int id PK
+    int user_id FK  "-> USERS.id, ON DELETE CASCADE"
+    int service_id FK "-> SERVICES.id"
+    varchar chess_path
+    varchar doc_directory
+    boolean is_quantized
+    varchar llm_name
+    boolean qa_is_quantized
+    varchar qa_llm_name
+    float rag_retrieve_score_threshold
+    int rag_topk
+    varchar rag_vector_db_path
+    boolean same_as_above
+    int seed
+  }
+
+  STATISTICS {
+    int id PK
+    int user_id FK  "-> USERS.id, ON DELETE CASCADE"
+    varchar email
+    datetime start_date
+    datetime last_date
+    int average_token_length
+    int query_count
+  }
+
+  LLMS {
+    int id PK
+    varchar openweb_model_id UK "OpenWebUI model.id"
+    varchar name               "Human-friendly model name"
+    varchar base_model_id      "Underlying base model id"
+    bigint created_at          "Epoch seconds"
+    bigint updated_at          "Epoch seconds"
+  }
+```
+
+Notes:
+- Foreign keys: `configs.user_id` and `statistics.user_id` cascade on delete to keep data consistent when a user is removed.
+- Indexes: `ix_configs_user_id`, `ix_configs_service_id`, `ix_statistics_user_id`, plus unique constraints for `users.email`, `users.openweb_id`, and `llms.openweb_model_id`.
+- The OpenWebUI database is a separate Postgres database (`openwebui_db`). A background sync mirrors users and models into CoSMIC as described below.
+
 ### OpenWebUI -> Cosmic Data Synchronization
 
 A lightweight one-way synchronization copies user records from the OpenWebUI database into the Cosmic application database.
