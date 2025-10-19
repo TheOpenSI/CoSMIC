@@ -55,7 +55,7 @@ services:
       - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=
       - OPENAI_API_KEY=0p3n-w3bu!
-      - OPENAI_API_BASE_URL=http://pipelines:9099docekr
+      - OPENAI_API_BASE_URL=http://pipelines:9099
       - OPENSI_COSMIC_API_BASE_URL=http://localhost:3000
       - ENABLE_OAUTH_SIGNUP=true
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
@@ -82,9 +82,9 @@ services:
     ports:
       - '9099:9099'
     environment:
-    - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
-    - MAX_QUERIES_PER_USER=5
-    - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
+      - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
+      - MAX_QUERIES_PER_USER=5
+      - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
     tty: true
     extra_hosts:
       - host.docker.internal:host-gateway
@@ -119,6 +119,9 @@ services:
       COSMIC_DB_PASSWORD: ${DATABASE_PASSWORD}
       COSMIC_DB_NAME: cosmic_db
       CREATE_COSMIC_DB: "1"
+      # Auto-sync configuration
+      COSMIC_SYNC_ON_START: "1"
+      COSMIC_SYNC_INTERVAL_SECONDS: "300"
       # Source OpenWebUI database (for sync)
       OPENWEBUI_DATABASE_URL: postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@cosmic_db_server:5432/openwebui_db
 
@@ -151,15 +154,6 @@ configs:
         "Servers": {
           "1": {
             "Name": "Postgres Server",
-            "Group": "Servers",
-            "Port": 5432,
-            "Username": "${DATABASE_USER}",
-            "Host": "cosmic_db_server",
-            "SSLMode": "prefer",
-            "MaintenanceDB": "postgres"
-          },
-          "2": {
-            "Name": "Cosmic DB (same server)",
             "Group": "Servers",
             "Port": 5432,
             "Username": "${DATABASE_USER}",

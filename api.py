@@ -16,6 +16,7 @@ from internal.schemas import ServiceModel
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
+import threading, time
 from typing import Optional
 
 from utils.chat_history import build_context_from_messages
@@ -23,13 +24,13 @@ from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from src.controllers.statistics import update_statistic_table
 from internal.models import Config
-from internal.openwebui_db import get_latest_model_id
 from internal.db import SessionLocal, Base, engine
 from sqlalchemy.orm import Session
 from src.controllers.general import get_all_services
 
 # Sync imports
 SYNC_ON_START = os.getenv("COSMIC_SYNC_ON_START", "1") == "1"
+SYNC_INTERVAL_SECONDS = int(os.getenv("COSMIC_SYNC_INTERVAL_SECONDS", "0") or "0")
 try:
     from internal.sync import sync_users, sync_llms
 except Exception as e:  # pragma: no cover - ignore if sync module missing
@@ -55,6 +56,28 @@ if SYNC_ON_START and sync_llms:
         print(f"[cosmic-sync] LLMs synchronized: {summary}")
     except Exception as sync_e:  # pragma: no cover
         print(f"[cosmic-sync] Startup LLM sync failed: {sync_e}")
+
+# Start a periodic auto-sync loop if configured
+def _auto_sync_loop(interval: int):
+    # Delay initial run slightly to allow DBs to come up
+    time.sleep(5)
+    while True:
+        try:
+            if sync_users:
+                summary = sync_users()
+                print(f"[cosmic-sync] Periodic user sync: {summary}")
+            if sync_llms:
+                summary = sync_llms()
+                print(f"[cosmic-sync] Periodic LLM sync: {summary}")
+        except Exception as e:
+            print(f"[cosmic-sync] Periodic sync error: {e}")
+        time.sleep(max(interval, 60))
+
+@app.on_event("startup")
+async def start_auto_sync():
+    if SYNC_INTERVAL_SECONDS > 0:
+        t = threading.Thread(target=_auto_sync_loop, args=(SYNC_INTERVAL_SECONDS,), daemon=True, name="cosmic-auto-sync")
+        t.start()
 
 def get_db():
     db = SessionLocal()
@@ -260,10 +283,8 @@ async def get_config(db: Session = Depends(get_db)):
             if db_config.same_as_above is not None:
                 config_data["sameasabove"] = db_config.same_as_above
 
-        # Prefer OpenWebUI DB model id for llm_name (override YAML/DB setting)
-        ow_model_id = get_latest_model_id()
-        if ow_model_id:
-            config_data["llm_name"] = ow_model_id
+        # Note: We no longer override llm_name from OpenWebUI here.
+        # Any synchronization from OpenWebUI into CoSMIC is handled by internal.sync.
 
         # Include the current OPENAI_API_KEY separately for UI use
         config_data["OPENAI_API_KEY"] = openai_api_key
