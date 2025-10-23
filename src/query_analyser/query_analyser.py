@@ -355,54 +355,102 @@ class QueryAnalyser:
             "system_information": ""
         }
         
-        # Early capability detection for system information queries
-        self.llm.set_user_prompter(self.user_prompter_system_info)
-        capability_check = self.user_prompter_system_info(query)
+        # Early capability detection using the sophisticated logic in user_prompter_system_info
+        # This checks if the query is asking "what can you do?" / "what are your services?" etc.
+        capability_check_result = self.user_prompter_system_info(query)
         
-        # If this is a capability question, handle it directly
-        if capability_check == "YES" or "YES" in capability_check.upper():
+        # If the prompter returns "YES", it's a direct capability question (detected via regex/patterns)
+        if capability_check_result == "YES":
+            # This is a capability explanation request - no LLM call needed
             service_info_dict["system_information_relevance"] = True
             service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-            return {"0": "system_information"}, service_info_dict
+            # Return a special marker that qa.py can handle
+            return {"capability_query": "system_information"}, service_info_dict
         
-        # If service_index is set (single or multiple) and not auto-selection
-        if self.service_index != ["-1"] and len(self.selected_services) > 0:
-            selected_services = self.selected_services
-        else:
-            # Set the user prompter for service option.
-            self.llm.set_user_prompter(self.user_prompter_service)
+        # If service_index is configured (not auto-select), use the configured service directly
+        # No need for LLM to select - user already chose the service!
+        if self.service_index != ["-1"]:
+            # Use the pre-configured service(s)
+            selected_services = dict(self.selected_services)
+            
+            # Parse the query for the selected service(s)
+            for option in list(selected_services.keys()):
+                if option == "0":
+                    # Chess service - parse to determine sub-service
+                    parsed_option, service_info_dict = self.chess_parse(query, service_info_dict)
+                    if parsed_option != "-1" and parsed_option in ["0.0", "0.1"]:
+                        del selected_services[option]
+                        selected_services[parsed_option] = self.full_services[parsed_option]
+                        
+                elif option.startswith("0."):
+                    _, service_info_dict = self.chess_parse(query, service_info_dict)
 
-            # Get raw analysis from LLM to select service(s).
-            service_analysis = self.llm(query)[0]
+                elif option == "1":
+                    _, service_info_dict = self.update_vector_database_parse(query, service_info_dict)
 
-            # Get the service option(s)
-            service_option = self.mapping(service_analysis)
+                elif option in ["2", "3"]:
+                    self.llm.set_user_prompter(self.user_prompter_system_info)
+                    relevance_analysis = self.llm(query)[0]
+                    relevance = self.get_system_information_relevance(relevance_analysis)
+                    service_info_dict["system_information_relevance"] = relevance
+                    if relevance:
+                        service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+            
+            if verbose:
+                print(set_color(
+                    "info",
+                    f"Query: {query}, using pre-configured services: {selected_services}."
+                ))
+            
+            return selected_services, service_info_dict
+        
+        # Auto-select mode: Use LLM to analyze and select appropriate service(s)
+        
+    
+        self.llm.set_user_prompter(self.user_prompter_service)
 
-            # Always normalize to a list
-            if isinstance(service_option, str):
-                service_option = [service_option]
+        # Get raw analysis from LLM to select service(s).
+        service_analysis = self.llm(query)[0]
 
-            # Filter valid services
-            selected_services = {
-                opt: self.full_services[opt]
-                for opt in service_option
-                if opt in self.full_services
-            }
+        # Get the service option(s)
+        service_option = self.mapping(service_analysis)
+
+        # Always normalize to a list
+        if isinstance(service_option, str):
+            service_option = [service_option]
+
+        # Filter valid services - only keep those that are in full_services
+        selected_services = {
+            opt: self.full_services[opt]
+            for opt in service_option
+            if opt in self.full_services
+        }
+        
+        # If no valid services found, default to Service 3 (General Q&A)
+        if not selected_services:
+            selected_services = {"3": self.full_services["3"]}
 
         # Loop through all selected services and parse if needed
         for option in list(selected_services.keys()):
-            relevance = False  # reset per service to avoid "referenced before assignment"
-
-            if option.startswith("0"):
-                # Chess service
+            if option == "0":
+                # Main chess service - need to parse to determine sub-service
+                parsed_option, service_info_dict = self.chess_parse(query, service_info_dict)
+                # Update the selected_services with the actual sub-service
+                if parsed_option != "-1" and parsed_option in ["0.0", "0.1"]:
+                    # Remove generic "0" and add specific sub-service
+                    del selected_services[option]
+                    selected_services[parsed_option] = self.full_services[parsed_option]
+                    
+            elif option.startswith("0."):
+                # Already a specific chess sub-service, just parse for info
                 _, service_info_dict = self.chess_parse(query, service_info_dict)
 
             elif option == "1":
                 # Update vector database
                 _, service_info_dict = self.update_vector_database_parse(query, service_info_dict)
 
-            else:
-                # Other services - system info relevance
+            elif option in ["2", "3"]:
+                # Services 2 (code gen) and 3 (general Q&A) - check system info relevance
                 self.llm.set_user_prompter(self.user_prompter_system_info)
                 relevance_analysis = self.llm(query)[0]
                 relevance = self.get_system_information_relevance(relevance_analysis)

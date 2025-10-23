@@ -83,7 +83,7 @@ class QueryAnalyserService(UserPromptBase):
             f" which service can answer the following query? The query is '{question}'." \
             f" For instance, if the query is to predict the next chess move, then select service 0;"\
             f" otherwise, if the query is to generate or modify a code, then select service 2." \
-            f" Just return which service without any explainations."
+            f" Just return which service without any explanations."
 
         return user_prompt
 

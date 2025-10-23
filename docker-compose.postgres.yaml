@@ -37,7 +37,7 @@ services:
       dockerfile: Dockerfile
       args:
         OLLAMA_BASE_URL: '/ollama'
-    image: opensicbr/cosmic_openwebui:latest
+    #image: opensicbr/cosmic_openwebui:latest
     container_name: open-webui
     volumes:
       - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic

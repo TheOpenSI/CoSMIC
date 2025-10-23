@@ -103,7 +103,7 @@ class OpenSICoSMIC:
             device=self.device
         )
 
-        # Code generation service.
+        # Code generation service
         self.code_generator = CodeGenerator()
 
         # Set up QA instance.

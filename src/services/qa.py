@@ -102,15 +102,27 @@ class QABase(ServiceBase):
         if query.find("skip") > -1:
             return response, raw_response, retrieve_score
 
+        # Check if this is a capability query (asking what services are available)
+        if service_option == "capability_query":
+            # Use LLM to explain the available services
+            system_info = service_info_dict["system_information"]
+            user_prompt = f"Based on this information about my capabilities: {system_info}, please provide a clear and helpful explanation of what services I can provide to the user."
+            response, raw_response = self.llm(user_prompt, context="")
+            return response, raw_response, retrieve_score
+
         # Process query with service parsing.
-        if service_option.find("0.") > -1:
+        if service_option.startswith("0.") or service_option == "0":
             if service_option == "0.0":
                 # Set game move mode.
                 if context == "": move_mode = "algebric"
                 else: move_mode = context
 
                 # Get chess FEN.
-                current_fen = service_info_dict["fen"]
+                current_fen = service_info_dict.get("fen")
+                
+                if current_fen is None:
+                    response = raw_response = "Error: No valid FEN provided for chess move prediction."
+                    return response, raw_response, retrieve_score
 
                 # Set up next move predictor as Stockfish.
                 binary_path = self.config.chess.stockfish_path if self.config else ""
@@ -121,13 +133,17 @@ class QABase(ServiceBase):
 
                 # Set the response with question and next move.
                 move_prediction_context = f"The current chess FEN is {[current_fen]}."
-            else:  # this is for prediction given moves, service_option == "0.1":
+            elif service_option == "0.1":  # this is for prediction given moves:
                 # Set game move mode.
                 if context == "": move_mode = "algebric"
                 else: move_mode = context
 
                 # Get moves.
-                current_moves = service_info_dict["moves"]
+                current_moves = service_info_dict.get("moves")
+                
+                if current_moves is None:
+                    response = raw_response = "Error: No valid move sequence provided for chess move prediction."
+                    return response, raw_response, retrieve_score
 
                 # Set up next move predictor as Stockfish.
                 binary_path = self.config.chess.stockfish_path if self.config else ""
@@ -138,6 +154,10 @@ class QABase(ServiceBase):
 
                 # Set the response with question and next move.
                 move_prediction_context = f"The previous chess moves are {[current_moves]}."
+            else:
+                # Service "0" without proper parsing - should not happen, but handle gracefully
+                response = raw_response = "Error: Chess service selected but no valid FEN or move sequence detected."
+                return response, raw_response, retrieve_score
 
             # Explain why these moves are feasible.
             user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
@@ -167,7 +187,7 @@ class QABase(ServiceBase):
 
             response = raw_response = "Vector database updated."
         elif service_option == "2":
-            raw_response, response = self.code_generator(query)
+            raw_response, response = self.code_generator(query, timeout=240)
         else:
             if is_rag:# General question has RAG activated
                 # Check if context is chat hostory
