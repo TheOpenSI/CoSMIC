@@ -219,10 +219,7 @@ class QueryAnalyser:
         # Default service option.
         service_option = ["-1"]
 
-        # Parse move string.
-        move_match = re.search('[\[,\:](.*?[,\s].*?)[\.,\]]?$', query)
-
-        # Parse FEN string.
+        # Parse FEN string first (more specific pattern).
         fen_match = re.search(
             '(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)' \
             '\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$',
@@ -234,20 +231,49 @@ class QueryAnalyser:
             current_fen = fen_match.group()
             service_option = ["0.0"]
             service_info_dict.update({"fen": current_fen})
-        elif move_match:
-            # Given a sequence of moves.
-            current_moves = move_match.group(1)
-            service_option = ["0.1"]
-            service_info_dict.update({"moves": current_moves})
         else:
-            # Invalid inputs.
-            if "predict" in query or "next move" in query:
-                print(
-                    set_color(
-                        "hint",
-                        f"For chess move prediction, index a sequence of moves or FEN with \":\"."
+            # Try multiple move patterns:
+            # 1. Bracketed or colon-prefixed
+            bracketed_match = re.search('[\[,\:](.*?[,\s].*?)[\.,\]]?$', query)
+            
+            # 2. Natural language with chess notation"
+            # Look for sequences of chess moves (algebraic notation)
+            # Chess moves: piece letters (N,B,R,Q,K) or pawn moves (a-h), followed by coordinates or captures
+            natural_move_match = re.search(
+                r'\b([NBRQK]?[a-h]?[1-8]?x?[a-h][1-8][+#]?(?:\s*,?\s*[NBRQK]?[a-h]?[1-8]?x?[a-h][1-8][+#]?)+)\b',
+                query
+            )
+            
+            # 3. Simple comma or space-separated notation"
+            simple_move_match = re.search(
+                r'(?:^|\s)([a-h][1-8](?:\s*,?\s*[NBRQK]?[a-h]?[1-8]?x?[a-h][1-8][+#]?)+)\b',
+                query
+            )
+            
+            if bracketed_match:
+                # Given a sequence of moves (old format).
+                current_moves = bracketed_match.group(1)
+                service_option = ["0.1"]
+                service_info_dict.update({"moves": current_moves})
+            elif natural_move_match:
+                # Natural language chess moves detected
+                current_moves = natural_move_match.group(1).strip()
+                service_option = ["0.1"]
+                service_info_dict.update({"moves": current_moves})
+            elif simple_move_match:
+                # Simple move sequence detected
+                current_moves = simple_move_match.group(1).strip()
+                service_option = ["0.1"]
+                service_info_dict.update({"moves": current_moves})
+            else:
+                # Invalid inputs - no moves or FEN detected.
+                if "predict" in query.lower() or "next move" in query.lower() or "follow-up" in query.lower():
+                    print(
+                        set_color(
+                            "hint",
+                            f"For chess move prediction, provide a sequence of moves (e.g., 'e4, e5, Nf3') or FEN notation."
+                        )
                     )
-                )
 
         # If only one service, return as string for backward compatibility
         return service_option if len(service_option) > 1 else service_option[0], service_info_dict
@@ -370,31 +396,61 @@ class QueryAnalyser:
         # If service_index is configured (not auto-select), use the configured service directly
         # No need for LLM to select - user already chose the service!
         if self.service_index != ["-1"]:
-            # Use the pre-configured service(s)
-            selected_services = dict(self.selected_services)
-            
-            # Parse the query for the selected service(s)
-            for option in list(selected_services.keys()):
+            # If only ONE service is pre-configured, use it directly
+            if len(self.service_index) == 1:
+                selected_services = dict(self.selected_services)
+                
+                # Parse the query for the selected service
+                option = list(selected_services.keys())[0]
                 if option == "0":
                     # Chess service - parse to determine sub-service
                     parsed_option, service_info_dict = self.chess_parse(query, service_info_dict)
                     if parsed_option != "-1" and parsed_option in ["0.0", "0.1"]:
                         del selected_services[option]
                         selected_services[parsed_option] = self.full_services[parsed_option]
-                        
-                elif option.startswith("0."):
-                    _, service_info_dict = self.chess_parse(query, service_info_dict)
+            else:
+                # Multiple services pre-configured - need to intelligently pick the right one
+                # Use LLM to select from the pre-configured services only
+                self.llm.set_user_prompter(self.user_prompter_service)
+                service_analysis = self.llm(query)[0]
+                service_option = self.mapping(service_analysis)
+                
+                # Normalize to list
+                if isinstance(service_option, str):
+                    service_option = [service_option]
+                
+                # Filter: only use services that are BOTH selected by LLM AND in pre-configured list
+                selected_services = {}
+                for opt in service_option:
+                    if opt in self.selected_services:
+                        selected_services[opt] = self.selected_services[opt]
+                
+                # If LLM selected a service not in pre-configured list, use first pre-configured
+                if not selected_services:
+                    selected_services = dict(self.selected_services)
+                
+                # Parse the selected service(s)
+                for option in list(selected_services.keys()):
+                    if option == "0":
+                        # Chess service - parse to determine sub-service
+                        parsed_option, service_info_dict = self.chess_parse(query, service_info_dict)
+                        if parsed_option != "-1" and parsed_option in ["0.0", "0.1"]:
+                            del selected_services[option]
+                            selected_services[parsed_option] = self.full_services[parsed_option]
+                            
+                    elif option.startswith("0."):
+                        _, service_info_dict = self.chess_parse(query, service_info_dict)
 
-                elif option == "1":
-                    _, service_info_dict = self.update_vector_database_parse(query, service_info_dict)
+                    elif option == "1":
+                        _, service_info_dict = self.update_vector_database_parse(query, service_info_dict)
 
-                elif option in ["2", "3"]:
-                    self.llm.set_user_prompter(self.user_prompter_system_info)
-                    relevance_analysis = self.llm(query)[0]
-                    relevance = self.get_system_information_relevance(relevance_analysis)
-                    service_info_dict["system_information_relevance"] = relevance
-                    if relevance:
-                        service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+                    elif option in ["2", "3"]:
+                        self.llm.set_user_prompter(self.user_prompter_system_info)
+                        relevance_analysis = self.llm(query)[0]
+                        relevance = self.get_system_information_relevance(relevance_analysis)
+                        service_info_dict["system_information_relevance"] = relevance
+                        if relevance:
+                            service_info_dict["system_information"] = self.user_prompter_system_info.system_information
             
             if verbose:
                 print(set_color(

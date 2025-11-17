@@ -61,7 +61,7 @@ services:
     depends_on:
       - cosmic
     ports:
-      - '9099:9099'
+      - '10099:9099'
     environment:
     - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
     - MAX_QUERIES_PER_USER=5
