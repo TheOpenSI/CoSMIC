@@ -23,8 +23,8 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: openwebui_db
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -61,7 +61,7 @@ services:
       - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
       - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
-      - DATABASE_URL=postgresql://opensi:data101@cosmic_db_server:5432/openwebui_db
+      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@cosmic_db_server:5432/openwebui_db
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
@@ -139,10 +139,10 @@ configs:
       {
         "Servers": {
             "1": {
-                "Name": " openwebui_db",
+                "Name": "openwebui_db",
                 "Group": "Servers",
                 "Port": 5432,
-                "Username": "${DB_USER}",
+                "Username": "${DATABASE_USER}",
                 "Host": "cosmic_db_server",
                 "SSLMode": "prefer",
                 "MaintenanceDB": "postgres"
