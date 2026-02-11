@@ -18,6 +18,12 @@ Before proceeding with the installation, ensure that the following tools are ins
 
 2. **Docker Compose**: Facilitates defining and running multi-container Docker applications. You can install it by following the [official Docker Compose installation guide](https://docs.docker.com/compose/install/).
 
+> [!IMPORTANT]
+> 3. For Linux machine only:
+> [NVIDIA GPU: NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#installation). [AMD GPU](https://docs.ollama.com/docker#amd-gpu) can safely skip this requrement.
+
+> [!TIP]
+> Recommended to use **Option 2** for anyone want a better understand what the script does, and also not downloading "potentially harm" file over the Internet using `wget` (or `curl`)
 ### Option 1: Docker Installation (Quick Start)
 
 The Docker installation provides the fastest way to get started with OpenSI-CoSMIC:
@@ -43,7 +49,8 @@ wget https://github.com/TheOpenSI/CoSMIC/raw/production/docker-compose.yaml http
 3. Open the directory containing the downloaded files in a terminal and run the following command to start the services:
 
 ```bash
-bash start.sh # bash start.sh --help for details
+# ./start.sh --help for details
+chmod +x ./start.sh && ./start_sh
 ```
 
 ### Option 2: Clone and Set Up Repository (For Development)
@@ -89,7 +96,8 @@ cd CoSMIC
 
 6. Now you can build from your local clone using the command below:
 ```bash
-bash start.sh --docker_build
+# ./start.sh --help for details
+chmod +x ./start.sh && ./start_sh --docker_build
 ```
 This will create an external volume required for [PyCapsule](https://github.com/TheOpenSI/PyCapsule) and run the `docker compose up` or `docker compose up --build` command. For details, run `bash start.sh --help`.
 
