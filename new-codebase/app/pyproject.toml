@@ -1,0 +1,9 @@
+[project]
+name = "OpenSI-CoSMIC"
+version = "0.1.0"
+description = "Open Source Institute-Cognitive System of Machine Intelligent Computing"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.128.7",
+]
