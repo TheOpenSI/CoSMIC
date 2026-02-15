@@ -1,0 +1,101 @@
+name: CoSMIC
+
+services:
+  # frontend:
+  #   container_name: cosmic-react
+  #   build:
+  #     context: ./
+  #     dockerfile: ./docker/react.Dockerfile
+  #   ports:
+  #     - name: cosmic-frontend-port
+  #       target: 5173
+  #       host_ip: 127.0.0.1
+  #       published: "5174"
+  #       protocol: tcp
+  #       app_protocol: http
+  #       mode: ingress
+
+  backend:
+    container_name: cosmic-fastapi
+    env_file:
+      - path: ./docker/backend/fastapi.dev.env
+        required: true
+        format: raw
+    build:
+      context: ./
+      dockerfile: ./docker/backend/fastapi.Dockerfile
+    volumes:
+      - cosmic-fastapi-data:/app/data:rw
+    ports:
+      - name: cosmic-backend-port
+        target: 8000
+        host_ip: 127.0.0.1
+        published: "8001"
+        protocol: tcp
+        app_protocol: http
+        mode: ingress
+    networks:
+      - cosmic_net
+    restart: unless-stopped
+
+  database:
+    container_name: cosmic-postgresql
+    env_file:
+      - path: ./docker/database/postgresql.dev.env
+        required: true
+        format: raw
+    build:
+      context: ./
+      dockerfile: ./docker/database/postgresql.Dockerfile
+    volumes:
+      - cosmic-postgresql-data:/var/lib/postgres/data:rw
+    ports:
+      - name: cosmic-database-port
+        target: 5432
+        host_ip: 127.0.0.1
+        published: "5433"
+        protocol: tcp
+        app_protocol: http
+        mode: ingress
+    shm_size: 128mb
+    networks:
+      - cosmic_net
+    restart: unless-stopped
+
+  gui:
+    container_name: cosmic-pgadmin4
+    env_file:
+      - path: ./docker/gui/pgadmin4.dev.env
+        required: true
+        format: raw
+    build:
+      context: ./
+      dockerfile: ./docker/gui/pgadmin4.Dockerfile
+    volumes:
+      - cosmic-pgadmin4-data:/var/lib/pgadmin/data:rw
+    ports:
+      - name: cosmic-gui-port
+        target: 80
+        host_ip: 127.0.0.1
+        published: "8080"
+        protocol: tcp
+        app_protocol: http
+        mode: ingress
+    networks:
+      - cosmic_net
+    restart: unless-stopped
+
+volumes:
+  # cosmic-react-data:
+  #   name: cosmic-react-data
+  cosmic-fastapi-data:
+    name: cosmic-fastapi-data
+  cosmic-postgresql-data:
+    name: cosmic-pstgresql-data
+  cosmic-pgadmin4-data:
+    name: cosmic-pgadmin4-data
+
+networks:
+  cosmic_net:
+    driver: bridge
+    name: cosmic_net

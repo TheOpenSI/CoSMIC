@@ -155,14 +155,14 @@ activemq-data/
 *.sage.py
 
 # Environments
-.env
-.envrc
+*.env*
+*.envrc*
 .venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+*env/
+*venv/
+*ENV/
+*env.bak/
+*venv.bak/
 
 # Spyder project settings
 .spyderproject
@@ -263,15 +263,6 @@ dist-ssr
 ######################################################################################
 
 
-.DS_Store
-.env
-.venv
-env/
-venv/
-*__pycache__*
 data
 third_party
-database
-database
 ./scripts/configs/config_updated.yaml
-.idea

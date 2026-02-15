@@ -1,0 +1,34 @@
+# Who would ever read docs and license in a container?
+*.md
+LICENSE
+
+# These file only needed at build time
+docker/
+*Dockerfile*
+*.Dockerfile*
+*docker-compose*
+*compose*
+.dockerignore
+
+# React stuff
+node_modules
+helm-charts
+
+# Git stuff
+.git
+.gitignore
+.editorconfig
+
+# VS Code stuff
+.vscode
+
+# C Build file stuff
+Makefile
+
+# All `.env` value has been passed at build time so we're safe to ignore it
+*.env*
+.venv
+
+# JetBrain stuff
+.idea
+coverage*
