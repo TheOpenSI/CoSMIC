@@ -3,3 +3,10 @@
 
 # Setup
 Follow instructions in [frontend](frontend/README.md) directory first, then head over to [backend](backend/README.md) directory to get this thing up and running with the new UI platform.
+
+# Convention
+Choose the section that you needed to see and start from there
+1. [Git](doc/GIT.md)
+2. [Frontend](doc/REACT.md)
+3. [Backend](doc/PYTHON.md)
+4. [Database](doc/POSTGRES.md)
