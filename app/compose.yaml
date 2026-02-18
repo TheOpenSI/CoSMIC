@@ -29,5 +29,59 @@ services:
         app_protocol: http
         mode: host
 
-  # database:
-  # gui:
+  database:
+    container_name: cosmic-postgres
+    # Set shared memory limit when using docker compose
+    shm_size: 128mb
+    env_file:
+      - path: ./docker/postgres.env
+        required: true
+        format: raw
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfile/postgres.Dockerfile
+    volumes:
+      - type: volume
+        source: cosmic-postgres-data
+        target: /var/lib/postgresql
+        volume:
+          nocopy: true
+    # For dev only
+    ports:
+      - name: cosmic-postgres-dev
+        target: 5432
+        host_ip: 127.0.0.1
+        published: "5433"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
+  gui:
+    container_name: cosmic-pgadmin
+    env_file:
+      - path: ./docker/pgadmin.env
+        required: true
+        format: raw
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfile/pgadmin.Dockerfile
+    volumes:
+      - type: volume
+        source: cosmic-pgadmin-data
+        target: /var/lib/pgadmin
+        volume:
+          nocopy: false
+    ports:
+      - name: cosmic-pgadmin-dev
+        target: 80
+        host_ip: 127.0.0.1
+        published: "5050"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
+volumes:
+  cosmic-postgres-data:
+    name: cosmic-relational
+  cosmic-pgadmin-data:
+    name: cosmic-gui
