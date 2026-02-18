@@ -1,13 +1,13 @@
 {
-  "name": "frontend",
+  "name": "CoSMIC-UI",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "bun x vite",
+    "build": "bun x tsc -b && bun x vite build",
+    "lint": "bun x eslint .",
+    "preview": "bun x vite preview"
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -18,7 +18,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.2.2",
+    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",

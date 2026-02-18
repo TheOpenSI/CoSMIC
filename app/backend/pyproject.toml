@@ -1,7 +1,7 @@
 [project]
-name = "CoSMIC"
+name = "backend"
 version = "0.1.0"
-description = "Cognitive System of Machine Intelligent Computing"
+description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

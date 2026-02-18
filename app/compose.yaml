@@ -1,0 +1,33 @@
+name: CoSMIC
+
+services:
+  frontend:
+    container_name: cosmic-react
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfile/react.Dockerfile
+    ports:
+      - name: cosmic-vite
+        target: 5173
+        host_ip: 127.0.0.1
+        published: "5174"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
+  backend:
+    container_name: cosmic-fastapi
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfile/fastapi.Dockerfile
+    ports:
+      - name: cosmic-uvicorn
+        target: 8000
+        host_ip: 127.0.0.1
+        published: "8001"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
+  # database:
+  # gui:
