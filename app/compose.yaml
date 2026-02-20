@@ -3,6 +3,12 @@ name: CoSMIC
 services:
   frontend:
     container_name: cosmic-react
+    depends_on:
+      backend:
+        restart: true
+        condition: service_started
+        required: true
+    restart: unless-stopped
     build:
       context: ./
       dockerfile: ./docker/dockerfile/react.Dockerfile
@@ -14,9 +20,12 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
+    networks:
+        - cosmic-public
 
   backend:
     container_name: cosmic-fastapi
+    restart: unless-stopped
     build:
       context: ./
       dockerfile: ./docker/dockerfile/fastapi.Dockerfile
@@ -28,15 +37,28 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
+    networks:
+        - cosmic-public
+        - cosmic-private
 
   database:
     container_name: cosmic-postgres
+    depends_on:
+      backend:
+        restart: true
+        condition: service_started
+        required: true
+    restart: unless-stopped
     # Set shared memory limit when using docker compose
     shm_size: 128mb
-    env_file:
-      - path: ./docker/postgres.env
-        required: true
-        format: raw
+    secrets:
+      - source: cosmic-postgres-user
+        target: postgres_user
+      - source: cosmic-postgres-password
+        target: postgres_password
+    environment:
+        POSTGRES_USER_FILE: /run/secrets/postgres_user
+        POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
     build:
       context: ./
       dockerfile: ./docker/dockerfile/postgres.Dockerfile
@@ -45,8 +67,8 @@ services:
         source: cosmic-postgres-data
         target: /var/lib/postgresql
         volume:
-          nocopy: true
-    # For dev only
+          nocopy: false
+    # NOTE: Open to quickly connect and debug on dev only
     ports:
       - name: cosmic-postgres-dev
         target: 5432
@@ -55,13 +77,31 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
+    networks:
+        - cosmic-private
 
   gui:
     container_name: cosmic-pgadmin
-    env_file:
-      - path: ./docker/pgadmin.env
+    depends_on:
+      backend:
+        restart: true
+        condition: service_started
         required: true
-        format: raw
+      database:
+        restart: true
+        condition: service_started
+        required: true
+    restart: unless-stopped
+    secrets:
+      - source: cosmic-pgadmin-password
+        target: pgadmin_password
+    environment:
+        # NOTE: Make sure to enable 2FA for this account on prod
+        PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
+        PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin_password
+    configs:
+      - source: cosmic-pgadmin-server
+        target: /pgadmin4/servers.json
     build:
       context: ./
       dockerfile: ./docker/dockerfile/pgadmin.Dockerfile
@@ -79,9 +119,31 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
+    networks:
+      - cosmic-private
 
 volumes:
   cosmic-postgres-data:
     name: cosmic-relational
   cosmic-pgadmin-data:
     name: cosmic-gui
+
+networks:
+  cosmic-public:
+    name: cosmic_net
+    driver: bridge
+  cosmic-private:
+    name: api_cosmic_net
+    driver: bridge
+
+secrets:
+  cosmic-postgres-user:
+    file: ./docker/secret/postgres_user.txt
+  cosmic-postgres-password:
+    file: ./docker/secret/postgres_password.txt
+  cosmic-pgadmin-password:
+    file: ./docker/secret/pgadmin_password.txt
+
+configs:
+  cosmic-pgadmin-server:
+    file: ./docker/config/pgadmin_servers.json

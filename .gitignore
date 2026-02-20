@@ -261,3 +261,5 @@ dist-ssr
 # Credit: CoSMIC-speicfic ignore lists #
 #                                      #
 ########################################
+**/docker/secret/
+**/docker/config/
