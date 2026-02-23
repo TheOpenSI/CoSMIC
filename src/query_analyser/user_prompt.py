@@ -129,7 +129,7 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
             f" I am created, developed, and maintained by OpenSI," \
-            f" which is an institute atß University of Canberra." \
+            f" which is an institute at University of Canberra." \
             f" At the moment, I can provide {len(self.services)} services," \
             f" including {self.service_string}." \
             f" I can design and provide more services under an agreement." \
