@@ -83,6 +83,7 @@ class QueryAnalyserService(UserPromptBase):
             f" which service can answer the following query? The query is '{question}'." \
             f" For instance, if the query is to predict the next chess move, then select service 0;"\
             f" otherwise, if the query is to generate or modify a code, then select service 2." \
+            f" otherwise, if the query is about Academic Governance, then select service 4." \
             f" Just return which service without any explainations."
 
         return user_prompt
@@ -128,7 +129,7 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
             f" OpenSI-CoSMIC stands for the Open Source" \
             f" Institute-Cognitive System of Machine Intelligent Computing." \
             f" I am created, developed, and maintained by OpenSI," \
-            f" which is an institute at the University of Canberra." \
+            f" which is an institute atß University of Canberra." \
             f" At the moment, I can provide {len(self.services)} services," \
             f" including {self.service_string}." \
             f" I can design and provide more services under an agreement." \
