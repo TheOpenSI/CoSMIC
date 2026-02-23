@@ -24,9 +24,9 @@ cd ./CoSMIC/app/
 # Create directories
 mkdir -p ./docker/{config,secret}/
 
-# Copy needed files
-cp -v example/*{pgadmin,postgres}*.example.{txt,env} docker/secret/ 2>/dev/null; 
-cp -v example/*pgadmin*.example.json docker/config/ 2>/dev/null
+# In `example` directory:
+# - Copy `.txt` & `.env` file to `docker/secret` directory and remove the `.example.` suffix.
+# - Copy `.json` file to `docker/config` directory and remove the `.example.` suffix.
 
 # Run the service.
 chmod +x ./bin/pg_secret.sh
