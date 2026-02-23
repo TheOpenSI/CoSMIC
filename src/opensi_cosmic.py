@@ -71,6 +71,9 @@ class OpenSICoSMIC:
 
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
+        
+        print(f"{self.config}")
+        
         self.user_id = str(user["id"]) \
             if ((user is not None) and ("id" in user) and user["id"] != "") \
             else None
@@ -117,7 +120,7 @@ class OpenSICoSMIC:
         """ Set up QA instance by user ID.
 
         Args:
-            user_id (str): user ID through OpenWebUI.
+            user_id (str): user ID through front-end.
             user_name (str, optional): user name. Defaults to None.
         """
         # Invalid user ID.

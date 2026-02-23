@@ -15,11 +15,11 @@ services:
       - cosmic_net
 
   # open-webui:
-  #   build:
-  #     context: ./../OpenWebUI-CoSMIC
-  #     dockerfile: Dockerfile
-  #     args:
-  #       OLLAMA_BASE_URL: '/ollama'
+  #   # build:
+  #   #   context: ./../OpenWebUI-CoSMIC
+  #   #   dockerfile: Dockerfile
+  #   #   args:
+  #   #     OLLAMA_BASE_URL: '/ollama'
   #   image: opensicbr/cosmic_openwebui:latest
   #   container_name: open-webui
   #   volumes:
@@ -28,7 +28,7 @@ services:
   #     - ollama
   #     - pipelines
   #     - cosmic
-  #     - pycapsule
+  #     # - pycapsule
   #   ports:
   #     - "${OPEN_WEBUI_PORT:-8080}:8080"
   #   env_file:
@@ -94,16 +94,16 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: cosmic
-    image: opensicbr/cosmic:latest
+    # image: opensicbr/cosmic:latest
     volumes:
-      - open-webui:/app/backend/data
+      # - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
     ports:
       - '3000:3000'
       - '5678:5678' # debupy
     depends_on:
       - ollama
-      - pycapsule
+      # - pycapsule
     tty: true
     restart: unless-stopped
     networks:
@@ -111,8 +111,8 @@ services:
 
 volumes:
   ollama: {}
-  open-webui: {}
-  pipelines: {}
+  # open-webui: {}
+  # pipelines: {}
   volume_configs: {}
   shared_mount:
     external: true
