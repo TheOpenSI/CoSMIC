@@ -1,10 +1,22 @@
+### Core modules ###
 from fastapi import FastAPI
 
-# from .backend.api import <api-file>
+### Internal modules ###
+from .routers import home
 
-app: FastAPI = FastAPI(
-    title="OpenSI-CoSMIC",
-    version="1.0.0"
+
+app: FastAPI = FastAPI()
+
+
+app.include_router(router=home.router)
+
+
+@app.get(
+    path="/",
+    tags=["Default Endpoints"]
 )
-
-# app.include_router(router=<api-file>.router)
+async def root() -> dict[str, str]:
+    return {
+        "message": "Welcome to CoSMIC!",
+        "version": "0.1.0"
+    }
