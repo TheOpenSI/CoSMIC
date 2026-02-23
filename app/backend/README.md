@@ -1,5 +1,5 @@
 # SETUP GUIDE FOR COSMIC (BE)
-> [!TIPS]
+> [!TIP]
 > Unless you cannot install Docker on your machine, prefer using the Docker setup guide.
 
 
@@ -19,13 +19,21 @@
 # Make sure you are in the `app` directory.
 cd ./CoSMIC/app/
 
+# TODO: I'll do this in the script later
+
+# Create directories
+mkdir -p ./docker/{config,secret}/
+
+# Copy needed files
+cp -v example/*{pgadmin,postgres}*.example.{txt,env} docker/secret/ 2>/dev/null; 
+cp -v example/*pgadmin*.example.json docker/config/ 2>/dev/null
+
 # Run the service.
 chmod +x ./bin/pg_secret.sh
 ./bin/pg_secret.sh
 ```
 
-Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs)
-pgAdmin will be accessible at: [localhost:5050](http://localhost:5050)
+Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs), while pgAdmin will be accessible at: [localhost:5050](http://localhost:5050)
 
 
 ## 2. Traditional
@@ -46,5 +54,4 @@ uv sync --frozen --no-cache
 uv run fastapi dev
 ```
 
-Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs)
-pgAdmin will be accessible by running the **pgAdmin 4** application on Mac (created after running the installer script). On Linux, simply search for `pgadmin4` and run, or type `pgadmin4` in terminal to run.
+Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs), while pgAdmin will be accessible by running the **pgAdmin 4** application on Mac (created after running the installer script). On Linux, simply search for `pgadmin4` and run, or type `pgadmin4` in terminal to run.

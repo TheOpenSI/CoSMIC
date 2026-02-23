@@ -1,5 +1,5 @@
 # SETUP GUIDE FOR COSMIC (FE)
-> [!TIPS]
+> [!TIP]
 > Unless you cannot install Docker on your machine, prefer using the Docker setup guide.
 
 
