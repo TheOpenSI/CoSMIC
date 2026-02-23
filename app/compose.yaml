@@ -3,11 +3,6 @@ name: CoSMIC
 services:
   frontend:
     container_name: cosmic-react
-    depends_on:
-      backend:
-        restart: true
-        condition: service_started
-        required: true
     restart: unless-stopped
     build:
       context: ./
@@ -54,10 +49,13 @@ services:
     secrets:
       - source: cosmic-postgres-user
         target: postgres_user
+      - source: cosmic-postgres-db
+        target: postgres_db
       - source: cosmic-postgres-password
         target: postgres_password
     environment:
         POSTGRES_USER_FILE: /run/secrets/postgres_user
+        POSTGRES_DB_FILE: /run/secrets/postgres_db
         POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
     build:
       context: ./
@@ -70,7 +68,7 @@ services:
           nocopy: false
     # NOTE: Open to quickly connect and debug on dev only
     ports:
-      - name: cosmic-postgres-dev
+      - name: cosmic-postgres-psql
         target: 5432
         host_ip: 127.0.0.1
         published: "5433"
@@ -112,7 +110,7 @@ services:
         volume:
           nocopy: false
     ports:
-      - name: cosmic-pgadmin-dev
+      - name: cosmic-pgadmin-gunicorn
         target: 80
         host_ip: 127.0.0.1
         published: "5050"
@@ -139,6 +137,8 @@ networks:
 secrets:
   cosmic-postgres-user:
     file: ./docker/secret/postgres_user.txt
+  cosmic-postgres-db:
+    file: ./docker/secret/postgres_db.txt
   cosmic-postgres-password:
     file: ./docker/secret/postgres_password.txt
   cosmic-pgadmin-password:
