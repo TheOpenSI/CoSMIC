@@ -87,7 +87,8 @@ done
 
 # Startup
 sleep 1.5s
-pg_log -l=1 -m="🚀 Firing up CoSMIC services from Docker..."
+pg_log -l=1 -m="🚀 Firing up CoSMIC Backend Services from Docker..."
 
 sleep 1.5s
-sudo docker compose up -d --build
+# This script only needed for BE works, therfore the specified service
+sudo docker compose up -d --build gui
