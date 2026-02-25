@@ -6,7 +6,7 @@ router: APIRouter = APIRouter()
 
 @router.get(
     path="/home",
-    tags=["Regular Endpoints"]
+    tags=["Normal Endpoints"]
 )
 async def home() -> dict[str, str]:
     return {

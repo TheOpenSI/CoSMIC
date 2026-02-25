@@ -1,14 +1,15 @@
 ### Core modules ###
+from fastapi import Depends
 from sqlmodel import SQLModel, Session, create_engine
 
 
 ### Type hints ###
 from sqlalchemy.engine.base import Engine
+from typing_extensions import Annotated, Any, Generator
 
 
 ### Custom modules ###
 from .env import get_env
-from ..apis import models
 
 
 cosmic_db_configs = get_env()
@@ -33,35 +34,28 @@ cosmic_db_url: str = (
     )
 )
 
+# NOTE: 'echo' param is for debug only!
 cosmic_db_engine: Engine = create_engine(
     url=cosmic_db_url,
     echo=True
 )
 
 
-def test_create_users() -> None:
-    batch_users: list[models.Users] = [
-        models.Users(name="Boryslavir", email="u3295557@uni.canberra.edu.au", pwd="123"),
-        models.Users(name="DeepInDark", email=None, pwd="456"),
-        models.Users(name="cosmic", email="opensi@canberra.edu.au", pwd="cosmic123")
-    ]
-
+def get_session() -> Generator[Session, Any, Any]:
     # Using `with` keyword, it handles starting/closing session automatically
-    with Session(bind=cosmic_db_engine) as session_user:
-        # Prepare data to commit
-        session_user.add_all(instances=batch_users)
+    with Session(bind=cosmic_db_engine) as session:
+        yield session
 
-        # Execute and commit
-        session_user.commit()
+SessionDependency = Annotated[Session, Depends(dependency=get_session)]
+
+
+def create_db_and_table() -> None:
+    # WARNING: `create_all()` function is for dev only. Using migration method with Alembic module!
+    SQLModel.metadata.create_all(bind=cosmic_db_engine)
 
     return None
 
 
-def main():
-    # NOTE: 'echo' params are for debug only!
-    SQLModel.metadata.create_all(bind=cosmic_db_engine)
-    test_create_users()
-
-
+# Prevent running the function when this file get included as module
 if __name__ == "__main__":
-    main()
+    create_db_and_table()
