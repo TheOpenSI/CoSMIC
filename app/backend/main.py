@@ -1,17 +1,18 @@
 ### Core modules ###
 from fastapi import FastAPI
 
+
 ### Internal modules ###
 from .routers import home
 
 
-app: FastAPI = FastAPI()
+cosmic_app: FastAPI = FastAPI()
 
 
-app.include_router(router=home.router)
+cosmic_app.include_router(router=home.router)
 
 
-@app.get(
+@cosmic_app.get(
     path="/",
     tags=["Default Endpoints"]
 )
