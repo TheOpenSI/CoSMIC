@@ -1,57 +1,124 @@
-# SETUP GUIDE FOR COSMIC (BE)
-> [!TIP]
-> Unless you cannot install Docker on your machine, prefer using the Docker setup guide.
+# **CoSMIC Backend Setup Guide**
+
+---
+
+## 📋 **Prerequisites**
+> [!NOTE]
+> For native setup, `pgAdmin` is recommended for database management but not strictly required.
+> For Docker setup, most of the requirements are optional as it's already inside its own container (which you can run in isolated environment).
 
 
-## 1. Docker
-### Prerequisite
-> [!TIP]
-> Recommended for Windows users only.
-1. [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/)
+| **Tool**   | **Docker Setup** | **Native Setup**       |
+| ---------- | ---------------- | ---------------------- |
+| Docker     | ✅ Mandatory     | ❌ Not required        |
+| Python     | ⚠️ Optional      | ✅ Mandatory (v3.14+)  |
+| uv         | ⚠️ Optional      | ✅ Mandatory (latest)  |
+| PostgreSQL | ⚠️ Optional      | ✅ Mandatory (v18+)    |
+| pgAdmin    | ⚠️ Optional      | ⚠️ Optional            |
 
-> [!TIP]
-> Recommended for Linux/Mac users only.
-1. [Docker Engine](https://docs.docker.com/engine/install/)
-2. [Docker Desktop](https://docs.docker.com/desktop/setup/install) (Optional)
 
-### Instruction
+---
+
+## 🛠️ **A. Configuration**
+
+### 1. **Navigate to the Project Root (Mandatory for both setups)**
 ```bash
-# Make sure you are in the `app` directory.
+# Make sure you are in the directory `app` (freshly cloned scenario)
 cd ./CoSMIC/app/
 
-# TODO: I'll do this in the script later
-
-# Create directories
-mkdir -p ./docker/{config,secret}/
-
-# In `example` directory:
-# - Copy `.txt` & `.env` file to `docker/secret` directory and remove the `.example.` suffix.
-# - Copy `.json` file to `docker/config` directory and remove the `.example.` suffix.
-
-# Run the service.
-chmod +x ./bin/pg_secret.sh
-./bin/pg_secret.sh
+# Make sure you are in the directory `app` (freshly cloned scenario)
+cd ./app/
 ```
 
-Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs), while pgAdmin will be accessible at: [localhost:5050](http://localhost:5050)
+### 2. **Prepare Configuration Files (Mandatory for Docker Setup)**
 
-
-## 2. Traditional
-### Prerequisite
-1. [uv](https://docs.astral.sh/uv/getting-started/installation/)
-2. [PostgreSQL](https://www.postgresql.org/download/)
-3. [pgAdmin](https://www.pgadmin.org/download/)
-
-### Instruction
+In both scenarios, create the following directories:
 ```bash
-# Make sure you are in the `backend` directory.
-cd ./CoSMIC/app/backend/
-
-# Install dependencies.
-uv sync --frozen --no-cache
-
-# Start the BE server.
-uv run fastapi dev
+mkdir -p docker/{secret,config}  # For Docker setups
 ```
 
-Swagger will be accessible at: [localhost:8001/docs](http://localhost:8001/docs), while pgAdmin will be accessible by running the **pgAdmin 4** application on Mac (created after running the installer script). On Linux, simply search for `pgadmin4` and run, or type `pgadmin4` in terminal to run.
+#### **File Setup Instructions**
+
+Copy the following files from the `example` directory to their respective locations (**remember to remove the `.example.` suffix from each of them**):
+> [!TIP]
+> Review and adjust default values in these files (e.g: passwords, ports) *before* proceeding.
+> If you're unsure on any of them, skip this step (defaults will work for local development).
+
+
+| **Source**                 | **Destination**  | **Purpose**               |
+| -------------------------- | ---------------- | ------------------------- |
+| `{postgres,pgadmin}_*.txt` | `docker/secret`  | Docker Secret credentials |
+| `{postgres,pgadmin}_*.env` | `docker/secret`  | Docker Secret variables   |
+| `pgadmin_*.json`           | `docker/config`  | `pgAdmin` database server |
+| `cosmic_*.env`             | `backend/cores`  | Core application settings |
+
+
+---
+
+## 🚀 **B. Setup & Execution**
+
+### **Docker Setup (Recommended)**
+
+1. **Start the containers**
+    > [!NOTE]
+    > This script is Linux/macOS-only (Windows support via PowerShell coming soon).
+
+    ```bash
+    chmod +x ./bin/pg_secret.sh
+    ./bin/pg_secret.sh
+    ```
+
+2. **Verify services**
+  - **FastAPI (Swagger Docs)**
+    + Accessible at: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+  - **pgAdmin**
+    + Accessible at: [http://localhost:5050](http://localhost:5050) *(Login with credentials from `docker/secret/pgadmin_*.txt`)*
+
+  - **PostgreSQL**
+    ```bash
+    # Inside the container (named `cosmic-postgres`)
+    psql -U demo
+
+    # From your host machine (if PostgreSQL is installed locally):
+    psql -h localhost -p 5433 -U demo  # Add `-d demo` to default connect to wanted DB
+    ```
+
+---
+
+### **Native Setup**
+
+1. **Install dependencies**
+    ```bash
+    # Make sure PostgreSQL is running
+    psql --version
+
+    # Then install needed dependencies
+    uv sync --frozen --no-cache
+    ```
+
+2. **Start the backend**
+    ```bash
+    uv run fastapi dev
+    ```
+
+3. **Verify setup**
+  - **FastAPI (Swagger Docs)**
+    + Accessible at: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+  - **pgAdmin**
+    + *Windows/MacOS:* Search and open the **pgAdmin 4** application.
+    + *Linux:* Search or type `pgadmin4` in your terminal.
+
+  - **PostgreSQL**
+    ```bash
+    psql -U demo  # Add `-d demo` to auto-connect to the default DB
+
+    ### Example output would look like so ###
+    Password for user demo:
+
+    psql (18.2)
+    Type "help" for help.
+
+    postgres=#
+    ```
