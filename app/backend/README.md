@@ -60,20 +60,20 @@ Copy the following files from the `example` directory to their respective locati
 ### **Docker Setup (Recommended)**
 
 1. **Start the containers**
-    > [!NOTE]
-    > This script is Linux/macOS-only (Windows support via PowerShell coming soon).
+> [!NOTE]
+> This script is Linux/macOS-only (Windows support via PowerShell coming soon).
 
-    ```bash
-    chmod +x ./bin/pg_secret.sh
-    ./bin/pg_secret.sh
-    ```
+  ```bash
+  chmod +x ./bin/pg_secret.sh
+  ./bin/pg_secret.sh
+  ```
 
 2. **Verify services**
   - **FastAPI (Swagger Docs)**
-    + Accessible at: [http://localhost:8000/docs](http://localhost:8000/docs)
+    + Accessible at: [localhost:8000/docs](http://localhost:8000/docs)
 
   - **pgAdmin**
-    + Accessible at: [http://localhost:5050](http://localhost:5050) *(Login with credentials from `docker/secret/pgadmin_*.txt`)*
+    + Accessible at: [localhost:5050](http://localhost:5050) *(Login with credentials from `docker/secret/pgadmin_*.txt`)*
 
   - **PostgreSQL**
     ```bash
@@ -104,7 +104,7 @@ Copy the following files from the `example` directory to their respective locati
 
 3. **Verify setup**
   - **FastAPI (Swagger Docs)**
-    + Accessible at: [http://localhost:8000/docs](http://localhost:8000/docs)
+    + Accessible at: [localhost:8000/docs](http://localhost:8000/docs)
 
   - **pgAdmin**
     + *Windows/MacOS:* Search and open the **pgAdmin 4** application.
