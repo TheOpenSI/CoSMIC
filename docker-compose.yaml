@@ -2,13 +2,13 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     volumes:
       - ollama:/root/.ollama
     networks:
@@ -99,8 +99,8 @@ services:
       # - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
     ports:
-      - '3000:3000'
-      - '5678:5678' # debupy
+      - "3000:3000"
+      - "5678:5678" # debupy
     depends_on:
       - ollama
       # - pycapsule
