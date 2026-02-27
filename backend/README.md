@@ -23,11 +23,8 @@
 
 ### 1. **Navigate to the Project Root (Mandatory for both setups)**
 ```bash
-# Make sure you are in the directory `app` (freshly cloned scenario)
+# Make sure you are in the root directory
 cd ./CoSMIC/app/
-
-# Make sure you are in the directory `app` (freshly cloned scenario)
-cd ./app/
 ```
 
 ### 2. **Prepare Configuration Files (Mandatory for Docker Setup)**
