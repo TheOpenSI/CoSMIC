@@ -160,11 +160,11 @@ activemq-data/
 *.envrc*
 !*.example.envrc
 .venv
-*env/
-*venv/
-*ENV/
-*env.bak/
-*venv.bak/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Spyder project settings
 .spyderproject
@@ -263,5 +263,6 @@ dist-ssr
 # Credit: CoSMIC-speicfic ignore lists #
 #                                      #
 ########################################
-**/docker/secret/
-**/docker/config/
+docker/secret/
+docker/config/
+!todo/* # Temporary, migration done will be deleted
