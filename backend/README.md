@@ -61,8 +61,8 @@ Copy the following files from the `example` directory to their respective locati
 > This script is Linux/macOS-only (Windows support via PowerShell coming soon).
 
   ```bash
-  chmod +x ./bin/pg_secret.sh
-  ./bin/pg_secret.sh
+  chmod +x ./bin/pg_docker.sh
+  ./bin/pg_docker.sh
   ```
 
 2. **Verify services**
