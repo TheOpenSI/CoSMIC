@@ -2,7 +2,7 @@
 
 
 # -------------------------------------------------------------------------------------------------------------
-# File: pg_secret.sh
+# File: pg_docker.sh
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Bing Tran <u3295557@canberra.edu.au>
@@ -32,7 +32,7 @@ set -euo pipefail
 
 # --- Utils ---
 source "./bin/utils/pg_log.sh"
-source "./bin/utils/pg_perms.sh"
+source "./bin/utils/pg_secret.sh"
 
 
 # --- Core Vars ---
