@@ -1,22 +1,23 @@
 name: CoSMIC
 
 services:
-  frontend:
-    container_name: cosmic-react
-    restart: unless-stopped
-    build:
-      context: ./
-      dockerfile: ./docker/dockerfile/react.Dockerfile
-    ports:
-      - name: cosmic-vite
-        target: 5173
-        host_ip: 127.0.0.1
-        published: "5174"
-        protocol: tcp
-        app_protocol: http
-        mode: host
-    networks:
-        - cosmic-public
+  # TODO: swap to Yarn setup due to FE more used to it
+  # frontend:
+  #   container_name: cosmic-react
+  #   restart: unless-stopped
+  #   build:
+  #     context: ./
+  #     dockerfile: ./docker/dockerfile/react.Dockerfile
+  #   ports:
+  #     - name: cosmic-vite
+  #       target: 5173
+  #       host_ip: 127.0.0.1
+  #       published: "5174"
+  #       protocol: tcp
+  #       app_protocol: http
+  #       mode: host
+  #   networks:
+  #       - cosmic-public
 
   backend:
     container_name: cosmic-fastapi
