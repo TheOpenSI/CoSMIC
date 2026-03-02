@@ -11,9 +11,10 @@ from typing_extensions import Any, Sequence
 
 
 ### Internal modules ###
-from ..routers import home
 from ..cores.db import SessionDependency, create_db_and_table
 from ..apis.cruds.users import Users, UserCreate, UserUpdate, UserPublic
+from ..routers.normal_endpoints import root, home
+from ..routers.api_endpoints import *
 
 
 # TODO: Need some more research on this usage rather than the deprecation
@@ -31,16 +32,7 @@ cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 
 # Non-API endpoints
-@cosmic_app.get(
-    path="/",
-    tags=["Normal Endpoints"]
-)
-async def root() -> dict[str, str]:
-    return {
-        "message": "Welcome to CoSMIC!",
-        "version": "0.1.0"
-    }
-
+cosmic_app.include_router(router=root.router)
 cosmic_app.include_router(router=home.router)
 
 
