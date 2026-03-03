@@ -9,7 +9,7 @@ from fastapi import FastAPI
 ### Internal modules ###
 from ..cores.db import create_db_and_table
 from ..routers.normal_endpoints import root, home
-from ..routers.api_endpoints import users
+from ..routers.api_endpoints import users, roles
 
 
 # TODO: Need some more research on this usage rather than the deprecation
@@ -33,3 +33,4 @@ cosmic_app.include_router(router=home.router)
 
 # API endpoints
 cosmic_app.include_router(router=users.router)
+cosmic_app.include_router(router=roles.router)
