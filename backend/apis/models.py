@@ -1,5 +1,5 @@
 ### Core modules ###
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, SQLModel, text
 from sqlalchemy.schema import PrimaryKeyConstraint, UniqueConstraint, ForeignKeyConstraint
 
 
@@ -32,12 +32,15 @@ class UserBase(SQLModel):
     # Invoke `email` column is optional as by default, it's NULL in both
     # validation and database
     email: str | None = Field(
-        default=None,
+        default="",
         max_length=256,
         nullable=True,
         # Disable it unless you're fine with the default constraint configs
         # because SQLModel is shit.
-        unique=False
+        unique=False,
+        sa_column_kwargs={
+            "server_default": text(text="NULL")
+        }
     )
     password: str = Field(
         max_length=256,
@@ -76,6 +79,9 @@ class RoleBase(SQLModel):
     # validation and database
     desc: str | None = Field(
         # TEXT type is effectively the same as VARCHAR with no length limitation
-        default=None,
-        nullable=True
+        default="",
+        nullable=True,
+        sa_column_kwargs={
+            "server_default": text(text="NULL")
+        }
     )
