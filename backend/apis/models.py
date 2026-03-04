@@ -4,7 +4,6 @@ from sqlalchemy.schema import PrimaryKeyConstraint, UniqueConstraint, ForeignKey
 
 
 ### Type hints ###
-from uuid import UUID
 
 
 ### Internal modules ###
@@ -31,9 +30,6 @@ class UserBase(SQLModel):
         sa_column_kwargs={
             "server_default": text(text="NULL")
         }
-    )
-    password: str = Field(
-        max_length=256
     )
 
 
@@ -69,14 +65,5 @@ class RoleBase(SQLModel):
         nullable=True,
         sa_column_kwargs={
             "server_default": text(text="NULL")
-        }
-    )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
-    user_id: UUID | None = Field(
-        default=None,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
         }
     )

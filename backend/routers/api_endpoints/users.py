@@ -13,6 +13,7 @@ from typing_extensions import Any, Sequence
 ### Internal modules ###
 from ...cores.db import SessionDependency
 from ...apis.cruds.users import Users, UserCreate, UserUpdate, UserPublic
+from ...apis.cruds.roles import Roles
 
 
 router: APIRouter = APIRouter()
@@ -33,17 +34,31 @@ async def read_users(
 
 
 @router.post(
-    path="/api/users",
+    path="/api/user",
     tags=["API Endpoints"],
     response_model=UserPublic
 )
-async def create_users(
+async def create_user(
     user: UserCreate,
     session: SessionDependency
 ) -> Users:
-    user_db: Users = Users.model_validate(obj=user)
+    # Create user first
+    user_data: dict[str, Any] = user.model_dump(
+        exclude={
+            "granted"
+        }
+    )
+    user_db: Users = Users.model_validate(obj=user_data)
 
+    # Create role associate with user second
+    role_data: dict[str, Any] = user.role_dict.model_dump()
+    role_db: Roles = Roles.model_validate(obj=role_data)
+    role_db.assigned_to = user_db # Update the Relationship() data before commit
+
+    # Create all together last
     session.add(instance=user_db)
+    session.add(instance=role_db)
+
     session.commit()
     session.refresh(user_db)
 

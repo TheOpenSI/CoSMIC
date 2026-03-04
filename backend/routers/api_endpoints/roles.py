@@ -13,6 +13,7 @@ from typing_extensions import Any, Sequence
 ### Internal modules ###
 from ...cores.db import SessionDependency
 from ...apis.cruds.roles import Roles, RoleCreate, RoleUpdate, RolePublic
+from ...apis.cruds.users import Users
 
 
 router: APIRouter = APIRouter()
@@ -33,25 +34,40 @@ async def read_roles(
 
 
 @router.post(
-    path="/api/roles",
+    path="/api/{user_id}/role",
     tags=["API Endpoints"],
     response_model=RolePublic
 )
-async def create_roles(
+async def create_role(
+    user_id: UUID,
     role: RoleCreate,
     session: SessionDependency
 ) -> Roles:
-    role_db: Roles = Roles.model_validate(obj=role)
+    user_db: Users | None = session.get(entity=Users, ident=user_id)
 
-    session.add(instance=role_db)
-    session.commit()
-    session.refresh(role_db)
+    if user_db is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found!"
+        )
 
-    return role_db
+    elif user_db.granted:
+        raise HTTPException(
+            status_code=400,
+            detail="User already have a role!"
+        )
+    else:
+        role_db: Roles = Roles.model_validate(obj=role)
+
+        session.add(instance=role_db)
+        session.commit()
+        session.refresh(role_db)
+
+        return role_db
 
 
 @router.get(
-    path="/api/{role_id}",
+    path="/api/{user_id}/role",
     tags=["API Endpoints"],
     response_model=RolePublic
 )
@@ -71,52 +87,66 @@ async def read_role(
 
 
 @router.patch(
-    path="/api/{role_id}",
+    path="/api/{user_id}/role",
     tags=["API Endpoints"],
     response_model=RolePublic
 )
 async def update_role(
-    role_id: UUID,
+    user_id: UUID,
     role: RoleUpdate,
     session: SessionDependency
 ) -> Roles:
-    role_db: Roles | None = session.get(entity=Roles, ident=role_id)
+    user_db: Users | None = session.get(entity=Users, ident=user_id)
 
-    if role_db is None:
+    if user_db is None:
         raise HTTPException(
             status_code=404,
-            detail="Role not found!"
+            detail="User not found!"
         )
+
+    elif user_db.granted is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User have no role yet!"
+        )
+
     else:
         role_data: dict[str, Any] = role.model_dump(exclude_unset=True)
-        role_db.sqlmodel_update(obj=role_data)
+        user_db.granted.sqlmodel_update(obj=role_data)
 
-        session.add(instance=role_db)
+        session.add(instance=user_db.granted)
         session.commit()
-        session.refresh(instance=role_db)
+        session.refresh(instance=user_db.granted)
 
-        return role_db
+        return user_db.granted
 
 
 @router.delete(
-    path="/api/{role_id}",
+    path="/api/{user_id}/role",
     tags=["API Endpoints"]
 )
 async def delete_role(
-    role_id: UUID,
+    user_id: UUID,
     session: SessionDependency
 ) -> dict[str, str | bool]:
-    role_data: Roles | None = session.get(entity=Roles, ident=role_id)
+    user_db: Users | None = session.get(entity=Users, ident=user_id)
 
-    if role_data is None:
+    if user_db is None:
         raise HTTPException(
             status_code=404,
-            detail="Role not found!"
+            detail="User not found!"
+        )
+
+    elif user_db.granted is None:
+        raise HTTPException(
+            status_code=404,
+            detail="User have no role yet!"
         )
     else:
-        session.delete(instance=role_data)
+        session.delete(instance=user_db.granted)
         session.commit()
 
         return {
-            "status": "OK"
+            "status": True,
+            "message": "Role is removed"
         }
