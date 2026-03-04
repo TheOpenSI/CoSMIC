@@ -1,11 +1,12 @@
 ### Core modules ###
-from sqlmodel import Field, text
+from sqlmodel import Field, Relationship, text
 
 
 ### Type hints ###
 from datetime import datetime
 from uuid import UUID
 from sqlalchemy.sql.sqltypes import TIMESTAMP
+from typing_extensions import Optional # SQLModel is being a bitch here, once again
 
 
 ### Internal modules ###
@@ -35,9 +36,9 @@ class Users(UserBase, table=True):
             "server_default": text(text="uuidv7()")
         }
     )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
+    # Postgres will generate the timestamp (with timezone) for us instead of
+    # manual defining it. The way this works in SQLModel is to provide value to
+    # both type-hint and `default` param
     create_on: datetime | None = Field(
         default=None,
         nullable=False,
@@ -46,6 +47,13 @@ class Users(UserBase, table=True):
             "server_default": text(text="current_timestamp(2)")
         }
     )
+
+    ### It's very confusing to read from database perspective, but here's my attempt:
+    ###   "CoSMIC user have Admin role granted through `assigned_to` object-level connection"
+    ###      👆              👆          👆                 👆                        👆
+    ###    Users            Users       Users           Relationship             Relationship
+    ###                   type-hint    object         `back_populates`
+    granted: Optional["Roles"] = Relationship(back_populates="assigned_to")
 
 
 class UserPublic(UserBase):

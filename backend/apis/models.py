@@ -4,10 +4,10 @@ from sqlalchemy.schema import PrimaryKeyConstraint, UniqueConstraint, ForeignKey
 
 
 ### Type hints ###
+from uuid import UUID
 
 
 ### Internal modules ###
-from .cruds import *
 
 
 class UserBase(SQLModel):
@@ -19,32 +19,21 @@ class UserBase(SQLModel):
             "id",
             name="PK_USER_ID"
         ),
-        UniqueConstraint(
-            "email",
-            name="UK_USER_EMAIL"
-        ),
     )
 
     name: str = Field(
-        max_length=100,
-        nullable=False
+        max_length=100
     )
-    # Invoke `email` column is optional as by default, it's NULL in both
-    # validation and database
     email: str | None = Field(
-        default="",
+        default=None,
         max_length=256,
         nullable=True,
-        # Disable it unless you're fine with the default constraint configs
-        # because SQLModel is shit.
-        unique=False,
         sa_column_kwargs={
             "server_default": text(text="NULL")
         }
     )
     password: str = Field(
-        max_length=256,
-        nullable=False
+        max_length=256
     )
 
 
@@ -72,16 +61,22 @@ class RoleBase(SQLModel):
     )
 
     name: str = Field(
-        max_length=20,
-        nullable=False
+        max_length=20
     )
-    # Invoke `desc` column is optional as by default, it's NULL in both
-    # validation and database
     desc: str | None = Field(
         # TEXT type is effectively the same as VARCHAR with no length limitation
-        default="",
+        default=None,
         nullable=True,
         sa_column_kwargs={
             "server_default": text(text="NULL")
+        }
+    )
+    # Postgres will generate the UUID (version 7) for us instead of manual
+    # defining it. The way this works in SQLModel is to provide value to both
+    # type-hint and `default` param
+    user_id: UUID | None = Field(
+        default=None,
+        sa_column_kwargs={
+            "server_default": text(text="uuidv7()")
         }
     )
