@@ -19,50 +19,64 @@ from ...apis.cruds.roles import Roles
 router: APIRouter = APIRouter()
 
 
-@router.get(
-    path="/api/users",
-    tags=["API Endpoints"],
-    response_model=list[UserPublic]
-)
-async def read_users(
-    session: SessionDependency
-) -> Sequence[Users]:
-    users_stmt: SelectOfScalar[Users] = select(Users)
-    users_view: Sequence[Users] = session.exec(statement=users_stmt).all()
-
-    return users_view
+# @router.get(
+#     path="/api/users",
+#     tags=["API Endpoints"],
+#     response_model=list[UserPublic]
+# )
+# async def read_users(
+#     session: SessionDependency
+# ) -> Sequence[Users]:
+#     users_stmt: SelectOfScalar[Users] = select(Users)
+#     users_view: Sequence[Users] = session.exec(statement=users_stmt).all()
+#
+#     return users_view
 
 
 @router.post(
     path="/api/user",
     tags=["API Endpoints"],
-    response_model=UserPublic
+    # response_model=UserPublic
 )
 async def create_user(
     user: UserCreate,
     session: SessionDependency
 ) -> Users:
-    # Create user first
-    user_data: dict[str, Any] = user.model_dump(
-        exclude={
-            "granted"
-        }
+    # First 2 default roles for inital user and new user respectively
+    role_admin: Roles = Roles(
+        name="Admin",
+        desc="Granted to initial user by default, update other users through this user on first time."
     )
-    user_db: Users = Users.model_validate(obj=user_data)
+    role_user: Roles = Roles(
+        name="User",
+        desc="Granted to new user by default."
+    )
 
-    # Create role associate with user second
-    role_data: dict[str, Any] = user.role_dict.model_dump()
-    role_db: Roles = Roles.model_validate(obj=role_data)
-    role_db.assigned_to = user_db # Update the Relationship() data before commit
+    # Create initial user that have all priviledges
+    insert_initial_user: Users = Users(
+        # TODO: read from .env instead
+        name="cosmic",
+        password="cosmic_password_123",
+        granted=role_admin
+    )
+    # Create new sign up users
+    new_user: Users = Users.model_validate(obj=user, strict=True)
+    insert_new_user: Users = Users(
+        name=new_user.name,
+        email=new_user.email,
+        password=new_user.password,
+        granted=role_user
+    )
 
-    # Create all together last
-    session.add(instance=user_db)
-    session.add(instance=role_db)
+    session.add(instance=insert_initial_user)
+    session.add(instance=insert_new_user)
 
     session.commit()
-    session.refresh(user_db)
 
-    return user_db
+    session.refresh(instance=insert_initial_user)
+    session.refresh(instance=insert_new_user)
+
+    return new_user
 
 
 @router.get(
