@@ -11,7 +11,7 @@ from typing_extensions import Optional # SQLModel is being a bitch here, once ag
 
 ### Internal modules ###
 from ..models import UserBase
-from .roles import RoleCreate, RolePublic, RoleUpdate
+from .roles import RolePublic
 
 
 # NOTE:
@@ -76,6 +76,13 @@ class UserPublic(UserBase):
     created_on: datetime
 
 
+class UserPublicWithRole(UserPublic):
+    """docstring for UserPublicWithRole."""
+    # Hint for testers that these are Relationship Attributes (FK) value (GET
+    # request scenario), which modifiable via the Role API only
+    granted: RolePublic | None = None
+
+
 class UserCreate(UserBase):
     """docstring for UserCreate."""
     # Hint for testers that these columns are needed alongside with default one
@@ -92,3 +99,14 @@ class UserUpdate(UserBase):
     email:      str | None = None
     # TODO: implement hashed password
     password:   str | None = None # type: ignore
+
+
+class UserDelete(UserBase):
+    """docstring for UserDelete."""
+    # Hint for testers that this is the response message for DELETE request
+    id: UUID
+    created_on: datetime
+    response: dict[str, int | str] | None = {
+        "status": 200,
+        "message": "User deleted successfully."
+    }
