@@ -23,6 +23,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
+from ast import List
 import os, glob, pytz, sys, csv
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
@@ -41,10 +42,18 @@ from src.services.base import ServiceBase
 class VectorDatabase(ServiceBase):
     def __init__(
         self,
-        document_analyser_model: str="gte-small",
+        # document_analyser_model: str="gte-small",
+        document_analyser_model: str="Qwen/Qwen3-Embedding-8B",
         local_database_path: str="database/vector_database",
         vector_database_update_threshold: float=0.98,
         device: str="cuda",
+        
+        # paragraph grouping controls
+        paragraph_separator: str = "\n\n",
+        min_paragraph_chars: int = 30,
+        target_group_chars: int = 1200,
+        paragraph_group_overlap: int = 1,
+
         **kwargs
     ):
         """Vector database service.
@@ -56,7 +65,13 @@ class VectorDatabase(ServiceBase):
             vector_database_update_threshold (float, optional): contents with similarity >= this threshold
                 will be skipped. Default to 0.98.
             device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
-            Defaults to "gte-small".
+            Defaults to "Qwen/Qwen3-Embedding-8B".
+            
+            paragraph_separator (str, optional): how to split paragraphs; default double newline.
+            min_paragraph_chars (int, optional): paragraphs shorter than this are filtered out.
+            target_group_chars (int, optional): approx char budget per grouped chunk.
+            paragraph_group_overlap (int, optional): number of previous paragraphs to overlap between chunks.
+
         """
         super().__init__(**kwargs)
 
@@ -99,11 +114,18 @@ class VectorDatabase(ServiceBase):
             catalogue.writerow(["Source", "Time", "Comment"])
             catalogue_pt.close()
 
-        # For document analysis and knowledge database generation/update.
-        EMBEDDING_MODEL_DICT = {'gte-small': "thenlper/gte-small"}
+        # Support two embedding models
+        EMBEDDING_MODEL_DICT = {
+            "gte-small": "thenlper/gte-small",
+            "Qwen/Qwen3-Embedding-8": "Qwen/Qwen3-Embedding-8",
+        }
 
-        # Set page separators.
-        MARKDOWN_SEPARATORS = ["\n\n", "\n", ""]
+        # Paragraph-grouping settings bound to self
+        self.paragraph_separator = paragraph_separator
+        self.min_paragraph_chars = min_paragraph_chars
+        self.target_group_chars = target_group_chars
+        self.paragraph_group_overlap = paragraph_group_overlap
+
 
         # Set splitter to split a document into pages.
         self.document_splitter = RecursiveCharacterTextSplitter(
@@ -111,11 +133,13 @@ class VectorDatabase(ServiceBase):
             chunk_overlap=100,
             add_start_index=True,
             strip_whitespace=True,
-            separators=MARKDOWN_SEPARATORS,
+            separators=["\n\n", "\n", ""],
         )
 
         # Build a document analyser.
-        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT[document_analyser_model]
+        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT.get(
+            document_analyser_model, document_analyser_model
+            )
 
         self.database_update_embedding = HuggingFaceEmbeddings(
             model_name=EMBEDDING_MODEL_NAME,
@@ -160,6 +184,50 @@ class VectorDatabase(ServiceBase):
         self.catalogue_time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
             .astimezone(pytz.timezone('Australia/Sydney')).strftime("%m/%d/%Y, %H:%M:%S")
 
+    ## new functions for better paragraph grouping
+    
+    def _split_into_paragraphs(self, text: str) -> List[str]:
+        """Split text into logical paragraphs, filter short ones, normalize whitespace."""
+        # Normalize line endings
+        t = text.replace("\r\n", "\n").replace("\r", "\n")
+        parts = [p.strip() for p in t.split(self.paragraph_separator)]
+        # Filter very short or empty paragraphs
+        paras = [p for p in parts if len(p) >= self.min_paragraph_chars]
+        return paras
+
+    def _group_paragraphs(self, paragraphs: List[str]) -> List[str]:
+        """Group consecutive paragraphs up to target_group_chars with paragraph_group_overlap."""
+        groups = []
+        i = 0
+        while i < len(paragraphs):
+            # Start group with optional overlap from previous
+            start = max(0, i - self.paragraph_group_overlap) if groups else i
+            group = []
+            length = 0
+            j = start
+            while j < len(paragraphs) and length < self.target_group_chars:
+                group.append(paragraphs[j])
+                length += len(paragraphs[j]) + len(self.paragraph_separator)
+                j += 1
+            # Deduplicate if overlap pulled in already-consumed paragraphs
+            group_text = self.paragraph_separator.join(group).strip()
+            if not groups or groups[-1] != group_text:
+                groups.append(group_text)
+            # Advance by the size of the new segment without counting overlap
+            i = max(i + max(1, (j - i)), j)
+        return groups
+
+    def paragraph_group_chunks(self, raw_text: str) -> List[str]:
+        """Public API to produce paragraph-grouped chunks from raw text."""
+        paras = self._split_into_paragraphs(raw_text)
+        if not paras:
+            # fallback to recursive splitter if the input has no paragraphs
+            return self.document_splitter.split_text(raw_text)
+        return self._group_paragraphs(paras)
+
+    
+    
+    
     def similarity_search_with_relevance_scores(
         self,
         *args,
