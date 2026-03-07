@@ -8,7 +8,8 @@ from fastapi import FastAPI
 
 ### Internal modules ###
 from ..cores.db import create_db_and_table, create_default_account
-from ..routers.normal_endpoints import root, home
+from ..routers.normal_endpoints import root
+from ..routers.normal_endpoints.home import home_router
 from ..routers.api_endpoints.users import users_v1_router
 from ..routers.api_endpoints.roles import roles_v1_router
 from ..routers.api_endpoints.chatboxes import chatboxes_v1_router
@@ -31,7 +32,7 @@ cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 # Normal endpoints
 cosmic_app.include_router(router=root.router)
-cosmic_app.include_router(router=home.router)
+cosmic_app.include_router(router=home_router)
 
 
 # API endpoints (V1)
