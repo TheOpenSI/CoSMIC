@@ -50,15 +50,6 @@ class RoleBase(SQLModel):
 
 class UserBase(SQLModel):
     """docstring for UserBase."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
-        PrimaryKeyConstraint(
-            "id",
-            name="PK_USER_ID"
-        ),
-    )
-
     name: str = Field(
         max_length=100
     )
@@ -207,6 +198,15 @@ class Roles(RoleBase, table=True):
 
 class Users(UserBase, table=True):
     """docstring for Users."""
+    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
+    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
+    __table_args__ = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_USER_ID"
+        ),
+    )
+
     # TODO: implement hashed password
     password: str = Field(
         max_length=256
@@ -405,7 +405,7 @@ class UserDelete(UserBase):
     # Hint for testers that this is the response message for DELETE request
     id: UUID
     created_on: datetime
-    response: dict[str, int | str] | None = {
+    response: dict[str, int | str] = {
         "status": 200,
-        "message": "User deleted successfully."
+        "message": "OK"
     }
