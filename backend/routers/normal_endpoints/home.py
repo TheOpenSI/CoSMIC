@@ -30,8 +30,10 @@ home_router: APIRouter = APIRouter(
     status_code=status.HTTP_200_OK,
     response_model=None
 )
-async def read_home() -> str:
-    return "This is the landing page of CoSMIC project!"
+async def read_home() -> dict[str, str]:
+    return {
+        "message": "This is the landing page of CoSMIC project!"
+    }
 
 
 @home_router.post(
@@ -41,7 +43,7 @@ async def read_home() -> str:
 )
 async def create_home() -> dict[str, int | str]:
     return {
-        "status": 405,
+        "status": status.HTTP_405_METHOD_NOT_ALLOWED,
         "message": "POST request method is not allowed for Home Endpoints"
     }
 
@@ -53,7 +55,7 @@ async def create_home() -> dict[str, int | str]:
 )
 async def update_home() -> dict[str, int | str]:
     return {
-        "status": 405,
+        "status": status.HTTP_405_METHOD_NOT_ALLOWED,
         "message": "PATCH request method is not allowed for Home Endpoints"
     }
 
@@ -65,6 +67,6 @@ async def update_home() -> dict[str, int | str]:
 )
 async def delete_home() -> dict[str, int | str]:
     return {
-        "status": 405,
+        "status": status.HTTP_405_METHOD_NOT_ALLOWED,
         "message": "DELETE request method is not allowed for Home Endpoints"
     }

@@ -60,7 +60,7 @@ async def read_roles_v1(
 )
 async def create_roles_v1() -> Any:
     return {
-        "status": 405,
+        "status": status.HTTP_405_METHOD_NOT_ALLOWED,
         "message": "POST request method is not allowed for Roles API (V1)"
     }
 
