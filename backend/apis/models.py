@@ -35,27 +35,6 @@ class ChatboxBase(SQLModel):
 
 class RoleBase(SQLModel):
     """docstring for RoleBase."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
-        PrimaryKeyConstraint(
-            "id",
-            name="PK_ROLE_ID"
-        ),
-        ForeignKeyConstraint(
-            columns=["user_id"],
-            refcolumns=["users.id"],
-            name="FK_ROLE_USER_ID",
-            onupdate="CASCADE",
-            ondelete="CASCADE",
-            match="FULL"
-        ),
-        UniqueConstraint(
-            "user_id",
-            name="UK_ROLE_USER_ID"
-        )
-    )
-
     name: str = Field(
         max_length=20
     )
@@ -162,6 +141,27 @@ class Chatboxes(ChatboxBase, table=True):
 
 class Roles(RoleBase, table=True):
     """docstring for Roles."""
+    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
+    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
+    __table_args__ = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_ROLE_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_ROLE_USER_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        UniqueConstraint(
+            "user_id",
+            name="UK_ROLE_USER_ID"
+        )
+    )
+
     # Postgres will generate the UUID (version 7) for us instead of manual
     # defining it. The way this works in SQLModel is to provide value to both
     # type-hint and `default` param
@@ -174,17 +174,9 @@ class Roles(RoleBase, table=True):
             "server_default": text(text="uuidv7()")
         }
     )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
     user_id: UUID | None = Field(
         default=None,
-        nullable=False,
-        # U might asking where's the FK? Welp, go check `Base Model` section and
-        # fucking find out why
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
+        nullable=False
     )
     # Postgres will generate the timestamp (without time zone) for us instead of
     # manual defining it. The way this works in SQLModel is to provide value to
@@ -324,9 +316,9 @@ class ChatboxDelete(ChatboxBase):
     id: UUID
     user_id: UUID
     created_on: datetime
-    response: dict[str, int | str] | None = {
-        "status": 204,
-        "message": "No Content"
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
     }
 
 
@@ -337,6 +329,14 @@ class RolePublic(RoleBase):
     id: UUID
     user_id: UUID
     created_on: datetime
+
+
+class RoleCreate(SQLModel):
+    """docstring for RoleCreate."""
+    # Hint for testers that these columns are needed alongside with default one
+    # during a POST request
+    status: int | str = "HTTP_STATUS_CODE"
+    message: str = "HTTP_STATUS_MESSAGE"
 
 
 class RolePublicWithUser(RolePublic):
@@ -360,9 +360,9 @@ class RoleDelete(RoleBase):
     id: UUID
     user_id: UUID
     created_on: datetime
-    response: dict[str, int | str] | None = {
+    response: dict[str, int | str] = {
         "status": 200,
-        "message": "User with assigned role deleted successfully."
+        "message": "OK"
     }
 
 

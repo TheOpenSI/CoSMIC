@@ -1,5 +1,5 @@
 ### Core modules ###
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from sqlmodel import select
 
 
@@ -10,7 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Roles, RoleUpdate, RolePublicWithUser, RolePublic, RoleDelete
+from ...apis.models import Roles, RoleCreate, RoleUpdate, RolePublicWithUser, RolePublic, RoleDelete
 
 
 # NOTE:
@@ -23,16 +23,29 @@ from ...apis.models import Roles, RoleUpdate, RolePublicWithUser, RolePublic, Ro
 # SQLAlchemy's Relationship API).
 
 
-router: APIRouter = APIRouter()
+roles_v1_router: APIRouter = APIRouter(
+    prefix="/v1/roles",
+    tags=["Roles API (V1)"],
+    responses={
+        200: {
+            "description": "OK (Roles API V1)"
+        },
+        404: {
+            "description": "Not Found (Roles API V1)"
+        },
+        405: {
+            "description": "Method Not Allowed (Roles API V1)"
+        }
+    }
+)
 
 
-@router.get(
-    path="/api/{role_id}/roles",
-    tags=["API Endpoints"],
-    summary="Read All User Assigned Roles",
+@roles_v1_router.get(
+    path="/",
+    status_code=status.HTTP_200_OK,
     response_model=list[RolePublic]
 )
-async def read_roles(
+async def read_roles_v1(
     session: SessionDependency
 ) -> Any:
     roles_view: Sequence[Roles] = session.exec(statement=select(Roles)).all()
@@ -40,13 +53,24 @@ async def read_roles(
     return roles_view
 
 
-@router.get(
-    path="/api/{user_id}/{role_id}",
-    tags=["API Endpoints"],
-    summary="Read User Assigned Role",
+@roles_v1_router.post(
+    path="/",
+    status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+    response_model=RoleCreate
+)
+async def create_roles_v1() -> Any:
+    return {
+        "status": 405,
+        "message": "POST request method is not allowed for Roles API (V1)"
+    }
+
+
+@roles_v1_router.get(
+    path="/{role_id}",
+    status_code=status.HTTP_200_OK,
     response_model=RolePublicWithUser
 )
-async def read_role(
+async def read_role_v1(
     role_id: UUID,
     session: SessionDependency
 ) -> Any:
@@ -54,20 +78,19 @@ async def read_role(
 
     if role_view is None:
         raise HTTPException(
-            status_code=404,
-            detail="User with assigned role not found!"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User Assigned Role Not Found!"
         )
     else:
         return role_view
 
 
-@router.patch(
-    path="/api/{user_id}/{role_id}",
-    tags=["API Endpoints"],
-    summary="Update User Assigned Role",
+@roles_v1_router.patch(
+    path="/{role_id}",
+    status_code=status.HTTP_200_OK,
     response_model=RolePublic
 )
-async def update_role(
+async def update_role_v1(
     role_id: UUID,
     role: RoleUpdate,
     session: SessionDependency
@@ -76,8 +99,8 @@ async def update_role(
 
     if role_db is None:
         raise HTTPException(
-            status_code=404,
-            detail="User with assigned role not found!"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User Assigned Role Not Found!"
         )
     else:
         role_data: dict[str, Any] = role.model_dump(exclude_unset=True)
@@ -90,13 +113,12 @@ async def update_role(
         return role_db
 
 
-@router.delete(
-    path="/api/{user_id}/{role_id}",
-    tags=["API Endpoints"],
-    summary="Delete User Assigned Role",
+@roles_v1_router.delete(
+    path="/{role_id}",
+    status_code=status.HTTP_200_OK,
     response_model=RoleDelete
 )
-async def delete_role(
+async def delete_role_v1(
     role_id: UUID,
     session: SessionDependency
 ) -> Any:
@@ -104,8 +126,8 @@ async def delete_role(
 
     if role_gone is None:
         raise HTTPException(
-            status_code=404,
-            detail="User with assigned role not found!"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User Assigned Role Not Found!"
         )
     else:
         session.delete(instance=role_gone)

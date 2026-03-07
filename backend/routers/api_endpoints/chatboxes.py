@@ -77,8 +77,8 @@ async def read_chatbox_v1(
 
     if chatbox_view is None:
         raise HTTPException(
-            status_code=404,
-            detail="Provided chatbox that belonged to user not found!"
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Chatbox Not Found."
         )
     else:
         return chatbox_view
@@ -98,7 +98,7 @@ async def update_chatbox_v1(
 
     if chatbox_db is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Chatbox Not Found."
         )
     else:
@@ -125,7 +125,7 @@ async def delete_chatbox_v1(
 
     if chatbox_gone is None:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Chatbox Not Found."
         )
     else:
