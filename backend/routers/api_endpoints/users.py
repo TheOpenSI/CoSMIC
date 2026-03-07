@@ -1,6 +1,5 @@
 ### Core modules ###
-from fastapi import APIRouter
-from fastapi import HTTPException
+from fastapi import APIRouter, HTTPException
 from sqlmodel import select
 
 
@@ -11,8 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.cruds.users import Users, UserCreate, UserUpdate, UserPublicWithRole, UserPublic, UserDelete
-from ...apis.cruds.roles import Roles
+from ...apis.models import Roles, Users, UserCreate, UserUpdate, UserPublicWithRole, UserPublic, UserDelete
 
 
 router: APIRouter = APIRouter()

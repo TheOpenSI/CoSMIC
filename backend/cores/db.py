@@ -11,8 +11,7 @@ from sqlalchemy.sql.expression import Select
 
 ### Internal modules ###
 from .env import get_env
-from ..apis.cruds.users import Users
-from ..apis.cruds.roles import Roles
+from ..apis.models import Users, Roles
 
 
 cosmic_db_configs = get_env()
