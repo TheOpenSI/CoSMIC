@@ -10,7 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import RoleDelete, Users, Roles, RoleUpdate, RolePublicWithUser, RolePublic
+from ...apis.models import Roles, RoleUpdate, RolePublicWithUser, RolePublic, RoleDelete
 
 
 # NOTE:
@@ -49,7 +49,7 @@ async def read_roles(
 async def read_role(
     role_id: UUID,
     session: SessionDependency
-) -> Roles:
+) -> Any:
     role_view: Roles | None = session.get(entity=Roles, ident=role_id)
 
     if role_view is None:

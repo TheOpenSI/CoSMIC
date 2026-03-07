@@ -46,7 +46,7 @@ async def create_user(
         # "string" value for optional data by default
         email=user.email if user.email != "string" else None,
         password=user.password,
-        granted= Roles(
+        granted=Roles(
             name="User",
             desc=""
         )
