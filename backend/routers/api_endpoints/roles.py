@@ -10,15 +10,26 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Users, Roles, RoleCreate, RoleUpdate, RolePublicWithUser, RolePublic
+from ...apis.models import RoleDelete, Users, Roles, RoleUpdate, RolePublicWithUser, RolePublic
+
+
+# NOTE:
+# For our case, the relationship between `Roles` & `Users` table are 1-1.
+# Therefore, we can't fetch roles directly without the user that has been
+# assigned for the role. This, however, will create a bit of a confusion on why
+# we specify the `{role_id}` path but not calling it anywhere. This's just the
+# way that makes SQLModel playing nice with us based on reason above, as it
+# using Pydantic to validate under the hood (which Pydantic don't know
+# SQLAlchemy's Relationship API).
 
 
 router: APIRouter = APIRouter()
 
 
 @router.get(
-    path="/api/roles",
+    path="/api/{role_id}/roles",
     tags=["API Endpoints"],
+    summary="Read All User Assigned Roles",
     response_model=list[RolePublic]
 )
 async def read_roles(
@@ -29,42 +40,10 @@ async def read_roles(
     return roles_view
 
 
-# @router.post(
-#     path="/api/{user_id}/role",
-#     tags=["API Endpoints"],
-#     response_model=RolePublic
-# )
-# async def create_role(
-#     user_id: UUID,
-#     role: RoleCreate,
-#     session: SessionDependency
-# ) -> Roles:
-#     user_db: Users | None = session.get(entity=Users, ident=user_id)
-#
-#     if user_db is None:
-#         raise HTTPException(
-#             status_code=404,
-#             detail="User not found!"
-#         )
-#
-#     elif user_db.granted:
-#         raise HTTPException(
-#             status_code=400,
-#             detail="User already have a role!"
-#         )
-#     else:
-#         role_db: Roles = Roles.model_validate(obj=role)
-#
-#         session.add(instance=role_db)
-#         session.commit()
-#         session.refresh(role_db)
-#
-#         return role_db
-
-
 @router.get(
-    path="/api/{role_id}",
+    path="/api/{user_id}/{role_id}",
     tags=["API Endpoints"],
+    summary="Read User Assigned Role",
     response_model=RolePublicWithUser
 )
 async def read_role(
@@ -76,73 +55,60 @@ async def read_role(
     if role_view is None:
         raise HTTPException(
             status_code=404,
-            detail="Role not found!"
+            detail="User with assigned role not found!"
         )
     else:
         return role_view
 
 
 @router.patch(
-    path="/api/{user_id}/role",
+    path="/api/{user_id}/{role_id}",
     tags=["API Endpoints"],
+    summary="Update User Assigned Role",
     response_model=RolePublic
 )
 async def update_role(
-    user_id: UUID,
+    role_id: UUID,
     role: RoleUpdate,
     session: SessionDependency
-) -> Roles:
-    user_db: Users | None = session.get(entity=Users, ident=user_id)
+) -> Any:
+    role_db: Roles | None = session.get(entity=Roles, ident=role_id)
 
-    if user_db is None:
+    if role_db is None:
         raise HTTPException(
             status_code=404,
-            detail="User not found!"
+            detail="User with assigned role not found!"
         )
-
-    elif user_db.granted is None:
-        raise HTTPException(
-            status_code=404,
-            detail="User have no role yet!"
-        )
-
     else:
         role_data: dict[str, Any] = role.model_dump(exclude_unset=True)
-        user_db.granted.sqlmodel_update(obj=role_data)
+        role_db.sqlmodel_update(obj=role_data)
 
-        session.add(instance=user_db.granted)
+        session.add(instance=role_db)
         session.commit()
-        session.refresh(instance=user_db.granted)
+        session.refresh(instance=role_db)
 
-        return user_db.granted
+        return role_db
 
 
 @router.delete(
-    path="/api/{user_id}/role",
-    tags=["API Endpoints"]
+    path="/api/{user_id}/{role_id}",
+    tags=["API Endpoints"],
+    summary="Delete User Assigned Role",
+    response_model=RoleDelete
 )
 async def delete_role(
-    user_id: UUID,
+    role_id: UUID,
     session: SessionDependency
-) -> dict[str, str | bool]:
-    user_db: Users | None = session.get(entity=Users, ident=user_id)
+) -> Any:
+    role_gone: Roles | None = session.get(entity=Roles, ident=role_id)
 
-    if user_db is None:
+    if role_gone is None:
         raise HTTPException(
             status_code=404,
-            detail="User not found!"
-        )
-
-    elif user_db.granted is None:
-        raise HTTPException(
-            status_code=404,
-            detail="User have no role yet!"
+            detail="User with assigned role not found!"
         )
     else:
-        session.delete(instance=user_db.granted)
+        session.delete(instance=role_gone)
         session.commit()
 
-        return {
-            "status": True,
-            "message": "Role is removed"
-        }
+        return role_gone
