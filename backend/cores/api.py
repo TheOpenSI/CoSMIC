@@ -14,6 +14,7 @@ from ..routers.api_endpoints.users import users_v1_router
 from ..routers.api_endpoints.roles import roles_v1_router
 from ..routers.api_endpoints.chatboxes import chatboxes_v1_router
 from .. routers.api_endpoints.services import services_v1_router
+from .. routers.api_endpoints.models import models_v1_router
 
 
 # TODO: Need some more research on this usage rather than the deprecation
@@ -41,3 +42,4 @@ cosmic_app.include_router(router=users_v1_router)
 cosmic_app.include_router(router=roles_v1_router)
 cosmic_app.include_router(router=chatboxes_v1_router)
 cosmic_app.include_router(router=services_v1_router)
+cosmic_app.include_router(router=models_v1_router)
