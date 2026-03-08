@@ -10,7 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Roles, Users, UserCreate, UserUpdate, UserPublicWithRole, UserPublic, UserDelete
+from ...apis.models import Roles, Users, UserCreate, UserPublic, UserPublicWithRole, UserUpdate, UserDelete
 
 
 users_v1_router: APIRouter = APIRouter(

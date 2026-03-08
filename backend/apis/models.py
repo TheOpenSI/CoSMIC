@@ -8,7 +8,7 @@ from datetime import datetime
 from uuid import UUID
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from typing_extensions import Any, Optional # SQLModel is being a bitch here, once again
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.dialects.postgresql import TEXT, JSONB
 
 
 ### Internal modules ###
@@ -18,12 +18,23 @@ from sqlalchemy.dialects.postgresql import JSONB
 ################################################
 ### Base Model (inheritance by other models) ###
 ################################################
+class ServiceBase(SQLModel):
+    """docstring for ServiceBase"""
+    name: str = Field(
+        max_length=100
+    )
+    desc: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+
+
 class ChatboxBase(SQLModel):
     """docstring for ChatboxBase"""
     name: str = Field(
         max_length=256
     )
-
     details: dict[str, Any] = Field(
         default={
             "<user-role>": "<user-query>",
@@ -39,12 +50,9 @@ class RoleBase(SQLModel):
         max_length=20
     )
     desc: str | None = Field(
-        # TEXT type is effectively the same as VARCHAR with no length limitation
         default=None,
         nullable=True,
-        sa_column_kwargs={
-            "server_default": text(text="NULL")
-        }
+        sa_type=TEXT
     )
 
 
@@ -56,10 +64,7 @@ class UserBase(SQLModel):
     email: str | None = Field(
         default=None,
         max_length=256,
-        nullable=True,
-        sa_column_kwargs={
-            "server_default": text(text="NULL")
-        }
+        nullable=True
     )
 
 
@@ -67,6 +72,75 @@ class UserBase(SQLModel):
 ######################################################
 ### Table Model (dynamic database table creations) ###
 ######################################################
+class Services(ServiceBase, table=True):
+    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
+    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
+    __table_args__ = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_SERVICE_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["chatbox_id"],
+            refcolumns=["chatboxes.id"],
+            name="FK_SERVICE_CHATBOX_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        Index(
+            "FKI_SERVICE_CHATBOX_ID",
+            "chatbox_id"
+        )
+    )
+    status: bool = Field(
+        default=False,
+        sa_column_kwargs={
+            "server_default": text(text="FALSE"),
+            # Gotta explains the usecase of this column a bit
+            "comment": "mainly for the multi-services usage scenario."
+        }
+    )
+    # Postgres will generate the UUID (version 7) for us instead of manual
+    # defining it. The way this works in SQLModel is to provide value to both
+    # type-hint and `default` param
+    id: UUID | None = Field(
+        default=None,
+        # For some fucking reasons, SQLModel works perfectly fine with PK
+        # constraint. For fuck sake!
+        primary_key=True,
+        sa_column_kwargs={
+            "server_default": text(text="uuidv7()")
+        }
+    )
+    chatbox_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    # Postgres will generate the timestamp (without time zone) for us instead of
+    # manual defining it. The way this works in SQLModel is to provide value to
+    # both type-hint and `default` param
+    created_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_column_kwargs={
+            "server_default": text(text="localtimestamp(2)")
+        }
+    )
+
+    ### It's very confusing to read from database perspective, but here's my attempt:
+    ###   "<name> service activated by <name> chatbox through `used` object-level connection"
+    ###     👆               👆         👆                     👆                     👆
+    ###   Services        Services    Services             Relationship          Relationship
+    ###                    object    type-hint           `back_populates`
+    activated_by: Optional["Chatboxes"] = Relationship(
+        back_populates="used",
+        sa_relationship_kwargs={
+            "uselist": False
+        }
+    )
+
+
 class Chatboxes(ChatboxBase, table=True):
     """docstring for Chatboxes."""
     # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
@@ -120,10 +194,22 @@ class Chatboxes(ChatboxBase, table=True):
     ### It's very confusing to read from database perspective, but here's my attempt:
     ###   "<name> chatbox is belonged to <name> user through `owned` object-level connection"
     ###     👆                 👆         👆                   👆                     👆
-    ###    Roles              Roles      Roles            Relationship           Relationship
+    ###  Chatboxes          Chatboxes  Chatboxes          Relationship           Relationship
     ###                      object    type-hint        `back_populates`
     belonged_to: Optional["Users"] = Relationship(
         back_populates="owned",
+        sa_relationship_kwargs={
+            "uselist": False
+        }
+    )
+
+    ### It's very confusing to read from database perspective, but here's my attempt:
+    ###   "<name> chatbox used <name> service through `activated_by` object-level connection"
+    ###     👆            👆    👆                         👆                        👆
+    ###  Chatboxes       (Chatboxes)                  Relationship              Relationship
+    ###              object     type-hint           `back_populates`
+    used: Optional["Services"] = Relationship(
+        back_populates="activated_by",
         sa_relationship_kwargs={
             "uselist": False
         }
@@ -277,6 +363,52 @@ class Users(UserBase, table=True):
 # + Even the linter (pyright) is fucked with this kinda bridging as well. I
 #   don't give a fuck anymore, I'll slap in `type: ignore` whenever I'm fucking
 #   can.
+
+
+class ServicePublic(ServiceBase):
+    """docstring for ServicePublic."""
+    # Hint for testers that these columns will not be appear in body as it is
+    # generated by database
+    id: UUID
+    chatbox_id: UUID
+    status: bool = False
+    created_on: datetime
+
+
+class ServicePublicWithChatbox(ServicePublic):
+    """docstring for ServicePublicWithUser."""
+    # Hint for testers that these are Relationship Attributes (FK) value (GET
+    # request scenario), which modifiable via the User API only
+    used: ChatboxPublic | None = None
+
+
+class ServiceCreate(ServiceBase):
+    """docstring for ChatBoxCreate."""
+    # Hint for testers that these columns are needed alongside with default one
+    # during a POST request
+    pass
+
+
+class ServiceUpdate(ServiceBase):
+    """docstring for ServiceUpdate."""
+    # Hint for testers that these columns are needed (optionally) alongside with
+    # default one during a PATCH request
+    name:   str | None = None # type: ignore
+    desc:   str | None = None
+    status: bool | None = False # type: ignore
+
+
+class ServiceDelete(ServiceBase):
+    """docstring for ServiceDelete."""
+    # Hint for testers that this is the response message for DELETE request
+    id: UUID
+    chatbox_id: UUID
+    status: bool
+    created_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
 
 
 class ChatboxPublic(ChatboxBase):

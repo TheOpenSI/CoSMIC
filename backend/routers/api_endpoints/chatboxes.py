@@ -10,7 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Chatboxes, ChatboxCreate, ChatboxUpdate, ChatboxPublicWithUser, ChatboxPublic, ChatboxDelete
+from ...apis.models import Chatboxes, ChatboxCreate, ChatboxPublic, ChatboxPublicWithUser, ChatboxUpdate, ChatboxDelete
 
 
 chatboxes_v1_router: APIRouter = APIRouter(
@@ -61,7 +61,6 @@ async def create_chatbox_v1(
     session.refresh(instance=chatbox_db)
 
     return chatbox_db
-
 
 
 @chatboxes_v1_router.get(

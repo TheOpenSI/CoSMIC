@@ -10,7 +10,7 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Roles, RoleCreate, RoleUpdate, RolePublicWithUser, RolePublic, RoleDelete
+from ...apis.models import Roles, RoleCreate, RolePublic, RolePublicWithUser, RoleUpdate, RoleDelete
 
 
 # NOTE:
