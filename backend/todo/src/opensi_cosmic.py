@@ -4,9 +4,10 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2024 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -23,26 +24,27 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 # -------------------------------------------------------------------------------------------------------------
 
+
 import os, sys, yaml, torch
+from box import Box
+
+from .services.llms import llm as llm_instances
+from .services.llms.llm import get_instance
+from .maps import LLM_INSTANCE_DICT
+from .services.vector_database import VectorDatabase
+from .services.qa import QABase
+from .services.rag import RAGBase
+from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
+from ..modules.chess.chess_qa_quality import QualityEval
+from ..modules.chess.chess_genfen import FENGenerator
+from ..modules.chess.chess_gencot import CotGenerator
+from ..modules.code_generation.code_generation import CodeGenerator
+from ..utils.log_tool import set_color
+from .query_analyser.query_analyser import QueryAnalyser
+
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 
-from src.services.llms import llm as llm_instances
-from src.services.llms.llm import get_instance
-from src.maps import LLM_INSTANCE_DICT
-from src.services.vector_database import VectorDatabase
-from src.services.qa import QABase
-from src.services.rag import RAGBase
-from modules.chess.chess_qa_puzzle import PuzzleAnalyse
-from modules.chess.chess_qa_quality import QualityEval
-from modules.chess.chess_genfen import FENGenerator
-from modules.chess.chess_gencot import CotGenerator
-from modules.code_generation.code_generation import CodeGenerator
-from utils.log_tool import set_color
-from box import Box
-from src.query_analyser.query_analyser import QueryAnalyser
-
-# =============================================================================================================
 
 class OpenSICoSMIC:
     def __init__(

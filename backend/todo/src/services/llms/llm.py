@@ -4,8 +4,9 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2024 - 2026 Open Source Institute
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -30,16 +31,16 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 from peft import PeftModel
 from openai import OpenAI
 from transformers import pipeline
-from src.maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
-from src.services.llms.LLMBase import LLMBase
-from src.services.llms.Ollama import Ollama
-from src.services.llms.prompts import system_prompt as system_prompt_instances
-from src.services.llms.prompts import user_prompt as user_prompt_instances
-from src.services.llms import tokenizer as tokenizer_instances
-from src.services.base import ServiceBase
-from src.services.llms.login import LLMLogin
-from utils.module import get_instance
-from utils.log_tool import set_color
+from ...maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
+from .LLMBase import LLMBase
+from .Ollama import Ollama
+from .prompts import system_prompt as system_prompt_instances
+from .prompts import user_prompt as user_prompt_instances
+from . import tokenizer as tokenizer_instances
+from ..base import ServiceBase
+from .login import LLMLogin
+from ....utils.module import get_instance
+from ....utils.log_tool import set_color
 
 
 class Mistral7bv01(LLMBase):

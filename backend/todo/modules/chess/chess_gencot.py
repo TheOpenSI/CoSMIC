@@ -4,9 +4,10 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
+#     Bing Tran <binhsan1307@gmail.com> (2026)
 #
-# Copyright (c) 2024 Open Source Institute
-# 
+# Copyright (c) 2024 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -28,10 +29,10 @@ import pandas as pd
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
-from utils.log_tool import set_color
-from src.services.llms.prompts import user_prompt as user_prompt_instances
-from src.services.llms.llm import GPT
-from src.services.chess import ChessBase
+from ...utils.log_tool import set_color
+from ...src.services.llms.prompts import user_prompt as user_prompt_instances
+from ...src.services.llms.llm import GPT
+from ...src.services.chess import ChessBase
 
 # =============================================================================================================
 

@@ -3,9 +3,10 @@
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2025 Open Source Institute
-# 
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2025 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -26,11 +27,11 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
 
 import ollama
 
-from typing import List, Dict, Any, Union
+from typing_extensions import List, Dict, Any, Union
 from ollama import Client
 
-from src.services.llms.llm import LLMBase
-from src.services.llms.OllamaPullManager import OllamaPullManager
+from .llm import LLMBase
+from .OllamaPullManager import OllamaPullManager
 
 class Ollama(LLMBase):
     def __init__(self,

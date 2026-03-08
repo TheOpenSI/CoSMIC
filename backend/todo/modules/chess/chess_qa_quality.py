@@ -4,9 +4,10 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2024 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -27,9 +28,9 @@ import numbers
 import pandas as pd
 import numpy as np
 
-from utils.log_tool import set_color
-from utils.num2word import convert_number2word
-from src.services.qa import QABase
+from ...utils.log_tool import set_color
+from ...utils.num2word import convert_number2word
+from ...src.services.qa import QABase
 
 # =============================================================================================================
 

@@ -3,7 +3,7 @@
 > Things will **DEFINITELY BREAK, TEAR APART, BURN DOWN TO THE ULTERNESS OF VORTEX**. Please go ahead if none of those would bother you...
 
 > [!NOTE]
-> `todo` directory is the setup that we used to run the CoSMIC project. I'm actively migrating it over this this new structure so unless you know what you need from that directory, safely ignore it.
+> `backend/todo` directory is the setup that we used to run the CoSMIC project. I'm actively migrating it over this this new structure so unless you know what you need from that directory, safely ignore it.
 
 # Setup
 ## 1. Clone repository

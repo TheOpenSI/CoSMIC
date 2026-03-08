@@ -4,9 +4,10 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2024 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -28,9 +29,9 @@ import os, chess, sys
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from stockfish import Stockfish
-from utils.log_tool import set_color
-from src.services.llms.llm import GPT, Ollama
-from src.services.base import ServiceBase
+from ...utils.log_tool import set_color
+from .llms.llm import GPT, Ollama
+from .base import ServiceBase
 
 # =============================================================================================================
 

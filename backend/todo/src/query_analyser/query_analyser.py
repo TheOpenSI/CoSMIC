@@ -3,9 +3,10 @@
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
+#     Bing Tran <binhsan1307@gmail.com> (2026)
+#
+# Copyright (c) 2024 - 2026 Open Source Institute
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
@@ -26,12 +27,12 @@ import os, sys, re
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
-from src.services.llms import llm as llm_instances
-from src.services.llms.llm import get_instance
-from src.query_analyser import user_prompt as query_user_prompt_instances
-from src.maps import LLM_INSTANCE_DICT
-from utils.log_tool import set_color
-from utils.module import get_instance
+from ..services.llms import llm as llm_instances
+from ..services.llms.llm import get_instance
+from . import user_prompt as query_user_prompt_instances
+from ..maps import LLM_INSTANCE_DICT
+from ...utils.log_tool import set_color
+from ...utils.module import get_instance
 
 # =============================================================================================================
 

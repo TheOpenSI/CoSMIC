@@ -11,18 +11,18 @@ from datetime import datetime
 import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from numpy import int64
-from src.opensi_cosmic import OpenSICoSMIC
+# from numpy import int64
+from .src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
-import pandas as pd
+# import pandas as pd
 from zoneinfo import ZoneInfo
-from typing import Optional
+from typing_extensions import Optional
 
-from utils.chat_history import build_context_from_messages
-from utils.general import validate_openai_api_key
-from utils.log_tool import set_color
-from utils.statistics import update_statistic_per_query
+# from utils.chat_history import build_context_from_messages
+# from utils.general import validate_openai_api_key
+from .utils.log_tool import set_color
+# from utils.statistics import update_statistic_per_query
 
 app = FastAPI()
 
@@ -54,20 +54,21 @@ class CosmicAPI(BaseModel):
     body: dict
     user_message: str
 
-config_path = "scripts/configs/config_updated.yaml"
+config_path = "./todo/scripts/configs/config_updated.yaml"
+openai_api_key: str = ""
 
 def update_openai_key():
-    global openai_api_key
-    openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
     if not openai_api_key:
         print(set_color("warning", "OPENAI_API_KEY is required in .env or environment variables."))
+    else:
+        pass
 
 
 # Initialize the OPENAI_API_KEY on startup.
 update_openai_key()
 
 if not os.path.exists(config_path):
-    shutil.copyfile("scripts/configs/config.yaml", config_path)
+    shutil.copyfile(src="./todo/scripts/configs/config.yaml", dst=config_path)
 
 config_modify_timestamp = str(os.path.getmtime(config_path))
 
