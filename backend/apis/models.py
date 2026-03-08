@@ -18,6 +18,21 @@ from sqlalchemy.dialects.postgresql import TEXT, JSONB
 ################################################
 ### Base Model (inheritance by other models) ###
 ################################################
+class StatisticBase(SQLModel):
+    """docstring for StatisticBase"""
+    name: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+    details: dict[str, Any] = Field(
+        default={
+            "<key>": "<value>"
+        },
+        sa_type=JSONB
+    )
+
+
 class ModelBase(SQLModel):
     """docstring for ModelBase"""
     name: str = Field(
@@ -87,6 +102,71 @@ class UserBase(SQLModel):
 ######################################################
 ### Table Model (dynamic database table creations) ###
 ######################################################
+class Statistics(StatisticBase, table=True):
+    """docstring for Statistics."""
+    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
+    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
+    __table_args__ = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_STATISTIC_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_STATISTIC_USER_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        UniqueConstraint(
+            "user_id",
+            name="UK_STATISTIC_USER_ID"
+        )
+    )
+    # Postgres will generate the UUID (version 7) for us instead of manual
+    # defining it. The way this works in SQLModel is to provide value to both
+    # type-hint and `default` param
+    id: UUID | None = Field(
+        default=None,
+        # For some fucking reasons, SQLModel works perfectly fine with PK
+        # constraint. For fuck sake!
+        primary_key=True,
+        sa_column_kwargs={
+            "server_default": text(text="uuidv7()")
+        }
+    )
+    user_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    # Postgres will generate the timestamp (without time zone) for us instead of
+    # manual defining it. The way this works in SQLModel is to provide value to
+    # both type-hint and `default` param
+    created_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_column_kwargs={
+            "server_default": text(text="localtimestamp(2)")
+        }
+    )
+
+    ### It's very confusing to read from database perspective, but here's my attempt:
+    ###   "<name> statistic generated from <name> user through `saw` object-level connection"
+    ###     👆                  👆          👆                  👆                   👆
+    ###  Statistics        Statistics    Statistics         Relationship         Relationship
+    ###                     object       type-hint        `back_populates`
+    generated_from: Optional["Users"] = Relationship(
+        back_populates="saw",
+        sa_relationship_kwargs={
+            "uselist": False,
+            # This allows delete operation on the FK side of 1-1
+            "single_parent": True
+        },
+        cascade_delete=True
+    )
+
+
 class Models(ModelBase, table=True):
     """docstring for Models."""
     # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
@@ -415,6 +495,19 @@ class Users(UserBase, table=True):
     )
 
     ### It's very confusing to read from database perspective, but here's my attempt:
+    ###   "<name> user have <name> role granted through `assigned_to` object-level connection"
+    ###      👆              👆          👆                 👆                        👆
+    ###    Users            Users       Users           Relationship             Relationship
+    ###                   type-hint    object         `back_populates`
+    granted: Optional["Roles"] = Relationship(
+        back_populates="assigned_to",
+        sa_relationship_kwargs={
+            "uselist": False
+        },
+        cascade_delete=True
+    )
+
+    ### It's very confusing to read from database perspective, but here's my attempt:
     ###   "<name> user owned <name> chatbox through `belonged_to` object-level connection"
     ###      👆         👆     👆                        👆                        👆
     ###    Users       Users  Users                 Relationship              Relationship
@@ -428,18 +521,17 @@ class Users(UserBase, table=True):
     )
 
     ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> user have <name> role granted through `assigned_to` object-level connection"
-    ###      👆              👆          👆                 👆                        👆
-    ###    Users            Users       Users           Relationship             Relationship
-    ###                   type-hint    object         `back_populates`
-    granted: Optional["Roles"] = Relationship(
-        back_populates="assigned_to",
+    ###   "<name> user saw <name> statistic through `generated_from` object-level connection"
+    ###      👆        👆    👆                           👆                          👆
+    ###    Users      Users Users                    Relationship                Relationship
+    ###              object type-hint              `back_populates`
+    saw: Optional["Statistics"] = Relationship(
+        back_populates="generated_from",
         sa_relationship_kwargs={
             "uselist": False
         },
         cascade_delete=True
     )
-
 
 
 #####################################################
@@ -455,6 +547,49 @@ class Users(UserBase, table=True):
 # + Even the linter (pyright) is fucked with this kinda bridging as well. I
 #   don't give a fuck anymore, I'll slap in `type: ignore` whenever I'm fucking
 #   can.
+
+
+class StatisticPublic(StatisticBase):
+    """docstring for StatisticPublic."""
+    # Hint for testers that these columns will not be appear in body as it is
+    # generated by database
+    id: UUID
+    user_id: UUID
+    created_on: datetime
+
+
+class StatisticPublicWithUser(StatisticPublic):
+    """docstring for StatisticPublicWithUser."""
+    # Hint for testers that these are Relationship Attributes (FK) value (GET
+    # request scenario), which modifiable via the User API only
+    saw: UserPublic | None = None
+
+
+class StatisticCreate(StatisticBase):
+    """docstring for StatisticCreate."""
+    # Hint for testers that these columns are needed alongside with default one
+    # during a POST request
+    pass
+
+
+class StatisticUpdate(StatisticBase):
+    """docstring for StatisticUpdate."""
+    # Hint for testers that these columns are needed (optionally) alongside with
+    # default one during a PATCH request
+    name:       str | None = None # type: ignore
+    details:    dict[str, Any] | None = None # type: ignore
+
+
+class StatisticDelete(StatisticBase):
+    """docstring for StatisticDelete."""
+    # Hint for testers that this is the response message for DELETE request
+    id: UUID
+    user_id: UUID
+    created_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
 
 
 class ModelPublic(ModelBase):
@@ -519,7 +654,7 @@ class ServicePublicWithChatbox(ServicePublic):
 
 
 class ServiceCreate(ServiceBase):
-    """docstring for ChatBoxCreate."""
+    """docstring for ServiceCreate."""
     # Hint for testers that these columns are needed alongside with default one
     # during a POST request
     pass

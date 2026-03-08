@@ -13,16 +13,6 @@ from ...cores.db import SessionDependency
 from ...apis.models import Roles, RoleCreate, RolePublic, RolePublicWithUser, RoleUpdate, RoleDelete
 
 
-# NOTE:
-# For our case, the relationship between `Roles` & `Users` table are 1-1.
-# Therefore, we can't fetch roles directly without the user that has been
-# assigned for the role. This, however, will create a bit of a confusion on why
-# we specify the `{role_id}` path but not calling it anywhere. This's just the
-# way that makes SQLModel playing nice with us based on reason above, as it
-# using Pydantic to validate under the hood (which Pydantic don't know
-# SQLAlchemy's Relationship API).
-
-
 roles_v1_router: APIRouter = APIRouter(
     prefix="/v1/roles",
     tags=["Roles API (V1)"],
