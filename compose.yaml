@@ -90,8 +90,6 @@ services:
       - type: volume
         source: cosmic-postgres-data
         target: /var/lib/postgresql
-        volume:
-          nocopy: false
     # NOTE: Open to quickly connect and debug on dev only
     ports:
       - name: cosmic-postgres-psql
@@ -133,8 +131,6 @@ services:
       - type: volume
         source: cosmic-pgadmin-data
         target: /var/lib/pgadmin
-        volume:
-          nocopy: false
     ports:
       - name: cosmic-pgadmin-gunicorn
         target: 80
@@ -149,7 +145,7 @@ services:
   ollama:
     container_name: cosmic-ollama
     depends_on:
-      database:
+      backend:
         restart: true
         condition: service_started
         required: true
@@ -181,8 +177,6 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-        volume:
-          nocopy: false
     ports:
       - name: cosmic-ollama-serve
         target: 11434
