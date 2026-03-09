@@ -398,9 +398,9 @@ async def get_ollama_models():
             models.append(
                 {
                     "model": model.get("model"),
-                    "ID": model.get("digest", "")[:12],
+                    "id": model.get("digest", "")[:12],
                     "size": f"{round(model.get('size', 0) / (1000 ** 3), 1)} GB",
-                    "modified": model.get("modified_at"),
+                    "modified_at": model.get("modified_at"),
                     "family": details.get("family", "N/A"),
                 }
             )
@@ -411,10 +411,19 @@ async def get_ollama_models():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/models/pull")
-async def pull_ollama_model(request: PullModelRequest):
-    def stream():
-        for progress in ollama_client.pull(request.model, stream=True):
-            yield json.dumps(dict(progress)) + "\n"
+# @app.post("/models/pull")
+# async def pull_ollama_model(request: PullModelRequest):
+#     def stream():
+#         for progress in ollama_client.pull(request.model, stream=True):
+#             yield json.dumps(dict(progress)) + "\n"
 
-    return StreamingResponse(stream(), media_type="text/plain")
+#     return StreamingResponse(stream(), media_type="text/plain")
+
+
+@app.delete("/models/{model_name}")
+async def delete_ollama_model(model_name: str):
+    try:
+        ollama_client.delete(model_name)
+        return {"message": f"Model '{model_name}' deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
