@@ -146,11 +146,61 @@ services:
     networks:
       - cosmic-private
 
+  ollama:
+    container_name: cosmic-ollama
+    depends_on:
+      database:
+        restart: true
+        condition: service_started
+        required: true
+    restart: unless-stopped
+    # NOTE:
+    # If you've GPU installed on your machine AND it's running Linux/MacOS
+    # (this's very important), comment out current Dockerfile and use the
+    # following:
+    # 1. NVIDIA GPU
+    # build:
+    #   context: ./
+    #   dockerfile: ./docker/dockerfile/ollama/ollama.nvida_cpu.Dockerfile
+    # model:
+    #   gpus: all
+    # 2. AMD GPU
+    # build:
+    #   context: ./
+    #   dockerfile: ./docker/dockerfile/ollama/ollama.amd_cpu.Dockerfile
+    # devices:
+    #   - "/dev/kfd:/dev/kfd"
+    #   - "/dev/dri:/dev/dri"
+    # Otherwise, stick with the default as it's guaranteed to run on all OSes.
+    # Refer to the documentation if you've any questions:
+    # https://docs.ollama.com/docker
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfile/ollama/ollama.all_cpu.Dockerfile
+    volumes:
+      - type: volume
+        source: cosmic-ollama-data
+        target: /root/.ollama
+        volume:
+          nocopy: false
+    ports:
+      - name: cosmic-ollama-serve
+        target: 11434
+        host_ip: 127.0.0.1
+        published: "11435"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+    networks:
+      - cosmic-private
+
 volumes:
   cosmic-postgres-data:
     name: cosmic-relational
   cosmic-pgadmin-data:
     name: cosmic-gui
+  cosmic-ollama-data:
+    name: cosmic-slm-provider
 
 networks:
   cosmic-public:
