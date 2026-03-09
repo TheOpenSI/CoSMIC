@@ -3,6 +3,7 @@
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Bing Tran <binhsan1307@gmail.com>
+#     Carlos Kuhn <carlosclaitonkuhn@gmail.com>
 #
 # Copyright (c) 2026 Open Source Institute
 #
@@ -30,4 +31,21 @@
 ########################################
 docker/secret/
 docker/config/
-!todo/* # Temporary until migration process are done.
+
+# Environments
+*.env*
+*.envrc*
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*__pycache__*
+
+# Logs and databases
+data/docs
+third_party
+database
+database
+./scripts/configs/config_updated.yaml
