@@ -386,6 +386,9 @@ async def process_cosmic(data: CosmicAPI):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# Models APIs - smanile
+
+
 @app.get("/models")
 async def get_ollama_models():
     try:
@@ -413,11 +416,36 @@ async def get_ollama_models():
 
 # @app.post("/models/pull")
 # async def pull_ollama_model(request: PullModelRequest):
-#     def stream():
-#         for progress in ollama_client.pull(request.model, stream=True):
-#             yield json.dumps(dict(progress)) + "\n"
+#     try:
+#         ollama_client.pull(request.model)
+#         return {"message": f"Model '{request.model}' downloaded successfully"}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
-#     return StreamingResponse(stream(), media_type="text/plain")
+
+@app.post("/models/pull")
+async def pull_ollama_model(request: PullModelRequest):
+
+    def stream():
+        for progress in ollama_client.pull(request.model, stream=True):
+            status = progress.get("status")
+            completed = progress.get("completed", 0)
+            total = progress.get("total", 0)
+
+            if total:
+                percent = round(completed / total * 100, 1)
+                data = {
+                    "status": status,
+                    "percent": percent,
+                    "completed": completed,
+                    "total": total,
+                }
+            else:
+                data = {"status": status, "percent": None}
+
+            yield f"data: {json.dumps(data)}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream")
 
 
 @app.delete("/models/{model_name}")
