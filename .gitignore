@@ -44,8 +44,8 @@ venv.bak/
 *__pycache__*
 
 # Logs and databases
-data/docs
-third_party
-database
-database
-./scripts/configs/config_updated.yaml
+data/docs/
+third_party/
+database/
+db/
+scripts/configs/config_updated.yaml
