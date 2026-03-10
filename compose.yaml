@@ -50,6 +50,20 @@ services:
     build:
       context: ./
       dockerfile: ./docker/dockerfile/fastapi.Dockerfile
+    # NOTE:
+    # Live mounting for auto reload on dev only. Remove it and the
+    # corresponding top-level volume on prod.
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /app
+        # NOTE:
+        # This makes `.venv` directory container-native at runtime and not
+        # trying to bypass the ignore at build time. This's very important when
+        # you do the development in Windows.
+      - type: volume
+        source: cosmic-fastapi-venv
+        target: /app/.venv
     ports:
       - name: cosmic-uvicorn
         target: 8000
@@ -195,6 +209,8 @@ volumes:
     name: cosmic-gui
   cosmic-ollama-data:
     name: cosmic-slm-provider
+  cosmic-fastapi-venv:
+    name: cosmic-backend-ignore
 
 networks:
   cosmic-public:
