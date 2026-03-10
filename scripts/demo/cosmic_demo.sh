@@ -31,8 +31,8 @@ set -euo pipefail
 
 
 # --- Utils ---
-source "./bin/utils/pg_log.sh"
-source "./bin/utils/pg_secret.sh"
+source "./scripts/utils/cosmic_log.sh"
+source "./scripts/utils/cosmic_config.sh"
 
 
 # --- Core Vars ---
@@ -91,4 +91,4 @@ pg_log -l=1 -m="🚀 Firing up CoSMIC Backend Services from Docker..."
 
 sleep 1.5s
 # This script only needed for BE works, therfore the specified service
-sudo docker compose up -d --build gui
+sudo docker compose up -d --build backend
