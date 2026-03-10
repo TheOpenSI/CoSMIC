@@ -25,6 +25,7 @@
 
 name: CoSMIC
 
+
 services:
   # TODO: swap to Yarn setup due to FE more used to it
   # frontend:
@@ -43,6 +44,7 @@ services:
   #       mode: host
   #   networks:
   #       - cosmic-public
+
 
   backend:
     container_name: cosmic-fastapi
@@ -76,6 +78,7 @@ services:
         - cosmic-public
         - cosmic-private
 
+
   database:
     container_name: cosmic-postgres
     depends_on:
@@ -104,17 +107,9 @@ services:
       - type: volume
         source: cosmic-postgres-data
         target: /var/lib/postgresql
-    # NOTE: Open to quickly connect and debug on dev only
-    ports:
-      - name: cosmic-postgres-psql
-        target: 5432
-        host_ip: 127.0.0.1
-        published: "5433"
-        protocol: tcp
-        app_protocol: http
-        mode: host
     networks:
         - cosmic-private
+
 
   gui:
     container_name: cosmic-pgadmin
@@ -155,6 +150,7 @@ services:
         mode: host
     networks:
       - cosmic-private
+
 
   ollama:
     container_name: cosmic-ollama
@@ -202,6 +198,7 @@ services:
     networks:
       - cosmic-private
 
+
 volumes:
   cosmic-postgres-data:
     name: cosmic-relational
@@ -212,6 +209,7 @@ volumes:
   cosmic-fastapi-venv:
     name: cosmic-backend-ignore
 
+
 networks:
   cosmic-public:
     name: cosmic_net
@@ -219,6 +217,7 @@ networks:
   cosmic-private:
     name: api_cosmic_net
     driver: bridge
+
 
 secrets:
   cosmic-postgres-user:
@@ -229,6 +228,7 @@ secrets:
     file: ./docker/secret/postgres_password.txt
   cosmic-pgadmin-password:
     file: ./docker/secret/pgadmin_password.txt
+
 
 configs:
   cosmic-pgadmin-server:
