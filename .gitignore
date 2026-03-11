@@ -24,13 +24,14 @@
 # -------------------------------------------------------------------------------------------------------------
 
 
-########################################
-#                                      #
-# Credit: CoSMIC-speicfic ignore lists #
-#                                      #
-########################################
-docker/secret/
-docker/config/
+# ================================= #
+# CoSMIC (Backend Repo) Ignore List #
+# ================================= #
+
+# Dockers
+docker/secrets/
+docker/configs/
+
 
 # Environments
 *.env*
@@ -43,9 +44,16 @@ env.bak/
 venv.bak/
 *__pycache__*
 
+
 # Logs and databases
 data/docs/
 third_party/
 database/
 db/
 scripts/configs/config_updated.yaml
+
+
+# Whitelists
+!scripts/**/*.env*
+!examples/**/*.env*
+!examples/database/
