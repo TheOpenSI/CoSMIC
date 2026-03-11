@@ -2,9 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
-[![python](https://img.shields.io/badge/Python-3.8-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.14-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![Media](https://img.shields.io/badge/Media-2024-purple.svg)](https://www.canberra.edu.au/about-uc/media/newsroom/2024/november/ucs-opensi-researchers-develop-framework-to-integrate-and-interpret-ai-tools)
-[![DebianBadge](https://badges.debian.net/badges/debian/stable/docker/version.svg)](https://www.docker.com/)
 
 This is the official implementation of the Open Source Institute - Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0, an innovative framework that integrates multiple AI systems into a unified cognitive computing platform.
 
@@ -12,9 +11,17 @@ This is the official implementation of the Open Source Institute - Cognitive Sys
 
 ## ⚠️ Important Notice
 
-> **Warning**: This branch represents a significant architectural shift. We are actively transitioning away from OpenWebUI to build our own UI platform. As a result, some components may be unstable during this migration phase. We recommend using this branch only if you're comfortable working with a system under active development.
+> [!WARNING]
+> This branch represents a significant architectural shift. We are actively
+> transitioning away from OpenWebUI to build our own UI platform. As a result,
+> some components may be unstable during this migration phase. We recommend
+> using this branch only if you're comfortable working with a system under
+> active development.
 
-> **Note**: The `backend/todo` directory contains the legacy setup configuration. While we're migrating to the new structure, you can safely ignore this directory unless you have specific needs from it.
+> [!NOTE]
+> The `backend/todo` directory contains the legacy setup configuration. While
+> we're migrating to the new structure, you can safely ignore this directory
+> unless you have specific needs from it.
 
 ---
 
