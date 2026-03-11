@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 
 # -------------------------------------------------------------------------------------------------------------
-# File: cosmic_demo.sh
+# File: cosmic_demo.zsh
 # Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
 # Contributors:
 #     Bing Tran <u3295557@canberra.edu.au>
@@ -28,7 +28,7 @@
 
 ################################################################################
 #
-# cosmic_demo.sh - Demo OpenSI-CoSMIC Platform Setup Script
+# cosmic_demo.zsh - Demo OpenSI-CoSMIC Platform Setup Script
 #
 # @description Automates OpenSI-CoSMIC platform setup (demo version) by copying
 #              example files from the examples directory to properly organized
@@ -58,12 +58,14 @@
 ################################################################################
 
 
-set -euo pipefail  # Exit on error, undefined vars, and pipe failures
-IFS=$'\n\t'        # Safer IFS for word splitting
+setopt ERR_EXIT           # Exit on error
+setopt NO_UNSET           # Error on undefined variables
+setopt PIPE_FAIL          # Pipe failure causes script failure
+setopt GLOB_SUBST         # Allow parameter expansion within glob patterns
 
 
 # Script metadata
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="${0:a:h}"
 readonly SCRIPT_DIR
 
 # Find the project root by searching upward for the examples directory
@@ -73,17 +75,17 @@ find_project_root() {
 	local max_depth=10
 	local depth=0
 	
-	while [[ $depth -lt $max_depth ]]; do
+	while (( depth < max_depth )); do
 		if [[ -d "${current_dir}/examples" ]]; then
-			echo "$current_dir"
+			print "$current_dir"
 			return 0
 		fi
-		current_dir="$(dirname "$current_dir")"
+		current_dir="${current_dir:h}"  # Zsh-native: parent directory
 		((depth++))
 	done
 	
 	# Fallback to parent of script directory if examples not found
-	dirname "$SCRIPT_DIR"
+	print "${SCRIPT_DIR:h}"
 	return 1
 }
 
@@ -103,14 +105,14 @@ DOCKER_CONFIGS="${DOCKER_DIR}/configs"
 readonly DOCKER_CONFIGS
 
 
-# Color codes for logging
-COLOR_RESET='\033[0m'
+# Color codes for logging (ANSI escape sequences)
+COLOR_RESET=$'\e[0m'
 readonly COLOR_RESET
-COLOR_BLUE='\033[0;34m'
+COLOR_BLUE=$'\e[0;34m'
 readonly COLOR_BLUE
-COLOR_YELLOW='\033[1;33m'
+COLOR_YELLOW=$'\e[1;33m'
 readonly COLOR_YELLOW
-COLOR_RED='\033[0;31m'
+COLOR_RED=$'\e[0;31m'
 readonly COLOR_RED
 
 
@@ -155,16 +157,18 @@ log_message() {
 	timestamp=$(date '+%Y-%m-%d %H:%M:%S')
 	
 	case "$level" in
-		"$LOG_INFO")
-			[[ $CURRENT_LOG_LEVEL -le $LOG_INFO ]] && \
-				printf "${COLOR_BLUE}[%s] ℹ INFO${COLOR_RESET}: %s\n" "$timestamp" "$message" >&2
+		$LOG_INFO)
+			if (( CURRENT_LOG_LEVEL <= LOG_INFO )); then
+				print -u 2 "${COLOR_BLUE}[${timestamp}] ℹ INFO${COLOR_RESET}: ${message}"
+			fi
 			;;
-		"$LOG_WARNING")
-			[[ $CURRENT_LOG_LEVEL -le $LOG_WARNING ]] && \
-				printf "${COLOR_YELLOW}[%s] ⚠ WARNING${COLOR_RESET}: %s\n" "$timestamp" "$message" >&2
+		$LOG_WARNING)
+			if (( CURRENT_LOG_LEVEL <= LOG_WARNING )); then
+				print -u 2 "${COLOR_YELLOW}[${timestamp}] ⚠ WARNING${COLOR_RESET}: ${message}"
+			fi
 			;;
-		"$LOG_ERROR")
-			printf "${COLOR_RED}[%s] ✗ ERROR${COLOR_RESET}: %s\n" "$timestamp" "$message" >&2
+		$LOG_ERROR)
+			print -u 2 "${COLOR_RED}[${timestamp}] ✗ ERROR${COLOR_RESET}: ${message}"
 			;;
 	esac
 }
@@ -239,11 +243,12 @@ validate_source_directories() {
 create_docker_directories() {
 	log_info "Creating docker directory structure..."
 	
-	mkdir -p "$DOCKER_SECRETS/database"
-	mkdir -p "$DOCKER_SECRETS/gui"
-	mkdir -p "$DOCKER_CONFIGS/gui"
+	mkdir -p "$DOCKER_SECRETS/database" || return 1
+	mkdir -p "$DOCKER_SECRETS/gui"		|| return 1
+	mkdir -p "$DOCKER_CONFIGS/gui"		|| return 1
 	
 	log_info "Docker directory structure created"
+	return 0
 }
 
 # @description Remove .example suffix and prefix from filename
@@ -259,20 +264,19 @@ create_docker_directories() {
 #   echo "$cleaned"  # Output: svr.json
 get_cleaned_filename() {
 	local filename="$1"
-	local basename
-	local extension
+
+	# Get extension after last dot
+	local extension="${filename##*.}"
+
+	# Remove extension
+	local basename="${filename%.*}"
 	
-	# Extract extension
-	extension="${filename##*.}"
-	
-	# Remove extension and .example suffix
-	basename="${filename%.*}"
+	# Remove .example suffix
 	basename="${basename%.example}"
-	
-	# Remove prefix (everything up to and including underscore)
+	# Remove prefix (everything up to and including first underscore)
 	basename="${basename#*_}"
-	
-	echo "${basename}.${extension}"
+
+	print "${basename}.${extension}"
 }
 
 # @description Copy file with cleaned name and log the operation
@@ -298,14 +302,11 @@ copy_file() {
 		return 1
 	fi
 	
-	local filename
-	filename=$(basename "$source")
-	local cleaned_filename
-	cleaned_filename=$(get_cleaned_filename "$filename")
+	local filename="$(basename "$source")"
+	local cleaned_filename="$(get_cleaned_filename "$filename")"
 	local destination="${target}/${cleaned_filename}"
 	
-	# Copy the file, preserving permissions
-	if cp "$source" "$destination"; then
+	if cp -p "$source" "$destination" 2>/dev/null; then
 		log_info "Copied <<$description: $filename>> ==> <<$cleaned_filename>>"
 		return 0
 	else
@@ -333,16 +334,18 @@ copy_backend_files() {
 	fi
 	
 	local source_files=()
-	mapfile -t source_files < <(find "$EXAMPLES_DIR/backend" -maxdepth 1 -name "cosmic_*.example.env" 2>/dev/null)
+	source_files=( "$EXAMPLES_DIR/backend"/cosmic_*.example.env(N) )
 	
-	if [[ ${#source_files[@]} -eq 0 ]]; then
+	if (( ${#source_files[@]} == 0 )); then
 		log_warning "No [backend] example files found"
 		return 0
 	fi
 	
 	for source_file in "${source_files[@]}"; do
-		copy_file "$source_file" "$BACKEND_DIR/cores" "required files for [backend] docker service"
+		copy_file "$source_file" "$BACKEND_DIR/cores" "required files for [backend] docker service" "" || true
 	done
+	
+	return 0
 }
 
 # @description Copy [database] docker service files to [docker/secrets/database]
@@ -359,18 +362,20 @@ copy_database_files() {
 	fi
 	
 	local source_files=()
-	mapfile -t source_files < <(find "$EXAMPLES_DIR/database" -maxdepth 1 -name "postgres_*.example.txt" 2>/dev/null)
+	source_files=( "$EXAMPLES_DIR/database"/postgres_*.example.txt(N) )
 	
-	if [[ ${#source_files[@]} -eq 0 ]]; then
+	if (( ${#source_files[@]} == 0 )); then
 		log_warning "No [database] example files found"
 		return 0
 	fi
 	
-	mkdir -p "$DOCKER_SECRETS/database"
+	mkdir -p "$DOCKER_SECRETS/database" || return 1
 	
 	for source_file in "${source_files[@]}"; do
-		copy_file "$source_file" "$DOCKER_SECRETS/database" "required files for [database] docker service"
+		copy_file "$source_file" "$DOCKER_SECRETS/database" "required files for [database] docker service" || true
 	done
+	
+	return 0
 }
 
 # @description Copy [gui] docker service files to appropriate docker directories
@@ -387,28 +392,30 @@ copy_gui_files() {
 	fi
 	
 	local txt_files=()
-	mapfile -t txt_files < <(find "$EXAMPLES_DIR/gui" -maxdepth 1 -name "pgadmin_*.example.txt" 2>/dev/null)
+	txt_files=( "$EXAMPLES_DIR/gui"/pgadmin_*.example.txt(N) )
 	
-	if [[ ${#txt_files[@]} -gt 0 ]]; then
-		mkdir -p "$DOCKER_SECRETS/gui"
+	if (( ${#txt_files[@]} > 0 )); then
+		mkdir -p "$DOCKER_SECRETS/gui" || return 1
 		for txt_file in "${txt_files[@]}"; do
-			copy_file "$txt_file" "$DOCKER_SECRETS/gui" "required files for [gui] docker service"
+			copy_file "$txt_file" "$DOCKER_SECRETS/gui" "required files for [gui] docker service" || true
 		done
 	else
 		log_warning "[.txt] required files for [gui] docker service not found"
 	fi
 	
 	local json_files=()
-	mapfile -t json_files < <(find "$EXAMPLES_DIR/gui" -maxdepth 1 -name "pgadmin_*.example.json" 2>/dev/null)
+	json_files=( "$EXAMPLES_DIR/gui"/pgadmin_*.example.json(N) )
 	
-	if [[ ${#json_files[@]} -gt 0 ]]; then
-		mkdir -p "$DOCKER_CONFIGS/gui"
+	if (( ${#json_files[@]} > 0 )); then
+		mkdir -p "$DOCKER_CONFIGS/gui" || return 1
 		for json_file in "${json_files[@]}"; do
-			copy_file "$json_file" "$DOCKER_CONFIGS/gui" "required files for [gui] docker service"
+			copy_file "$json_file" "$DOCKER_CONFIGS/gui" "required files for [gui] docker service" || true
 		done
 	else
 		log_warning "[.json] required files for [gui] docker service not found"
 	fi
+	
+	return 0
 }
 
 
@@ -420,9 +427,10 @@ copy_gui_files() {
 #
 # Coordinates all setup steps in the proper sequence:
 # 1. Validates source directories exist
-# 2. Creates docker directory structure
-# 3. Copies configuration files with transformations
-# 4. Starts Docker Compose with proper build flags
+# 2. Loads environment variables from .env
+# 3. Creates docker directory structure
+# 4. Copies configuration files with transformations
+# 5. Starts Docker Compose with proper build flags
 #
 # @exitcode 0 If all operations complete successfully
 # @exitcode 1 If any critical operation fails
@@ -441,14 +449,14 @@ main() {
 		return 1
 	fi
 	
-	copy_backend_files	|| true
-	copy_database_files || true
-	copy_gui_files		|| true
+	copy_backend_files
+	copy_database_files
+	copy_gui_files
 	
 	log_info "File copying completed"
 	log_info "Running Docker Compose..."
 	
-	if cd "$ROOT_DIR" && sudo docker compose up -d --build; then
+	if builtin cd "$ROOT_DIR" && docker compose up -d --build; then
 		log_info "Docker Compose started successfully"
 		return 0
 	else
