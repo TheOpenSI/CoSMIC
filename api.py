@@ -6,6 +6,8 @@
 # debugpy.wait_for_client()
 # print("Debugger attached!")
 # =======================================================
+
+
 from fastapi.responses import StreamingResponse
 import json
 from datetime import datetime
@@ -24,7 +26,9 @@ from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
+
 from ollama import Client
+from src.services.llms.Ollama import Ollama
 
 
 app = FastAPI()
@@ -387,8 +391,6 @@ async def process_cosmic(data: CosmicAPI):
 
 
 # Models APIs - smanile
-
-
 @app.get("/models")
 async def get_ollama_models():
     try:
@@ -414,38 +416,39 @@ async def get_ollama_models():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# @app.post("/models/pull")
-# async def pull_ollama_model(request: PullModelRequest):
-#     try:
-#         ollama_client.pull(request.model)
-#         return {"message": f"Model '{request.model}' downloaded successfully"}
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-
-
 @app.post("/models/pull")
 async def pull_ollama_model(request: PullModelRequest):
+    try:
+        Ollama(llm_name=request.model)
+        # ollama_client.pull(request.model)
+        return {"message": f"Model '{request.model}' downloaded successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-    def stream():
-        for progress in ollama_client.pull(request.model, stream=True):
-            status = progress.get("status")
-            completed = progress.get("completed", 0)
-            total = progress.get("total", 0)
 
-            if total:
-                percent = round(completed / total * 100, 1)
-                data = {
-                    "status": status,
-                    "percent": percent,
-                    "completed": completed,
-                    "total": total,
-                }
-            else:
-                data = {"status": status, "percent": None}
+# @app.post("/models/pull")
+# async def pull_ollama_model(request: PullModelRequest):
 
-            yield f"data: {json.dumps(data)}\n\n"
+#     def stream():
+#         for progress in ollama_client.pull(request.model, stream=True):
+#             status = progress.get("status")
+#             completed = progress.get("completed", 0)
+#             total = progress.get("total", 0)
 
-    return StreamingResponse(stream(), media_type="text/event-stream")
+#             if total:
+#                 percent = round(completed / total * 100, 1)
+#                 data = {
+#                     "status": status,
+#                     "percent": percent,
+#                     "completed": completed,
+#                     "total": total,
+#                 }
+#             else:
+#                 data = {"status": status, "percent": None}
+
+#             yield f"data: {json.dumps(data)}\n\n"
+
+#     return StreamingResponse(stream(), media_type="text/event-stream")
 
 
 @app.delete("/models/{model_name}")
