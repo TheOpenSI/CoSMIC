@@ -99,10 +99,11 @@ services:
       # - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
     ports:
-      - '3000:3000'
-      - '5678:5678' # debupy
+      - "3000:3000"
+      - "5678:5678" # debupy
     depends_on:
       - ollama
+      # - pycapsule
       # - pycapsule
     tty: true
     restart: unless-stopped

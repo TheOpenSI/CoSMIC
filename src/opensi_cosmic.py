@@ -4,18 +4,18 @@
 # Contributors:
 #     Danny Xu <danny.xu@canberra.edu.au>
 #     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
+#
 # Copyright (c) 2024 Open Source Institute
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 # documentation files (the "Software"), to deal in the Software without restriction, including without
 # limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
 # the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
 # conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all copies or substantial
 # portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
 # LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 # IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -44,15 +44,16 @@ from src.query_analyser.query_analyser import QueryAnalyser
 
 # =============================================================================================================
 
+
 class OpenSICoSMIC:
     def __init__(
         self,
-        query_llm_name: str="",
-        llm_name: str="",
-        config_path: str="scripts/configs/config.yaml",
-        user: dict=None
+        query_llm_name: str = "",
+        llm_name: str = "",
+        config_path: str = "scripts/configs/config.yaml",
+        user: dict = None,
     ):
-        """ Construct OpenSICoSMIC instance. It contains LLM and services including vector database
+        """Construct OpenSICoSMIC instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
         Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
 
@@ -77,6 +78,7 @@ class OpenSICoSMIC:
         self.user_id = str(user["id"]) \
             if ((user is not None) and ("id" in user) and user["id"] != "") \
             else None
+        )
 
         # Set model device.
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -85,25 +87,27 @@ class OpenSICoSMIC:
         self.qa = None
 
         # If llm_name is not specified, read it from the config file.
-        if llm_name == "": llm_name = self.config.llm_name
+        if llm_name == "":
+            llm_name = self.config.llm_name
         self.llm = self.get_llm(
             llm_name,
             seed=self.config.seed,
             is_quantized=self.config.is_quantized,
-            device=self.device
+            device=self.device,
         )
 
         # Check OpenAI API key.
         self.openai_api_status = self.check_openai_key()
 
         # Set LLM for query analysis.
-        if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
+        if query_llm_name == "":
+            query_llm_name = self.config.query_analyser.llm_name
         self.query_analyser = QueryAnalyser(
             query_llm_name,
             seed=self.config.seed,
             is_quantized=self.config.query_analyser.is_quantized,
             service_index=self.config.service,
-            device=self.device
+            device=self.device,
         )
 
         # Code generation service.
@@ -112,12 +116,8 @@ class OpenSICoSMIC:
         # Set up QA instance.
         self.set_up_qa(self.user_id)
 
-    def set_up_qa(
-        self,
-        user_id: str,
-        user_name: str=None
-    ):
-        """ Set up QA instance by user ID.
+    def set_up_qa(self, user_id: str, user_name: str = None):
+        """Set up QA instance by user ID.
 
         Args:
             user_id (str): user ID through front-end.
@@ -152,8 +152,7 @@ class OpenSICoSMIC:
                 os.makedirs(vector_db_path, exist_ok=True)
 
             vector_database = VectorDatabase(
-                local_database_path=vector_db_path,
-                device=self.device
+                local_database_path=vector_db_path, device=self.device
             )
 
             # Add a directory of documents.
@@ -169,7 +168,7 @@ class OpenSICoSMIC:
             self.rag = RAGBase(
                 vector_database=vector_database,
                 retrieve_score_threshold=self.config.rag.retrieve_score_threshold,
-                topk=self.config.rag.topk
+                topk=self.config.rag.topk,
             )
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
@@ -179,11 +178,11 @@ class OpenSICoSMIC:
                 self.llm,
                 self.rag,
                 self.code_generator,
-                config=self.config
+                config=self.config,
             )
 
     def check_openai_key(self):
-        """ Check OpenAI API key valid.
+        """Check OpenAI API key valid.
 
         Returns:
             answer: status information.
@@ -195,33 +194,35 @@ class OpenSICoSMIC:
         is_query_analyser_llm_name_gpt = query_analyser_llm_name.find("gpt") > -1
 
         llm_name_list = []
-        if is_llm_name_gpt: llm_name_list.append(llm_name)
-        if is_query_analyser_llm_name_gpt and (query_analyser_llm_name not in llm_name_list):
+        if is_llm_name_gpt:
+            llm_name_list.append(llm_name)
+        if is_query_analyser_llm_name_gpt and (
+            query_analyser_llm_name not in llm_name_list
+        ):
             llm_name_list.append(query_analyser_llm_name)
 
         count = len(llm_name_list)
 
-        if is_llm_name_gpt: openai_api_key = self.llm.get_openai_key()
-        elif is_query_analyser_llm_name_gpt: openai_api_key = self.query_analyser.llm.get_openai_key()
-        else: openai_api_key = ""
+        if is_llm_name_gpt:
+            openai_api_key = self.llm.get_openai_key()
+        elif is_query_analyser_llm_name_gpt:
+            openai_api_key = self.query_analyser.llm.get_openai_key()
+        else:
+            openai_api_key = ""
 
         if (count > 0) and (openai_api_key == ""):
-            if count == 1: answer = f"{llm_name_list[0]} is"
-            elif count == 2: answer = f"{llm_name_list[0]} and {llm_name_list[1]} are"
+            if count == 1:
+                answer = f"{llm_name_list[0]} is"
+            elif count == 2:
+                answer = f"{llm_name_list[0]} and {llm_name_list[1]} are"
             answer = f"Since {answer} used, please add valid OPENAI_API_KEY in .env."
         else:
             answer = ""
 
         return answer
 
-    def get_llm(
-        self,
-        llm_name,
-        seed: int=0,
-        is_quantized: bool=False,
-        **kwargs
-    ):
-        """ Construct LLM give an LLM name.
+    def get_llm(self, llm_name, seed: int = 0, is_quantized: bool = False, **kwargs):
+        """Construct LLM give an LLM name.
 
         Args:
             llm_name (str): LLM name, check LLM_MODEL_DICT in src/maps.py.
@@ -243,28 +244,19 @@ class OpenSICoSMIC:
             sys.exit()
 
         llm = get_instance(llm_instances, llm_instance_name)(
-            llm_name=llm_name,
-            seed=seed,
-            is_quantized=is_quantized,
-            **kwargs
+            llm_name=llm_name, seed=seed, is_quantized=is_quantized, **kwargs
         )
 
         return llm
 
     def quit(self):
-        """ Release memory of LLM and vector embedding model in vector_database.
-        """
+        """Release memory of LLM and vector embedding model in vector_database."""
         self.query_analyser.quit()
         self.llm.quit()
         self.rag.vector_database.quit()
 
-    def __call__(
-        self,
-        question: str,
-        context: str="",
-        log_file: str=None
-    ):
-        """ Execute QA.
+    def __call__(self, question: str, context: str = "", log_file: str = None):
+        """Execute QA.
 
         Args:
             question (str): a question or a .csv containing multiple questions.
@@ -319,13 +311,17 @@ class OpenSICoSMIC:
                 # Return how many questions get correct best move prediction
                 # using Stockfish or GPT API.
                 response = f"Success rate of {question} is {average_score:.2f}."
-            elif question.find("attention") > -1 \
-                or question.find("memory") > -1 \
-                or question.find("perception") > -1:
+            elif (
+                question.find("attention") > -1
+                or question.find("memory") > -1
+                or question.find("perception") > -1
+            ):
 
                 # Manually switch on and off RAG for specific questions.
-                if question.find("attention") > -1 \
-                    or question.find("memory_update") > -1:
+                if (
+                    question.find("attention") > -1
+                    or question.find("memory_update") > -1
+                ):
                     is_rag = True
                 else:
                     is_rag = False
@@ -338,10 +334,7 @@ class OpenSICoSMIC:
 
                 # Build quality evaluation service.
                 quality_evaluator = QualityEval(
-                    llm=self.llm,
-                    rag=self.rag,
-                    is_rag=is_rag,
-                    log_file=log_file
+                    llm=self.llm, rag=self.rag, is_rag=is_rag, log_file=log_file
                 )
 
                 # Batch process the question file.
@@ -358,13 +351,12 @@ class OpenSICoSMIC:
             elif question.find("finetune_dataset") > -1:
                 # Generate CoT analysis for finetune dataset.
                 cot_generator = CotGenerator(
-                    log_file=log_file,
-                    is_truncate_response=True
+                    log_file=log_file, is_truncate_response=True
                 )
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
-                
+
         else:
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)
@@ -375,7 +367,7 @@ class OpenSICoSMIC:
             # Process each question.
             response, raw_response, retrieve_score = self.qa(
                 question,
-                context=context, # The context that we are passing here is chat history. See api.py
+                context=context,  # The context that we are passing here is chat history. See api.py
                 is_rag=True,
                 verbose=False,
             )

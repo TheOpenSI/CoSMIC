@@ -7,6 +7,9 @@
 # print("Debugger attached!")
 # =======================================================
 
+
+from fastapi.responses import StreamingResponse
+import json
 from datetime import datetime
 import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
@@ -24,15 +27,23 @@ from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 
+from ollama import Client
+from src.services.llms.Ollama import Ollama
+
+
 app = FastAPI()
+
+ollama_client = Client(
+    host="http://ollama:11434", headers={"Content-Type": "application/json"}
+)
 
 # To test CORS_ALLOW_ORIGIN locally, you can set something like
 # CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
 # in your .env file depending on your frontend port, 8080 or 5173 in this case.
 
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",  # Open-WebUI production server
-    "http://localhost:5173",  # Open-WebUI development server
+    "http://localhost:8080",  # Frontend production server
+    "http://localhost:5173",  # Frontend development server
 ]
 
 # Allow CORS for the specified origins
@@ -50,17 +61,31 @@ app.add_middleware(
 UPLOAD_BASE_DIR = "third_party"
 os.makedirs(UPLOAD_BASE_DIR, exist_ok=True)
 
+
+class PullModelRequest(BaseModel):
+    model: str
+
+
 class CosmicAPI(BaseModel):
     body: dict
     user_message: str
 
+
 config_path = "scripts/configs/config_updated.yaml"
+
 
 def update_openai_key():
     global openai_api_key
-    openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
+    openai_api_key = os.environ.get(
+        "OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", "")
+    )
     if not openai_api_key:
-        print(set_color("warning", "OPENAI_API_KEY is required in .env or environment variables."))
+        print(
+            set_color(
+                "warning",
+                "OPENAI_API_KEY is required in .env or environment variables.",
+            )
+        )
 
 
 # Initialize the OPENAI_API_KEY on startup.
@@ -88,23 +113,29 @@ opensi_cosmic = OpenSICoSMIC(config_path=config_path)
 # Open-WebUi/src/lib/components/admin/Settings/Configs.svelte;
 # otherwise set them as Optional[the config name]=default value;
 
+
 class QueryQnalyserConfig(BaseModel):
-    llm_name: Optional[str] = opensi_cosmic.config['query_analyser']['llm_name']
-    is_quantized: Optional[bool] = opensi_cosmic.config['query_analyser']['is_quantized']
+    llm_name: Optional[str] = opensi_cosmic.config["query_analyser"]["llm_name"]
+    is_quantized: Optional[bool] = opensi_cosmic.config["query_analyser"][
+        "is_quantized"
+    ]
 
 
 class RAGConfig(BaseModel):
-    top_k: Optional[int] = opensi_cosmic.config['rag']['topk']
-    retrieve_score_threshold: Optional[float] = opensi_cosmic.config['rag']['retrieve_score_threshold']
-    vector_db_path: Optional[str] = opensi_cosmic.config['rag']['vector_db_path']
+    top_k: Optional[int] = opensi_cosmic.config["rag"]["topk"]
+    retrieve_score_threshold: Optional[float] = opensi_cosmic.config["rag"][
+        "retrieve_score_threshold"
+    ]
+    vector_db_path: Optional[str] = opensi_cosmic.config["rag"]["vector_db_path"]
 
 
 class ChessConfig(BaseModel):
-    stockfish_path: Optional[str] = opensi_cosmic.config['chess']['stockfish_path']
+    stockfish_path: Optional[str] = opensi_cosmic.config["chess"]["stockfish_path"]
 
 
 class OpenAIConfig(BaseModel):
     api_key: Optional[str] = openai_api_key
+
 
 class ConfigUpdateForm(BaseModel):
     llm_name: str
@@ -120,6 +151,7 @@ class ConfigUpdateForm(BaseModel):
     chess: ChessConfig
     openai: OpenAIConfig
 
+
 openai_api_status = opensi_cosmic.check_openai_key()
 
 
@@ -133,20 +165,25 @@ def rebuild_cosmic():
     global openai_api_status
 
     current_config_modify_timestamp = str(os.path.getmtime(config_path))
-    current_openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
+    current_openai_api_key = os.environ.get(
+        "OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", "")
+    )
 
-    if (current_config_modify_timestamp != config_modify_timestamp) \
-            or (current_openai_api_key != openai_api_key):
+    if (current_config_modify_timestamp != config_modify_timestamp) or (
+        current_openai_api_key != openai_api_key
+    ):
         opensi_cosmic.quit()
         update_openai_key()
         config_modify_timestamp = current_config_modify_timestamp
         opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-        print('Reconstruct OpenSICoSMIC due to changed configs.')
+        print("Reconstruct OpenSICoSMIC due to changed configs.")
         openai_api_status = opensi_cosmic.check_openai_key()
+
 
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the OpenSICoSMIC API"}
+
 
 @app.get("/config")
 async def get_config():
@@ -160,7 +197,8 @@ async def get_config():
         raise http_exc
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @app.post("/config/update")
 async def update_config(request: Request, form_data: ConfigUpdateForm):
     try:
@@ -176,9 +214,13 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
         config_data["seed"] = form_data.seed
         config_data["service"] = form_data.service
         config_data["query_analyser"]["llm_name"] = form_data.query_analyser.llm_name
-        config_data["query_analyser"]["is_quantized"] = form_data.query_analyser.is_quantized
+        config_data["query_analyser"][
+            "is_quantized"
+        ] = form_data.query_analyser.is_quantized
         config_data["rag"]["topk"] = form_data.rag.top_k
-        config_data["rag"]["retrieve_score_threshold"] = form_data.rag.retrieve_score_threshold
+        config_data["rag"][
+            "retrieve_score_threshold"
+        ] = form_data.rag.retrieve_score_threshold
         config_data["sameasabove"] = form_data.sameasabove
 
         # Update only when these paths exist, instead of overwriting by invalid paths.
@@ -198,18 +240,24 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
         env_path = ".env"
 
         is_llm_name_gpt = form_data.llm_name.find("gpt") > -1
-        is_query_analyser_llm_name_gpt = form_data.query_analyser.llm_name.find("gpt") > -1
+        is_query_analyser_llm_name_gpt = (
+            form_data.query_analyser.llm_name.find("gpt") > -1
+        )
 
         # This might not be useful as it is in docker container.
 
         if is_llm_name_gpt or is_query_analyser_llm_name_gpt:
-            if not form_data.openai.api_key == "" and validate_openai_api_key(form_data.openai.api_key):
+            if not form_data.openai.api_key == "" and validate_openai_api_key(
+                form_data.openai.api_key
+            ):
                 os.environ["OPENAI_API_KEY"] = form_data.openai.api_key
                 # Change the root's .env which is shared with .env in this backend container.
                 dotenv.set_key(env_path, "OPENAI_API_KEY", form_data.openai.api_key)
                 update_openai_key()
             else:
-                raise HTTPException(status_code=400, detail="Invalid OpenAI API key provided.")
+                raise HTTPException(
+                    status_code=400, detail="Invalid OpenAI API key provided."
+                )
 
         # Save updated configs to config_updated.yaml, instead of overwriting config.yaml.
         with open(config_path, "w") as file:
@@ -222,13 +270,16 @@ async def update_config(request: Request, form_data: ConfigUpdateForm):
         raise http_exc
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @app.post("/chess/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
 
         if file.content_type != "application/octet-stream":
-            raise HTTPException(status_code=400, detail="Only binary files are allowed.")
+            raise HTTPException(
+                status_code=400, detail="Only binary files are allowed."
+            )
 
         folder_name = file.filename
         save_dir = os.path.join(UPLOAD_BASE_DIR, folder_name)
@@ -253,6 +304,7 @@ async def upload_file(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/quit")
 async def quit():
     try:
@@ -262,7 +314,8 @@ async def quit():
         raise http_exc
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @app.post("/cosmic")
 async def process_cosmic(data: CosmicAPI):
     global config_modify_timestamp
@@ -279,30 +332,26 @@ async def process_cosmic(data: CosmicAPI):
 
         # Chat history context.
         chat_history_context = build_context_from_messages(
-            data.body.get("messages", []),
-            num_pairs=5
+            data.body.get("messages", []), num_pairs=5
         )
         # Check if Chat History is empty.
-        chat_history_context = "" \
-            if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============' \
+        chat_history_context = (
+            ""
+            if chat_history_context.strip()
+            == "Conversation History: \n\n=============== End of Chat History ==============="
             else chat_history_context
-                               
+        )
+
         # Set user ID to use a specific vector database.
         # For the same user, the QA instance will not change.
         opensi_cosmic.set_up_qa(str(user_id))
 
         # Compute statistic information.
         current_time = datetime.strftime(
-            datetime.now(tz=ZoneInfo("Australia/Sydney")),
-            '%d-%m-%Y,%H:%M:%S'
+            datetime.now(tz=ZoneInfo("Australia/Sydney")), "%d-%m-%Y,%H:%M:%S"
         )
 
-        update_statistic_per_query(
-            data.user_message,
-            user_id,
-            user_email,
-            current_time
-        )
+        update_statistic_per_query(data.user_message, user_id, user_email, current_time)
 
         # Proceed as normal
         if openai_api_status != "":
@@ -314,27 +363,98 @@ async def process_cosmic(data: CosmicAPI):
 
                 # Extract the original question.
                 data.user_message = splits[1]
-                
 
                 # The directory storing uploaded files.
                 file_dir = f"backend/data/uploads/{user_id}"
 
                 # Extract the files.
                 files = splits[0].split("<files>")[-1]
-                files = [os.path.join(file_dir, v) for v in files.split(',') if v != ""]
+                files = [os.path.join(file_dir, v) for v in files.split(",") if v != ""]
 
                 for file in files:
                     # Form a prompt to update vector database.
-                    user_message_vector_db_update = \
+                    user_message_vector_db_update = (
                         f"Add the following file to the vector database: {file}"
+                    )
 
                     # Update vector database.
                     answer = opensi_cosmic(user_message_vector_db_update)[0]
 
-            answer = opensi_cosmic(question=data.user_message,
-                                   context=chat_history_context)[0]
+            answer = opensi_cosmic(
+                question=data.user_message, context=chat_history_context
+            )[0]
         return {"status": "success", "result": answer}
     except HTTPException as http_exc:
         raise http_exc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Models APIs - smanile
+@app.get("/models")
+async def get_ollama_models():
+    try:
+        result = ollama_client.list()
+
+        models = []
+
+        for model in result.get("models", []):
+            details = model.get("details", {})
+            models.append(
+                {
+                    "model": model.get("model"),
+                    "id": model.get("digest", "")[:12],
+                    "size": f"{round(model.get('size', 0) / (1000 ** 3), 1)} GB",
+                    "modified_at": model.get("modified_at"),
+                    "family": details.get("family", "N/A"),
+                }
+            )
+
+        return {"models": models, "total": len(models)}
+        # return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/models/pull")
+async def pull_ollama_model(request: PullModelRequest):
+    try:
+        Ollama(llm_name=request.model)
+        # ollama_client.pull(request.model)
+        return {"message": f"Model '{request.model}' downloaded successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# @app.post("/models/pull")
+# async def pull_ollama_model(request: PullModelRequest):
+
+#     def stream():
+#         for progress in ollama_client.pull(request.model, stream=True):
+#             status = progress.get("status")
+#             completed = progress.get("completed", 0)
+#             total = progress.get("total", 0)
+
+#             if total:
+#                 percent = round(completed / total * 100, 1)
+#                 data = {
+#                     "status": status,
+#                     "percent": percent,
+#                     "completed": completed,
+#                     "total": total,
+#                 }
+#             else:
+#                 data = {"status": status, "percent": None}
+
+#             yield f"data: {json.dumps(data)}\n\n"
+
+#     return StreamingResponse(stream(), media_type="text/event-stream")
+
+
+@app.delete("/models/{model_name}")
+async def delete_ollama_model(model_name: str):
+    try:
+        ollama_client.delete(model_name)
+        return {"message": f"Model '{model_name}' deleted"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
