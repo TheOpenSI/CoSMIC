@@ -84,6 +84,9 @@ class LLMBase(ServiceBase):
             llm_instance_name = LLM_INSTANCE_DICT[llm_name]
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
+        ## CK: It seems this is the defult case even when using Ollama integration, 
+        # since the model is still GPT-based. 
+        # We can further specify the LLM type when we have more LLM types integrated.
         else:
             llm_instance_name = "GPT"
 
@@ -161,6 +164,7 @@ class LLMBase(ServiceBase):
 
         Args:
             system_prompt_instance_name (str): set a system prompter instance name.
+            service (str): the service for which to set the prompter.
         """
         self.system_prompter = get_instance(
             system_prompt_instances,
@@ -178,11 +182,12 @@ class LLMBase(ServiceBase):
         """
         self.system_prompter = system_prompt_instance
 
-    def set_system_prompter(
-        self,
-        system_prompt_instance: system_prompt_instances.SystemPromptBase,
-    ):
-        self.system_prompter = system_prompt_instance
+### Cmmented out since it is the same as the one above,
+    # def set_system_prompter(
+    #     self,
+    #     system_prompt_instance: system_prompt_instances.SystemPromptBase,
+    # ):
+    #     self.system_prompter = system_prompt_instance
 
     def set_seed(
         self,
@@ -239,13 +244,15 @@ class LLMBase(ServiceBase):
     def __call__(
         self,
         question: str,
-        context: dict = {}
+        context: dict = {},
+        service: str = ""
     ):
         """Process the question answering.
 
         Args:
             question (str): user question in string.
             context (str, optional): context retrieved externally if applicable. Defaults to "".
+            service (str, optional): the service for which to set the prompter. Defaults to "".
 
         Returns:
             response: truncated response.
@@ -258,7 +265,15 @@ class LLMBase(ServiceBase):
         user_prompt = self.user_prompter(question, context=context)
 
         # Merge user prompt to system prompt by LLM type.
-        system_prompt = self.system_prompter(user_prompt, context=context)
+        
+        ##here is where I call the system prompter to merge the user 
+        # prompt and context into a system prompt that can be fed into the LLM.
+        # I need to be able to specify the service for which to set the prompter, 
+        # since different services may have different system prompts. only if 
+        # the Instance is GPT
+        
+        system_prompt = self.system_prompter(user_prompt, context=context, service=service)
+        
 
         # Encode system prompt for LLM.
         system_prompt_encoded = self.tokenizer.encode(system_prompt)
