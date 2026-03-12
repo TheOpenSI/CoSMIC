@@ -163,7 +163,7 @@ We welcome contributions from researchers, developers, and enthusiasts. There ar
 
 **Report Issues**: Found a bug or have a feature suggestion? Open an issue on our [GitHub repository](https://github.com/TheOpenSI/CoSMIC/issues).
 
-**Submit Code Contributions**: We accept pull requests from the community. Please review our [contribution guidelines](CONTRIBUTING.md) before submitting to ensure your contributions align with our standards.
+**Submit Code Contributions**: We accept pull requests from the community. Please review our [contribution guidelines](CONTRIBUTING) before submitting to ensure your contributions align with our standards.
 
 **Support the Project**: Consider making a donation to support ongoing development at [our donations page](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
 
