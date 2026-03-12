@@ -3,10 +3,10 @@ chess:
 doc_directory: ''
 document_path: []
 is_quantized: false
-llm_name: ollama:qwen2.5:0.5b
+llm_name: ollama:qwen2.5:7b
 query_analyser:
   is_quantized: false
-  llm_name: ollama:qwen2.5:0.5b
+  llm_name: ollama:qwen2.5:7b
 rag:
   retrieve_score_threshold: 0.7
   topk: 10
