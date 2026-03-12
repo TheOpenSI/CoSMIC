@@ -42,8 +42,8 @@ ollama_client = Client(
 # in your .env file depending on your frontend port, 8080 or 5173 in this case.
 
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",  # Open-WebUI production server
-    "http://localhost:5173",  # Open-WebUI development server
+    "http://localhost:8080",  # Frontend production server
+    "http://localhost:5173",  # Frontend development server
 ]
 
 # Allow CORS for the specified origins

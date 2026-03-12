@@ -2,78 +2,107 @@ services:
   ollama:
     image: ollama/ollama:latest
     container_name: ollama
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     volumes:
       - ollama:/root/.ollama
     networks:
       - cosmic_net
+  
+  # web:
+  #   build:
+  #     context: .
+  #     dockerfile: ../CoSMIC_UI/Dockerfile.dev
+  #   container_name: vite-react-dev
+  #   # Vite dev server + HMR
+  #   command: yarn dev --host --port 5173
+  #   ports:
+  #     - "5173:5173"     # Vite dev server
+  #     - "24678:24678"   # Vite HMR websocket (Vite auto-selects; mapping helps in some envs)
+  #   environment:
+  #     # Fix file watching across Docker/WSL/VMs
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - WATCHPACK_POLLING=true
+  #     - NODE_ENV=development
+  #     # If your app reads VITE_ vars, you can pass them here or from .env
+  #     - VITE_API_BASE_URL=http://cosmic:3000
+  #   volumes:
+  #     # Bind-mount your source for live reload
+  #     - .:/app
+  #     # Keep node_modules in container to avoid OS conflicts & speed up installs
+  #     - /app/node_modules
+  #   # For Yarn Berry zero-install, optionally persist .yarn cache:
+  #   #   - ./.yarn:/app/.yarn
+  #   #   - ./.yarn/cache:/app/.yarn/cache
+  #   # If you need specific user permissions on Linux:
+  #   # user: "${UID:-1000}:${GID:-1000}"
+  #   networks:
+  #     - cosmic_net
+  # open-webui:
+  #   # build:
+  #   #   context: ./../OpenWebUI-CoSMIC
+  #   #   dockerfile: Dockerfile
+  #   #   args:
+  #   #     OLLAMA_BASE_URL: '/ollama'
+  #   image: opensicbr/cosmic_openwebui:latest
+  #   container_name: open-webui
+  #   volumes:
+  #     - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
+  #   depends_on:
+  #     - ollama
+  #     - pipelines
+  #     - cosmic
+  #     # - pycapsule
+  #   ports:
+  #     - "${OPEN_WEBUI_PORT:-8080}:8080"
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
+  #     - OLLAMA_BASE_URL=http://ollama:11434
+  #     - WEBUI_SECRET_KEY=
+  #     - OPENAI_API_KEY=0p3n-w3bu!
+  #     - OPENAI_API_BASE_URL=http://pipelines:9099
+  #     - OPENSI_COSMIC_API_BASE_URL=http://localhost:3000
+  #     - ENABLE_OAUTH_SIGNUP=true
+  #     - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
+  #     - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+  #     - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
+  #     - ENABLE_WEBSOCKET_SUPPORT=false # https://github.com/open-webui/open-webui/discussions/11071
+  #   extra_hosts:
+  #     - host.docker.internal:host-gateway
+  #   restart: unless-stopped
+  #   networks:
+  #     - cosmic_net
 
-  open-webui:
-    # build:
-    #   context: ./../OpenWebUI-CoSMIC
-    #   dockerfile: Dockerfile
-    #   args:
-    #     OLLAMA_BASE_URL: '/ollama'
-    image: opensicbr/cosmic_openwebui:latest
-    container_name: open-webui
-    volumes:
-      - open-webui:/app/backend/data #used to store the vector data base by open-webui and cosmic
-    depends_on:
-      - ollama
-      - pipelines
-      - cosmic
-      # - pycapsule
-    ports:
-      - "${OPEN_WEBUI_PORT:-8080}:8080"
-    env_file:
-      - .env
-    environment:
-      - CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=
-      - OPENAI_API_KEY=0p3n-w3bu!
-      - OPENAI_API_BASE_URL=http://pipelines:9099
-      - OPENSI_COSMIC_API_BASE_URL=http://localhost:3000
-      - ENABLE_OAUTH_SIGNUP=true
-      - MICROSOFT_CLIENT_ID=${AZURE_CLIENT_ID}
-      - MICROSOFT_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
-      - MICROSOFT_CLIENT_TENANT_ID=${AZURE_TENANT_ID}
-      - ENABLE_WEBSOCKET_SUPPORT=false # https://github.com/open-webui/open-webui/discussions/11071
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: unless-stopped
-    networks:
-      - cosmic_net
-
-  pipelines:
-    # build:
-    #   context: ./../pipelines-openwebui
-    #   dockerfile: Dockerfile
-    image: ghcr.io/open-webui/pipelines:main
-    pull_policy: always
-    container_name: pipelines
-    volumes:
-      - pipelines:/app/pipelines
-    depends_on:
-      - cosmic
-    ports:
-      - "9099:9099"
-    environment:
-      - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
-      - MAX_QUERIES_PER_USER=5
-      - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
-    tty: true
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: unless-stopped
-    networks:
-      - cosmic_net
+  # pipelines:
+  #   # build:
+  #   #   context: ./../pipelines-openwebui
+  #   #   dockerfile: Dockerfile
+  #   image: ghcr.io/open-webui/pipelines:main
+  #   pull_policy: always
+  #   container_name: pipelines
+  #   volumes:
+  #     - pipelines:/app/pipelines
+  #   depends_on:
+  #     - cosmic
+  #   ports:
+  #     - "9099:9099"
+  #   environment:
+  #     - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
+  #     - MAX_QUERIES_PER_USER=5
+  #     - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
+  #   tty: true
+  #   extra_hosts:
+  #     - host.docker.internal:host-gateway
+  #   restart: unless-stopped
+  #   networks:
+  #     - cosmic_net
 
   # pycapsule:
   #   image: opensicbr/pycapsule:latest
