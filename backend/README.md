@@ -1,8 +1,8 @@
-# CoSMIC Backend Setup Guide
+<h1 align="center">CoSMIC Backend Setup Guide</h1>
 
 ---
 
-## 📁 Directory Hierarchy
+# 📁 Directory Hierarchy
 
 ```md
 CoSMIC/
@@ -32,7 +32,7 @@ CoSMIC/
 
 ---
 
-## 📋 Prerequisites
+# 📋 Prerequisites
 
 Before setting up the backend, ensure you have the appropriate tools installed depending on your chosen setup method. This guide supports both native development (running services directly on your machine) and Docker-based development (running services in isolated containers).
 
@@ -53,9 +53,9 @@ The following table outlines which tools are essential for each setup method:
 
 ---
 
-## 🛠️ Configuration
+# 🛠️ Configuration
 
-### Step 1: Navigate to the Backend Directory
+## Step 1: Navigate to the Backend Directory
 
 Start by ensuring you're in the correct directory. The backend code is located in the `backend/` subdirectory of your CoSMIC project root:
 
@@ -65,11 +65,11 @@ cd CoSMIC/backend/
 
 This directory contains all the backend source code, configuration files, and the dependencies specification for both Docker and native setups.
 
-### Step 2: Understanding Configuration Files
+## Step 2: Understanding Configuration Files
 
 The backend expects configuration files to be organized in specific locations depending on your setup method. Understanding this structure will help you prepare the environment correctly.
 
-#### Docker Setup Configuration
+### Docker Setup Configuration
 
 If you're planning to use Docker, configuration files are organized in the following locations:
 
@@ -99,11 +99,11 @@ However, if you're setting up the backend independently or need to manually conf
 > settings, the default values work fine for local development, so you can skip
 > customisation for now and proceed with the defaults.
 
-#### Native Setup Configuration
+### Native Setup Configuration
 
 For native setup, configuration is handled through environment variables. You have two options:
 
-##### **Option 1 - Create a `.env` file in the `CoSMIC/backend/` directory**
+#### **Option 1 - Create a `.env` file in the `CoSMIC/backend/` directory**
 
 Copy the example environment file and customize it:
 
@@ -121,7 +121,7 @@ DATABASE_HOST=localhost
 DATABASE_PORT=5432
 ```
 
-##### **Option 2 - Set environment variables directly in your shell**
+#### **Option 2 - Set environment variables directly in your shell**
 
 Alternatively, export variables directly before running the application:
 
@@ -139,13 +139,13 @@ export DATABASE_PORT=5432
 
 ---
 
-## 🚀 Setup & Execution
+# 🚀 Setup & Execution
 
-### Docker Development
+## Docker Development
 
 Docker provides an isolated environment where all services run in containers. This approach is recommended if you want to avoid installing PostgreSQL and other dependencies directly on your machine.
 
-#### **1. Starting the Backend Services**
+### **1. Starting the Backend Services**
 
 From the `CoSMIC/backend/` directory, ensure you've completed the configuration steps in the Docker Setup Configuration section above. Then start the backend service using Docker Compose:
 
@@ -156,7 +156,7 @@ docker compose up -d --build backend
 
 This command builds the Docker image for the backend service (and dependent services) then starts it in detached mode (running in the background).
 
-#### **2. Verifying the Docker Setup**
+### **2. Verifying the Docker Setup**
 
 Once the containers are running, you can verify that all services are working correctly:
 
@@ -181,7 +181,7 @@ postgres=#
 
 The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
 
-### Native Development Setup
+## Native Development Setup
 
 Native setup involves running services directly on your machine rather than in containers. This approach is useful if you prefer to develop and debug services directly without Docker's abstraction layer.
 
@@ -195,7 +195,7 @@ psql --version
 ```
 
 
-#### **1. Installing Dependencies**
+### **1. Installing Dependencies**
 
 The backend uses Python with the `uv` package manager for dependency management. Once PostgreSQL is running and you're in the `CoSMIC/backend/` directory, install the project's Python dependencies:
 
@@ -205,7 +205,7 @@ uv sync --frozen --no-cache
 
 The `--frozen` flag ensures that the exact versions specified in the lock file are installed, preventing version mismatches. The `--no-cache` flag forces a clean installation without relying on cached packages.
 
-#### **2. Starting the Backend Server**
+### **2. Starting the Backend Server**
 
 After dependencies are installed and you've completed the configuration steps in the [Native Setup Configuration](./README.md#Native-Setup-Configuration) section, start the FastAPI development server:
 
@@ -215,7 +215,7 @@ uv run fastapi dev
 
 The `dev` flag enables hot-reload, meaning the server automatically restarts when you modify Python files. This significantly speeds up the development workflow.
 
-#### **3. Verifying the Native Setup**
+### **3. Verifying the Native Setup**
 
 You can now verify that the backend is running correctly:
 

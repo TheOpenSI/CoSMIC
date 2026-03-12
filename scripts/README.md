@@ -1,7 +1,9 @@
 # Directory Hierachy
+
 > [!NOTE]
 > We use platform-native shell scripts for now. When the project is at a more
 > stable stage, we'll unify them all in a Python CLI instead.
+
 ```md
 scripts/
 ├── chatbot/            # TODO: clear explanation when I test this script later on.
