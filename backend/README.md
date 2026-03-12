@@ -1,121 +1,243 @@
-# **CoSMIC Backend Setup Guide**
+# CoSMIC Backend Setup Guide
 
 ---
 
-## 📋 **Prerequisites**
+## 📁 Directory Hierarchy
+
+```md
+CoSMIC/
+├── backend/
+│   ├── cores/                  # Main FastAPI files that powers the application.
+│   │   └── fastapi.env         # PostgreSQL credentials to do a connection from FastAPI here.
+│   ├── apis/                   # FastAPI Models design structure.
+│   ├── routers/
+│   │   ├── normal_endpoints/   # Regular endpoints that can be interact by clients on FastAPI.
+│   │   └── api_endpoints/      # API endpoints that can only be interact by FastAPI.
+│   ├── todo/                   # **Legacy setup that will be migrated over**.
+│   ├── pyproject.toml          # CoSMIC metadata, dependencies, and tool configurations.
+│   ├── .python-version         # Pin a Python version for CoSMIC project (beneficial for `uv` only).
+│   ├── uv.lock                 # Locked dependency versions across environments.
+│   ├── README.md               # The documentation that you are seeing here.
+│   └── .gitignore              # Backend-specific ignore lists.
+├── docker/
+│   ├── dockerfiles/            # Dockerfile for each services.
+│   ├── configs/                # Non-sensitive service configurations (pgAdmin server definitions, etc).
+│   └── secrets/                # Sensitive service credentials & secrets (database passwords, API keys, etc).
+├── examples/
+│   ├── backend/                # Example `backend/cores/fastapi.env` file usage for quick setup.
+│   ├── database/               # Example **database service** file usage for quick setup.
+│   └── gui/                    # Example **gui service** file usage for quick setup.
+└── compose.yaml                # Main compose file to run Docker Setup.
+```
+
+---
+
+## 📋 Prerequisites
+
+Before setting up the backend, ensure you have the appropriate tools installed depending on your chosen setup method. This guide supports both native development (running services directly on your machine) and Docker-based development (running services in isolated containers).
+
 > [!NOTE]
-> For native setup, `pgAdmin` is recommended for database management but not strictly required.
-> For Docker setup, most of the requirements are optional as it's already inside its own container (which you can run in isolated environment).
+> For native setup, **pgAdmin** is recommended for database management but not
+> strictly required. For Docker setup, most requirements are optional since the
+> services run in their own containers in an isolated environment.
 
+The following table outlines which tools are essential for each setup method:
 
-| **Tool**   | **Docker Setup** | **Native Setup**       |
-| ---------- | ---------------- | ---------------------- |
-| Docker     | ✅ Mandatory     | ❌ Not required        |
-| Python     | ⚠️ Optional      | ✅ Mandatory (v3.14+)  |
-| uv         | ⚠️ Optional      | ✅ Mandatory (latest)  |
-| PostgreSQL | ⚠️ Optional      | ✅ Mandatory (v18+)    |
-| pgAdmin    | ⚠️ Optional      | ⚠️ Optional            |
-
+| **Tool**   | **Docker Setup** | **Native Setup**      |
+| ---------- | ---------------- | --------------------- |
+| Docker     | ✅ Mandatory     | ❌ Not required       |
+| Python     | ⚠️ Optional      | ✅ Mandatory (v3.14+) |
+| uv         | ⚠️ Optional      | ✅ Mandatory (latest) |
+| PostgreSQL | ⚠️ Optional      | ✅ Mandatory (v18+)   |
+| pgAdmin    | ⚠️ Optional      | ⚠️ Optional           |
 
 ---
 
-## 🛠️ **A. Configuration**
+## 🛠️ Configuration
 
-### 1. **Navigate to the Project Root (Mandatory for both setups)**
+### Step 1: Navigate to the Backend Directory
+
+Start by ensuring you're in the correct directory. The backend code is located in the `backend/` subdirectory of your CoSMIC project root:
+
 ```bash
-# Make sure you are in the root directory
-cd ./CoSMIC/app/
+cd CoSMIC/backend/
 ```
 
-### 2. **Prepare Configuration Files (Mandatory for Docker Setup)**
+This directory contains all the backend source code, configuration files, and the dependencies specification for both Docker and native setups.
 
-In both scenarios, create the following directories:
+### Step 2: Understanding Configuration Files
+
+The backend expects configuration files to be organized in specific locations depending on your setup method. Understanding this structure will help you prepare the environment correctly.
+
+#### Docker Setup Configuration
+
+If you're planning to use Docker, configuration files are organized in the following locations:
+
+1. `docker/secrets/database/`: Contains PostgreSQL database credentials and configuration files.
+2. `docker/secrets/gui/`: Contains pgAdmin credentials and authentication files.
+3. `docker/configs/gui/`: Contains pgAdmin server definitions and non-sensitive configuration.
+4. `backend/cores/`: Contains core application environment variables (at project root).
+
+Create the necessary directory structure first:
+
 ```bash
-mkdir -p docker/{secret,config}  # For Docker setups
+mkdir -p docker/secrets/database docker/secrets/gui docker/configs/gui
 ```
 
-#### **File Setup Instructions**
+The demo scripts provided in the main README handle copying and organizing example configuration files automatically. These scripts search for example files in the `examples/` directory at your project root and transform them by removing the `.example` suffix and service prefix before placing them in the appropriate locations.
 
-Copy the following files from the `example` directory to their respective locations (**remember to remove the `.example.` suffix from each of them**):
+However, if you're setting up the backend independently or need to manually configure files, copy the following files from the `examples/` directory to their respective backend directories. Remember to remove the `.example.` suffix from each filename:
+
+1. **PostgreSQL credentials**: (`postgres_*.example.txt`) → `docker/secrets/database/` 
+2. **pgAdmin credentials**: (`pgadmin_*.example.txt`) → `docker/secrets/gui/`
+3. **pgAdmin server configuration**: (`pgadmin_*.example.json`) → `docker/configs/gui/`
+4. **Backend environment files**: (`cosmic_*.example.env`) → `backend/cores/` (at project root)
+
 > [!TIP]
-> Review and adjust default values in these files (e.g: passwords, ports) *before* proceeding.
-> If you're unsure on any of them, skip this step (defaults will work for local development).
+> Before finalising these files, review and adjust default values such as
+> passwords, database usernames, and service ports. If you're unsure about any
+> settings, the default values work fine for local development, so you can skip
+> customisation for now and proceed with the defaults.
 
+#### Native Setup Configuration
 
-| **Source**                 | **Destination**  | **Purpose**               |
-| -------------------------- | ---------------- | ------------------------- |
-| `{postgres,pgadmin}_*.txt` | `docker/secret`  | Docker Secret credentials |
-| `{postgres,pgadmin}_*.env` | `docker/secret`  | Docker Secret variables   |
-| `pgadmin_*.json`           | `docker/config`  | `pgAdmin` database server |
-| `cosmic_*.env`             | `backend/cores`  | Core application settings |
+For native setup, configuration is handled through environment variables. You have two options:
 
+##### **Option 1 - Create a `.env` file in the `CoSMIC/backend/` directory**
+
+Copy the example environment file and customize it:
+
+```bash
+cp ../examples/backend/cosmic_*.example.env fastapi.env
+```
+
+Then edit the `.env` file to set your desired configuration values:
+
+```bash
+# Example .env file content
+DATABASE_USER=postgres
+DATABASE_PASSWORD=""
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+```
+
+##### **Option 2 - Set environment variables directly in your shell**
+
+Alternatively, export variables directly before running the application:
+
+```bash
+export DATABASE_USER=postgres
+export DATABASE_PASSWORD=""
+export DATABASE_HOST=localhost
+export DATABASE_PORT=5432
+```
+
+> [!TIP]
+> The `.env` file approach is recommended as it keeps your configuration
+> organised and prevents accidentally committing secrets to version control.
+> Make sure to add `.env` to your `.gitignore` file.
 
 ---
 
-## 🚀 **B. Setup & Execution**
+## 🚀 Setup & Execution
 
-### **Docker Setup (Recommended)**
+### Docker Development
 
-1. **Start the containers**
-> [!NOTE]
-> This script is Linux/macOS-only (Windows support via PowerShell coming soon).
+Docker provides an isolated environment where all services run in containers. This approach is recommended if you want to avoid installing PostgreSQL and other dependencies directly on your machine.
 
-  ```bash
-  chmod +x ./bin/pg_docker.sh
-  ./bin/pg_docker.sh
-  ```
+#### **1. Starting the Backend Services**
 
-2. **Verify services**
-  - **FastAPI (Swagger Docs)**
-    + Accessible at: [localhost:8000/docs](http://localhost:8000/docs)
+From the `CoSMIC/backend/` directory, ensure you've completed the configuration steps in the Docker Setup Configuration section above. Then start the backend service using Docker Compose:
 
-  - **pgAdmin**
-    + Accessible at: [localhost:5050](http://localhost:5050) *(Login with credentials from `docker/secret/pgadmin_*.txt`)*
+```bash
+# On macOS or Linux, add sudo if necessary
+docker compose up -d --build backend
+```
 
-  - **PostgreSQL**
-    ```bash
-    # Inside the container (named `cosmic-postgres`)
-    psql -U demo
+This command builds the Docker image for the backend service (and dependent services) then starts it in detached mode (running in the background).
 
-    # From your host machine (if PostgreSQL is installed locally):
-    psql -h localhost -p 5433 -U demo  # Add `-d demo` to default connect to wanted DB
-    ```
+#### **2. Verifying the Docker Setup**
 
----
+Once the containers are running, you can verify that all services are working correctly:
 
-### **Native Setup**
+1. **FastAPI**: The REST API (Swagger) is served at [localhost:8001/docs](http://localhost:8001/docs). This endpoint provides interactive API documentation where you can test endpoints directly from your browser.
 
-1. **Install dependencies**
-    ```bash
-    # Make sure PostgreSQL is running
-    psql --version
+2. **pgAdmin**: The database management tool is accessible at [localhost:5050](http://localhost:5050). Use the credentials from your `docker/secrets/gui/pgadmin_*.txt` file to log in.
 
-    # Then install needed dependencies
-    uv sync --frozen --no-cache
-    ```
+3. **PostgreSQL**: To access the database directly from the command line, use:
 
-2. **Start the backend**
-    ```bash
-    uv run fastapi dev
-    ```
+```bash
+docker exec cosmic-postgres psql -U postgres
+```
 
-3. **Verify setup**
-  - **FastAPI (Swagger Docs)**
-    + Accessible at: [localhost:8000/docs](http://localhost:8000/docs)
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
 
-  - **pgAdmin**
-    + *Windows/MacOS:* Search and open the **pgAdmin 4** application.
-    + *Linux:* Search or type `pgadmin4` in your terminal.
+```
+psql (18.3)
+Type "help" for help.
 
-  - **PostgreSQL**
-    ```bash
-    psql -U demo  # Add `-d demo` to auto-connect to the default DB
+postgres=#
+```
 
-    ### Example output would look like so ###
-    Password for user demo:
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
 
-    psql (18.2)
-    Type "help" for help.
+### Native Development Setup
 
-    postgres=#
-    ```
+Native setup involves running services directly on your machine rather than in containers. This approach is useful if you prefer to develop and debug services directly without Docker's abstraction layer.
+
+**Prerequisites for Native Setup**
+
+Before starting native development, ensure you have `uv` & `PostgreSQL` running on your system:
+
+```bash
+uv --version
+psql --version
+```
+
+
+#### **1. Installing Dependencies**
+
+The backend uses Python with the `uv` package manager for dependency management. Once PostgreSQL is running and you're in the `CoSMIC/backend/` directory, install the project's Python dependencies:
+
+```bash
+uv sync --frozen --no-cache
+```
+
+The `--frozen` flag ensures that the exact versions specified in the lock file are installed, preventing version mismatches. The `--no-cache` flag forces a clean installation without relying on cached packages.
+
+#### **2. Starting the Backend Server**
+
+After dependencies are installed and you've completed the configuration steps in the [Native Setup Configuration](./README.md#Native-Setup-Configuration) section, start the FastAPI development server:
+
+```bash
+uv run fastapi dev
+```
+
+The `dev` flag enables hot-reload, meaning the server automatically restarts when you modify Python files. This significantly speeds up the development workflow.
+
+#### **3. Verifying the Native Setup**
+
+You can now verify that the backend is running correctly:
+
+1. **FastAPI**: The REST API (Swagger) is served at [localhost:8000/docs](http://localhost:8000/docs). This interactive documentation allows you to explore all available endpoints and test them directly from your browser.
+
+2. **pgAdmin**:
+- On Windows or macOS, search for and open the **pgAdmin 4** application from your applications menu.
+- On Linux, search for pgAdmin or type `pgadmin4` in your terminal to start the application.
+
+3. **PostgreSQL**: To verify that your PostgreSQL connection is working, open a terminal and connect to the database:
+
+```bash
+psql -U postgres
+```
+
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+
+```
+psql (18.3)
+Type "help" for help.
+
+postgres=#
+```
+
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
