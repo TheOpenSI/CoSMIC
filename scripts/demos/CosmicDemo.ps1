@@ -99,7 +99,7 @@ function Find-ProjectRoot
     return (Split-Path -Parent $script:ScriptDir)
 }
 
-$script:Version         = '0.1'
+$script:Version         = '1.0.0'
 $script:RootDir         = Find-ProjectRoot
 $script:BackendDir      = Join-Path $script:RootDir 'backend'
 $script:ExamplesDir     = Join-Path $script:RootDir 'examples'

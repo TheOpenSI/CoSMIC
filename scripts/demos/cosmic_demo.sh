@@ -62,7 +62,7 @@ find_project_root() {
 	return 1
 }
 
-SCRIPT_VERSION="0.1"
+SCRIPT_VERSION="1.0.0"
 readonly SCRIPT_VERSION
 ROOT_DIR="$(find_project_root)"
 readonly ROOT_DIR
