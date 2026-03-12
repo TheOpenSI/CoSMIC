@@ -1,4 +1,4 @@
-# OpenSI-CoSMIC - Cognitive System of Machine Intelligent Computing
+<h1 align="center">OpenSI-CoSMIC - Cognitive System of Machine Intelligent Computing</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
 [![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
@@ -9,8 +9,6 @@ This is the official implementation of the Open Source Institute - Cognitive Sys
 
 ---
 
-## ⚠️ Important Notice
-
 > [!WARNING]
 > This branch represents a significant architectural shift. We are actively
 > transitioning away from OpenWebUI to build our own UI platform. As a result,
@@ -18,19 +16,12 @@ This is the official implementation of the Open Source Institute - Cognitive Sys
 > using this branch only if you're comfortable working with a system under
 > active development.
 
-> [!NOTE]
-> The `backend/todo` directory contains the legacy setup configuration. While
-> we're migrating to the new structure, you can safely ignore this directory
-> unless you have specific needs from it.
+# 📋 Quick Start
 
----
+Before you begin, ensure you have Docker and Docker Compose installed on your system. These are required to run the platform:
 
-## 📋 Quick Start
-
-Before you begin, ensure you have Docker and Docker Compose installed on your system. These are required to run OpenSI-CoSMIC:
-
-- **Docker**: [Installation Guide](https://docs.docker.com/get-docker/)
-- **Docker Compose**: [Installation Guide](https://docs.docker.com/compose/install/)
+1. [**Docker**](https://docs.docker.com/get-docker/)
+2. [**Docker Compose**](https://docs.docker.com/compose/install/)
 
 Then, start by cloning the repository using your preferred method:
 
@@ -50,11 +41,11 @@ cd CoSMIC
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-Depending on your use case, you have three main paths to explore. Whether you want to see the system in action, contribute to development, or understand the architecture, we've organized the documentation to guide you through each pathway.
+Depending on your use case, we have 2 options to explore:
 
-### Option 1: Quick Demo
+## Option 1: Demo Setup
 
 1. **Linux**
 ```bash
@@ -74,14 +65,13 @@ chmod +x ./scripts/cosmic_demo.zsh && ./scripts/cosmic_demo.zsh
 .\scripts\CosmicDemo.ps1
 ```
 
-#### **GPU Configuration**
+### **GPU Configuration**
 
 OpenSI-CoSMIC includes flexible GPU support through Ollama. By default, the system uses a CPU-only Dockerfile that's guaranteed to work on all operating systems (Windows, macOS, Linux). However, if you have a GPU installed on a Linux or macOS machine and want to leverage it for improved performance, you can enable GPU acceleration.
 
-To enable GPU support, open the `docker-compose.yaml` file and modify the Ollama service configuration. The file includes clear documentation on which Dockerfile to use based on your GPU type:
+To enable GPU support, open the `compose.yaml` file and modify the Ollama service configuration. The file includes clear documentation on which Dockerfile to use based on your GPU type.
 
-For NVIDIA GPUs on Linux or macOS, replace the default build configuration with:
-
+1. **NVIDIA GPUs** (Linux/MacOS)
 ```yaml
 build:
   context: ./
@@ -89,7 +79,7 @@ build:
 gpus: all
 ```
 
-For AMD GPUs on Linux or macOS, use instead:
+2. **AMD GPUs** (Linux/MacOS)
 
 ```yaml
 build:
@@ -100,11 +90,16 @@ devices:
   - "/dev/dri:/dev/dri"
 ```
 
-It's important to note that GPU support is only reliably available on Linux and macOS. If you're using Windows, the Docker virtualization layer introduces complications with GPU passthrough, so we recommend sticking with the default CPU-only configuration. For more detailed information about Ollama's Docker GPU support, please refer to the [official Ollama documentation](https://docs.ollama.com/docker).
+> [!IMPORTANT]
+> GPU support is only reliably available on **Linux & MacOS**. If you're using
+> Windows, the Docker virtualization layer introduces complications with GPU
+> passthrough, so we recommend sticking with the default CPU-only configuration.
+> For more detailed information about Ollama's Docker GPU support, please refer
+> to the [official Ollama documentation](https://docs.ollama.com/docker).
 
 The default CPU-only Dockerfile is optimized for broad compatibility and will work reliably across all platforms and hardware configurations, so you don't need to make any changes unless you specifically want GPU acceleration.
 
-#### **First Run Initialisation**
+### **First Run Initialisation**
 > [!NOTE]
 > During the first run, the system will download and install a substantial
 > number of AI/ML Python packages. Due to the comprehensive nature of these
@@ -114,39 +109,44 @@ The default CPU-only Dockerfile is optimized for broad compatibility and will wo
 > installation process without interruption. Everything will be ready when it
 > finishes!
 
-### Option 2: Development Setup
+## Option 2: Dev Setup
 
-If you're contributing to the CoSMIC project or want to understand how the different components work together, this section guides you through setting up the development environment.
+If you're contributing to the OpenSI-CoSMIC project or want to understand how the different components work together, this section guides you through setting up the development environment.
 
-#### **Frontend Development**
+### **Frontend Development**
 
-The frontend is built as a separate repository to maintain clean separation of concerns. For detailed information about frontend development, including how to set up the development environment, run hot-reload servers, and contribute to the UI, start with the [Frontend Development Guide](https://github.com/TheOpenSI/CoSMIC_UI/blob/main/README.md)
+The frontend is built as a separate repository to maintain clean separation of concerns. For more detailed information, start with the [development guide](https://github.com/TheOpenSI/CoSMIC_UI/blob/main/README.md) in `frontend/` directory.
 
-#### **Backend Development**
+### **Backend Development**
 
-The backend contains the core cognitive services and integrations. To understand the architecture, set up a development environment, and contribute new features, start with the [Backend Development Guide](backend/README.md)
+The backend is built within this repository as it contains the core CoSMIC platform and logics. For more detailed information, start with the [development guide](backend/README.md) in `backend/` directory.
 
-## **Understanding the Framework Architecture**
+# **Understanding the CoSMIC Architecture**
 
-The system's behavior is configured through the `config.yaml` file located at `scripts/configs/config.yaml`. This configuration drives the five core services:
+> [!NOTE]
+> At the moment, we're in the process of migrating the old system over to the
+> new structure. Therefore, any of the metioned files below can be found in
+> `backend/todo` directory until progress is done. Thank you for understanding.
 
-1. **Chess Game Service** (`src/services/chess.py`): Provides next move prediction and detailed game analysis using advanced AI models
-2. **Vector Database Service** (`src/services/vector_database.py`): Manages text-based and document-based information, enabling semantic search and retrieval
-3. **Retrieval-Augmented Generation** (`src/services/rag.py`): Enhances question answering by retrieving relevant context from the vector database
-4. **Code Generation Service** (PyCapsule): Generates Python code based on natural language descriptions, integrated from [TheOpenSI/PyCapsule](https://github.com/TheOpenSI/PyCapsule)
-5. **Question Answering Service** (`src/services/qa.py`): Provides general-purpose reasoning and question answering capabilities
+The system's behavior is configured through the `config.yaml` file located at `scripts/configs/config.yaml`. This configuration drives the 5 core services:
+
+1. **Chess Game** (`src/services/chess.py`): Provides next move prediction and detailed game analysis using advanced AI models
+2. **Vector Database** (`src/services/vector_database.py`): Manages text-based and document-based information, enabling semantic search and retrieval
+3. **Retrieval-Augmented Generation (RAG)** (`src/services/rag.py`): Enhances question answering by retrieving relevant context from the vector database
+4. **Code Generation** ([PyCapsule](https://docs.python.org/3/c-api/capsule.html)): Generates Python code based on natural language descriptions.
+5. **Question Answering (QA)** (`src/services/qa.py`): Provides general-purpose reasoning and question answering capabilities
 
 When a user submits a query, the [LLM-based Query Analyzer](src/query_analyser/query_analyser.py) evaluates the input and routes it to the most appropriate service. This intelligent routing ensures that specialized services handle their domain-specific tasks while general services provide fallback capability.
 
-Advanced chess capabilities build on the core service:
+Specifically for **Chess Game** service, advanced chess capabilities has been build:
 
-- **Chess Puzzle Solving** (`src/modules/chess_qa_puzzle.py`): Specialized puzzle analysis and next move prediction
-- **FEN Generation** (`src/modules/chess_genfen.py`): Converts move sequences into Forsyth-Edwards Notation for position analysis
-- **Chain-of-Thought Reasoning** (`src/modules/chess_gencot.py`): Generates step-by-step reasoning for move recommendations
+1. **Chess Puzzle Solving** (`src/modules/chess_qa_puzzle.py`): Specialized puzzle analysis and next move prediction
+2. **FEN Generation** (`src/modules/chess_genfen.py`): Converts move sequences into Forsyth-Edwards Notation for position analysis
+3. **Chain-of-Thought Reasoning** (`src/modules/chess_gencot.py`): Generates step-by-step reasoning for move recommendations
 
 ---
 
-## 📚 Development Conventions & Resources
+# 📚 Conventions & Resources
 
 This project follows specific conventions for different components to maintain consistency and facilitate collaboration. Choose the section relevant to your work:
 
@@ -157,7 +157,7 @@ This project follows specific conventions for different components to maintain c
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 We welcome contributions from researchers, developers, and enthusiasts. There are multiple ways to get involved with the OpenSI-CoSMIC project:
 
@@ -169,7 +169,7 @@ We welcome contributions from researchers, developers, and enthusiasts. There ar
 
 ---
 
-## 📝 Citation
+# 📝 Citation
 
 If you use OpenSI-CoSMIC in your research or project, please cite the following paper:
 
@@ -184,39 +184,47 @@ If you use OpenSI-CoSMIC in your research or project, please cite the following 
 
 ---
 
-## 📧 Support & Contact
+# 📧 Support & Contact
 
-We're here to help with technical questions and project coordination:
+We're here to help with technical questions and project coordination
 
-**Technical Support**: For engineering questions, bug reports, or implementation issues:
+1. **Technical Support**
+For engineering questions, bug reports, or implementation issues:
+
 - [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au)
 - [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au)
 - [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au)
 - [Manile Srun](mailto:manile.srun@canberra.edu.au)
 - [Bing Tran](mailto:binhsan1307@gmail.com)
 
-**Project Management**: For project-level decisions and strategic inquiries:
+2. **Project Management**:
+For project-level decisions and strategic inquiries:
 - [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au)
 
 ---
 
-## 📄 License
+# 📄 License
 
 OpenSI-CoSMIC is distributed under the [MIT License](LICENSE). This permissive license allows broad use while maintaining attribution requirements.
 
-**Important License Notes**: If you use any of the following models or services, you must also comply with their respective licenses:
+**Note that if you use any of the following models or services, you must also comply with their respective licenses:**
 
-- **Ollama Models**: OpenSI-CoSMIC uses Ollama for running large language models. The models available through Ollama (such as Llama3.1) have their own respective licenses. You must review and comply with the license of any specific model you download and use through Ollama. Visit the [Ollama models page](https://ollama.com/library) for detailed license information for each model.
-- **Hugging Face Models**: If you use Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B Instruct from Hugging Face, you must also follow the [Hugging Face Model License](https://huggingface.co/models)
-- **OpenAI API**: If you integrate GPT 3.5-Turbo or GPT 4-o from OpenAI, you must also comply with [OpenAI's terms of service](https://openai.com/terms)
+1. **Ollama Models**
+If you leverage the power of Llama 3.1, or Qwen 3.5 from Ollama, you must review and comply with the license of any specific model you download and use through Ollama. Visit the [Ollama Models Page](https://ollama.com/library) for detailed license information for each model.
+
+2. **Hugging Face Models**
+If you use Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B Instruct from Hugging Face, you must also follow the [Hugging Face Model License](https://huggingface.co/models)
+
+3. **OpenAI API**
+If you integrate GPT 4o or GPT 5.4 from OpenAI, you must also comply with [OpenAI's Terms of Service (ToS)](https://openai.com/terms)
 
 ---
 
-## 💰 Funding
+# 💰 Funding
 
 This project receives funding through:
 
-- **ACT Government Future Jobs Fund**: Partnership with Open Source Institute (OpenSI) under agreement R01553
-- **NetApp Technology Alliance**: Partnership with NetApp under agreement R01657
+1. **ACT Government Future Jobs Fund**: Partnership with Open Source Institute (OpenSI) under agreement **R01553**
+2. **NetApp Technology Alliance**: Partnership with NetApp under agreement **R01657**
 
 These partnerships enable us to maintain the project, implement new features, and provide community support.
