@@ -92,13 +92,17 @@ class Ollama(LLMBase):
     
     def __call__(self,
                  question: str,
-                 context: Union[str, Dict[str, Any]] = {}) -> tuple[str, str]:
+                 context: Union[str, Dict[str, Any]] = {},
+                 serivce_name: str = "",
+                 ) -> tuple[str, str]:
+
         """
         Process the question and generate a response using Ollama.
         
         Args:
             question (str): User question in string.
             context (Union[str, Dict[str, Any]], optional): Context for the question. Defaults to {}.
+            serivce_name (str, optional): Name of the service. Defaults to "".
             
         Returns:
             Tuple of (response, raw_response)
@@ -107,7 +111,7 @@ class Ollama(LLMBase):
         user_prompt: str = self.user_prompter(question, context=context)
         
         # Combine system prompt with user prompt
-        combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context)
+        combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context, service=serivce_name)
         
         # Chat
         chat_response = self.ollama_client.chat(

@@ -281,21 +281,21 @@ class GPT(SystemPromptBase):
         super().__init__(**kwargs)
         self._prompts_root = Path.cwd() / "src" / "services" / "llms" / "prompts"
         
-    def _load_service_prompt(self,services: str) -> str:
+    def _load_service_prompt(self,service: str) -> str:
         """
         Attempt to load additional sytem prompt content from a text file under:
             ./src/services/llms/prompts/<services> or <services>.txt
 
-        If file is not found or `services` is falsy, return empty string.
+        If file is not found or `service` is falsy, return empty string.
         """
-        if not services or not isinstance(services, str):
+        if not service or not isinstance(service, str):
             return ""
 
         prompts_root = self._prompts_root
         # Try exact filename first (no extension), then .txt
         candidate_paths = [
-            prompts_root / services,                 # e.g., prompts/promptA
-            prompts_root / f"{services}.txt",        # e.g., prompts/promptA.txt
+            prompts_root / service,                 # e.g., prompts/promptA
+            prompts_root / f"{service}.txt",        # e.g., prompts/promptA.txt
         ]
 
         for p in candidate_paths:
@@ -312,7 +312,7 @@ class GPT(SystemPromptBase):
         self,
         user_prompt: str,
         context: str="",
-        services: str=""
+        service: str=""
     ):
         """Apply system prompt with user prompt and context.
 
@@ -326,7 +326,7 @@ class GPT(SystemPromptBase):
         """
     
         # Compose the system content: base self.prefix + (optional) file content
-        prompt_service = self._load_service_prompt(services)
+        prompt_service = self._load_service_prompt(service)
         composed_prefix = self.prefix + (prompt_service if prompt_service else "")
 
         system_prompt = [
