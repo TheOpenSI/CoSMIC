@@ -36,7 +36,7 @@ git clone --single-branch -b bing-dev git@github.com:TheOpenSI/CoSMIC.git
 Once cloned, navigate to the project directory:
 
 ```bash
-cd CoSMIC
+cd CoSMIC/
 ```
 
 ---
@@ -50,24 +50,24 @@ Depending on your use case, we have 2 options to explore:
 1. **Linux**
 ```bash
 # Make sure you're in the root directory
-chmod +x ./scripts/cosmic_demo.sh && ./scripts/cosmic_demo.sh
+chmod +x ./scripts/demos/cosmic_demo.sh && ./scripts/demos/cosmic_demo.sh
 ```
 
 2. **macOS**
 ```zsh
 # Make sure you're in the root directory
-chmod +x ./scripts/cosmic_demo.zsh && ./scripts/cosmic_demo.zsh
+chmod +x ./scripts/demos/cosmic_demo.zsh && ./scripts/demos/cosmic_demo.zsh
 ```
 
 3. **Windows**
 ```ps1
 # Make sure you're in the root directory
-.\scripts\CosmicDemo.ps1
+.\scripts\demos\CosmicDemo.ps1
 ```
 
 ### **GPU Configuration**
 
-OpenSI-CoSMIC includes flexible GPU support through Ollama. By default, the system uses a CPU-only Dockerfile that's guaranteed to work on all operating systems (Windows, macOS, Linux). However, if you have a GPU installed on a Linux or macOS machine and want to leverage it for improved performance, you can enable GPU acceleration.
+OpenSI-CoSMIC includes flexible GPU support through Ollama. By default, the system uses a CPU-only Dockerfile that's guaranteed to work on all operating systems (Windows, macOS, Linux). However, if you have a GPU installed on a Linux/macOS machine and want to leverage it for improved performance, you can enable GPU acceleration.
 
 To enable GPU support, open the `compose.yaml` file and modify the Ollama service configuration. The file includes clear documentation on which Dockerfile to use based on your GPU type.
 

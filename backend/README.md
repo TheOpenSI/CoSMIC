@@ -81,14 +81,14 @@ If you're planning to use Docker, configuration files are organized in the follo
 Create the necessary directory structure first:
 
 ```bash
-mkdir -p docker/secrets/database docker/secrets/gui docker/configs/gui
+mkdir -p docker/{secrets/{database,gui},configs/gui}
 ```
 
 The demo scripts provided in the main README handle copying and organizing example configuration files automatically. These scripts search for example files in the `examples/` directory at your project root and transform them by removing the `.example` suffix and service prefix before placing them in the appropriate locations.
 
 However, if you're setting up the backend independently or need to manually configure files, copy the following files from the `examples/` directory to their respective backend directories. Remember to remove the `.example.` suffix from each filename:
 
-1. **PostgreSQL credentials**: (`postgres_*.example.txt`) → `docker/secrets/database/` 
+1. **PostgreSQL credentials**: (`postgres_*.example.txt`) → `docker/secrets/database/`
 2. **pgAdmin credentials**: (`pgadmin_*.example.txt`) → `docker/secrets/gui/`
 3. **pgAdmin server configuration**: (`pgadmin_*.example.json`) → `docker/configs/gui/`
 4. **Backend environment files**: (`cosmic_*.example.env`) → `backend/cores/` (at project root)
@@ -108,7 +108,7 @@ For native setup, configuration is handled through environment variables. You ha
 Copy the example environment file and customize it:
 
 ```bash
-cp ../examples/backend/cosmic_*.example.env fastapi.env
+cp ../examples/backend/cosmic_*.example.env ./cores/fastapi.env
 ```
 
 Then edit the `.env` file to set your desired configuration values:
@@ -150,7 +150,7 @@ Docker provides an isolated environment where all services run in containers. Th
 From the `CoSMIC/backend/` directory, ensure you've completed the configuration steps in the Docker Setup Configuration section above. Then start the backend service using Docker Compose:
 
 ```bash
-# On macOS or Linux, add sudo if necessary
+# On Linux/MacOS, add `sudo` if necessary
 docker compose up -d --build backend
 ```
 
@@ -167,6 +167,7 @@ Once the containers are running, you can verify that all services are working co
 3. **PostgreSQL**: To access the database directly from the command line, use:
 
 ```bash
+# On Linux/MacOS, add `sudo` if necessary
 docker exec cosmic-postgres psql -U postgres
 ```
 
