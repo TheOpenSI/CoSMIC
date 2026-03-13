@@ -1,0 +1,24 @@
+# Supported base LLMs:
+# mistral-7b-v0.1, mistral-7b-instruct-v0.1, mistral-7b-finetuned,
+# gemma-7b, gemma-7b-it,
+# gpt-3.5-turbo, gpt-4o,
+# ollama:[ollama model] from https://ollama.com/library.
+
+llm_name: "ollama:qwen3.5:0.5b"
+is_quantized: False
+seed: 0  # seed of response generation by base LLM.
+doc_directory: ""  # directory containing .pdf documents to build the system's vector database.
+document_path: []  # a string or a list of .pdf to add context to the vector database.
+service: -1  # service selection: -1 [auto], 0 [chess], 1 [update vector database], 2 [code generation], 3 [general QA]
+
+query_analyser:
+  llm_name: "ollama:llama3.1:8b"
+  is_quantized: False
+
+chess:
+  stockfish_path: ""  # if empty, default to "third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
+
+rag: # RAG-related config.
+  topk: 10  # retrieve topk documents.
+  retrieve_score_threshold: 0.7  # similarity score under this threshold will not be used in prompt.
+  vector_db_path: ""  # vector database path, if not exist, use default database/vector_database.

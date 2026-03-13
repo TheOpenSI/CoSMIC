@@ -18,6 +18,9 @@ from ..routers.api_endpoints.services import services_v1_router
 from ..routers.api_endpoints.models import models_v1_router
 from ..routers.api_endpoints.statistics import statistics_v1_router
 
+# NOTE: for removal
+from ..todo.todo import cosmic_todo_startup
+
 
 # TODO: Need some more research on this usage rather than the deprecation
 # event: 'startup' & 'shutdown'
@@ -26,6 +29,9 @@ async def lifespan(app: FastAPI):
     # Equivalent to 'startup' event
     create_db_and_table()
     create_default_account()
+
+    # NOTE: for removal
+    cosmic_todo_startup()
     yield
 
     # Equivalent to 'shutdown' event (Optional)

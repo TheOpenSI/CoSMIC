@@ -39,8 +39,8 @@ from .prompts import user_prompt as user_prompt_instances
 from . import tokenizer as tokenizer_instances
 from ..base import ServiceBase
 from .login import LLMLogin
-from ....utils.module import get_instance
-from ....utils.log_tool import set_color
+from utils.module import get_instance
+from utils.log_tool import set_color
 
 
 class Mistral7bv01(LLMBase):

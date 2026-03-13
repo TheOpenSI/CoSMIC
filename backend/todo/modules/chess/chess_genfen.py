@@ -29,9 +29,9 @@ import pandas as pd
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
-from ...src.services import chess as chess_instances
-from ...utils.log_tool import set_color
-from ...src.services.chess import ChessBase
+from src.services import chess as chess_instances
+from utils.log_tool import set_color
+from src.services.chess import ChessBase
 
 # =============================================================================================================
 

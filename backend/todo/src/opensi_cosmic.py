@@ -34,12 +34,12 @@ from .maps import LLM_INSTANCE_DICT
 from .services.vector_database import VectorDatabase
 from .services.qa import QABase
 from .services.rag import RAGBase
-from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
-from ..modules.chess.chess_qa_quality import QualityEval
-from ..modules.chess.chess_genfen import FENGenerator
-from ..modules.chess.chess_gencot import CotGenerator
-from ..modules.code_generation.code_generation import CodeGenerator
-from ..utils.log_tool import set_color
+from modules.chess.chess_qa_puzzle import PuzzleAnalyse
+from modules.chess.chess_qa_quality import QualityEval
+from modules.chess.chess_genfen import FENGenerator
+from modules.chess.chess_gencot import CotGenerator
+from modules.code_generation.code_generation import CodeGenerator
+from utils.log_tool import set_color
 from .query_analyser.query_analyser import QueryAnalyser
 
 
@@ -49,10 +49,10 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 class OpenSICoSMIC:
     def __init__(
         self,
-        query_llm_name: str="",
-        llm_name: str="",
-        config_path: str="scripts/configs/config.yaml",
-        user: dict=None
+        query_llm_name: str = "",
+        llm_name: str = "",
+        config_path: str = "scripts/configs/config.yaml",
+        user: dict | None = None
     ):
         """ Construct OpenSICoSMIC instance. It contains LLM and services including vector database
         and RAG, where RAG includes context retriever and vector database update.
@@ -200,18 +200,39 @@ class OpenSICoSMIC:
 
         count = len(llm_name_list)
 
-        if is_llm_name_gpt: openai_api_key = self.llm.get_openai_key()
-        elif is_query_analyser_llm_name_gpt: openai_api_key = self.query_analyser.llm.get_openai_key()
-        else: openai_api_key = ""
-
-        if (count > 0) and (openai_api_key == ""):
-            if count == 1: answer = f"{llm_name_list[0]} is"
-            elif count == 2: answer = f"{llm_name_list[0]} and {llm_name_list[1]} are"
-            answer = f"Since {answer} used, please add valid OPENAI_API_KEY in .env."
+        if is_llm_name_gpt:
+            openai_api_key = self.llm.get_openai_key()
+        elif is_query_analyser_llm_name_gpt:
+            openai_api_key = self.query_analyser.llm.get_openai_key()
         else:
-            answer = ""
+            openai_api_key = ""
 
-        return answer
+        if (
+            (count > 0)
+            and
+            (openai_api_key == "")
+        ):
+            if count == 1:
+                self.answer: str = "{0:s}.{1:s}".format(
+                    f"Default SLM model: [{llm_name_list[0]}]",
+                    f"Since [{llm_name_list[0]}] used, please add valid [OPENAI_API_KEY] in .env."
+                )
+            elif count == 2:
+                self.answer: str = "{0:s}.{1:s}".format(
+                    f"Default SLM models: [{llm_name_list[0]}] & [{llm_name_list[1]}]",
+                    f"Since [{llm_name_list[0]} & {llm_name_list[1]}] used, please add valid [OPENAI_API_KEY] in .env."
+                )
+            else:
+                self.answer: str = "{0:s}.{1:s}".format(
+                    f"Default SLM model: [None]",
+                    f"Something wrong happens, consider checking your config file again."
+                )
+
+            return self.answer
+        else:
+            self.answer: str = ""
+
+            return self.answer
 
     def get_llm(
         self,

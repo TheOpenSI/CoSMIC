@@ -31,8 +31,8 @@ from ..services.llms import llm as llm_instances
 from ..services.llms.llm import get_instance
 from . import user_prompt as query_user_prompt_instances
 from ..maps import LLM_INSTANCE_DICT
-from ...utils.log_tool import set_color
-from ...utils.module import get_instance
+from utils.log_tool import set_color
+from utils.module import get_instance
 
 # =============================================================================================================
 
@@ -137,7 +137,7 @@ class QueryAnalyser:
         response = response.lower()
 
         # Truncate to get the option index.
-        option = re.search('service (\d{1,3}\.\d{1,3}|\d{1,3})', response)
+        option = re.search('service (\\d{1,3}\\.\\d{1,3}|\\d{1,3})', response)
 
         if option:
             option = option.group(1)
@@ -188,12 +188,12 @@ class QueryAnalyser:
         service_option = "-1"
 
         # Parse move string.
-        move_match = re.search('[\[,\:](.*?[,\s].*?)[\.,\]]?$', query)
+        move_match = re.search('[\\[,\\:](.*?[,\\s].*?)[\\.,\\]]?$', query)
 
         # Parse FEN string.
         fen_match = re.search(
-            '(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)' \
-            '\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$',
+            '(((?:[rnbqkpRNBQKP1-8]+\\/){7})[rnbqkpRNBQKP1-8]+)' \
+            '\\s([b|w])\\s(-|[K|Q|k|q]{1,4})\\s(-|[a-h][1-8])\\s(\\d+\\s\\d+)$',
             query
         )
 
@@ -248,7 +248,7 @@ class QueryAnalyser:
 
         if is_a_document:
             # Parse move string
-            document_path = re.search('(?<=\:\s)(.*?)+\.pdf', query)
+            document_path = re.search('(?<=\\:\\s)(.*?)+\\.pdf', query)
 
             if document_path:
                 document_path = document_path.group()
@@ -268,7 +268,7 @@ class QueryAnalyser:
             service_info_dict["document_path"] = document_path
         else:
             # Extract text.
-            text = re.search('\:((\"|\')?(.*?)[\",\']?$)', query)
+            text = re.search('\\:((\"|\')?(.*?)[\",\']?$)', query)
 
             if text:
                 text = text.group(0)

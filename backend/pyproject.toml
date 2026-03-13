@@ -24,4 +24,6 @@ dependencies = [
     "chess>=1.11.2",
     "stockfish>=4.0.8",
     "pandas>=3.0.1",
+    "sentence-transformers>=5.3.0",
+    "faiss-cpu>=1.13.2", # CPU version for Vector Database (works on all OSes)
 ]

@@ -29,10 +29,10 @@ import pandas as pd
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
-from ...utils.log_tool import set_color
-from ...src.services.llms.prompts import user_prompt as user_prompt_instances
-from ...src.services.llms.llm import GPT
-from ...src.services.chess import ChessBase
+from utils.log_tool import set_color
+from src.services.llms.prompts import user_prompt as user_prompt_instances
+from src.services.llms.llm import GPT
+from src.services.chess import ChessBase
 
 # =============================================================================================================
 

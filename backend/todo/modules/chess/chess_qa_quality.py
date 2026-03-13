@@ -28,9 +28,9 @@ import numbers
 import pandas as pd
 import numpy as np
 
-from ...utils.log_tool import set_color
-from ...utils.num2word import convert_number2word
-from ...src.services.qa import QABase
+from utils.log_tool import set_color
+from utils.num2word import convert_number2word
+from src.services.qa import QABase
 
 # =============================================================================================================
 

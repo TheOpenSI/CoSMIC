@@ -29,7 +29,7 @@ import os, chess, sys
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from stockfish import Stockfish
-from ...utils.log_tool import set_color
+from utils.log_tool import set_color
 from .llms.llm import GPT, Ollama
 from .base import ServiceBase
 

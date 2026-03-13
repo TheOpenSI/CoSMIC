@@ -19,10 +19,10 @@ import yaml, os, shutil
 from zoneinfo import ZoneInfo
 from typing_extensions import Optional
 
-# from utils.chat_history import build_context_from_messages
-# from utils.general import validate_openai_api_key
+from .utils.chat_history import build_context_from_messages
+from .utils.general import validate_openai_api_key
 from .utils.log_tool import set_color
-# from utils.statistics import update_statistic_per_query
+from .utils.statistics import update_statistic_per_query
 
 app = FastAPI()
 
