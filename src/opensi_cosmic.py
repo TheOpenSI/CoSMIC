@@ -72,13 +72,9 @@ class OpenSICoSMIC:
 
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
-        
-        print(f"{self.config}")
-        
         self.user_id = str(user["id"]) \
             if ((user is not None) and ("id" in user) and user["id"] != "") \
             else None
-        )
 
         # Set model device.
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -237,16 +233,22 @@ class OpenSICoSMIC:
             llm_instance_name = LLM_INSTANCE_DICT[llm_name]
         elif llm_name.find("gpt") > -1:
             llm_instance_name = "GPT"
+            
+            
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
+            
+            
         else:
             print(set_color("error", f"Unsupported LLM: {llm_name}."))
             sys.exit()
 
         llm = get_instance(llm_instances, llm_instance_name)(
-            llm_name=llm_name, seed=seed, is_quantized=is_quantized, **kwargs
+            llm_name=llm_name, seed=seed, is_quantized=is_quantized **kwargs
         )
 
+        print(f"LLM instance created: {llm}")
+        
         return llm
 
     def quit(self):
