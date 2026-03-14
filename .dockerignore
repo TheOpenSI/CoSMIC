@@ -1,5 +1,12 @@
+.git
+.gitignore
+.gitmodules
+.gitattributes
 *.md*
 !LICENSE
 .venv/
 node_modules/
 __pycache__
+*.example.*
+examples/
+*.env_*

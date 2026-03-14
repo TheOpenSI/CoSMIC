@@ -2,23 +2,36 @@ name: OpenSI-CoSMIC
 
 
 services:
-  # TODO: swap to Yarn setup due to FE more used to it
-  # frontend:
-  #   container_name: cosmic-react
-  #   restart: unless-stopped
-  #   build:
-  #     context: ./
-  #     dockerfile: ./docker/dockerfiles/react.Dockerfile
-  #   ports:
-  #     - name: cosmic-vite
-  #       target: 5173
-  #       host_ip: 127.0.0.1
-  #       published: "5174"
-  #       protocol: tcp
-  #       app_protocol: http
-  #       mode: host
-  #   networks:
-  #       - cosmic-public
+  frontend:
+    container_name: cosmic-react
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/react.Dockerfile
+    # NOTE:
+    # Live mounting for auto reload on dev only. Remove it and the
+    # corresponding top-level volume on prod.
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
+        # NOTE:
+        # This makes `node_modules` directory container-native at runtime and not
+        # trying to bypass the ignore at build time. This's very important when
+        # you do the development in Windows.
+      - type: volume
+        source: cosmic-react-node
+        target: /app/node_modules
+    ports:
+      - name: cosmic-vite
+        target: 5173
+        host_ip: 127.0.0.1
+        published: "5174"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+    networks:
+        - cosmic-public
 
 
   backend:
@@ -130,7 +143,7 @@ services:
   ollama:
     container_name: cosmic-ollama
     depends_on:
-      backend:
+      frontend:
         restart: true
         condition: service_started
         required: true
@@ -184,6 +197,9 @@ volumes:
   # NOTE: as explained above, define this only in dev (delete on prod).
   cosmic-fastapi-venv:
     name: cosmic-backend-ignore
+  # NOTE: as explained above, define this only in dev (delete on prod).
+  cosmic-react-node:
+    name: cosmic-frontend-ignore
 
 
 networks:
