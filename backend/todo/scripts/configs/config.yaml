@@ -4,7 +4,7 @@
 # gpt-3.5-turbo, gpt-4o,
 # ollama:[ollama model] from https://ollama.com/library.
 
-llm_name: "ollama:qwen3.5:0.5b"
+llm_name: "ollama:ollama3.2:1b"
 is_quantized: False
 seed: 0  # seed of response generation by base LLM.
 doc_directory: ""  # directory containing .pdf documents to build the system's vector database.
@@ -12,7 +12,7 @@ document_path: []  # a string or a list of .pdf to add context to the vector dat
 service: -1  # service selection: -1 [auto], 0 [chess], 1 [update vector database], 2 [code generation], 3 [general QA]
 
 query_analyser:
-  llm_name: "ollama:llama3.1:8b"
+  llm_name: "ollama:llama3:8b"
   is_quantized: False
 
 chess:

@@ -1,0 +1,9 @@
+,Question,Answer
+0,"How many chess pieces have been captured so far in this game - d4 Nf6 Bf4?",None
+1,"How many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4",3
+2,"How many chess pieces have been captured so far in this game - d4 Nf6 Bf4?",0
+3,"How many chess pieces have been captured so far in this game - d4 d5 Bf4 e6 Nf3 c5 e3 Bd6 Bg3 Bxg3 hxg3 cxd4 exd4 a6 c3 Nf6 Bd3 Nbd7 Nbd2 b5 Ne5?",4
+4,"How many chess pieces have been captured so far in this game - d4 g6 e4 Bg7 Bf4 e6 Bc4 Ne7 Nf3 h6 Ne5 O-O Qg4 d5 exd5 exd5 Bd3 Bxg4?",3
+5,"How many chess pieces have been captured so far in this game - e4 e6 f4 d5 e5 c5 Nf3 Nc6 c3 Nh6 d4 cxd4 cxd4 Qa5+?",2
+6,"How many chess pieces have been captured so far in this game - e4 e6 Nf3 d5 exd5 exd5 d4 Bg4 Be2 Qe7 O-O Nc6 Re1 O-O-O Bb5 Qf6 Re3 Bxf3 Rxf3?",4
+7,"How many chess pieces have been captured so far in this game - Nf3 g6 g3 Bg7 Bg2 e6 O-O Ne7 c3 c5 d4 Qb6 dxc5 Qxc5 Be3 Qb5 b4 Nd5 a4 Qc4 Ra3",2

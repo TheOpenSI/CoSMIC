@@ -221,3 +221,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Logs and databases
+**/data/vector_db_cosmic/
+**/third_party/
+**/database/
+**/config_updated.yaml

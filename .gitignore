@@ -20,15 +20,6 @@ venv.bak/
 *__pycache__*
 
 
-# Logs and databases
-data/docs/
-data/vector_db_cosmic/
-third_party/
-database/
-db/
-**/config_updated.yaml
-
-
 # Whitelists
 !scripts/**/*.env*
 !examples/**/*.env*
