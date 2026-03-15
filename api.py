@@ -22,6 +22,11 @@ import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
 
+import sys
+import asyncio
+import threading
+from fastapi.responses import StreamingResponse
+
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
@@ -416,39 +421,56 @@ async def get_ollama_models():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/models/pull")
-async def pull_ollama_model(request: PullModelRequest):
-    try:
-        Ollama(llm_name=request.model)
-        # ollama_client.pull(request.model)
-        return {"message": f"Model '{request.model}' downloaded successfully"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
 # @app.post("/models/pull")
 # async def pull_ollama_model(request: PullModelRequest):
+#     try:
+#         Ollama(llm_name=request.model)
+#         # ollama_client.pull(request.model)
+#         return {"message": f"Model '{request.model}' downloaded successfully"}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
 
-#     def stream():
-#         for progress in ollama_client.pull(request.model, stream=True):
-#             status = progress.get("status")
-#             completed = progress.get("completed", 0)
-#             total = progress.get("total", 0)
 
-#             if total:
-#                 percent = round(completed / total * 100, 1)
-#                 data = {
-#                     "status": status,
-#                     "percent": percent,
-#                     "completed": completed,
-#                     "total": total,
-#                 }
-#             else:
-#                 data = {"status": status, "percent": None}
+@app.post("/models/pull")
+async def pull_ollama_model(request: PullModelRequest):
+    print_messages_queue = (
+        asyncio.Queue()
+    )  # just an async array which is able to wait if empty until data arrives
+    loop = asyncio.get_event_loop()
 
-#             yield f"data: {json.dumps(data)}\n\n"
+    class PrintMessagesCapture:
+        def write(self, message):
+            loop.call_soon_threadsafe(
+                print_messages_queue.put_nowait, message
+            )  # append the print messages into the print_messages_queue, safely send from thread to async
 
-#     return StreamingResponse(stream(), media_type="text/event-stream")
+        def flush(self):
+            pass
+
+    def run():
+        sys.stdout = PrintMessagesCapture()
+        try:
+            Ollama(llm_name=request.model)
+            loop.call_soon_threadsafe(print_messages_queue.put_nowait, "__DONE__")
+        except Exception as e:
+            loop.call_soon_threadsafe(print_messages_queue.put_nowait, f"__ERROR__:{e}")
+
+    threading.Thread(target=run, daemon=True).start()  # run download in background
+
+    async def stream():
+        while True:
+            msg = await print_messages_queue.get()
+            if msg == "__DONE__":
+                yield f"data: {json.dumps({'type': 'done'})}\n\n"
+                break
+
+            else:
+                clean = msg.strip()
+                if not clean:
+                    continue
+                yield f"data: {json.dumps({'type': 'log', 'message': clean})}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream")
 
 
 @app.delete("/models/{model_name}")

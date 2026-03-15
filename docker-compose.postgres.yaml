@@ -70,29 +70,29 @@ services:
   #   networks:
   #     - cosmic_net
 
-  pipelines:
-    # build:
-    #   context: ./../pipelines-openwebui
-    #   dockerfile: Dockerfile
-    image: ghcr.io/open-webui/pipelines:main
-    pull_policy: always
-    container_name: pipelines
-    volumes:
-      - pipelines:/app/pipelines
-    depends_on:
-      - cosmic
-    ports:
-      - "9099:9099"
-    environment:
-      - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
-      - MAX_QUERIES_PER_USER=5
-      - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
-    tty: true
-    extra_hosts:
-      - host.docker.internal:host-gateway
-    restart: unless-stopped
-    networks:
-      - cosmic_net
+  # pipelines:
+  #   # build:
+  #   #   context: ./../pipelines-openwebui
+  #   #   dockerfile: Dockerfile
+  #   image: ghcr.io/open-webui/pipelines:main
+  #   pull_policy: always
+  #   container_name: pipelines
+  #   volumes:
+  #     - pipelines:/app/pipelines
+  #   depends_on:
+  #     - cosmic
+  #   ports:
+  #     - "9099:9099"
+  #   environment:
+  #     - OPENSI_COSMIC_API_BASE_URL=http://cosmic:3000
+  #     - MAX_QUERIES_PER_USER=5
+  #     - PIPELINES_URLS=https://github.com/TheOpenSI/CoSMIC/blob/production/pipelines/cosmic_pipeline.py
+  #   tty: true
+  #   extra_hosts:
+  #     - host.docker.internal:host-gateway
+  #   restart: unless-stopped
+  #   networks:
+  #     - cosmic_net
 
   cosmic:
     build:
@@ -114,26 +114,26 @@ services:
     networks:
       - cosmic_net
 
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin
-    restart: always
-    ports:
-      - "5050:80"
-    env_file:
-      - .env
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    volumes:
-      - pgadmin-data:/var/lib/pgadmin
-    depends_on:
-      - cosmic_db_server
-    configs:
-      - source: servers.json
-        target: /pgadmin4/servers.json
-    networks:
-      - cosmic_net
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   container_name: pgadmin
+  #   restart: always
+  #   ports:
+  #     - "5050:80"
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+  #   volumes:
+  #     - pgadmin-data:/var/lib/pgadmin
+  #   depends_on:
+  #     - cosmic_db_server
+  #   configs:
+  #     - source: servers.json
+  #       target: /pgadmin4/servers.json
+  #   networks:
+  #     - cosmic_net
 
 configs:
   servers.json:
