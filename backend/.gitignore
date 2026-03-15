@@ -225,6 +225,7 @@ __marimo__/
 
 # Logs and databases
 **/data/vector_db_cosmic/
+**/data/cosmic/
 **/third_party/
 **/database/
 **/config_updated.yaml

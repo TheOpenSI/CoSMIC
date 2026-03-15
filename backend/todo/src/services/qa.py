@@ -44,7 +44,7 @@ class QABase(ServiceBase):
         llm: LLMBase,
         rag: RAGBase,
         code_generator: CodeGenerator,
-        config: Box=None,
+        config: Box | None = None,
         **kwargs
     ):
         """Base class for QA.

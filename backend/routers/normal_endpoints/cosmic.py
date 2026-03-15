@@ -70,12 +70,14 @@ async def create_cosmic(
         )
 
         # Check if Chat History is empty.
-        chat_history_empty: str = "{0:s} {1:s}".format(
-            "Conversation History: \n\n===============",
-            "End of Chat History ==============='"
+        chat_history_empty: str = "{0:s}{1:s}{2:s}{3:s}".format(
+            "Conversation History:\n",
+            "Previous Conversation Pair\n",
+            f"{"-"*30}\n",
+            f"{"="*15} End of Chat History {"="*15}\n"
         )
 
-        if chat_history_context.strip() is chat_history_empty:
+        if chat_history_context.strip() == chat_history_empty:
             chat_history_context = ""
 
             return {
@@ -94,10 +96,12 @@ async def create_cosmic(
             )
 
             # Compute statistic information.
-            current_time: str = datetime.strftime(
-                self=datetime.now(tz=ZoneInfo("Australia/Sydney")),
+            current_time: str = datetime.now(
+                tz=ZoneInfo(key="Australia/Sydney")
+            ).strftime(
                 format="%d-%m-%Y,%H:%M:%S"
             )
+
             update_statistic_per_query(
                 query=payload.msg,
                 user_id=user_id,
@@ -107,7 +111,8 @@ async def create_cosmic(
 
             # Proceed as normal
             if openai_api_status != "":
-                final_answer.join(openai_api_status)
+                print("API case")
+                final_answer = openai_api_status
             else:
                 # Find the key word for adding file to vector database.
                 if payload.msg.find("</files>") > -1:
@@ -122,7 +127,7 @@ async def create_cosmic(
                     # Create user-specific's uploaded documents directory
                     try:
                         USER_UPLOAD_DIR.mkdir(
-                            mode=511,
+                            mode=0o777,
                             parents=False,
                             exist_ok=False
                         )
@@ -137,31 +142,38 @@ async def create_cosmic(
                         raise err
 
                     # Extract the files.
-                    files: str = message_splits[0].split("<files>")[-1]
-                    for file in files:
-                        if file != "":
-                            file_paths.append(USER_UPLOAD_DIR / f"{file}")
+                    files_part: str = message_splits[0].split("<files>")[-1]
+                    # Split by comma or newline to get individual files
+                    file_list: list[str] = [file_part.strip() for file_part in files_part.split(",") if file_part.strip()]
 
-                    for file in files:
+                    for file in file_list:
+                        file_paths.append(USER_UPLOAD_DIR / "file")
+
                         # Form a prompt to update vector database.
-                        final_answer.join(
-                            str(
-                                object=opensi_cosmic(
-                                    question=f"Add the following file to the vector database: {file}"
-                                )
-                            )[0]
+                        result = opensi_cosmic(
+                            question=f"Add the following file to the vector database: {file}"
                         )
+                        print(f"Type (Inner): {type(result)}")
 
-                    final_answer.join(
-                        str(
-                            object=opensi_cosmic(
-                                question=payload.msg,
-                                context=chat_history_context
-                            )[0]
-                        )
+                        final_answer += str(object=result[0]) if result else ""
+
+                    # Get the answer for the actual question
+                    result: tuple = opensi_cosmic(
+                        question=payload.msg,
+                        context=chat_history_context
                     )
+
+                    print("RAG case")
+                    final_answer += str(object=result[0]) if result else ""
                 else:
-                    final_answer = ""
+                    # Get the answer for the actual question
+                    result: tuple = opensi_cosmic(
+                        question=payload.msg,
+                        context=chat_history_context
+                    )
+
+                    print("QA case")
+                    final_answer += str(object=result[0]) if result else ""
 
             return {
                 "status": "success",

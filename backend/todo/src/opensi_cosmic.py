@@ -73,9 +73,16 @@ class OpenSICoSMIC:
 
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
-        self.user_id = str(user["id"]) \
-            if ((user is not None) and ("id" in user) and user["id"] != "") \
-            else None
+        if (
+            (user is not None)
+            and
+            ("id" in user)
+            and
+            (user["id"] != "")
+        ):
+            self.user_id = str(user["id"])
+        else:
+            self.user_id = ""
 
         # Set model device.
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -84,37 +91,39 @@ class OpenSICoSMIC:
         self.qa = None
 
         # If llm_name is not specified, read it from the config file.
-        if llm_name == "": llm_name = self.config.llm_name
-        self.llm = self.get_llm(
-            llm_name,
-            seed=self.config.seed,
-            is_quantized=self.config.is_quantized,
-            device=self.device
-        )
+        if llm_name == "": 
+            llm_name = self.config.llm_name
+            self.llm = self.get_llm(
+                llm_name,
+                seed=self.config.seed,
+                is_quantized=self.config.is_quantized,
+                device=self.device
+            )
 
         # Check OpenAI API key.
         self.openai_api_status = self.check_openai_key()
 
         # Set LLM for query analysis.
-        if query_llm_name == "": query_llm_name = self.config.query_analyser.llm_name
-        self.query_analyser = QueryAnalyser(
-            query_llm_name,
-            seed=self.config.seed,
-            is_quantized=self.config.query_analyser.is_quantized,
-            service_index=self.config.service,
-            device=self.device
-        )
+        if query_llm_name == "": 
+            query_llm_name = self.config.query_analyser.llm_name
+            self.query_analyser = QueryAnalyser(
+                query_llm_name,
+                seed=self.config.seed,
+                is_quantized=self.config.query_analyser.is_quantized,
+                service_index=self.config.service,
+                device=self.device
+            )
 
         # Code generation service.
         self.code_generator = CodeGenerator()
 
         # Set up QA instance.
-        self.set_up_qa(self.user_id)
+        self.set_up_qa(user_id=self.user_id)
 
     def set_up_qa(
         self,
         user_id: str,
-        user_name: str=None
+        user_name: str | None = None
     ):
         """ Set up QA instance by user ID.
 
@@ -130,7 +139,11 @@ class OpenSICoSMIC:
         if (user_id is None) and (self.qa is not None):
             return -1
 
-        if (user_id != self.user_id) or (self.qa is None):
+        if (
+            (user_id != self.user_id)
+            or
+            (self.qa is None)
+        ):
             # Change the global user ID.
             self.user_id = user_id
 

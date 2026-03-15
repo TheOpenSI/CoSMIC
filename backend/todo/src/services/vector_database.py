@@ -215,7 +215,7 @@ class VectorDatabase(ServiceBase):
 
     def update_database_catalogue(
         self,
-        metadata: str
+        metadata: list[str] | str
     ):
         """Update catalogue of vector database.
 
