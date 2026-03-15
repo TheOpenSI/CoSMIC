@@ -68,9 +68,9 @@ class QABase(ServiceBase):
     def __call__(
         self,
         query: str,
-        context: str="",
-        is_rag: bool=False,
-        verbose: bool=False
+        context: str = "",
+        is_rag: bool = False,
+        verbose: bool = False
     ):
         """Process each QA.
 
@@ -164,14 +164,17 @@ class QABase(ServiceBase):
                     self.rag.vector_database.update_database_from_text(text=text)
 
             response = raw_response = "Vector database updated."
+
         elif service_option == "2":
             raw_response, response = self.code_generator(query)
+
         else:
-            if is_rag:# General question has RAG activated
+            # General question has RAG activated
+            if is_rag:
                 # Check if context is chat hostory
                 chat_history_context = context if "Conversation History:" in context else ""
                 rag_context = "" if "Conversation History:" in context else context
-                
+
                 # If retrieving context, first generate the user prompt given the
                 # user prompter format.
                 user_prompt = self.llm.user_prompter(query, context=rag_context)
@@ -184,11 +187,16 @@ class QABase(ServiceBase):
                 suffix = "" \
                     if context_retrieved == "" \
                     else "\nContext:\n" + context_retrieved 
-                
-                context = context.update({"context": chat_history_context + suffix}) \
-                          if isinstance(context, dict) \
-                          else chat_history_context + suffix
-                
+
+                if isinstance(context, dict):
+                    context = str(
+                        context.update(
+                            {"context": chat_history_context + suffix}
+                        )
+                    )
+                else:
+                    context = chat_history_context + suffix
+
             else:
                 user_prompt = query
                 retrieve_score = -1
@@ -202,18 +210,32 @@ class QABase(ServiceBase):
                 # Add the information to existing context.
                 # This context is likely to be chat history.
                 if isinstance(context, dict):
-                    context["context"] = "OpenSI System Information:\n" + system_information + "\n\n" + context["context"]
+                    context["context"] = "{0:s}{1:s}{2:s}".format(
+                        "OpenSI System Information:\n",
+                        f"{system_information}\n\n",
+                        context["context"]
+                    )
                 else:
-                    context = "OpenSI System Information:\n" + system_information + "\n\n" + context
+                    context = "{0:s}{1:s}{2:s}".format(
+                        "OpenSI System Information:\n",
+                        f"{system_information}\n\n",
+                        context
+                    )
 
             # Get the response with retrieved context if applicable.
-            response, raw_response = self.llm(user_prompt, context=context)
+            (response, raw_response) = self.llm(user_prompt, context={"response": context})
 
-        # Print service name.
-        if verbose \
-            and (response is not None) \
-            and (service_option in self.query_analyser.full_services.keys()):
-            response += f" [service: {self.query_analyser.full_services[service_option]}" \
-                f"; system info relevance: {system_information_relevance}]"
+            # Print service name.
+            if (
+                (verbose)
+                and
+                (response is not None)
+                and 
+                (service_option in self.query_analyser.full_services.keys())
+            ):
+                response += "[{0:s}{1:s}]".format(
+                    f"service: {self.query_analyser.full_services[service_option]}",
+                    f"; system info relevance: {system_information_relevance}"
+                )
 
-        return response, raw_response, retrieve_score
+        return (response, raw_response, retrieve_score)

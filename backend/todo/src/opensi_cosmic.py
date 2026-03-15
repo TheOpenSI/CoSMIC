@@ -186,6 +186,7 @@ class OpenSICoSMIC:
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
+            print("QA Debugging: we get to know that QA is set up correctly.")
             self.qa = QABase(
                 self.query_analyser,
                 self.llm,
@@ -294,8 +295,8 @@ class OpenSICoSMIC:
     def __call__(
         self,
         question: str,
-        context: str="",
-        log_file: str=None
+        context: str = "",
+        log_file: str | None = None
     ):
         """ Execute QA.
 
@@ -397,8 +398,9 @@ class OpenSICoSMIC:
 
                 # Batch process the question file.
                 cot_generator.batch_process(question)
-                
+
         else:
+            print("QA Debugging: We also get to know that OpenSiCoSMIC class is called and run correctly.")
             # General question needs truncation according the system prompt to avoid hallucination.
             self.llm.set_truncate_response(True)
 
@@ -406,7 +408,7 @@ class OpenSICoSMIC:
             self.llm.system_prompter.set_use_example(True)
 
             # Process each question.
-            response, raw_response, retrieve_score = self.qa(
+            (response, raw_response, retrieve_score) = self.qa(
                 question,
                 context=context, # The context that we are passing here is chat history. See api.py
                 is_rag=True,
@@ -414,4 +416,4 @@ class OpenSICoSMIC:
             )
 
         # Return answers with and without truncation, and retrieve score if applicable otherwise -1.
-        return response, raw_response, retrieve_score
+        return (response, raw_response, retrieve_score)

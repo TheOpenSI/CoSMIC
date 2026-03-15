@@ -111,7 +111,6 @@ async def create_cosmic(
 
             # Proceed as normal
             if openai_api_status != "":
-                print("API case")
                 final_answer = openai_api_status
             else:
                 # Find the key word for adding file to vector database.
@@ -153,7 +152,6 @@ async def create_cosmic(
                         result = opensi_cosmic(
                             question=f"Add the following file to the vector database: {file}"
                         )
-                        print(f"Type (Inner): {type(result)}")
 
                         final_answer += str(object=result[0]) if result else ""
 
@@ -163,7 +161,6 @@ async def create_cosmic(
                         context=chat_history_context
                     )
 
-                    print("RAG case")
                     final_answer += str(object=result[0]) if result else ""
                 else:
                     # Get the answer for the actual question
@@ -172,7 +169,7 @@ async def create_cosmic(
                         context=chat_history_context
                     )
 
-                    print("QA case")
+                    print("QA Debugging: So we know that QA works, and I'm not going to test the other services.")
                     final_answer += str(object=result[0]) if result else ""
 
             return {
