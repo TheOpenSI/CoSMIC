@@ -4,6 +4,16 @@ name: OpenSI-CoSMIC
 services:
   frontend:
     container_name: cosmic-react
+    depends_on:
+      backend:
+        restart: true
+        condition: service_started
+        required: true
+
+      traefik:
+        restart: true
+        condition: service_started
+        required: true
     restart: unless-stopped
     build:
       context: ./
@@ -22,20 +32,32 @@ services:
       - type: volume
         source: cosmic-react-node
         target: /app/node_modules
-    ports:
-      - name: cosmic-vite
-        target: 5173
-        host_ip: 127.0.0.1
-        published: "5174"
-        protocol: tcp
-        app_protocol: http
-        mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadBalancer.server.port=5173"
     networks:
-        - cosmic-public
+        - cosmic-proxy
 
 
   backend:
     container_name: cosmic-fastapi
+    depends_on:
+      database:
+        restart: true
+        condition: service_started
+        required: true
+
+      ollama:
+        restart: true
+        condition: service_started
+        required: true
+
+      traefik:
+        restart: true
+        condition: service_started
+        required: true
     restart: unless-stopped
     build:
       context: ./
@@ -54,23 +76,19 @@ services:
       - type: volume
         source: cosmic-fastapi-venv
         target: /app/.venv
-    ports:
-      - name: cosmic-uvicorn
-        target: 8000
-        host_ip: 127.0.0.1
-        published: "8001"
-        protocol: tcp
-        app_protocol: http
-        mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.cosmic.localhost`)"
+      - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.services.backend.loadBalancer.server.port=8000"
     networks:
-        - cosmic-public
-        - cosmic-private
+        - cosmic-proxy
 
 
   database:
     container_name: cosmic-postgres
     depends_on:
-      backend:
+      traefik:
         restart: true
         condition: service_started
         required: true
@@ -96,7 +114,7 @@ services:
         source: cosmic-postgres-data
         target: /var/lib/postgresql
     networks:
-        - cosmic-private
+        - cosmic-proxy
 
 
   gui:
@@ -106,7 +124,13 @@ services:
         restart: true
         condition: service_started
         required: true
+
       database:
+        restart: true
+        condition: service_started
+        required: true
+
+      traefik:
         restart: true
         condition: service_started
         required: true
@@ -128,22 +152,19 @@ services:
       - type: volume
         source: cosmic-pgadmin-data
         target: /var/lib/pgadmin
-    ports:
-      - name: cosmic-pgadmin-gunicorn
-        target: 80
-        host_ip: 127.0.0.1
-        published: "5050"
-        protocol: tcp
-        app_protocol: http
-        mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gui.rule=Host(`db.cosmic.localhost`)"
+      - "traefik.http.routers.gui.entrypoints=web"
+      - "traefik.http.services.gui.loadBalancer.server.port=80"
     networks:
-      - cosmic-private
+        - cosmic-proxy
 
 
   ollama:
     container_name: cosmic-ollama
     depends_on:
-      frontend:
+      traefik:
         restart: true
         condition: service_started
         required: true
@@ -175,16 +196,60 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ollama.rule=Host(`ollama.cosmic.localhost`)"
+      - "traefik.http.routers.ollama.entrypoints=web"
+      - "traefik.http.services.ollama.loadBalancer.server.port=11434"
+    networks:
+        - cosmic-proxy
+
+
+  traefik:
+    container_name: cosmic-traefik
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/traefik.Dockerfile
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
     ports:
-      - name: cosmic-ollama-serve
-        target: 11434
+      - name: cosmic-traefik-http
+        target: 80
         host_ip: 127.0.0.1
-        published: "11435"
+        published: "80"
         protocol: tcp
         app_protocol: http
         mode: host
+
+      - name: cosmic-traefik-dashboard
+        target: 8080
+        host_ip: 127.0.0.1
+        published: "8080"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+    command:
+      # Entrypoints
+      - "--entrypoints.web.address=:80"
+
+      # Providers
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=true"
+      - "--providers.docker.network=proxy_cosmic_net"
+
+      # API & Dashboard (NOTE: use only in dev)
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+
+      # Logging
+      - "--log.level=INFO"
+      - "--accesslog=true"
+      - "--metrics.prometheus=true"
     networks:
-      - cosmic-private
+      - cosmic-proxy
 
 
 volumes:
@@ -203,11 +268,8 @@ volumes:
 
 
 networks:
-  cosmic-public:
-    name: cosmic_net
-    driver: bridge
-  cosmic-private:
-    name: api_cosmic_net
+  cosmic-proxy:
+    name: proxy_cosmic_net
     driver: bridge
 
 
