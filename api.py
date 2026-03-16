@@ -433,39 +433,46 @@ async def get_ollama_models():
 
 @app.post("/models/pull")
 async def pull_ollama_model(request: PullModelRequest):
-    print_messages_queue = (
-        asyncio.Queue()
-    )  # just an async array which is able to wait if empty until data arrives
-    loop = asyncio.get_event_loop()
+    # set up a queue [] (like an array, but can get and put messages in without crashing if empty)
+    # thread will DROP messages in
+    # stream will PICK messages out
+    queue = asyncio.Queue()
+    # needed so the thread can safely talk to asyncio
+    loop = asyncio.get_running_loop()
 
+    # Class that has write method to change from showing messages in terminal to showing in the frontend via stream
     class PrintMessagesCapture:
         def write(self, message):
-            loop.call_soon_threadsafe(
-                print_messages_queue.put_nowait, message
-            )  # append the print messages into the print_messages_queue, safely send from thread to async
+            sys.__stdout__.write(message)
+            loop.call_soon_threadsafe(queue.put_nowait, message)
 
         def flush(self):
             pass
 
+    # Thread - allows background jobs to run all together
     def run():
         sys.stdout = PrintMessagesCapture()
         try:
             Ollama(llm_name=request.model)
-            loop.call_soon_threadsafe(print_messages_queue.put_nowait, "__DONE__")
+            loop.call_soon_threadsafe(queue.put_nowait, "__DONE__")
         except Exception as e:
-            loop.call_soon_threadsafe(print_messages_queue.put_nowait, f"__ERROR__:{e}")
+            loop.call_soon_threadsafe(queue.put_nowait, f"__ERROR__:{e}")
 
-    threading.Thread(target=run, daemon=True).start()  # run download in background
+    threading.Thread(target=run, daemon=True).start()
 
+    # Stream - picks messages and sends to user live
     async def stream():
         while True:
-            msg = await print_messages_queue.get()
-            if msg == "__DONE__":
+            message = await queue.get()
+            if message == "__DONE__":
                 yield f"data: {json.dumps({'type': 'done'})}\n\n"
                 break
-
+            elif message.startswith("__ERROR__"):
+                error = message.replace("__ERROR__:", "")
+                yield f"data: {json.dumps({'type': 'error', 'message': error})}\n\n"
+                break
             else:
-                clean = msg.strip()
+                clean = message.strip()
                 if not clean:
                     continue
                 yield f"data: {json.dumps({'type': 'log', 'message': clean})}\n\n"
