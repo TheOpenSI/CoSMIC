@@ -440,7 +440,7 @@ async def pull_ollama_model(request: PullModelRequest):
     # needed so the thread can safely talk to asyncio
     loop = asyncio.get_running_loop()
 
-    # Class that has write method to change from showing messages in terminal to showing in the frontend via stream
+    # Class that has "write" method to change from showing messages in terminal to showing in the frontend via stream
     class PrintMessagesCapture:
         def write(self, message):
             sys.__stdout__.write(message)
@@ -467,14 +467,15 @@ async def pull_ollama_model(request: PullModelRequest):
             if message == "__DONE__":
                 yield f"data: {json.dumps({'type': 'done'})}\n\n"
                 break
-            elif message.startswith("__ERROR__"):
-                error = message.replace("__ERROR__:", "")
-                yield f"data: {json.dumps({'type': 'error', 'message': error})}\n\n"
-                break
+
             else:
                 clean = message.strip()
                 if not clean:
                     continue
+
+                if "Download error" in clean:
+                    yield f"data: {json.dumps({'type': 'error', 'message': clean})}\n\n"
+                    break
                 yield f"data: {json.dumps({'type': 'log', 'message': clean})}\n\n"
 
     return StreamingResponse(stream(), media_type="text/event-stream")
