@@ -230,7 +230,7 @@ class QABase(ServiceBase):
                 (verbose)
                 and
                 (response is not None)
-                and 
+                and
                 (service_option in self.query_analyser.full_services.keys())
             ):
                 response += "[{0:s}{1:s}]".format(

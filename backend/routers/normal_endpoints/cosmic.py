@@ -103,7 +103,7 @@ async def create_cosmic(
             )
 
             update_statistic_per_query(
-                query=payload.msg,
+                query=payload.user_message,
                 user_id=user_id,
                 user_email=user_email,
                 current_time=current_time
@@ -114,11 +114,11 @@ async def create_cosmic(
                 final_answer = openai_api_status
             else:
                 # Find the key word for adding file to vector database.
-                if payload.msg.find("</files>") > -1:
-                    message_splits: list[str] = payload.msg.split("</files>")
+                if payload.user_message.find("</files>") > -1:
+                    message_splits: list[str] = payload.user_message.split("</files>")
 
                     # Extract the original question.
-                    payload.msg = message_splits[1]
+                    payload.user_message = message_splits[1]
 
                     # The directory storing uploaded files.
                     USER_UPLOAD_DIR: Path = (Path(__file__).resolve(strict=True).parent.parent.parent / "data" / "uploads" / f"{user_id}")
@@ -157,7 +157,7 @@ async def create_cosmic(
 
                     # Get the answer for the actual question
                     result: tuple = opensi_cosmic(
-                        question=payload.msg,
+                        question=payload.user_message,
                         context=chat_history_context
                     )
 
@@ -165,7 +165,7 @@ async def create_cosmic(
                 else:
                     # Get the answer for the actual question
                     result: tuple = opensi_cosmic(
-                        question=payload.msg,
+                        question=payload.user_message,
                         context=chat_history_context
                     )
 

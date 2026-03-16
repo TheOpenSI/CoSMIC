@@ -117,8 +117,8 @@ openai_api_status: str = opensi_cosmic.check_openai_key()
 # Payload received from user query
 class CosmicAPI(BaseModel):
     # Not too clear about types received but this does play a bit nicer to the legacy setup
+    user_message: str
     body: Json[dict]
-    msg: str
 
 
 def rebuild_cosmic(opensi_cosmic: OpenSICoSMIC) -> str | None:
