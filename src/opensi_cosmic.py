@@ -244,7 +244,7 @@ class OpenSICoSMIC:
             sys.exit()
 
         llm = get_instance(llm_instances, llm_instance_name)(
-            llm_name=llm_name, seed=seed, is_quantized=is_quantized **kwargs
+            llm_name=llm_name, seed=seed, is_quantized=is_quantized, **kwargs
         )
 
         print(f"LLM instance created: {llm}")

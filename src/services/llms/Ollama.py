@@ -111,6 +111,7 @@ class Ollama(LLMBase):
         user_prompt: str = self.user_prompter(question, context=context)
         
         # Combine system prompt with user prompt
+        # combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context)
         combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context, service=serivce_name)
         
         # Chat
