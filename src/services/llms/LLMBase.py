@@ -273,6 +273,7 @@ class LLMBase(ServiceBase):
         # the Instance is GPT
         
         system_prompt = self.system_prompter(user_prompt, context=context, service=service)
+        # system_prompt = self.system_prompter(user_prompt, context=context)
         
 
         # Encode system prompt for LLM.

@@ -209,14 +209,18 @@ class QABase(ServiceBase):
             
             ##TODO: needs to read the services from the DataBase and pass the service name to the prompter.
             services_names = {
-                0: "chess",
-                1: "memory",
-                2: "code_generation",
-                3: "general_question_answering",
-                4: "AcademicGovernance"
+                '0': "chess",
+                '1': "memory",
+                '2': "code_generation",
+                '3': "general_question_answering",
+                '4': "AcademicGovernance"
             }
-             
-            response, raw_response = self.llm(user_prompt, context=context, service=services_names[service_option])
+            #  
+            combined_system_prompt: list[dict] = self.llm.system_prompter(user_prompt, context=context, service=services_names[service_option])
+            
+            # response, raw_response = self.llm(user_prompt, context=combined_prompt)
+            response, raw_response = self.llm(user_prompt, context=combined_system_prompt[0]["content"]+ "\n\n" + context)
+
 
         # Print service name.
         if verbose \
