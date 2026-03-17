@@ -35,7 +35,8 @@ def update_statistic_table(statistic_dict):
         history_total_token_length = data["average_token_length"][idx] * data["query_count"][idx]
         current_total_token_length = statistic_dict["average_token_length"] * statistic_dict["query_count"]
         total_query_count = data["query_count"][idx] + statistic_dict["query_count"]
-        data.loc[idx, "average_token_length"] = (history_total_token_length + current_total_token_length) / total_query_count
+        # TODO: I don't fucking know how this changes fix it, but it fucking works b4 we re-write this shit
+        data.loc[idx, "average_token_length"] = int((history_total_token_length + current_total_token_length) / total_query_count)
         data.loc[idx, "query_count"] = total_query_count
     else:
         df = pd.DataFrame([{

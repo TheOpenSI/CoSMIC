@@ -35,8 +35,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.routers.frontend.entrypoints=cosmic"
       - "traefik.http.services.frontend.loadBalancer.server.port=5173"
+
+      # CORS routing on infra level
+      - "traefik.http.routers.frontend-cosmic-proxy.rule=Host(`cosmic.localhost`) && PathPrefix(`/cosmic`)"
+      - "traefik.http.routers.frontend-cosmic-proxy.entrypoints=cosmic"
+      - "traefik.http.routers.frontend-cosmic-proxy.service=backend@docker"
     networks:
         - cosmic-proxy
 
@@ -79,7 +84,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.cosmic.localhost`)"
-      - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.routers.backend.entrypoints=cosmic"
       - "traefik.http.services.backend.loadBalancer.server.port=8000"
     networks:
         - cosmic-proxy
@@ -155,7 +160,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gui.rule=Host(`db.cosmic.localhost`)"
-      - "traefik.http.routers.gui.entrypoints=web"
+      - "traefik.http.routers.gui.entrypoints=cosmic"
       - "traefik.http.services.gui.loadBalancer.server.port=80"
     networks:
         - cosmic-proxy
@@ -199,7 +204,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ollama.rule=Host(`ollama.cosmic.localhost`)"
-      - "traefik.http.routers.ollama.entrypoints=web"
+      - "traefik.http.routers.ollama.entrypoints=cosmic"
       - "traefik.http.services.ollama.loadBalancer.server.port=11434"
     networks:
         - cosmic-proxy
@@ -233,7 +238,7 @@ services:
         mode: host
     command:
       # Entrypoints
-      - "--entrypoints.web.address=:80"
+      - "--entrypoints.cosmic.address=:80"
 
       # Providers
       - "--providers.docker=true"
