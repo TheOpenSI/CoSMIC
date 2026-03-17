@@ -165,7 +165,7 @@ We welcome contributions from researchers, developers, and enthusiasts. There ar
 
 **Submit Code Contributions**: We accept pull requests from the community. Please review our [contribution guidelines](CONTRIBUTING) before submitting to ensure your contributions align with our standards.
 
-**Support the Project**: Consider making a donation to support ongoing development at [our donations page](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
+**Support the Project**: Consider making a donation to support ongoing development at [our donations page](https://www.canberra.edu.au/give/funds/research/opensiresearchfund).
 
 ---
 
@@ -193,7 +193,6 @@ For engineering questions, bug reports, or implementation issues:
 
 - [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au)
 - [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au)
-- [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au)
 - [Manile Srun](mailto:manile.srun@canberra.edu.au)
 - [Bing Tran](mailto:binhsan1307@gmail.com)
 
