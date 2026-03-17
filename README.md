@@ -49,21 +49,96 @@ Depending on your use case, we have 2 options to explore:
 
 1. **Linux**
 ```bash
-# Make sure you're in the root directory
+# Make sure you're in the project root directory
 chmod +x ./scripts/demos/cosmic_demo.sh && ./scripts/demos/cosmic_demo.sh
 ```
 
+After the script successfully run, you can access each services at:
+
+- **Traefik**: [localhost:8080](http://localhost:8080)
+- **React**: [cosmic.localhost](http://cosmic.localhost)
+- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
+- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
+- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
+- **PostgreSQL**: To access the database directly from the command line, use:
+
+```bash
+# On Linux/MacOS, add `sudo` if necessary
+docker exec cosmic-postgres psql -U postgres
+```
+
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+
+```
+psql (18.3)
+Type "help" for help.
+
+postgres=#
+```
+
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
+
 2. **macOS**
 ```zsh
-# Make sure you're in the root directory
+# Make sure you're in the project root directory
 chmod +x ./scripts/demos/cosmic_demo.zsh && ./scripts/demos/cosmic_demo.zsh
 ```
 
+After the script successfully run, you can access each services at:
+
+- **Traefik**: [localhost:8080](http://localhost:8080)
+- **React**: [cosmic.localhost](http://cosmic.localhost)
+- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
+- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
+- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
+- **PostgreSQL**: To access the database directly from the command line, use:
+
+```bash
+# On Linux/MacOS, add `sudo` if necessary
+docker exec cosmic-postgres psql -U postgres
+```
+
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+
+```
+psql (18.3)
+Type "help" for help.
+
+postgres=#
+```
+
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
+
 3. **Windows**
 ```ps1
-# Make sure you're in the root directory
+# Make sure you're in the project root directory
 .\scripts\demos\CosmicDemo.ps1
 ```
+
+After the script successfully run, you can access each services at:
+
+- **Traefik**: [localhost:8080](http://localhost:8080)
+- **React**: [cosmic.localhost](http://cosmic.localhost)
+- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
+- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
+- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
+- **PostgreSQL**: To access the database directly from the command line, use:
+
+```bash
+# On Linux/MacOS, add `sudo` if necessary
+docker exec cosmic-postgres psql -U postgres
+```
+
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+
+```
+psql (18.3)
+Type "help" for help.
+
+postgres=#
+```
+
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
 
 ### **GPU Configuration**
 
@@ -75,7 +150,7 @@ To enable GPU support, open the `compose.yaml` file and modify the Ollama servic
 ```yaml
 build:
   context: ./
-  dockerfile: ./docker/dockerfiles/ollama/ollama.nvidia_cpu.Dockerfile
+  dockerfile: ./docker/dockerfiles/ollama/ollama.nvidia_gpu.Dockerfile
 gpus: all
 ```
 
@@ -84,7 +159,7 @@ gpus: all
 ```yaml
 build:
   context: ./
-  dockerfile: ./docker/dockerfiles/ollama/ollama.amd_cpu.Dockerfile
+  dockerfile: ./docker/dockerfiles/ollama/ollama.amd_gpu.Dockerfile
 devices:
   - "/dev/kfd:/dev/kfd"
   - "/dev/dri:/dev/dri"

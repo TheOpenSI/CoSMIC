@@ -176,13 +176,13 @@ services:
     # 1. NVIDIA GPU
     # build:
     #   context: ./
-    #   dockerfile: ./docker/dockerfile/ollama/ollama.nvida_cpu.Dockerfile
+    #   dockerfile: ./docker/dockerfile/ollama/ollama.nvida_gpu.Dockerfile
     # model:
     #   gpus: all
     # 2. AMD GPU
     # build:
     #   context: ./
-    #   dockerfile: ./docker/dockerfile/ollama/ollama.amd_cpu.Dockerfile
+    #   dockerfile: ./docker/dockerfile/ollama/ollama.amd_gpu.Dockerfile
     # devices:
     #   - "/dev/kfd:/dev/kfd"
     #   - "/dev/dri:/dev/dri"

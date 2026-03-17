@@ -50,6 +50,7 @@ The following table outlines which tools are essential for each setup method:
 | uv         | ⚠️ Optional      | ✅ Mandatory (latest) |
 | PostgreSQL | ⚠️ Optional      | ✅ Mandatory (v18+)   |
 | pgAdmin    | ⚠️ Optional      | ⚠️ Optional           |
+| Traefik    | ⚠️ Optional      | ✅ Mandatory (v3.7+)  |
 
 ---
 
@@ -160,11 +161,15 @@ This command builds the Docker image for the backend service (and dependent serv
 
 Once the containers are running, you can verify that all services are working correctly:
 
-1. **FastAPI**: The REST API (Swagger) is served at [localhost:8001/docs](http://localhost:8001/docs). This endpoint provides interactive API documentation where you can test endpoints directly from your browser.
+1. **Traefik**: The dashboard is served at [localhost:8080](http://localhost:8080). This endpoint provides an intuitive dashboard to see all the mapped proxy between each Docker services with Traefik.
 
-2. **pgAdmin**: The database management tool is accessible at [localhost:5050](http://localhost:5050). Use the credentials from your `docker/secrets/gui/pgadmin_*.txt` file to log in.
+2. **FastAPI**: The REST API (Swagger) is served at [api.cosmic.localhost](http://api.cosmic.localhost). This endpoint provides interactive API documentation where you can test endpoints directly from your browser.
 
-3. **PostgreSQL**: To access the database directly from the command line, use:
+3. **pgAdmin**: The database management tool is accessible at [db.cosmic.localhost](http://db.cosmic.localhost). Use the credentials from your `docker/secrets/gui/pgadmin_*.txt` file to log in.
+
+4. **Ollama**: The Ollama models are accessible at [ollama.cosmic.localhost](http://ollama.cosmic.localhost). This endpoint allows you to interact with Ollama models directly without having to write code in the backend services.
+
+5. **PostgreSQL**: To access the database directly from the command line, use:
 
 ```bash
 # On Linux/MacOS, add `sudo` if necessary
@@ -188,11 +193,12 @@ Native setup involves running services directly on your machine rather than in c
 
 **Prerequisites for Native Setup**
 
-Before starting native development, ensure you have `uv` & `PostgreSQL` running on your system:
+Before starting native development, ensure you have `uv`, `PostgreSQL`, and `Traefik` running on your system:
 
 ```bash
 uv --version
 psql --version
+traefik --help
 ```
 
 
@@ -220,13 +226,17 @@ The `dev` flag enables hot-reload, meaning the server automatically restarts whe
 
 You can now verify that the backend is running correctly:
 
-1. **FastAPI**: The REST API (Swagger) is served at [localhost:8000/docs](http://localhost:8000/docs). This interactive documentation allows you to explore all available endpoints and test them directly from your browser.
+1. **Traefik**: The dashboard is served at [localhost:8080](http://localhost:8080). This endpoint provides an intuitive dashboard to see all the mapped proxy between each Docker services with Traefik.
 
-2. **pgAdmin**:
+2. **FastAPI**: The REST API (Swagger) is served at [api.cosmic.localhost](http://api.cosmic.localhost). This endpoint provides interactive API documentation where you can test endpoints directly from your browser.
+
+3. **pgAdmin**:
 - On Windows or macOS, search for and open the **pgAdmin 4** application from your applications menu.
 - On Linux, search for pgAdmin or type `pgadmin4` in your terminal to start the application.
 
-3. **PostgreSQL**: To verify that your PostgreSQL connection is working, open a terminal and connect to the database:
+4. **Ollama**: The Ollama models are accessible at [ollama.cosmic.localhost](http://ollama.cosmic.localhost). This endpoint allows you to interact with Ollama models directly without having to write code in the backend services.
+
+5. **PostgreSQL**: To verify that your PostgreSQL connection is working, open a terminal and connect to the database:
 
 ```bash
 psql -U postgres
