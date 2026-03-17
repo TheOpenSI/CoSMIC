@@ -215,11 +215,8 @@ class QABase(ServiceBase):
                 '3': "general_question_answering",
                 '4': "AcademicGovernance"
             }
-            #  
-            combined_system_prompt: list[dict] = self.llm.system_prompter(user_prompt, context=context, service=services_names[service_option])
             
-            # response, raw_response = self.llm(user_prompt, context=combined_prompt)
-            response, raw_response = self.llm(user_prompt, context=combined_system_prompt[0]["content"]+ "\n\n" + context)
+            response, raw_response = self.llm(user_prompt, context=context, serivce_name=services_names[service_option])
 
 
         # Print service name.
