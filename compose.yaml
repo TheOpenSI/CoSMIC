@@ -32,6 +32,14 @@ services:
       - type: volume
         source: cosmic-react-node
         target: /app/node_modules
+    ports:
+      - name: cosmic-react-vite
+        target: 5173
+        host_ip: 127.0.0.1
+        published: "5173"
+        protocol: tcp
+        app_protocol: http
+        mode: host
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
@@ -81,6 +89,14 @@ services:
       - type: volume
         source: cosmic-fastapi-venv
         target: /app/.venv
+    ports:
+      - name: cosmic-fastapi-uvicorn
+        target: 8000
+        host_ip: 127.0.0.1
+        published: "3000"
+        protocol: tcp
+        app_protocol: http
+        mode: host
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.cosmic.localhost`)"
@@ -157,6 +173,14 @@ services:
       - type: volume
         source: cosmic-pgadmin-data
         target: /var/lib/pgadmin
+    ports:
+      - name: cosmic-pgadmin-gunicorn
+        target: 80
+        host_ip: 127.0.0.1
+        published: "5050"
+        protocol: tcp
+        app_protocol: http
+        mode: host
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gui.rule=Host(`db.cosmic.localhost`)"
@@ -201,6 +225,14 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
+    ports:
+      - name: cosmic-ollama-serve
+        target: 11434
+        host_ip: 127.0.0.1
+        published: "11434"
+        protocol: tcp
+        app_protocol: http
+        mode: host
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ollama.rule=Host(`ollama.cosmic.localhost`)"
