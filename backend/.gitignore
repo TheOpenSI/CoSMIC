@@ -224,9 +224,9 @@ __marimo__/
 
 
 # Logs and databases
-todo/data/
-todo/database/
-**/data/vector_db_cosmic/
-**/data/cosmic/
-**/third_party/
-**/config_updated.yaml
+# todo/data/
+# todo/database/
+# **/data/vector_db_cosmic/
+# **/data/cosmic/
+# **/third_party/
+# **/config_updated.yaml

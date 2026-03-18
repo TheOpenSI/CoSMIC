@@ -1,0 +1,15 @@
+llm_name: "ollama:llama3.2:1b"
+is_quantized: false
+seed: 0
+doc_directory: ''
+document_path: []
+service: -1
+query_analyser:
+  llm_name: "ollama:llama3:8b"
+  is_quantized: false
+chess:
+  stockfish_path: ''
+rag:
+  topk: 10
+  retrieve_score_threshold: 0.7
+  vector_db_path: data/vector_db_cosmic
