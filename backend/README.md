@@ -93,6 +93,9 @@ However, if you're setting up the backend independently or need to manually conf
 2. **pgAdmin credentials**: (`pgadmin_*.example.txt`) → `docker/secrets/gui/`
 3. **pgAdmin server configuration**: (`pgadmin_*.example.json`) → `docker/configs/gui/`
 4. **Backend environment files**: (`cosmic_*.example.env`) → `backend/cores/` (at project root)
+> [!WARNING]
+> This will be merged to the backend's `.env` file after folder restructure is complete (track at `COSMIC-92` branch):
+> 5. OpenAI API Key: `cp ../examples/backend/todo.example.env todo/todo.env`
 
 > [!TIP]
 > Before finalising these files, review and adjust default values such as
@@ -110,6 +113,10 @@ Copy the example environment file and customize it:
 
 ```bash
 cp ../examples/backend/cosmic_*.example.env ./cores/fastapi.env
+
+# WARN: This will be merged to the backend's `.env` file after folder restructure is complete (track at `COSMIC-92` branch):
+cp ../examples/backend/todo.example.env ./todo/todo.env
+
 ```
 
 Then edit the `.env` file to set your desired configuration values:
@@ -120,6 +127,9 @@ DATABASE_USER=postgres
 DATABASE_PASSWORD=""
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
+
+# WARN: This will be merged to the backend's `.env` file after folder restructure is complete (track at `COSMIC-92` branch):
+OPENAI_API_KEY="abcdef12345-:/.}{]"
 ```
 
 #### **Option 2 - Set environment variables directly in your shell**
@@ -131,6 +141,10 @@ export DATABASE_USER=postgres
 export DATABASE_PASSWORD=""
 export DATABASE_HOST=localhost
 export DATABASE_PORT=5432
+
+# WARN: This will be merged to the backend's `.env` file after folder restructure is complete (track at `COSMIC-92` branch):
+export OPENAI_API_KEY="abcdef12345-:/.}{]"
+
 ```
 
 > [!TIP]
