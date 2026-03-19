@@ -8,6 +8,7 @@
 # =======================================================
 
 
+from contextlib import asynccontextmanager
 from fastapi.responses import StreamingResponse
 import json
 from datetime import datetime
@@ -21,6 +22,7 @@ from fastapi import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 from numpy import int64
+from src.db import create_db_and_table
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
@@ -42,7 +44,18 @@ from ollama import Client
 from src.services.llms.Ollama import Ollama
 
 
-app = FastAPI()
+# TODO: Need some more research on this usage rather than the deprecation
+# event: 'startup' & 'shutdown'
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Equivalent to 'startup' event
+    create_db_and_table()
+    yield
+
+    # Equivalent to 'shutdown' event (Optional)
+
+
+app = FastAPI(lifespan=lifespan)
 
 ollama_client = Client(
     host="http://ollama:11434", headers={"Content-Type": "application/json"}

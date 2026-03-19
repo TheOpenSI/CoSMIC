@@ -87,6 +87,8 @@ pillow==10.4.0
 platformdirs==4.9.4
 propcache==0.4.1
 psutil==7.2.2
+psycopg==3.3.3
+psycopg-binary==3.3.3
 pycparser==3.0
 pydantic==2.12.5
 pydantic_core==2.41.5

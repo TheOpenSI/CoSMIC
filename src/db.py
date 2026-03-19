@@ -7,7 +7,7 @@ from sqlmodel import (
 )
 from sqlalchemy.engine import Engine
 from typing_extensions import Annotated, Any, Generator
-from env import get_env
+from src.env import get_env
 
 
 cosmic_db_configs: dict[str, str | None] = get_env()
