@@ -1,0 +1,615 @@
+from sqlmodel import (
+    Field,
+    SQLModel,
+    Relationship,
+    text
+)
+from sqlalchemy.schema import (
+    PrimaryKeyConstraint,
+    UniqueConstraint,
+    ForeignKeyConstraint
+)
+from datetime import datetime
+from uuid import UUID
+from sqlalchemy.types import TIMESTAMP
+from typing_extensions import Any, Optional
+from sqlalchemy.dialects.postgresql import TEXT, JSONB
+
+
+################################################
+### Base Model (inheritance by other models) ###
+################################################
+class StatisticBase(SQLModel):
+    name: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+    details: dict[str, Any] = Field(
+        default={
+            "<key>": "<value>"
+        },
+        sa_type=JSONB
+    )
+
+
+class ModelBase(SQLModel):
+    name: str = Field(
+        max_length=100
+    )
+    provider: str = Field(
+        max_length=100
+    )
+    desc: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+
+
+class ServiceBase(SQLModel):
+    name: str = Field(
+        max_length=100
+    )
+    desc: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+
+
+class ChatboxBase(SQLModel):
+    name: str = Field(
+        max_length=256
+    )
+    details: dict[str, Any] = Field(
+        default={
+            "<user-role>": "<user-query>",
+            "<model-name>": "<model-response>"
+        },
+        sa_type=JSONB
+    )
+
+
+class RoleBase(SQLModel):
+    name: str = Field(
+        max_length=20
+    )
+    desc: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+
+
+class UserBase(SQLModel):
+    name: str = Field(
+        max_length=100
+    )
+    email: str | None = Field(
+        default=None,
+        max_length=256,
+        nullable=True
+    )
+
+
+################################################
+### Link Models (Junction Tables)            ###
+################################################
+class UserRoleLink(SQLModel, table=True):
+    """Junction table (Users + Roles)"""
+    __tablename__: str = "user_roles" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "user_id", "role_id",
+            name="PK_UR_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_UR_USER_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        ForeignKeyConstraint(
+            columns=["role_id"],
+            refcolumns=["roles.id"],
+            name="FK_UR_ROLE_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+    )
+    user_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    role_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+
+
+class ServiceModelLink(SQLModel, table=True):
+    """Junction table (Services + Models)"""
+    __tablename__: str = "service_slms" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "service_id", "model_id",
+            name="PK_SS_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["service_id"],
+            refcolumns=["services.id"],
+            name="FK_SS_SERVICE_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        ForeignKeyConstraint(
+            columns=["model_id"],
+            refcolumns=["models.id"],
+            name="FK_SS_MODEL_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+    )
+    service_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    model_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+
+
+class UserChatSession(SQLModel, table=True):
+    """Junction table (Users + Chatboxes + Services)"""
+    __tablename__: str = "user_chat_sessions" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "user_id", "chatbox_id", "service_id",
+            name="PK_UCS_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_UCS_USER_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        ForeignKeyConstraint(
+            columns=["chatbox_id"],
+            refcolumns=["chatboxes.id"],
+            name="FK_UCS_CHATBOX_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        ForeignKeyConstraint(
+            columns=["service_id"],
+            refcolumns=["services.id"],
+            name="FK_UCS_SERVICE_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+    )
+    user_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    chatbox_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    service_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    status: bool = Field(
+        default=False,
+        sa_column_kwargs={
+            "server_default": text(text="FALSE"),
+            # Gotta explains the usecase of this column a bit
+            "comment": "mainly for the multi-services usage scenario."
+        }
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+
+
+######################################################
+### Table Model (dynamic database table creations) ###
+######################################################
+class Statistics(StatisticBase, table=True):
+    __tablename__: str = "statistics" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_STATISTIC_ID"
+        ),
+        ForeignKeyConstraint(
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_STATISTIC_USER_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    user_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    users: Optional["Users"] = Relationship(
+        back_populates="statistics",
+        sa_relationship_kwargs={
+            "uselist": False,
+            # This allows delete operation on the FK side of 1-1
+            "single_parent": True
+        },
+        cascade_delete=True
+    )
+
+
+class Models(ModelBase, table=True):
+    __tablename__: str = "models" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_MODEL_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    install_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    services: list["Services"] = Relationship(
+        back_populates="models",
+        link_model=ServiceModelLink,
+        cascade_delete=True
+    )
+
+
+class Services(ServiceBase, table=True):
+    __tablename__: str = "services" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_SERVICE_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+
+    models: list["Models"] = Relationship(
+        back_populates="services",
+        link_model=ServiceModelLink,
+        cascade_delete=True
+    )
+    chat_sessions: list["UserChatSession"] = Relationship(
+        cascade_delete=True
+    )
+
+
+class Chatboxes(ChatboxBase, table=True):
+    __tablename__: str = "chatboxes" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_CHATBOX_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    users: Optional["Users"] = Relationship(
+        back_populates="chatboxes",
+        sa_relationship_kwargs={
+            "uselist": False,
+            # This allows delete operation on the FK side of 1-1
+            "single_parent": True
+        },
+        cascade_delete=True
+    )
+    chat_sessions: list["UserChatSession"] = Relationship(
+        cascade_delete=True
+    )
+
+
+class Roles(RoleBase, table=True):
+    __tablename__: str = "roles" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ]= (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_ROLE_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    users: list["Users"] = Relationship(
+        back_populates="roles",
+        link_model=UserRoleLink,
+        cascade_delete=True
+    )
+
+
+class Users(UserBase, table=True):
+    __tablename__: str = "users" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        UniqueConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_USER_ID"
+        ),
+        UniqueConstraint(
+            "email",
+            name="UK_USER_EMAIL"
+        ),
+    )
+    id: UUID | None = Field(default=None, primary_key=True)
+    password: str = Field(max_length=256)
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    statistics: list["Statistics"] = Relationship(
+        back_populates="users",
+        sa_relationship_kwargs={
+            "uselist": False
+        },
+        cascade_delete=True
+    )
+    chatboxes: Optional["Chatboxes"] = Relationship(
+        back_populates="users",
+        sa_relationship_kwargs={
+            "uselist": False
+        },
+        cascade_delete=True
+    )
+    roles: list["Roles"] = Relationship(
+        back_populates="users",
+        link_model=UserRoleLink,
+        cascade_delete=True
+    )
+    chat_sessions: list["UserChatSession"] = Relationship(
+        cascade_delete=True
+    )
+
+
+#####################################################
+### Data Model (dynamic database data operations) ###
+#####################################################
+class UserPublic(UserBase):
+    id: UUID
+    # TODO: implement hashed password
+    password: str
+    create_on: datetime
+
+
+class UserCreate(UserBase):
+    # TODO: implement hashed password
+    password: str
+
+
+class UserUpdate(UserBase):
+    name:       str | None = None # type: ignore
+    email:      str | None = None
+    # TODO: implement hashed password
+    password:   str | None = None # type: ignore
+
+
+class UserDelete(UserBase):
+    id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class StatisticPublic(StatisticBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+
+
+class StatisticPublicWithUser(StatisticPublic):
+    users: UserPublic | None = None
+
+
+class StatisticCreate(StatisticBase):
+    pass
+
+
+class StatisticUpdate(StatisticBase):
+    name:       str | None = None # type: ignore
+    details:    dict[str, Any] | None = None # type: ignore
+
+
+class StatisticDelete(StatisticBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ModelPublic(ModelBase):
+    id: UUID
+    install_on: datetime
+
+
+class ModelCreate(ModelBase):
+    pass
+
+
+class ModelUpdate(ModelBase):
+    name:       str | None = None # type: ignore
+    provider:   str | None = None # type: ignore
+    desc:       str | None = None
+
+
+class ModelDelete(ModelBase):
+    id: UUID
+    install_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ServicePublic(ServiceBase):
+    id: UUID
+    create_on: datetime
+
+
+class ServiceCreate(ServiceBase):
+    pass
+
+
+class ServiceUpdate(ServiceBase):
+    name:   str | None = None # type: ignore
+    desc:   str | None = None
+    status: bool | None = False # type: ignore
+
+
+class ServiceDelete(ServiceBase):
+    id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ChatboxPublic(ChatboxBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+
+
+class ChatboxPublicWithUser(ChatboxPublic):
+    users: UserPublic | None = None
+
+
+class ChatboxCreate(ChatboxBase):
+    pass
+
+
+class ChatboxUpdate(ChatboxBase):
+    name:       str | None = None # type: ignore
+    details:    dict[str, Any] | None = None # type: ignore
+
+
+class ChatboxDelete(ChatboxBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class RolePublic(RoleBase):
+    id: UUID
+    create_on: datetime
+
+
+class RoleCreate(RoleBase):
+    pass
+
+
+class RoleUpdate(RoleBase):
+    name:   str | None = None # type: ignore
+    desc:   str | None = None
+
+
+class RoleDelete(RoleBase):
+    id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
