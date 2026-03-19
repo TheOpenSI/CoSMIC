@@ -1,11 +1,11 @@
-# =====================Debugging========================
-# Uncomment the following lines to enable debugging
+# # =====================Debugging========================
+# # Uncomment the following lines to enable debugging
 # import debugpy
 # print("Waiting for debugger attach...")
 # debugpy.listen(("0.0.0.0", 5678))
 # debugpy.wait_for_client()
 # print("Debugger attached!")
-# =======================================================
+# # =======================================================
 
 
 from fastapi.responses import StreamingResponse
@@ -47,8 +47,8 @@ ollama_client = Client(
 # in your .env file depending on your frontend port, 8080 or 5173 in this case.
 
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",  # Open-WebUI production server
-    "http://localhost:5173",  # Open-WebUI development server
+    "http://localhost:8080",  # Frontend production server
+    "http://localhost:5173",  # Frontend development server
 ]
 
 # Allow CORS for the specified origins

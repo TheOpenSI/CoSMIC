@@ -48,12 +48,7 @@ def build_context_from_messages(messages: list, num_pairs: int) -> str:
 
 if __name__ == "__main__":
     messages = [
-    {'role': 'system', 'content': 'PDF content from OpenwebUI'},
-    {'role': 'user', 'content': 'who is Einstein?'},
-    {'role': 'assistant', 'content': 'Albert Einstein (1879-1955) was a renowned German-born physicist'},
-    {'role': 'user', 'content': 'is he still alive?'},
-    {'role': 'assistant', 'content': 'No, he passed away in 1955.'},
-    {'role': 'user', 'content': 'what is the theory of relativity?'}
+    {'role': 'system', 'content': 'PDF content from OpenwebUI'}
     ]
     
     print(build_context_from_messages(messages, 5))
