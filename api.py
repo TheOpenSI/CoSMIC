@@ -12,7 +12,13 @@ from fastapi.responses import StreamingResponse
 import json
 from datetime import datetime
 import dotenv
-from fastapi import FastAPI, Request, File, UploadFile, HTTPException
+from fastapi import (
+    FastAPI,
+    Request,
+    File,
+    UploadFile,
+    HTTPException
+)
 from fastapi.middleware.cors import CORSMiddleware
 from numpy import int64
 from src.opensi_cosmic import OpenSICoSMIC
