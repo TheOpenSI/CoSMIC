@@ -29,19 +29,22 @@ import yaml, os, shutil
 import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
-
 import sys
 import asyncio
 import threading
 from fastapi.responses import StreamingResponse
-
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
-
 from ollama import Client
 from src.services.llms.Ollama import Ollama
+from src.routers.users import users_v1_router
+from src.routers.roles import roles_v1_router
+from src.routers.chatboxes import chatboxes_v1_router
+from src.routers.services import services_v1_router
+from src.routers.models import models_v1_router
+from src.routers.statistics import statistics_v1_router
 
 
 # TODO: Need some more research on this usage rather than the deprecation
@@ -507,3 +510,11 @@ async def delete_ollama_model(model_name: str):
         return {"message": f"Model '{model_name}' deleted"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+app.include_router(router=users_v1_router)
+app.include_router(router=roles_v1_router)
+app.include_router(router=chatboxes_v1_router)
+app.include_router(router=services_v1_router)
+app.include_router(router=models_v1_router)
+app.include_router(router=statistics_v1_router)
