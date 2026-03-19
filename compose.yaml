@@ -2,56 +2,59 @@ name: OpenSI-CoSMIC
 
 
 services:
-  frontend:
-    container_name: cosmic-react
-    depends_on:
-      backend:
-        restart: true
-        condition: service_started
-        required: true
-
-      traefik:
-        restart: true
-        condition: service_started
-        required: true
-    restart: unless-stopped
-    build:
-      context: ./
-      dockerfile: ./docker/dockerfiles/react.Dockerfile
-    # NOTE:
-    # Live mounting for auto reload on dev only. Remove it and the
-    # corresponding top-level volume on prod.
-    volumes:
-      - type: bind
-        source: ./frontend
-        target: /app
-        # NOTE:
-        # This makes `node_modules` directory container-native at runtime and not
-        # trying to bypass the ignore at build time. This's very important when
-        # you do the development in Windows.
-      - type: volume
-        source: cosmic-react-node
-        target: /app/node_modules
-    ports:
-      - name: cosmic-react-vite
-        target: 5173
-        host_ip: 127.0.0.1
-        published: "5173"
-        protocol: tcp
-        app_protocol: http
-        mode: host
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=cosmic"
-      - "traefik.http.services.frontend.loadBalancer.server.port=5173"
-
-      # CORS routing on infra level
-      - "traefik.http.routers.frontend-cosmic-proxy.rule=Host(`cosmic.localhost`) && PathPrefix(`/cosmic`)"
-      - "traefik.http.routers.frontend-cosmic-proxy.entrypoints=cosmic"
-      - "traefik.http.routers.frontend-cosmic-proxy.service=backend@docker"
-    networks:
-        - cosmic-proxy
+  # NOTE: frontend and backend is built on 2 different servers. Therefore, I
+  # commented out for now until I have created a dedicated Docker version to run
+  # backend only, while this one will be for actual demo run.
+  # frontend:
+  #   container_name: cosmic-react
+  #   depends_on:
+  #     backend:
+  #       restart: true
+  #       condition: service_started
+  #       required: true
+  #
+  #     traefik:
+  #       restart: true
+  #       condition: service_started
+  #       required: true
+  #   restart: unless-stopped
+  #   build:
+  #     context: ./
+  #     dockerfile: ./docker/dockerfiles/react.Dockerfile
+  #   # NOTE:
+  #   # Live mounting for auto reload on dev only. Remove it and the
+  #   # corresponding top-level volume on prod.
+  #   volumes:
+  #     - type: bind
+  #       source: ./frontend
+  #       target: /app
+  #       # NOTE:
+  #       # This makes `node_modules` directory container-native at runtime and not
+  #       # trying to bypass the ignore at build time. This's very important when
+  #       # you do the development in Windows.
+  #     - type: volume
+  #       source: cosmic-react-node
+  #       target: /app/node_modules
+  #   ports:
+  #     - name: cosmic-react-vite
+  #       target: 5173
+  #       host_ip: 127.0.0.1
+  #       published: "5173"
+  #       protocol: tcp
+  #       app_protocol: http
+  #       mode: host
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
+  #     - "traefik.http.routers.frontend.entrypoints=cosmic"
+  #     - "traefik.http.services.frontend.loadBalancer.server.port=5173"
+  #
+  #     # CORS routing on infra level
+  #     - "traefik.http.routers.frontend-cosmic-proxy.rule=Host(`cosmic.localhost`) && PathPrefix(`/cosmic`)"
+  #     - "traefik.http.routers.frontend-cosmic-proxy.entrypoints=cosmic"
+  #     - "traefik.http.routers.frontend-cosmic-proxy.service=backend@docker"
+  #   networks:
+  #       - cosmic-proxy
 
 
   backend:
@@ -225,19 +228,6 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-    ports:
-      - name: cosmic-ollama-serve
-        target: 11434
-        host_ip: 127.0.0.1
-        published: "11434"
-        protocol: tcp
-        app_protocol: http
-        mode: host
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.ollama.rule=Host(`ollama.cosmic.localhost`)"
-      - "traefik.http.routers.ollama.entrypoints=cosmic"
-      - "traefik.http.services.ollama.loadBalancer.server.port=11434"
     networks:
         - cosmic-proxy
 
@@ -261,6 +251,7 @@ services:
         app_protocol: http
         mode: host
 
+      # NOTE: viewable dashboard port (use only in dev)
       - name: cosmic-traefik-dashboard
         target: 8080
         host_ip: 127.0.0.1
