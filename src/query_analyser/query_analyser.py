@@ -63,7 +63,8 @@ class QueryAnalyser:
             "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
             "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
             "2": "generate or improve a code or answer a question in order to generate or improve a code",
-            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services"
+            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
+            "4": "Answer question about Academic Governance"
         }
 
         # Set chess services.

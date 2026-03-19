@@ -42,6 +42,7 @@ class VectorDatabase(ServiceBase):
     def __init__(
         self,
         document_analyser_model: str="gte-small",
+        # document_analyser_model: str="Qwen/Qwen3-Embedding-8B",
         local_database_path: str="database/vector_database",
         vector_database_update_threshold: float=0.98,
         device: str="cuda",
@@ -187,6 +188,7 @@ class VectorDatabase(ServiceBase):
         Args:
             document_paths (string or list): a document path or multiple such paths.
         """
+        print("Adding documents to vector database...")
         # Set as a list for loop.
         if not isinstance(document_paths, list):
             document_paths = [document_paths]
@@ -194,6 +196,7 @@ class VectorDatabase(ServiceBase):
         # Update per document.
         for document_path in document_paths:
             if not os.path.exists(document_path): continue
+            print(f"{document_path=}")
             self.update_database_from_document(document_path)
 
     def add_document_directory(
