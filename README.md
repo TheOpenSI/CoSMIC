@@ -27,10 +27,10 @@ Then, start by cloning the repository using your preferred method:
 
 ```bash
 # Using HTTPS (recommended for most users)
-git clone --single-branch -b bing-dev https://github.com/TheOpenSI/CoSMIC.git
+git clone --single-branch -b bing-dev --recurse-submodules https://github.com/TheOpenSI/CoSMIC.git
 
 # Using SSH (recommended if you have SSH keys configured)
-git clone --single-branch -b bing-dev git@github.com:TheOpenSI/CoSMIC.git
+git clone --single-branch -b bing-dev --recurse-submodules git@github.com:TheOpenSI/CoSMIC.git
 ```
 
 Once cloned, navigate to the project directory:
