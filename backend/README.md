@@ -181,9 +181,7 @@ Once the containers are running, you can verify that all services are working co
 
 3. **pgAdmin**: The database management tool is accessible at [db.cosmic.localhost](http://db.cosmic.localhost). Use the credentials from your `docker/secrets/gui/pgadmin_*.txt` file to log in.
 
-4. **Ollama**: The Ollama models are accessible at [ollama.cosmic.localhost](http://ollama.cosmic.localhost). This endpoint allows you to interact with Ollama models directly without having to write code in the backend services.
-
-5. **PostgreSQL**: To access the database directly from the command line, use:
+4. **PostgreSQL**: To access the database directly from the command line, use:
 
 ```bash
 # On Linux/MacOS, add `sudo` if necessary
@@ -244,11 +242,9 @@ You can now verify that the backend is running correctly:
 
 2. **FastAPI**: The REST API (Swagger) is served at [api.cosmic.localhost](http://api.cosmic.localhost). This endpoint provides interactive API documentation where you can test endpoints directly from your browser.
 
-3. **pgAdmin**:
+4. **pgAdmin**:
 - On Windows or macOS, search for and open the **pgAdmin 4** application from your applications menu.
 - On Linux, search for pgAdmin or type `pgadmin4` in your terminal to start the application.
-
-4. **Ollama**: The Ollama models are accessible at [ollama.cosmic.localhost](http://ollama.cosmic.localhost). This endpoint allows you to interact with Ollama models directly without having to write code in the backend services.
 
 5. **PostgreSQL**: To verify that your PostgreSQL connection is working, open a terminal and connect to the database:
 

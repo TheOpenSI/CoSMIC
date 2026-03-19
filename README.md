@@ -59,7 +59,6 @@ After the script successfully run, you can access each services at:
 - **React**: [cosmic.localhost](http://cosmic.localhost)
 - **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
 - **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
-- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
 - **PostgreSQL**: To access the database directly from the command line, use:
 
 ```bash
@@ -90,7 +89,6 @@ After the script successfully run, you can access each services at:
 - **React**: [cosmic.localhost](http://cosmic.localhost)
 - **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
 - **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
-- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
 - **PostgreSQL**: To access the database directly from the command line, use:
 
 ```bash
