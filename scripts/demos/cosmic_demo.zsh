@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 
 
 ################################################################################
@@ -11,18 +11,18 @@
 #              with filename cleaning.
 #
 # @usage
-#   ./cosmic_demo.sh
-#   LOG_LEVEL=1 ./cosmic_demo.sh
+#   ./cosmic_demo.zsh
+#   LOG_LEVEL=1 ./cosmic_demo.zsh
 #
 # @examples
 #   # Run with default INFO logging
-#   ./cosmic_demo.sh
+#   ./cosmic_demo.zsh
 #
 #   # Run with WARNING level (less verbose)
-#   LOG_LEVEL=1 ./cosmic_demo.sh
+#   LOG_LEVEL=1 ./cosmic_demo.zsh
 #
 #   # Run with ERROR level (most verbose)
-#   LOG_LEVEL=2 ./cosmic_demo.sh
+#   LOG_LEVEL=2 ./cosmic_demo.zsh
 #
 # @env LOG_LEVEL (optional) Sets the logging verbosity (0=INFO, 1=WARNING, 2=ERROR)
 #
