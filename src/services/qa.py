@@ -206,7 +206,18 @@ class QABase(ServiceBase):
                     context = "OpenSI System Information:\n" + system_information + "\n\n" + context
 
             # Get the response with retrieved context if applicable.
-            response, raw_response = self.llm(user_prompt, context=context)
+            
+            ##TODO: needs to read the services from the DataBase and pass the service name to the prompter.
+            services_names = {
+                '0': "chess",
+                '1': "memory",
+                '2': "code_generation",
+                '3': "general_question_answering",
+                '4': "AcademicGovernance"
+            }
+            
+            response, raw_response = self.llm(user_prompt, context=context, serivce_name=services_names[service_option])
+
 
         # Print service name.
         if verbose \
