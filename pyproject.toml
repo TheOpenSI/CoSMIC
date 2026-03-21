@@ -1,7 +1,7 @@
 [project]
-name = "CoSMIC"
+name = "CoSMIC-BE"
 version = "1.0.0"
-description = "Cognitive System of Machine Intelligent Computing"
+description = "Cognitive System of Machine Intelligent Computing (BE structure)"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -9,21 +9,5 @@ dependencies = [
     # NOTE: Use 'psycopg[binary]' version on pord.
     "psycopg>=3.3.3",
     "python-dotenv>=1.2.1",
-    "sqlmodel>=0.0.37",
-    # TODO: Installed for now to get CoSMIC file working.
-    "python-box>=7.4.1",
-    "torch>=2.10.0",
-    "ollama>=0.6.1",
-    "transformers[torch]>=5.3.0",
-    "peft>=0.18.1",
-    "openai>=2.26.0",
-    "pytz>=2026.1.post1",
-    "langchain-community>=0.4.1",
-    "langchain-huggingface>=1.2.1",
-    "langchain-text-splitters>=1.1.1",
-    "chess>=1.11.2",
-    "stockfish>=4.0.8",
-    "pandas>=3.0.1",
-    "sentence-transformers>=5.3.0",
-    "faiss-cpu>=1.13.2", # CPU version for Vector Database (works on all OSes)
+    "sqlmodel>=0.0.37"
 ]

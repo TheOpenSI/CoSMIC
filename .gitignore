@@ -228,6 +228,4 @@ docker/secrets/
 docker/configs/
 
 # Whitelists
-!scripts/**/*.env*
-!examples/**/*.env*
-!examples/database/
+!examples/*.env*
