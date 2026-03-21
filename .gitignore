@@ -1,8 +1,9 @@
-##########################################################################################################
-#                                                                                                        #
-# Credit: Python.gitignore from [github](https://github.com/github/gitignore/blob/main/Python.gitignore) #
-#                                                                                                        #
-##########################################################################################################
+#=============================================================================#
+#                           CoSMIC (BE) gitignore list                        #
+#=============================================================================#
+# Inspired from one of the templates on `gitignore` GitHub repo:              #
+# https://github.com/github/gitignore/blob/main/Python.gitignore              #
+#=============================================================================#
 
 
 # Byte-compiled / optimized / DLL files
