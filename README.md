@@ -14,7 +14,7 @@ COSMIC-DB/
 │   ├── api_endpoints/      # All requests call to API endpoints goes here
 │   └── normal_endpoints/   # All requests call to CoSMIC and related endpoints goes here
 ├── utils/                  # Modular helper functions and shared utility scripts
-├── `__init__.py`             # Package initialization
+├── __init__.py             # Package initialization
 ├── .dockerignore           # Files excluded from Docker builds
 ├── .gitattributes          # Git configuration for path attributes
 ├── .gitignore              # Files excluded from version control
