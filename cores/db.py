@@ -1,17 +1,19 @@
 ### Core modules ###
 from fastapi import Depends
-from sqlmodel import SQLModel, Session, create_engine, select
+from sqlmodel import (
+    SQLModel,
+    Session,
+    create_engine
+)
 
 
 ### Type hints ###
 from sqlalchemy.engine import Engine
 from typing_extensions import Annotated, Any, Generator
-from sqlalchemy.sql.expression import Select
 
 
 ### Internal modules ###
 from .env import get_env
-from ..apis.models import Users, Roles
 
 
 cosmic_db_configs: dict[str, str | None] = get_env()
@@ -49,33 +51,6 @@ def get_session() -> Generator[Session, Any, Any]:
         yield session
 
 
-def create_default_account() -> None:
-    # TODO: this should be define in a [.env] file and read from there instead.
-    default_account: Users = Users(
-        name="cosmic",
-        password="secret_password_123",
-        granted=Roles(
-            name="Admin",
-            desc=""
-        )
-    )
-
-    with Session(bind=cosmic_db_engine) as session:
-        default_account_stmt: Select[tuple] = select(Users, Roles).join(Roles).where(Users.name == "cosmic", Roles.name == "Admin")
-        default_account_data: tuple[Users, Roles] | None = session.exec(statement=default_account_stmt).first()
-
-        if default_account_data is None:
-            # Add the default account
-            session.add(instance=default_account)
-            session.commit()
-            session.refresh(instance=default_account)
-        else:
-            # Do nothing
-            pass
-
-    return None
-
-
 def create_db_and_table() -> None:
     # WARNING: `create_all()` function is for dev only. Using migration method with Alembic module!
     SQLModel.metadata.create_all(bind=cosmic_db_engine)
@@ -89,4 +64,3 @@ SessionDependency = Annotated[Session, Depends(dependency=get_session)]
 # Prevent running the function when this file get included as module
 if __name__ == "__main__":
     create_db_and_table()
-    create_default_account()

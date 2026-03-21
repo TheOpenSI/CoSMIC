@@ -10,7 +10,13 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Roles, Users, UserCreate, UserPublic, UserPublicWithRole, UserUpdate, UserDelete
+from ...apis.models import (
+    Users,
+    UserCreate,
+    UserPublic,
+    UserUpdate,
+    UserDelete
+)
 
 
 users_v1_router: APIRouter = APIRouter(
@@ -52,21 +58,7 @@ async def create_user_v1(
     user: UserCreate,
     session: SessionDependency
 ) -> Any:
-    # New users have a default user role granted for them
-    new_account: Users = Users(
-        name=user.name,
-        # Trick to handle NULL value (when needed) as Swagger gives literal
-        # "string" value for optional data by default
-        email=user.email if user.email != "string" else None,
-        password=user.password,
-        granted=Roles(
-            name="User",
-            desc=""
-        )
-    )
-
-    # Final validation to ensure corect data type & value sent to database model
-    user_db: Users = Users.model_validate(obj=new_account, strict=True)
+    user_db: Users = Users.model_validate(obj=user, strict=True)
 
     session.add(instance=user_db)
     session.commit()
@@ -78,7 +70,7 @@ async def create_user_v1(
 @users_v1_router.get(
     path="/{user_id}",
     status_code=status.HTTP_200_OK,
-    response_model=UserPublicWithRole
+    response_model=UserPublic
 )
 async def read_user_v1(
     user_id: UUID,
@@ -89,7 +81,7 @@ async def read_user_v1(
     if user_view is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Not Found."
+            detail="User Not Found!"
         )
     else:
         return user_view
@@ -110,7 +102,7 @@ async def update_user_v1(
     if user_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Not Found."
+            detail="User Not Found!"
         )
     else:
         user_data: dict[str, Any] = user.model_dump(exclude_unset=True)
@@ -137,7 +129,7 @@ async def delete_user_v1(
     if user_gone is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Not Found."
+            detail="User Not Found!"
         )
     else:
         session.delete(instance=user_gone)

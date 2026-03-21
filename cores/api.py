@@ -7,7 +7,7 @@ from fastapi import FastAPI
 
 
 ### Internal modules ###
-from ..cores.db import create_db_and_table, create_default_account
+from ..cores.db import create_db_and_table
 from ..routers.normal_endpoints.root import root_router
 from ..routers.normal_endpoints.home import home_router
 from ..routers.normal_endpoints.cosmic import cosmic_router
@@ -25,7 +25,6 @@ from ..routers.api_endpoints.statistics import statistics_v1_router
 async def lifespan(app: FastAPI):
     # Equivalent to 'startup' event
     create_db_and_table()
-    create_default_account()
 
     yield
 

@@ -1,13 +1,22 @@
 ### Core modules ###
-from sqlmodel import Field, SQLModel, Relationship, text
-from sqlalchemy.schema import Index, PrimaryKeyConstraint, UniqueConstraint, ForeignKeyConstraint
+from sqlmodel import (
+    Field,
+    SQLModel,
+    Relationship,
+    text
+)
+from sqlalchemy.schema import (
+    PrimaryKeyConstraint,
+    UniqueConstraint,
+    ForeignKeyConstraint
+)
 
 
 ### Type hints ###
-from datetime import datetime
-from uuid import UUID
-from sqlalchemy.sql.sqltypes import TIMESTAMP
-from typing_extensions import Any, Optional # SQLModel is being a bitch here, once again
+from datetime import datetime, timezone
+from uuid import UUID, uuid7
+from sqlalchemy.types import TIMESTAMP, Uuid
+from typing import Any, Optional
 from sqlalchemy.dialects.postgresql import TEXT, JSONB
 
 
@@ -18,23 +27,53 @@ from sqlalchemy.dialects.postgresql import TEXT, JSONB
 ################################################
 ### Base Model (inheritance by other models) ###
 ################################################
-class StatisticBase(SQLModel):
-    """docstring for StatisticBase"""
-    name: str | None = Field(
+class UserBase(SQLModel):
+    name: str = Field(
+        max_length=100
+    )
+    email: str | None = Field(
+        default=None,
+        max_length=256,
+        nullable=True
+    )
+
+
+class RoleBase(SQLModel):
+    name: str = Field(
+        max_length=20
+    )
+    desc: str | None = Field(
         default=None,
         nullable=True,
         sa_type=TEXT
     )
+
+
+class ChatboxBase(SQLModel):
+    name: str = Field(
+        max_length=256
+    )
     details: dict[str, Any] = Field(
         default={
-            "<key>": "<value>"
+            "<user-role>": "<user-query>",
+            "<model-name>": "<model-response>"
         },
         sa_type=JSONB
     )
 
 
+class ServiceBase(SQLModel):
+    name: str = Field(
+        max_length=100
+    )
+    desc: str | None = Field(
+        default=None,
+        nullable=True,
+        sa_type=TEXT
+    )
+
+
 class ModelBase(SQLModel):
-    """docstring for ModelBase"""
     name: str = Field(
         max_length=100
     )
@@ -48,210 +87,161 @@ class ModelBase(SQLModel):
     )
 
 
-class ServiceBase(SQLModel):
-    """docstring for ServiceBase"""
-    name: str = Field(
-        max_length=100
-    )
-    desc: str | None = Field(
+class StatisticBase(SQLModel):
+    name: str | None = Field(
         default=None,
         nullable=True,
         sa_type=TEXT
     )
-
-
-class ChatboxBase(SQLModel):
-    """docstring for ChatboxBase"""
-    name: str = Field(
-        max_length=256
-    )
     details: dict[str, Any] = Field(
         default={
-            "<user-role>": "<user-query>",
-            "<model-name>": "<model-response>"
+            "<key>": "<value>"
         },
         sa_type=JSONB
     )
 
 
-class RoleBase(SQLModel):
-    """docstring for RoleBase."""
-    name: str = Field(
-        max_length=20
-    )
-    desc: str | None = Field(
-        default=None,
-        nullable=True,
-        sa_type=TEXT
-    )
 
-
-class UserBase(SQLModel):
-    """docstring for UserBase."""
-    name: str = Field(
-        max_length=100
-    )
-    email: str | None = Field(
-        default=None,
-        max_length=256,
-        nullable=True
-    )
-
-
-
-######################################################
-### Table Model (dynamic database table creations) ###
-######################################################
-class Statistics(StatisticBase, table=True):
-    """docstring for Statistics."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
+################################################
+###   Table Link Models (Junction Tables)    ###
+################################################
+class UserRoleLink(SQLModel, table=True):
+    """Junction table (Users + Roles)"""
+    __tablename__: str = "user_roles" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
         PrimaryKeyConstraint(
-            "id",
-            name="PK_STATISTIC_ID"
+            "user_id", "role_id",
+            name="PK_UR_ID"
         ),
         ForeignKeyConstraint(
             columns=["user_id"],
             refcolumns=["users.id"],
-            name="FK_STATISTIC_USER_ID",
+            name="FK_UR_USER_ID",
             onupdate="CASCADE",
             ondelete="CASCADE",
             match="FULL"
         ),
-        UniqueConstraint(
-            "user_id",
-            name="UK_STATISTIC_USER_ID"
-        )
-    )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
-    id: UUID | None = Field(
-        default=None,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
+        ForeignKeyConstraint(
+            columns=["role_id"],
+            refcolumns=["roles.id"],
+            name="FK_UR_ROLE_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
     )
     user_id: UUID | None = Field(
         default=None,
         nullable=False
     )
-    # Postgres will generate the timestamp (without time zone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    created_on: datetime | None = Field(
+    role_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    create_on: datetime | None = Field(
         default=None,
         nullable=False,
-        sa_column_kwargs={
-            "server_default": text(text="localtimestamp(2)")
-        }
-    )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> statistic generated from <name> user through `saw` object-level connection"
-    ###     👆                  👆          👆                  👆                   👆
-    ###  Statistics        Statistics    Statistics         Relationship         Relationship
-    ###                     object       type-hint        `back_populates`
-    generated_from: Optional["Users"] = Relationship(
-        back_populates="saw",
-        sa_relationship_kwargs={
-            "uselist": False,
-            # This allows delete operation on the FK side of 1-1
-            "single_parent": True
-        },
-        cascade_delete=True
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
 
 
-class Models(ModelBase, table=True):
-    """docstring for Models."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
+class ServiceModelLink(SQLModel, table=True):
+    """Junction table (Services + Models)"""
+    __tablename__: str = "service_slms" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
         PrimaryKeyConstraint(
-            "id",
-            name="PK_MODEL_ID"
+            "service_id", "model_id",
+            name="PK_SS_ID"
         ),
         ForeignKeyConstraint(
             columns=["service_id"],
             refcolumns=["services.id"],
-            name="FK_MODEL_SERVICE_ID",
+            name="FK_SS_SERVICE_ID",
             onupdate="CASCADE",
             ondelete="CASCADE",
             match="FULL"
         ),
-        UniqueConstraint(
-            "service_id",
-            name="UK_MODEL_SERVICE_ID"
-        )
-    )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
-    id: UUID | None = Field(
-        default=None,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
+        ForeignKeyConstraint(
+            columns=["model_id"],
+            refcolumns=["models.id"],
+            name="FK_SS_MODEL_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
     )
     service_id: UUID | None = Field(
         default=None,
         nullable=False
     )
-    # Postgres will generate the timestamp (without time zone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    installed_on: datetime | None = Field(
+    model_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    create_on: datetime | None = Field(
         default=None,
         nullable=False,
-        sa_column_kwargs={
-            "server_default": text(text="localtimestamp(2)")
-        }
-    )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> model used by <name> service through `powered_from` object-level connection"
-    ###     👆            👆     👆                          👆                       👆
-    ###    Models        Models Models                  Relationship              Relationship
-    ###                  object type-hint             `back_populates`
-    used_by: Optional["Services"] = Relationship(
-        back_populates="powered_from",
-        sa_relationship_kwargs={
-            "uselist": False,
-            # This allows delete operation on the FK side of 1-1
-            "single_parent": True
-        },
-        cascade_delete=True
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
 
 
-class Services(ServiceBase, table=True):
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
+class UserChatSession(SQLModel, table=True):
+    """Junction table (Users + Chatboxes + Services)"""
+    __tablename__: str = "user_chat_sessions" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
         PrimaryKeyConstraint(
-            "id",
-            name="PK_SERVICE_ID"
+            "user_id", "chatbox_id", "service_id",
+            name="PK_UCS_ID"
         ),
         ForeignKeyConstraint(
-            columns=["chatbox_id"],
-            refcolumns=["chatboxes.id"],
-            name="FK_SERVICE_CHATBOX_ID",
+            columns=["user_id"],
+            refcolumns=["users.id"],
+            name="FK_UCS_USER_ID",
             onupdate="CASCADE",
             ondelete="CASCADE",
             match="FULL"
         ),
-        Index(
-            "FKI_SERVICE_CHATBOX_ID",
-            "chatbox_id"
-        )
+        ForeignKeyConstraint(
+            columns=["chatbox_id"],
+            refcolumns=["chatboxes.id"],
+            name="FK_UCS_CHATBOX_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+        ForeignKeyConstraint(
+            columns=["service_id"],
+            refcolumns=["services.id"],
+            name="FK_UCS_SERVICE_ID",
+            onupdate="CASCADE",
+            ondelete="CASCADE",
+            match="FULL"
+        ),
+    )
+    user_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    chatbox_id: UUID | None = Field(
+        default=None,
+        nullable=False
+    )
+    service_id: UUID | None = Field(
+        default=None,
+        nullable=False
     )
     status: bool = Field(
         default=False,
@@ -261,63 +251,93 @@ class Services(ServiceBase, table=True):
             "comment": "mainly for the multi-services usage scenario."
         }
     )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
-    id: UUID | None = Field(
-        default=None,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
-    )
-    chatbox_id: UUID | None = Field(
-        default=None,
-        nullable=False
-    )
-    # Postgres will generate the timestamp (without time zone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    created_on: datetime | None = Field(
+    create_on: datetime | None = Field(
         default=None,
         nullable=False,
-        sa_column_kwargs={
-            "server_default": text(text="localtimestamp(2)")
-        }
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
 
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> service activated by <name> chatbox through `used` object-level connection"
-    ###     👆               👆         👆                     👆                     👆
-    ###   Services        Services    Services             Relationship          Relationship
-    ###                    object    type-hint           `back_populates`
-    activated_by: Optional["Chatboxes"] = Relationship(
-        back_populates="used",
-        sa_relationship_kwargs={
-            "uselist": False
-        }
-    )
 
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> service powered from <name> model through `used_by` object-level connection"
-    ###     👆                 👆       👆                     👆                     👆
-    ###   Services          Services  Services            Relationship            Relationship
-    ###                      object  type-hint          `back_populates`
-    powered_from: Optional["Models"] = Relationship(
-        back_populates="used_by",
-        sa_relationship_kwargs={
-            "uselist": False
-        }
+
+######################################################
+### Table Model (dynamic database table creations) ###
+######################################################
+class Users(UserBase, table=True):
+    __tablename__: str = "users" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        UniqueConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_USER_ID"
+        ),
+        UniqueConstraint(
+            "email",
+            name="UK_USER_EMAIL"
+        ),
+    )
+    id: UUID = Field(
+        default_factory=(lambda: uuid7()),
+        primary_key=True,
+        sa_type=Uuid
+    )
+    password: str = Field(
+        max_length=256
+    )
+    create_on: datetime = Field(
+        default_factory=(lambda: datetime.now(tz=timezone.utc)),
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    chatboxes: list["Chatboxes"] = Relationship(
+        back_populates="users",
+        cascade_delete=True,
+        passive_deletes=True
+    )
+    statistics: Optional["Statistics"] = Relationship(
+        back_populates="users",
+        cascade_delete=True,
+        passive_deletes=True
+    )
+    roles: list["Roles"] = Relationship(
+        back_populates="users",
+        link_model=UserRoleLink
+    )
+    chat_sessions: list["UserChatSession"] = Relationship()
+
+
+class Roles(RoleBase, table=True):
+    __tablename__: str = "roles" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ]= (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_ROLE_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    users: list["Users"] = Relationship(
+        back_populates="roles",
+        link_model=UserRoleLink
     )
 
 
 class Chatboxes(ChatboxBase, table=True):
-    """docstring for Chatboxes."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
+    __tablename__: str = "chatboxes" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
         PrimaryKeyConstraint(
             "id",
             name="PK_CHATBOX_ID"
@@ -330,123 +350,112 @@ class Chatboxes(ChatboxBase, table=True):
             ondelete="CASCADE",
             match="FULL"
         ),
-        Index(
-            "FKI_CHATBOX_USER_ID",
-            "user_id"
-        )
     )
-
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
     id: UUID | None = Field(
         default=None,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
+        primary_key=True
     )
     user_id: UUID | None = Field(
         default=None,
-        nullable=False
+        primary_key=True
     )
-    # Postgres will generate the timestamp (without time zone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    created_on: datetime | None = Field(
+    create_on: datetime | None = Field(
         default=None,
         nullable=False,
-        sa_column_kwargs={
-            "server_default": text(text="localtimestamp(2)")
-        }
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> chatbox is belonged to <name> user through `owned` object-level connection"
-    ###     👆                 👆         👆                   👆                     👆
-    ###  Chatboxes          Chatboxes  Chatboxes          Relationship           Relationship
-    ###                      object    type-hint        `back_populates`
-    belonged_to: Optional["Users"] = Relationship(
-        back_populates="owned",
-        sa_relationship_kwargs={
-            "uselist": False
-        }
+    users: Optional["Users"] = Relationship(
+        back_populates="chatboxes"
     )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> chatbox used <name> service through `activated_by` object-level connection"
-    ###     👆            👆    👆                         👆                        👆
-    ###  Chatboxes       (Chatboxes)                  Relationship              Relationship
-    ###              object     type-hint           `back_populates`
-    used: Optional["Services"] = Relationship(
-        back_populates="activated_by",
-        sa_relationship_kwargs={
-            "uselist": False
-        }
-    )
+    chat_sessions: list["UserChatSession"] = Relationship()
 
 
-class Roles(RoleBase, table=True):
-    """docstring for Roles."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
+class Services(ServiceBase, table=True):
+    __tablename__: str = "services" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ] = (
         PrimaryKeyConstraint(
             "id",
-            name="PK_ROLE_ID"
+            name="PK_SERVICE_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    create_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+
+    models: list["Models"] = Relationship(
+        back_populates="services",
+        link_model=ServiceModelLink
+    )
+    chat_sessions: list["UserChatSession"] = Relationship()
+
+
+class Models(ModelBase, table=True):
+    __tablename__: str = "models" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_MODEL_ID"
+        ),
+    )
+    id: UUID | None = Field(
+        default=None,
+        primary_key=True
+    )
+    install_on: datetime | None = Field(
+        default=None,
+        nullable=False,
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
+    )
+    services: list["Services"] = Relationship(
+        back_populates="models",
+        link_model=ServiceModelLink
+    )
+
+
+class Statistics(StatisticBase, table=True):
+    __tablename__: str = "statistics" # type: ignore
+    __table_args__: tuple[
+        PrimaryKeyConstraint,
+        ForeignKeyConstraint
+    ] = (
+        PrimaryKeyConstraint(
+            "id",
+            name="PK_STATISTIC_ID"
         ),
         ForeignKeyConstraint(
             columns=["user_id"],
             refcolumns=["users.id"],
-            name="FK_ROLE_USER_ID",
+            name="FK_STATISTIC_USER_ID",
             onupdate="CASCADE",
-            ondelete="CASCADE",
-            match="FULL"
+            ondelete="CASCADE"
         ),
-        UniqueConstraint(
-            "user_id",
-            name="UK_ROLE_USER_ID"
-        )
     )
-
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
     id: UUID | None = Field(
         default=None,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
+        primary_key=True
     )
     user_id: UUID | None = Field(
         default=None,
         nullable=False
     )
-    # Postgres will generate the timestamp (without time zone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    created_on: datetime | None = Field(
+    create_on: datetime | None = Field(
         default=None,
         nullable=False,
-        sa_column_kwargs={
-            "server_default": text(text="localtimestamp(2)")
-        }
+        sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> role is assigned to <name> user through `permission` object-level connection"
-    ###     👆               👆        👆                    👆                        👆
-    ###    Roles            Roles     Roles              Relationship             Relationship
-    ###                     object  type-hint          `back_populates`
-    assigned_to: Optional["Users"] = Relationship(
-        back_populates="granted",
+    users: Optional["Users"] = Relationship(
+        back_populates="statistics",
         sa_relationship_kwargs={
-            "uselist": False,
             # This allows delete operation on the FK side of 1-1
             "single_parent": True
         },
@@ -454,349 +463,23 @@ class Roles(RoleBase, table=True):
     )
 
 
-class Users(UserBase, table=True):
-    """docstring for Users."""
-    # This's the only way that SQLModel not trying to be a bitch for its "bridging" feature:
-    # https://docs.sqlalchemy.org/en/21/orm/declarative_tables.html#orm-declarative-table-configuration
-    __table_args__ = (
-        PrimaryKeyConstraint(
-            "id",
-            name="PK_USER_ID"
-        ),
-    )
-
-    # TODO: implement hashed password
-    password: str = Field(
-        max_length=256
-    )
-    # Postgres will generate the UUID (version 7) for us instead of manual
-    # defining it. The way this works in SQLModel is to provide value to both
-    # type-hint and `default` param
-    id: UUID | None = Field(
-        default=None,
-        nullable=False,
-        # For some fucking reasons, SQLModel works perfectly fine with PK
-        # constraint. For fuck sake!
-        primary_key=True,
-        sa_column_kwargs={
-            "server_default": text(text="uuidv7()")
-        }
-    )
-    # Postgres will generate the timestamp (with timezone) for us instead of
-    # manual defining it. The way this works in SQLModel is to provide value to
-    # both type-hint and `default` param
-    created_on: datetime | None = Field(
-        default=None,
-        nullable=False,
-        sa_type=TIMESTAMP(timezone=True), # type: ignore
-        sa_column_kwargs={
-            "server_default": text(text="current_timestamp(2)")
-        }
-    )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> user have <name> role granted through `assigned_to` object-level connection"
-    ###      👆              👆          👆                 👆                        👆
-    ###    Users            Users       Users           Relationship             Relationship
-    ###                   type-hint    object         `back_populates`
-    granted: Optional["Roles"] = Relationship(
-        back_populates="assigned_to",
-        sa_relationship_kwargs={
-            "uselist": False
-        },
-        cascade_delete=True
-    )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> user owned <name> chatbox through `belonged_to` object-level connection"
-    ###      👆         👆     👆                        👆                        👆
-    ###    Users       Users  Users                 Relationship              Relationship
-    ###               object type-hint            `back_populates`
-    owned: Optional["Chatboxes"] = Relationship(
-        back_populates="belonged_to",
-        sa_relationship_kwargs={
-            "uselist": False
-        },
-        cascade_delete=True
-    )
-
-    ### It's very confusing to read from database perspective, but here's my attempt:
-    ###   "<name> user saw <name> statistic through `generated_from` object-level connection"
-    ###      👆        👆    👆                           👆                          👆
-    ###    Users      Users Users                    Relationship                Relationship
-    ###              object type-hint              `back_populates`
-    saw: Optional["Statistics"] = Relationship(
-        back_populates="generated_from",
-        sa_relationship_kwargs={
-            "uselist": False
-        },
-        cascade_delete=True
-    )
-
 
 #####################################################
 ### Data Model (dynamic database data operations) ###
 #####################################################
-
-# NOTE:
-# + This's why you don't just wrap over 2 popular libraries without having a
-#   clear explanation on how to use them both in your library. Custom type-hints
-#   from both of them, which are crucially needed for correct references, are
-#   completely fucked.
-#
-# + Even the linter (pyright) is fucked with this kinda bridging as well. I
-#   don't give a fuck anymore, I'll slap in `type: ignore` whenever I'm fucking
-#   can.
-
-
-class StatisticPublic(StatisticBase):
-    """docstring for StatisticPublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-
-
-class StatisticPublicWithUser(StatisticPublic):
-    """docstring for StatisticPublicWithUser."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the User API only
-    saw: UserPublic | None = None
-
-
-class StatisticCreate(StatisticBase):
-    """docstring for StatisticCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
-    pass
-
-
-class StatisticUpdate(StatisticBase):
-    """docstring for StatisticUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
-    name:       str | None = None # type: ignore
-    details:    dict[str, Any] | None = None # type: ignore
-
-
-class StatisticDelete(StatisticBase):
-    """docstring for StatisticDelete."""
-    # Hint for testers that this is the response message for DELETE request
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-    response: dict[str, int | str] = {
-        "status": 200,
-        "message": "OK"
-    }
-
-
-class ModelPublic(ModelBase):
-    """docstring for ModelPublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    id: UUID
-    service_id: UUID
-    installed_on: datetime
-
-
-class ModelPublicWithService(ModelPublic):
-    """docstring for ModelPublicWithUser."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the User API only
-    powered_from: ServicePublic | None = None
-
-
-class ModelCreate(ModelBase):
-    """docstring for ChatBoxCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
-    pass
-
-
-class ModelUpdate(ModelBase):
-    """docstring for ModelUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
-    name:       str | None = None # type: ignore
-    provider:   str | None = None # type: ignore
-    desc:       str | None = None
-
-
-class ModelDelete(ModelBase):
-    """docstring for ModelDelete."""
-    # Hint for testers that this is the response message for DELETE request
-    id: UUID
-    service_id: UUID
-    installed_on: datetime
-    response: dict[str, int | str] = {
-        "status": 200,
-        "message": "OK"
-    }
-
-
-class ServicePublic(ServiceBase):
-    """docstring for ServicePublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    id: UUID
-    chatbox_id: UUID
-    status: bool = False
-    created_on: datetime
-
-
-class ServicePublicWithChatbox(ServicePublic):
-    """docstring for ServicePublicWithUser."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the User API only
-    used: ChatboxPublic | None = None
-
-
-class ServiceCreate(ServiceBase):
-    """docstring for ServiceCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
-    pass
-
-
-class ServiceUpdate(ServiceBase):
-    """docstring for ServiceUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
-    name:   str | None = None # type: ignore
-    desc:   str | None = None
-    status: bool | None = False # type: ignore
-
-
-class ServiceDelete(ServiceBase):
-    """docstring for ServiceDelete."""
-    # Hint for testers that this is the response message for DELETE request
-    id: UUID
-    chatbox_id: UUID
-    status: bool
-    created_on: datetime
-    response: dict[str, int | str] = {
-        "status": 200,
-        "message": "OK"
-    }
-
-
-class ChatboxPublic(ChatboxBase):
-    """docstring for ChatboxPublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-
-
-class ChatboxPublicWithUser(ChatboxPublic):
-    """docstring for ChatboxPublicWithUser."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the User API only
-    belonged_to: UserPublic | None = None
-
-
-class ChatboxCreate(ChatboxBase):
-    """docstring for ChatBoxCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
-    pass
-
-
-class ChatboxUpdate(ChatboxBase):
-    """docstring for ChatboxUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
-    name:       str | None = None # type: ignore
-    details:    dict[str, Any] | None = None # type: ignore
-
-
-class ChatboxDelete(ChatboxBase):
-    """docstring for ChatboxDelete."""
-    # Hint for testers that this is the response message for DELETE request
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-    response: dict[str, int | str] = {
-        "status": 200,
-        "message": "OK"
-    }
-
-
-class RolePublic(RoleBase):
-    """docstring for RolePublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-
-
-class RoleCreate(SQLModel):
-    """docstring for RoleCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
-    status: int | str = "HTTP_STATUS_CODE"
-    message: str = "HTTP_STATUS_MESSAGE"
-
-
-class RolePublicWithUser(RolePublic):
-    """docstring for RolePublicWithUser."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the User API only
-    assigned_to: UserPublic | None = None
-
-
-class RoleUpdate(RoleBase):
-    """docstring for RoleUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
-    name:       str | None = None # type: ignore
-    desc:       str | None = None
-
-
-class RoleDelete(RoleBase):
-    """docstring for RoleDelete."""
-    # Hint for testers that this is the response message for DELETE request
-    id: UUID
-    user_id: UUID
-    created_on: datetime
-    response: dict[str, int | str] = {
-        "status": 200,
-        "message": "OK"
-    }
-
-
 class UserPublic(UserBase):
-    """docstring for UserPublic."""
-    # Hint for testers that these columns will not be appear in body as it is
-    # generated by database
-    password: str # TODO: implement hashed password
     id: UUID
-    created_on: datetime
-
-
-class UserPublicWithRole(UserPublic):
-    """docstring for UserPublicWithRole."""
-    # Hint for testers that these are Relationship Attributes (FK) value (GET
-    # request scenario), which modifiable via the Role API only
-    granted: RolePublic | None = None
+    # TODO: implement hashed password
+    password: str
+    create_on: datetime
 
 
 class UserCreate(UserBase):
-    """docstring for UserCreate."""
-    # Hint for testers that these columns are needed alongside with default one
-    # during a POST request
     # TODO: implement hashed password
     password: str
 
 
 class UserUpdate(UserBase):
-    """docstring for UserUpdate."""
-    # Hint for testers that these columns are needed (optionally) alongside with
-    # default one during a PATCH request
     name:       str | None = None # type: ignore
     email:      str | None = None
     # TODO: implement hashed password
@@ -804,10 +487,137 @@ class UserUpdate(UserBase):
 
 
 class UserDelete(UserBase):
-    """docstring for UserDelete."""
-    # Hint for testers that this is the response message for DELETE request
     id: UUID
-    created_on: datetime
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class RolePublic(RoleBase):
+    id: UUID
+    create_on: datetime
+
+
+class RoleCreate(RoleBase):
+    pass
+
+
+class RoleUpdate(RoleBase):
+    name:   str | None = None # type: ignore
+    desc:   str | None = None
+
+
+class RoleDelete(RoleBase):
+    id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ChatboxPublic(ChatboxBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+
+
+class ChatboxPublicWithUser(ChatboxPublic):
+    users: UserPublic | None = None
+
+
+class ChatboxCreate(ChatboxBase):
+    pass
+
+
+class ChatboxUpdate(ChatboxBase):
+    name:       str | None = None # type: ignore
+    details:    dict[str, Any] | None = None # type: ignore
+
+
+class ChatboxDelete(ChatboxBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ServicePublic(ServiceBase):
+    id: UUID
+    create_on: datetime
+
+
+class ServiceCreate(ServiceBase):
+    pass
+
+
+class ServiceUpdate(ServiceBase):
+    name:   str | None = None # type: ignore
+    desc:   str | None = None
+    status: bool | None = False # type: ignore
+
+
+class ServiceDelete(ServiceBase):
+    id: UUID
+    create_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class ModelPublic(ModelBase):
+    id: UUID
+    install_on: datetime
+
+
+class ModelCreate(ModelBase):
+    pass
+
+
+class ModelUpdate(ModelBase):
+    name:       str | None = None # type: ignore
+    provider:   str | None = None # type: ignore
+    desc:       str | None = None
+
+
+class ModelDelete(ModelBase):
+    id: UUID
+    install_on: datetime
+    response: dict[str, int | str] = {
+        "status": 200,
+        "message": "OK"
+    }
+
+
+class StatisticPublic(StatisticBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
+
+
+class StatisticPublicWithUser(StatisticPublic):
+    users: UserPublic | None = None
+
+
+class StatisticCreate(StatisticBase):
+    pass
+
+
+class StatisticUpdate(StatisticBase):
+    name:       str | None = None # type: ignore
+    details:    dict[str, Any] | None = None # type: ignore
+
+
+class StatisticDelete(StatisticBase):
+    id: UUID
+    user_id: UUID
+    create_on: datetime
     response: dict[str, int | str] = {
         "status": 200,
         "message": "OK"

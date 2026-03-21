@@ -10,7 +10,14 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Statistics, StatisticCreate, StatisticPublic, StatisticPublicWithUser, StatisticUpdate, StatisticDelete
+from ...apis.models import (
+    Statistics,
+    StatisticCreate,
+    StatisticPublic,
+    StatisticPublicWithUser,
+    StatisticUpdate,
+    StatisticDelete
+)
 
 
 statistics_v1_router: APIRouter = APIRouter(
@@ -63,7 +70,6 @@ async def create_statistic_v1(
     return statistic_db
 
 
-
 @statistics_v1_router.get(
     path="/{statistic_id}",
     status_code=status.HTTP_200_OK,
@@ -78,7 +84,7 @@ async def read_statistic_v1(
     if statistic_view is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Generated Statistic Not Found!"
+            detail="Statistic Not Found!"
         )
     else:
         return statistic_view
@@ -99,7 +105,7 @@ async def update_statistic_v1(
     if statistic_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Generated Statistic Not Found!"
+            detail="Statistic Not Found!"
         )
     else:
         statistic_data: dict[str, Any] = statistic.model_dump(exclude_unset=True)
@@ -126,7 +132,7 @@ async def delete_statistic_v1(
     if statistic_gone is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Generated Statistic Not Found!"
+            detail="Statistic Not Found!"
         )
     else:
         session.delete(instance=statistic_gone)

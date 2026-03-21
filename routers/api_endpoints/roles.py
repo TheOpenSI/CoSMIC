@@ -10,7 +10,13 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Roles, RoleCreate, RolePublic, RolePublicWithUser, RoleUpdate, RoleDelete
+from ...apis.models import (
+    Roles,
+    RoleCreate,
+    RolePublic,
+    RoleUpdate,
+    RoleDelete
+)
 
 
 roles_v1_router: APIRouter = APIRouter(
@@ -20,11 +26,11 @@ roles_v1_router: APIRouter = APIRouter(
         200: {
             "description": "OK (Roles API V1)"
         },
+        201: {
+            "description": "Created (Roles API V1)"
+        },
         404: {
             "description": "Not Found (Roles API V1)"
-        },
-        405: {
-            "description": "Method Not Allowed (Roles API V1)"
         }
     }
 )
@@ -45,20 +51,26 @@ async def read_roles_v1(
 
 @roles_v1_router.post(
     path="/",
-    status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
-    response_model=RoleCreate
+    status_code=status.HTTP_201_CREATED,
+    response_model=RolePublic
 )
-async def create_role_v1() -> Any:
-    return {
-        "status": status.HTTP_405_METHOD_NOT_ALLOWED,
-        "message": "POST request method is not allowed for Roles API (V1)"
-    }
+async def create_role_v1(
+    role: RoleCreate,
+    session: SessionDependency
+) -> Any:
+    role_db: Roles = Roles.model_validate(obj=role, strict=True)
+
+    session.add(instance=role_db)
+    session.commit()
+    session.refresh(instance=role_db)
+
+    return role_db
 
 
 @roles_v1_router.get(
     path="/{role_id}",
     status_code=status.HTTP_200_OK,
-    response_model=RolePublicWithUser
+    response_model=RolePublic
 )
 async def read_role_v1(
     role_id: UUID,
@@ -69,7 +81,7 @@ async def read_role_v1(
     if role_view is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Assigned Role Not Found!"
+            detail="Role Not Found!"
         )
     else:
         return role_view
@@ -90,7 +102,7 @@ async def update_role_v1(
     if role_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Assigned Role Not Found!"
+            detail="Role Not Found!"
         )
     else:
         role_data: dict[str, Any] = role.model_dump(exclude_unset=True)
@@ -117,7 +129,7 @@ async def delete_role_v1(
     if role_gone is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User Assigned Role Not Found!"
+            detail="Role Not Found!"
         )
     else:
         session.delete(instance=role_gone)
