@@ -14,7 +14,7 @@ from .env import get_env
 from ..apis.models import Users, Roles
 
 
-cosmic_db_configs = get_env()
+cosmic_db_configs: dict[str, str | None] = get_env()
 
 cosmic_db_dia:  str | None = cosmic_db_configs["DB_DIALECT"]
 cosmic_db_dri:  str | None = cosmic_db_configs["DB_DRIVER"]
