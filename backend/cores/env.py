@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 def get_env() -> dict[str, str | None]:
-    env_file = (Path(__file__).resolve(strict=True).parent / "fastapi.env")
+    env_file = (Path(__file__).resolve(strict=True).parent / "cosmic_cfg.env")
 
     return dotenv_values(
         dotenv_path=env_file,
