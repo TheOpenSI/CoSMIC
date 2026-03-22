@@ -7,7 +7,7 @@ from fastapi import FastAPI
 
 
 ### Internal modules ###
-from ..cores.db import create_db_and_table, create_default_account
+from ..cores.db import create_db_and_table
 
 from ..routers.normal_endpoints.cosmic import cosmic_router
 
