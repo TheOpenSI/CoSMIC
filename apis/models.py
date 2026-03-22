@@ -78,10 +78,12 @@ class ServiceBase(SQLModel):
 
 class ModelBase(SQLModel):
     name: str = Field(
-        max_length=100
+        max_length=100,
+        sa_type=VARCHAR
     )
     provider: str = Field(
-        max_length=100
+        max_length=100,
+        sa_type=VARCHAR
     )
     desc: str | None = Field(
         default=None,
@@ -391,7 +393,7 @@ class Services(ServiceBase, table=True):
             name="PK_SERVICE_ID"
         ),
     )
-    id: UUID | None = Field(
+    id: UUID = Field(
         default_factory=(lambda: uuid7()),
         primary_key=True,
         sa_type=Uuid
@@ -417,13 +419,13 @@ class Models(ModelBase, table=True):
             name="PK_MODEL_ID"
         ),
     )
-    id: UUID | None = Field(
-        default=None,
-        primary_key=True
+    id: UUID = Field(
+        default_factory=(lambda: uuid7()),
+        primary_key=True,
+        sa_type=Uuid
     )
     install_on: datetime | None = Field(
-        default=None,
-        nullable=False,
+        default_factory=(lambda: datetime.now(tz=timezone.utc)),
         sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
     services: list["Services"] = Relationship(
