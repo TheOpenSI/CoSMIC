@@ -10,7 +10,13 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Services, ServiceCreate, ServicePublic, ServicePublicWithChatbox, ServiceUpdate, ServiceDelete
+from ...apis.models import (
+    Services,
+    ServiceCreate,
+    ServicePublic,
+    ServiceUpdate,
+    ServiceDelete
+)
 
 
 services_v1_router: APIRouter = APIRouter(
@@ -49,12 +55,10 @@ async def read_services_v1(
     response_model=ServicePublic
 )
 async def create_service_v1(
-    chatbox_id: UUID,
     service: ServiceCreate,
     session: SessionDependency
 ) -> Any:
     service_db: Services = Services.model_validate(obj=service, strict=True)
-    service_db.chatbox_id = chatbox_id
 
     session.add(instance=service_db)
     session.commit()
@@ -66,7 +70,7 @@ async def create_service_v1(
 @services_v1_router.get(
     path="/{service_id}",
     status_code=status.HTTP_200_OK,
-    response_model=ServicePublicWithChatbox
+    response_model=ServicePublic
 )
 async def read_service_v1(
     service_id: UUID,
@@ -77,7 +81,7 @@ async def read_service_v1(
     if service_view is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Service Not Found."
+            detail="Service Not Found!"
         )
     else:
         return service_view
@@ -98,7 +102,7 @@ async def update_service_v1(
     if service_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Service Not Found."
+            detail="Service Not Found!"
         )
     else:
         service_data: dict[str, Any] = service.model_dump(exclude_unset=True)
@@ -125,7 +129,7 @@ async def delete_service_v1(
     if service_gone is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Service Not Found."
+            detail="Service Not Found!"
         )
     else:
         session.delete(instance=service_gone)

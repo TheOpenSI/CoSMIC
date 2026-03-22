@@ -10,7 +10,13 @@ from typing_extensions import Any, Sequence
 
 ### Internal modules ###
 from ...cores.db import SessionDependency
-from ...apis.models import Models, ModelCreate, ModelPublic, ModelPublicWithService, ModelUpdate, ModelDelete
+from ...apis.models import (
+    Models,
+    ModelCreate,
+    ModelPublic,
+    ModelUpdate,
+    ModelDelete
+)
 
 
 models_v1_router: APIRouter = APIRouter(
@@ -49,12 +55,10 @@ async def read_models_v1(
     response_model=ModelPublic
 )
 async def create_model_v1(
-    service_id: UUID,
     model: ModelCreate,
     session: SessionDependency
 ) -> Any:
     model_db: Models = Models.model_validate(obj=model, strict=True)
-    model_db.service_id = service_id 
 
     session.add(instance=model_db)
     session.commit()
@@ -66,7 +70,7 @@ async def create_model_v1(
 @models_v1_router.get(
     path="/{model_id}",
     status_code=status.HTTP_200_OK,
-    response_model=ModelPublicWithService
+    response_model=ModelPublic
 )
 async def read_model_v1(
     model_id: UUID,
@@ -77,7 +81,7 @@ async def read_model_v1(
     if model_view is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Model Powered Service Not Found!"
+            detail="Model Not Found!"
         )
     else:
         return model_view
@@ -98,7 +102,7 @@ async def update_model_v1(
     if model_db is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Model Powered Service Not Found!"
+            detail="Model Not Found!"
         )
     else:
         model_data: dict[str, Any] = model.model_dump(exclude_unset=True)
@@ -125,7 +129,7 @@ async def delete_model_v1(
     if model_gone is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Model Powered Service Not Found!"
+            detail="Model Not Found!"
         )
     else:
         session.delete(instance=model_gone)
