@@ -15,9 +15,9 @@ from sqlalchemy.schema import (
 ### Type hints ###
 from datetime import datetime, timezone
 from uuid import UUID, uuid7
-from sqlalchemy.types import TIMESTAMP, Uuid
+from sqlalchemy.types import TIMESTAMP, Uuid, Text, VARCHAR
+from sqlalchemy.dialects.postgresql import JSONB
 from typing import Any, Optional
-from sqlalchemy.dialects.postgresql import TEXT, JSONB
 
 
 ### Internal modules ###
@@ -29,23 +29,26 @@ from sqlalchemy.dialects.postgresql import TEXT, JSONB
 ################################################
 class UserBase(SQLModel):
     name: str = Field(
-        max_length=100
+        max_length=100,
+        sa_type=VARCHAR
     )
     email: str | None = Field(
         default=None,
         max_length=256,
-        nullable=True
+        nullable=True,
+        sa_type=VARCHAR
     )
 
 
 class RoleBase(SQLModel):
     name: str = Field(
-        max_length=20
+        max_length=20,
+        sa_type=VARCHAR
     )
     desc: str | None = Field(
         default=None,
         nullable=True,
-        sa_type=TEXT
+        sa_type=Text
     )
 
 
@@ -69,7 +72,7 @@ class ServiceBase(SQLModel):
     desc: str | None = Field(
         default=None,
         nullable=True,
-        sa_type=TEXT
+        sa_type=Text
     )
 
 
@@ -83,7 +86,7 @@ class ModelBase(SQLModel):
     desc: str | None = Field(
         default=None,
         nullable=True,
-        sa_type=TEXT
+        sa_type=Text
     )
 
 
@@ -91,7 +94,7 @@ class StatisticBase(SQLModel):
     name: str | None = Field(
         default=None,
         nullable=True,
-        sa_type=TEXT
+        sa_type=Text
     )
     details: dict[str, Any] = Field(
         default={
@@ -283,11 +286,11 @@ class Users(UserBase, table=True):
         sa_type=Uuid
     )
     password: str = Field(
-        max_length=256
+        max_length=256,
+        sa_type=VARCHAR
     )
     create_on: datetime = Field(
         default_factory=(lambda: datetime.now(tz=timezone.utc)),
-        nullable=False,
         sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
     chatboxes: list["Chatboxes"] = Relationship(
@@ -317,13 +320,13 @@ class Roles(RoleBase, table=True):
             name="PK_ROLE_ID"
         ),
     )
-    id: UUID | None = Field(
-        default=None,
-        primary_key=True
+    id: UUID = Field(
+        default_factory=(lambda: uuid7()),
+        primary_key=True,
+        sa_type=Uuid
     )
-    create_on: datetime | None = Field(
-        default=None,
-        nullable=False,
+    create_on: datetime = Field(
+        default_factory=(lambda: datetime.now(tz=timezone.utc)),
         sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
     users: list["Users"] = Relationship(
