@@ -40,7 +40,7 @@ statistics_v1_router: APIRouter = APIRouter(
 @statistics_v1_router.get(
     path="/",
     status_code=status.HTTP_200_OK,
-    response_model=list[StatisticPublic]
+    response_model=list[StatisticPublicWithUser]
 )
 async def read_statistics_v1(
     session: SessionDependency
