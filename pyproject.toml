@@ -1,0 +1,14 @@
+[project]
+name = "CoSMIC-BE"
+version = "1.0.0"
+description = "Cognitive System of Machine Intelligent Computing (BE structure)"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.129.0",
+    # NOTE: Use 'psycopg[binary]' version on pord.
+    "psycopg>=3.3.3",
+    "pydantic[email]>=2.12.5",
+    "python-dotenv>=1.2.1",
+    "sqlmodel>=0.0.37",
+]

@@ -1,303 +1,291 @@
-<h1 align="center">OpenSI-CoSMIC - Cognitive System of Machine Intelligent Computing</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://opensource.org/licenses/MIT)
-[![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
-[![python](https://img.shields.io/badge/Python-3.14-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![Media](https://img.shields.io/badge/Media-2024-purple.svg)](https://www.canberra.edu.au/about-uc/media/newsroom/2024/november/ucs-opensi-researchers-develop-framework-to-integrate-and-interpret-ai-tools)
+<h1 align="center">📁 Directory Hierarchy</h1>
 
-This is the official implementation of the Open Source Institute - Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC) v1.0.0, an innovative framework that integrates multiple AI systems into a unified cognitive computing platform.
+```md
+COSMIC-DB/
+├── apis/                   # Core logic for external API integrations and data models
+├── cores/                  # Central backend logic, database engines, and global configurations
+├── docker/                 # Containerization resources and orchestration files
+│   ├── configs/            # Non-sensitive configuration files for Docker services
+│   ├── dockerfiles/        # Dockerfile for each services defined in Docker Compose file
+│   └── secrets/            # Secure storage for sensitive data like database credentials
+├── examples/               # Template files and default values for rapid environment setup
+├── routers/                # RESTful API design
+│   ├── api_endpoints/      # All requests call to API endpoints goes here
+│   └── normal_endpoints/   # All requests call to CoSMIC and related endpoints goes here
+├── utils/                  # Modular helper functions and shared utility scripts
+├── __init__.py             # Package initialization
+├── .dockerignore           # Files excluded from Docker builds
+├── .gitattributes          # Git configuration for path attributes
+├── .gitignore              # Files excluded from version control
+├── .python-version         # Pinned Python version for the project (benefical to `uv` only)
+├── compose.yaml            # Modern Docker Compose specification for service orchestration
+├── CONTRIBUTING            # Guidelines for project contributors
+├── LICENSE                 # Project licensing information (MIT)
+├── main.py                 # Primary entry point for the FastAPI application
+├── pyproject.toml          # Project metadata and dependency definitions
+├── README.md               # This is where you see the project hierachy
+└── uv.lock                 # Pinned dependency lockfile via `uv`
+```
 
 ---
 
-> [!WARNING]
-> This branch represents a significant architectural shift. We are actively
-> transitioning away from OpenWebUI to build our own UI platform. As a result,
-> some components may be unstable during this migration phase. We recommend
-> using this branch only if you're comfortable working with a system under
-> active development.
+# Quick Start
 
-# 📋 Quick Start
+Before setting up, ensure you've the appropriate tools installed depending on your chosen setup method. This guide supports:
+- Native setup (running services directly on your machine)
+- Docker setup (running services in isolated containers)
 
-Before you begin, ensure you have Docker and Docker Compose installed on your system. These are required to run the platform:
 
-1. [**Docker**](https://docs.docker.com/get-docker/)
-2. [**Docker Compose**](https://docs.docker.com/compose/install/)
+| **Tool**   |   **Docker Setup**    |   **Native Setup**    |
+| ---------- | --------------------- | --------------------- |
+| Docker     | ✅ Mandatory          | ❌ Not required       |
+| Python     | ✅ Mandatory (v3.14+) | ✅ Mandatory (v3.14+) |
+| uv         | ✅ Mandatory          | ✅ Mandatory (latest) |
+| PostgreSQL | ⚠️ Optional           | ✅ Mandatory (v18+)   |
+| pgAdmin    | ⚠️ Optional           | ⚠️ Optional           |
+
 
 Then, start by cloning the repository using your preferred method:
 
 ```bash
 # Using HTTPS (recommended for most users)
-git clone --single-branch -b bing-dev --recurse-submodules https://github.com/TheOpenSI/CoSMIC.git
+git clone https://github.com/TheOpenSI/COSMIC_DB.git CoSMIC_DB/ # Linux/MacOS
 
-# Using SSH (recommended if you have SSH keys configured)
-git clone --single-branch -b bing-dev --recurse-submodules git@github.com:TheOpenSI/CoSMIC.git
+# Using SSH (recommended if you've SSH keys configured)
+git clone git@github.com:TheOpenSI/COSMIC_DB.git CoSMIC_DB/     # Linux/MacOS
 ```
-
-Once cloned, navigate to the project directory:
-
-```bash
-cd CoSMIC/
-```
-
----
-
-# 🚀 Getting Started
-
-Depending on your use case, we have 2 options to explore:
-
-## Option 1: Demo Setup
-
-1. **Linux**
-```bash
-# Make sure you're in the project root directory
-chmod +x ./scripts/demos/cosmic_demo.sh && ./scripts/demos/cosmic_demo.sh
-```
-
-After the script successfully run, you can access each services at:
-
-- **Traefik**: [localhost:8080](http://localhost:8080)
-- **React**: [cosmic.localhost](http://cosmic.localhost)
-- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
-- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
-- **PostgreSQL**: To access the database directly from the command line, use:
-
-```bash
-# On Linux/MacOS, add `sudo` if necessary
-docker exec cosmic-postgres psql -U postgres
-```
-
-If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
-
-```
-psql (18.3)
-Type "help" for help.
-
-postgres=#
-```
-
-The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
-
-2. **macOS**
-```zsh
-# Make sure you're in the project root directory
-chmod +x ./scripts/demos/cosmic_demo.zsh && ./scripts/demos/cosmic_demo.zsh
-```
-
-After the script successfully run, you can access each services at:
-
-- **Traefik**: [localhost:8080](http://localhost:8080)
-- **React**: [cosmic.localhost](http://cosmic.localhost)
-- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
-- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
-- **PostgreSQL**: To access the database directly from the command line, use:
-
-```bash
-# On Linux/MacOS, add `sudo` if necessary
-docker exec cosmic-postgres psql -U postgres
-```
-
-If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
-
-```
-psql (18.3)
-Type "help" for help.
-
-postgres=#
-```
-
-The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
-
-3. **Windows**
 ```ps1
-# Make sure you're in the project root directory
-.\scripts\demos\CosmicDemo.ps1
+# Using HTTPS (recommended for most users)
+git clone https://github.com/TheOpenSI/COSMIC_DB.git CoSMIC_DB/ # Windows
+
+# Using SSH (recommended if you've SSH keys configured)
+git clone git@github.com:TheOpenSI/COSMIC_DB.git CoSMIC_DB/     # Windows
 ```
 
-After the script successfully run, you can access each services at:
-
-- **Traefik**: [localhost:8080](http://localhost:8080)
-- **React**: [cosmic.localhost](http://cosmic.localhost)
-- **FastAPI**: [api.cosmic.localhost](http://api.cosmic.localhost)
-- **pgAdmin**: [db.cosmic.localhost](http://db.cosmic.localhost) (Use the credentials from `docker/secrets/gui/pgadmin_*.txt` file to log in)
-- **Ollama**: [ollama.cosmic.localhost](http://ollama.cosmic.localhost)
-- **PostgreSQL**: To access the database directly from the command line, use:
+Once cloned, navigate to the project root directory:
 
 ```bash
-# On Linux/MacOS, add `sudo` if necessary
-docker exec cosmic-postgres psql -U postgres
+cd CoSMIC_DB/ # Linux/MacOS
+```
+```ps1
+Set-Location CoSMIC_DB\ # Windows
 ```
 
-If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+# Understanding Configuration Setup
 
-```
-psql (18.3)
-Type "help" for help.
+Our backend expects configuration files to be organised in specific locations depending on your chosen setup method. Understanding this structure will help you prepare the environment correctly.
 
-postgres=#
-```
+## Docker Configuration
 
-The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
+If you're planning to use Docker, configuration files are organised in the following locations:
 
-### **GPU Configuration**
+1. `docker/secrets/postgres_*.txt`: Contains PostgreSQL database credentials and configuration files.
+2. `docker/secrets/pgadmin_*.txt`: Contains pgAdmin credentials and authentication files.
+3. `docker/configs/pgadmin_*.json`: Contains pgAdmin server definitions and non-sensitive configuration.
+4. `cores/cosmic_*.env`: Contains core application environment variables (at project root).
 
-OpenSI-CoSMIC includes flexible GPU support through Ollama. By default, the system uses a CPU-only Dockerfile that's guaranteed to work on all operating systems (Windows, macOS, Linux). However, if you have a GPU installed on a Linux/macOS machine and want to leverage it for improved performance, you can enable GPU acceleration.
+Create the necessary directories first:
 
-To enable GPU support, open the `compose.yaml` file and modify the Ollama service configuration. The file includes clear documentation on which Dockerfile to use based on your GPU type.
-
-1. **NVIDIA GPUs** (Linux/MacOS)
-```yaml
-build:
-  context: ./
-  dockerfile: ./docker/dockerfiles/ollama/ollama.nvidia_gpu.Dockerfile
-gpus: all
+```bash
+mkdir -p docker/{secrets,configs}
 ```
 
-2. **AMD GPUs** (Linux/MacOS)
-
-```yaml
-build:
-  context: ./
-  dockerfile: ./docker/dockerfiles/ollama/ollama.amd_gpu.Dockerfile
-devices:
-  - "/dev/kfd:/dev/kfd"
-  - "/dev/dri:/dev/dri"
-```
+Then, copy the following files from the `examples/` directory to their respective backend directories:
 
 > [!IMPORTANT]
-> GPU support is only reliably available on **Linux & MacOS**. If you're using
-> Windows, the Docker virtualization layer introduces complications with GPU
-> passthrough, so we recommend sticking with the default CPU-only configuration.
-> For more detailed information about Ollama's Docker GPU support, please refer
-> to the [official Ollama documentation](https://docs.ollama.com/docker).
+> Remember to remove these from each filenames:
+> - "`{fastapi,postgres,pgadmin}_`" leading name
+> - "`.example`" suffix
 
-The default CPU-only Dockerfile is optimized for broad compatibility and will work reliably across all platforms and hardware configurations, so you don't need to make any changes unless you specifically want GPU acceleration.
+1. **Backend service**: (`cosmic_*.example.env`) ==> (`cores/`)
+2. **PostgreSQL service**: (`postgres_*.example.txt`) ==> (`docker/secrets/`)
+3. **pgAdmin service**: (`pgadmin_*.example.txt` & `pgadmin_*.example.json`) ==> (`docker/secrets/` & `docker/configs/` respectively)
 
-### **First Run Initialisation**
-> [!NOTE]
-> During the first run, the system will download and install a substantial
-> number of AI/ML Python packages. Due to the comprehensive nature of these
-> dependencies, the initial setup may take considerable time depending on your
-> internet connection speed and system specifications. We recommend sitting
-> back, grabbing a cup of coffee or tea, and letting the system complete the
-> installation process without interruption. Everything will be ready when it
-> finishes!
+> [!TIP]
+> Before finalising these files, review and adjust default values such as
+> passwords, database usernames, and service ports. If you're unsure about any
+> settings, the default values work fine for local development, so you can skip
+> customisation for now and proceed with the defaults.
 
-## Option 2: Dev Setup
+## Native Configuration
 
-If you're contributing to the OpenSI-CoSMIC project or want to understand how the different components work together, this section guides you through setting up the development environment.
+> [!TIP]
+> The `.env` file approach is recommended as it keeps your configuration
+> organised and prevents accidentally committing secrets to version control.
+> Make sure to add `.env` to your `.gitignore` file.
 
-### **Frontend Development**
+If you're planning to go with native setup, configuration is handled through environment variables. You've two options:
 
-The frontend is built as a separate repository to maintain clean separation of concerns. For more detailed information, start with the [development guide](https://github.com/TheOpenSI/CoSMIC_UI/blob/main/README.md) in `frontend/` directory.
+### **Option 1: Create a `.env` file in the `cores/` directory**
 
-### **Backend Development**
+First, copy the `examples/cosmic_*.example.env` file and customise it:
 
-The backend is built within this repository as it contains the core CoSMIC platform and logics. For more detailed information, start with the [development guide](backend/README.md) in `backend/` directory.
+```bash
+cp ../examples/cosmic_*.example.env ./cores/cosmic_*.env # Linux/MacOS
+```
+```ps1
+Copy-Item -Path ..\examples\cosmic_*.example.env -Destination .\cores\cosmic_*.env # Windows
+```
 
-# **Understanding the CoSMIC Architecture**
+Then, edit the `cores/cosmic_*.env` file to set your desired configuration values.
 
-> [!NOTE]
-> At the moment, we're in the process of migrating the old system over to the
-> new structure. Therefore, any of the metioned files below can be found in
-> `backend/todo` directory until progress is done. Thank you for understanding.
+### **Option 2: Set environment variables directly in your shell**
 
-The system's behavior is configured through the `config.yaml` file located at `scripts/configs/config.yaml`. This configuration drives the 5 core services:
+Alternatively, export variables directly before running the application:
 
-1. **Chess Game** (`src/services/chess.py`): Provides next move prediction and detailed game analysis using advanced AI models
-2. **Vector Database** (`src/services/vector_database.py`): Manages text-based and document-based information, enabling semantic search and retrieval
-3. **Retrieval-Augmented Generation (RAG)** (`src/services/rag.py`): Enhances question answering by retrieving relevant context from the vector database
-4. **Code Generation** ([PyCapsule](https://docs.python.org/3/c-api/capsule.html)): Generates Python code based on natural language descriptions.
-5. **Question Answering (QA)** (`src/services/qa.py`): Provides general-purpose reasoning and question answering capabilities
-
-When a user submits a query, the [LLM-based Query Analyzer](src/query_analyser/query_analyser.py) evaluates the input and routes it to the most appropriate service. This intelligent routing ensures that specialized services handle their domain-specific tasks while general services provide fallback capability.
-
-Specifically for **Chess Game** service, advanced chess capabilities has been build:
-
-1. **Chess Puzzle Solving** (`src/modules/chess_qa_puzzle.py`): Specialized puzzle analysis and next move prediction
-2. **FEN Generation** (`src/modules/chess_genfen.py`): Converts move sequences into Forsyth-Edwards Notation for position analysis
-3. **Chain-of-Thought Reasoning** (`src/modules/chess_gencot.py`): Generates step-by-step reasoning for move recommendations
-
----
-
-# 📚 Conventions & Resources
-
-This project follows specific conventions for different components to maintain consistency and facilitate collaboration. Choose the section relevant to your work:
-
-1. **[Git Workflow](doc/GIT.md)**: Guidelines for branching, committing, and pulling requests
-2. **[Frontend Development](doc/REACT.md)**: React component patterns, styling, and component organization
-3. **[Backend Development](doc/PYTHON.md)**: Python code style, service architecture, and API design
-4. **[Database Schema](doc/POSTGRES.md)**: Database design patterns, migrations, and query optimization
-
----
-
-# 🤝 Contributing
-
-We welcome contributions from researchers, developers, and enthusiasts. There are multiple ways to get involved with the OpenSI-CoSMIC project:
-
-**Report Issues**: Found a bug or have a feature suggestion? Open an issue on our [GitHub repository](https://github.com/TheOpenSI/CoSMIC/issues).
-
-**Submit Code Contributions**: We accept pull requests from the community. Please review our [contribution guidelines](CONTRIBUTING) before submitting to ensure your contributions align with our standards.
-
-**Support the Project**: Consider making a donation to support ongoing development at [our donations page](https://payments.canberra.edu.au/Misc/tran?tran-type=OPENSI).
-
----
-
-# 📝 Citation
-
-If you use OpenSI-CoSMIC in your research or project, please cite the following paper:
-
-```bibtex
-@misc{
-    title         = {Unleashing Artificial Cognition: Integrating Multiple AI Systems},
-    author        = {Muntasir Adnan and Buddhi Gamage and Zhiwei Xu and Damith Herath and Carlos C. N. Kuhn},
-    howpublished  = {Australasian Conference on Information Systems},
-    year          = {2024}
-}
+```bash
+# Linux/MacOS
+export DB_DIALECT=postgresql
+export DB_DRIVER=psycopg
+export DB_USER=postgres
+export DB_PASSWORD=""
+export DB_HOST=localhost
+export DB_PORT=5432
+export DB_NAME=postgres
+```
+```ps1
+# Windows
+$env:DB_DIALECT="postgresql"
+$env:DB_DRIVER="psycopg"
+$env:DB_USER="postgres"
+$env:DB_PASSWORD=""
+$env:DB_HOST="localhost"
+$env:DB_PORT="5432"
+$env:DB_NAME="postgres"
 ```
 
 ---
 
-# 📧 Support & Contact
+# Setup & Execution
 
-We're here to help with technical questions and project coordination
+> [!TIP]
+> Docker provides an isolated environment where all services run in containers.
+> This approach is recommended if you want to avoid installing PostgreSQL and
+> other dependencies directly on your machine.
 
-1. **Technical Support**
-For engineering questions, bug reports, or implementation issues:
+## Docker Setup
 
-- [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au)
-- [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au)
-- [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au)
-- [Manile Srun](mailto:manile.srun@canberra.edu.au)
-- [Bing Tran](mailto:binhsan1307@gmail.com)
+Before you begin, ensure you have **Docker** & **Docker Compose** installed on your system. These are required to run the platform:
 
-2. **Project Management**:
-For project-level decisions and strategic inquiries:
-- [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au)
+1. [**Docker**](https://docs.docker.com/get-docker/)
+2. [**Docker Compose**](https://docs.docker.com/compose/install/)
 
----
+### **1. Starting Docker Services**
 
-# 📄 License
+From the project root directory (`CoSMIC_DB/`), ensure you've completed the steps in the [Docker Configuration](#docker-configuration) section above. Then start all the service using `compose.yaml` Docker Compose file:
 
-OpenSI-CoSMIC is distributed under the [MIT License](LICENSE). This permissive license allows broad use while maintaining attribution requirements.
+```bash
+# Add `sudo` if necessary
+docker compose up --build -d # Linux/MacOS
+```
+```ps1
+docker compose up --build -d # Windows
+```
 
-**Note that if you use any of the following models or services, you must also comply with their respective licenses:**
+### **2. Verifying Docker Services**
 
-1. **Ollama Models**
-If you leverage the power of Llama 3.1, or Qwen 3.5 from Ollama, you must review and comply with the license of any specific model you download and use through Ollama. Visit the [Ollama Models Page](https://ollama.com/library) for detailed license information for each model.
+Once the containers are running, you can verify that all services are working correctly by these way:
 
-2. **Hugging Face Models**
-If you use Mistral 7B v0.1, Mistral 7B Instruct v0.1, Gemma 7B, or Gemma 7B Instruct from Hugging Face, you must also follow the [Hugging Face Model License](https://huggingface.co/models)
+1. **FastAPI**: [localhost:3000/docs](http://localhost:3000/docs)
+2. **pgAdmin**: [localhost:5050](http://localhost:5050) (use credentials from `docker/secrets/pgadmin_*.txt` file to login)
+3. **PostgreSQL**:
+- We disabled direct access by default as this's totally viewable from **pgAdmin**. However, you can still do it by typing this in your terminal:
 
-3. **OpenAI API**
-If you integrate GPT 4o or GPT 5.4 from OpenAI, you must also comply with [OpenAI's Terms of Service (ToS)](https://openai.com/terms)
+```bash
+# Add `sudo` if necessary
+docker exec cosmic-infrastructure-postgres psql -U demo # Linux/MacOS
+```
+```ps1
+docker exec cosmic-infrastructure-postgres psql -U demo # Windows
+```
 
----
+or go to **Docker Desktop**, search for `cosmic-infrastructure-postgres` service under `opensi-cosmic-infrastructure` top-level service, click on it then click on **Terminal** icon on the near top right corner.
 
-# 💰 Funding
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
 
-This project receives funding through:
+```
+psql (18.3)
+Type "help" for help.
 
-1. **ACT Government Future Jobs Fund**: Partnership with Open Source Institute (OpenSI) under agreement **R01553**
-2. **NetApp Technology Alliance**: Partnership with NetApp under agreement **R01657**
+postgres=#
+```
 
-These partnerships enable us to maintain the project, implement new features, and provide community support.
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.
+
+## Native Setup
+
+Before you begin, ensure you have `python (v3.14+)`, `uv`, and `PostgreSQL (v18+)` running on your system:
+
+```bash
+# Linux/MacOS
+python --version
+uv --version
+psql --version
+```
+```ps1
+# Windows
+py --version
+uv --version
+psql --version
+```
+
+### **1. Installing Dependencies**
+
+Our backend uses **Python (v3.14+)** with the `uv` package manager for dependency management. Once **PostgreSQL (v18+)** is running and you're in the project root directory (`CoSMIC_DB/`), install the project's Python dependencies:
+
+```bash
+uv sync --frozen --no-cache # Linux/MacOS
+```
+```ps1
+uv sync --frozen --no-cache # Windows
+```
+
+### **2. Starting Backend Server**
+
+After dependencies are installed, ensure you've completed the steps from the [Native Configuration](#native-configuration) section above. Then, start the FastAPI development server:
+
+```bash
+uv run fastapi dev # Linux/MacOS
+```
+```ps1
+uv run fastapi dev # Windows
+```
+
+### **3. Verifying Native Setup**
+
+You can now verify that the backend is running correctly by these way:
+
+1. **FastAPI**: [localhost:8000/docs](http://localhost:8000/docs)
+2. **pgAdmin**:
+- On `Windows/MacOS`, search for and open the **pgAdmin 4** application from your applications menu.
+- On `Linux`, search for pgAdmin or type `pgadmin4` in your terminal to start the application.
+- Default credentials on all OS environment are:
+
+```txt
+Host:       postgres
+Username:   postgres
+Password:   none, unless you set it explicitly during installation setup
+Database:   postgres
+```
+
+3. **PostgreSQL**:
+- We disabled direct access by default as this's totally viewable from **pgAdmin**. However, you can still do it by typing this in your terminal:
+
+```bash
+psql -U postgres # Linux/MacOS
+```
+```ps1
+psql -U postgres # Windows
+```
+
+If the connection is successful, you'll see the PostgreSQL prompt, which looks like this:
+
+```
+psql (18.3)
+Type "help" for help.
+
+postgres=#
+```
+
+The version number and exact format may vary depending on your PostgreSQL installation, but the prompt indicates a successful connection.

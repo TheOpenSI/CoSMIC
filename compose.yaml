@@ -1,76 +1,16 @@
-name: OpenSI-CoSMIC
+name: OpenSI-CoSMIC-Infrastructure
 
 
 services:
-  # NOTE: frontend and backend is built on 2 different servers. Therefore, I
-  # commented out for now until I have created a dedicated Docker version to run
-  # backend only, while this one will be for actual demo run.
-  # frontend:
-  #   container_name: cosmic-react
-  #   depends_on:
-  #     backend:
-  #       restart: true
-  #       condition: service_started
-  #       required: true
-  #
-  #     traefik:
-  #       restart: true
-  #       condition: service_started
-  #       required: true
-  #   restart: unless-stopped
-  #   build:
-  #     context: ./
-  #     dockerfile: ./docker/dockerfiles/react.Dockerfile
-  #   # NOTE:
-  #   # Live mounting for auto reload on dev only. Remove it and the
-  #   # corresponding top-level volume on prod.
-  #   volumes:
-  #     - type: bind
-  #       source: ./frontend
-  #       target: /app
-  #       # NOTE:
-  #       # This makes `node_modules` directory container-native at runtime and not
-  #       # trying to bypass the ignore at build time. This's very important when
-  #       # you do the development in Windows.
-  #     - type: volume
-  #       source: cosmic-react-node
-  #       target: /app/node_modules
-  #   ports:
-  #     - name: cosmic-react-vite
-  #       target: 5173
-  #       host_ip: 127.0.0.1
-  #       published: "5173"
-  #       protocol: tcp
-  #       app_protocol: http
-  #       mode: host
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.frontend.rule=Host(`cosmic.localhost`)"
-  #     - "traefik.http.routers.frontend.entrypoints=cosmic"
-  #     - "traefik.http.services.frontend.loadBalancer.server.port=5173"
-  #
-  #     # CORS routing on infra level
-  #     - "traefik.http.routers.frontend-cosmic-proxy.rule=Host(`cosmic.localhost`) && PathPrefix(`/cosmic`)"
-  #     - "traefik.http.routers.frontend-cosmic-proxy.entrypoints=cosmic"
-  #     - "traefik.http.routers.frontend-cosmic-proxy.service=backend@docker"
-  #   networks:
-  #       - cosmic-proxy
-
-
   backend:
-    container_name: cosmic-fastapi
+    container_name: cosmic-infrastructure-fastapi
     depends_on:
       database:
         restart: true
         condition: service_started
         required: true
 
-      ollama:
-        restart: true
-        condition: service_started
-        required: true
-
-      traefik:
+      gui:
         restart: true
         condition: service_started
         required: true
@@ -83,48 +23,39 @@ services:
     # corresponding top-level volume on prod.
     volumes:
       - type: bind
-        source: ./backend
+        source: ./
         target: /app
         # NOTE:
         # This makes `.venv` directory container-native at runtime and not
         # trying to bypass the ignore at build time. This's very important when
         # you do the development in Windows.
       - type: volume
-        source: cosmic-fastapi-venv
+        source: cosmic-infrastructure-fastapi-venv
         target: /app/.venv
+    # NOTE: For quick debugging (on dev only)
     ports:
-      - name: cosmic-fastapi-uvicorn
+      - name: cosmic-infrastructure-fastapi-uvicorn
         target: 8000
         host_ip: 127.0.0.1
         published: "3000"
         protocol: tcp
         app_protocol: http
         mode: host
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.cosmic.localhost`)"
-      - "traefik.http.routers.backend.entrypoints=cosmic"
-      - "traefik.http.services.backend.loadBalancer.server.port=8000"
     networks:
-        - cosmic-proxy
+        - cosmic-infrastructure-internal
 
 
   database:
-    container_name: cosmic-postgres
-    depends_on:
-      traefik:
-        restart: true
-        condition: service_started
-        required: true
+    container_name: cosmic-infrastructure-postgres
     restart: unless-stopped
     # Set shared memory limit when using docker compose
     shm_size: 128mb
     secrets:
-      - source: cosmic-postgres-user
+      - source: cosmic-infrastructure-postgres-user
         target: usr.txt
-      - source: cosmic-postgres-database
+      - source: cosmic-infrastructure-postgres-database
         target: db.txt
-      - source: cosmic-postgres-password
+      - source: cosmic-infrastructure-postgres-password
         target: pwd.txt
     environment:
         POSTGRES_USER_FILE: /run/secrets/usr.txt
@@ -135,183 +66,81 @@ services:
       dockerfile: ./docker/dockerfiles/postgres.Dockerfile
     volumes:
       - type: volume
-        source: cosmic-postgres-data
+        source: cosmic-infrastructure-postgres-data
         target: /var/lib/postgresql
     networks:
-        - cosmic-proxy
+        - cosmic-infrastructure-internal
 
 
   gui:
-    container_name: cosmic-pgadmin
-    depends_on:
-      backend:
-        restart: true
-        condition: service_started
-        required: true
-
-      database:
-        restart: true
-        condition: service_started
-        required: true
-
-      traefik:
-        restart: true
-        condition: service_started
-        required: true
+    container_name: cosmic-infrastructure-pgadmin
     restart: unless-stopped
     secrets:
-      - source: cosmic-pgadmin-password
+      - source: cosmic-infrastructure-pgadmin-password
         target: pwd.txt
     environment:
         # NOTE: Make sure to enable 2FA for this account on prod
         PGADMIN_DEFAULT_EMAIL: opensi@canberra.edu.au
         PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pwd.txt
     configs:
-      - source: cosmic-pgadmin-server
+      - source: cosmic-infrastructure-pgadmin-server
         target: /pgadmin4/servers.json
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/pgadmin.Dockerfile
     volumes:
       - type: volume
-        source: cosmic-pgadmin-data
+        source: cosmic-infrastructure-pgadmin-data
         target: /var/lib/pgadmin
+    # NOTE: For quick debugging (on dev only)
     ports:
-      - name: cosmic-pgadmin-gunicorn
+      - name: cosmic-infrastructure-pgadmin-gunicorn
         target: 80
         host_ip: 127.0.0.1
         published: "5050"
         protocol: tcp
         app_protocol: http
         mode: host
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.gui.rule=Host(`db.cosmic.localhost`)"
-      - "traefik.http.routers.gui.entrypoints=cosmic"
-      - "traefik.http.services.gui.loadBalancer.server.port=80"
     networks:
-        - cosmic-proxy
-
-
-  ollama:
-    container_name: cosmic-ollama
-    depends_on:
-      traefik:
-        restart: true
-        condition: service_started
-        required: true
-    restart: unless-stopped
-    # NOTE:
-    # If you've GPU installed on your machine AND it's running Linux/MacOS
-    # (this's very important), comment out current Dockerfile and use the
-    # following:
-    # 1. NVIDIA GPU
-    # build:
-    #   context: ./
-    #   dockerfile: ./docker/dockerfile/ollama/ollama.nvida_gpu.Dockerfile
-    # model:
-    #   gpus: all
-    # 2. AMD GPU
-    # build:
-    #   context: ./
-    #   dockerfile: ./docker/dockerfile/ollama/ollama.amd_gpu.Dockerfile
-    # devices:
-    #   - "/dev/kfd:/dev/kfd"
-    #   - "/dev/dri:/dev/dri"
-    # Otherwise, stick with the default as it's guaranteed to run on all OSes.
-    # Refer to the documentation if you've any questions:
-    # https://docs.ollama.com/docker
-    build:
-      context: ./
-      dockerfile: ./docker/dockerfiles/ollama/ollama.all_cpu.Dockerfile
-    volumes:
-      - type: volume
-        source: cosmic-ollama-data
-        target: /root/.ollama
-    networks:
-        - cosmic-proxy
-
-
-  traefik:
-    container_name: cosmic-traefik
-    restart: unless-stopped
-    build:
-      context: ./
-      dockerfile: ./docker/dockerfiles/traefik.Dockerfile
-    volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-    ports:
-      - name: cosmic-traefik-http
-        target: 80
-        host_ip: 127.0.0.1
-        published: "80"
-        protocol: tcp
-        app_protocol: http
-        mode: host
-
-      # NOTE: viewable dashboard port (use only in dev)
-      - name: cosmic-traefik-dashboard
-        target: 8080
-        host_ip: 127.0.0.1
-        published: "8080"
-        protocol: tcp
-        app_protocol: http
-        mode: host
-    command:
-      # Entrypoints
-      - "--entrypoints.cosmic.address=:80"
-
-      # Providers
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=true"
-      - "--providers.docker.network=proxy_cosmic_net"
-
-      # API & Dashboard (NOTE: use only in dev)
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-
-      # Logging
-      - "--log.level=INFO"
-      - "--accesslog=true"
-      - "--metrics.prometheus=true"
-    networks:
-      - cosmic-proxy
+        - cosmic-infrastructure-internal
 
 
 volumes:
-  cosmic-postgres-data:
-    name: cosmic-relational
-  cosmic-pgadmin-data:
-    name: cosmic-gui
-  cosmic-ollama-data:
-    name: cosmic-slm-provider
   # NOTE: as explained above, define this only in dev (delete on prod).
-  cosmic-fastapi-venv:
-    name: cosmic-backend-ignore
-  # NOTE: as explained above, define this only in dev (delete on prod).
-  cosmic-react-node:
-    name: cosmic-frontend-ignore
+  cosmic-infrastructure-fastapi-venv:
+    name: cosmic-infrastructure-backend-ignore
+
+  # NOTE: data will be stored from the hosting machine rather than inside
+  # container due to disadvantage of Docker Overlay2 (on prod only)
+  cosmic-infrastructure-postgres-data:
+    name: cosmic-infrastructure-relational
+
+  # NOTE: data will be stored from the hosting machine rather than inside
+  # container due to disadvantage of Docker Overlay2 (on prod only)
+  cosmic-infrastructure-pgadmin-data:
+    name: cosmic-infrastructure-gui
 
 
 networks:
-  cosmic-proxy:
-    name: proxy_cosmic_net
+  cosmic-infrastructure-internal:
+    name: api_cosmic_infrastructure_net
     driver: bridge
 
 
 secrets:
-  cosmic-postgres-user:
-    file: ./docker/secrets/database/usr.txt
-  cosmic-postgres-database:
-    file: ./docker/secrets/database/db.txt
-  cosmic-postgres-password:
-    file: ./docker/secrets/database/pwd.txt
-  cosmic-pgadmin-password:
-    file: ./docker/secrets/gui/pwd.txt
+  cosmic-infrastructure-postgres-user:
+    file: ./docker/secrets/postgres_usr.txt
+
+  cosmic-infrastructure-postgres-database:
+    file: ./docker/secrets/postgres_db.txt
+
+  cosmic-infrastructure-postgres-password:
+    file: ./docker/secrets/postgres_pwd.txt
+
+  cosmic-infrastructure-pgadmin-password:
+    file: ./docker/secrets/pgadmin_pwd.txt
 
 
 configs:
-  cosmic-pgadmin-server:
-    file: ./docker/configs/gui/svr.json
+  cosmic-infrastructure-pgadmin-server:
+    file: ./docker/configs/pgadmin_svr.json
