@@ -66,7 +66,8 @@ class ChatboxBase(SQLModel):
 
 class ServiceBase(SQLModel):
     name: str = Field(
-        max_length=100
+        max_length=100,
+        sa_type=VARCHAR
     )
     desc: str | None = Field(
         default=None,
@@ -391,15 +392,14 @@ class Services(ServiceBase, table=True):
         ),
     )
     id: UUID | None = Field(
-        default=None,
-        primary_key=True
+        default_factory=(lambda: uuid7()),
+        primary_key=True,
+        sa_type=Uuid
     )
-    create_on: datetime | None = Field(
-        default=None,
-        nullable=False,
+    create_on: datetime = Field(
+        default_factory=(lambda: datetime.now(tz=timezone.utc)),
         sa_type=TIMESTAMP(timezone=True) # type: ignore
     )
-
     models: list["Models"] = Relationship(
         back_populates="services",
         link_model=ServiceModelLink
@@ -580,7 +580,6 @@ class ServiceCreate(ServiceBase):
 class ServiceUpdate(ServiceBase):
     name:   str | None = None # type: ignore
     desc:   str | None = None
-    status: bool | None = False # type: ignore
 
 
 class ServiceDelete(ServiceBase):
