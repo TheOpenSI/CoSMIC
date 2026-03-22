@@ -69,6 +69,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
     { name = "psycopg" },
+    { name = "pydantic", extra = ["email"] },
     { name = "python-dotenv" },
     { name = "sqlmodel" },
 ]
@@ -77,6 +78,7 @@ dependencies = [
 requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.129.0" },
     { name = "psycopg", specifier = ">=3.3.3" },
+    { name = "pydantic", extras = ["email"], specifier = ">=2.12.5" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "sqlmodel", specifier = ">=0.0.37" },
 ]

@@ -40,7 +40,7 @@ chatboxes_v1_router: APIRouter = APIRouter(
 @chatboxes_v1_router.get(
     path="/",
     status_code=status.HTTP_200_OK,
-    response_model=list[ChatboxPublic]
+    response_model=list[ChatboxPublicWithUser]
 )
 async def read_chatboxes_v1(
     session: SessionDependency
