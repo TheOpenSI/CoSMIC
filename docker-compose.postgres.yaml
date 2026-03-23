@@ -99,9 +99,10 @@ services:
     container_name: cosmic
     image: opensicbr/cosmic:latest
     volumes:
-      - open-webui:/app/backend/data
+      # - open-webui:/app/backend/data
       - volume_configs:/app/scripts/configs
-      - .:/app # TO-DO must remove this as well for production as it relates with reload
+      - ./:/app # TODO: must remove this as well for production as it relates with reload
+      - venv-conflict:/app/.venv/ # Workaround on different '.venv' directory strucutre in between Linux and Windows
     ports:
       - "3000:3000"
       - "5678:5678" # debupy
@@ -127,6 +128,7 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
       - cosmic_db_server
+      - cosmic
     configs:
       - source: servers.json
         target: /pgadmin4/servers.json
@@ -152,11 +154,12 @@ configs:
 
 volumes:
   ollama: {}
-  open-webui: {}
-  pipelines: {}
+  # open-webui: {}
+  # pipelines: {}
   volume_configs: {}
   postgres-data: {}
   pgadmin-data: {}
+  venv-conflict: {}
 
 networks:
   cosmic_net:

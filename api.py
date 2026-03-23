@@ -8,7 +8,6 @@
 # # =======================================================
 
 
-from contextlib import asynccontextmanager
 from fastapi.responses import StreamingResponse
 import json
 from datetime import datetime
@@ -22,7 +21,6 @@ from fastapi import (
 )
 from fastapi.middleware.cors import CORSMiddleware
 from numpy import int64
-from src.db import create_db_and_table
 from src.opensi_cosmic import OpenSICoSMIC
 from pydantic import BaseModel
 import yaml, os, shutil
@@ -39,26 +37,9 @@ from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 from ollama import Client
 from src.services.llms.Ollama import Ollama
-from src.routers.users import users_v1_router
-from src.routers.roles import roles_v1_router
-from src.routers.chatboxes import chatboxes_v1_router
-from src.routers.services import services_v1_router
-from src.routers.models import models_v1_router
-from src.routers.statistics import statistics_v1_router
 
 
-# TODO: Need some more research on this usage rather than the deprecation
-# event: 'startup' & 'shutdown'
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Equivalent to 'startup' event
-    create_db_and_table()
-    yield
-
-    # Equivalent to 'shutdown' event (Optional)
-
-
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 ollama_client = Client(
     host="http://ollama:11434", headers={"Content-Type": "application/json"}
@@ -511,10 +492,3 @@ async def delete_ollama_model(model_name: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-app.include_router(router=users_v1_router)
-app.include_router(router=roles_v1_router)
-app.include_router(router=chatboxes_v1_router)
-app.include_router(router=services_v1_router)
-app.include_router(router=models_v1_router)
-app.include_router(router=statistics_v1_router)

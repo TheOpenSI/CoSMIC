@@ -37,7 +37,7 @@ class OllamaPullManager:
                  min_speed_kbps: float = 200.0, 
                  max_retries: int = 5,
                  fall_back_interval: int = 60,
-                 ollama_client: ollama.Client = None):
+                 ollama_client: ollama.Client | None = None):
         """
         OllamaPullManager to mange fail-safe model pulling
 
