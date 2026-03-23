@@ -1,15 +1,12 @@
-# # =====================Debugging========================
-# # Uncomment the following lines to enable debugging
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging
 # import debugpy
 # print("Waiting for debugger attach...")
 # debugpy.listen(("0.0.0.0", 5678))
 # debugpy.wait_for_client()
 # print("Debugger attached!")
-# # =======================================================
+# =======================================================
 
-
-from fastapi.responses import StreamingResponse
-import json
 from datetime import datetime
 import dotenv
 from fastapi import (
@@ -37,13 +34,10 @@ from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 from ollama import Client
 from src.services.llms.Ollama import Ollama
+from backend.routers import models
 
 
 app = FastAPI()
-
-ollama_client = Client(
-    host="http://ollama:11434", headers={"Content-Type": "application/json"}
-)
 
 # To test CORS_ALLOW_ORIGIN locally, you can set something like
 # CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
@@ -68,10 +62,6 @@ app.add_middleware(
 
 UPLOAD_BASE_DIR = "third_party"
 os.makedirs(UPLOAD_BASE_DIR, exist_ok=True)
-
-
-class PullModelRequest(BaseModel):
-    model: str
 
 
 class CosmicAPI(BaseModel):
@@ -492,3 +482,5 @@ async def delete_ollama_model(model_name: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+app.include_router(models.router, prefix="/api/v1/models", tags=["Models APIs"])
