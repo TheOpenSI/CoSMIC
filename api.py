@@ -1,15 +1,12 @@
-# # =====================Debugging========================
-# # Uncomment the following lines to enable debugging
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging
 # import debugpy
 # print("Waiting for debugger attach...")
 # debugpy.listen(("0.0.0.0", 5678))
 # debugpy.wait_for_client()
 # print("Debugger attached!")
-# # =======================================================
+# =======================================================
 
-
-from fastapi.responses import StreamingResponse
-import json
 from datetime import datetime
 import dotenv
 from fastapi import FastAPI, Request, File, UploadFile, HTTPException
@@ -22,25 +19,14 @@ import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
 
-import sys
-import asyncio
-import threading
-from fastapi.responses import StreamingResponse
-
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
 
-from ollama import Client
-from src.services.llms.Ollama import Ollama
-
+from backend.routers import models
 
 app = FastAPI()
-
-ollama_client = Client(
-    host="http://ollama:11434", headers={"Content-Type": "application/json"}
-)
 
 # To test CORS_ALLOW_ORIGIN locally, you can set something like
 # CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
@@ -65,10 +51,6 @@ app.add_middleware(
 
 UPLOAD_BASE_DIR = "third_party"
 os.makedirs(UPLOAD_BASE_DIR, exist_ok=True)
-
-
-class PullModelRequest(BaseModel):
-    model: str
 
 
 class CosmicAPI(BaseModel):
@@ -396,95 +378,4 @@ async def process_cosmic(data: CosmicAPI):
 
 
 # Models APIs - smanile
-@app.get("/models")
-async def get_ollama_models():
-    try:
-        result = ollama_client.list()
-
-        models = []
-
-        for model in result.get("models", []):
-            details = model.get("details", {})
-            models.append(
-                {
-                    "model": model.get("model"),
-                    "id": model.get("digest", "")[:12],
-                    "size": f"{round(model.get('size', 0) / (1000 ** 3), 1)} GB",
-                    "modified_at": model.get("modified_at"),
-                    "family": details.get("family", "N/A"),
-                }
-            )
-
-        return {"models": models, "total": len(models)}
-        # return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# @app.post("/models/pull")
-# async def pull_ollama_model(request: PullModelRequest):
-#     try:
-#         Ollama(llm_name=request.model)
-#         # ollama_client.pull(request.model)
-#         return {"message": f"Model '{request.model}' downloaded successfully"}
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/models/pull")
-async def pull_ollama_model(request: PullModelRequest):
-    # set up a queue [] (like an array, but can get and put messages in without crashing if empty)
-    # thread will DROP messages in
-    # stream will PICK messages out
-    queue = asyncio.Queue()
-    # needed so the thread can safely talk to asyncio
-    loop = asyncio.get_running_loop()
-
-    # Class that has "write" method to change from showing messages in terminal to showing in the frontend via stream
-    class PrintMessagesCapture:
-        def write(self, message):
-            sys.__stdout__.write(message)
-            loop.call_soon_threadsafe(queue.put_nowait, message)
-
-        def flush(self):
-            pass
-
-    # Thread - allows background jobs to run all together
-    def run():
-        sys.stdout = PrintMessagesCapture()
-        try:
-            Ollama(llm_name=request.model)
-            loop.call_soon_threadsafe(queue.put_nowait, "__DONE__")
-        except Exception as e:
-            loop.call_soon_threadsafe(queue.put_nowait, f"__ERROR__:{e}")
-
-    threading.Thread(target=run, daemon=True).start()
-
-    # Stream - picks messages and sends to user live
-    async def stream():
-        while True:
-            message = await queue.get()
-            if message == "__DONE__":
-                yield f"data: {json.dumps({'type': 'done'})}\n\n"
-                break
-
-            else:
-                clean = message.strip()
-                if not clean:
-                    continue
-
-                if "Download error" in clean:
-                    yield f"data: {json.dumps({'type': 'error', 'message': clean})}\n\n"
-                    break
-                yield f"data: {json.dumps({'type': 'log', 'message': clean})}\n\n"
-
-    return StreamingResponse(stream(), media_type="text/event-stream")
-
-
-@app.delete("/models/{model_name}")
-async def delete_ollama_model(model_name: str):
-    try:
-        ollama_client.delete(model_name)
-        return {"message": f"Model '{model_name}' deleted"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+app.include_router(models.router, prefix="/api/v1/models", tags=["Models APIs"])
