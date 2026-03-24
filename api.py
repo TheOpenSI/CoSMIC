@@ -9,7 +9,13 @@
 
 from datetime import datetime
 import dotenv
-from fastapi import FastAPI, Request, File, UploadFile, HTTPException
+from fastapi import (
+    FastAPI,
+    Request,
+    File,
+    UploadFile,
+    HTTPException
+)
 from fastapi.middleware.cors import CORSMiddleware
 from numpy import int64
 from src.opensi_cosmic import OpenSICoSMIC
@@ -18,13 +24,18 @@ import yaml, os, shutil
 import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
-
+import sys
+import asyncio
+import threading
+from fastapi.responses import StreamingResponse
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
 from utils.statistics import update_statistic_per_query
-
+from ollama import Client
+from src.services.llms.Ollama import Ollama
 from backend.routers import models
+
 
 app = FastAPI()
 
