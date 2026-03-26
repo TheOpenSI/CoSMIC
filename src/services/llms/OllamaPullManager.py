@@ -37,7 +37,7 @@ class OllamaPullManager:
                  min_speed_kbps: float = 200.0, 
                  max_retries: int = 5,
                  fall_back_interval: int = 60,
-                 ollama_client: ollama.Client | None = None):
+                 ollama_client: ollama.Client = None):
         """
         OllamaPullManager to mange fail-safe model pulling
 
@@ -55,6 +55,7 @@ class OllamaPullManager:
         self.min_speed_kbps = min_speed_kbps
         self.max_retries = max_retries
         self.fall_back_interval = fall_back_interval
+        self._download_error = None
         if ollama_client is None:
             self.ollama_client = ollama.Client()
         else:
@@ -123,7 +124,7 @@ class OllamaPullManager:
             print(f"Model {self.model_name} is available on the server.")
             return
         
-        print(f"Pulling model {self.model_name} in {self.mode} mode...")
+        print(f"Pulling model '{self.model_name}' in {self.mode} mode...")
         
         attempt = 0
         while attempt < self.max_retries:
@@ -140,6 +141,12 @@ class OllamaPullManager:
                     print(f"\nModel {self.model_name} pulled successfully!")
                     return
                 
+                # incorrect model name
+                if "file does not exist" in str(self._download_error).lower():
+                    print(f"Model '{self.model_name}' does not exist on the Ollama registry.")
+                    self._reset()
+                    return
+                
             except Exception as e:
                 print(f"\nError in attempt {attempt + 1}: {e}")
             
@@ -152,7 +159,7 @@ class OllamaPullManager:
         print(f"\nFailed to pull model after {self.max_retries} attempts.")
     
     
-    def _pull_with_stochastic(self):
+    def _pull_with_stochastic(self) -> bool:
         """
         Pull with stochastic interventions
         """
@@ -164,6 +171,11 @@ class OllamaPullManager:
                        f" at {target_percentage}%)...")
             
             self._start_download()
+            time.sleep(2) # Allow some time to start the thread and get initial progress
+            
+            if self._download_error is not None:
+                print(f"Download error: {self._download_error}")
+                return False 
             
             # Monitor progress until target percentage
             while self._is_pulling:
@@ -270,7 +282,8 @@ class OllamaPullManager:
                         print(f"\r{status}", end="", flush=True)
         
         except Exception as e:
-            print(f"\nDownload error: {e}")
+            self._download_error = str(e)
+            
         finally:
             self._is_pulling = False
        
@@ -303,3 +316,9 @@ class OllamaPullManager:
     def get_intervention_log(self):
         """Get log of completed interventions"""
         return self._completed_interventions
+    
+    
+if __name__ == "__main__":
+    model_name = "test_name"
+    pull_manager = OllamaPullManager(model_name=model_name, mode="stochastic")
+    pull_manager.pull_model()
