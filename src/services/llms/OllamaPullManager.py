@@ -326,10 +326,3 @@ class OllamaPullManager:
     def get_intervention_log(self):
         """Get log of completed interventions"""
         return self._completed_interventions
-    
-    
-if __name__ == "__main__":
-    model_name = "qwen3:235b"
-    model_name = "test_model"
-    pull_manager = OllamaPullManager(model_name=model_name, mode="stochastic")
-    pull_manager.pull_model()
