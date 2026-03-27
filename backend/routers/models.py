@@ -77,35 +77,34 @@ async def pull_ollama_model(request: PullModelRequest):
                 if not clean:
                     return
                 download_jobs[job_id]["logs"].append(clean)
-                # Nature of OllamaPullManager: the backend keeps on re-trying to re-download the model again and again.
-                # OllamaPullManager does not detect wrong name, it still keep on re-trying and re-downloading
-                # Therefore, it affects the frontend as well, the frontend just keep on running without stopping.
-                # Example: user just entered "s" for the model name
-
-                # For now:
-                # If "Progress:" never appeared in logs, the model name is invalid.
-                # If progress was already happening, it's a mid-download retry — let OllamaPullManager handle it.
-
-                if "file does not exist" in clean:
-                    progress_started = False
-                    for log in download_jobs[job_id]["logs"]:
-                        if "Progress:" in log:
-                            progress_started = True
-                            break
-                    if not progress_started:
-                        download_jobs[job_id]["status"] = "error"
-                        download_jobs[job_id][
-                            "error"
-                        ] = "Model not found — please check the model name!"
 
             def flush(self):
                 pass
 
         sys.stdout = PrintMessagesCapture()
 
+        # must handle Ollama errors carefully because it can't have exception as it would break the Ollama code
+        # if new errors arise, can add in here
         try:
             Ollama(llm_name=request.model)
-            download_jobs[job_id]["status"] = "done"
+            logs = download_jobs[job_id]["logs"]
+
+            for log in logs:
+                if "invalid model name" in log:
+                    download_jobs[job_id]["status"] = "error"
+                    download_jobs[job_id]["error"] = "Invalid model name!"
+                    break
+                if "does not exist on the Ollama registry" in log:
+                    download_jobs[job_id]["status"] = "error"
+                    download_jobs[job_id]["error"] = "Invalid model name!"
+                    break
+                if "no space left on device" in log:
+                    download_jobs[job_id]["status"] = "error"
+                    download_jobs[job_id]["error"] = "No space left!"
+                    break
+
+            else:
+                download_jobs[job_id]["status"] = "done"
         except Exception as e:
             download_jobs[job_id]["status"] = "error"
             download_jobs[job_id]["error"] = str(e)
