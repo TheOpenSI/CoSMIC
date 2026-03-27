@@ -101,6 +101,7 @@ async def pull_ollama_model(request: PullModelRequest):
                 if "no space left on device" in log:
                     download_jobs[job_id]["status"] = "error"
                     download_jobs[job_id]["error"] = "No space left!"
+                    break
 
             else:
                 download_jobs[job_id]["status"] = "done"
