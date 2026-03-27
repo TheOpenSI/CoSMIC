@@ -141,9 +141,19 @@ class OllamaPullManager:
                     print(f"\nModel {self.model_name} pulled successfully!")
                     return
                 
-                # incorrect model name
-                if "file does not exist" in str(self._download_error).lower():
-                    print(f"Model '{self.model_name}' does not exist on the Ollama registry.")
+                if self._download_error is not None:
+                    # incorrect model name
+                    if "file does not exist" in str(self._download_error).lower():
+                        print(f"Model '{self.model_name}' does not exist on the Ollama registry.")
+                    
+                    # storage issues
+                    elif "no space left on device" in str(self._download_error).lower():
+                        print("Storage issue detected: No space left on device.")
+                    
+                    # generic error
+                    else:
+                        print(f"Download error: {self._download_error}")
+                        
                     self._reset()
                     return
                 
@@ -171,10 +181,10 @@ class OllamaPullManager:
                        f" at {target_percentage}%)...")
             
             self._start_download()
-            time.sleep(2) # Allow some time to start the thread and get initial progress
+            time.sleep(5) # Allow some time to start the thread and get initial progress
             
             if self._download_error is not None:
-                print(f"Download error: {self._download_error}")
+                print(f"\nDownload error: {self._download_error}")
                 return False 
             
             # Monitor progress until target percentage
@@ -271,7 +281,7 @@ class OllamaPullManager:
                             
                             print(f"\rProgress: {self._current_percentage:.1f}% "
                                   f"({completed_mb:.1f}MB/{total_mb:.1f}MB)", 
-                                  end='', flush=True)
+                                  end="", flush=True)
                     
                     elif 'success' in status.lower():
                         self._download_completed = True
@@ -319,6 +329,7 @@ class OllamaPullManager:
     
     
 if __name__ == "__main__":
-    model_name = "test_name"
+    model_name = "qwen3:235b"
+    model_name = "test_model"
     pull_manager = OllamaPullManager(model_name=model_name, mode="stochastic")
     pull_manager.pull_model()
