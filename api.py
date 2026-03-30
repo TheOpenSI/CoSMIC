@@ -38,5 +38,5 @@ app.add_middleware(
 )
 
 # APIs - smanile
-app.include_router(default_apis.router, tags=["Default APIs"])
-app.include_router(models.router, prefix="/api/v1/models", tags=["Models APIs"])
+app.include_router(default_apis.router, tags=["CoSMIC APIs"])
+app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
