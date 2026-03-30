@@ -1,10 +1,10 @@
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
-import debugpy
-print("Waiting for debugger attach...")
-debugpy.listen(("0.0.0.0", 5678))
-debugpy.wait_for_client()
-print("Debugger attached!")
+# import debugpy
+# print("Waiting for debugger attach...")
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# print("Debugger attached!")
 # =======================================================
 
 
