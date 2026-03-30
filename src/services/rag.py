@@ -108,26 +108,28 @@ class RAGBase(ServiceBase):
         )
 
         # Store the retrieved page contents and page scores.
-        retrieved_context = []
+        retrieved_docs = []
         retrieved_context_score = []
 
         for doc, score in retrieved_contents:
             # Filter out low confidence context.
             if score >= self.retrieve_score_threshold:
-                retrieved_context.append(doc.page_content)
+                retrieved_docs.append(doc)
             else:
-                retrieved_context.append(None)
+                retrieved_docs.append(None)
 
             # Store all the scores.
             retrieved_context_score.append(score)
 
-        if len(retrieved_context) == 0:
+        if len(retrieved_docs) == 0:
             context = ""
         else:
             # Change the linechange to avoid messing up the print and log file.
             context = "".join([
-                f"Document {str(i)}: " + doc.replace("\n", " ") + ". " \
-                for i, doc in enumerate(retrieved_context) if (doc is not None)
+                f"{doc.metadata.get('title') if getattr(doc, 'metadata', None) else None}: "
+                + doc.page_content.replace("\n", " ")
+                + ". "
+                for i, doc in enumerate(retrieved_docs) if (doc is not None)
             ])
 
         return context, retrieved_context_score

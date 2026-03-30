@@ -10,3 +10,4 @@ database
 database
 ./scripts/configs/config_updated.yaml
 .idea
+.vscode/settings.json

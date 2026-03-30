@@ -9,7 +9,8 @@ is_quantized: False
 seed: 0  # seed of response generation by base LLM.
 doc_directory: "/app/data/docs"  # directory containing .pdf documents to build the system's vector database.
 document_path: []  # a string or a list of .pdf to add context to the vector database.
-service: 3  # service selection: -1 [auto], 0 [chess], 1 [update vector database], 2 [code generation], 3 [general QA]
+service: -1  # service selection: -1 [auto], 0 [chess], 1 [update vector database], 
+            # 2 [code generation], 3 [general QA], 4 [Academic QA]
 
 query_analyser:
   llm_name: "ollama:qwen2.5:7b"

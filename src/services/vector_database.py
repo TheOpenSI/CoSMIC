@@ -255,6 +255,8 @@ class VectorDatabase(ServiceBase):
         """
         # Check if the document exists.
         if os.path.exists(document_path):
+            document_title = os.path.splitext(os.path.basename(document_path))[0]
+
             # Read pages of a document.
             loader = PyPDFLoader(document_path)
             pages = loader.load_and_split() # split by page number
@@ -266,6 +268,11 @@ class VectorDatabase(ServiceBase):
             document_processed = []
 
             for doc in pages:
+                # Attach per-document metadata (propagates to all chunks).
+                if doc.metadata is None:
+                    doc.metadata = {}
+                doc.metadata["title"] = document_title
+
                 # If not highly similar to existing contents, add the content.
                 content_retrieved, similarity_score = self.similarity_search_with_relevance_scores(
                     doc.page_content,
@@ -279,7 +286,12 @@ class VectorDatabase(ServiceBase):
                     continue
 
                 # Ready to add to the vector database.
-                document_processed += self.document_splitter.split_documents([doc])
+                chunks = self.document_splitter.split_documents([doc])
+                for chunk in chunks:
+                    if chunk.metadata is None:
+                        chunk.metadata = {}
+                    chunk.metadata.setdefault("title", document_title)
+                document_processed += chunks
 
             # Obtain new knowledge from the splitted tokens.
             if len(document_processed) > 0:  # for invalid pdf such as a scanned .pdf
