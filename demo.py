@@ -27,7 +27,7 @@ import argparse
 
 from src.opensi_cosmic import OpenSICoSMIC
 
-# =============================================================================================================
+
 def run_cli(cosmic_instance: OpenSICoSMIC) -> None:
     while True:
         # Get a query from the terminal.
@@ -42,12 +42,27 @@ def run_cli(cosmic_instance: OpenSICoSMIC) -> None:
         # Print the results.
         print(f"[Answer] {answer}")
 
-def run_benchmark(cosmic_instance: OpenSICoSMIC, questions: list[str]) -> None:
+def run_benchmark(root_path: str,
+                  cosmic_instance: OpenSICoSMIC, 
+                  questions: list[str]) -> None:
+    
+    openai_config_path = os.path.join(root_path, "scripts/configs/config_openai.yaml")
+    l_config_path = os.path.join(root_path, "scripts/configs/config_l.yaml")
+
+    openai = OpenSICoSMIC(config_path=openai_config_path)
+    l_llm = OpenSICoSMIC(config_path=l_config_path)
+
     for question in questions:
         print(f"[Question] {question}")
         answer, _, _ = cosmic_instance(question)
-        print(f"[Answer] {answer}")
+        print(f"[{cosmic_instance.llm.llm_name} Answer] {answer}")
         print("-" * 50)
+        answer, _, _ = openai(question)
+        print(f"[{openai.llm.llm_name} Answer] {answer}")
+        print("-" * 50)
+        answer, _, _ = l_llm(question)
+        print(f"[{l_llm.llm.llm_name} Answer] {answer}")
+        print("=" * 100)
 
 if __name__ == "__main__":
     parser =  argparse.ArgumentParser(description = "Academic Governance RAG Benchmark")
@@ -71,11 +86,11 @@ if __name__ == "__main__":
         questions = f.read().splitlines()
 
     # Build the system for a specific LLM.
-    config_path = os.path.join(root, "scripts/configs/config.yaml")
+    config_path = os.path.join(root, "scripts/configs/config_default.yaml")
     opensi_cosmic = OpenSICoSMIC(config_path=config_path)
 
     if args.benchmark:
-        run_benchmark(opensi_cosmic, questions)
+        run_benchmark(root, opensi_cosmic, questions)
     else:
         run_cli(opensi_cosmic)
 

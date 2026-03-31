@@ -282,13 +282,23 @@ class GPT(LLMBase):
         self.model = OpenAI(api_key=api_key)
 
         # OpenAI API call.
+        # self.llm = lambda system_prompt: \
+        #     self.model.chat.completions.create(
+        #         model=llm_name,
+        #         # max_tokens=2048,
+        #         max_completion_tokens=2048,
+        #         temperature=0.0,
+        #         messages=system_prompt
+        #     ).choices[0].message.content
+
+        # OpenAI API Upgrade for newer model
         self.llm = lambda system_prompt: \
-            self.model.chat.completions.create(
+            self.model.responses.create(
                 model=llm_name,
-                max_tokens=2048,
+                max_output_tokens=2048,
                 temperature=0.0,
-                messages=system_prompt
-            ).choices[0].message.content
+                input=system_prompt
+            ).output[0].content[0].text
 
     def quit(self):
         """Close OpenAI API model entry.

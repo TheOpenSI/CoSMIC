@@ -216,7 +216,7 @@ class QABase(ServiceBase):
                 '4': "AcademicGovernance"
             }
             
-            response, raw_response = self.llm(user_prompt, context=context, serivce_name=services_names[service_option])
+            response, raw_response = self.llm(user_prompt, context=context, service_name=services_names[service_option])
 
 
         # Print service name.
