@@ -1,0 +1,1329 @@
+Model qwen2.5:7b is available on the server.
+LLM instance created: <src.services.llms.Ollama.Ollama object at 0x7fee18721240>
+Model qwen2.5:7b is available on the server.
+[92m[Success][0m Load "/home/adnana/workspace/CoSMIC/default" to vector database.
+Adding documents to vector database...
+document_path='data/docs/guidance-note-academic-governance.pdf'
+[93m[Warning][0m Contents of 'data/docs/guidance-note-academic-governance.pdf' exist.
+document_path='data/docs/UC Act.PDF'
+[93m[Warning][0m Contents of 'data/docs/UC Act.PDF' exist.
+document_path='data/docs/UC AB Rules 2021.pdf'
+[93m[Warning][0m Contents of 'data/docs/UC AB Rules 2021.pdf' exist.
+document_path='data/docs/IIA three-lines-model.pdf'
+[93m[Warning][0m Contents of 'data/docs/IIA three-lines-model.pdf' exist.
+document_path='data/docs/Academic Governance Handbook 2025.pdf'
+[93m[Warning][0m Contents of 'data/docs/Academic Governance Handbook 2025.pdf' exist.
+document_path='data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf'
+[93m[Warning][0m Contents of 'data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf' exist.
+document_path='data/docs/HESF Threshold Standards.pdf'
+[93m[Warning][0m Contents of 'data/docs/HESF Threshold Standards.pdf' exist.
+document_path='data/docs/TEQSA risk assessment framework.pdf'
+[93m[Warning][0m Contents of 'data/docs/TEQSA risk assessment framework.pdf' exist.
+Adding documents to vector database...
+LLM instance created: <src.services.llms.llm.GPT object at 0x7fedff391540>
+Model qwen2.5:7b is available on the server.
+[92m[Success][0m Load "/home/adnana/workspace/CoSMIC/default" to vector database.
+Adding documents to vector database...
+document_path='data/docs/guidance-note-academic-governance.pdf'
+[93m[Warning][0m Contents of 'data/docs/guidance-note-academic-governance.pdf' exist.
+document_path='data/docs/UC Act.PDF'
+[93m[Warning][0m Contents of 'data/docs/UC Act.PDF' exist.
+document_path='data/docs/UC AB Rules 2021.pdf'
+[93m[Warning][0m Contents of 'data/docs/UC AB Rules 2021.pdf' exist.
+document_path='data/docs/IIA three-lines-model.pdf'
+[93m[Warning][0m Contents of 'data/docs/IIA three-lines-model.pdf' exist.
+document_path='data/docs/Academic Governance Handbook 2025.pdf'
+[93m[Warning][0m Contents of 'data/docs/Academic Governance Handbook 2025.pdf' exist.
+document_path='data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf'
+[93m[Warning][0m Contents of 'data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf' exist.
+document_path='data/docs/HESF Threshold Standards.pdf'
+[93m[Warning][0m Contents of 'data/docs/HESF Threshold Standards.pdf' exist.
+document_path='data/docs/TEQSA risk assessment framework.pdf'
+[93m[Warning][0m Contents of 'data/docs/TEQSA risk assessment framework.pdf' exist.
+Adding documents to vector database...
+Pulling model 'qwen2.5:32b' in stochastic mode...
+Starting download (Intervention 1/2 at 85%)...
+verifying sha256 digest
+writing manifest
+Model qwen2.5:32b pulled successfully!
+Download completed!
+
+Model qwen2.5:32b pulled successfully!
+LLM instance created: <src.services.llms.Ollama.Ollama object at 0x7fedfc2ff790>
+Model qwen2.5:7b is available on the server.
+[92m[Success][0m Load "/home/adnana/workspace/CoSMIC/default" to vector database.
+Adding documents to vector database...
+document_path='data/docs/guidance-note-academic-governance.pdf'
+[93m[Warning][0m Contents of 'data/docs/guidance-note-academic-governance.pdf' exist.
+document_path='data/docs/UC Act.PDF'
+[93m[Warning][0m Contents of 'data/docs/UC Act.PDF' exist.
+document_path='data/docs/UC AB Rules 2021.pdf'
+[93m[Warning][0m Contents of 'data/docs/UC AB Rules 2021.pdf' exist.
+document_path='data/docs/IIA three-lines-model.pdf'
+[93m[Warning][0m Contents of 'data/docs/IIA three-lines-model.pdf' exist.
+document_path='data/docs/Academic Governance Handbook 2025.pdf'
+[93m[Warning][0m Contents of 'data/docs/Academic Governance Handbook 2025.pdf' exist.
+document_path='data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf'
+[93m[Warning][0m Contents of 'data/docs/Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original.pdf' exist.
+document_path='data/docs/HESF Threshold Standards.pdf'
+[93m[Warning][0m Contents of 'data/docs/HESF Threshold Standards.pdf' exist.
+document_path='data/docs/TEQSA risk assessment framework.pdf'
+[93m[Warning][0m Contents of 'data/docs/TEQSA risk assessment framework.pdf' exist.
+Adding documents to vector database...
+====================================================================================================
+[Question] Explain what university governance is.
+[qwen2.5:7b Answer] University governance refers to the framework and processes through which a higher education institution like the University of Canberra (UC) operates and makes decisions. It encompasses various aspects including strategic direction setting, policy formulation, quality assurance, and oversight of academic activities.
+
+### Key Components of University Governance at UC:
+1. **University Council:**
+   - The overarching governing body.
+   - Sets overall strategic direction and policy framework.
+   - Reviews the Charter every two years to ensure it remains relevant and effective.
+
+2. **Academic Board:**
+   - Principal policy-making and advisory body for all academic matters.
+   - Responsibilities include approving academic policies, setting academic standards, and maintaining oversight of academic activities.
+   - Composed primarily of academics, students, and professional staff, fostering a community of scholars and free inquiry.
+
+3. **Academic Quality and Standards Committee:**
+   - Oversees academic quality and standards, ensuring high educational outcomes.
+
+4. **Curriculum Committee:**
+   - Manages curriculum development and assessment.
+
+5. **University Research Committee:**
+   - Focuses on research governance and integrity.
+
+6. **Faculty Boards and Assessment Boards:**
+   - Specific governance bodies for each faculty, managing academic programs and quality assurance within their respective fields.
+
+### Core Principles of Academic Governance at UC:
+- **Shared Governance:** The model is founded upon consultation, collegiality, and broad-based representation.
+- **Consultation and Collegiality:** Encourages active participation from all stakeholders including students and professional staff.
+- **Adaptability:** The governance framework is tailored to fit the mission and circumstances of UC.
+
+### References:
+- **Academic Governance Handbook 2025**
+- **University of Canberra Act 1989 (ACT)**
+- **Delegations of Authority Policy**
+
+For further details, you can refer to the Academic Governance Team at academic.governance@canberra.edu.au or review the official UC policy documents.
+
+### Next Steps:
+- Review the University Council Charter and Delegations of Authority Policy.
+- Consult with the Academic Governance Team for specific procedures and support.
+--------------------------------------------------
+[gpt-5.4 Answer] University governance is the system by which the University of Canberra is directed, overseen, and held accountable.
+
+At UC, it operates through a tripartite model with three main parts:
+
+- Council: the overarching governing body that sets the University’s strategic direction and policy framework.
+- Academic Board: the principal body for academic governance, responsible for academic policy, academic standards, and oversight of teaching, learning, research, and educational programs.
+- Executive: senior management, led by the Vice-Chancellor, which implements policies, programs, processes, staffing, budgets, and infrastructure.
+
+In practical terms, university governance is about:
+
+- who makes decisions
+- what authority each body has
+- how responsibilities are delegated
+- how academic quality, integrity, and continuous improvement are assured
+- how accountability is maintained across strategy, academic matters, and operations
+
+The material you provided also shows that academic governance is a subset of overall university governance. It focuses specifically on the integrity and quality of the University’s core academic activities, including:
+
+- teaching
+- student learning
+- research and research training
+- scholarship
+
+So, in short:
+University governance is the overall framework of structures, roles, rules, delegations, and processes through which UC is governed; academic governance is the part of that framework concerned specifically with academic quality, standards, and integrity.
+
+Next steps / Where to confirm:
+- Academic Governance Handbook 2025
+- University of Canberra Act 1989
+- University of Canberra Academic Board Rules 2021
+- Delegations of Authority Policy
+- Academic Governance Team: academic.governance@canberra.edu.au
+--------------------------------------------------
+[qwen2.5:32b Answer] University governance refers to the structures, processes, and roles established within a higher education institution to ensure effective management, decision-making, and accountability. At the University of Canberra (UC), the governance model follows a traditional tripartite structure comprising:
+
+1. **Council**: The overarching governing body responsible for setting strategic direction and policy framework.
+2. **Academic Board**: Focuses on academic governance, approving policies, setting academic standards, and overseeing academic activities to ensure quality assurance in teaching, research, and educational programs.
+3. **Executive (including the Vice-Chancellor)**: Responsible for implementing policies, managing budgets, staffing, infrastructure, and overall operations.
+
+### Key Aspects of University Governance at UC
+
+- **Strategic Direction**: The Council sets overarching strategic goals and ensures compliance with legislative and regulatory frameworks such as the Higher Education Standards Framework.
+- **Academic Quality**: The Academic Board plays a crucial role in maintaining academic standards through policy-making and oversight, ensuring the integrity and quality of teaching and research activities.
+- **Implementation and Management**: Executive management oversees daily operations, including budgeting, staffing, and infrastructure to support the strategic and academic goals set by Council and the Academic Board.
+
+### Key Documents and Frameworks
+
+- **University of Canberra Act 1989 (ACT)**: Establishes the legal framework within which UC operates.
+- **Delegations of Authority Policy**: Articulates how authority is delegated across different governance bodies to ensure clarity in roles and responsibilities.
+- **Higher Education Standards Framework (Threshold Standards) 2021**: Details specific requirements for academic governance, including processes and structures.
+
+### Next Steps / Where to Confirm
+
+For more detailed information on university governance at UC, you can refer to the following resources:
+- **Academic Governance Handbook 2025**
+- **University of Canberra Council Charter**
+- **Delegations of Authority Policy**
+
+If you have any questions or need further clarification regarding academic governance matters, contact the Academic Governance Team at academic.governance@canberra.edu.au.
+====================================================================================================
+[Question] Summarise the core responsibilities of the Academic Board.
+[qwen2.5:7b Answer] The core responsibilities of the Academic Board at the University of Canberra include:
+
+- **Oversight and Monitoring:** Ensuring compliance with legislation relevant to higher education, particularly the Higher Education Standards Framework (Threshold Standards) 2021.
+- **Policy Approval and Delegated Authority:** Approving university policies related to academic matters such as teaching and learning, assessment, research, admission standards, and other areas.
+- **Quality Assurance:** Assuring academic standards and quality in accordance with the University’s policy and procedures, including promoting academic freedom and integrity.
+- **Strategy Development:** Debating, developing, and implementing institutional strategy in various academic areas like education, research, international development, and community engagement.
+- **Benchmarking and Review:** Conducting or overseeing regular reviews of departments, schools, faculties, or disciplines within the university.
+- **Academic Governance:** Ensuring transparency and ethical communication through strategies such as regular reports and summaries of agendas and minutes.
+- **Decision-Making:** Making expert, well-informed decisions that serve the pursuit of truth, high academic standards, and the best interests of the university.
+- **Representation:** Representing various levels of the university community in discussions and decision-making processes.
+
+For further confirmation or specific policies related to these responsibilities, you can refer to the University of Canberra Academic Board Rules 2021 and the Academic Governance Portal.
+--------------------------------------------------
+[gpt-5.4 Answer] The Academic Board’s core responsibilities are to oversee and assure the University’s academic standards, quality, and integrity across teaching, research, and educational programs.
+
+Key responsibilities include:
+- Advising Council on academic matters, academic policy, and the University’s academic objectives.
+- Overseeing compliance with relevant higher education legislation and standards, including the Higher Education Standards Framework (Threshold Standards) 2021.
+- Approving academic policy, and overseeing the effective exercise of delegated academic authority.
+- Assuring academic quality and standards in teaching, research, assessment, admissions, and related academic processes.
+- Safeguarding academic freedom and academic integrity.
+- Monitoring academic risk and quality, including matters that may affect the University’s reputation.
+- Providing a forum for informed, evidence-based debate and decision-making on important academic matters.
+- Supporting student involvement in the development and evaluation of academic processes.
+- Working with Council, the Vice-Chancellor, and executive management while remaining separate from, and accountable to, Council.
+- Receiving reports from, referring matters to, and overseeing relevant academic committees and areas such as research, curriculum, quality, and faculty governance.
+
+Board members are also expected to:
+- Attend and participate actively in meetings.
+- Prepare properly and exercise care and diligence.
+- Disclose and avoid conflicts of interest.
+- Communicate between the Board and the areas they represent.
+
+Next steps / Where to confirm:
+- University of Canberra Academic Board Rules 2021
+- Academic Board Standing Orders
+- Academic Governance Handbook 2025
+- University of Canberra Act 1989
+--------------------------------------------------
+[qwen2.5:32b Answer] The core responsibilities of the Academic Board at the University of Canberra are:
+
+- **Provide oversight and monitoring** of the University's compliance with relevant legislation, including the Higher Education Standards Framework (Threshold Standards) 2021.
+- **Approve University policy** related to academic governance, quality, and risk management.
+- **Ensure academic standards and quality**, promoting academic freedom and integrity across teaching, research, and admissions.
+- **Advise Council** on matters of academic policy and the formulation of the University’s academic objectives.
+- **Develop and implement academic policies** regarding teaching and learning, assessment, research, admission standards, and other key academic areas.
+- **Foster productive relationships** between the Board, senior executive management committees, relevant organizational units, and the broader academic community.
+- **Conduct regular reviews** of Departments, Schools, Faculties, or disciplines to ensure continuous quality improvement.
+- **Establish performance criteria** for probation and promotion, and actively participate in senior academic appointments and promotions.
+
+### Next steps / Where to confirm:
+For more detailed information on these responsibilities, you can refer to the following documents:
+
+- **Academic Board Rules 2021**
+- **Academic Board Standing Orders**
+- **Purpose-and-Function-of-Academic-Boards-May-2018-Update-Final-original**
+- **Academic Governance Handbook 2025**
+
+If you need further clarification or specific guidance, contact the Academic Governance Office at UC.
+====================================================================================================
+[Question] What is the composition of the Academic Board?
+[qwen2.5:7b Answer] The composition of the Academic Board at the University of Canberra includes:
+
+- **Academic Staff Members**: Representatives of academic diversity within the university.
+- **Students**: Junior colleagues in the academic enterprise, providing an opportunity for student contributions to academic decision-making.
+- **Professional Staff**: Key partners in the operationalization of the board's mission.
+
+Additionally, the Academic Board has approved two Expert Advisors who do not have voting rights: 
+
+- The Director Student Experience and Education (also the Curriculum Committee Chair)
+- The Chief Operating Officer
+
+All committees have an Academic Board member among their membership to facilitate communication channels. Undergraduate and Postgraduate Student Members of the Academic Board are also concurrent members of the Student Representative Council (SRC) to support broader communication with the student body.
+
+For specific details on membership roles, responsibilities, and procedures, you should refer to:
+
+- **University of Canberra Act 1989**, Division 2.3
+- **Academic Board Rules 2021**
+- **Academic Board Standing Orders**
+
+For further confirmation or detailed information, contact the Academic Governance Office or the University’s Policy Library.
+--------------------------------------------------
+[gpt-5.4 Answer] The Academic Board is composed primarily of **academic staff members**, intended to reflect the **academic diversity of the University**. It also includes:
+
+- **students**, to support student participation in academic decision-making
+- **professional staff**, as partners in the University’s academic mission
+
+From the material you provided, the composition is formally determined by **section 5 (Membership of Board) of the University of Canberra Academic Board Rules 2021**.
+
+Additional points noted in the Handbook excerpt:
+
+- The **Chair of Academic Board** must be a **Professor of the University**
+- The Chair is **appointed by Council** after considering recommendations from the **Vice-Chancellor**
+- Academic Board had approved **two Expert Advisors** who **do not have voting rights**:
+  - the **Director Student Experience and Education** (also the **Curriculum Committee Chair**)
+  - the **Chief Operating Officer**
+- **Undergraduate and Postgraduate Student Members** on Academic Board are also concurrent members of the **Student Representative Council (SRC)**
+
+The broader governance guidance also indicates the Board includes a **balanced membership** with academic leaders, elected staff, and student members, with a majority of elected members who are not formal managers.
+
+### Next steps / Where to confirm
+For the authoritative membership details, check:
+- **University of Canberra Academic Board Rules 2021** — especially **section 5 (Membership of Board)**
+- **Academic Governance Handbook 2025**
+- If needed, confirm through the **Academic Governance Office** or **UC Policy Library**
+--------------------------------------------------
+[qwen2.5:32b Answer] The composition of the Academic Board at the University of Canberra includes:
+
+- **Academic Staff Members**: These members are representative of the academic diversity within the university and include senior academics who contribute to institutional leadership.
+  
+- **Students**: Undergraduate and Postgraduate Student Members serve on the Board as part of their role in student governance, also being concurrent members of the Student Representative Council (SRC).
+
+- **Professional Staff**: This includes key partners such as the Chief Operating Officer and Expert Advisors like the Director Student Experience and Education, who do not have voting rights.
+
+The exact number and specific roles within these categories are governed by the *University of Canberra Academic Board Rules 2021* and further detailed in the *Academic Board Standing Orders*. 
+
+**Next steps / Where to confirm**: For more precise details or any updates on membership composition, refer to the "University of Canberra Academic Board Rules" available through the UC Policy Library or contact the Academic Governance Office.
+====================================================================================================
+[Question] Summarise member responsibilities and expected behaviours.
+[qwen2.5:7b Answer] Based on the provided context, here is a summary of the member responsibilities and expected behaviors:
+
+### Member Responsibilities:
+1. **Preparation and Participation:**
+   - Exercise reasonable care and diligence by preparing adequately for meetings (reading agendas and associated papers).
+   - Attend all proceedings fully.
+   - Engage in discussions.
+   - Ask relevant questions about their responsibilities.
+   - Provide constructive feedback.
+
+2. **Conflict of Interest:**
+   - Avoid conflicts of interest.
+   - Disclose any potential conflicts between personal interests and the University’s interests to the Academic Board.
+
+3. **Ethical Conduct:**
+   - Do not improperly use their position or information obtained due to their position for personal gain.
+   - Refrain from causing detriment to the University or others.
+
+4. **Decision-Making Contribution:**
+   - Actively participate in decision-making processes by exchanging ideas and providing expert insights.
+   - Be a key point of contact between the area they represent and the Board.
+   - Share relevant information with their represented areas (e.g., faculty, unit meetings, Student Representative Council).
+
+5. **Adherence to Legal and Policy Requirements:**
+   - Understand and observe legal requirements including the University of Canberra Act 1989, Higher Education Standards Framework, and University Statutes, Rules, and Policies.
+
+6. **Professional Conduct:**
+   - Uphold the University’s Charter of Conduct and Values in all matters related to their work.
+   - Ensure strategic roles in academic leadership, reconciliation, teaching, learning, research, inclusion, and quality assurance.
+   - Provide mentoring and support for Student Members.
+   - Represent the vision and purpose of the University.
+
+7. **Attendance:**
+   - Attend scheduled meetings regularly (more than three unexcused absences may result in removal as a member).
+
+8. **Induction and Training:**
+   - Participate in induction sessions provided by the Academic Board.
+
+### Expected Behaviors:
+- Act in the best interests of the University.
+- Follow established processes, structures, and responsibilities to achieve effective academic oversight.
+- Monitor member action points and ensure communication between the Board/committees.
+- Engage in regular self-assessment through surveys and reviews to ensure ongoing effectiveness.
+- Attend and participate in induction sessions for new members.
+- Maintain accurate records of meetings and report on them in annual reports.
+
+These responsibilities and behaviors collectively aim to ensure that Academic Board members contribute effectively to academic decision-making, uphold ethical standards, and maintain the quality of teaching, learning, research, and other academic activities at the University.
+--------------------------------------------------
+[gpt-5.4 Answer] Academic Board and committee members are expected to act responsibly, actively, and in the University’s best interests.
+
+**Member responsibilities and expected behaviours**
+- **Act in UC’s best interests** and comply with relevant legal and policy requirements, including the **University of Canberra Act 1989**, the **Higher Education Standards Framework**, and UC statutes, rules and policies.
+- **Uphold the Charter of Conduct and Values** in all committee-related work.
+- **Prepare properly for meetings** by reading agendas and papers in advance.
+- **Participate actively and constructively**:
+  - give full attention during proceedings
+  - engage in discussion
+  - ask questions relevant to Board/committee responsibilities
+  - provide constructive feedback
+  - contribute expert insights to decision-making.
+- **Manage conflicts of interest** by avoiding conflicts where possible and disclosing any conflict between personal interests and the University’s interests.
+- **Use position and information appropriately**:
+  - do not misuse the role
+  - do not use information gained through the role for personal or others’ advantage
+  - do not cause detriment to the University or others.
+- **Represent and communicate**:
+  - act as a point of contact between the Board and the area they represent
+  - share relevant information back to that area, such as faculty boards, unit meetings, SRC, or student body.
+- **Engage in governance effectiveness processes**, including induction, surveys, reviews, and continuous improvement activities.
+- **Attend meetings regularly**; elected members may be removed for failing to meet duties or for missing more than three meetings without approved leave.
+
+**In short:** members are expected to be prepared, ethical, engaged, communicative, and accountable.
+
+**Next steps / Where to confirm**
+- **Academic Governance Handbook 2025**
+- **UC Academic Board Rules 2021**
+- **UC Policy Library** or **Academic Governance Office** for the current authoritative wording.
+--------------------------------------------------
+[qwen2.5:32b Answer] Based on the provided context, here is a summary of the responsibilities and expected behaviors for members of the Academic Board at the University of Canberra:
+
+### Responsibilities:
+1. **Prepare and Engage**: Ensure appropriate preparation for meetings by reading agendas and associated papers, offer full attention during proceedings, engage in discussions, ask relevant questions, and provide constructive feedback.
+2. **Conflict of Interest Management**: Avoid conflicts of interest and disclose any potential conflicts between personal interests and those of the University to the Academic Board.
+3. **Use of Position**: Not improperly use their position or information obtained because of it for personal gain or to cause detriment to others or the University.
+4. **Decision Making Participation**: Actively participate in decision making, exchange ideas, provide expert insights into topical discussions, and contribute to effective decisions.
+5. **Point of Contact**: Serve as a point of contact between their respective areas (e.g., faculty) and the Board.
+6. **Communication**: Share relevant information with their represented area and feedback from Board meetings.
+
+### Expected Behaviors:
+1. **Best Interests**: Act in the best interests of the University, understanding and observing legal requirements such as the University of Canberra Act 1989, Higher Education Standards Framework, and other statutes.
+2. **Conduct and Values**: Uphold the University’s Charter of Conduct and Values for all work-related matters.
+3. **Mentoring (Chairs/Deputy Chairs)**: Provide mentoring and support to Student Members.
+4. **Vision Representation**: Represent the vision and purpose of the University.
+5. **Effective Committee Functioning**: Ensure that committees function according to their terms of reference, relevant procedures are followed, and all matters of relevance are discussed effectively.
+
+### Additional Notes:
+- Regular member surveys and reviews are conducted to ensure effectiveness.
+- Members must fully engage with these processes.
+- Induction sessions for new members provide necessary training.
+- The Board has resources including secretarial support, record keeping, and communication tools.
+- Annual reports from the Academic Board and its committees detail their activities and anticipated areas of focus.
+
+These responsibilities and behaviors aim to ensure effective academic oversight, quality assurance, and governance within the University.
+====================================================================================================
+[Question] Summarise the Academic Board’s role in fostering academic freedom and scholarly culture.
+[qwen2.5:7b Answer] The Academic Board plays a crucial role in fostering academic freedom and scholarly culture within the university through several key functions:
+
+1. **Promoting Free and Open Debate**: The Board provides a forum for free and open debate, which is essential for moral authority within the academic community. This encourages the exchange of ideas and supports evidence-based decision-making.
+
+2. **Encouraging Innovation and Continuous Improvement**: By embracing innovative change, the Board ensures that the university can adapt to the changing higher education environment and maintain high standards in teaching, research, and learning.
+
+3. **Representational Structure**: The Board's composition includes academics, students, and professional staff, ensuring broad-based representation. This structure fosters a collaborative and collegial environment where ideas are continuously scrutinized and re-evaluated by experts.
+
+4. **Oversight of Academic Processes**: Through its oversight role, the Board ensures that academic processes align with the university's goals and values, including the pursuit of truth and the creation and dissemination of knowledge.
+
+5. **Quality Assurance and Risk Management**: The Board is responsible for assuring academic standards and quality in accordance with relevant frameworks and policies. This includes monitoring compliance with legislation and higher education standards, ensuring academic freedom and integrity are upheld.
+
+6. **Supporting Research and Scholarship**: The Board plays a key role in encouraging and supporting research through standing committees focused on research issues, benchmarking with other universities, and setting performance criteria for probation and promotion.
+
+7. **Communication and Information Flow**: Effective communication strategies within the institution ensure that essential academic information is disseminated widely, enhancing efficiency and quality across the university.
+
+By fulfilling these roles, the Academic Board contributes significantly to fostering an environment of academic freedom and scholarly excellence in the university community.
+--------------------------------------------------
+[gpt-5.4 Answer] The Academic Board’s role in fostering academic freedom and scholarly culture is to provide the University’s central collegial forum for expert, evidence-based academic deliberation.
+
+In summary, the Board:
+
+- protects and promotes academic freedom by ensuring important academic matters can be debated openly and independently within its terms of reference;
+- supports free inquiry and pursuit of truth as core university values;
+- fosters a scholarly culture through consultation, collegiality and broad-based representation of academic staff, students and professional staff;
+- provides a forum for free and open debate on issues affecting teaching, learning, research and higher education;
+- strengthens the moral authority of academic decision-making by making informed, respected decisions in the best interests of the University;
+- promotes cross-functional discussion and resolution of complex academic and administrative issues;
+- helps uphold high academic standards, academic integrity, and quality in research, assessment and admissions;
+- enables student participation as colleagues in the academic enterprise, supporting an inclusive academic community;
+- contributes to the creation and dissemination of knowledge by aligning its work with the University’s mission while maintaining space for independent academic discussion.
+
+Next steps / Where to confirm:
+- UC Academic Governance Handbook 2025
+- Academic Board Rules
+- Academic Board Standing Orders
+--------------------------------------------------
+[qwen2.5:32b Answer] The Academic Board plays a pivotal role in fostering academic freedom and maintaining a robust scholarly culture within the University of Canberra (UC). Key aspects of this role include:
+
+- **Promoting Free Inquiry:** The Board encourages open debate and free inquiry, which are fundamental to advancing knowledge and ensuring moral authority within the academic community. It provides a forum for wide-ranging discussions on issues affecting research and higher education.
+
+- **Ensuring Academic Freedom:** In its oversight functions, the Board is committed to upholding academic freedom by fostering an environment where ideas can be freely scrutinized and re-evaluated without undue constraints or fear of reprisal.
+
+- **Supporting Collegiality:** The Board model is built on consultation and collegiality. It brings together a diverse group of representatives from across the university, including academics, students, and professional staff. This broad-based representation ensures that decisions are well-informed and inclusive.
+
+- **Overseeing Compliance with Standards:** The Academic Board monitors compliance with legislative frameworks relevant to higher education, such as the Higher Education Standards Framework (Threshold Standards) 2021. By ensuring adherence to these standards, it helps maintain high academic quality and integrity, which are critical for a vibrant scholarly culture.
+
+- **Developing Institutional Strategy:** Through its participation in developing institutional strategies related to teaching, learning, research, international development, and community engagement, the Board sets an agenda that supports ongoing innovation and improvement within UC’s academic programs.
+
+- **Engaging Students in Governance:** The inclusion of students as junior colleagues on the Academic Board provides a platform for their voices to be heard. This involvement ensures that student perspectives are considered in decision-making processes affecting education and research at UC.
+
+In summary, the Academic Board is instrumental in fostering an environment conducive to academic freedom and scholarly excellence through its commitment to open dialogue, governance oversight, and inclusive representation from across the university community.
+====================================================================================================
+[Question] Summarise TEQSA’s academic governance requirements.
+[qwen2.5:7b Answer] TEQSA's academic governance requirements under the Higher Education Standards Framework (Threshold Standards) 2021 encompass several key areas:
+
+- **Established Processes and Structures**: Providers must have established processes and structures with assigned responsibilities that collectively ensure effective academic governance.
+
+- **Academic Leadership and Expertise**: Academic leadership should be mature, advanced, and relevant to the fields of education being delivered. This includes identifying and implementing good practices in teaching and learning.
+
+- **Scholarship Support**: Sufficient support for scholarship must exist, which informs teaching and contributes to knowledge advancement.
+
+- **Research Capabilities**: Providers are required to undertake research at or above benchmark standards within broad fields of education, leading to new knowledge creation. This applies both generally and specifically to specialized universities.
+
+- **Quality Assurance Mechanisms**: Mature and advanced processes should cover the design, delivery, accreditation, monitoring, institutional quality assurance, review, and improvement of courses of study. Academic integrity must also be maintained.
+
+- **Engagement with Stakeholders**: Providers need to engage with employers, industry, and professions relevant to their offerings.
+
+- **Risk Management**: Corporate governing bodies must manage risks related to the independence and integrity of academic governance structures, avoiding actions that create compliance risks such as major shareholders attending Academic Board meetings.
+
+For detailed confirmation or further guidance on these requirements, you can refer to the TEQSA Act and Higher Education Standards Framework 2021. For more specific advice, contact the University of Canberra's Academic Governance Office or the Research Integrity Unit.
+--------------------------------------------------
+[gpt-5.4 Answer] TEQSA’s academic governance requirements can be summarised as follows:
+
+- **Academic governance must be fit for purpose**  
+  Providers must have processes, structures, roles, delegations, policies and systems that collectively assure the **integrity and quality** of teaching, learning, research, research training and scholarship.
+
+- **There must be sufficient academic capability and leadership**  
+  TEQSA expects enough academic expertise, leadership and independent scrutiny to support sound academic decision-making and quality assurance.
+
+- **Governance arrangements must match the provider’s scale and scope**  
+  The academic governance structure should be appropriate to the size, complexity and level of academic activity of the provider, including whether it offers HDR and research.
+
+- **Academic governance must support systematic quality assurance and continuous improvement**  
+  Providers need evidence that academic governance is effective, systematic and produces expected student outcomes. Auditable self-assurance records are important.
+
+- **There must be clear links between academic and corporate governance**  
+  The corporate governing body must receive reliable academic assurance, but the independence and integrity of academic governance must be protected.
+
+- **Academic governance must oversee compliance across key standards**  
+  Oversight should extend beyond courses to areas such as:
+  - facilities and infrastructure
+  - diversity and equity
+  - learning resources and student support
+  - research
+  - research training
+
+- **Scholarship must be supported and inform teaching**  
+  TEQSA expects systematic support for scholarship and evidence that scholarly activity informs teaching, learning and professional practice.
+
+- **Providers need mature course quality processes**  
+  Especially for self-accrediting authority and category changes, TEQSA looks for robust processes for:
+  - course design and approval
+  - delivery and monitoring
+  - review and improvement
+  - institutional quality assurance
+  - maintenance of academic integrity
+
+- **Academic integrity must be maintained as a core governance function**  
+  Governance arrangements must support the prevention, monitoring and management of academic integrity issues.
+
+- **Evidence of review and improvement is essential**  
+  Providers should demonstrate completed review cycles, evidence-based improvements, and effective review processes across courses.
+
+- **For higher-category or self-accrediting providers, expectations are higher**  
+  TEQSA expects mature, advanced academic governance, strong academic leadership, scholarship support, and—in relevant cases—research performance and external engagement.
+
+### Next steps / Where to confirm
+For UC-specific interpretation, check:
+- **UC Academic Governance Framework / Handbook**
+- **UC Policy Library**
+- **Academic Board / Academic Governance Office**
+- **Research Integrity Unit** if your question relates to research governance or research training.
+--------------------------------------------------
+[qwen2.5:32b Answer] TEQSA's academic governance requirements for higher education providers, as detailed in the Higher Education Standards Framework (Threshold Standards) 2021, include several key components:
+
+1. **Processes and Structures**: Providers must establish processes and structures with assigned responsibilities that collectively ensure academic quality and continuous improvement.
+
+2. **Evidence of Governance**: Sufficient evidence is required to demonstrate effective and systematic quality assurance with expected student outcomes achieved. This includes:
+   - Academic capability for leadership and competent scrutiny.
+   - Consistent governance structure relative to the scope and scale of operations.
+   - Links between academic and corporate governance.
+
+3. **Support for Scholarship**: There must be requisite support for scholarship, which informs teaching practices.
+
+4. **Capacity for Governance**: Sufficient capacity is needed to provide systematic and effective academic governance.
+
+5. **Oversight and Monitoring**: Academic governance should oversee other standards like:
+   - Facilities and infrastructure
+   - Diversity and equity
+   - Learning resources and educational support
+   - Research
+   - Research training
+
+6. **Impact on Assessments**: The effectiveness of a provider’s academic governance impacts assessments related to changes in provider categories, self-accrediting authority, and course accreditation.
+
+7. **Quality Assurance and Integrity**: Providers must have mature processes for designing, delivering, accrediting, monitoring, quality assurance, reviewing, and improving courses while maintaining academic integrity.
+
+8. **Scholarship Contributions**: Demonstrated systematic support for scholarship that informs teaching, learning, and professional practice, contributing to the advancement of knowledge.
+
+9. **Good Practices**: Identification and implementation of good practices in teaching and learning, with broader sharing within the higher education sector.
+
+10. **Academic Leadership**: Providers should have breadth and depth of academic leadership expertise guiding their educational activities.
+
+11. **Engagement**: Engagement with employers, industry, and professions relevant to their offerings.
+
+**Next Steps / Where to Confirm:**
+- Refer to the Higher Education Standards Framework (Threshold Standards) 2021 for specific policy details.
+- Contact the Academic Governance Office at UC for further guidance on meeting these requirements.
+
+This summary provides an overview of TEQSA’s academic governance expectations. For detailed compliance and implementation strategies, consult the relevant guidelines or the University of Canberra's Academic Governance Office.
+====================================================================================================
+[Question] Provide a briefing for induction into the Academic Board.
+[qwen2.5:7b Answer] ### Briefing for Induction into the Academic Board
+
+Welcome to your induction into the Academic Board at the University of Canberra (UC). This induction aims to ensure you are well-prepared and equipped to contribute effectively to the board's important functions.
+
+#### Key Components of Your Induction:
+
+1. **Additional Induction Sessions:**
+   - You will participate in additional sessions initiated by the Chair, designed specifically for new members.
+   
+2. **Ongoing Mentoring:**
+   - The Chair will provide ongoing mentoring as needed, ensuring you are well-supported and informed.
+
+3. **Support from Academic Governance Team:**
+   - The Academic Governance team is available to assist with any specific needs or queries during your induction period.
+   
+4. **Support from Student Representative Council (SRC):**
+   - You will receive support from the SRC, which includes feedback mechanisms and communication channels.
+
+#### Expectations as an Academic Board Member:
+
+1. **Preparation for Meetings:**
+   - Ensure you are prepared by reading the agenda and associated papers before meetings.
+   
+2. **Active Participation:**
+   - Engage actively in discussions, ask relevant questions, and provide constructive feedback.
+   
+3. **Conflicts of Interest:**
+   - Disclose any conflicts of interest to the Academic Board promptly.
+
+4. **Proper Use of Position:**
+   - Avoid using your position or information obtained for personal gain or detriment to the University.
+
+5. **Decision Making:**
+   - Contribute through active participation, exchange of ideas, and providing expert insights.
+   
+6. **Communication Roles:**
+   - Be the point of contact between the area you represent and the Board. Share relevant information with your constituency (e.g., faculty board, unit meetings, Student Representative Council).
+
+#### Meeting Attendance:
+
+- **Attendance Policy:** 
+  - Attend all scheduled Academic Board meetings unless approved leave is granted.
+  - If unable to attend in person, notify the Secretary of the relevant Board/Committee at least 24 hours in advance. Virtual attendance may be possible with prior approval from the Chair.
+
+#### Agendas and Submissions:
+
+- **Agenda Structure:**
+  - The agenda for each meeting typically includes:
+    - Meeting Opening
+    - Specific items for discussion
+
+- **Submissions Process:**
+  - Submissions must be made via email to academic.governance@canberra.edu.au.
+  - Use the approved template and ensure it is submitted two weeks before the meeting.
+
+#### Additional Resources:
+
+- **Academic Governance Portal:** 
+   - Access meeting papers, minutes, actions, and other important documents through this portal. It is available for all committee members and UC Staff Members.
+
+- **Meeting Invitations:**
+  - You will receive invitations for scheduled meetings at the beginning of each year.
+
+#### Support and Resources:
+
+- The Chair, Academic Governance Team, and Student Representative Council are committed to supporting you throughout your induction period and beyond.
+  
+### Next Steps / Where to Confirm:
+- **Academic Governance Office:** For any specific questions or further details about your role on the board.
+- **Research Integrity Unit:** If you need additional support regarding research-related responsibilities.
+
+If you have any specific questions during this induction process, feel free to reach out to the Academic Governance Office for clarification. We are here to assist you in making a smooth transition into your new role.
+--------------------------------------------------
+[gpt-5.4 Answer] **Academic Board Induction Briefing**
+
+## 1. Purpose of the Academic Board
+The Academic Board is a key academic governance body of the University of Canberra. Its role is to provide expert, collegial, and independent consideration of academic matters within its terms of reference. It helps safeguard academic standards and supports informed academic decision-making across the University.
+
+The Board:
+- considers academic business independently of Council and University Executive, while supporting their respective roles;
+- may request reports from, or refer matters to, Faculties, Schools, Departments and Boards of Studies;
+- supports communication and oversight across its standing committees and the wider academic community.
+
+## 2. Membership and Representation
+The Board has a balanced membership including:
+- senior officers and academic leaders;
+- elected staff members; and
+- elected student members.
+
+A majority of elected members are not formal managers, supporting independent academic judgement.
+
+Members are expected to:
+- represent the area or constituency from which they are elected or appointed;
+- act as a point of contact between that area and the Board; and
+- share relevant information back to their faculty, unit, Student Representative Council, or student body as appropriate.
+
+## 3. Core Responsibilities of Members
+Members are expected to:
+- exercise reasonable care and diligence;
+- prepare for meetings by reading agendas and papers;
+- participate actively in discussion and decision-making;
+- ask questions and provide constructive feedback;
+- contribute expert insight where relevant;
+- avoid conflicts of interest and disclose any actual or potential conflict;
+- not misuse their position or information obtained through their role;
+- communicate Board matters appropriately with their represented area.
+
+## 4. Attendance Expectations
+Members are required to attend all Board or committee meetings.
+
+If unable to attend, members should:
+- send an apology to the Secretary of the relevant Board/Committee;
+- do so at least 24 hours in advance where possible.
+
+Important attendance rule:
+- elected members who fail to comply with their duties or miss more than three meetings without approved leave of absence may be removed from membership.
+
+Attendance is:
+- recorded in meeting minutes; and
+- reported in the Annual Report.
+
+## 5. Meeting Format and Conduct
+Academic Board meetings are generally held in person, though attendance may occur by:
+- teleconference;
+- videoconference; or
+- other approved technology,
+
+with prior approval of the Chairperson. Where virtual attendance is approved, cameras are expected to be on.
+
+Meetings are expected to be:
+- transparent;
+- ethical;
+- respectful;
+- participatory; and
+- robust in discussion.
+
+## 6. Meeting Preparation and Papers
+Members should prepare carefully before each meeting by reviewing:
+- the agenda;
+- associated papers; and
+- any actions or minutes from previous meetings.
+
+The **Academic Governance Portal** provides access to:
+- meeting papers;
+- minutes;
+- actions; and
+- important governance documents.
+
+It is accessible to committee members and UC staff members.
+
+## 7. Agenda and Submissions
+The agenda for Academic Board and its standing committees is structured into standard parts, beginning with meeting opening.
+
+Submissions:
+- may be made by any member of the University community;
+- must be within the scope of the relevant terms of reference;
+- should be submitted before agenda closure, usually **two weeks prior** to the meeting.
+
+If a person not normally associated with the committee wishes to submit an item, they must:
+- provide an overview of the item; and
+- obtain permission from the Chair for inclusion on the agenda.
+
+All submissions should:
+- use the approved template;
+- be in MS Word; and
+- be sent to **academic.governance@canberra.edu.au**.
+
+Templates are available on the Academic Governance Portal.
+
+## 8. Induction Arrangements
+Following the election cycle:
+- new members are invited to attend and observe the last meeting of the year in the year of election;
+- an induction session is held prior to the first meeting of their membership;
+- the induction is hosted by the Chair of Academic Board.
+
+Continuing members may also be asked to support new members through:
+- guidance; and
+- mentorship.
+
+## 9. Student Member Induction and Support
+Student members are recognised as making an important contribution to Academic Board and its sub-committees.
+
+Student-focused induction includes:
+- additional induction sessions initiated by the Chair;
+- ongoing mentoring by the Chair as needed;
+- support from the Academic Governance team as needed; and
+- support from the Student Representative Council.
+
+## 10. Communication Role of Members
+A key part of Board membership is two-way communication.
+
+Members should:
+- bring relevant perspectives from their area to the Board; and
+- report relevant Board matters back to their constituency.
+
+This supports:
+- transparency;
+- coordination across committees and faculties; and
+- effective implementation of Board decisions.
+
+## 11. Key Documents to Know
+Members should become familiar with the following:
+- **University of Canberra Act 1989** — particularly Division 2.3 on the Board;
+- **University of Canberra Academic Board Rules 2021**;
+- **Academic Board Standing Orders**;
+- **Academic Quality and Standards Committee Charter**;
+- **Curriculum Committee Charter**;
+- **University Research Committee Charter**;
+- **Faculty Boards Charter**;
+- **Faculty Assessment Boards Charter**;
+- **Academic Governance Portal**.
+
+## 12. Practical First Steps for New Members
+As a new member, you should:
+- attend the induction session;
+- review the Board’s governing documents;
+- access the Academic Governance Portal;
+- read the meeting calendar and accept invitations for scheduled meetings;
+- understand your representative role and communication responsibilities;
+- familiarise yourself with conflict of interest expectations;
+- identify the Secretary and Chair contacts for your committee.
+
+## 13. Key Messages for New Members
+In summary, effective Academic Board membership requires:
+- preparation;
+- attendance;
+- active and respectful participation;
+- integrity and disclosure of conflicts;
+- communication with your represented area; and
+- familiarity with the Board’s governing framework.
+
+## Next steps / Where to confirm
+Please confirm details in:
+- the **Academic Governance Handbook 2025**;
+- the **Academic Board Standing Orders**;
+- the **University of Canberra Academic Board Rules 2021**; and
+- the **Academic Governance Portal**.
+
+If you want, I can also turn this into:
+1. a **1-page induction handout**,  
+2. a **formal speaking script for induction**, or  
+3. a **PowerPoint-style briefing outline**.
+--------------------------------------------------
+[qwen2.5:32b Answer] ### Induction Briefing for the Academic Board
+
+**Introduction:**
+Welcome to your role on the Academic Board at the University of Canberra (UC)! As part of the Academic Governance structure, you will play an important role in ensuring high academic standards and integrity across UC. The following briefing provides key information about your responsibilities, induction process, and ongoing support mechanisms.
+
+#### Key Responsibilities:
+- **Preparation and Participation:** Attend all meetings and ensure appropriate preparation by reading agendas and associated papers. Offer full attention during proceedings and engage actively.
+- **Conflict of Interest Disclosure:** Disclose any conflicts of interest that may arise between personal interests and the University’s interests.
+- **Prohibition Against Misuse of Position:** Avoid using your position to gain advantages or cause detriment improperly.
+- **Decision-Making:** Actively participate in discussions, provide expert insights, and contribute constructively to decision-making processes.
+- **Communication Role:** Serve as a point of contact between your area (e.g., faculty) and the Board. Share relevant information back with your electors.
+
+#### Induction Process:
+1. **Induction Session:**
+   - Following election, you will be invited to observe the last meeting of the year in which you were elected.
+   - The official induction session is hosted by the Chair of Academic Board and covers key areas such as roles, responsibilities, and ethical guidelines.
+
+2. **Mentorship and Support:**
+   - Ongoing mentoring by the Chair is available if needed.
+   - The Academic Governance team will provide support as required.
+   - Student members receive additional training through specific student-focused sessions initiated by the Chair.
+
+#### Resources:
+- **Academic Governance Portal:** Access to meeting papers, minutes, actions, and important documents.
+- **Agendas:** Typically divided into sections for clarity. Submissions must be made within two weeks prior to the meeting on approved templates.
+- **Meeting Attendance:** Generally in-person but can be virtual with camera requirements and Chair approval.
+
+#### Compliance:
+- Members are expected to attend all Board meetings. If unable, provide an apology at least 24 hours before the scheduled time.
+- Regular attendance is tracked and reported annually.
+
+#### External Communication:
+- Foster productive relationships between the Academic Board and external stakeholders, including senior executive management committees and relevant organisational units.
+- Transparent communication strategies include regular reports, summaries of agendas and minutes, a functional website, and guides to academic policies.
+
+### Next Steps / Where to Confirm
+- **Academic Governance Handbook 2025:** Detailed guidelines on roles, responsibilities, and procedures.
+- **Chair of Academic Board:** For any queries or mentorship needs.
+- **Academic Governance Team:** Ongoing support for induction processes and general guidance.
+- **Student Representative Council (SRC):** Support for student members.
+
+For further information, refer to the Academic Governance Handbook 2025 available on the UC Policy Library or contact the relevant offices directly.
+====================================================================================================
+[Question] What matters are considered ‘academic’.
+[qwen2.5:7b Answer] Based on the provided context, several areas fall under the category of 'academic' matters. These include:
+
+1. **Teaching and Learning**:
+   - Designing curricula.
+   - Implementing learning outcomes.
+   - Ensuring coherence and progressive achievement of expected learning outcomes.
+
+2. **Student Admission and Progress**:
+   - Admission policies for students.
+   - Credit for prior learning.
+   - Academic progress monitoring.
+
+3. **Research and Research Training**:
+   - Accreditation and reaccreditation of courses.
+   - Revision and changes to courses, including admission standards, location, and awarding of degrees.
+
+4. **Quality Assurance and Standards**:
+   - Establishing and maintaining institutional academic standards.
+   - Monitoring the quality and effectiveness of educational innovations.
+   - Ensuring compliance with Australian Qualifications Framework (AQF) requirements.
+
+5. **Policy and Governance**:
+   - Formulating policies for granting medals, awards, scholarships.
+   - Scrutinizing and approving accreditation of courses.
+   - Advising on academic priorities and strategic plans.
+
+6. **Academic Freedom and Integrity**:
+   - Protecting and promoting academic freedom.
+   - Ensuring high standards in research, assessment, and admissions.
+
+7. **Student Discipline and Academic Conduct**:
+   - Addressing academic misconduct.
+   - Awarding degrees, diplomas, and certificates.
+
+8. **Innovations and Continuous Improvement**:
+   - Evaluating the quality and effectiveness of educational innovations.
+   - Advising on academic implications of organizational changes.
+
+These areas collectively encompass a wide range of activities that contribute to the overall academic integrity, quality, and outcomes of an institution's teaching, research, and educational programs.
+--------------------------------------------------
+[gpt-5.4 Answer] Based on the material you provided, “academic” matters are those connected to the university’s core higher education functions and academic quality oversight.
+
+They include, in particular:
+
+- teaching and learning
+- admission of students
+- assessment
+- credit for prior learning
+- academic progress
+- research
+- research training
+- educational programs
+- scholarship
+- course accreditation and reaccreditation
+- revisions to courses, including:
+  - learning outcomes
+  - admission standards
+  - location of offering
+  - the award to which the course leads
+- academic quality and outcomes
+- institutional benchmarks and standards for academic quality
+- monitoring, review and improvement of academic activities
+- academic policy and delegations of academic authority
+- medals, awards, prizes and scholarships where not solely based on academic merit, if designated
+- educational innovations
+- academic aspects of strategic plans
+- academic priorities and objectives
+- academic implications of organisational change
+- conferring of degrees, diplomas and certificates
+- student discipline where it concerns academic misconduct
+- academic freedom
+- academic integrity
+- research integrity
+- compliance with AQF requirements
+
+In short, matters considered “academic” are those relating to the integrity, quality, standards, approval, delivery, and oversight of teaching, learning, research, research training, courses, awards, and associated academic policy.
+
+If you want, I can also turn this into:
+1. a one-sentence definition,
+2. a bullet list for a policy document, or
+3. a table separating academic vs non-academic matters.
+--------------------------------------------------
+[qwen2.5:32b Answer] Based on the context provided from the Academic Governance Handbook 2025 and other related documents, "academic" matters encompass a broad range of issues that relate to teaching, learning, research, educational programs, and quality assurance within a university setting. Here is a summary of what constitutes academic matters:
+
+- **Teaching and Learning**: This includes all aspects of delivering education, such as curriculum design, assessment methods, and ensuring the effectiveness of teaching practices.
+
+- **Admission of Students**: Policies and processes for admitting students into various programs, including criteria for selection and acceptance.
+
+- **Assessment**: Ensuring that assessments are fair, transparent, and aligned with learning outcomes.
+
+- **Credit for Prior Learning**: Evaluating prior learning experiences to grant academic credit where appropriate.
+
+- **Academic Progress**: Monitoring student progress through their academic programs and ensuring they meet the necessary standards.
+
+- **Research**: Overseeing research activities, including ethical considerations, funding, and ensuring high-quality scholarly output.
+
+- **Research Training**: Ensuring that students engaged in research receive adequate training to perform at a high level of competence.
+
+- **Approval of Policies and Principles**: Approving policies related to academic awards such as medals, scholarships, prizes, etc., that are not based solely on merit or designated by the Council.
+
+- **Monitoring Academic Standards and Quality**: Ensuring that academic standards are maintained across all programs and courses offered by the university.
+
+- **Accreditation of Courses**: Reviewing and approving accreditation and reaccreditation processes for university courses to ensure they meet quality benchmarks.
+
+- **Educational Innovations**: Evaluating new educational initiatives or proposals to enhance teaching and learning practices.
+
+- **Academic Implications of Organizational Changes**: Advising on the academic impacts of any changes in organizational structure, strategic plans, or institutional policies.
+
+In essence, "academic" matters cover all aspects related to ensuring high-quality education and research activities within a university setting, including policy-making, monitoring, review, and improvement processes.
+====================================================================================================
+[Question] Explain the role of Academic Board in ensuring academic integrity under TEQSA Standards.
+[qwen2.5:7b Answer] The Academic Board plays a crucial role in ensuring academic integrity at the University of Canberra (UC) as per the Threshold Standards by the Teaching Excellence and Quality Standards Agency (TEQSA). Here are the key responsibilities and actions taken by the Academic Board to uphold academic integrity:
+
+- **Oversight and Monitoring**: The Academic Board is responsible for overseeing and monitoring the University's compliance with legislation relevant to higher education, including matters of academic governance, quality, and risk. This includes ensuring that all academic activities meet the requirements outlined in the Higher Education Standards Framework (Threshold Standards) 2021.
+
+- **Approval of Policies and Delegations**: The Board is responsible for approving University policies related to academic integrity and effective exercise of delegated authority. This ensures that there are clear definitions, roles, relationships, and systems in place to support high standards in research, assessment, and admissions.
+
+- **Quality Assurance Framework**: By maintaining a robust quality assurance framework, the Academic Board ensures that academic decisions and processes are transparent and aligned with best practices. This includes regular reviews of teaching, learning, research, and scholarship to ensure continuous improvement and integrity.
+
+- **Academic Standards and Integrity**: The Board works collaboratively with other senior officers and units within the university to develop balanced, clear, shared definitions of academic standards and integrity. This collaborative approach helps maintain a consistent standard across all academic activities.
+
+- **Risk Management**: The Academic Board is responsible for managing risks that could compromise academic governance, including potential conflicts of interest or perceived independence issues. Ensuring that major stakeholders do not attend meetings that involve sensitive discussions can help mitigate these risks.
+
+### Next Steps / Where to Confirm
+For further details on the specific roles and responsibilities, you may refer to:
+
+- **Academic Governance Handbook 2025**: This document provides comprehensive guidance on academic governance frameworks.
+- **Guidance Note: Academic Governance (Version 3.1)**: For more detailed insights into the operational aspects of academic governance at UC.
+
+If you need specific policies or contact details for further clarification, please reach out to the Academic Governance Office or the Research Integrity Unit at UC.
+--------------------------------------------------
+[gpt-5.4 Answer] The Academic Board’s role in ensuring academic integrity under the TEQSA Higher Education Standards Framework is to provide the institution’s central academic oversight, assurance, and scrutiny over the quality and integrity of teaching, learning, research, assessment, admissions, and scholarship.
+
+### In practical terms, Academic Board is expected to:
+
+- **Assure academic standards and quality**
+  - Oversee whether academic activities meet the **Higher Education Standards Framework (Threshold Standards) 2021**, especially **Standard 6.3 on academic governance**.
+  - Help ensure qualifications awarded are consistent with the **AQF** and institutional academic standards.
+
+- **Protect academic integrity and academic freedom**
+  - Maintain oversight of policies and processes relating to:
+    - academic integrity
+    - assessment integrity
+    - admissions standards
+    - research integrity
+    - research training quality
+
+- **Approve and monitor academic policy**
+  - Play a key role in the formulation, approval, and monitoring of academic policy on:
+    - teaching and learning
+    - assessment
+    - research
+    - admissions
+    - other academic matters
+
+- **Monitor compliance and academic risk**
+  - Oversee compliance with legislation and regulatory requirements relevant to higher education.
+  - Monitor academic quality and risk, and support institutional self-assurance.
+  - Identify issues that may affect academic standards, student outcomes, or institutional reputation.
+
+- **Provide independent academic scrutiny**
+  - Offer informed academic advice to the governing body/Council while retaining sufficient independence.
+  - TEQSA expects providers to avoid arrangements that compromise the Academic Board’s independence or integrity.
+
+- **Support continuous improvement**
+  - Review evidence on academic performance and outcomes.
+  - Recommend changes to policies, processes, and standards where needed.
+  - Ensure scholarship and research-informed teaching are supported.
+
+### Under TEQSA, this means Academic Board should collectively ensure that:
+
+- academic governance structures are effective and fit for purpose
+- responsibilities are clearly assigned
+- there is sufficient academic capability for oversight
+- academic decisions are subject to competent scrutiny
+- links between academic governance and corporate governance support, rather than undermine, academic integrity
+
+### Bottom line
+Under TEQSA Standards, the Academic Board is the principal body responsible for safeguarding the **integrity, quality, and credibility of academic activities**. It does this through independent oversight, policy authority, compliance monitoring, and quality assurance across teaching, assessment, research, and admissions.
+
+### Next steps / Where to confirm
+For UC-specific confirmation, check:
+- **Academic Board Rules**
+- **Academic Board Standing Orders**
+- **UC Policy Library**
+- **Academic Governance Office** or equivalent UC governance support unit
+--------------------------------------------------
+[qwen2.5:32b Answer] The Academic Board plays a pivotal role in ensuring academic integrity at the University of Canberra (UC) in compliance with the Threshold Standards set by TEQSA (Tertiary Education Quality and Standards Agency). According to these standards, the Academic Board has several responsibilities:
+
+1. **Quality Assurance**: The Academic Board oversees the quality of all academic activities including teaching, student learning, research, and scholarship. It ensures that these activities meet the required standards for maintaining academic integrity.
+
+2. **Policy Approval**: The board is responsible for approving university policies related to academic governance, ensuring they align with legislative requirements such as the Higher Education Standards Framework (Threshold Standards) 2021. This includes monitoring compliance with relevant legislation and ensuring adherence to institutional policies that support academic integrity.
+
+3. **Delegated Authority**: The Academic Board exercises delegated authority from the Council in matters of academic governance, ensuring effective scrutiny and advice on all academic decisions. It ensures that these decisions uphold academic standards and integrity across the university.
+
+4. **Risk Management**: By monitoring compliance with quality and risk-related legislation and policies, the board plays a crucial role in managing risks to academic integrity. This includes identifying potential threats to academic standards and implementing measures to mitigate them.
+
+5. **Collaboration with Other Bodies**: The Academic Board works alongside other senior officers and units within UC to ensure that all activities adhere to institutional policy obligations and reflect the requirements of the Australian Qualifications Framework (AQF).
+
+### Next Steps / Where to Confirm
+To confirm specific responsibilities and processes, you can review:
+- **University Policies & Procedures**: Referenced in the Academic Governance Handbook 2025.
+- **TEQSA Guidance Notes on Academic Governance**: Provides detailed guidance aligned with the Higher Education Standards Framework.
+- **Academic Board Rules and Standing Orders**: Documented within UC's internal governance documents.
+
+For any further questions or clarifications, you may also reach out to the University’s Academic Governance Office.
+====================================================================================================
+[Question] Explain how the Board can demonstrate oversight of academic integrity in line with HESF 5.2.
+[qwen2.5:7b Answer] To demonstrate oversight of academic integrity in line with the Higher Education Standards Framework (HESF) 5.2, the Academic Board at the University of Canberra should:
+
+- **Ensure Clear Policies and Procedures**: Develop and maintain clear policies on what constitutes academic or research misconduct, as well as guidelines for maintaining academic and research integrity.
+- **Implement Training Programs**: Provide training to students, staff, and other stakeholders on these policies and procedures. This can include workshops, seminars, and online modules.
+- **Monitor Compliance**: Regularly monitor compliance with the university’s academic integrity policies through mechanisms such as:
+  - **Self-Assessment and Peer Review**: Conduct internal reviews of teaching and research practices.
+  - **External Benchmarking**: Engage in external referencing or benchmarking activities to ensure that standards are met.
+- **Address Misconduct Proactively**: Establish processes for reporting, investigating, and addressing instances of academic misconduct. This includes:
+  - **Prompt Reporting Mechanisms**: Encourage students and staff to report suspected cases of academic misconduct.
+  - **Confidentiality and Impartiality**: Ensure that investigations into alleged misconduct are handled confidentially and impartially.
+- **Corrective Actions**: Take appropriate corrective actions when non-compliance is identified, including disciplinary measures for offenders and support for those who need it.
+
+**Next steps / Where to confirm**: For detailed guidance on these responsibilities, refer to the Academic Governance Handbook 2025 or contact the Academic Governance Office at UC.
+--------------------------------------------------
+[gpt-5.4 Answer] The Board can demonstrate oversight of academic integrity under HESF 5.2 by showing that it has clear, active, and evidence-based governance processes that prevent, monitor, and respond to integrity risks across teaching, learning, research, and research training.
+
+### What this looks like in practice
+
+- **Set and approve the policy framework**
+  - Approve and periodically review academic integrity and research integrity policies, procedures, and delegations.
+  - Ensure these align with the **Higher Education Standards Framework (Threshold Standards) 2021**, the **AQF**, and relevant institutional requirements.
+
+- **Monitor integrity risks and incidents**
+  - Receive regular reports on:
+    - academic misconduct trends
+    - research misconduct or breaches
+    - contract cheating / plagiarism risks
+    - integrity issues in partnerships, placements, offshore delivery, and joint awards
+  - Track whether underlying causes are identified and corrective action is taken, consistent with HESF 5.2 and 6.3.
+
+- **Assure student guidance and education**
+  - Confirm students are provided with guidance on:
+    - what constitutes academic misconduct and research misconduct
+    - good practices in academic and research integrity
+  - Seek evidence that induction, assessment design, and support mechanisms are working.
+
+- **Oversee integrity in third-party and partnership arrangements**
+  - Ensure academic and research integrity obligations are maintained where another party is involved in delivery, placements, collaborative research, research training, or joint awards.
+
+- **Review quality assurance mechanisms**
+  - Test whether institutional processes for compliance, monitoring, review, and improvement are effective, timely, comprehensive, and rigorous.
+  - Ensure non-compliance is identified, escalated, and acted on.
+
+- **Use committees effectively**
+  - Rely on standing committees and academic governance committees to investigate, monitor, and advise on integrity matters, while retaining ultimate academic oversight.
+  - Require committees to report clearly on risks, actions, and outcomes.
+
+- **Benchmark and review**
+  - Use periodic course reviews, external referencing, and benchmarking to assess whether assessment design, progression monitoring, and academic quality processes support integrity.
+  - Monitor institutional benchmarks for academic quality and outcomes.
+
+- **Maintain documented evidence of oversight**
+  - Board and committee minutes, agendas, papers, dashboards, action registers, policy reviews, and compliance reports should show:
+    - issues were considered
+    - questions were asked
+    - actions were assigned
+    - follow-up occurred
+
+### In relation to HESF 5.2 specifically
+The Board should be able to evidence that:
+
+- students receive guidance on misconduct and good practice;
+- integrity and accountability are maintained in all relevant arrangements with external parties;
+- breaches or lapses are identified, monitored, and corrected;
+- oversight extends to both **academic integrity** and **research integrity**.
+
+### Useful indicators of Board oversight
+Examples of evidence include:
+
+- annual academic integrity reports to Academic Board
+- research integrity or ethics compliance reports
+- policy approval and review schedules
+- reports on misconduct case trends and response times
+- committee reports on assessment quality and integrity risks
+- records of actions taken where non-compliance was found
+
+### Next steps / Where to confirm
+Check the relevant UC sources such as:
+
+- **Academic Board Rules**
+- **Academic Board Standing Orders**
+- **Academic Governance Handbook**
+- **UC Policy Library**
+- relevant advice from the **Research Integrity Unit** or **Academic Governance Office**
+
+If you want, I can also turn this into a **short compliance-style paragraph** suitable for a report or audit response.
+--------------------------------------------------
+[qwen2.5:32b Answer] The Board at the University of Canberra (UC) demonstrates oversight of academic integrity in line with the Higher Education Standards Framework (HESF) Threshold Standard 5.2 through several key actions and processes:
+
+### Direct Answer:
+1. **Approval and Review**: The Academic Board is responsible for approving and reviewing all university policies that relate to academic governance, including those regarding academic integrity. This ensures compliance with both institutional requirements and external frameworks like the Australian Qualifications Framework (AQF).
+
+2. **Monitoring Compliance**: The Board oversees compliance with legislation relevant to higher education provision, ensuring all programs meet established quality benchmarks. It monitors potential risks related to academic and research integrity.
+
+3. **Critical Evaluation**: The Academic Board evaluates the effectiveness of educational innovations or proposals for innovation critically. This includes assessing their alignment with academic integrity principles.
+
+4. **Reporting Mechanisms**: The Board ensures there are mechanisms in place for reporting suspected cases of misconduct, including clear escalation pathways and processes for addressing such issues promptly and thoroughly.
+
+5. **Quality Assurance**: Academic oversight is maintained through periodic reviews (at least every seven years) of all accredited courses to ensure they continue to meet the required standards and remain compliant with academic integrity policies.
+
+### Next Steps / Where to Confirm:
+- **Academic Governance Handbook 2025**: This document outlines responsibilities and processes for ensuring academic governance, including sections on maintaining oversight of academic integrity.
+- **Higher Education Standards Framework (Threshold Standards) 2021**: The specific criteria under Threshold Standard 5.2 can be referenced here.
+- **Research Integrity Unit at UC**: For detailed policies and procedures related to research integrity.
+- **Policy Library at UC**: Accessible online, where all approved academic policies are published and reviewed.
+
+### Key Contacts:
+- **Academic Governance Office**: Provides guidance on compliance and policy development.
+- **Ethics Committees (Human/Animal)**: Ensure ethical standards in research activities are maintained.
+- **Research Integrity Unit**: Oversees processes related to academic misconduct reporting and handling.
+====================================================================================================
+[Question] Explain how to interpret attrition, progression and completion indicators for AB monitoring.
+[qwen2.5:7b Answer] To interpret the attrition, progression, and completion indicators for Academic Board (AB) monitoring at the University of Canberra, you should focus on several key areas as outlined by TEQSA's Risk Assessment Framework:
+
+1. **Attrition Rate**:
+   - **Definition**: The percentage of first-year commencing students in a year who neither complete nor return to study in the following year.
+   - **Calculation Example**: 
+     \[
+     R_1 = \text{Commencing students (headcount) in Year X}
+     \]
+     \[
+     R_2 = \text{Completing headcount in Year X + 1}
+     \]
+     \[
+     \text{Attrition Rate} = \left( \frac{\text{R}_1 - \text{R}_2}{\text{R}_1} \right) \times 100
+     \]
+   - **Trend Analysis**: Consider the trend over multiple years to identify any patterns or issues.
+
+2. **Progression**:
+   - **Mapping with Standards**: Sections related include Course Design (3.1), Monitoring, Review and Improvement (5.3), Academic Governance (6.3).
+   - **Description of Risk**: Graduates have valid methods of assessment or monitoring that determine progress within or between units of study or in research training.
+
+3. **Completion**:
+   - **Mapping with Standards**: Sections related include Admission (1.1), Credit and Recognition of Prior Learning (1.2), Orientation and Progression (1.3).
+   - **Description of Risk**: Trends in rates of retention, progression, and completion of student cohorts through courses of study are monitored to enable review and improvement.
+
+**Next steps / Where to confirm**:
+- Review the relevant sections of the University's policies on academic governance, particularly those related to admissions, course design, and monitoring.
+- Consult with the Academic Governance Office or Research Integrity Unit for specific guidance tailored to UC’s practices and procedures.
+
+By focusing on these areas, you can ensure a comprehensive understanding of attrition, progression, and completion indicators as part of AB monitoring.
+--------------------------------------------------
+[gpt-5.4 Answer] For Academic Board monitoring, attrition, progression, and completion indicators should be interpreted as **governance-level risk and quality signals**, not as stand-alone proof of poor performance.
+
+### How to interpret them
+
+- **Attrition**
+  - High attrition suggests possible issues in:
+    - admissions and student preparedness
+    - orientation and transition support
+    - teaching, assessment, and learning design
+    - overall student experience
+  - It should be read carefully because attrition is not always negative:
+    - some students may transfer to another provider
+    - cohort mix, delivery mode, and student background may affect rates
+
+- **Progression**
+  - Low progress rates indicate students may not be successfully moving through units or milestones at the expected pace.
+  - This can point to problems with:
+    - assessment design and feedback
+    - early identification of at-risk students
+    - course structure and sequencing
+    - adequacy of academic and support services
+
+- **Completion**
+  - Low or declining completion rates suggest students are not reaching the end of their course successfully.
+  - This may reflect cumulative issues across the student lifecycle:
+    - admission and credit decisions
+    - progression support
+    - curriculum design
+    - supervision or research training for HDR students
+    - institutional monitoring and intervention effectiveness
+
+### What Academic Board should look for
+
+AB should consider these indicators in context, including:
+
+- **Trend over time**, not just one year
+- **Differences by cohort**, especially:
+  - overseas students
+  - undergraduate / postgraduate coursework / HDR
+  - onshore vs offshore where relevant
+- **Related evidence**, such as:
+  - graduate satisfaction
+  - graduate destinations
+  - support programs in place
+  - reasons for attrition, including transfers
+- **Comparative patterns**, for example:
+  - institution-wide vs course-level issues
+  - whether deterioration is isolated or systemic
+
+### Governance interpretation
+
+Under the HESF and TEQSA risk framework, these indicators are relevant because they test whether UC is meeting expectations that:
+
+- student progress is validly assessed
+- students at risk are identified and supported
+- retention, progression, and completion trends are monitored
+- review and improvement actions are implemented
+- academic governance is overseeing quality effectively
+
+So for AB purposes, these indicators should be used to ask:
+
+- Is there a **material risk to academic quality or student success**?
+- Are there **specific cohorts or courses** needing intervention?
+- Are existing supports and course improvements working?
+- Is management providing sufficient analysis and action plans?
+- Does the pattern indicate a **Section 5.3 monitoring/review issue** or a broader **Section 6.3 academic governance issue**?
+
+### Practical AB reading
+
+A useful way to read the indicators is:
+
+- **High attrition + low progression + low completions**  
+  = strong warning sign of systemic quality concerns
+
+- **High attrition but stable completions**  
+  = may reflect early-course transition issues rather than whole-course failure
+
+- **Low progression but normal attrition**  
+  = students may be staying enrolled but not advancing effectively
+
+- **Declining completions over several years**  
+  = likely signals structural course or support problems requiring review
+
+### Next steps / Where to confirm
+
+Check against:
+- **HESF 2021**, especially:
+  - Section 1.3 Orientation and Progression
+  - Section 1.4 Learning Outcomes and Assessment
+  - Section 5.3 Monitoring, Review and Improvement
+  - Section 6.3 Academic Governance
+- **TEQSA Risk Assessment Framework**
+- UC internal reporting to **Academic Board**, relevant course quality committees, and the **UC Policy Library** for student progress, course review, and academic governance instruments.
+
+If you want, I can also turn this into a **short Academic Board paper paragraph** or a **traffic-light interpretation guide** for UC reporting.
+--------------------------------------------------
+[qwen2.5:32b Answer] To interpret attrition, progression, and completion indicators for Academic Board (AB) monitoring at the University of Canberra (UC), you should consider these metrics within the context of TEQSA's risk assessment framework as well as UC’s academic governance policies. Here are key considerations:
+
+### Attrition Rate:
+- **Definition**: The percentage of first-year students who neither complete their program nor return to study in the following year.
+- **Indicators for Concern**:
+  - High attrition rates may suggest issues in admission processes, teaching and learning quality, or student support services.
+  - Trends over time can indicate if the issue is worsening or improving.
+
+### Progression Rate:
+- **Definition**: The percentage of students who progress from one academic year to another or complete specific milestones within their course.
+- **Indicators for Concern**:
+  - Low progression rates may reflect challenges in teaching quality, student support, or curriculum design.
+  - Consistent low rates can indicate systemic issues that need addressing.
+
+### Completion Rate:
+- **Definition**: The percentage of students who successfully complete their courses within the expected timeframe.
+- **Indicators for Concern**:
+  - Low completion rates may indicate poor academic advising, inadequate student support services, or other barriers to success.
+  - Trends over time can help identify if there are persistent issues.
+
+### Next Steps / Where to Confirm:
+1. **Review UC Policies**: Refer to the Higher Education Standards Framework (Threshold Standards) and related policies available in the UC Policy Library for detailed guidelines on monitoring these indicators.
+2. **Contact Relevant Units**:
+   - **Academic Governance Office**: For guidance on how these metrics are used within AB processes.
+   - **Research Integrity Unit**: To discuss any research-related concerns that may impact student progression or completion rates.
+   - **Student Support Services**: For insights into the effectiveness of support services and any areas for improvement.
+
+3. **Data Analysis**:
+   - Use Tertiary College Student Information (TCSI) data to calculate metrics such as attrition, progression, and completion rates.
+   - Analyze trends over multiple years using consistent methodologies to track changes.
+
+By understanding these indicators, UC can ensure effective monitoring and continuous improvement in academic governance and student outcomes.
+====================================================================================================
