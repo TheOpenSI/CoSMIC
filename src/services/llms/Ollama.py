@@ -35,7 +35,7 @@ from src.services.llms.OllamaPullManager import OllamaPullManager
 class Ollama(LLMBase):
     def __init__(self,
                  llm_name: str = "llama3.2",
-                 container_name: str = "ollama",
+                 container_name: str = "localhost",
                  local_port: int = 11434,
                  **kwargs) -> None:
         """

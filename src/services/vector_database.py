@@ -210,7 +210,7 @@ class VectorDatabase(ServiceBase):
         """
         if os.path.exists(document_dir):
             # Find all pdf in a folder.
-            document_paths = glob.glob(f"{document_dir}/*.pdf")
+            document_paths = glob.glob(f"{document_dir}/*.[Pp][Dd][Ff]")
 
             # Add these documents.
             self.add_documents(document_paths)
