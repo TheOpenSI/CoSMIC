@@ -1,7 +1,7 @@
 services:
   ollama:
     image: ollama/ollama:latest
-    container_name: ollama
+    container_name: ollama_cosmic
     deploy:
       resources:
         reservations:
@@ -89,4 +89,5 @@ volumes:
 
 networks:
   cosmic_net:
+    name: cosmic_net
     driver: bridge
