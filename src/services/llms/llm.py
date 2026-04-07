@@ -283,12 +283,12 @@ class GPT(LLMBase):
 
         # OpenAI API call.
         self.llm = lambda system_prompt: \
-            self.model.chat.completions.create(
+            self.model.responses.create(
                 model=llm_name,
-                max_tokens=2048,
+                max_output_tokens=2048,
                 temperature=0.0,
-                messages=system_prompt
-            ).choices[0].message.content
+                input=system_prompt
+            ).output[0].content[0].text
 
     def quit(self):
         """Close OpenAI API model entry.
@@ -318,39 +318,6 @@ class GPT(LLMBase):
             print(set_color("warning", "The OPENAI_API_KEY in .env is invalid."))
 
         return openai_key
-
-# =============================================================================================================
-
-# class Ollama(LLMBase):
-#     def __init__(
-#         self,
-#         llm_name: str="mistral",
-#         **kwargs
-#     ):
-#         """For Ollama supported LLMs.
-
-#         Args:
-#             llm_name (str, optional): Ollama supported LLMs available at https://ollama.com/library.
-#         """
-#         super().__init__(llm_name=llm_name, **kwargs)
-
-#         # Ollama model name will be in "ollama:[llm_name]", so truncate it to get the exact one.
-#         llm_name = llm_name.replace("ollama:", "")
-
-#         # Pull model.
-#         ollama.pull(llm_name)
-
-#         # Ollama API call.
-#         self.llm = lambda system_prompt: \
-#             ollama.chat(
-#                 model=llm_name,
-#                 messages=system_prompt
-#             )['message']['content']
-
-#     def quit(self):
-#         """Close OpenAI API model entry.
-#         """
-#         if self.model: self.model.close()
 
 # =============================================================================================================
 

@@ -93,7 +93,7 @@ class Ollama(LLMBase):
     def __call__(self,
                  question: str,
                  context: Union[str, Dict[str, Any]] = {},
-                 serivce_name: str = "",
+                 service_name: str = "",
                  ) -> tuple[str, str]:
 
         """
@@ -102,8 +102,7 @@ class Ollama(LLMBase):
         Args:
             question (str): User question in string.
             context (Union[str, Dict[str, Any]], optional): Context for the question. Defaults to {}.
-            serivce_name (str, optional): Name of the service. Defaults to "".
-            
+            service_name (str, optional): Name of the service. Defaults to "".
         Returns:
             Tuple of (response, raw_response)
         """
@@ -112,7 +111,7 @@ class Ollama(LLMBase):
         
         # Combine system prompt with user prompt
         # combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context)
-        combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context, service=serivce_name)
+        combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context, service=service_name)
         
         # Chat
         chat_response = self.ollama_client.chat(
@@ -134,9 +133,3 @@ class Ollama(LLMBase):
         Clean up any resources. No specific cleanup needed for API-based implementation.
         """
         pass  # No resources to clean up for REST API implementation
-    
-# if __name__ == "__main__":
-#     ollama_instance = OllamaContainer(container_name = "localhost")
-#     response, raw_respose = ollama_instance.__call__("what is the capital of greece?")
-#     print("Response:", response)
-#     print("Raw Response:", raw_respose)

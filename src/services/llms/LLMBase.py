@@ -245,14 +245,14 @@ class LLMBase(ServiceBase):
         self,
         question: str,
         context: dict = {},
-        service: str = ""
+        service_name: str = ""
     ):
         """Process the question answering.
 
         Args:
             question (str): user question in string.
             context (str, optional): context retrieved externally if applicable. Defaults to "".
-            service (str, optional): the service for which to set the prompter. Defaults to "".
+            service_name (str, optional): the service for which to set the prompter. Defaults to "".
 
         Returns:
             response: truncated response.
@@ -272,7 +272,7 @@ class LLMBase(ServiceBase):
         # since different services may have different system prompts. only if 
         # the Instance is GPT
         
-        system_prompt = self.system_prompter(user_prompt, context=context, service=service)
+        system_prompt = self.system_prompter(user_prompt, context=context, service=service_name)
         # system_prompt = self.system_prompter(user_prompt, context=context)
         
 
