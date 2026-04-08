@@ -5,10 +5,13 @@ services:
   ollama:
     container_name: cosmic-ollama
     restart: unless-stopped
-    image: ollama/ollama:latest
+    # image: ollama/ollama:latest
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/ollama.Dockerfile
     volumes:
       - type: volume
-        source: cosmic-ollama
+        source: cosmic-ollama-data
         target: /root/.ollama
     deploy:
       resources:
@@ -37,7 +40,7 @@ services:
     # image: opensicbr/cosmic:latest
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
     volumes:
       # - type: volume
       #   source: open-webui
@@ -130,7 +133,7 @@ services:
 
 
 volumes:
-  cosmic-ollama:
+  cosmic-ollama-data:
     name: cosmic-default-models
 
   cosmic-configs:
@@ -140,9 +143,9 @@ volumes:
   cosmic-fastapi-venv:
     name: cosmic-ignore
 
-  shared_mount:
-    name: cosmic-shared-mount
-    external: true
+  # cosmic-shared-mount:
+  #   name: cosmic-shared-mount
+  #   external: true
   # open-webui: {}
   # pipelines: {}
 
