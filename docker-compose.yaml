@@ -68,7 +68,7 @@ services:
     # NOTE: For quick debugging (on dev only)
     ports:
       - name: cosmic-uvicorn
-        target: 3000 
+        target: 3000
         host_ip: 127.0.0.1
         published: "3000"
         protocol: tcp
