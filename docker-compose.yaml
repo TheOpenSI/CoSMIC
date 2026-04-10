@@ -96,4 +96,6 @@ volumes:
 
 networks:
   cosmic_net:
+    name: cosmic_net
     driver: bridge
+    external: true
