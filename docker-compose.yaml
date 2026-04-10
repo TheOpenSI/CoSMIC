@@ -1,7 +1,18 @@
+name: OpenSI-CoSMIC
+
+
 services:
   ollama:
-    image: ollama/ollama:latest
     container_name: ollama
+    restart: unless-stopped
+    # image: ollama/ollama:latest
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/ollama.Dockerfile
+    volumes:
+      - type: volume
+        source: cosmic-ollama-data
+        target: /root/.ollama
     deploy:
       resources:
         reservations:
@@ -9,11 +20,72 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    volumes:
-      - ollama:/root/.ollama
     networks:
-      - cosmic_net
-  
+      - cosmic
+
+
+  cosmic:
+    container_name: cosmic-fastapi
+    depends_on:
+      ollama:
+        restart: true
+        condition: service_started
+        required: true
+
+      # pycapsule:
+      #   restart: true
+      #   condition: service_started
+      #   required: true
+    restart: unless-stopped
+    # image: opensicbr/cosmic:latest
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
+    volumes:
+      # - type: volume
+      #   source: open-webui
+      #   target: /app/backend/data
+
+      - type: volume
+        source: cosmic-configs
+        target: /app/scripts/configs
+
+        # NOTE:
+        # Live mounting for auto reload on dev only. Remove it and the
+        # corresponding top-level volume on prod.
+      - type: bind
+        source: ./
+        target: /app
+
+        # NOTE:
+        # This makes `.venv` directory container-native at runtime and not
+        # trying to bypass the ignore at build time. This's very important when
+        # you do the development in Windows.
+      - type: volume
+        source: cosmic-fastapi-venv
+        target: /app/.venv
+    tty: true
+    # NOTE: For quick debugging (on dev only)
+    ports:
+      - name: cosmic-uvicorn
+        target: 3000
+        host_ip: 127.0.0.1
+        published: "3000"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
+      - name: cosmic-debugpy
+        target: 5678
+        host_ip: 127.0.0.1
+        published: "5678"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+    networks:
+      - cosmic
+
+
   # web:
   #   build:
   #     context: .
@@ -59,34 +131,27 @@ services:
   #   networks:
   #     - cosmic_net
 
-  cosmic:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: cosmic
-    # image: opensicbr/cosmic:latest
-    volumes:
-      # - open-webui:/app/backend/data
-      - volume_configs:/app/scripts/configs
-    ports:
-      - "3000:3000"
-      - "5678:5678" # debupy
-    depends_on:
-      - ollama
-      # - pycapsule
-    tty: true
-    restart: unless-stopped
-    networks:
-      - cosmic_net
 
 volumes:
-  ollama: {}
+  cosmic-ollama-data:
+    name: cosmic-default-models
+
+  cosmic-configs:
+    name: cosmic-default-configs
+
+  # NOTE: as explained above, define this only in dev (delete on prod).
+  cosmic-fastapi-venv:
+    name: cosmic-ignore
+
+  # cosmic-shared-mount:
+  #   name: cosmic-shared-mount
+  #   external: true
   # open-webui: {}
   # pipelines: {}
-  volume_configs: {}
-  shared_mount:
-    external: true
+
 
 networks:
-  cosmic_net:
+  cosmic:
+    name: cosmic_net
     driver: bridge
+    external: true
