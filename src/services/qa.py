@@ -213,7 +213,7 @@ class QABase(ServiceBase):
                 '1': "memory",
                 '2': "code_generation",
                 '3': "general_question_answering",
-                '4': "AcademicGovernance"
+                '4': "academic_governance"
             }
             
             response, raw_response = self.llm(user_prompt, context=context, service_name=services_names[service_option])
