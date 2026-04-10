@@ -3,7 +3,7 @@ name: OpenSI-CoSMIC
 
 services:
   ollama:
-    container_name: cosmic-ollama
+    container_name: ollama
     restart: unless-stopped
     # image: ollama/ollama:latest
     build:
