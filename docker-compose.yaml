@@ -77,7 +77,7 @@ services:
       - volume_configs:/app/scripts/configs
     ports:
       - "3000:3000"
-      - "5678:5678" # debugpy
+      # - "5678:5678" # debugpy
     depends_on:
       - ollama
       # - pycapsule
