@@ -24,7 +24,7 @@ def update_statistic_table(statistic_dict):
     )
 
     if os.path.exists(statistic_path):
-        data = pd.read_csv(statistic_path)
+        data = pd.read_csv(statistic_path, dtype={"average_token_length": float})
         user_emails = data["email"].tolist()
     else:
         user_emails = []

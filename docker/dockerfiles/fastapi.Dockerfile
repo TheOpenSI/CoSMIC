@@ -31,4 +31,5 @@ EXPOSE 3000/tcp
 # TODO:
 # provide `--no-reload` flag on production run, change the `--host` flag, and
 # remove `dev` flag on prod run.
-CMD [ "uv", "run", "fastapi", "dev", "api.py", "--host", "0.0.0.0", "--port", "3000" ]
+# CMD [ "uv", "run", "fastapi", "dev", "api.py", "--host", "0.0.0.0", "--port", "3000" ]
+CMD [ "uv", "run", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "3000", "--reload" ]
