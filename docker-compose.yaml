@@ -1,6 +1,5 @@
 name: OpenSI-CoSMIC
 
-
 services:
   ollama:
     container_name: ollama
@@ -13,16 +12,15 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     networks:
       - cosmic
-
 
   cosmic:
     container_name: cosmic-fastapi
@@ -41,13 +39,13 @@ services:
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     volumes:
       # - type: volume
       #   source: open-webui
@@ -92,7 +90,6 @@ services:
     networks:
       - cosmic
 
-
   # web:
   #   build:
   #     context: .
@@ -122,8 +119,7 @@ services:
   #   # user: "${UID:-1000}:${GID:-1000}"
   #   networks:
   #     - cosmic_net
-  
-    
+
   # pycapsule:
   #   image: opensicbr/pycapsule:latest
   #   privileged: true
@@ -137,7 +133,6 @@ services:
   #     - ollama
   #   networks:
   #     - cosmic_net
-
 
 volumes:
   cosmic-ollama-data:
@@ -155,7 +150,6 @@ volumes:
   #   external: true
   # open-webui: {}
   # pipelines: {}
-
 
 networks:
   cosmic:

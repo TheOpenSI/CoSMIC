@@ -72,9 +72,11 @@ class OpenSICoSMIC:
 
         # Load yaml file to get the config.
         self.config = Box.from_yaml(filename=config_path, Loader=yaml.FullLoader)
-        self.user_id = str(user["id"]) \
-            if ((user is not None) and ("id" in user) and user["id"] != "") \
+        self.user_id = (
+            str(user["id"])
+            if ((user is not None) and ("id" in user) and user["id"] != "")
             else None
+        )
 
         # Set model device.
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -95,6 +97,34 @@ class OpenSICoSMIC:
         # Check OpenAI API key.
         self.openai_api_status = self.check_openai_key()
 
+        # ensure when starting the application first time, service.config is still int,
+        # so need to change service.config is a list
+        if isinstance(self.config.service, int):
+            self.config.service = (
+                list(all_services.keys())
+                if self.config.service == -1
+                else [self.config.service]
+            )
+
+        # smanile: all available services
+        all_services = {
+            "1": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
+            "2": "update the vector database with a declarative sentence (not a question) or a pdf document",
+            "3": "generate or improve a code or answer a question in order to generate or improve a code",
+            "4": "answer a question or provide a reasoning, which cannot be achieved by the other services",
+            "5": "Answer question about Academic Governance",
+        }
+
+        # smanile: filter to only active services from config
+        active_services = {}
+        for k in self.config.service:
+            key = str(k)
+            value = all_services.get(key)
+            if value:
+                active_services[key] = value
+            else:
+                raise ValueError(f"Service {key} does not exist.")
+
         # Set LLM for query analysis.
         if query_llm_name == "":
             query_llm_name = self.config.query_analyser.llm_name
@@ -102,7 +132,8 @@ class OpenSICoSMIC:
             query_llm_name,
             seed=self.config.seed,
             is_quantized=self.config.query_analyser.is_quantized,
-            service_index=self.config.service,
+            services=active_services,  # filtered services
+            # service_index=self.config.service,
             device=self.device,
         )
 
@@ -233,12 +264,10 @@ class OpenSICoSMIC:
             llm_instance_name = LLM_INSTANCE_DICT[llm_name]
         elif llm_name.find("gpt") > -1:
             llm_instance_name = "GPT"
-            
-            
+
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
-            
-            
+
         else:
             print(set_color("error", f"Unsupported LLM: {llm_name}."))
             sys.exit()
@@ -248,7 +277,7 @@ class OpenSICoSMIC:
         )
 
         print(f"LLM instance created: {llm}")
-        
+
         return llm
 
     def quit(self):
