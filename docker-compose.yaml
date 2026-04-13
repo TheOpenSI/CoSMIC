@@ -12,13 +12,13 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     networks:
       - cosmic
 
@@ -39,13 +39,13 @@ services:
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     volumes:
       # - type: volume
       #   source: open-webui
