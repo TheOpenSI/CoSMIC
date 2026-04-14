@@ -1,3 +1,16 @@
+### Core modules ###
+import os
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+
+### Type hints ###
+
+
+### Internal modules ###
+from .backend.routers import default_apis, models
+
+
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
 # import debugpy
@@ -6,12 +19,6 @@
 # debugpy.wait_for_client()
 # print("Debugger attached!")
 # =======================================================
-
-
-import os
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from backend.routers import default_apis, models
 
 
 app = FastAPI()

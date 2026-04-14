@@ -1,4 +1,7 @@
-def build_context_from_messages(messages: list, num_pairs: int) -> str:
+def build_context_from_messages(
+    messages: list,
+    num_pairs: int
+) -> str:
     """
     Build a chat history from the given number of conversation pairs.
 
@@ -12,43 +15,56 @@ def build_context_from_messages(messages: list, num_pairs: int) -> str:
     if not messages:
         return ""
 
-    pairs = []
-    i = 0
+    pairs: list[tuple[str, str]] = []
+    i: int = 0
+
     while i < len(messages) - 1:
         if messages[i]["role"] == "user" and messages[i + 1]["role"] == "assistant":
-            user_msg = messages[i]["content"]
-            assistant_msg = messages[i + 1]["content"]
+            user_msg: str = messages[i]["content"]
+            assistant_msg: str = messages[i + 1]["content"]
+
             pairs.append((user_msg, assistant_msg))
             i += 2
+
         else:
             i += 1
 
-    selected_pairs = pairs[-num_pairs:]
+    selected_pairs: list[tuple[str ,str]] = pairs[-num_pairs:]
 
-    context_parts = []
-    for idx, (user_msg, assistant_msg) in enumerate(selected_pairs, start=1):
-        block = (
-            f"Previous Conversation Pair {idx}\n"
-            f"{'-'*30}\n"
-            f"**User:** {user_msg}\n"
+    context_parts: list[str] = []
+
+    for idx, (user_msg, assistant_msg) in enumerate(
+        iterable=selected_pairs,
+        start=1
+    ):
+        block: str = "{0:s}\n{1:s}\n{2:s}\n{3:s}".format(
+            f"Previous Conversation Pair {idx}",
+            f"{'-'*30}",
+            f"**User:** {user_msg}",
             f"**Assistant:** {assistant_msg}"
         )
         context_parts.append(block)
 
-    full_context = (
-        "Conversation History: \n"
-        + "\n\n".join(context_parts)
-        + "\n"
-        + f"{'='*15} End of Chat History {'='*15}\n"
+    full_context: str = "{0:s}\n\n\n{1:s}\n{2:s}\n".format(
+        "Conversation History:",
+        f"{context_parts}",
+        f"{'='*15} End of Chat History {'='*15}"
     )
 
     return full_context
 
 
-
 if __name__ == "__main__":
-    messages = [
-    {'role': 'system', 'content': 'PDF content from OpenwebUI'}
+    messages: list[dict[str, str]] = [
+        {
+            'role': 'system',
+            'content': 'PDF content from OpenwebUI'
+        }
     ]
-    
-    print(build_context_from_messages(messages, 5))
+
+    print(
+        build_context_from_messages(
+            messages=messages,
+            num_pairs=5
+        )
+    )
