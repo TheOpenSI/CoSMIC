@@ -11,7 +11,6 @@ from torch import cuda
 
 ### Internal modules ###
 from .services.llms import llm as llm_instances
-from .services.llms.llm import get_instance
 from .maps import LLM_INSTANCE_DICT
 from .services.vector_database import VectorDatabase
 from .services.qa import QABase
@@ -22,6 +21,7 @@ from ..modules.chess.chess_genfen import FENGenerator
 from ..modules.chess.chess_gencot import CotGenerator
 from ..modules.code_generation.code_generation import CodeGenerator
 from ..utils.log_tool import set_color
+from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
 

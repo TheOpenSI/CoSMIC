@@ -1,34 +1,12 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: user_prompt.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
+### Core modules ###
 
-import os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+### Type hints ###
 
-from src.services.llms.prompts.user_prompt import UserPromptBase
 
-# =============================================================================================================
+### Internal modules ###
+from ..services.llms.prompts.user_prompt import UserPromptBase
+
 
 class QueryAnalyserService(UserPromptBase):
     def __init__(
@@ -36,7 +14,8 @@ class QueryAnalyserService(UserPromptBase):
         services: dict,
         **kwargs
     ):
-        """Initialize the instance.
+        """
+        Initialize the instance.
 
         Args:
             services (dict): a dictionary of services.
@@ -68,27 +47,28 @@ class QueryAnalyserService(UserPromptBase):
     def __call__(
         self,
         question: str,
-        context: dict={}
+        context: dict = {}
     ):
         """Build user prompt to analyse the question.
 
         Args:
-            question (str): the question.
-            context (dict): context, not used but reserve for interface uniform. Default to "".
+            question    (str):  the question.
+            context     (dict): context, not used but reserve for interface uniform. Default to "".
 
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given {self.num_services} services: '{self.service_string}'," \
-            f" which service can answer the following query? The query is '{question}'." \
-            f" For instance, if the query is to predict the next chess move, then select service 0;"\
-            f" otherwise, if the query is to generate or modify a code, then select service 2." \
-            f" otherwise, if the query is about Academic Governance, then select service 4." \
-            f" Just return which service without any explainations."
+        user_prompt: str = "{0:s}, {1:s}. {2:s}; {3:s}. {4:s}. {5:s}.".format(
+            f"Given {self.num_services} services: '{self.service_string}'",
+            f"which service can answer the following query? The query is '{question}'",
+            "For instance, if the query is to predict the next chess move, then select service 0",
+            "otherwise, if the query is to generate or modify a code, then select service 2",
+            "otherwise, if the query is about Academic Governance, then select service 4",
+            "Just return which service without any explainations"
+        )
 
         return user_prompt
 
-# =============================================================================================================
 
 class QueryAnalyserSystemInfo(QueryAnalyserService):
     def __init__(
@@ -96,7 +76,8 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         *args,
         **kwargs
     ):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__(*args, **kwargs)
 
@@ -117,39 +98,44 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         # Get system information.
         self.system_information = self.get_system_information()
 
+
     def get_system_information(self):
-        """Get system information.
+        """
+        Get system information.
 
         Returns:
             system_information (str): system information.
         """
-        system_information = \
-            f"My name is OpenSI-CoSMIC." \
-            f" I am an AI system." \
-            f" OpenSI-CoSMIC stands for the Open Source" \
-            f" Institute-Cognitive System of Machine Intelligent Computing." \
-            f" I am created, developed, and maintained by OpenSI," \
-            f" which is an institute at University of Canberra." \
-            f" At the moment, I can provide {len(self.services)} services," \
-            f" including {self.service_string}." \
-            f" I can design and provide more services under an agreement." \
-            f" To request more services, please find the contact information in my profile." \
-            f" My profile and project repository can be found at" \
-            f" <https://github.com/TheOpenSI/CoSMIC>." \
-            f" You take my role."
+        system_information: str = "{0:s}. {1:s}. {2:s}{3:s}. {4:s}, {5:s}. {6:s}, {7:s}. {8:s}. {9:s}. {10:s}{11:s}. {12:s}.".format(
+            "My name is OpenSI-CoSMIC.",
+            " I am an AI system",
+            "OpenSI-CoSMIC stands for the Open Source",
+            "Institute-Cognitive System of Machine Intelligent Computing",
+            "I am created, developed, and maintained by OpenSI",
+            "which is an institute at University of Canberra",
+            f"At the moment, I can provide {len(self.services)} services",
+            f"including {self.service_string}",
+            "I can design and provide more services under an agreement",
+            "To request more services, please find the contact information in my profile",
+            "My profile and project repository can be found at",
+            "<https://github.com/TheOpenSI/CoSMIC>",
+            "You take my role"
+        )
 
         return system_information
+
 
     def __call__(
         self,
         question: str,
-        context: dict={}
+        context: dict = {}
     ):
-        """Build user prompt to analyse the question.
+        """
+        Build user prompt to analyse the question.
 
         Args:
-            question (str): the question.
-            context (dict): context, not used but reserve for interface uniform. Default to "".
+            question    (str):  the question.
+            context     (dict): context, not used but reserve for interface uniform. Default to "".
 
         Returns:
             user_prompt (str): question with instruction.
@@ -158,10 +144,12 @@ class QueryAnalyserSystemInfo(QueryAnalyserService):
         #     f" is the question '{question}' a general question related to the system" \
         #     f" information or OpenSI-CoSMIC?" \
         #     f" Just answer yes or no without any explainations."
-        
-        user_prompt = f"A user has asked the following question - '{question}', " \
-                      f"is the user asking information about you (the AI assistant called OpenSI-CoSMIC) or " \
-                      f"requesting information about how you work/what you can do? " \
-                      f"Answer only 'YES' or 'NO' without any explanations."
+
+        user_prompt: str = "{0:s}, {1:s} {2:s} {3:s}.".format(
+            f"A user has asked the following question - '{question}'",
+            "is the user asking information about you (the AI assistant called OpenSI-CoSMIC) or",
+            "requesting information about how you work/what you can do?",
+            "Answer only 'YES' or 'NO' without any explanations"
+        )
 
         return user_prompt
