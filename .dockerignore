@@ -1,0 +1,17 @@
+.git/
+.venv/
+docker/
+examples/
+.dockerignore
+.gitattributes
+.gitignore
+CONTRIBUTING
+*.md*
+!LICENSE*
+*compose.yaml*
+*compose.yml*
+__pycache__
+data/
+logs/
+*.txt
+start.sh
