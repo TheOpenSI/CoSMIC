@@ -1,104 +1,105 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: vector_database.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
-
-import os, glob, pytz, sys, csv
-
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
-
+### Core modules ###
+from pathlib import Path
+from csv import writer
+from glob import glob
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
-from utils.log_tool import set_color
-from src.services.base import ServiceBase
 
-# =============================================================================================================
+
+### Type hints ###
+
+
+### Internal modules ###
+from ...utils.log_tool import set_color
+from .base import ServiceBase
+
 
 class VectorDatabase(ServiceBase):
     def __init__(
         self,
-        document_analyser_model: str="gte-small",
-        # document_analyser_model: str="Qwen/Qwen3-Embedding-8B",
-        local_database_path: str="database/vector_database",
-        vector_database_update_threshold: float=0.98,
-        device: str="cuda",
+        document_analyser_model: str = "gte-small",
+        # document_analyser_model: str = "Qwen/Qwen3-Embedding-8B",
+        local_database_path: str = "database/vector_database",
+        vector_database_update_threshold: float = 0.98,
+        device: str = "cuda",
         **kwargs
     ):
-        """Vector database service.
+        """
+        Vector database service.
 
         Args:
-            document_analyser_model (str, optional): document analyser/process model.
-            local_database_path (str, optional): path of local vector database on disk.
-                Default to "database/vector_database".
-            vector_database_update_threshold (float, optional): contents with similarity >= this threshold
-                will be skipped. Default to 0.98.
-            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
-            Defaults to "gte-small".
+            document_analyser_model             (str, optional):    document analyser/process model.
+            local_database_path                 (str, optional):    path of local vector database on disk.
+                                                                    Default to "database/vector_database".
+            vector_database_update_threshold    (float, optional):  contents with similarity >= this threshold
+                                                                    will be skipped. Default to 0.98.
+            device                              (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
+                                                                    Defaults to "gte-small".
         """
         super().__init__(**kwargs)
 
         # Set config.
         # Set to absolute path.
-        if local_database_path != "" and not os.path.isabs(local_database_path):
-            local_database_path = os.path.join(self.root, local_database_path)
+        self.local_database_path: Path = Path(local_database_path).resolve(strict=True)
+
+        if local_database_path != "" and not self.local_database_path.is_absolute():
+            self.local_database_path: Path = self.root.joinpath(self.local_database_path)
 
         # Use default one.
-        if not os.path.exists(local_database_path):
-            if local_database_path != "":
+        if not self.local_database_path.exists(follow_symlinks=True):
+            if self.local_database_path != "":
                 print(
                     set_color(
-                        "warning",
-                        f"Vector database \"{local_database_path}\" not exist" \
-                        f", use default \"database/vector_database\"."
+                        status="warning",
+                        information="{0:s}{1:s}".format(
+                            f"Vector database \"{local_database_path}\" not exist",
+                            f", use default \"database/vector_database\"."
+                        )
                     )
                 )
 
-            local_database_path = os.path.join(self.root, "database/vector_database")
+            self.local_database_path: Path = self.root.joinpath("database/vector_database")
 
         # Get the catalogue path and threshold.
-        self.local_database_path = local_database_path
-        self.local_database_catalogue_path = os.path.join(local_database_path, "file_list.csv")
+        self.current_local_database_path: Path = self.local_database_path
+        self.local_database_catalogue_path: Path = self.current_local_database_path.joinpath("file_list.csv")
         self.vector_database_update_threshold = vector_database_update_threshold
 
         # Create local database directory.
-        if local_database_path != "":
-            local_database_name = local_database_path.split("/")[-1]
-            local_database_directory = local_database_path.replace(
-                "/" + local_database_name,
+        if self.current_local_database_path != "":
+            local_database_name = str(object=self.current_local_database_path).split("/")[-1]
+            local_database_directory = str(object=self.current_local_database_path).replace(
+                f"/{local_database_name}",
                 ""
             )
-            os.makedirs(local_database_directory, exist_ok=True)
+            Path(local_database_directory).resolve(strict=True).mkdir(
+                mode=0o777,
+                parents=False,
+                exist_ok=True
+            )
 
         # Write head in catalogue file.
-        if not os.path.exists(self.local_database_catalogue_path):
-            catalogue_pt = open(self.local_database_catalogue_path, "w")
-            catalogue = csv.writer(catalogue_pt)
-            catalogue.writerow(["Source", "Time", "Comment"])
-            catalogue_pt.close()
+        if not self.local_database_catalogue_path.exists(follow_symlinks=True):
+            with self.local_database_catalogue_path.open(
+                mode="w",
+                buffering=-1,
+                encoding="utf-8",
+                errors=None,
+                newline=None
+            ) as catalogue_pt:
+                catalogue = writer(catalogue_pt)
+                catalogue.writerow(
+                    [
+                        "Source",
+                        "Time",
+                        "Comment"
+                    ]
+                )
 
         # For document analysis and knowledge database generation/update.
         EMBEDDING_MODEL_DICT = {'gte-small': "thenlper/gte-small"}
@@ -131,134 +132,159 @@ class VectorDatabase(ServiceBase):
         # Build a processor to handle a sentence for database updates.
 
         # Load a local database from a file
-        if os.path.exists(f"{local_database_path}/index.faiss"):
+        if Path(self.current_local_database_path / "index.faiss").exists(follow_symlinks=True):
             self.database = FAISS.load_local(
-                local_database_path,
-                self.database_update_embedding,
+                folder_path=local_database_path,
+                embeddings=self.database_update_embedding,
+                index_name="index",
                 allow_dangerous_deserialization=True
             )
 
             print(
                 set_color(
-                    "success",
-                    f"Load \"{os.path.abspath(local_database_path)}\" to vector database."
+                    status="success",
+                    information=f"Load \"{str(object=self.current_local_database_path)}\" to vector database."
                 )
             )
         else:
             self.database = FAISS.from_texts(
-                ["Use FAISS as database updater"],
-                self.database_update_embedding,
+                texts=["Use FAISS as database updater"],
+                embedding=self.database_update_embedding,
+                metadatas=None,
+                ids=None
             )
 
         # Set search strategy.
         self.database.distance_strategy = DistanceStrategy.COSINE
 
         # Set a time stamp to highlight the most recently updated information.
-        self.time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
-            .astimezone(pytz.timezone('Australia/Sydney')).strftime("%B, %Y")
+        self.time_stamper:              str = datetime.now(tz=ZoneInfo(key="Australia/Sydney")).strftime(format="%B, %Y")
 
         # Set a time stamp to update vector database catalogue.
-        self.catalogue_time_stamper = lambda time_stamp: pytz.utc.localize(time_stamp) \
-            .astimezone(pytz.timezone('Australia/Sydney')).strftime("%m/%d/%Y, %H:%M:%S")
+        self.catalogue_time_stamper:    str = datetime.now(tz=ZoneInfo(key="Australia/Sydney")).strftime(format="%m/%d/%Y, %H:%M:%S")
+
 
     def similarity_search_with_relevance_scores(
         self,
         *args,
         **kwargs
     ):
-        """Retriever from the vector database.
+        """
+        Retriever from the vector database.
 
         Returns:
             context (str): retrieved information.
         """
         return self.database.similarity_search_with_relevance_scores(*args, **kwargs)
 
+
     def quit(self):
-        """Release document analyser model.
+        """
+        Release document analyser model.
         """
         if self.database_update_embedding:
             del self.database_update_embedding
+
 
     def add_documents(
         self,
         document_paths
     ):
-        """Add context from a document or multiple documents to the vector database.
+        """
+        Add context from a document or multiple documents to the vector database.
 
         Args:
             document_paths (string or list): a document path or multiple such paths.
         """
         print("Adding documents to vector database...")
+
         # Set as a list for loop.
         if not isinstance(document_paths, list):
             document_paths = [document_paths]
 
         # Update per document.
         for document_path in document_paths:
-            if not os.path.exists(document_path): continue
+            if not Path(document_path).resolve(strict=True).exists(follow_symlinks=True):
+                continue
+
             print(f"{document_path=}")
             self.update_database_from_document(document_path)
+
 
     def add_document_directory(
         self,
         document_dir: str
     ):
-        """Add all .pdf in a folder to the vector database.
+        """
+        Add all .pdf in a folder to the vector database.
 
         Args:
             document_dir (str): a directory of .pdf to be added to the vector database.
         """
-        if os.path.exists(document_dir):
+        self.document_dir: Path = Path(document_dir).resolve(strict=True)
+
+        if self.document_dir.exists(follow_symlinks=True):
             # Find all pdf in a folder.
-            document_paths = glob.glob(f"{document_dir}/*.pdf")
+            document_paths = glob(f"{str(object=self.document_dir)}/*.pdf")
 
             # Add these documents.
             self.add_documents(document_paths)
+
 
     def update_database_catalogue(
         self,
         metadata: str
     ):
-        """Update catalogue of vector database.
+        """
+        Update catalogue of vector database.
 
         Args:
             metadata (str|list): contents to be added.
         """
         # Set as a list for loop.
         if not isinstance(metadata, list):
-            metadata = [metadata]
+            metadatas: list[str] = [metadata]
 
-        # Open the catalogue file.
-        catalogue_pt = open(self.local_database_catalogue_path, "a")
-        catalogue = csv.writer(catalogue_pt)
+            # Open the catalogue file.
+            with self.local_database_catalogue_path.open(
+                mode="a",
+                buffering=-1,
+                encoding="utf-8",
+                errors=None,
+                newline=None
+            ) as catalogue_pt:
+                catalogue = writer(catalogue_pt)
 
-        # Write metadata.
-        for data in metadata:
-            if isinstance(data, str):
-                catalogue.writerow([
-                    data,
-                    self.catalogue_time_stamper(datetime.now()),
-                    ""
-                ])
+            # Write metadata.
+            for data in metadatas:
+                if isinstance(data, str):
+                    catalogue.writerow(
+                        [
+                            data,
+                            self.catalogue_time_stamper,
+                            ""
+                        ]
+                    )
 
-        # Close the file.
-        catalogue_pt.close()
 
     def update_database_from_document(
         self,
         document_path: str
     ):
-        """Add a document to the vector database.
+        """
+        Add a document to the vector database.
 
         Args:
             document_path (str): a document path.
         """
         # Check if the document exists.
-        if os.path.exists(document_path):
-            document_title = os.path.splitext(os.path.basename(document_path))[0]
+        self.document_path: Path = Path(document_path).resolve(strict=True)
+
+        if self.document_path.exists(follow_symlinks=True):
+            document_title = self.document_path.stem
 
             # Read pages of a document.
-            loader = PyPDFLoader(document_path)
+            loader = PyPDFLoader(self.document_path)
             pages = loader.load_and_split() # split by page number
 
             for i in range(len(pages)):
@@ -301,19 +327,36 @@ class VectorDatabase(ServiceBase):
                 self.update_database_catalogue(document_path)
 
                 # Save to local database.
-                self.database.save_local(self.local_database_path)
+                self.database.save_local(str(object=self.current_local_database_path))
 
-                print(set_color("info", f"Add '{document_path}'."))
+                print(
+                    set_color(
+                        status="info",
+                        information=f"Add '{str(object=self.document_path)}'."
+                    )
+                )
             else:
-                print(set_color("warning", f"Contents of '{document_path}' exist."))
+                print(
+                    set_color(
+                        status="warning",
+                        information=f"Contents of '{str(object=self.document_path)}' exist."
+                    )
+                )
         else:
-            print(set_color("warning", f"Document {document_path} not exists."))
+            print(
+                set_color(
+                    status="warning",
+                    information=f"Document {str(object=document_path)} not exists."
+                )
+            )
+
 
     def update_database_from_text(
         self,
         text: str
     ):
-        """Add a sentence to the vector database.
+        """
+        Add a sentence to the vector database.
 
         Args:
             text (str): a text sentence.
@@ -336,7 +379,7 @@ class VectorDatabase(ServiceBase):
                 return -1
 
             # Update the text with timestamp.
-            text = f"{text} by the date {self.time_stamper(datetime.now())}"
+            text = f"{text} by the date {self.time_stamper}"
 
             # Add text to database.
             self.database.add_texts([text])
@@ -345,9 +388,14 @@ class VectorDatabase(ServiceBase):
             self.update_database_catalogue(text)
 
             # Save to local file.
-            self.database.save_local(self.local_database_path)
+            self.database.save_local(str(object=self.current_local_database_path))
 
             # Print the progress.
-            print(set_color('info', f"Update database with '{text}'."))
+            print(
+                set_color(
+                    status='info',
+                    information=f"Update database with '{text}'."
+                )
+            )
 
             return 0
