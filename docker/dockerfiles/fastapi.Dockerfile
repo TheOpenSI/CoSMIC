@@ -2,7 +2,7 @@
 FROM python:3.14-trixie AS base
 
 
-FROM base as uv
+FROM base AS uv
 # Install uv. For reference:
 # https://docs.astral.sh/uv/guides/integration/docker/#installing-uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
@@ -12,7 +12,6 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
 
 
-FROM base as setup
 # Copy the whole CoSMIC.
 COPY ./ ./
 

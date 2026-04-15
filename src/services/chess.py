@@ -13,7 +13,7 @@ from stockfish import Stockfish
 
 ### Internal modules ###
 from ...utils.log_tool import set_color
-from .llms.llm import GPT, Ollama
+from .llms.llm import GPT
 from .base import ServiceBase
 
 
@@ -436,18 +436,18 @@ class GPTFENNextMove(ChessBase):
         self.llm_name = llm_name
         self.is_truncate_response = is_truncate_response
 
-        # Use GPT model.
+        # Default to use GPT model.
         if llm_name.find("ollama") > -1:
-            self.llm = Ollama(llm_name, user_prompt_instance_name="FenNextMovePredict")
-        else:
             self.llm = GPT(llm_name, user_prompt_instance_name="FenNextMovePredict")
+
+        self.llm = GPT(llm_name, user_prompt_instance_name="FenNextMovePredict")
 
 
     def quit(self):
         """
         Release LLM memory cached on GPU and LLM instannce.
         """
-        self.llm.close()
+        self.llm.quit()
         del self.llm
 
 
@@ -500,7 +500,7 @@ class GPTFENNextMove(ChessBase):
         try:
             if self.llm_name  == "gpt-4o":
                 response = response.split("**")[1].replace(".", "").split(" ")[-1]
-            elif self.llm_model == "gpt-3.5-turbo":
+            elif self.llm_name == "gpt-3.5-turbo":
                 response = response.split("is ")[-1].replace(".", "").replace("*", "").split(" ")[-1]
         except:
             response = response.split("** is")[-1]

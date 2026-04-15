@@ -69,8 +69,10 @@ class LLMBase(ServiceBase):
         # Get LLM instance name.
         if llm_name in LLM_INSTANCE_DICT.keys():
             llm_instance_name = LLM_INSTANCE_DICT[llm_name]
+
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
+
         ## CK: It seems this is the defult case even when using Ollama integration, 
         # since the model is still GPT-based. 
         # We can further specify the LLM type when we have more LLM types integrated.
