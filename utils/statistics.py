@@ -123,7 +123,7 @@ def update_statistic_table(
 
 
 def update_statistic_per_query(
-    query: list[int],
+    query: list[str],
     user_id: int,
     user_email: str | None,
     current_time: str

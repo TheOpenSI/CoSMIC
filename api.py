@@ -1,5 +1,5 @@
 ### Core modules ###
-import os
+from os import environ
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -33,8 +33,10 @@ CORS_ALLOW_ORIGIN = [
 ]
 
 # Allow CORS for the specified origins
-if os.environ.get("CORS_ALLOW_ORIGIN"):
-    CORS_ALLOW_ORIGIN.extend(os.environ.get("CORS_ALLOW_ORIGIN").split(";"))
+if environ.get("CORS_ALLOW_ORIGIN"):
+    CORS_ALLOW_ORIGIN.extend(
+        str(object=environ.get("CORS_ALLOW_ORIGIN")).split(";")
+    )
 
 app.add_middleware(
     CORSMiddleware,

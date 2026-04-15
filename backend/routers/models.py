@@ -1,20 +1,26 @@
+### Core modules ###
 import threading
-
-from src.services.llms.Ollama import Ollama
 import sys
 import uuid
-
 from fastapi import APIRouter
 from ollama import Client
 from fastapi import HTTPException
 from pydantic import BaseModel
 
 
+### Type hints ###
+
+
+### Internal modules ###
+from ...src.services.llms.Ollama import Ollama
+
+
 router = APIRouter()
 
 
 ollama_client = Client(
-    host="http://ollama:11434", headers={"Content-Type": "application/json"}
+    host="http://ollama:11434",
+    headers={"Content-Type": "application/json"}
 )
 
 # track the job_id
@@ -46,6 +52,7 @@ async def get_ollama_models():
 
         return {"models": models, "total": len(models)}
         # return result
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -54,7 +61,9 @@ async def get_ollama_models():
 async def delete_ollama_model(model_name: str):
     try:
         ollama_client.delete(model_name)
+
         return {"message": f"Model '{model_name}' deleted"}
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -94,10 +103,12 @@ async def pull_ollama_model(request: PullModelRequest):
                     download_jobs[job_id]["status"] = "error"
                     download_jobs[job_id]["error"] = "Invalid model name!"
                     break
+
                 if "does not exist on the Ollama registry" in log:
                     download_jobs[job_id]["status"] = "error"
                     download_jobs[job_id]["error"] = "Invalid model name!"
                     break
+
                 if "no space left on device" in log:
                     download_jobs[job_id]["status"] = "error"
                     download_jobs[job_id]["error"] = "No space left!"
@@ -105,9 +116,11 @@ async def pull_ollama_model(request: PullModelRequest):
 
             else:
                 download_jobs[job_id]["status"] = "done"
+
         except Exception as e:
             download_jobs[job_id]["status"] = "error"
             download_jobs[job_id]["error"] = str(e)
+
         finally:
             sys.stdout = sys.__stdout__
 
@@ -122,6 +135,7 @@ async def get_pull_status(job_id: str):
     job = download_jobs.get(job_id)
     if not job:
         return {"error": "Job not found"}
+
     return job
 
 
