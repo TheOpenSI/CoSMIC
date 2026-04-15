@@ -1,45 +1,30 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: chess_qa_quality.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
+### Core modules ###
+from pandas import read_csv
+from numpy import (
+   nonzero,
+    mean,
+    array
+)
+from numbers import Number
 
-import numbers
-import pandas as pd
-import numpy as np
 
-from utils.log_tool import set_color
-from utils.num2word import convert_number2word
-from src.services.qa import QABase
+### Type hints ###
 
-# =============================================================================================================
+
+### Internal modules ###
+from ...utils.log_tool import set_color
+from ...utils.num2word import convert_number2word
+from ...src.services.qa import QABase
+
 
 class QualityEval(QABase):
     def __init__(
         self,
-        is_rag: bool=False,
+        is_rag: bool = False,
         **kwargs
     ):
-        """Evaluate OpenSI-CoSMIC's qualities except for the reasoning which is evaluated in
+        """
+        Evaluate OpenSI-CoSMIC's qualities except for the reasoning which is evaluated in
         src/modules/chess_qa_puzzle.py.
 
         Args:
@@ -50,11 +35,13 @@ class QualityEval(QABase):
         # Set config.
         self.is_rag = is_rag
 
+
     def parse_quality_csv(
         self,
         csv_path: str
     ):
-        """Get query information from .csv file.
+        """
+        Get query information from .csv file.
 
         Args:
             csv_path (str): .csv file path.
@@ -63,7 +50,7 @@ class QualityEval(QABase):
             info (dict): a dictionary containing query information.
         """
         # Read data.
-        df = pd.read_csv(csv_path)
+        df = read_csv(csv_path)
 
         # Set a dictionary.
         info = {
@@ -72,6 +59,7 @@ class QualityEval(QABase):
         }
 
         return info
+
 
     def batch_process(
         self,
@@ -118,9 +106,10 @@ class QualityEval(QABase):
                 gt_answer = "N/A"
 
             # Case insensitive and remove line change for better readability.
-            if isinstance(gt_answer, numbers.Number) or gt_answer.isdigit():
+            if isinstance(gt_answer, Number) or gt_answer.isdigit():
                 # Convert number to word and compare both number and string format answer.
                 gt_answer = [str(int(gt_answer)), str(convert_number2word(int(gt_answer)))]
+
             elif isinstance(gt_answer, str):
                 # A number can be read as a string, so convert it to a number.
                 gt_answer = gt_answer.lower().replace("\n", " ")
@@ -131,7 +120,7 @@ class QualityEval(QABase):
 
             # Check if the answer is in the analysis.
             if isinstance(gt_answer, list):
-                score_per = float(len(np.nonzero([float(result.find(v) > -1) for v in gt_answer])[0]) > 0)
+                score_per = float(len(nonzero([float(result.find(v) > -1) for v in gt_answer])[0]) > 0)
             else:
                 score_per = float(result.find(gt_answer) > -1)
 
@@ -153,6 +142,6 @@ class QualityEval(QABase):
                 )
 
         # Calculate the average score for queries having a ground truth answer.
-        average_score = np.mean(np.array(score_list))
+        average_score = mean(array(score_list))
 
         return average_score

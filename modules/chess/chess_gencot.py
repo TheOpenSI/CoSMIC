@@ -1,47 +1,26 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: chess_gencot.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-#
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
+### Core modules ###
+from sys import exit
+from pandas import read_csv
 
-import os, sys
-import pandas as pd
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+### Type hints ###
 
-from utils.log_tool import set_color
-from src.services.llms.prompts import user_prompt as user_prompt_instances
-from src.services.llms.llm import GPT
-from src.services.chess import ChessBase
 
-# =============================================================================================================
+### Internal modules ###
+from ...utils.log_tool import set_color
+from ...src.services.llms.prompts import user_prompt as user_prompt_instances
+from ...src.services.llms.llm import GPT
+from ...src.services.chess import ChessBase
+
 
 class CotGenerator(ChessBase):
     def __init__(
         self,
-        is_truncate_response: bool=True,
+        is_truncate_response: bool = True,
         **kwargs
     ):
-        """Generate Chain-of-Thought analysis for chess next move prediction.
+        """
+        Generate Chain-of-Thought analysis for chess next move prediction.
 
         Args:
             is_truncate_response (bool, optional): truncate raw reponse from LLM. Defaults to True.
@@ -56,6 +35,7 @@ class CotGenerator(ChessBase):
 
         # Set truncate response bool flag globally.
         self.is_truncate_response = is_truncate_response
+
 
     def get_player(
         self,
@@ -75,16 +55,18 @@ class CotGenerator(ChessBase):
         # Ensure only w or b.
         if color_to_be_checked not in ["w", "b"]:
             print(set_color("error", f"Player name is wrong, either w or b, but not {color_to_be_checked}."))
-            sys.exit()
+            exit(1)
 
         # Return the full name of player.
         return self.PLAYER_DICT[color_to_be_checked]
+
 
     def truncate_response(
         self,
         response: str
     ):
-        """Truncate response with key words from system prompt.
+        """
+        Truncate response with key words from system prompt.
 
         Args:
             response (str): raw response from LLM.
@@ -104,24 +86,26 @@ class CotGenerator(ChessBase):
         # Up to 10 CoT steps. If more steps are needed, increase it to more than 10.
         for i in range(10):
             analysis = analysis.replace(f"\n{i}.", f"\n{i-1}.")
-        
+
         return analysis
+
 
     def __call__(
         self,
         fen: str,
         best_move: str
     ):
-        """Generate CoT analysis for each chess puzzle.
+        """
+        Generate CoT analysis for each chess puzzle.
 
         Args:
-            fen (str): chess FEN.
-            best_move (str): best move is also used as next move given FEN.
+            fen         (str): chess FEN.
+            best_move   (str): best move is also used as next move given FEN.
 
         Returns:
-            cot_analysis (str): truncated CoT analysis.
-            raw_cot_analysis (str): original CoT analysis.
-            gpt_analysis (str): analysis from GPT 4-o without CoT.
+            cot_analysis        (str): truncated CoT analysis.
+            raw_cot_analysis    (str): original CoT analysis.
+            gpt_analysis        (str): analysis from GPT 4-o without CoT.
         """
         # Get player's full name, to be used in the user prompt for CoT analysis.
         player = self.get_player(fen)
@@ -130,7 +114,7 @@ class CotGenerator(ChessBase):
         for with_cot_instruct in [True, False]:
             # Get user prompt for the current chess status.
             user_prompt = self.user_prompter(fen, player, best_move, with_cot_instruct=with_cot_instruct)
-            
+
             # Original response from LLM.
             response = self.llm(user_prompt)
 
@@ -143,20 +127,22 @@ class CotGenerator(ChessBase):
             else:
                 # GPT 4-o analysis for best move prediction.
                 gpt_analysis = response
-        
-        return cot_analysis, raw_cot_analysis, gpt_analysis
+
+        return (cot_analysis, raw_cot_analysis, gpt_analysis)
+
 
     def batch_process(
         self,
         query_csv: str
     ):
-        """Generate CoT analysis for multiple puzzle FENs in .csv.
+        """
+        Generate CoT analysis for multiple puzzle FENs in .csv.
 
         Args:
             query_csv (str): .csv path.
         """
         # This is to generate CoT analysis from OpenAI for model finetuning on reasoning.
-        df = pd.read_csv(query_csv)
+        df = read_csv(query_csv)
         raw_fen = df["Question"]
         raw_best_move = df["Answer"]
         fens = []
