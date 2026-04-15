@@ -486,60 +486,53 @@ async def process_cosmic(data: CosmicAPI):
             answer: str = str(object=openai_api_status)
             return {
                 "status": "success",
-                "result": ""
+                # "condition": "no API key found",
+                "result": answer
             }
 
         else:
-            # Proceed as normal
-            if openai_api_status != "":
-                answer: str = openai_api_status
-                return {
-                    "status": "success",
-                    "result": answer
-                }
+            # Find the key word for adding file to vector database.
+            if data.user_message.find("</files>") > -1:
+                splits: list[Any] = data.user_message.split("</files>")
 
-            else:
-                # Find the key word for adding file to vector database.
-                if data.user_message.find("</files>") > -1:
-                    splits: list[Any] = data.user_message.split("</files>")
+                # Extract the original question.
+                data.user_message = splits[1]
 
-                    # Extract the original question.
-                    data.user_message = splits[1]
+                # The directory storing uploaded files.
+                file_dir: Path = (Path(__file__).resolve(strict=True).parent.parent.parent / "data" / "upload" / f"{user_id}")
 
-                    # The directory storing uploaded files.
-                    file_dir: Path = (Path(__file__).resolve(strict=True).parent.parent.parent / "data" / "upload" / f"{user_id}")
+                # Extract the files.
+                extracted_files: str = splits[0].split("<files>")[-1]
+                new_files: list[str] = []
 
-                    # Extract the files.
-                    extracted_files: str = splits[0].split("<files>")[-1]
-                    new_files: list[str] = []
+                for extracted_file in extracted_files.split(sep=",", maxsplit=-1):
+                    if extracted_file != "":
+                        new_files.append(str(object=file_dir.joinpath(extracted_file)))
 
-                    for extracted_file in extracted_files.split(sep=",", maxsplit=-1):
-                        if extracted_file != "":
-                            new_files.append(str(object=file_dir.joinpath(extracted_file)))
+                for new_file in new_files:
+                    # Form a prompt to update vector database.
+                    user_message_vector_db_update: str = f"Add the following file to the vector database: {new_file}"
 
-                    for new_file in new_files:
-                        # Form a prompt to update vector database.
-                        user_message_vector_db_update: str = f"Add the following file to the vector database: {new_file}"
-
-                        # Update vector database.
-                        answer: str = str(
-                            object=opensi_cosmic(
-                                question=user_message_vector_db_update
-                            )[0]
-                        )
-
-                else:
+                    # Update vector database.
                     answer: str = str(
                         object=opensi_cosmic(
-                            question=data.user_message,
-                            context=chat_history_context
+                            question=user_message_vector_db_update
                         )[0]
                     )
 
-                    return {
-                        "status": "success",
-                        "result": answer
-                    }
+            else:
+                answer: str = str(
+                    object=opensi_cosmic(
+                        question=data.user_message,
+                        context=chat_history_context
+                    )[0]
+                )
+
+                return {
+                    "status": "success",
+                    # "condition": "API key found",
+                    "result": answer
+                }
 
     except HTTPException as http_exc:
             raise http_exc

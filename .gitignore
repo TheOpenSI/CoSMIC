@@ -283,7 +283,8 @@ __marimo__/
 
 # Misc
 .DS_Store
-data/
+data/*
+!data/statistics/
 logs/
 third_party/
 database/

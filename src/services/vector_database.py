@@ -244,16 +244,18 @@ class VectorDatabase(ServiceBase):
         # Set as a list for loop.
         if not isinstance(metadata, list):
             metadatas: list[str] = [metadata]
+        else:
+            metadatas: list[str] = metadata
 
-            # Open the catalogue file.
-            with self.local_database_catalogue_path.open(
-                mode="a",
-                buffering=-1,
-                encoding="utf-8",
-                errors=None,
-                newline=None
-            ) as catalogue_pt:
-                catalogue = writer(catalogue_pt)
+        # Open the catalogue file.
+        with self.local_database_catalogue_path.open(
+            mode="a",
+            buffering=-1,
+            encoding="utf-8",
+            errors=None,
+            newline=None
+        ) as catalogue_pt:
+            catalogue = writer(catalogue_pt)
 
             # Write metadata.
             for data in metadatas:

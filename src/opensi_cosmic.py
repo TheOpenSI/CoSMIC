@@ -235,21 +235,18 @@ class OpenSICoSMIC:
             openai_api_key = ""
 
         if (count > 0) and (openai_api_key == ""):
-            if count == 1:
-                answer = f"{llm_name_list[0]} is"
+            answer = ""
 
-                return answer
+            if count == 1:
+                answer = f"Since '{llm_name_list[0]} is' used, please add valid OPENAI_API_KEY in .env."
 
             elif count == 2:
-                answer = f"{llm_name_list[0]} and {llm_name_list[1]} are"
-
-                return answer
+                answer = f"Since '{llm_name_list[0]} and {llm_name_list[1]} are' used, please add valid OPENAI_API_KEY in .env."
 
         else:
             answer = ""
-            answer = f"Since {answer} used, please add valid OPENAI_API_KEY in .env."
 
-            return answer
+        return answer
 
 
     def get_llm(

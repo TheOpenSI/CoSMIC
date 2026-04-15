@@ -16,9 +16,15 @@ from transformers import pipeline
 
 
 ### Internal modules ###
-from ...maps import LLM_MODEL_DICT
+from ...maps import LLM_INSTANCE_DICT, LLM_MODEL_DICT
 from .LLMBase import LLMBase
+from .Ollama import Ollama
+from .prompts import system_prompt as system_prompt_instances
+from .prompts import user_prompt as user_prompt_instances
+from . import tokenizer as tokenizer_instances
+from ..base import ServiceBase
 from .login import LLMLogin
+from ....utils.module import get_instance
 from ....utils.log_tool import set_color
 
 

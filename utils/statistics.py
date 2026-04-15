@@ -18,7 +18,7 @@ from pandas import DataFrame
 ### Internal modules ###
 
 
-statistic_dir: Path = (Path(__file__).resolve(strict=True).parent.parent / "data" / "cosmic" / "statistic")
+statistic_dir: Path = (Path(__file__).resolve(strict=True).parent.parent.joinpath("data", "statistics"))
 statistic_dict: dict[str, int | str | float | datetime] = {
     # NOTE: these are just example data.
     "user_id": 0,
