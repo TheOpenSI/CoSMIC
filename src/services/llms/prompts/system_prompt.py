@@ -1,76 +1,61 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: system_prompt.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-#     Carlos Kuhn <carlosclaitonkuhn@gmail.com>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
-
-# =============================================================================================================
-
+### Core modules ###
 from pathlib import Path
+
+
+### Type hints ###
+
+
+### Internal modules ###
 
 
 class SystemPromptBase:
     def __init__(
         self,
         use_example: bool=False,
-        prefix: str="SYSTEM IDENTITY \
-                    You are OpenSI-CoSMIC, a helpful assistant developed by Open Source Institute at University of Canberra. \
-                        If the question is not clear, ask for clarification instead of making assumptions. \
-                            You would have access to conversation history, this is for your context only. \
-                                Always answer the question even if the context is not helpful. \
-                                     If you don't know the answer, say you don't know, but try to provide some helpful information if possible. \
-                        "
+        prefix: str = "{0:s}{1:s}. {2:s}. {3:s}. {4:s}. {5:s}.".format(
+            "SYSTEM IDENTITY",
+            "You are OpenSI-CoSMIC, a helpful assistant developed by Open Source Institute at University of Canberra",
+            "If the question is not clear, ask for clarification instead of making assumptions",
+            "You would have access to conversation history, this is for your context only",
+            "Always answer the question even if the context is not helpful",
+            "If you don't know the answer, say you don't know, but try to provide some helpful information if possible"
+        )
     ):
-        """System prompt base.
+        """
+        System prompt base.
 
         Args:
-            use_example (bool, optional): use example in system prompt to detect keywords for
-                response truncation. Defaults to False.
-            prefix (str): prefix to start the prompt. Default to "".
+            use_example (bool, optional):   use example in system prompt to detect keywords for
+                                            response truncation. Defaults to False.
+            prefix      (str):              prefix to start the prompt. Default to "".
         """
         self.use_example = use_example
         self.prefix = prefix
+
 
     def set_prefix(
         self,
         prefix: str
     ):
-        """Set prefix externally.
+        """
+        Set prefix externally.
 
         Args:
             prefix (str): prefix for system prompt.
         """
         self.prefix = prefix
 
+
     def get_context(
         self,
-        context: str=""
+        context: str = ""
     ):
-        """Get context based on the input type.
+        """
+        Get context based on the input type.
 
         Args:
-            context (str|dict, optional): context, string or dictionary.
-                Defaults to "".
+            context (str|dict, optional):   context, string or dictionary.
+                                            Defaults to "".
 
         Returns:
             context: extract context or an empty string.
@@ -83,56 +68,62 @@ class SystemPromptBase:
 
         return context
 
+
     def set_use_example(
         self,
         use_example: bool
     ):
-        """Set use_example externally.
+        """
+        Set use_example externally.
 
         Args:
             use_example (bool): use example in system prompt.
         """
         self.use_example = use_example
 
+
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Merge user_prompt in system prompt as the question containing context.
+        """
+        Merge user_prompt in system prompt as the question containing context.
 
         Args:
-            user_prompt (str): user prompt.
-            context (str|dict, optional): context retrieved if applicable. Defaults to "".
+            user_prompt (str):                  user prompt.
+            context     (str|dict, optional):   context retrieved if applicable. Defaults to "".
         """
         # Need to be implemented, otherwise raise error.
         raise NotImplementedError
 
-# =============================================================================================================
 
 class Mistral7bv01(SystemPromptBase):
     def __init__(
         self,
-        prefix="<s>",
+        prefix = "<s>",
         **kwargs
     ):
-        """For Mistral 7B.
+        """
+        For Mistral 7B.
 
         Args:
             prefix (str): prompt prefix. Default to "<s>".
         """
         super().__init__(prefix=prefix, **kwargs)
 
+
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -162,24 +153,26 @@ class Mistral7bv01(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class Mistral7bInstructv01(SystemPromptBase):
     def __init__(self, **kwargs):
-        """For Mistral 7B Instruction.
+        """
+        For Mistral 7B Instruction.
         """
         super().__init__(**kwargs)
+
 
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -204,31 +197,33 @@ class Mistral7bInstructv01(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class Gemma7b(SystemPromptBase):
     def __init__(
         self,
-        prefix="<bos>",
+        prefix = "<bos>",
         **kwargs
     ):
-        """For Gemma 7B.
+        """
+        For Gemma 7B.
 
         Args:
             prefix (str): prompt prefix. Default to "<bos>".
         """
         super().__init__(prefix=prefix, **kwargs)
 
+
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -264,23 +259,24 @@ class Gemma7b(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class Gemma7bIt(Mistral7bInstructv01):
     def __init__(self, **kwargs):
-        """For Gemma 7B Instruction.
+        """
+        For Gemma 7B Instruction.
         """
         super().__init__(**kwargs)
 
-# =============================================================================================================
 
 class GPT(SystemPromptBase):
     def __init__(self, **kwargs):
-        """For GPT API.
+        """
+        For GPT API.
         """
         super().__init__(**kwargs)
         self._prompts_root = Path.cwd() / "src" / "services" / "llms" / "prompts"
-        
+
+
     def _load_service_prompt(self,service: str) -> str:
         """
         Attempt to load additional sytem prompt content from a text file under:
@@ -308,18 +304,20 @@ class GPT(SystemPromptBase):
         # If no file found/readable
         return ""
 
+
     def __call__(
         self,
         user_prompt: str,
-        context: str="",
-        service: str=""
+        context: str = "",
+        service: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
-            services (str, optional): service name for loading specific system prompt. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
+            services    (str, optional):        service name for loading specific system prompt. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -331,7 +329,7 @@ class GPT(SystemPromptBase):
 
         system_prompt = [
             {
-                "role": "system",          
+                "role": "system",
                 "content": composed_prefix
             },
             {"role": "user", "content": user_prompt}
@@ -339,39 +337,41 @@ class GPT(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class Ollama(GPT):
     def __init__(self, **kwargs):
-        """For Ollama model.
+        """
+        For Ollama model.
         """
         super().__init__(**kwargs)
 
-# =============================================================================================================
 
 class MistralFinetuned(SystemPromptBase):
     def __init__(
         self,
-        prefix="<s>",
+        prefix = "<s>",
         **kwargs
     ):
-        """For Mistral 7B Finetuned LLM.
+        """
+        For Mistral 7B Finetuned LLM.
 
         Args:
             prefix (str): prompt prefix. Default to "<s>".
         """
         super().__init__(prefix=prefix, **kwargs)
 
+
     def __call__(
         self,
         question: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -384,24 +384,26 @@ class MistralFinetuned(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class FENNextMoveAnalyse(SystemPromptBase):
     def __init__(self, **kwargs):
-        """For analysis of next move prediction given a FEN.
+        """
+        For analysis of next move prediction given a FEN.
         """
         super().__init__(**kwargs)
+
 
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str): question with context.
-            context (str|dict, optional): context retrieved. Defaults to "".
+            user_prompt (str):                  question with context.
+            context     (str|dict, optional):   context retrieved. Defaults to "".
 
         Returns:
             system_prompt (str): system prompt with question and context under LLM query format.
@@ -416,27 +418,29 @@ class FENNextMoveAnalyse(SystemPromptBase):
 
         return system_prompt
 
-# =============================================================================================================
 
 class FENNextMoveAnalyseMistralFinetuned(SystemPromptBase):
     def __init__(
         self,
-        prefix="<s>",
+        prefix = "<s>",
         **kwargs
     ):
-        """For analysis of next move prediction given a FEN and a finetuned LLM.
+        """
+        For analysis of next move prediction given a FEN and a finetuned LLM.
 
         Args:
             prefix (str): prompt prefix. Default to "<s>".
         """
         super().__init__()
 
+
     def __call__(
         self,
         user_prompt: str,
-        context: str=""
+        context: str = ""
     ):
-        """Apply system prompt with user prompt and context.
+        """
+        Apply system prompt with user prompt and context.
 
         Args:
             user_prompt (str): question with context.
@@ -449,5 +453,3 @@ class FENNextMoveAnalyseMistralFinetuned(SystemPromptBase):
             f"{self.prefix}### Instruction:\n{user_prompt}\n### Context: \n \n### Response:"
 
         return system_prompt
-    
-   
