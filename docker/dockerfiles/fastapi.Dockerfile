@@ -26,8 +26,11 @@ EXPOSE 3000/tcp
 
 # TODO:
 # In prod environment:
-# - Add `--no-reload` flag
+# - Remove `--reload` flag (or add '--no-reload' flag if FastAPI CLI usable)
 # - Change `--host` flag value to hosting server IP address
-# - Remove `dev` flag (simply do `uv run fastapi run` with extra flags explained)
-CMD [ "uv", "run", "fastapi", "dev", "api.py", "--host", "0.0.0.0", "--port", "3000" ]
-# CMD [ "uv", "run", "uvicorn", "api:app", "--host", "0.0.0.0", "--port", "3000", "--reload" ]
+
+# NOTE:
+# There's a known issue about ANSI escape codes output to terminal when running
+# with `fastapi dev` under some conditions (https://github.com/fastapi/fastapi/discussions/13866).
+# Therefore, until the CLI maintainer patched this, we'll be using `uvicorn` CLI directly.
+CMD [ ".venv/bin/uvicorn", "--app-dir", "/", "--host", "0.0.0.0", "--port", "3000", "--reload", "app.api:app" ]
