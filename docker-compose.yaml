@@ -5,7 +5,6 @@ services:
   ollama:
     container_name: ollama
     restart: unless-stopped
-    # image: ollama/ollama:latest
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/ollama.Dockerfile
@@ -74,9 +73,9 @@ services:
     tty: true
     # NOTE: For quick debugging (on dev only)
     ports:
-      - name: cosmic-fastapi
+      - name: cosmic-uvicorn
         target: 3000
-        # host_ip: 127.0.0.1
+        host_ip: 127.0.0.1
         published: "3000"
         protocol: tcp
         app_protocol: http
@@ -84,7 +83,7 @@ services:
 
       - name: cosmic-debugpy
         target: 5678
-        # host_ip: 127.0.0.1
+        host_ip: 127.0.0.1
         published: "5678"
         protocol: tcp
         app_protocol: http

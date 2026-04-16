@@ -1,40 +1,19 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: qa.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
+### Core modules ###
+from pathlib import Path
+from yaml import safe_load
 
-import os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
+### Type hints ###
+from typing import Any
 
-from src.services import chess as chess_instances
-from src.services.base import ServiceBase
-from src.services.llms.llm import LLMBase
-from src.services.rag import RAGBase
-from modules.code_generation.code_generation import CodeGenerator
-from box import Box
 
-# =============================================================================================================
+### Internal modules ###
+from . import chess as chess_instances
+from .base import ServiceBase
+from .llms.llm import LLMBase
+from .rag import RAGBase
+from ...modules.code_generation.code_generation import CodeGenerator
+
 
 class QABase(ServiceBase):
     def __init__(
@@ -43,46 +22,49 @@ class QABase(ServiceBase):
         llm: LLMBase,
         rag: RAGBase,
         code_generator: CodeGenerator,
-        config: Box=None,
+        config: str | None = None,
         **kwargs
     ):
-        """Base class for QA.
+        """
+        Base class for QA.
 
         Args:
-            query_analyser (LLMBase): query analyser.
-            llm (LLMBase): LLM instance.
-            rag (RAGBase): RAG instance containing vector database service.
-            code_generator (CodeGenerator): code generation service.
-            config (Box): config file to extract settings. Default to None.
+            query_analyser  (LLMBase):          query analyser.
+            llm             (LLMBase):          LLM instance.
+            rag             (RAGBase):          RAG instance containing vector database service.
+            code_generator  (CodeGenerator):    code generation service.
+            config          (str, optional):    config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
 
         # Set config globally.
-        self.query_analyser = query_analyser
-        self.llm = llm
-        self.rag = rag
-        self.code_generator = code_generator
-        self.config = config
+        self.query_analyser: LLMBase = query_analyser
+        self.llm: LLMBase = llm
+        self.rag: RAGBase = rag
+        self.code_generator: CodeGenerator = code_generator
+        self.config: str | None = config
+
 
     def __call__(
         self,
         query: str,
-        context: str="",
-        is_rag: bool=False,
-        verbose: bool=False
+        context: str | dict = "",
+        is_rag: bool = False,
+        verbose: bool = False
     ):
-        """Process each QA.
+        """
+        Process each QA.
 
         Args:
-            query (str): a question.
-            context (str|dict, optional): contex associated with the question. Defaults to "".
-            is_rag (bool, optional): if retrieve context for the question. Defaults to False.
-            verbose (bool, optional): debug mode. Default to False.
+            query   (str):                  a question.
+            context (str|dict, optional):   contex associated with the question. Defaults to "".
+            is_rag  (bool, optional):       if retrieve context for the question. Defaults to False.
+            verbose (bool, optional):       debug mode. Default to False.
 
         Returns:
-            response (str): truncated answer if applicable.
-            raw_response (str): original answer from LLM.
-            retrieve_score: score of context retrieving if applicable.
+            response        (str): truncated answer if applicable.
+            raw_response    (str): original answer from LLM.
+            retrieve_score       : score of context retrieving if applicable.
         """
         # Set initial return answers.
         response = None
@@ -90,59 +72,95 @@ class QABase(ServiceBase):
         retrieve_score = -1
 
         # Get service option through query analyser.
-        service_option, service_info_dict = self.query_analyser(query)
+        (service_option, service_info_dict) = self.query_analyser(query)
 
         # Whether this query is related to system information.
         system_information_relevance = service_info_dict["system_information_relevance"]
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
-            return response, raw_response, retrieve_score
+            return (response, raw_response, retrieve_score)
 
         # Process query with service parsing.
         if service_option.find("0.") > -1:
             if service_option == "0.0":
                 # Set game move mode.
-                if context == "": move_mode = "algebric"
-                else: move_mode = context
+                move_mode = "algebric"  \
+                    if context == ""    \
+                    else context
 
                 # Get chess FEN.
                 current_fen = service_info_dict["fen"]
 
                 # Set up next move predictor as Stockfish.
-                binary_path = self.config.chess.stockfish_path if self.config else ""
+                self.config_path: Path = Path(str(object=self.config)).resolve(strict=True)
+                with self.config_path.open(
+                    mode="r",
+                    buffering=-1,
+                    encoding="utf-8",
+                    errors=None,
+                    newline=None
+                ) as config_file:
+                    self.config_data: dict[str, Any] = safe_load(stream=config_file)
+
+                binary_path: str = self.config_data["chess"]["stockfish_path"] if self.config else ""
                 next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
 
                 # Predict the next move.
-                next_move = next_move_predictor(fen=current_fen, move_mode=move_mode, topk=5)
+                next_move = next_move_predictor(
+                    fen=current_fen,
+                    move_mode=str(object=move_mode),
+                    topk=5
+                )
 
                 # Set the response with question and next move.
                 move_prediction_context = f"The current chess FEN is {[current_fen]}."
-            else:  # this is for prediction given moves, service_option == "0.1":
+
+            # this is for prediction given moves, service_option == "0.1":
+            else:
                 # Set game move mode.
-                if context == "": move_mode = "algebric"
-                else: move_mode = context
+                move_mode = "algebric"  \
+                    if context == ""    \
+                    else context
 
                 # Get moves.
                 current_moves = service_info_dict["moves"]
 
                 # Set up next move predictor as Stockfish.
-                binary_path = self.config.chess.stockfish_path if self.config else ""
+                self.config_path: Path = Path(str(object=self.config)).resolve(strict=True)
+                with self.config_path.open(
+                    mode="r",
+                    buffering=-1,
+                    encoding="utf-8",
+                    errors=None,
+                    newline=None
+                ) as config_file:
+                    self.config_data: dict[str, Any] = safe_load(stream=config_file)
+
+                binary_path: str = self.config_data["chess"]["stockfish_path"] if self.config else ""
                 next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
 
                 # Predict the next move.
-                next_move = next_move_predictor(current_moves, move_mode=move_mode, topk=5)
+                next_move = next_move_predictor(
+                    moves=current_moves,
+                    move_mode=str(object=move_mode),
+                    topk=5
+                )
 
                 # Set the response with question and next move.
                 move_prediction_context = f"The previous chess moves are {[current_moves]}."
 
             # Explain why these moves are feasible.
             user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
-            response, raw_response = self.llm(user_prompt, context=move_prediction_context)
+            (response, raw_response) = self.llm(
+                question=user_prompt,
+                context=move_prediction_context
+            )
 
             # Attach all the moves in case LLM cannot select the best one.
             response = f"The next moves are from {next_move}.\n{response}"
             raw_response = f"The next moves are from {next_move}.\n{raw_response}"
+
         elif service_option == "1":
             # Check if context is a .pdf.
             is_a_document = service_info_dict["is_a_document"]
@@ -163,31 +181,41 @@ class QABase(ServiceBase):
                     self.rag.vector_database.update_database_from_text(text=text)
 
             response = raw_response = "Vector database updated."
+
         elif service_option == "2":
             raw_response, response = self.code_generator(query)
+
         else:
             if is_rag:# General question has RAG activated
                 # Check if context is chat hostory
-                chat_history_context = context if "Conversation History:" in context else ""
-                rag_context = "" if "Conversation History:" in context else context
-                
+                chat_history_context = context              \
+                    if "Conversation History:" in context   \
+                    else ""
+
+                rag_context = ""                            \
+                    if "Conversation History:" in context   \
+                    else context
+
                 # If retrieving context, first generate the user prompt given the
                 # user prompter format.
-                user_prompt = self.llm.user_prompter(query, context=rag_context)
+                user_prompt = self.llm.user_prompter(
+                    query,
+                    context=rag_context
+                )
 
                 # Get the retrieved context.
-                context_retrieved, retrieve_score = self.rag(query)
+                (context_retrieved, retrieve_score) = self.rag(query)
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.
-                suffix = "" \
-                    if context_retrieved == "" \
-                    else "\nContext:\n" + context_retrieved 
-                
-                context = context.update({"context": chat_history_context + suffix}) \
-                          if isinstance(context, dict) \
-                          else chat_history_context + suffix
-                
+                suffix = ""                                 \
+                    if context_retrieved == ""              \
+                    else "\nContext:\n" + context_retrieved
+
+                context = context.update({"context": (chat_history_context + suffix)})  \
+                    if isinstance(context, dict)                                        \
+                    else chat_history_context + suffix
+
             else:
                 user_prompt = query
                 retrieve_score = -1
@@ -201,13 +229,21 @@ class QABase(ServiceBase):
                 # Add the information to existing context.
                 # This context is likely to be chat history.
                 if isinstance(context, dict):
-                    context["context"] = "OpenSI System Information:\n" + system_information + "\n\n" + context["context"]
+                    context["context"] = "{0:s}\n{1:s}\n\n{2:s}".format(
+                        "OpenSI System Information:",
+                        system_information,
+                        context["context"]
+                    )
                 else:
-                    context = "OpenSI System Information:\n" + system_information + "\n\n" + context
+                    context = "{0:s}\n{1:s}\n\n{2:s}".format(
+                        "OpenSI System Information:",
+                        system_information,
+                        context
+                    )
 
             # Get the response with retrieved context if applicable.
-            
-            ##TODO: needs to read the services from the DataBase and pass the service name to the prompter.
+
+            # TODO: needs to read the services from the DataBase and pass the service name to the prompter.
             services_names = {
                 '0': "chess",
                 '1': "memory",
@@ -215,15 +251,21 @@ class QABase(ServiceBase):
                 '3': "general_question_answering",
                 '4': "AcademicGovernance"
             }
-            
-            response, raw_response = self.llm(user_prompt, context=context, service_name=services_names[service_option])
+
+            (response, raw_response) = self.llm(
+                question=user_prompt,
+                context=context,
+                service_name=services_names[service_option]
+            )
 
 
         # Print service name.
-        if verbose \
-            and (response is not None) \
-            and (service_option in self.query_analyser.full_services.keys()):
-            response += f" [service: {self.query_analyser.full_services[service_option]}" \
-                f"; system info relevance: {system_information_relevance}]"
+        if  verbose                                                             \
+        and (response is not None)                                              \
+        and (service_option in self.query_analyser["full_services"].keys()):
+            response += "{0:s} ; {1:s}".format(
+                f"[service: {self.query_analyser["full_services"][service_option]}",
+                f"system info relevance: {system_information_relevance}]"
+            )
 
-        return response, raw_response, retrieve_score
+        return (response, raw_response, retrieve_score)

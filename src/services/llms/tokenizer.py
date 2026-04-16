@@ -1,60 +1,39 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: tokenizer.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
-
-import os, sys
-
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../..")
-
+### Core modules ###
 from transformers import AutoTokenizer
-from src.maps import LLM_MODEL_DICT
-from src.services.llms.login import LLMLogin
 
-# =============================================================================================================
+
+### Type hints ###
+
+
+### Internal modules ###
+from ...maps import LLM_MODEL_DICT
+from .login import LLMLogin
+
 
 class TokenizerBase:
     def __init__(
         self,
         llm_name: str,
-        device: str="cuda"
+        device: str = "cuda"
     ):
         """Base class for tokenizer.
 
         Args:
-            llm_name (str): LLM name, see src/maps.py, adapting tokenizer to different models.
-            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
+            llm_name    (str):              LLM name, see src/maps.py, adapting tokenizer to different models.
+            device      (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
         """
         self.llm_name = llm_name
         self.tokenizer = None
         self.device = device
+
 
     def encode(
         self,
         system_prompt: str,
         **kwargs
     ):
-        """Encode prompt for LLM.
+        """
+        Encode prompt for LLM.
 
         Args:
             system_prompt (str): system prompt containing user prompt and context.
@@ -64,12 +43,14 @@ class TokenizerBase:
         """
         return system_prompt
 
+
     def decode(
         self,
         response: str,
         **kwargs
     ):
-        """Decode response according to the encoder.
+        """
+        Decode response according to the encoder.
 
         Args:
             response (str): raw response, string or torch.tensor, from LLM.
@@ -79,15 +60,15 @@ class TokenizerBase:
         """
         return response
 
-# =============================================================================================================
 
 class Mistral7bv01(TokenizerBase):
     def __init__(
         self,
-        llm_name: str="mistral-7b-v0.1",
+        llm_name: str = "mistral-7b-v0.1",
         **kwargs
     ):
-        """For Mistral 7B.
+        """
+        For Mistral 7B.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-7b-v0.1".
@@ -107,27 +88,29 @@ class Mistral7bv01(TokenizerBase):
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
-# =============================================================================================================
 
 class Mistral7bInstructv01(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="mistral-7b-instruct-v0.1",
+        llm_name: str = "mistral-7b-instruct-v0.1",
         **kwargs
     ):
-        """For Mistral 7B Instruction.
+        """
+        For Mistral 7B Instruction.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-7b-instruct-v0.1".
         """
         super().__init__(llm_name, **kwargs)
 
+
     def encode(
         self,
         system_prompt: str,
         **kwargs
     ):
-        """Encode prompt for LLM.
+        """
+        Encode prompt for LLM.
 
         Args:
             system_prompt (str): system prompt containing user prompt and context.
@@ -142,12 +125,14 @@ class Mistral7bInstructv01(Mistral7bv01):
             **kwargs
         ).to(self.device)
 
+
     def decode(
         self,
         response: str,
         **kwargs
     ):
-        """Decode response according to the encoder.
+        """
+        Decode response according to the encoder.
 
         Args:
             response (str): raw response, torch.tensor, from LLM.
@@ -157,27 +142,29 @@ class Mistral7bInstructv01(Mistral7bv01):
         """
         return self.tokenizer.decode(response, **kwargs)
 
-# =============================================================================================================
 
 class Gemma7b(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="gemma-7b",
+        llm_name: str = "gemma-7b",
         **kwargs
     ):
-        """For Gemma 7B.
+        """
+        For Gemma 7B.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "mistral-gemma-7b".
         """
         super().__init__(llm_name, **kwargs)
 
+
     def encode(
         self,
         system_prompt: str,
         **kwargs
     ):
-        """Encode prompt for LLM.
+        """
+        Encode prompt for LLM.
 
         Args:
             system_prompt (str): system prompt containing user prompt and context.
@@ -192,12 +179,14 @@ class Gemma7b(Mistral7bv01):
             **kwargs
         ).input_ids.to(self.device)
 
+
     def decode(
         self,
         response: str,
         **kwargs
     ):
-        """Decode response according to the encoder.
+        """
+        Decode response according to the encoder.
 
         Args:
             response (str): raw response, torch.tensor, from LLM.
@@ -211,7 +200,6 @@ class Gemma7b(Mistral7bv01):
             **kwargs
         )
 
-# =============================================================================================================
 
 class Gemma7bIt(Mistral7bv01):
     def __init__(
@@ -219,19 +207,22 @@ class Gemma7bIt(Mistral7bv01):
         llm_name: str="gemma-7b-it",
         **kwargs
     ):
-        """For Gemma 7B Instruction.
+        """
+        For Gemma 7B Instruction.
 
         Args:
             llm_name (str, optional): LLM name. Defaults to "gemma-7b-instruct".
         """
         super().__init__(llm_name, **kwargs)
 
+
     def encode(
         self,
         system_prompt: str,
         **kwargs
     ):
-        """Encode prompt for LLM.
+        """
+        Encode prompt for LLM.
 
         Args:
             system_prompt (str): system prompt containing user prompt and context.
@@ -248,12 +239,14 @@ class Gemma7bIt(Mistral7bv01):
             **kwargs
         ).to(self.device)
 
+
     def decode(
         self,
         response: str,
         **kwargs
     ):
-        """Decode response according to the encoder.
+        """
+        Decode response according to the encoder.
 
         Args:
             response (str): raw response, torch.tensor, from LLM.
@@ -267,15 +260,15 @@ class Gemma7bIt(Mistral7bv01):
             **kwargs
         )
 
-# =============================================================================================================
 
 class GPT(TokenizerBase):
     def __init__(
         self,
-        llm_name: str="",
+        llm_name: str = "",
         **kwargs
     ):
-        """For OpenAI GPT.
+        """
+        For OpenAI GPT.
         GPT does not require tokenizer, just keep the interface.
 
         Args:
@@ -283,15 +276,15 @@ class GPT(TokenizerBase):
         """
         super().__init__(llm_name, **kwargs)
 
-# =============================================================================================================
 
 class Ollama(GPT):
     def __init__(
         self,
-        llm_name: str="",
+        llm_name: str = "",
         **kwargs
     ):
-        """For Ollama model.
+        """
+        For Ollama model.
         Ollama model does not require tokenizer, just keep the interface.
 
         Args:
@@ -299,15 +292,15 @@ class Ollama(GPT):
         """
         super().__init__(llm_name, **kwargs)
 
-# =============================================================================================================
 
 class MistralFinetuned(Mistral7bv01):
     def __init__(
         self,
-        llm_name: str="",
+        llm_name: str = "",
         **kwargs
     ):
-        """For Mistral 7B finetuned.
+        """
+        For Mistral 7B finetuned.
         Since the tokenizer depends on base model, not finetuned model, remaining the definition internally.
 
         Args:
@@ -321,12 +314,14 @@ class MistralFinetuned(Mistral7bv01):
             add_bos_token=True
         )
 
+
     def encode(
         self,
         system_prompt: str,
         **kwargs
     ):
-        """Encode prompt for LLM.
+        """
+        Encode prompt for LLM.
 
         Args:
             system_prompt (str): system prompt containing user prompt and context.
@@ -340,12 +335,14 @@ class MistralFinetuned(Mistral7bv01):
             **kwargs
         ).input_ids.to(self.device)
 
+
     def decode(
         self,
         response: str,
         **kwargs
     ):
-        """Decode response according to the encoder.
+        """
+        Decode response according to the encoder.
 
         Args:
             response (str): raw response, torch.tensor, from LLM.

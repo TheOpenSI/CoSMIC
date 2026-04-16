@@ -1,45 +1,26 @@
-# -------------------------------------------------------------------------------------------------------------
-# File: user_prompt.py
-# Project: Open Source Institute-Cognitive System of Machine Intelligent Computing (OpenSI-CoSMIC)
-# Contributors:
-#     Danny Xu <danny.xu@canberra.edu.au>
-#     Muntasir Adnan <adnan.adnan@canberra.edu.au>
-# 
-# Copyright (c) 2024 Open Source Institute
-# 
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-# documentation files (the "Software"), to deal in the Software without restriction, including without
-# limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-# conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-# 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-# LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-# -------------------------------------------------------------------------------------------------------------
+### Core modules ###
 
-import os, sys
 
-sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../../../..")
+### Type hints ###
 
-# =============================================================================================================
+
+### Internal modules ###
+
 
 class UserPromptBase:
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         pass
 
+
     def get_context(
         self,
-        context: str=""
+        context: str = ""
     ):
-        """Get context based on the input type.
+        """
+        Get context based on the input type.
 
         Args:
             context (str|dict, optional): context, string or dictionary.
@@ -56,20 +37,22 @@ class UserPromptBase:
 
         return context
 
-# =============================================================================================================
 
 class GeneralUserPrompt(UserPromptBase):
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__()
+
 
     def __call__(
         self,
         question: str,
-        context: dict={}
+        context: dict = {}
     ):
-        """Build user prompt.
+        """
+        Build user prompt.
 
         Args:
             question (str): user question.
@@ -83,18 +66,20 @@ class GeneralUserPrompt(UserPromptBase):
 
         if context == "":
             user_prompt = question
+
         else:
             user_prompt = f"Given that '{context}', {question}"
 
         return user_prompt
 
-# =============================================================================================================
 
 class FENNextMovePredict(UserPromptBase):
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__()
+
 
     def __call__(
         self,
@@ -115,11 +100,11 @@ class FENNextMovePredict(UserPromptBase):
 
         return user_prompt
 
-# =============================================================================================================
 
 class FENNextMoveAnalyse(UserPromptBase):
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__()
 
@@ -130,7 +115,8 @@ class FENNextMoveAnalyse(UserPromptBase):
         move: str,
         context: str=""
     ):
-        """Build user prompt to analyse next move action.
+        """
+        Build user prompt to analyse next move action.
 
         Args:
             fen (str): Chess FEN.
@@ -154,28 +140,30 @@ class FENNextMoveAnalyse(UserPromptBase):
 
         return user_prompt
 
-# =============================================================================================================
 
 class FENNextMoveAnalyseMistralFinetuned(UserPromptBase):
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__()
+
 
     def __call__(
         self,
         fen: str,
         player: str,
         move: str,
-        context: str=""
+        context: str = ""
     ):
-        """Build user prompt to analyse next move action for Mistral 7B finetuned LLM.
+        """
+        Build user prompt to analyse next move action for Mistral 7B finetuned LLM.
 
         Args:
-            fen (str): Chess FEN.
-            player (str): White or Black for the next move.
-            move (str): next move taken by player given FEN.
-            context (str|dict, optional): context retrieved if applicable. Defaults to "".
+            fen     (str):                  Chess FEN.
+            player  (str):                  White or Black for the next move.
+            move    (str):                  next move taken by player given FEN.
+            context (str|dict, optional):   context retrieved if applicable. Defaults to "".
 
         Returns:
             user_prompt (str): user prompt.
@@ -193,22 +181,24 @@ class FENNextMoveAnalyseMistralFinetuned(UserPromptBase):
 
         return user_prompt
 
-# =============================================================================================================
 
 class CoTGeneration(UserPromptBase):
     def __init__(self):
-        """Initialize the instance.
+        """
+        Initialize the instance.
         """
         super().__init__()
+
 
     def __call__(
         self,
         fen: str,
         player: str,
         move: str,
-        with_cot_instruct: bool=True
+        with_cot_instruct: bool = True
     ):
-        """Build user prompt to generate CoT analysis for next move action.
+        """
+        Build user prompt to generate CoT analysis for next move action.
 
         Args:
             fen (str): Chess FEN.
