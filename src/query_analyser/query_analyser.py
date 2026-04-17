@@ -1,10 +1,25 @@
 ### Core modules ###
-from sys import exit
+from sys import (
+    exit,
+    stdout
+)
 from pathlib import Path
 from re import search
+from httpx import (
+    Client,
+    Response,
+    ConnectError,
+    ConnectTimeout
+)
+from fastapi import (
+    HTTPException,
+    status
+)
+from pprint import pp
 
 
 ### Type hints ###
+from ...types.query_analyser import ServicesJsonResponse
 
 
 ### Internal modules ###
@@ -39,25 +54,29 @@ class QueryAnalyser:
         self.device = device
 
         # Set a list of services.
-        self.services = {
-            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
-            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
-            "2": "generate or improve a code or answer a question in order to generate or improve a code",
-            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
-            "4": "Answer question about Academic Governance"
+
+        # NOTE:
+        # Due to the way current logic checking for selected service after
+        # receiving the response from LLM based on Query Analyser's refined
+        # question from user query, we've to do this kind of workaround until
+        # it get updates to handle 'int' type correctly (which it should be).
+        services_desc:              dict[int, str] = self._get_service_desc()
+        self.legacy_services_desc:  dict[str, str] = {
+            str(str_id): desc \
+            for (str_id, desc) in services_desc.items()
         }
 
-        # Set chess services.
-        self.chess_services = {
+        # Set chess subservices.
+        self.chess_subservices_desc: dict[str, str] = {
             "0.0": "predict next move given a chess FEN",
             "0.1": "predict next move given a sequence of moves"
         }
 
         # Get full services.
-        self.full_services = {**self.services, **self.chess_services}
+        self.full_services = {**self.legacy_services_desc, **self.chess_subservices_desc}
 
         # Get the number of services.
-        self.num_services = len(self.services)
+        self.num_services = len(self.legacy_services_desc)
 
         # Set provided service.
         self.service_index = service_index
@@ -99,7 +118,7 @@ class QueryAnalyser:
             instances=query_user_prompt_instances,
             instance_name="QueryAnalyserService"
         )(
-            services=self.services
+            services=self.legacy_services_desc
         )
 
         # Set user prompter for system information.
@@ -107,7 +126,7 @@ class QueryAnalyser:
             instances=query_user_prompt_instances,
             instance_name="QueryAnalyserSystemInfo"
         )(
-            services=self.services
+            services=self.legacy_services_desc
         )
 
 
@@ -137,7 +156,7 @@ class QueryAnalyser:
 
         # Truncate to get the option index.
         option = search(
-            pattern="service (\d{1,3}\.\d{1,3}|\d{1,3})",
+            pattern=r"service (\d{1,3}\.\d{1,3}|\d{1,3})",
             string=response,
             flags=0
         )
@@ -177,7 +196,7 @@ class QueryAnalyser:
         if index not in self.full_services.keys():
             return None
 
-        return self.services[str(object=index)]
+        return self.legacy_services_desc[str(object=index)]
 
 
     def chess_parse(
@@ -201,7 +220,7 @@ class QueryAnalyser:
 
         # Parse move string.
         move_match = search(
-            pattern="[\[,\:](.*?[,\s].*?)[\.,\]]?$",
+            pattern=r"[\[,\:](.*?[,\s].*?)[\.,\]]?$",
             string=query,
             flags=0
         )
@@ -209,8 +228,8 @@ class QueryAnalyser:
         # Parse FEN string.
         fen_match = search(
             pattern="{0:s}{1:s}".format(
-                "(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)",
-                "\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$"
+                r"(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)",
+                r"\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$"
             ),
             string=query,
             flags=0
@@ -272,7 +291,7 @@ class QueryAnalyser:
         if is_a_document:
             # Parse move string
             document_path = search(
-                pattern="(?<=\:\s)(.*?)+\.pdf",
+                pattern=r"(?<=\:\s)(.*?)+\.pdf",
                 string=query,
                 flags=0
             )
@@ -299,7 +318,7 @@ class QueryAnalyser:
         else:
             # Extract text.
             text = search(
-                pattern="\:((\"|\')?(.*?)[\",\']?$)",
+                pattern=r"\:((\"|\')?(.*?)[\",\']?$)",
                 string=query,
                 flags=0
             )
@@ -414,3 +433,93 @@ class QueryAnalyser:
                 service_info_dict["system_information"] = self.user_prompter_system_info.system_information
 
         return (service_option, service_info_dict)
+
+
+    def _get_service_desc(
+        self,
+        # TODO: util to dynamically check for valid endpoint format
+        endpoint:   str     = "http://backend:8000/api/v1/services/",
+        lifetime:   float   = 10.0,
+        verbose:    bool    = False
+    ) -> dict[int, str]:
+        """
+        Retrieve service descriptions from the backend API with 0-based indexing.
+
+        This method fetches service data from the specified endpoint and returns
+        a dictionary mapping 0-based indices to service descriptions. The
+        transformation subtracts 1 from the API's 1-based IDs to create 0-based
+        indexing.
+
+        Args:
+            endpoint: Base URL of the services API endpoint.
+                Defaults to "http://backend:8000/api/v1/services/".
+            lifetime: HTTP client timeout in seconds.
+                Defaults to 10.0 seconds.
+            verbose: Enable pretty-printed debug output of service data.
+                When True, prints formatted service data using 'pprint'.
+
+        Returns:
+            Dictionary mapping 0-based indices to service descriptions.
+            Example: {0: "<service 1 description>", 1: "<service 2 description>"}
+
+        Raises:
+            HTTPException: With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> services = obj._get_services_desc(verbose=True)
+            >>> services[0]  # First service description
+            'Answer question about Academic Governance.'
+        """
+        services_desc_dict: dict[int, str] = {}
+
+        with Client(
+            base_url=endpoint,
+            timeout=lifetime
+        ) as client:
+            try:
+                response:   Response                    = client.get(url="/")
+                data:       list[ServicesJsonResponse]  = response.json()["result"]
+
+                for service_data in data:
+                    # NOTE: for matching the hard-coded style until updating the logic
+                    service_id:     int = service_data["id"] - 1
+                    services_desc:   str = service_data["desc"]
+
+                    services_desc_dict.update({service_id: services_desc})
+
+                if verbose:
+                    print(
+                        "{head_sep:s}{body_msg:s}{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}\n",
+                            body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)\n",
+                            foot_sep=f"{'=' * 80}\n"
+                        )
+                    )
+                    pp(
+                        object=services_desc_dict,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    return services_desc_dict
+
+                else:
+                    return services_desc_dict
+
+            except ConnectError as httpx_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=httpx_err)
+                )
+
+            except ConnectTimeout as httpx_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=httpx_err)
+                )
+
+            except Exception as fastapi_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=fastapi_err)
+                )
