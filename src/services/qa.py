@@ -1,10 +1,23 @@
 ### Core modules ###
+from sys import stdout
 from pathlib import Path
 from yaml import safe_load
+from httpx import (
+    Client,
+    Response,
+    ConnectError,
+    ConnectTimeout
+)
+from fastapi import (
+    HTTPException,
+    status
+)
+from pprint import pp
 
 
 ### Type hints ###
 from typing import Any
+from ...types.query_analyser import ServicesJsonResponse
 
 
 ### Internal modules ###
@@ -243,19 +256,21 @@ class QABase(ServiceBase):
 
             # Get the response with retrieved context if applicable.
 
-            # TODO: needs to read the services from the DataBase and pass the service name to the prompter.
-            services_names = {
-                '0': "chess",
-                '1': "memory",
-                '2': "code_generation",
-                '3': "general_question_answering",
-                '4': "AcademicGovernance"
+            # NOTE:
+            # Due to the way current logic checking for selected service after
+            # receiving the response from LLM based on Query Analyser's refined
+            # question from user query, we've to do this kind of workaround until
+            # it get updates to handle 'int' type correctly (which it should be).
+            services_name:          dict[int, str] = self._get_service_name()
+            legacy_services_name:   dict[str, str] = {
+                str(str_id): name \
+                for (str_id, name) in services_name.items()
             }
 
             (response, raw_response) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_names[service_option]
+                service_name=legacy_services_name[service_option]
             )
 
 
@@ -269,3 +284,92 @@ class QABase(ServiceBase):
             )
 
         return (response, raw_response, retrieve_score)
+
+
+    def _get_service_name(
+        self,
+        # TODO: util to dynamically check for valid endpoint format
+        endpoint:   str     = "http://backend:8000/api/v1/services/",
+        lifetime:   float   = 10.0,
+        verbose:    bool    = False
+    ) -> dict[int, str]:
+        """
+        Retrieve service names from the backend API with 0-based indexing.
+
+        This method fetches service data from the specified endpoint and returns
+        a dictionary mapping 0-based indices to service names. The transformation
+        subtracts 1 from the API's 1-based IDs to create 0-based indexing.
+
+        Args:
+            endpoint: Base URL of the services API endpoint.
+                Defaults to "http://backend:8000/api/v1/services/".
+            lifetime: HTTP client timeout in seconds.
+                Defaults to 10.0 seconds.
+            verbose: Enable pretty-printed debug output of service data.
+                When True, prints formatted service data using 'pprint'.
+
+        Returns:
+            Dictionary mapping 0-based indices to service names.
+            Example: {0: "memory", 1: "code_generation"}
+
+        Raises:
+            HTTPException: With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> services = obj._get_services_name(verbose=True)
+            >>> services[0]  # First service name
+            'academic_governance'
+        """
+        services_name_dict: dict[int, str] = {}
+
+        with Client(
+            base_url=endpoint,
+            timeout=lifetime
+        ) as client:
+            try:
+                response:   Response                    = client.get(url="/")
+                data:       list[ServicesJsonResponse]  = response.json()["result"]
+
+                for service_data in data:
+                    # NOTE: for matching the hard-coded style until updating the logic
+                    service_id:     int = service_data["id"] - 1
+                    service_name:   str = service_data["name"]
+
+                    services_name_dict.update({service_id: service_name})
+
+                if verbose:
+                    print(
+                        "{head_sep:s}{body_msg:s}{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}\n",
+                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)\n",
+                            foot_sep=f"{'=' * 80}\n"
+                        )
+                    )
+                    pp(
+                        object=services_name_dict,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    return services_name_dict
+
+                else:
+                    return services_name_dict
+
+            except ConnectError as httpx_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=httpx_err)
+                )
+
+            except ConnectTimeout as httpx_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=httpx_err)
+                )
+
+            except Exception as fastapi_err:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail=str(object=fastapi_err)
+                )
