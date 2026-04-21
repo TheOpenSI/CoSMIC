@@ -143,25 +143,27 @@ class OpenSICoSMIC:
             # Create vector database service which will be included in RAG for retrieve and information updates.
             vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
 
-            # If index.faiss exists, it is user selected path; do not change the path.
-            # Otherwise, create a new directory.
-            if not Path.exists(
-                vector_db_path.joinpath("index.faiss"),
-                follow_symlinks=True
-            ):
-                if self.user_id is not None:
-                    # User ID specific.
-                    vector_db_path: Path = vector_db_path.joinpath(self.user_id)
-                else:
-                    # Set to default folder for easy management.
-                    vector_db_path: Path = vector_db_path.joinpath("default")
+            # # If index.faiss exists, it is user selected path; do not change the path.
+            # # Otherwise, create a new directory.
+            # if not Path.exists(
+            #     vector_db_path.joinpath("index.faiss"),
+            #     follow_symlinks=True
+            # ):
+            #     if self.user_id is not None:
+            #         # User ID specific.
+            #         vector_db_path: Path = vector_db_path.joinpath(self.user_id)
+            #     else:
+            #         # Set to default folder for easy management.
+            #         vector_db_path: Path = vector_db_path.joinpath("default")
 
-                # Create the data folder if not exist.
-                vector_db_path.mkdir(
-                    mode=0o777,
-                    parents=False,
-                    exist_ok=True
-                )
+            #     # Create the data folder if not exist.
+            #     vector_db_path.mkdir(
+            #         mode=0o777,
+            #         parents=False,
+            #         exist_ok=True
+            #     )
+            # Since Qdrant is now managed, we don't need to check for index.faiss
+            # The VectorDatabase service will handle the connection.
 
             vector_database = VectorDatabase(
                 document_analyser_model="gte-small",
