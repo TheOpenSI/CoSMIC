@@ -1,6 +1,5 @@
 name: OpenSI-CoSMIC
 
-
 services:
   ollama:
     container_name: ollama
@@ -18,10 +17,9 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [gpu]
+              capabilities: [ gpu ]
     networks:
       - cosmic
-
 
   cosmic:
     container_name: cosmic-fastapi
@@ -30,7 +28,10 @@ services:
         restart: true
         condition: service_started
         required: true
-
+      qdrant:
+        restart: true
+        condition: service_started
+        required: true
       # pycapsule:
       #   restart: true
       #   condition: service_started
@@ -46,7 +47,7 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [gpu]
+              capabilities: [ gpu ]
     volumes:
       # - type: volume
       #   source: open-webui
@@ -55,21 +56,22 @@ services:
       - type: volume
         source: cosmic-configs
         target: /app/scripts/configs
-
         # NOTE:
         # Live mounting for auto reload on dev only. Remove it and the
         # corresponding top-level volume on prod.
-      - type: bind
-        source: ./
-        target: /app
-
+        # - type: bind
+        #   source: ./
+        #   target: /app
         # NOTE:
         # This makes `.venv` directory container-native at runtime and not
         # trying to bypass the ignore at build time. This's very important when
         # you do the development in Windows.
-      - type: volume
-        source: cosmic-fastapi-venv
-        target: /app/.venv
+        # - type: volume
+        #   source: cosmic-fastapi-venv
+        #   target: /app/.venv
+
+      - .:/app
+      - /app/.venv
     tty: true
     # NOTE: For quick debugging (on dev only)
     ports:
@@ -91,7 +93,19 @@ services:
     networks:
       - cosmic
 
-
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - type: volume
+        source: cosmic-qdrant-data
+        target: /qdrant/storage
+    networks:
+      - cosmic
   # web:
   #   build:
   #     context: .
@@ -121,8 +135,8 @@ services:
   #   # user: "${UID:-1000}:${GID:-1000}"
   #   networks:
   #     - cosmic_net
-  
-    
+
+
   # pycapsule:
   #   image: opensicbr/pycapsule:latest
   #   privileged: true
@@ -146,9 +160,11 @@ volumes:
     name: cosmic-default-configs
 
   # NOTE: as explained above, define this only in dev (delete on prod).
-  cosmic-fastapi-venv:
-    name: cosmic-ignore
+  # cosmic-fastapi-venv:
+  #   name: cosmic-ignore
 
+  cosmic-qdrant-data:
+    name: cosmic-database-vector
   # cosmic-shared-mount:
   #   name: cosmic-shared-mount
   #   external: true
