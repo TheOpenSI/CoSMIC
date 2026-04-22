@@ -18,6 +18,15 @@ services:
             - driver: nvidia
               count: all
               capabilities: [ gpu ]
+    ports:
+      - name: ollama
+        target: 11434
+        host_ip: 127.0.0.1
+        published: "11434"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+
     networks:
       - cosmic
 
