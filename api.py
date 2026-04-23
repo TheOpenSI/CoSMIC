@@ -30,6 +30,7 @@ app = FastAPI()
 CORS_ALLOW_ORIGIN = [
     "http://localhost:8080",  # Frontend production server
     "http://localhost:5173",  # Frontend development server
+    "http://localhost:11434",  # Ollama server
 ]
 
 # Allow CORS for the specified origins
