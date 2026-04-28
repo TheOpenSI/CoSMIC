@@ -1,0 +1,29 @@
+# Scalability tiers: which specialist slugs are registered for each case.
+# Default is nested prefix of ALL_KEYS in specialists.py (first 3, 5, 8).
+
+tier_3:
+  - abstract_algebra
+  - anatomy
+  - astronomy
+
+tier_5:
+  - abstract_algebra
+  - anatomy
+  - astronomy
+  - business_ethics
+  - clinical_knowledge
+
+tier_8:
+  - abstract_algebra
+  - anatomy
+  - astronomy
+  - business_ethics
+  - clinical_knowledge
+  - college_biology
+  - college_chemistry
+  - college_computer_science
+
+# Optional: override default CSV paths per tier (relative to repo root or absolute).
+# csv_tier_3: agents/testing/data/prompts_tier3.csv
+# csv_tier_5: agents/testing/data/prompts_tier5.csv
+# csv_tier_8: agents/testing/data/prompts_tier8.csv

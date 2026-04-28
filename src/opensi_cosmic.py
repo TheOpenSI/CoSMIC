@@ -41,6 +41,7 @@ from modules.code_generation.code_generation import CodeGenerator
 from utils.log_tool import set_color
 from box import Box
 from src.query_analyser.query_analyser import QueryAnalyser
+from agents.runner import run_agent_sync
 
 # =============================================================================================================
 
@@ -80,7 +81,23 @@ class OpenSICoSMIC:
 
         # Initialize QA instance.
         self.qa = None
+        self.llm = None
+        self.query_analyser = None
+        self.code_generator = None
+        self.rag = None
 
+        # ADK pipeline routes single-query, non-CSV calls through the coordinator
+        # in ``agents/coordinator/agent.py`` instead of the legacy QueryAnalyser.
+        self.use_adk_pipeline = bool(self.config.get("use_adk_pipeline", True))
+
+        if self.use_adk_pipeline:
+            # ADK specialists own their LLM, RAG, and code generator instances; nothing
+            # to construct here. CSV-batch evaluators (puzzle, quality, ...) build their
+            # own LLM lazily inside ``__call__`` if ever exercised in this mode.
+            self.openai_api_status = self.check_openai_key()
+            return
+
+        # Legacy pipeline: build the analyser-led stack.
         # If llm_name is not specified, read it from the config file.
         if llm_name == "": llm_name = self.config.llm_name
         self.llm = self.get_llm(
@@ -191,6 +208,23 @@ class OpenSICoSMIC:
         is_llm_name_gpt = llm_name.find("gpt") > -1
         is_query_analyser_llm_name_gpt = query_analyser_llm_name.find("gpt") > -1
 
+        # In ADK mode the legacy LLM/QueryAnalyser instances are not built, so we
+        # cannot ask them for a key. ADK specialists default to Ollama (see
+        # ``agents/config.py``) and do not require ``OPENAI_API_KEY``; only flag a
+        # missing key if a GPT model is configured here AND the env var is empty.
+        if self.use_adk_pipeline:
+            if not (is_llm_name_gpt or is_query_analyser_llm_name_gpt):
+                return ""
+            if os.environ.get("OPENAI_API_KEY", "").strip() != "":
+                return ""
+            llm_name_list = []
+            if is_llm_name_gpt: llm_name_list.append(llm_name)
+            if is_query_analyser_llm_name_gpt and (query_analyser_llm_name not in llm_name_list):
+                llm_name_list.append(query_analyser_llm_name)
+            joined = " and ".join(llm_name_list)
+            verb = "is" if len(llm_name_list) == 1 else "are"
+            return f"Since {joined} {verb} used, please add valid OPENAI_API_KEY in .env."
+
         llm_name_list = []
         if is_llm_name_gpt: llm_name_list.append(llm_name)
         if is_query_analyser_llm_name_gpt and (query_analyser_llm_name not in llm_name_list):
@@ -250,10 +284,16 @@ class OpenSICoSMIC:
 
     def quit(self):
         """ Release memory of LLM and vector embedding model in vector_database.
+
+        Safe to call in ADK mode where these subsystems are not constructed.
         """
-        self.query_analyser.quit()
-        self.llm.quit()
-        self.rag.vector_database.quit()
+        if getattr(self, "query_analyser", None) is not None:
+            self.query_analyser.quit()
+        if getattr(self, "llm", None) is not None:
+            self.llm.quit()
+        rag = getattr(self, "rag", None)
+        if rag is not None and getattr(rag, "vector_database", None) is not None:
+            rag.vector_database.quit()
 
     def __call__(
         self,
@@ -281,6 +321,26 @@ class OpenSICoSMIC:
         # Check if OpenAI API key is valid.
         if self.openai_api_status != "":
             return self.openai_api_status, self.openai_api_status, -1
+
+        # ADK pipeline: route any non-CSV single-query call through the coordinator.
+        # CSV branches stay on the legacy evaluators (different harness, out of scope
+        # for the ADK migration); they require ``use_adk_pipeline: false``.
+        if self.use_adk_pipeline:
+            if question is not None and question.find(".csv") > -1:
+                msg = (
+                    "CSV batch evaluation (puzzle/quality/checkmate_moves/finetune_dataset) "
+                    "requires the legacy pipeline. Set 'use_adk_pipeline: false' in your config."
+                )
+                print(set_color("error", msg))
+                return msg, msg, -1
+            vector_db_path = self.config.rag.vector_db_path if self.config else ""
+            answer = run_agent_sync(
+                user_id=self.user_id or "local",
+                query=question,
+                context=context,
+                vector_db_path=vector_db_path,
+            )
+            return answer, answer, -1
 
         # Chat-mode LLM do not need example in the system prompt.
         if self.llm.llm_name in ["mistral-7b-instruct-v0.1", "gemma-7b-it"]:

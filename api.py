@@ -19,6 +19,7 @@ import pandas as pd
 from zoneinfo import ZoneInfo
 from typing import Optional
 
+from agents.runner import run_agent
 from utils.chat_history import build_context_from_messages
 from utils.general import validate_openai_api_key
 from utils.log_tool import set_color
@@ -81,26 +82,38 @@ if not os.path.exists(config["rag"]["vector_db_path"]):
 with open(config_path, "w") as file:
     yaml.safe_dump(config, file)
 
-# Initialize the OpenSICoSMIC class
-opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+# The /cosmic endpoint always uses the ADK agent runner via run_agent.
+# Construct the legacy OpenSICoSMIC class only when use_adk_pipeline is False;
+# otherwise we read defaults straight from the loaded yaml below.
+_use_adk_pipeline = bool(config.get("use_adk_pipeline", True))
+
+opensi_cosmic = None
+if not _use_adk_pipeline:
+    try:
+        opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+    except Exception:
+        opensi_cosmic = None
 
 # All these configs must be given to
 # Open-WebUi/src/lib/components/admin/Settings/Configs.svelte;
 # otherwise set them as Optional[the config name]=default value;
 
+_legacy_config = opensi_cosmic.config if opensi_cosmic else config
+
+
 class QueryQnalyserConfig(BaseModel):
-    llm_name: Optional[str] = opensi_cosmic.config['query_analyser']['llm_name']
-    is_quantized: Optional[bool] = opensi_cosmic.config['query_analyser']['is_quantized']
+    llm_name: Optional[str] = _legacy_config['query_analyser']['llm_name']
+    is_quantized: Optional[bool] = _legacy_config['query_analyser']['is_quantized']
 
 
 class RAGConfig(BaseModel):
-    top_k: Optional[int] = opensi_cosmic.config['rag']['topk']
-    retrieve_score_threshold: Optional[float] = opensi_cosmic.config['rag']['retrieve_score_threshold']
-    vector_db_path: Optional[str] = opensi_cosmic.config['rag']['vector_db_path']
+    top_k: Optional[int] = _legacy_config['rag']['topk']
+    retrieve_score_threshold: Optional[float] = _legacy_config['rag']['retrieve_score_threshold']
+    vector_db_path: Optional[str] = _legacy_config['rag']['vector_db_path']
 
 
 class ChessConfig(BaseModel):
-    stockfish_path: Optional[str] = opensi_cosmic.config['chess']['stockfish_path']
+    stockfish_path: Optional[str] = _legacy_config['chess']['stockfish_path']
 
 
 class OpenAIConfig(BaseModel):
@@ -120,17 +133,21 @@ class ConfigUpdateForm(BaseModel):
     chess: ChessConfig
     openai: OpenAIConfig
 
-openai_api_status = opensi_cosmic.check_openai_key()
+openai_api_status = opensi_cosmic.check_openai_key() if opensi_cosmic else ""
 
 
 def rebuild_cosmic():
     """
-    Rebuilds the OpenSICoSMIC instance if the configuration file or OpenAI API key changes.
+    Rebuilds the legacy OpenSICoSMIC instance if the configuration file or
+    OpenAI API key changes. Only relevant for non-ADK routes.
     """
     global config_modify_timestamp
     global openai_api_key
     global opensi_cosmic
     global openai_api_status
+
+    if opensi_cosmic is None:
+        return
 
     current_config_modify_timestamp = str(os.path.getmtime(config_path))
     current_openai_api_key = os.environ.get("OPENAI_API_KEY", dotenv.dotenv_values(".env").get("OPENAI_API_KEY", ""))
@@ -140,9 +157,12 @@ def rebuild_cosmic():
         opensi_cosmic.quit()
         update_openai_key()
         config_modify_timestamp = current_config_modify_timestamp
-        opensi_cosmic = OpenSICoSMIC(config_path=config_path)
-        print('Reconstruct OpenSICoSMIC due to changed configs.')
-        openai_api_status = opensi_cosmic.check_openai_key()
+        if _use_adk_pipeline:
+            opensi_cosmic = None
+        else:
+            opensi_cosmic = OpenSICoSMIC(config_path=config_path)
+            print('Reconstruct OpenSICoSMIC due to changed configs.')
+            openai_api_status = opensi_cosmic.check_openai_key()
 
 @app.get("/")
 async def read_root():
@@ -256,7 +276,8 @@ async def upload_file(file: UploadFile = File(...)):
 @app.get("/quit")
 async def quit():
     try:
-        opensi_cosmic.quit()
+        if opensi_cosmic:
+            opensi_cosmic.quit()
         return {"status": "success", "message": "Application is shutting down"}
     except HTTPException as http_exc:
         raise http_exc
@@ -265,16 +286,8 @@ async def quit():
     
 @app.post("/cosmic")
 async def process_cosmic(data: CosmicAPI):
-    global config_modify_timestamp
-    global openai_api_key
-    global opensi_cosmic
-    global openai_api_status
     try:
-        rebuild_cosmic()
-
-        # Extract user_id from body. Adjust if user_id is available elsewhere.
-        user_id = data.body["user"]["id"]
-        user_role = data.body["user"]["role"]
+        user_id = str(data.body["user"]["id"])
         user_email = data.body["user"]["email"]
 
         # Chat history context.
@@ -282,14 +295,12 @@ async def process_cosmic(data: CosmicAPI):
             data.body.get("messages", []),
             num_pairs=5
         )
-        # Check if Chat History is empty.
         chat_history_context = "" \
             if chat_history_context.strip() == 'Conversation History: \n\n=============== End of Chat History ===============' \
             else chat_history_context
-                               
-        # Set user ID to use a specific vector database.
-        # For the same user, the QA instance will not change.
-        opensi_cosmic.set_up_qa(str(user_id))
+
+        # Per-user vector database path.
+        vector_db_path = f"database/vector_database/{user_id}"
 
         # Compute statistic information.
         current_time = datetime.strftime(
@@ -304,35 +315,28 @@ async def process_cosmic(data: CosmicAPI):
             current_time
         )
 
-        # Proceed as normal
-        if openai_api_status != "":
-            answer = openai_api_status
-        else:
-            # Find the key word for adding file to vector database.
-            if data.user_message.find("</files>") > -1:
-                splits = data.user_message.split("</files>")
+        # Handle file uploads: ingest each file before answering the question.
+        if data.user_message.find("</files>") > -1:
+            splits = data.user_message.split("</files>")
+            data.user_message = splits[1]
 
-                # Extract the original question.
-                data.user_message = splits[1]
-                
+            file_dir = f"backend/data/uploads/{user_id}"
+            files = splits[0].split("<files>")[-1]
+            files = [os.path.join(file_dir, v) for v in files.split(',') if v != ""]
 
-                # The directory storing uploaded files.
-                file_dir = f"backend/data/uploads/{user_id}"
+            for file in files:
+                await run_agent(
+                    user_id=user_id,
+                    query=f"Add the following file to the vector database: {file}",
+                    vector_db_path=vector_db_path,
+                )
 
-                # Extract the files.
-                files = splits[0].split("<files>")[-1]
-                files = [os.path.join(file_dir, v) for v in files.split(',') if v != ""]
-
-                for file in files:
-                    # Form a prompt to update vector database.
-                    user_message_vector_db_update = \
-                        f"Add the following file to the vector database: {file}"
-
-                    # Update vector database.
-                    answer = opensi_cosmic(user_message_vector_db_update)[0]
-
-            answer = opensi_cosmic(question=data.user_message,
-                                   context=chat_history_context)[0]
+        answer = await run_agent(
+            user_id=user_id,
+            query=data.user_message,
+            context=chat_history_context,
+            vector_db_path=vector_db_path,
+        )
         return {"status": "success", "result": answer}
     except HTTPException as http_exc:
         raise http_exc

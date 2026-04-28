@@ -133,7 +133,36 @@ Currently, it has 5 base services, including
 - [PyCapsule (python code generation)](https://github.com/TheOpenSI/PyCapsule)
 - [General question answering and reasoning](src/services/qa.py)
 
-Each query will be parsed by [an LLM-based analyser](src/query_analyser/query_analyser.py) to select the most relevant service.
+### Routing pipeline (ADK by default)
+
+By default queries are routed by the **ADK coordinator** in [agents/coordinator/agent.py](agents/coordinator/agent.py), which delegates to four specialists (chess, database, code, general QA) defined under [agents/subagents/](agents/subagents). Both the FastAPI `/cosmic` endpoint and the CLI entry points (`main.py`, `demo.py`, `modules/docker/main_docker.py`) share this routing path through [agents/runner.py](agents/runner.py).
+
+To temporarily fall back to the legacy [LLM-based query analyser](src/query_analyser/query_analyser.py) (used for routing accuracy regression tests in [modules/query_analyser/test_query_analyser.py](modules/query_analyser/test_query_analyser.py) and CSV batch evaluators), set the flag in [scripts/configs/config.yaml](scripts/configs/config.yaml):
+
+```yaml
+use_adk_pipeline: False
+```
+
+The CSV batch evaluators (puzzle / quality / checkmate_moves / finetune_dataset) require the legacy pipeline; running them with the flag on returns an instructive error.
+
+### Agent model configuration
+
+[agents/config.py](agents/config.py) defines two model settings: **`COSMIC_AGENT_MODEL`** for the chess / code / database / general-QA specialists (default `ollama_chat/llama3.1:8b`, aligned with [scripts/configs/config.yaml](scripts/configs/config.yaml)), and **`COSMIC_COORDINATOR_MODEL`** for the routing-only coordinator (default `ollama_chat/gemma4:e4b`).
+
+```bash
+# If Ollama reports "model not found", pull the defaults once:
+ollama pull llama3.1:8b
+ollama pull gemma4:e4b
+
+# Optional: switch specialists to Qwen2.5 Instruct (strong tool calling) after pulling:
+ollama pull qwen2.5:7b-instruct
+export COSMIC_AGENT_MODEL=ollama_chat/qwen2.5:7b-instruct
+
+# Optional: use the same LLM for routing as for specialists:
+export COSMIC_COORDINATOR_MODEL=ollama_chat/llama3.1:8b
+```
+
+Avoid the edge Gemma variants (`gemma4:e4b`, `gemma3n:e4b`) **for tool-using specialists**, not for the lightweight coordinator: their tool-calling output is unreliable and can loop. As a defense-in-depth backstop, every sub-agent installs the loop guard from [agents/safeguards.py](agents/safeguards.py), which short-circuits the same `(tool, args)` invocation after `COSMIC_MAX_CALLS_PER_TOOL` (default 3) repeats in a single turn.
 
 Upper-level chess-game services include
 
