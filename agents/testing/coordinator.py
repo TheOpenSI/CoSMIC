@@ -21,7 +21,7 @@ _PRESETS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "preset
 _TESTING_ROOT = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.join(_TESTING_ROOT, "data")
 
-_VALID_TIERS = frozenset({3, 5, 8})
+_VALID_TIERS = frozenset({3, 5, 8, 10})
 
 
 def _load_presets() -> dict:
@@ -30,7 +30,7 @@ def _load_presets() -> dict:
 
 
 def tier_keys(tier: int) -> list[str]:
-    """Return specialist slug list for tier 3, 5, or 8 from presets."""
+    """Return specialist service identifiers for tier 3, 5, 8, or 10 from presets."""
     if tier not in _VALID_TIERS:
         raise ValueError(f"tier must be one of {sorted(_VALID_TIERS)}, got {tier}")
     data = _load_presets()
@@ -46,10 +46,10 @@ def tier_keys(tier: int) -> list[str]:
         if s and s not in out:
             out.append(s)
     if not out:
-        raise ValueError(f"presets.yaml '{key}' has no valid slugs")
+        raise ValueError(f"presets.yaml '{key}' has no valid services")
     for s in out:
         if s not in SPECIALISTS:
-            raise KeyError(f"Unknown specialist slug in presets.yaml {key}: {s!r}")
+            raise KeyError(f"Unknown service identifier in presets.yaml {key}: {s!r}")
     return out
 
 
@@ -70,15 +70,18 @@ def default_csv_path(tier: int) -> str:
 
 
 def build_root_agent(keys: list[str]) -> Agent:
-    """Coordinator that routes to exactly one of the given specialist slugs."""
+    """Coordinator that routes to exactly one of the given specialist services."""
     seen: list[str] = []
     for k in keys:
         if k not in SPECIALISTS:
-            raise KeyError(f"Unknown specialist slug: {k!r} (not in SPECIALISTS)")
+            raise KeyError(f"Unknown service identifier: {k!r} (not in SPECIALISTS)")
         if k not in seen:
             seen.append(k)
 
-    lines = "\n".join(f"- {k}: use for questions matching that specialist's domain (see sub-agent description)." for k in seen)
+    lines = "\n".join(
+        f"- {k}: use for questions matching that specialist's domain (see sub-agent description)."
+        for k in seen
+    )
     instruction = (
         "Scalability-test coordinator: route each user message to exactly one specialist below. "
         "Pick the single best-matching domain.\n"
@@ -105,5 +108,5 @@ def build_root_agent(keys: list[str]) -> Agent:
 
 
 def load_tier(tier: int) -> Agent:
-    """Load presets for tier 3, 5, or 8 and build the coordinator."""
+    """Load presets for tier 3, 5, 8, or 10 and build the coordinator."""
     return build_root_agent(tier_keys(tier))

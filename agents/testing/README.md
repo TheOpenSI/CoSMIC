@@ -1,68 +1,75 @@
 # Agent scalability testing
 
-This package measures coordinator behavior as the number of domain **sub-agents** grows (tiers **3**, **5**, and **8**). It does **not** replace the production coordinator in `[agents/coordinator/agent.py](../coordinator/agent.py)`; use `[runner.py](runner.py)` and `[benchmark.py](benchmark.py)` only for experiments.
+This package evaluates **routing**: how reliably the scalability-test coordinator hands each question to the right domain specialist, as you increase the number of registered **services** (tiers **3**, **5**, **8**, and **10**).
 
-## 1:1 mapping
+It does **not** replace the production coordinator in [`agents/coordinator/agent.py`](../coordinator/agent.py). Use [`runner.py`](runner.py) and [`benchmark.py`](benchmark.py) only for experiments.
 
+## Preset tiers (services per scenario)
 
-| Scalability case | `presets.yaml` key |
-| ---------------- | ------------------ |
-| 3 services       | `tier_3`           |
-| 5 services       | `tier_5`           |
-| 8 services       | `tier_8`           |
+| Scalability case | `presets.yaml` key | Typical scope |
+| ---------------- | ------------------ | ------------- |
+| 3 services       | `tier_3`           | First three entries in [`ALL_KEYS`](specialists.py) (unless you edit presets). |
+| 5 services       | `tier_5`           | First five. |
+| 8 services       | `tier_8`           | First eight. |
+| 10 services      | `tier_10`          | Full [`ALL_KEYS`](specialists.py) (all specialists). |
 
+Edit [`presets.yaml`](presets.yaml) to change which specialist **services** are registered per tier. Definitions and canonical order live in [`specialists.py`](specialists.py) (`ALL_KEYS`).
 
-Edit `[presets.yaml](presets.yaml)` to change which specialist slugs are registered per tier. Specialist definitions and order are in `[specialists.py](specialists.py)` (`ALL_KEYS`).
+## Domain specialists (service id and role)
 
-## Domain specialists (name and description)
-
-
-| Dataset                    | Description                                                                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `abstract_algebra`         | Contains theoretical mathematics problems focused on algebraic structures, used to evaluate abstract reasoning routing.                      |
-| `anatomy`                  | Includes questions about human body structure and systems, helping identify life science and medical queries.                                |
-| `astronomy`                | Covers celestial objects and space-related concepts, supporting routing for physics-oriented queries.                                        |
-| `business_ethics`          | Consists of ethical decision-making scenarios in business contexts, useful for social science reasoning.                                     |
-| `clinical_knowledge`       | Covers patient-centered medical scenarios involving diagnosis, symptoms, or treatment decisions, used to route clinical reasoning tasks.     |
-| `college_biology`          | Focuses on theoretical and conceptual biology such as genetics, evolution, and cellular processes, without clinical or patient context.      |
-| `college_chemistry`        | Includes chemistry problems involving reactions, equations, and physical or organic principles, supporting chemistry-specific query routing. |
-| `college_computer_science` | Covers algorithms and data structures, used for routing technical and computational queries.                                                 |
-| `mathematics`              | Contains general math problems across topics, supporting quantitative reasoning routing.                                                     |
-| `medicine`                 | Includes broad medical knowledge questions, enabling routing for healthcare-related queries.                                                 |
+These ids are the **`service`** labels in CSVs and the sub-agent **`name`** strings used when routing.
 
 
-## Running the benchmark
+| Dataset / service id        | Role |
+| ---------------------------- | ---- |
+| `abstract_algebra`            | Algebraic structures and abstract reasoning benchmarks. |
+| `anatomy`                     | Body structure and organ systems. |
+| `astronomy`                   | Celestial and space phenomena. |
+| `business_ethics`             | Ethical dilemmas in business settings. |
+| `clinical_knowledge`          | Clinical scenarios (diagnosis, symptoms, treatments). |
+| `college_biology`             | Conceptual biology without patient-centric framing. |
+| `college_chemistry`           | Reaction and theory chemistry tasks. |
+| `college_computer_science`    | Algorithms, data structures, CS theory. |
+| `mathematics`                 | Broader quantitative problems. |
+| `medicine`                    | Broader medical knowledge. |
 
-From the **repository root**, with your LLM endpoints configured (same as main CoSMIC, see `[agents/config.py](../config.py)`):
+
+## Running the routing benchmark
+
+From the **repository root**, with LLM endpoints configured like the rest of CoSMIC ([`agents/config.py`](../config.py)):
 
 ```bash
-python -m agents.testing.benchmark --tier 3
-python -m agents.testing.benchmark --tier 5 --runs 2 --warmup 1
-python -m agents.testing.benchmark --tier 8 --csv path/to/custom.csv
+python -m agents.testing.benchmark --tier 5
+python -m agents.testing.benchmark --tier 10 --csv path/to/custom.csv
+python -m agents.testing.benchmark --all
 ```
 
-- `**--tier**`: `3`, `5`, or `8` (required).
-- `**--csv**`: optional; overrides the default path for that tier (see `[data/README.md](data/README.md)`).
-- `**--runs**`: repeat the full task list (default `1`).
-- `**--warmup**`: extra iterations before timing (default `0`).
+- **`--tier`**: one of `3`, `5`, `8`, `10`. Loads evaluation rows from default CSV unless `--csv` is set.
+- **`--all`**: runs tiers **3, 5, 8,** and **10** in sequence using each tier’s default CSV from [`data/README.md`](data/README.md).
+- **`--csv`**: only with **`--tier`**, overrides that tier’s CSV path.
+- **`--out-dir`**: directory for outputs (defaults to [`results/`](results/)). Writes **`metrics.md`** (summary table) and **`confusion_tier{N}.png`** per tier evaluated (matplotlib + scikit-learn required for PNGs).
 
-If the default CSV for a tier is missing, the harness uses short **inline** prompts—one per active specialist—so you can still measure latency without data files.
+Each run prints a textual **confusion matrix** on stderr (truth vs predicted route, including `__no_transfer__` when the coordinator never calls `transfer_to_agent`). The same aggregate metrics appear as **stdout TSV**, and are **written** to **`results/metrics.md`** (Markdown table). **`token_cost`** is the summed **`total_token_count`** across ADK events—not USD. **`routing_failures`** counts samples with no predicted transfer.
+
+**`top3_accuracy` is omitted**: the coordinator selects a single `transfer_to_agent` target per question; ranking top-3 would require extra evaluation passes or API changes.
+
 
 ### Environment
 
-- `COSMIC_TEST_TIER`: default tier (`3`, `5`, or `8`) when calling `[runner.run_agent](runner.py)` with `tier=None`.
-- `COSMIC_AGENT_MODEL`, `COSMIC_COORDINATOR_MODEL`: model ids for specialists and coordinator (`[agents/config.py](../config.py)`).
+- `COSMIC_TEST_TIER`: default tier (`3`, `5`, `8`, or `10`) when [`runner.run_agent`](runner.py) is called with `tier=None`.
+- `COSMIC_AGENT_MODEL`, `COSMIC_COORDINATOR_MODEL`: specialist and coordinator model IDs ([`agents/config.py`](../config.py)).
 
 ## Programmatic use
 
 ```python
 from agents.testing import build_root_agent, load_tier, tier_keys, SPECIALISTS
 
-keys = tier_keys(5)
-agent = load_tier(5)  # or build_root_agent(keys)
+keys = tier_keys(10)
+agent = load_tier(10)  # or build_root_agent(keys)
 ```
 
-To run one query asynchronously:
+
+### One routed query (`run_agent`)
 
 ```python
 import asyncio
@@ -75,14 +82,30 @@ async def main():
 asyncio.run(main())
 ```
 
+### Structured routing metrics (`run_agent_routing`)
+
+Use this when building tools or alternative analysis pipelines:
+
+```python
+import asyncio
+from agents.testing.runner import run_agent_routing
+
+async def main():
+    r = await run_agent_routing(user_id="bench-2", query="...", tier=10)
+    print(r.predicted_service, r.latency_ms, r.tokens_total)
+
+asyncio.run(main())
+```
+
 ## Registering these specialists in a custom coordinator
 
 1. Import the agents you need from `agents.testing.specialists` (or `SPECIALISTS[key]`).
-2. Build an `Agent` coordinator with `sub_agents=[...]` and instructions that list each sub-agent name and when to route to it (same pattern as `[agents/coordinator/agent.py](../coordinator/agent.py)`).
+2. Build an `Agent` coordinator with `sub_agents=[...]` and routing instructions listing each sub-agent name (same pattern as [`agents/coordinator/agent.py`](../coordinator/agent.py)).
 3. Pass that coordinator to `google.adk.runners.Runner`.
 
-Do not add these testing specialists to the production coordinator unless you intend to ship that behavior.
+Do not attach these testing specialists to production unless that is intentional.
 
-## CSV format
 
-See `[data/README.md](data/README.md)` for the shared column schema and the three-file convention.
+## Evaluation CSV format
+
+See [`data/README.md`](data/README.md) for filenames and the shared column schema (`question`, `service`).

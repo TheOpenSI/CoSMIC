@@ -4,9 +4,12 @@
 env/
 venv/
 *__pycache__*
-data
 third_party
 database
 database
 ./scripts/configs/config_updated.yaml
 .idea
+
+# agents/testing routing benchmark outputs (regenerate with benchmark)
+agents/testing/results/*.png
+agents/testing/results/metrics.md

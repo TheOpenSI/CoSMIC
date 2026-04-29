@@ -7,7 +7,9 @@ from __future__ import annotations
 import asyncio
 import os
 import sys
+import time
 import uuid
+from dataclasses import dataclass
 
 _project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 if _project_root not in sys.path:
@@ -18,12 +20,25 @@ from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
 from agents.config import RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN, RUNNER_MAX_TOTAL_TOOL_CALLS
-from agents.testing.coordinator_factory import load_tier
+from agents.testing.coordinator import load_tier
 
 APP_NAME = "cosmic-scalability-test"
 
 _session_service = InMemorySessionService()
 _runners: dict[int, Runner] = {}
+
+_VALID_TIERS = frozenset({3, 5, 8, 10})
+
+
+@dataclass(frozen=True)
+class RoutingOutcome:
+    """Result of running the scalability-test coordinator once."""
+
+    final_text: str
+    predicted_service: str | None
+    latency_ms: float
+    tokens_total: int
+    aborted_reason: str
 
 
 def _resolve_tier(tier: int | None) -> int:
@@ -49,20 +64,49 @@ def clear_runner_cache() -> None:
     _runners.clear()
 
 
-async def run_agent(
+def _function_call_args_to_dict(fc) -> dict[str, object]:
+    args = getattr(fc, "args", None)
+    if args is None:
+        return {}
+    if isinstance(args, dict):
+        return args  # type: ignore[return-value]
+    if hasattr(args, "model_dump"):
+        return args.model_dump()  # type: ignore[no-any-return]
+    if hasattr(args, "items"):
+        try:
+            return dict(args.items())
+        except Exception:
+            pass
+    return {}
+
+
+def _transfer_target_from_event(event) -> str | None:
+    actions = getattr(event, "actions", None)
+    if actions:
+        transferred = getattr(actions, "transfer_to_agent", None)
+        if transferred:
+            return str(transferred)
+    for fc in event.get_function_calls():
+        if fc.name != "transfer_to_agent":
+            continue
+        args_map = _function_call_args_to_dict(fc)
+        raw_name = args_map.get("agent_name")
+        if raw_name:
+            return str(raw_name)
+    return None
+
+
+async def _run_agent_inner(
     user_id: str,
     query: str,
     context: str = "",
     vector_db_path: str = "",
     tier: int | None = None,
-) -> str:
-    """Run the scalability-test coordinator for ``tier`` (3, 5, or 8).
-
-    If ``tier`` is None, uses environment variable ``COSMIC_TEST_TIER`` (default ``3``).
-    """
+) -> RoutingOutcome:
+    """Run coordinator once; compute predicted routing transfer, timings, and token totals."""
     t = _resolve_tier(tier)
-    if t not in (3, 5, 8):
-        raise ValueError("tier must be 3, 5, or 8")
+    if t not in _VALID_TIERS:
+        raise ValueError(f"tier must be one of {sorted(_VALID_TIERS)}, got {t}")
 
     runner = _get_runner(t)
     session_id = str(uuid.uuid4())
@@ -93,6 +137,11 @@ async def run_agent(
     total_tool_calls = 0
     aborted_reason = ""
 
+    predicted_service: str | None = None
+    tokens_accum = 0
+
+    t_start = time.perf_counter()
+
     runner_iter = runner.run_async(
         user_id=user_id,
         session_id=session_id,
@@ -100,6 +149,16 @@ async def run_agent(
     )
 
     async for event in runner_iter:
+        xfer = _transfer_target_from_event(event)
+        if xfer is not None and predicted_service is None:
+            predicted_service = xfer
+
+        um = getattr(event, "usage_metadata", None)
+        if um is not None:
+            tt = getattr(um, "total_token_count", None)
+            if isinstance(tt, int) and tt > 0:
+                tokens_accum += tt
+
         for fc in event.get_function_calls():
             tool_name = fc.name or "<unknown>"
             tool_call_counts[tool_name] = tool_call_counts.get(tool_name, 0) + 1
@@ -129,14 +188,64 @@ async def run_agent(
                 if part.text:
                     final_text += part.text
 
+    latency_ms = (time.perf_counter() - t_start) * 1000
+
     if aborted_reason:
         try:
             await runner_iter.aclose()
         except Exception:
             pass
-        return final_text + ("\n\n" if final_text else "") + aborted_reason
 
-    return final_text or "No response generated."
+    if aborted_reason:
+        text_out = final_text + ("\n\n" if final_text else "") + aborted_reason
+    else:
+        text_out = final_text or "No response generated."
+
+    return RoutingOutcome(
+        final_text=text_out,
+        predicted_service=predicted_service,
+        latency_ms=latency_ms,
+        tokens_total=tokens_accum,
+        aborted_reason=aborted_reason,
+    )
+
+
+async def run_agent(
+    user_id: str,
+    query: str,
+    context: str = "",
+    vector_db_path: str = "",
+    tier: int | None = None,
+) -> str:
+    """Run the scalability-test coordinator for ``tier`` (3, 5, 8, or 10).
+
+    If ``tier`` is None, uses environment variable ``COSMIC_TEST_TIER`` (default ``3``).
+    """
+    outcome = await _run_agent_inner(
+        user_id=user_id,
+        query=query,
+        context=context,
+        vector_db_path=vector_db_path,
+        tier=tier,
+    )
+    return outcome.final_text
+
+
+async def run_agent_routing(
+    user_id: str,
+    query: str,
+    context: str = "",
+    vector_db_path: str = "",
+    tier: int | None = None,
+) -> RoutingOutcome:
+    """Like :func:`run_agent` but returns structured routing metrics (predicted service, latency, tokens)."""
+    return await _run_agent_inner(
+        user_id=user_id,
+        query=query,
+        context=context,
+        vector_db_path=vector_db_path,
+        tier=tier,
+    )
 
 
 def run_agent_sync(
