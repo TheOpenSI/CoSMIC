@@ -289,9 +289,10 @@ class QABase(ServiceBase):
     def _get_service_name(
         self,
         # TODO: util to dynamically check for valid endpoint format
-        endpoint:   str     = "http://backend:8000/api/v1/services/",
-        lifetime:   float   = 10.0,
-        verbose:    bool    = False
+        endpoint:           str                     = "http://backend:8000/api/v1/services/",
+        endpoint_params:    dict[str, bool] | None  = {"active": True},
+        lifetime:           float                   = 10.0,
+        verbose:            bool                    = False
     ) -> dict[int, str]:
         """
         Retrieve service names from the backend API with 0-based indexing.
@@ -303,6 +304,8 @@ class QABase(ServiceBase):
         Args:
             endpoint: Base URL of the services API endpoint.
                 Defaults to "http://backend:8000/api/v1/services/".
+            endpoint_params: optional query parameter for provided endpoint.
+                Defaults to {"active": True} to get active only services.
             lifetime: HTTP client timeout in seconds.
                 Defaults to 10.0 seconds.
             verbose: Enable pretty-printed debug output of service data.
@@ -325,6 +328,7 @@ class QABase(ServiceBase):
 
         with Client(
             base_url=endpoint,
+            params=endpoint_params,
             timeout=lifetime
         ) as client:
             try:
@@ -359,17 +363,11 @@ class QABase(ServiceBase):
             except ConnectError as httpx_err:
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=str(object=httpx_err)
+                    detail=f"{httpx_err}"
                 )
 
             except ConnectTimeout as httpx_err:
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=str(object=httpx_err)
-                )
-
-            except Exception as fastapi_err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=str(object=fastapi_err)
+                    detail=f"{httpx_err}"
                 )
