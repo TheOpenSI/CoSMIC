@@ -3,13 +3,11 @@ from os import environ
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
 ### Type hints ###
 
 
 ### Internal modules ###
-from .backend.routers import default_apis, models
-
+from .backend.routers import default_apis, models, cosmic
 
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
@@ -35,9 +33,7 @@ CORS_ALLOW_ORIGIN = [
 
 # Allow CORS for the specified origins
 if environ.get("CORS_ALLOW_ORIGIN"):
-    CORS_ALLOW_ORIGIN.extend(
-        str(object=environ.get("CORS_ALLOW_ORIGIN")).split(";")
-    )
+    CORS_ALLOW_ORIGIN.extend(str(object=environ.get("CORS_ALLOW_ORIGIN")).split(";"))
 
 app.add_middleware(
     CORSMiddleware,
@@ -50,3 +46,4 @@ app.add_middleware(
 # APIs - smanile
 app.include_router(default_apis.router, tags=["CoSMIC APIs"])
 app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
+app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
