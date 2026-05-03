@@ -261,29 +261,58 @@ class QABase(ServiceBase):
             # receiving the response from LLM based on Query Analyser's refined
             # question from user query, we've to do this kind of workaround until
             # it get updates to handle 'int' type correctly (which it should be).
-            services_name:          dict[int, str] = self._get_service_name()
-            legacy_services_name:   dict[str, str] = {
-                str(str_id): name \
-                for (str_id, name) in services_name.items()
-            }
+            services_name: dict[int, str] = self._get_service_name(verbose=True)
 
-            (response, raw_response) = self.llm(
-                question=user_prompt,
-                context=context,
-                service_name=legacy_services_name[service_option]
-            )
+            # No active services available in the system
+            if len(services_name) == 0:
+                # TODO: do we want to deny using query analyser or default to using 
+                # service 3 - general QA answering?
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail={
+                        "status": "500 - Internal Server Error",
+                        "message": "{trig:s}: {cond:s}".format(
+                            trig="ServiceNotFoundError",
+                            cond="No active services found. Query Analyser requires at least 1 service enabled for usages"
+                        )
+                    }
+                )
 
+            # There is/are active services available in the system
+            else:
+                legacy_services_name: dict[str, str] = {
+                    str(str_id): name \
+                    for (str_id, name) in services_name.items()
+                }
 
-        # Print service name.
-        if  verbose                                                             \
-        and (response is not None)                                              \
-        and (service_option in self.query_analyser["full_services"].keys()):
-            response += "{0:s} ; {1:s}".format(
-                f"[service: {self.query_analyser["full_services"][service_option]}",
-                f"system info relevance: {system_information_relevance}]"
-            )
+                (response, raw_response) = self.llm(
+                    question=user_prompt,
+                    context=context,
+                    service_name=legacy_services_name[service_option]
+                )
 
-        return (response, raw_response, retrieve_score)
+        # Print service name (NOTE: DEBUG only)
+        if verbose:
+            if  (response is not None) \
+            and (service_option in self.query_analyser["full_services"].keys()):
+                response += "{0:s} ; {1:s}".format(
+                    f"[service: {self.query_analyser["full_services"][service_option]}",
+                    f"system info relevance: {system_information_relevance}]"
+                )
+
+            else:
+                # Found no LLM response due to unknown circumstances
+                pass
+
+        else:
+            # No need to mind about extra infomation for debugging
+            pass
+
+        return (
+            response,
+            raw_response,
+            retrieve_score
+        )
 
 
     def _get_service_name(
@@ -335,30 +364,54 @@ class QABase(ServiceBase):
                 response:   Response                    = client.get(url="/")
                 data:       list[ServicesJsonResponse]  = response.json()["result"]
 
-                for service_data in data:
-                    # NOTE: for matching the hard-coded style until updating the logic
-                    service_id:     int = service_data["id"] - 1
-                    service_name:   str = service_data["name"]
-
-                    services_name_dict.update({service_id: service_name})
-
-                if verbose:
-                    print(
-                        "{head_sep:s}{body_msg:s}{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}\n",
-                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)\n",
-                            foot_sep=f"{'=' * 80}\n"
+                if len(data) == 0:
+                    # No active services available
+                    if verbose:
+                        print(
+                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                                head_sep=f"{'=' * 80}",
+                                body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                                foot_sep=f"{'=' * 80}"
+                            )
                         )
-                    )
-                    pp(
-                        object=services_name_dict,
-                        stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
-                    )
-                    return services_name_dict
+                        print(
+                            "{debug_msg:s}\n{foot_sep:s}".format(
+                                debug_msg="No active services available...",
+                                foot_sep=f"{'=' * 80}"
+                            )
+                        )
+                        return services_name_dict
+
+                    else:
+                        return services_name_dict
 
                 else:
-                    return services_name_dict
+                    # There is/are active services available
+                    for service_data in data:
+                        # NOTE: for matching the hard-coded style until updating the logic
+                        service_id:     int = service_data["id"] - 1
+                        service_name:   str = service_data["name"]
+
+                        services_name_dict.update({service_id: service_name})
+
+                    if verbose:
+                        print(
+                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                                head_sep=f"{'=' * 80}",
+                                body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                                foot_sep=f"{'=' * 80}"
+                            )
+                        )
+                        pp(
+                            object=services_name_dict,
+                            stream=stdout,
+                            indent=4 # Prefer tab over spaces indentation
+                        )
+                        print(f"{'=' * 80}")
+                        return services_name_dict
+
+                    else:
+                        return services_name_dict
 
             except ConnectError as httpx_err:
                 raise HTTPException(

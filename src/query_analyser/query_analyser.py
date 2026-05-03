@@ -60,74 +60,92 @@ class QueryAnalyser:
         # receiving the response from LLM based on Query Analyser's refined
         # question from user query, we've to do this kind of workaround until
         # it get updates to handle 'int' type correctly (which it should be).
-        services_desc:              dict[int, str] = self._get_service_desc()
-        self.legacy_services_desc:  dict[str, str] = {
-            str(str_id): desc \
-            for (str_id, desc) in services_desc.items()
-        }
+        services_desc: dict[int, str] = self._get_service_desc(verbose=True)
 
-        # Set chess subservices.
-        self.chess_subservices_desc: dict[str, str] = {
-            "0.0": "predict next move given a chess FEN",
-            "0.1": "predict next move given a sequence of moves"
-        }
-
-        # Get full services.
-        self.full_services = {**self.legacy_services_desc, **self.chess_subservices_desc}
-
-        # Get the number of services.
-        self.num_services = len(self.legacy_services_desc)
-
-        # Set provided service.
-        self.service_index = service_index
-
-        # Build LLM instance from class defined in .py if llm_name is supported.
-        if llm_name in LLM_INSTANCE_DICT.keys():
-            llm_instance_name = LLM_INSTANCE_DICT[llm_name]
-
-        elif llm_name.find("gpt") > -1:
-            llm_instance_name = "GPT"
-
-        elif llm_name.find("ollama") > -1:
-            llm_instance_name = "Ollama"
-
-        else:
-            print(
-                set_color(
-                    status="error",
-                    information=f"Unsupported LLM: {llm_name}."
-                )
+        # No active services available in the system
+        if len(services_desc) == 0:
+            # TODO: do we want to deny using query analyser or default to using 
+            # service 3 - general QA answering?
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail={
+                    "status": "500 - Internal Server Error",
+                    "message": "{trig:s}: {cond:s}".format(
+                        trig="ServiceNotFoundError",
+                        cond="No active services found. Query Analyser requires at least 1 service enabled for usages"
+                    )
+                }
             )
-            exit(1)
 
-        # Build LLM instance from class defined in .py
-        self.llm = get_instance(
-            instances=llm_instances,
-            instance_name=llm_instance_name
-        )(
-            llm_name=llm_name,
-            seed=seed,
-            is_quantized=is_quantized,
-            use_example=False,
-            is_truncate_response=True,
-            device=device
-        )
+        # There is/are active services available in the system
+        else:
+            self.legacy_services_desc: dict[str, str] = {
+                str(str_id): desc \
+                for (str_id, desc) in services_desc.items()
+            }
 
-        # Set user prompter for service option.
-        self.user_prompter_service = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserService"
-        )(
-            services=self.legacy_services_desc
-        )
+            # Set chess subservices.
+            self.chess_subservices_desc: dict[str, str] = {
+                "0.0": "predict next move given a chess FEN",
+                "0.1": "predict next move given a sequence of moves"
+            }
 
-        # Set user prompter for system information.
-        self.user_prompter_system_info = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserSystemInfo"
-        )(
-            services=self.legacy_services_desc
-        )
+            # Get full services.
+            self.full_services = {**self.legacy_services_desc, **self.chess_subservices_desc}
+
+            # Get the number of services.
+            self.num_services = len(self.legacy_services_desc)
+
+            # Set provided service.
+            self.service_index = service_index
+
+            # Build LLM instance from class defined in .py if llm_name is supported.
+            if llm_name in LLM_INSTANCE_DICT.keys():
+                llm_instance_name = LLM_INSTANCE_DICT[llm_name]
+
+            elif llm_name.find("gpt") > -1:
+                llm_instance_name = "GPT"
+
+            elif llm_name.find("ollama") > -1:
+                llm_instance_name = "Ollama"
+
+            else:
+                print(
+                    set_color(
+                        status="error",
+                        information=f"Unsupported LLM: {llm_name}."
+                    )
+                )
+                exit(1)
+
+            # Build LLM instance from class defined in .py
+            self.llm = get_instance(
+                instances=llm_instances,
+                instance_name=llm_instance_name
+            )(
+                llm_name=llm_name,
+                seed=seed,
+                is_quantized=is_quantized,
+                use_example=False,
+                is_truncate_response=True,
+                device=device
+            )
+
+            # Set user prompter for service option.
+            self.user_prompter_service = get_instance(
+                instances=query_user_prompt_instances,
+                instance_name="QueryAnalyserService"
+            )(
+                services=self.legacy_services_desc
+            )
+
+            # Set user prompter for system information.
+            self.user_prompter_system_info = get_instance(
+                instances=query_user_prompt_instances,
+                instance_name="QueryAnalyserSystemInfo"
+            )(
+                services=self.legacy_services_desc
+            )
 
 
     def quit(self):
@@ -485,30 +503,54 @@ class QueryAnalyser:
                 response:   Response                    = client.get(url="/")
                 data:       list[ServicesJsonResponse]  = response.json()["result"]
 
-                for service_data in data:
-                    # NOTE: for matching the hard-coded style until updating the logic
-                    service_id:     int = service_data["id"] - 1
-                    services_desc:   str = service_data["desc"]
-
-                    services_desc_dict.update({service_id: services_desc})
-
-                if verbose:
-                    print(
-                        "{head_sep:s}{body_msg:s}{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}\n",
-                            body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)\n",
-                            foot_sep=f"{'=' * 80}\n"
+                if len(data) == 0:
+                    # No active services available
+                    if verbose:
+                        print(
+                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                                head_sep=f"{'=' * 80}",
+                                body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)   [DEBUG]",
+                                foot_sep=f"{'=' * 80}"
+                            )
                         )
-                    )
-                    pp(
-                        object=services_desc_dict,
-                        stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
-                    )
-                    return services_desc_dict
+                        print(
+                            "{debug_msg:s}\n{foot_sep:s}".format(
+                                debug_msg="No active services available...",
+                                foot_sep=f"{'=' * 80}"
+                            )
+                        )
+                        return services_desc_dict
+
+                    else:
+                        return services_desc_dict
 
                 else:
-                    return services_desc_dict
+                    # There is/are active services available
+                    for service_data in data:
+                        # NOTE: for matching the hard-coded style until updating the logic
+                        service_id:     int = service_data["id"] - 1
+                        services_desc:  str = service_data["desc"]
+
+                        services_desc_dict.update({service_id: services_desc})
+
+                    if verbose:
+                        print(
+                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                                head_sep=f"{'=' * 80}",
+                                body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)   [DEBUG]",
+                                foot_sep=f"{'=' * 80}"
+                            )
+                        )
+                        pp(
+                            object=services_desc_dict,
+                            stream=stdout,
+                            indent=4 # Prefer tab over spaces indentation
+                        )
+                        print(f"{'=' * 80}")
+                        return services_desc_dict
+
+                    else:
+                        return services_desc_dict
 
             except ConnectError as httpx_err:
                 raise HTTPException(
