@@ -44,6 +44,9 @@ python -m agents.testing.benchmark --tier 10 --csv path/to/custom.csv
 python -m agents.testing.benchmark --all
 ```
 
+With Docker and the bundled Compose stack (Ollama on **`cosmic_net`**):  
+`docker compose -f docker-compose.benchmark.yaml run --rm --build benchmark --tier 5` (override CLI args as needed; see comments in [`docker-compose.benchmark.yaml`](../../docker-compose.benchmark.yaml)).
+
 - **`--tier`**: one of `3`, `5`, `8`, `10`. Loads evaluation rows from default CSV unless `--csv` is set.
 - **`--all`**: runs tiers **3, 5, 8,** and **10** in sequence using each tier’s default CSV from [`data/README.md`](data/README.md).
 - **`--csv`**: only with **`--tier`**, overrides that tier’s CSV path.
@@ -63,6 +66,20 @@ python -m agents.testing.benchmark --all
 
 - `COSMIC_TEST_TIER`: default tier (`3`, `5`, `8`, or `10`) when [`runner.run_agent`](runner.py) is called with `tier=None`.
 - `COSMIC_AGENT_MODEL`, `COSMIC_COORDINATOR_MODEL`: specialist and coordinator model IDs ([`agents/config.py`](../config.py)).
+- **`OLLAMA_API_BASE`**: base URL for the **LiteLLM** Ollama integration (e.g. `http://ollama:11434`). Defaults to localhost; **inside Docker**, `localhost:11434` is the container itself, so calls to `ollama_chat/...` models fail with **connection refused** unless you set this (or **`COSMIC_OLLAMA_API_BASE`**).
+- **`COSMIC_OLLAMA_API_BASE`**: optional CoSMIC alias; if set, [`agents/config.py`](../config.py) applies it to `OLLAMA_API_BASE` when that is not already set.
+
+**Ollama reachability from a benchmark container** (not the same as Open WebUI’s `OLLAMA_BASE_URL`; that env is not read by LiteLLM):
+
+| Where Ollama runs | Typical value |
+| ----------------- | ------------- |
+| Compose service `ollama` on the same user-defined network (e.g. `cosmic_net`) | `http://ollama:11434` |
+| Ollama on the Docker host (Desktop) | `http://host.docker.internal:11434` |
+| Ollama on the Docker host (Linux) | `http://host.docker.internal:11434` with `extra_hosts: ["host.docker.internal:host-gateway"]` on the benchmark service, or the bridge gateway / host LAN IP |
+
+**Sanity check** (inside the container): `curl -sS "$OLLAMA_API_BASE/api/tags"` (or `/api/version`) should succeed before running the benchmark.
+
+**Compose example:** see [`docker-compose.benchmark.yaml`](../../docker-compose.benchmark.yaml) at the repo root (`OLLAMA_API_BASE=http://ollama:11434`, same network as `ollama`).
 
 ## Programmatic use
 

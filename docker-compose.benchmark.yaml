@@ -1,0 +1,38 @@
+# Routing benchmark against the repo's Ollama service on the same Docker network.
+# LiteLLM reads OLLAMA_API_BASE (not Open WebUI's OLLAMA_BASE_URL).
+#
+# Examples:
+#   docker compose -f docker-compose.benchmark.yaml run --rm --build benchmark --tier 5
+#   docker compose -f docker-compose.benchmark.yaml run --rm --build benchmark --all
+#
+# To use an Ollama on the host instead, set COSMIC_OLLAMA_API_BASE or OLLAMA_API_BASE for the
+# benchmark service (e.g. http://host.docker.internal:11434) and add extra_hosts if on Linux.
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_benchmark:/root/.ollama
+    networks:
+      - cosmic_net
+
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    environment:
+      OLLAMA_API_BASE: http://ollama:11434
+    depends_on:
+      - ollama
+    networks:
+      - cosmic_net
+    entrypoint: ["python", "-m", "agents.testing.benchmark"]
+    command: ["--tier", "3"]
+
+volumes:
+  ollama_benchmark: {}
+
+networks:
+  cosmic_net:
+    driver: bridge

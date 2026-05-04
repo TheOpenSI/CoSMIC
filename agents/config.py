@@ -15,9 +15,17 @@ The coordinator default matches specialists; override routing-only with
 Duplicate-tool-call limits: ``COSMIC_MAX_CALLS_PER_TOOL`` caps repeated identical
 (tool, arguments) pairs in ``agents.safeguards``; ``COSMIC_RUNNER_MAX_CALLS_PER_TOOL_NAME``
 and ``COSMIC_RUNNER_MAX_TOTAL_TOOL_CALLS`` tune the stream guard in ``agents.runner``.
+
+Docker / LiteLLM: for ``ollama_chat/...`` models, LiteLLM reads ``OLLAMA_API_BASE``.
+Set ``COSMIC_OLLAMA_API_BASE`` to the same URL if you prefer a CoSMIC-prefixed env; it is
+mapped into ``OLLAMA_API_BASE`` when the latter is unset (see below).
 """
 
 import os
+
+_cosmic_ollama_api_base = (os.environ.get("COSMIC_OLLAMA_API_BASE") or "").strip()
+if _cosmic_ollama_api_base:
+    os.environ.setdefault("OLLAMA_API_BASE", _cosmic_ollama_api_base)
 
 # LiteLLM format: ollama_chat/<name> — name must exist in `ollama list`.
 DEFAULT_MODEL = "ollama_chat/llama3.1:8b"

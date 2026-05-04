@@ -137,6 +137,8 @@ Currently, it has 5 base services, including
 
 By default queries are routed by the **ADK coordinator** in [agents/coordinator/agent.py](agents/coordinator/agent.py), which delegates to four specialists (chess, database, code, general QA) defined under [agents/subagents/](agents/subagents). Both the FastAPI `/cosmic` endpoint and the CLI entry points (`main.py`, `demo.py`, `modules/docker/main_docker.py`) share this routing path through [agents/runner.py](agents/runner.py).
 
+If you run **routing benchmarks** or other ADK tools **inside Docker** against **Ollama**, set **`OLLAMA_API_BASE`** or **`COSMIC_OLLAMA_API_BASE`** so LiteLLM does not use `localhost:11434` inside the container; see **Environment** in [agents/testing/README.md](agents/testing/README.md) and [docker-compose.benchmark.yaml](docker-compose.benchmark.yaml).
+
 To temporarily fall back to the legacy [LLM-based query analyser](src/query_analyser/query_analyser.py) (used for routing accuracy regression tests in [modules/query_analyser/test_query_analyser.py](modules/query_analyser/test_query_analyser.py) and CSV batch evaluators), set the flag in [scripts/configs/config.yaml](scripts/configs/config.yaml):
 
 ```yaml
