@@ -19,8 +19,8 @@ document_path: [] # a string or a list of .pdf to add context to the vector data
 service: -1
 
 query_analyser:
-  llm_name: "ollama:llama3.3:70b"
-  is_quantized: true
+  llm_name: "ollama:qwen2.5:7b"
+  is_quantized: false
 
 chess:
   stockfish_path: "" # if empty, default to "third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
