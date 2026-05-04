@@ -1,11 +1,13 @@
 ### Core modules ###
+import os
 from pathlib import Path
 from csv import writer
 from glob import glob
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
+# from langchain_community.vectorstores import FAISS
+from langchain_qdrant import QdrantVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
@@ -126,33 +128,52 @@ class VectorDatabase(ServiceBase):
             encode_kwargs={"normalize_embeddings": True},
         )
 
+                # Initialize Qdrant client connecting to the Docker service
+        # Collection name defaults to "cosmic_collection"
+        # The URL points to the qdrant service defined in docker-compose.yml
+        qdrant_url = os.getenv("QDRANT_URL", "http://qdrant:6333")
+        collection_name = "cosmic_collection"
+
+        print(set_color("info", f"Connecting to Qdrant at {qdrant_url}..."))
+        
+        # Connect to existing collection or create one if it doesn't exist
+        # Replaces FAISS local loading logic
+        self.database = QdrantVectorStore.from_texts(
+            texts=["Initial collection entry"],
+            embedding=self.database_update_embedding,
+            url=qdrant_url,
+            collection_name=collection_name,
+        )
+        
+        print(set_color("success", f"Connected to Qdrant collection: {collection_name}"))
+
         # Build processor to handle a new document for database updates.
         # Find the API at https://api.python.langchain.com/en/latest/vectorstores
         # /langchain_community.vectorstores.faiss.FAISS.html
         # Build a processor to handle a sentence for database updates.
 
-        # Load a local database from a file
-        if Path(self.current_local_database_path / "index.faiss").exists(follow_symlinks=True):
-            self.database = FAISS.load_local(
-                folder_path=local_database_path,
-                embeddings=self.database_update_embedding,
-                index_name="index",
-                allow_dangerous_deserialization=True
-            )
+        # # Load a local database from a file
+        # if Path(self.current_local_database_path / "index.faiss").exists(follow_symlinks=True):
+        #     self.database = FAISS.load_local(
+        #         folder_path=local_database_path,
+        #         embeddings=self.database_update_embedding,
+        #         index_name="index",
+        #         allow_dangerous_deserialization=True
+        #     )
 
-            print(
-                set_color(
-                    status="success",
-                    information=f"Load \"{str(object=self.current_local_database_path)}\" to vector database."
-                )
-            )
-        else:
-            self.database = FAISS.from_texts(
-                texts=["Use FAISS as database updater"],
-                embedding=self.database_update_embedding,
-                metadatas=None,
-                ids=None
-            )
+        #     print(
+        #         set_color(
+        #             status="success",
+        #             information=f"Load \"{str(object=self.current_local_database_path)}\" to vector database."
+        #         )
+        #     )
+        # else:
+        #     self.database = FAISS.from_texts(
+        #         texts=["Use FAISS as database updater"],
+        #         embedding=self.database_update_embedding,
+        #         metadatas=None,
+        #         ids=None
+        #     )
 
         # Set search strategy.
         self.database.distance_strategy = DistanceStrategy.COSINE
@@ -329,7 +350,10 @@ class VectorDatabase(ServiceBase):
                 self.update_database_catalogue(document_path)
 
                 # Save to local database.
-                self.database.save_local(str(object=self.current_local_database_path))
+                # self.database.save_local(str(object=self.current_local_database_path))
+
+                # Qdrant handles persistence automatically in Docker/Disk mode.
+                # No explicit save_local call is needed.
 
                 print(
                     set_color(
@@ -390,7 +414,7 @@ class VectorDatabase(ServiceBase):
             self.update_database_catalogue(text)
 
             # Save to local file.
-            self.database.save_local(str(object=self.current_local_database_path))
+            # self.database.save_local(str(object=self.current_local_database_path))
 
             # Print the progress.
             print(

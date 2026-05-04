@@ -37,6 +37,10 @@ services:
         restart: true
         condition: service_started
         required: true
+      qdrant:
+        restart: true
+        condition: service_started
+        required: true
       # pycapsule:
       #   restart: true
       #   condition: service_started
@@ -57,7 +61,6 @@ services:
       # - type: volume
       #   source: open-webui
       #   target: /app/backend/data
-
       - type: volume
         source: cosmic-configs
         target: /app/scripts/configs
@@ -74,6 +77,7 @@ services:
       - type: volume
         source: cosmic-fastapi-venv
         target: /app/.venv
+    tty: true
     # NOTE: For quick debugging (on dev only)
     ports:
       - name: cosmic-uvicorn
@@ -83,7 +87,6 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
-
       - name: cosmic-debugpy
         target: 5678
         host_ip: 127.0.0.1
@@ -91,6 +94,20 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
+    networks:
+      - cosmic
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - type: volume
+        source: cosmic-qdrant-data
+        target: /qdrant/storage
     networks:
       - cosmic
   # pycapsule:
@@ -118,6 +135,8 @@ volumes:
   # NOTE: as explained above, define this only in dev (delete on prod).
   cosmic-fastapi-venv:
     name: cosmic-ignore
+  cosmic-qdrant-data:
+    name: cosmic-database-vector
   # cosmic-shared-mount:
   #   name: cosmic-shared-mount
   #   external: true

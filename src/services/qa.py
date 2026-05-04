@@ -199,7 +199,10 @@ class QABase(ServiceBase):
             raw_response, response = self.code_generator(query)
 
         else:
-            if is_rag:# General question has RAG activated
+            RAG_ENABLED_SERVICES = ["4"] # Academic QA triggers retrieval
+            execute_rag = is_rag and (service_option in RAG_ENABLED_SERVICES)
+
+            if execute_rag:
                 # Check if context is chat hostory
                 chat_history_context = context              \
                     if "Conversation History:" in context   \
