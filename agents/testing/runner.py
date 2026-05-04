@@ -5,15 +5,22 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 import os
 import sys
 import time
 import uuid
 from dataclasses import dataclass
 
+_log = logging.getLogger(__name__)
+
 _project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
+
+from agents.deprecation_filters import apply_known_deprecation_filters
+
+apply_known_deprecation_filters()
 
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
@@ -28,6 +35,19 @@ _session_service = InMemorySessionService()
 _runners: dict[int, Runner] = {}
 
 _VALID_TIERS = frozenset({3, 5, 8, 10})
+
+
+def _ensure_agents_testing_log_handler() -> None:
+    """If nothing configured ``agents.testing``, attach stderr INFO logging (library-style default)."""
+    pkg = logging.getLogger("agents.testing")
+    if pkg.handlers:
+        return
+    fmt = logging.Formatter("%(asctime)s %(levelname)s [%(name)s] %(message)s", datefmt="%H:%M:%S")
+    h = logging.StreamHandler(sys.stderr)
+    h.setFormatter(fmt)
+    pkg.addHandler(h)
+    pkg.setLevel(logging.INFO)
+    pkg.propagate = False
 
 
 @dataclass(frozen=True)
@@ -102,12 +122,14 @@ async def _run_agent_inner(
     context: str = "",
     vector_db_path: str = "",
     tier: int | None = None,
+    *,
+    verbose: bool = False,
 ) -> RoutingOutcome:
     """Run coordinator once; compute predicted routing transfer, timings, and token totals."""
+    _ensure_agents_testing_log_handler()
     t = _resolve_tier(tier)
     if t not in _VALID_TIERS:
         raise ValueError(f"tier must be one of {sorted(_VALID_TIERS)}, got {t}")
-
     runner = _get_runner(t)
     session_id = str(uuid.uuid4())
 
@@ -148,45 +170,59 @@ async def _run_agent_inner(
         new_message=new_message,
     )
 
-    async for event in runner_iter:
-        xfer = _transfer_target_from_event(event)
-        if xfer is not None and predicted_service is None:
-            predicted_service = xfer
+    try:
+        async for event in runner_iter:
+            xfer = _transfer_target_from_event(event)
+            if xfer is not None and predicted_service is None:
+                predicted_service = xfer
 
-        um = getattr(event, "usage_metadata", None)
-        if um is not None:
-            tt = getattr(um, "total_token_count", None)
-            if isinstance(tt, int) and tt > 0:
-                tokens_accum += tt
-
-        for fc in event.get_function_calls():
-            tool_name = fc.name or "<unknown>"
-            tool_call_counts[tool_name] = tool_call_counts.get(tool_name, 0) + 1
-            total_tool_calls += 1
-
-            if tool_call_counts[tool_name] > RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN:
-                aborted_reason = (
-                    f"Aborted: tool '{tool_name}' was called "
-                    f"{tool_call_counts[tool_name]} times in a single turn "
-                    f"(limit: {RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN}). The model appears to be stuck "
-                    "in a loop. Please rephrase your request."
+            if verbose and _log.isEnabledFor(logging.DEBUG):
+                tool_names = [getattr(fc, "name", None) or "<unknown>" for fc in event.get_function_calls()]
+                _log.debug(
+                    "ADK event final=%s transfer_target=%s tools=%s tokens_this_event=%s",
+                    event.is_final_response(),
+                    xfer,
+                    tool_names,
+                    getattr(getattr(event, "usage_metadata", None), "total_token_count", None),
                 )
-                break
-            if total_tool_calls > RUNNER_MAX_TOTAL_TOOL_CALLS:
-                aborted_reason = (
-                    f"Aborted: exceeded total tool-call limit "
-                    f"({RUNNER_MAX_TOTAL_TOOL_CALLS}) in a single turn. The model appears "
-                    "to be stuck in a loop. Please rephrase your request."
-                )
+
+            um = getattr(event, "usage_metadata", None)
+            if um is not None:
+                tt = getattr(um, "total_token_count", None)
+                if isinstance(tt, int) and tt > 0:
+                    tokens_accum += tt
+
+            for fc in event.get_function_calls():
+                tool_name = fc.name or "<unknown>"
+                tool_call_counts[tool_name] = tool_call_counts.get(tool_name, 0) + 1
+                total_tool_calls += 1
+
+                if tool_call_counts[tool_name] > RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN:
+                    aborted_reason = (
+                        f"Aborted: tool '{tool_name}' was called "
+                        f"{tool_call_counts[tool_name]} times in a single turn "
+                        f"(limit: {RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN}). The model appears to be stuck "
+                        "in a loop. Please rephrase your request."
+                    )
+                    break
+                if total_tool_calls > RUNNER_MAX_TOTAL_TOOL_CALLS:
+                    aborted_reason = (
+                        f"Aborted: exceeded total tool-call limit "
+                        f"({RUNNER_MAX_TOTAL_TOOL_CALLS}) in a single turn. The model appears "
+                        "to be stuck in a loop. Please rephrase your request."
+                    )
+                    break
+
+            if aborted_reason:
                 break
 
-        if aborted_reason:
-            break
-
-        if event.is_final_response() and event.content and event.content.parts:
-            for part in event.content.parts:
-                if part.text:
-                    final_text += part.text
+            if event.is_final_response() and event.content and event.content.parts:
+                for part in event.content.parts:
+                    if part.text:
+                        final_text += part.text
+    except ValueError as exc:
+        aborted_reason = f"Routing error (hallucinated agent name): {exc}"
+        _log.warning("%s", aborted_reason)
 
     latency_ms = (time.perf_counter() - t_start) * 1000
 
@@ -227,6 +263,7 @@ async def run_agent(
         context=context,
         vector_db_path=vector_db_path,
         tier=tier,
+        verbose=False,
     )
     return outcome.final_text
 
@@ -237,6 +274,8 @@ async def run_agent_routing(
     context: str = "",
     vector_db_path: str = "",
     tier: int | None = None,
+    *,
+    verbose: bool = False,
 ) -> RoutingOutcome:
     """Like :func:`run_agent` but returns structured routing metrics (predicted service, latency, tokens)."""
     return await _run_agent_inner(
@@ -245,6 +284,7 @@ async def run_agent_routing(
         context=context,
         vector_db_path=vector_db_path,
         tier=tier,
+        verbose=verbose,
     )
 
 

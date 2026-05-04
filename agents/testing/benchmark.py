@@ -5,16 +5,50 @@ from __future__ import annotations
 import argparse
 import asyncio
 import csv
+import logging
 import math
 import os
 import sys
 import uuid
 from typing import Sequence
 
+_log = logging.getLogger(__name__)
+
+
+def _configure_benchmark_logging(verbose: bool) -> None:
+    """Benchmark progress goes to stderr; stdout stays metrics TSV."""
+    pkg_level = logging.DEBUG if verbose else logging.INFO
+
+    fmt = logging.Formatter("%(asctime)s %(levelname)s [%(name)s] %(message)s", datefmt="%H:%M:%S")
+    stderr_h = logging.StreamHandler(sys.stderr)
+    stderr_h.setFormatter(fmt)
+
+    pkg = logging.getLogger("agents.testing")
+    pkg.handlers.clear()
+    pkg.addHandler(stderr_h)
+    pkg.setLevel(pkg_level)
+    pkg.propagate = False
+
+    logging.basicConfig(
+        level=logging.WARNING,
+        format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+        datefmt="%H:%M:%S",
+        stream=sys.stderr,
+        force=True,
+    )
+
+    noisy = ("httpx", "httpcore", "google", "google_genai", "google.auth", "urllib3")
+    for name in noisy:
+        logging.getLogger(name).setLevel(logging.WARNING)
+
 _TESTING_DIR = os.path.dirname(os.path.abspath(__file__))
 _project_root = os.path.join(_TESTING_DIR, "..", "..")
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
+
+from agents.deprecation_filters import apply_known_deprecation_filters
+
+apply_known_deprecation_filters()
 
 _DEFAULT_RESULTS_DIR = os.path.normpath(os.path.join(_TESTING_DIR, "results"))
 
@@ -25,11 +59,44 @@ except ImportError:
 
 from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 
-from agents.testing.coordinator import default_csv_path, tier_keys
+from agents.testing.coordinator import (
+    default_csv_path,
+    tier_keys,
+    tier_prediction_labels,
+)
 from agents.testing.runner import RoutingOutcome, clear_runner_cache, run_agent_routing
 
 
 _SENTINEL_NO_ROUTE = "__no_transfer__"
+
+_METRIC_COLS = [
+    "dataset",
+    "accuracy",
+    "total_samples",
+    "latency_avg_ms",
+    "latency_p95_ms",
+    "best_class",
+    "best_class_accuracy",
+    "worst_class",
+    "worst_class_accuracy",
+    "token_cost",
+    "routing_failures",
+]
+
+_PER_ROW_CSV_COLS = [
+    "row_index",
+    "question",
+    "gold",
+    "predicted",
+    "predicted_service_raw",
+    "correct",
+    "response",
+    "aborted_reason",
+    "latency_ms",
+    "tokens",
+    "tier",
+    *_METRIC_COLS,
+]
 
 
 def _normalize_row(raw: dict[str, str | None]) -> dict[str, str]:
@@ -74,10 +141,7 @@ def _load_csv_eval_rows(path: str, allowed: set[str]) -> list[tuple[str, str]]:
                 continue
             tasks.append((q, svc))
     if skipped:
-        print(
-            f"[benchmark] skipped {skipped} rows (empty question/service or service not in tier)",
-            file=sys.stderr,
-        )
+        _log.info("skipped %s rows (empty question/service or service not in tier)", skipped)
     return tasks
 
 
@@ -133,35 +197,43 @@ async def _eval_tier(
     tier: int,
     csv_path: str | None,
     out_dir: str | None,
+    *,
+    predictions_dir: str | None = None,
+    verbose: bool = False,
 ) -> dict[str, object]:
-    allowed = set(tier_keys(tier))
+    gold_allowed = set(tier_keys(tier))
+    valid_predictions = frozenset(tier_prediction_labels(tier))
     path = csv_path if csv_path else default_csv_path(tier)
     if not os.path.isfile(path):
         raise FileNotFoundError(f"CSV not found for tier {tier}: {path}")
 
-    rows = _load_csv_eval_rows(path, allowed)
+    rows = _load_csv_eval_rows(path, gold_allowed)
     if not rows:
         raise SystemExit(f"No evaluation rows for tier {tier} (empty or invalid CSV).")
 
     clear_runner_cache()
+
     y_true: list[str] = []
     y_pred: list[str] = []
     latencies: list[float] = []
     tokens_per_row: list[int] = []
+    prediction_rows: list[dict[str, str]] = []
     routing_failures = 0
 
+    total_rows = len(rows)
     uid_base = str(uuid.uuid4())
     for i, (q, gold) in enumerate(rows):
         outcome: RoutingOutcome = await run_agent_routing(
             user_id=f"{uid_base}-{i}",
             query=q,
             tier=tier,
+            verbose=verbose,
         )
         pred = outcome.predicted_service
         if pred is None:
             routing_failures += 1
             pred_label = _SENTINEL_NO_ROUTE
-        elif pred not in allowed:
+        elif pred not in valid_predictions:
             pred_label = _SENTINEL_NO_ROUTE
         else:
             pred_label = pred
@@ -169,9 +241,39 @@ async def _eval_tier(
         y_pred.append(pred_label)
         latencies.append(outcome.latency_ms)
         tokens_per_row.append(outcome.tokens_total)
+        ok = "OK" if pred_label == gold else "MISS"
+        q_preview = q.replace("\n", " ").strip()
+        if len(q_preview) > 160:
+            q_preview = q_preview[:157] + "..."
+        _log.info(
+            "tier=%s row %s/%s gold=%s pred=%s latency_ms=%s %s tokens=%s question=%s",
+            tier,
+            i + 1,
+            total_rows,
+            gold,
+            pred_label,
+            f"{outcome.latency_ms:.0f}",
+            ok,
+            outcome.tokens_total,
+            q_preview,
+        )
+        if outcome.aborted_reason:
+            _log.warning("row %s aborted: %s", i + 1, outcome.aborted_reason)
+        prediction_rows.append({
+            "row_index": str(i + 1),
+            "question": q,
+            "gold": gold,
+            "predicted": pred_label,
+            "predicted_service_raw": pred if pred is not None else "",
+            "correct": str(pred_label == gold),
+            "response": outcome.final_text,
+            "aborted_reason": outcome.aborted_reason,
+            "latency_ms": f"{outcome.latency_ms:.2f}",
+            "tokens": str(outcome.tokens_total),
+        })
 
     labels_order = list(tier_keys(tier))
-    matrix_labels = labels_order + [_SENTINEL_NO_ROUTE]
+    matrix_labels = tier_prediction_labels(tier) + [_SENTINEL_NO_ROUTE]
 
     cm = confusion_matrix(y_true, y_pred, labels=matrix_labels)
 
@@ -187,25 +289,7 @@ async def _eval_tier(
 
     dataset_id = os.path.basename(path)
 
-    print(f"\n=== Tier {tier} | dataset={dataset_id} | n={len(y_true)} ===", file=sys.stderr)
-    print(_format_cm_text(matrix_labels, cm.tolist()), file=sys.stderr)
-
-    if out_dir and plt is not None:
-        os.makedirs(out_dir, exist_ok=True)
-        safe = f"confusion_tier{tier}.png"
-        fig_path = os.path.join(out_dir, safe)
-        fig, ax = plt.subplots(figsize=(max(8, 0.45 * len(matrix_labels)), max(6, 0.4 * len(matrix_labels))))
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=matrix_labels)
-        disp.plot(ax=ax, xticks_rotation=75, colorbar=False, include_values=True, values_format="d")
-        ax.set_title(f"Routing confusion (tier {tier})")
-        fig.tight_layout()
-        fig.savefig(fig_path, dpi=120, bbox_inches="tight")
-        plt.close(fig)
-        print(f"[benchmark] saved {fig_path}", file=sys.stderr)
-    elif out_dir and plt is None:
-        print("[benchmark] matplotlib not installed; skipping PNG export", file=sys.stderr)
-
-    return {
+    result: dict[str, object] = {
         "dataset": dataset_id,
         "accuracy": accuracy,
         "total_samples": len(y_true),
@@ -219,20 +303,43 @@ async def _eval_tier(
         "routing_failures": routing_failures,
     }
 
+    _log.info(
+        "Tier %s complete | dataset=%s | n=%s | accuracy=%s",
+        tier,
+        dataset_id,
+        len(y_true),
+        f"{accuracy:.4f}",
+    )
+    _log.info("Confusion matrix (rows=gold, cols=pred):\n%s", _format_cm_text(matrix_labels, cm.tolist()))
 
-_METRIC_COLS = [
-    "dataset",
-    "accuracy",
-    "total_samples",
-    "latency_avg_ms",
-    "latency_p95_ms",
-    "best_class",
-    "best_class_accuracy",
-    "worst_class",
-    "worst_class_accuracy",
-    "token_cost",
-    "routing_failures",
-]
+    if out_dir and plt is not None:
+        os.makedirs(out_dir, exist_ok=True)
+        safe = f"confusion_tier{tier}.png"
+        fig_path = os.path.join(out_dir, safe)
+        fig, ax = plt.subplots(figsize=(max(8, 0.45 * len(matrix_labels)), max(6, 0.4 * len(matrix_labels))))
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=matrix_labels)
+        disp.plot(ax=ax, xticks_rotation=75, colorbar=False, include_values=True, values_format="d")
+        ax.set_title(f"Routing confusion (tier {tier})")
+        fig.tight_layout()
+        fig.savefig(fig_path, dpi=120, bbox_inches="tight")
+        plt.close(fig)
+        _log.info("saved confusion matrix PNG: %s", fig_path)
+    elif out_dir and plt is None:
+        _log.warning("matplotlib not installed; skipping PNG export")
+
+    if predictions_dir:
+        tier_suffix = {"tier": str(tier)} | {k: _cell_str(k, result[k]) for k in _METRIC_COLS}
+        for pr in prediction_rows:
+            pr.update(tier_suffix)
+        os.makedirs(predictions_dir, exist_ok=True)
+        pred_path = os.path.join(predictions_dir, f"predictions_tier{tier}.csv")
+        with open(pred_path, "w", newline="", encoding="utf-8") as pf:
+            writer = csv.DictWriter(pf, fieldnames=_PER_ROW_CSV_COLS, extrasaction="ignore")
+            writer.writeheader()
+            writer.writerows(prediction_rows)
+        _log.info("predictions written to %s", pred_path)
+
+    return result
 
 
 def _cell_str(key: str, val: object) -> str:
@@ -257,7 +364,7 @@ def _write_metrics_md(path: str, rows: list[dict[str, object]]) -> None:
         lines.append("| " + " | ".join(escaped) + " |")
     lines.append("")
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
 
@@ -275,19 +382,27 @@ async def _main_async(args: argparse.Namespace) -> None:
     if args.all:
         tiers = [3, 5, 8, 10]
         if args.csv:
-            print("[benchmark] ignoring --csv when using --all (per-tier defaults from presets)", file=sys.stderr)
+            _log.info("ignoring --csv when using --all (per-tier defaults from presets)")
     else:
         tiers = [args.tier]
+
+    pred_dir = None if args.no_per_row_csv else out_dir
+
+    _log.info("starting benchmark | tiers=%s | out_dir=%s | verbose=%s", tiers, out_dir, args.verbose)
 
     results: list[dict[str, object]] = []
     for tier in tiers:
         csv_override = None if args.all else args.csv
-        row = await _eval_tier(tier, csv_override, out_dir)
+        row = await _eval_tier(
+            tier, csv_override, out_dir,
+            predictions_dir=pred_dir,
+            verbose=args.verbose,
+        )
         results.append(row)
 
     metrics_path = os.path.join(out_dir, "metrics.md")
     _write_metrics_md(metrics_path, results)
-    print(f"[benchmark] metrics written to {metrics_path}", file=sys.stderr)
+    _log.info("metrics written to %s", metrics_path)
 
     _print_metrics_table(results)
 
@@ -299,14 +414,31 @@ def main() -> None:
     g.add_argument("--all", action="store_true", help="Run evaluation for tiers 3, 5, 8, and 10.")
     p.add_argument("--csv", type=str, default=None, help="Override CSV path (only with --tier).")
     p.add_argument(
+        "--no-per-row-csv",
+        action="store_true",
+        help="Skip per-row predictions_tier{N}.csv (full model responses can be large).",
+    )
+    p.add_argument(
+        "--predictions",
+        action="store_true",
+        help="No-op: per-row CSV is written by default unless --no-per-row-csv is set.",
+    )
+    p.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="Log each ADK event (tools, transfers, finals) during each sample.",
+    )
+    p.add_argument(
         "--out-dir",
         type=str,
         default=_DEFAULT_RESULTS_DIR,
-        help=f"Directory for metrics.md and confusion PNGs (default: {_DEFAULT_RESULTS_DIR}).",
+        help=f"Directory for metrics.md, confusion PNGs, and per-row predictions CSV (default: {_DEFAULT_RESULTS_DIR}).",
     )
     args = p.parse_args()
     if args.csv and not args.all and not os.path.isfile(args.csv):
         raise SystemExit(f"CSV not found: {args.csv}")
+    _configure_benchmark_logging(verbose=args.verbose)
     asyncio.run(_main_async(args))
 
 

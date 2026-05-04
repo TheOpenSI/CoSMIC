@@ -20,7 +20,7 @@ Reuse the **same headers** wherever possible.
 | Column | Required | Notes |
 | ------ | -------- | ----- |
 | `question` | **Yes** | User text routed through the coordinator. Aliases understood by [`benchmark.py`](../benchmark.py): `query`, `prompt`, `text`. |
-| `service` | **Yes** (for evaluation rows) | Gold label: specialist **service id** present in [`SPECIALISTS`](../specialists.py) (`abstract_algebra`, …). Legacy aliases retained for ingestion: `specialist`, `dataset_slug`, `dataset`, `subject_slug`, `expected_service`. Rows whose gold service is missing or **not** in that tier’s preset list are skipped (count printed on stderr). |
+| `service` | **Yes** (for evaluation rows) | Gold label: specialist **service id** for that tier’s preset (`abstract_algebra`, …). **`general_qa`** is reserved for coordinator fallback routing only—do **not** use it as CSV gold unless you intentionally test fallback labeling. Legacy aliases retained for ingestion: `specialist`, `dataset_slug`, … |
 | `id` | No | Optional stable identifier. |
 
 Extra columns (`subject`, `correct_answer`, `choices`) are ignored by the harness.

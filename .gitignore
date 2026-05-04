@@ -9,7 +9,9 @@ database
 database
 ./scripts/configs/config_updated.yaml
 .idea
+session.db
 
 # agents/testing routing benchmark outputs (regenerate with benchmark)
 agents/testing/results/*.png
+agents/testing/results/*.csv
 agents/testing/results/metrics.md

@@ -29,6 +29,10 @@ _project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
+from agents.deprecation_filters import apply_known_deprecation_filters
+
+apply_known_deprecation_filters()
+
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.genai import types

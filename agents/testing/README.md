@@ -47,9 +47,14 @@ python -m agents.testing.benchmark --all
 - **`--tier`**: one of `3`, `5`, `8`, `10`. Loads evaluation rows from default CSV unless `--csv` is set.
 - **`--all`**: runs tiers **3, 5, 8,** and **10** in sequence using each tier’s default CSV from [`data/README.md`](data/README.md).
 - **`--csv`**: only with **`--tier`**, overrides that tier’s CSV path.
-- **`--out-dir`**: directory for outputs (defaults to [`results/`](results/)). Writes **`metrics.md`** (summary table) and **`confusion_tier{N}.png`** per tier evaluated (matplotlib + scikit-learn required for PNGs).
+- **`--out-dir`**: directory for outputs (defaults to [`results/`](results/)). Writes **`metrics.md`** (summary table), **`confusion_tier{N}.png`** per tier evaluated (matplotlib + scikit-learn required for PNGs), and **`predictions_tier{N}.csv`** (per-row experiment log, including full model **`response`**, unless you pass **`--no-per-row-csv`**).
+- **`--no-per-row-csv`**: skip **`predictions_tier{N}.csv`** when you only want summary artifacts or wish to avoid large files.
+- **`--predictions`**: no-op (kept for older scripts); per-row CSV is written by default unless **`--no-per-row-csv`** is set.
+- **`-v` / `--verbose`**: log each ADK event (tools, transfers, final responses) per sample on stderr. on stderr (truth vs predicted route, including `__no_transfer__` when the coordinator never calls `transfer_to_agent`). The same aggregate metrics appear as **stdout TSV**, and are **written** to **`results/metrics.md`** (Markdown table).
 
-Each run prints a textual **confusion matrix** on stderr (truth vs predicted route, including `__no_transfer__` when the coordinator never calls `transfer_to_agent`). The same aggregate metrics appear as **stdout TSV**, and are **written** to **`results/metrics.md`** (Markdown table). **`token_cost`** is the summed **`total_token_count`** across ADK events—not USD. **`routing_failures`** counts samples with no predicted transfer.
+**`predictions_tier{N}.csv`** (unless **`--no-per-row-csv`**) has one row per evaluation prompt: **`row_index`**, **`question`**, **`gold`**, **`predicted`** (eval label, including `__no_transfer__`), **`predicted_service_raw`** (transfer target before normalization to the eval label), **`correct`**, **`response`** (full coordinator text), **`aborted_reason`**, **`latency_ms`**, **`tokens`**, **`tier`**, then the same tier-level columns as **`metrics.md`**: **`dataset`**, **`accuracy`**, **`total_samples`**, **`latency_avg_ms`**, **`latency_p95_ms`**, **`best_class`**, **`best_class_accuracy`**, **`worst_class`**, **`worst_class_accuracy`**, **`token_cost`**, **`routing_failures`** (duplicated on each row for that tier).
+
+**`token_cost`** is the summed **`total_token_count`** across ADK events—not USD. **`routing_failures`** counts samples with no predicted transfer.
 
 **`top3_accuracy` is omitted**: the coordinator selects a single `transfer_to_agent` target per question; ranking top-3 would require extra evaluation passes or API changes.
 

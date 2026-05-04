@@ -7,12 +7,16 @@ nested-prefix tier convention in ``presets.yaml``.
 import os
 import sys
 
-from google.adk.agents.llm_agent import Agent
-from google.genai import types
-
 _project_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
+
+from agents.deprecation_filters import apply_known_deprecation_filters
+
+apply_known_deprecation_filters()
+
+from google.adk.agents.llm_agent import Agent
+from google.genai import types
 
 from agents.config import AGENT_MODEL
 
@@ -121,6 +125,21 @@ medicine_agent = _make_agent(
     "general medicine and healthcare knowledge",
 )
 
+# Always registered on the scalability coordinator after tier specialists (not in CSV gold / ALL_KEYS).
+general_qa_testing_agent = Agent(
+    model=AGENT_MODEL,
+    name="general_qa",
+    description=(
+        "Fallback when no domain specialist is a clear match: mixed or off-topic queries, casual questions, "
+        "or topics that do not fit the listed domains."
+    ),
+    instruction=(
+        "You receive questions that the router could not assign to a single domain specialist. "
+        "Answer helpfully and concisely in plain language."
+    ),
+    generate_content_config=_GEN,
+)
+
 # Fixed table order (nested-prefix tiers use prefixes of this list).
 ALL_KEYS: list[str] = [
     "abstract_algebra",
@@ -146,4 +165,5 @@ SPECIALISTS: dict[str, Agent] = {
     "college_computer_science": college_computer_science_agent,
     "mathematics": mathematics_agent,
     "medicine": medicine_agent,
+    "general_qa": general_qa_testing_agent,
 }
