@@ -29,7 +29,7 @@ from google.genai import types
 from agents.config import RUNNER_MAX_CALLS_PER_TOOL_NAME_PER_TURN, RUNNER_MAX_TOTAL_TOOL_CALLS
 from agents.testing.coordinator import load_tier
 
-APP_NAME = "cosmic-scalability-test"
+APP_NAME = "cosmic_scalability_test"
 
 _session_service = InMemorySessionService()
 _runners: dict[int, Runner] = {}

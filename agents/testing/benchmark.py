@@ -217,129 +217,143 @@ async def _eval_tier(
     y_pred: list[str] = []
     latencies: list[float] = []
     tokens_per_row: list[int] = []
-    prediction_rows: list[dict[str, str]] = []
     routing_failures = 0
+
+    pred_path: str | None = None
+    pred_pf = None
+    pred_writer: csv.DictWriter | None = None
+    if predictions_dir:
+        os.makedirs(predictions_dir, exist_ok=True)
+        pred_path = os.path.join(predictions_dir, f"predictions_tier{tier}.csv")
+        pred_pf = open(pred_path, "w", newline="", encoding="utf-8")
+        pred_writer = csv.DictWriter(pred_pf, fieldnames=_PER_ROW_CSV_COLS, extrasaction="ignore")
+        pred_writer.writeheader()
+        pred_pf.flush()
 
     total_rows = len(rows)
     uid_base = str(uuid.uuid4())
-    for i, (q, gold) in enumerate(rows):
-        outcome: RoutingOutcome = await run_agent_routing(
-            user_id=f"{uid_base}-{i}",
-            query=q,
-            tier=tier,
-            verbose=verbose,
-        )
-        pred = outcome.predicted_service
-        if pred is None:
-            routing_failures += 1
-            pred_label = _SENTINEL_NO_ROUTE
-        elif pred not in valid_predictions:
-            pred_label = _SENTINEL_NO_ROUTE
-        else:
-            pred_label = pred
-        y_true.append(gold)
-        y_pred.append(pred_label)
-        latencies.append(outcome.latency_ms)
-        tokens_per_row.append(outcome.tokens_total)
-        ok = "OK" if pred_label == gold else "MISS"
-        q_preview = q.replace("\n", " ").strip()
-        if len(q_preview) > 160:
-            q_preview = q_preview[:157] + "..."
+    base: dict[str, str] = {}
+    empty_tier_metrics = {k: "" for k in _METRIC_COLS}
+
+    try:
+        for i, (q, gold) in enumerate(rows):
+            outcome: RoutingOutcome = await run_agent_routing(
+                user_id=f"{uid_base}-{i}",
+                query=q,
+                tier=tier,
+                verbose=verbose,
+            )
+            pred = outcome.predicted_service
+            if pred is None:
+                routing_failures += 1
+                pred_label = _SENTINEL_NO_ROUTE
+            elif pred not in valid_predictions:
+                pred_label = _SENTINEL_NO_ROUTE
+            else:
+                pred_label = pred
+            y_true.append(gold)
+            y_pred.append(pred_label)
+            latencies.append(outcome.latency_ms)
+            tokens_per_row.append(outcome.tokens_total)
+            ok = "OK" if pred_label == gold else "MISS"
+            q_preview = q.replace("\n", " ").strip()
+            if len(q_preview) > 160:
+                q_preview = q_preview[:157] + "..."
+            _log.info(
+                "tier=%s row %s/%s gold=%s pred=%s latency_ms=%s %s tokens=%s question=%s",
+                tier,
+                i + 1,
+                total_rows,
+                gold,
+                pred_label,
+                f"{outcome.latency_ms:.0f}",
+                ok,
+                outcome.tokens_total,
+                q_preview,
+            )
+            if outcome.aborted_reason:
+                _log.warning("row %s aborted: %s", i + 1, outcome.aborted_reason)
+            base = {
+                "row_index": str(i + 1),
+                "question": q,
+                "gold": gold,
+                "predicted": pred_label,
+                "predicted_service_raw": pred if pred is not None else "",
+                "correct": str(pred_label == gold),
+                "response": outcome.final_text,
+                "aborted_reason": outcome.aborted_reason,
+                "latency_ms": f"{outcome.latency_ms:.2f}",
+                "tokens": str(outcome.tokens_total),
+            }
+            if pred_writer is not None and pred_pf is not None and i < total_rows - 1:
+                pred_writer.writerow(base | {"tier": str(tier)} | empty_tier_metrics)
+                pred_pf.flush()
+
+        labels_order = list(tier_keys(tier))
+        matrix_labels = tier_prediction_labels(tier) + [_SENTINEL_NO_ROUTE]
+
+        cm = confusion_matrix(y_true, y_pred, labels=matrix_labels)
+
+        correct = sum(1 for g, p in zip(y_true, y_pred) if g == p)
+        accuracy = correct / len(y_true) if y_true else 0.0
+
+        pca = _per_class_accuracy(y_true, y_pred, labels_order)
+        best_c, best_a, worst_c, worst_a = _best_worst_class(pca)
+
+        lat_avg = sum(latencies) / len(latencies) if latencies else float("nan")
+        lat_p95 = _percentile_p95(latencies)
+        tok_sum = sum(tokens_per_row)
+
+        dataset_id = os.path.basename(path)
+
+        result: dict[str, object] = {
+            "dataset": dataset_id,
+            "accuracy": accuracy,
+            "total_samples": len(y_true),
+            "latency_avg_ms": lat_avg,
+            "latency_p95_ms": lat_p95,
+            "best_class": best_c,
+            "best_class_accuracy": best_a,
+            "worst_class": worst_c,
+            "worst_class_accuracy": worst_a,
+            "token_cost": tok_sum,
+            "routing_failures": routing_failures,
+        }
+
         _log.info(
-            "tier=%s row %s/%s gold=%s pred=%s latency_ms=%s %s tokens=%s question=%s",
+            "Tier %s complete | dataset=%s | n=%s | accuracy=%s",
             tier,
-            i + 1,
-            total_rows,
-            gold,
-            pred_label,
-            f"{outcome.latency_ms:.0f}",
-            ok,
-            outcome.tokens_total,
-            q_preview,
+            dataset_id,
+            len(y_true),
+            f"{accuracy:.4f}",
         )
-        if outcome.aborted_reason:
-            _log.warning("row %s aborted: %s", i + 1, outcome.aborted_reason)
-        prediction_rows.append({
-            "row_index": str(i + 1),
-            "question": q,
-            "gold": gold,
-            "predicted": pred_label,
-            "predicted_service_raw": pred if pred is not None else "",
-            "correct": str(pred_label == gold),
-            "response": outcome.final_text,
-            "aborted_reason": outcome.aborted_reason,
-            "latency_ms": f"{outcome.latency_ms:.2f}",
-            "tokens": str(outcome.tokens_total),
-        })
+        _log.info("Confusion matrix (rows=gold, cols=pred):\n%s", _format_cm_text(matrix_labels, cm.tolist()))
 
-    labels_order = list(tier_keys(tier))
-    matrix_labels = tier_prediction_labels(tier) + [_SENTINEL_NO_ROUTE]
+        if out_dir and plt is not None:
+            os.makedirs(out_dir, exist_ok=True)
+            safe = f"confusion_tier{tier}.png"
+            fig_path = os.path.join(out_dir, safe)
+            fig, ax = plt.subplots(figsize=(max(8, 0.45 * len(matrix_labels)), max(6, 0.4 * len(matrix_labels))))
+            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=matrix_labels)
+            disp.plot(ax=ax, xticks_rotation=75, colorbar=False, include_values=True, values_format="d")
+            ax.set_title(f"Routing confusion (tier {tier})")
+            fig.tight_layout()
+            fig.savefig(fig_path, dpi=120, bbox_inches="tight")
+            plt.close(fig)
+            _log.info("saved confusion matrix PNG: %s", fig_path)
+        elif out_dir and plt is None:
+            _log.warning("matplotlib not installed; skipping PNG export")
 
-    cm = confusion_matrix(y_true, y_pred, labels=matrix_labels)
+        if pred_writer is not None and pred_pf is not None:
+            tier_suffix = {"tier": str(tier)} | {k: _cell_str(k, result[k]) for k in _METRIC_COLS}
+            pred_writer.writerow(base | tier_suffix)
+            pred_pf.flush()
+            _log.info("predictions written to %s", pred_path)
 
-    correct = sum(1 for g, p in zip(y_true, y_pred) if g == p)
-    accuracy = correct / len(y_true) if y_true else 0.0
-
-    pca = _per_class_accuracy(y_true, y_pred, labels_order)
-    best_c, best_a, worst_c, worst_a = _best_worst_class(pca)
-
-    lat_avg = sum(latencies) / len(latencies) if latencies else float("nan")
-    lat_p95 = _percentile_p95(latencies)
-    tok_sum = sum(tokens_per_row)
-
-    dataset_id = os.path.basename(path)
-
-    result: dict[str, object] = {
-        "dataset": dataset_id,
-        "accuracy": accuracy,
-        "total_samples": len(y_true),
-        "latency_avg_ms": lat_avg,
-        "latency_p95_ms": lat_p95,
-        "best_class": best_c,
-        "best_class_accuracy": best_a,
-        "worst_class": worst_c,
-        "worst_class_accuracy": worst_a,
-        "token_cost": tok_sum,
-        "routing_failures": routing_failures,
-    }
-
-    _log.info(
-        "Tier %s complete | dataset=%s | n=%s | accuracy=%s",
-        tier,
-        dataset_id,
-        len(y_true),
-        f"{accuracy:.4f}",
-    )
-    _log.info("Confusion matrix (rows=gold, cols=pred):\n%s", _format_cm_text(matrix_labels, cm.tolist()))
-
-    if out_dir and plt is not None:
-        os.makedirs(out_dir, exist_ok=True)
-        safe = f"confusion_tier{tier}.png"
-        fig_path = os.path.join(out_dir, safe)
-        fig, ax = plt.subplots(figsize=(max(8, 0.45 * len(matrix_labels)), max(6, 0.4 * len(matrix_labels))))
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=matrix_labels)
-        disp.plot(ax=ax, xticks_rotation=75, colorbar=False, include_values=True, values_format="d")
-        ax.set_title(f"Routing confusion (tier {tier})")
-        fig.tight_layout()
-        fig.savefig(fig_path, dpi=120, bbox_inches="tight")
-        plt.close(fig)
-        _log.info("saved confusion matrix PNG: %s", fig_path)
-    elif out_dir and plt is None:
-        _log.warning("matplotlib not installed; skipping PNG export")
-
-    if predictions_dir:
-        tier_suffix = {"tier": str(tier)} | {k: _cell_str(k, result[k]) for k in _METRIC_COLS}
-        for pr in prediction_rows:
-            pr.update(tier_suffix)
-        os.makedirs(predictions_dir, exist_ok=True)
-        pred_path = os.path.join(predictions_dir, f"predictions_tier{tier}.csv")
-        with open(pred_path, "w", newline="", encoding="utf-8") as pf:
-            writer = csv.DictWriter(pf, fieldnames=_PER_ROW_CSV_COLS, extrasaction="ignore")
-            writer.writeheader()
-            writer.writerows(prediction_rows)
-        _log.info("predictions written to %s", pred_path)
-
-    return result
+        return result
+    finally:
+        if pred_pf is not None:
+            pred_pf.close()
 
 
 def _cell_str(key: str, val: object) -> str:
