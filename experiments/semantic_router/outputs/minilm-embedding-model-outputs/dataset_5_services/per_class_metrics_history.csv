@@ -1,0 +1,6 @@
+model,service,accuracy
+all-MiniLM-L6-v2,abstract_algebra,0.858586
+all-MiniLM-L6-v2,anatomy,0.783582
+all-MiniLM-L6-v2,astronomy,0.940397
+all-MiniLM-L6-v2,business_ethics,0.77
+all-MiniLM-L6-v2,clinical_knowledge,0.28125

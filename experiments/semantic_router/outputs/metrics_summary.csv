@@ -1,0 +1,2 @@
+model,accuracy,top3_accuracy,total_samples
+text-embedding-3-large,0.989583,1.0,384

@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+bi-encoder,sentence-transformers/all-MiniLM-L6-v2,dataset_5_services,0.65,0.918919,740,8.665703,12.106675,astronomy,0.940397,clinical_knowledge,0.28125

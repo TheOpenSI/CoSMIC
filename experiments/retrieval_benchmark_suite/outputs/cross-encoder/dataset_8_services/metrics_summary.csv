@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+cross-encoder,cross-encoder/stsb-distilroberta-base,dataset_8_services,0.247016,0.629017,1089,44.064399,67.225891,college_chemistry,0.929293,abstract_algebra,0.0

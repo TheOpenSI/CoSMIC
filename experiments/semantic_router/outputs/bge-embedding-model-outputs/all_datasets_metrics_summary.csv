@@ -1,0 +1,5 @@
+model,dataset,accuracy,top3_accuracy,total_samples,best_class,best_class_accuracy,worst_class,worst_class_accuracy,dataset_output_dir
+bge-base-en-v1.5,dataset_3_services,0.942708,1.0,384,abstract_algebra,0.959596,astronomy,0.92053,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/bge-embedding-model-outputs/dataset_3_services
+bge-base-en-v1.5,dataset_5_services,0.660811,0.937838,740,abstract_algebra,0.959596,clinical_knowledge,0.285156,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/bge-embedding-model-outputs/dataset_5_services
+bge-base-en-v1.5,dataset_8_services,0.523416,0.803489,1089,abstract_algebra,0.959184,clinical_knowledge,0.222656,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/bge-embedding-model-outputs/dataset_8_services
+bge-base-en-v1.5,dataset_10_services,0.51742,0.782061,1349,abstract_algebra,0.796178,medicine,0.043478,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/bge-embedding-model-outputs/dataset_10_services

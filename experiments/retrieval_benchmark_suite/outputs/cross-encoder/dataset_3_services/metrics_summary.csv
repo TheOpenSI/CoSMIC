@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+cross-encoder,cross-encoder/stsb-distilroberta-base,dataset_3_services,0.679688,1.0,384,40.653442,50.863089,astronomy,0.847682,abstract_algebra,0.313131

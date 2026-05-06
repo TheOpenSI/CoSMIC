@@ -1,0 +1,17 @@
+model,service,accuracy
+text-embedding-3-large,abstract_algebra,1.0
+text-embedding-3-large,anatomy,0.61194
+text-embedding-3-large,astronomy,0.874172
+text-embedding-3-large,business_ethics,0.7
+text-embedding-3-large,clinical_knowledge,0.402344
+text-embedding-3-large,college_biology,0.546053
+text-embedding-3-large,college_chemistry,0.787879
+text-embedding-3-large,college_computer_science,0.292929
+text-embedding-3-large,abstract_algebra,1.0
+text-embedding-3-large,anatomy,0.61194
+text-embedding-3-large,astronomy,0.880795
+text-embedding-3-large,business_ethics,0.7
+text-embedding-3-large,clinical_knowledge,0.402344
+text-embedding-3-large,college_biology,0.546053
+text-embedding-3-large,college_chemistry,0.787879
+text-embedding-3-large,college_computer_science,0.292929

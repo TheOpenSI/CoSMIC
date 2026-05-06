@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+bi-encoder,sentence-transformers/all-MiniLM-L6-v2,dataset_10_services,0.39066,0.688658,1349,7.942042,8.593992,college_chemistry,0.72973,chemistry,0.0

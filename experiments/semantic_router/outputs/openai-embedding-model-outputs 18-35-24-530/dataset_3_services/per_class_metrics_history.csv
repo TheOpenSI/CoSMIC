@@ -1,0 +1,4 @@
+model,service,accuracy
+text-embedding-3-large,abstract_algebra,1.0
+text-embedding-3-large,anatomy,0.992537
+text-embedding-3-large,astronomy,0.980132

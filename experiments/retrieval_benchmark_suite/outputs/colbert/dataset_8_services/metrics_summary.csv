@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+colbert,colbert-ir/colbertv2.0,dataset_8_services,0.399449,0.695133,1089,51.071018,61.542883,astronomy,0.695364,anatomy,0.104478

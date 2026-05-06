@@ -1,0 +1,4 @@
+model,service,accuracy
+all-MiniLM-L6-v2,abstract_algebra,0.878788
+all-MiniLM-L6-v2,anatomy,0.962687
+all-MiniLM-L6-v2,astronomy,0.94702

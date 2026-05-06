@@ -1,0 +1,2 @@
+model,dataset,accuracy,top3_accuracy,total_samples
+text-embedding-3-large,dataset_8_services,1.0,1.0,100

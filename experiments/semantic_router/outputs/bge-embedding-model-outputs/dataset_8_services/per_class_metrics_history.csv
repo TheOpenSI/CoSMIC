@@ -1,0 +1,9 @@
+model,service,accuracy
+bge-base-en-v1.5,abstract_algebra,0.959184
+bge-base-en-v1.5,anatomy,0.604478
+bge-base-en-v1.5,astronomy,0.788079
+bge-base-en-v1.5,business_ethics,0.68
+bge-base-en-v1.5,clinical_knowledge,0.222656
+bge-base-en-v1.5,college_biology,0.223684
+bge-base-en-v1.5,college_chemistry,0.686869
+bge-base-en-v1.5,college_computer_science,0.494949

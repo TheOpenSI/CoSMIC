@@ -1,0 +1,2 @@
+model,dataset,accuracy,top3_accuracy,total_samples
+all-MiniLM-L6-v2,dataset_3_services,0.934896,1.0,384

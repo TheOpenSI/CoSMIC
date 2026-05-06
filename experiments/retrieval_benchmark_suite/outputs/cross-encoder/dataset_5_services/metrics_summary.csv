@@ -1,0 +1,2 @@
+method,model,dataset,accuracy,top3_accuracy,total_samples,latency_avg_ms,latency_p95_ms,best_class,best_class_accuracy,worst_class,worst_class_accuracy
+cross-encoder,cross-encoder/stsb-distilroberta-base,dataset_5_services,0.517568,0.836486,740,44.423684,68.793321,clinical_knowledge,0.820312,abstract_algebra,0.060606

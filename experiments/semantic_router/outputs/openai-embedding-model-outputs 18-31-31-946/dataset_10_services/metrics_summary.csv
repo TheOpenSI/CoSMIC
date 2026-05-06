@@ -1,0 +1,2 @@
+model,dataset,accuracy,top3_accuracy,total_samples
+text-embedding-3-large,dataset_10_services,0.488889,0.757778,1350

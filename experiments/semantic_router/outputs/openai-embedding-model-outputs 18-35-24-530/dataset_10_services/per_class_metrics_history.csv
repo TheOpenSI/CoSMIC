@@ -1,0 +1,12 @@
+model,service,accuracy
+text-embedding-3-large,abstract_algebra,0.974522
+text-embedding-3-large,anatomy,0.349593
+text-embedding-3-large,astronomy,0.735632
+text-embedding-3-large,business_ethics,0.653846
+text-embedding-3-large,clinical_knowledge,0.045455
+text-embedding-3-large,college_biology,0.7
+text-embedding-3-large,college_chemistry,0.797297
+text-embedding-3-large,college_computer_science,0.355932
+text-embedding-3-large,general_qa,0.010204
+text-embedding-3-large,mathematics,0.297619
+text-embedding-3-large,medicine,0.086957

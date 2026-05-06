@@ -1,0 +1,2 @@
+model,dataset,accuracy,top3_accuracy,total_samples
+bge-base-en-v1.5,dataset_8_services,0.523416,0.803489,1089

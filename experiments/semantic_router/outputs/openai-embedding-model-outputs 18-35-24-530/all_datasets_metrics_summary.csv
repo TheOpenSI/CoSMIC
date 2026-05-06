@@ -1,0 +1,5 @@
+model,dataset,accuracy,top3_accuracy,total_samples,best_class,best_class_accuracy,worst_class,worst_class_accuracy,dataset_output_dir
+text-embedding-3-large,dataset_3_services,0.989583,1.0,384,abstract_algebra,1.0,astronomy,0.980132,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/openai-embedding-model-outputs/dataset_3_services
+text-embedding-3-large,dataset_5_services,0.650602,0.760375,747,abstract_algebra,1.0,general_qa,0.037879,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/openai-embedding-model-outputs/dataset_5_services
+text-embedding-3-large,dataset_8_services,1.0,1.0,100,college_computer_science,1.0,college_computer_science,1.0,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/openai-embedding-model-outputs/dataset_8_services
+text-embedding-3-large,dataset_10_services,0.48851,0.75834,1349,abstract_algebra,0.974522,general_qa,0.010204,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/openai-embedding-model-outputs/dataset_10_services

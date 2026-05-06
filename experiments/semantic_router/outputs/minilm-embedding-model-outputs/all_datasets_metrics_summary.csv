@@ -1,0 +1,5 @@
+model,dataset,accuracy,top3_accuracy,total_samples,best_class,best_class_accuracy,worst_class,worst_class_accuracy,dataset_output_dir
+all-MiniLM-L6-v2,dataset_3_services,0.934896,1.0,384,anatomy,0.962687,abstract_algebra,0.878788,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/minilm-embedding-model-outputs/dataset_3_services
+all-MiniLM-L6-v2,dataset_5_services,0.65,0.918919,740,astronomy,0.940397,clinical_knowledge,0.28125,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/minilm-embedding-model-outputs/dataset_5_services
+all-MiniLM-L6-v2,dataset_8_services,0.526171,0.794307,1089,astronomy,0.827815,clinical_knowledge,0.183594,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/minilm-embedding-model-outputs/dataset_8_services
+all-MiniLM-L6-v2,dataset_10_services,0.39066,0.6894,1349,college_chemistry,0.72973,clinical_knowledge,0.022727,/Volumes/CoSMIC-APFS/cosmic-run/CoSMIC/experiments/semantic_router/outputs/minilm-embedding-model-outputs/dataset_10_services
