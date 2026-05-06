@@ -40,105 +40,109 @@ def _make_agent(name: str, description: str, domain_line: str) -> Agent:
     )
 
 
-abstract_algebra_agent = _make_agent(
-    "abstract_algebra",
-    (
-        "Contains theoretical mathematics problems focused on algebraic structures, used to evaluate "
-        "abstract reasoning routing."
-    ),
-    "abstract algebra and algebraic structures",
-)
+def get_specialist(key: str) -> Agent:
+    """Return a fresh instance of a specialist agent to avoid parent-conflict errors."""
+    if key == "abstract_algebra":
+        return _make_agent(
+            "abstract_algebra",
+            (
+                "Contains theoretical mathematics problems focused on algebraic structures, used to evaluate "
+                "abstract reasoning routing."
+            ),
+            "abstract algebra and algebraic structures",
+        )
+    if key == "anatomy":
+        return _make_agent(
+            "anatomy",
+            (
+                "Includes questions about human body structure and systems, helping identify life science "
+                "and medical queries."
+            ),
+            "human anatomy, body structure, and organ systems",
+        )
+    if key == "astronomy":
+        return _make_agent(
+            "astronomy",
+            (
+                "Covers celestial objects and space-related concepts, supporting routing for physics-oriented queries."
+            ),
+            "astronomy, celestial mechanics, and space science",
+        )
+    if key == "business_ethics":
+        return _make_agent(
+            "business_ethics",
+            (
+                "Consists of ethical decision-making scenarios in business contexts, useful for social science reasoning."
+            ),
+            "business ethics and professional ethical decision-making",
+        )
+    if key == "clinical_knowledge":
+        return _make_agent(
+            "clinical_knowledge",
+            (
+                "Covers patient-centered medical scenarios involving diagnosis, symptoms, or treatment decisions, "
+                "used to route clinical reasoning tasks."
+            ),
+            "clinical medicine: diagnosis, symptoms, and treatment decisions in patient scenarios",
+        )
+    if key == "college_biology":
+        return _make_agent(
+            "college_biology",
+            (
+                "Focuses on theoretical and conceptual biology such as genetics, evolution, and cellular processes, "
+                "without clinical or patient context."
+            ),
+            "college-level biology: genetics, evolution, cell biology, and related theory (not bedside clinical care)",
+        )
+    if key == "college_chemistry":
+        return _make_agent(
+            "college_chemistry",
+            (
+                "Includes chemistry problems involving reactions, equations, and physical or organic principles, "
+                "supporting chemistry-specific query routing."
+            ),
+            "college chemistry: reactions, stoichiometry, physical and organic principles",
+        )
+    if key == "college_computer_science":
+        return _make_agent(
+            "college_computer_science",
+            (
+                "Covers algorithms and data structures, used for routing technical and computational queries."
+            ),
+            "algorithms, data structures, and theoretical computer science",
+        )
+    if key == "mathematics":
+        return _make_agent(
+            "mathematics",
+            (
+                "Contains general math problems across topics, supporting quantitative reasoning routing."
+            ),
+            "general mathematics and quantitative reasoning",
+        )
+    if key == "medicine":
+        return _make_agent(
+            "medicine",
+            (
+                "Includes broad medical knowledge questions, enabling routing for healthcare-related queries."
+            ),
+            "general medicine and healthcare knowledge",
+        )
+    if key == "general_qa":
+        return Agent(
+            model=AGENT_MODEL,
+            name="general_qa",
+            description=(
+                "Fallback when no domain specialist is a clear match: mixed or off-topic queries, casual questions, "
+                "or topics that do not fit the listed domains."
+            ),
+            instruction=(
+                "You receive questions that the router could not assign to a single domain specialist. "
+                "Answer helpfully and concisely in plain language."
+            ),
+            generate_content_config=_GEN,
+        )
+    raise KeyError(f"Unknown specialist: {key}")
 
-anatomy_agent = _make_agent(
-    "anatomy",
-    (
-        "Includes questions about human body structure and systems, helping identify life science "
-        "and medical queries."
-    ),
-    "human anatomy, body structure, and organ systems",
-)
-
-astronomy_agent = _make_agent(
-    "astronomy",
-    (
-        "Covers celestial objects and space-related concepts, supporting routing for physics-oriented queries."
-    ),
-    "astronomy, celestial mechanics, and space science",
-)
-
-business_ethics_agent = _make_agent(
-    "business_ethics",
-    (
-        "Consists of ethical decision-making scenarios in business contexts, useful for social science reasoning."
-    ),
-    "business ethics and professional ethical decision-making",
-)
-
-clinical_knowledge_agent = _make_agent(
-    "clinical_knowledge",
-    (
-        "Covers patient-centered medical scenarios involving diagnosis, symptoms, or treatment decisions, "
-        "used to route clinical reasoning tasks."
-    ),
-    "clinical medicine: diagnosis, symptoms, and treatment decisions in patient scenarios",
-)
-
-college_biology_agent = _make_agent(
-    "college_biology",
-    (
-        "Focuses on theoretical and conceptual biology such as genetics, evolution, and cellular processes, "
-        "without clinical or patient context."
-    ),
-    "college-level biology: genetics, evolution, cell biology, and related theory (not bedside clinical care)",
-)
-
-college_chemistry_agent = _make_agent(
-    "college_chemistry",
-    (
-        "Includes chemistry problems involving reactions, equations, and physical or organic principles, "
-        "supporting chemistry-specific query routing."
-    ),
-    "college chemistry: reactions, stoichiometry, physical and organic principles",
-)
-
-college_computer_science_agent = _make_agent(
-    "college_computer_science",
-    (
-        "Covers algorithms and data structures, used for routing technical and computational queries."
-    ),
-    "algorithms, data structures, and theoretical computer science",
-)
-
-mathematics_agent = _make_agent(
-    "mathematics",
-    (
-        "Contains general math problems across topics, supporting quantitative reasoning routing."
-    ),
-    "general mathematics and quantitative reasoning",
-)
-
-medicine_agent = _make_agent(
-    "medicine",
-    (
-        "Includes broad medical knowledge questions, enabling routing for healthcare-related queries."
-    ),
-    "general medicine and healthcare knowledge",
-)
-
-# Always registered on the scalability coordinator after tier specialists (not in CSV gold / ALL_KEYS).
-general_qa_testing_agent = Agent(
-    model=AGENT_MODEL,
-    name="general_qa",
-    description=(
-        "Fallback when no domain specialist is a clear match: mixed or off-topic queries, casual questions, "
-        "or topics that do not fit the listed domains."
-    ),
-    instruction=(
-        "You receive questions that the router could not assign to a single domain specialist. "
-        "Answer helpfully and concisely in plain language."
-    ),
-    generate_content_config=_GEN,
-)
 
 # Fixed table order (nested-prefix tiers use prefixes of this list).
 ALL_KEYS: list[str] = [
@@ -154,16 +158,5 @@ ALL_KEYS: list[str] = [
     "medicine",
 ]
 
-SPECIALISTS: dict[str, Agent] = {
-    "abstract_algebra": abstract_algebra_agent,
-    "anatomy": anatomy_agent,
-    "astronomy": astronomy_agent,
-    "business_ethics": business_ethics_agent,
-    "clinical_knowledge": clinical_knowledge_agent,
-    "college_biology": college_biology_agent,
-    "college_chemistry": college_chemistry_agent,
-    "college_computer_science": college_computer_science_agent,
-    "mathematics": mathematics_agent,
-    "medicine": medicine_agent,
-    "general_qa": general_qa_testing_agent,
-}
+# For backwards compatibility in coordinator.py lookup checks
+SPECIALISTS = frozenset(ALL_KEYS + ["general_qa"])

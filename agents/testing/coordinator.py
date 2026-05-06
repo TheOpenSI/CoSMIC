@@ -19,7 +19,7 @@ from google.genai import types
 import yaml
 
 from agents.config import COORDINATOR_MODEL
-from agents.testing.specialists import SPECIALISTS
+from agents.testing.specialists import SPECIALISTS, get_specialist
 
 _PRESETS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "presets.yaml")
 _TESTING_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -99,8 +99,8 @@ def build_root_agent(keys: list[str]) -> Agent:
             f"{FALLBACK_ROUTING_SERVICE!r} is reserved for the coordinator fallback; remove it from tier keys"
         )
 
-    sub_agents: list[Agent] = [SPECIALISTS[k] for k in seen]
-    sub_agents.append(SPECIALISTS[FALLBACK_ROUTING_SERVICE])
+    sub_agents: list[Agent] = [get_specialist(k) for k in seen]
+    sub_agents.append(get_specialist(FALLBACK_ROUTING_SERVICE))
 
     all_names = [a.name for a in sub_agents]
     name_list = ", ".join(all_names)
