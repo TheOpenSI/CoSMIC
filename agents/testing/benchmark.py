@@ -214,6 +214,7 @@ async def _eval_tier(
     csv_path: str | None,
     out_dir: str,
     run_id: str,
+    per_sample_path: str,
     verbose: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     gold_allowed = set(tier_keys(tier))
@@ -239,7 +240,6 @@ async def _eval_tier(
 
     total_rows = len(rows)
     uid_base = str(uuid.uuid4())
-    per_sample_path = os.path.join(out_dir, "per_sample_evaluations.csv")
 
     for i, (q, gold) in enumerate(rows):
         timestamp = datetime.now().isoformat()
@@ -343,13 +343,6 @@ async def _main_async(args: argparse.Namespace) -> None:
     run_id = str(uuid.uuid4())
     
     os.makedirs(out_dir, exist_ok=True)
-    per_sample_path = os.path.join(out_dir, "per_sample_evaluations.csv")
-    summary_path = os.path.join(out_dir, "benchmark_summary_metrics.csv")
-    
-    if os.path.exists(per_sample_path):
-        os.remove(per_sample_path)
-    if os.path.exists(summary_path):
-        os.remove(summary_path)
     
     print("-" * 80)
     print(f"Benchmark starting | Run ID: {run_id}")
@@ -367,20 +360,26 @@ async def _main_async(args: argparse.Namespace) -> None:
     all_summaries = []
     for tier in tiers:
         csv_override = None if args.all else args.csv
-        evals, metrics = await _eval_tier(tier, csv_override, out_dir, run_id, args.verbose)
+        per_sample_path = os.path.join(out_dir, f"per_sample_tier{tier}.csv")
+        
+        if os.path.exists(per_sample_path):
+            os.remove(per_sample_path)
+            
+        evals, metrics = await _eval_tier(tier, csv_override, out_dir, run_id, per_sample_path, args.verbose)
         all_evaluations.extend(evals)
         all_summaries.append(metrics)
+        
+        # Save individual tier summary
+        tier_summary_path = os.path.join(out_dir, f"summary_tier{tier}.csv")
+        pd.DataFrame([metrics]).to_csv(tier_summary_path, index=False)
+        _log.info("Saved summary metrics for tier %s to %s", tier, tier_summary_path)
 
-    # Save CSVs (summaries)
-    os.makedirs(out_dir, exist_ok=True)
-    
-    summary_df = pd.DataFrame(all_summaries)
-    summary_path = os.path.join(out_dir, "benchmark_summary_metrics.csv")
-    
-    summary_df.to_csv(summary_path, index=False)
-    
-    _log.info("Saved per-sample evaluations to %s", per_sample_path)
-    _log.info("Saved summary metrics to %s", summary_path)
+    # Save combined summary if running all tiers
+    if args.all:
+        summary_df = pd.DataFrame(all_summaries)
+        summary_all_path = os.path.join(out_dir, "summary_all_tiers.csv")
+        summary_df.to_csv(summary_all_path, index=False)
+        _log.info("Saved combined summary metrics to %s", summary_all_path)
 
 
 def main() -> None:

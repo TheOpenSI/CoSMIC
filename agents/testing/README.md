@@ -50,14 +50,33 @@ With Docker and the bundled Compose stack (Ollama on **`cosmic_net`**):
 - **`--tier`**: one of `3`, `5`, `8`, `10`. Loads evaluation rows from default CSV unless `--csv` is set.
 - **`--all`**: runs tiers **3, 5, 8,** and **10** in sequence using each tier’s default CSV from [`data/README.md`](data/README.md).
 - **`--csv`**: only with **`--tier`**, overrides that tier’s CSV path.
-- **`--out-dir`**: directory for outputs (defaults to [`results/`](results/)). Writes **`metrics.md`** (summary table), **`confusion_tier{N}.png`** per tier evaluated (matplotlib + scikit-learn required for PNGs), and **`predictions_tier{N}.csv`** (per-row experiment log, including full model **`response`**, unless you pass **`--no-per-row-csv`**). That CSV is **updated incrementally**: each prompt’s row is written and flushed as soon as that run finishes (so partial results survive crashes or long runs).
-- **`--no-per-row-csv`**: skip **`predictions_tier{N}.csv`** when you only want summary artifacts or wish to avoid large files.
-- **`--predictions`**: no-op (kept for older scripts); per-row CSV is written by default unless **`--no-per-row-csv`** is set.
-- **`-v` / `--verbose`**: log each ADK event (tools, transfers, final responses) per sample on stderr. on stderr (truth vs predicted route, including `__no_transfer__` when the coordinator never calls `transfer_to_agent`). The same aggregate metrics appear as **stdout TSV**, and are **written** to **`results/metrics.md`** (Markdown table).
+- **`--out-dir`**: directory for outputs (defaults to [`results/`](results/)). Writes:
+  - **`summary_tier{N}.csv`**: summary metrics for a specific tier run.
+  - **`summary_all_tiers.csv`**: combined summary metrics for all tiers (only with `--all`).
+  - **`per_sample_tier{N}.csv`**: per-row experiment log, including full model **`response`**. Updated incrementally: each prompt’s row is written and flushed as soon as that run finishes.
+- **`-v` / `--verbose`**: log each ADK event (tools, transfers, final responses) per sample on stderr.
 
-**`predictions_tier{N}.csv`** (unless **`--no-per-row-csv`**) has one row per evaluation prompt: **`row_index`**, **`question`**, **`gold`**, **`predicted`** (eval label, including `__no_transfer__`), **`predicted_service_raw`** (transfer target before normalization to the eval label), **`correct`**, **`response`** (full coordinator text), **`aborted_reason`**, **`latency_ms`**, **`tokens`**, **`tier`**, then the same tier-level columns as **`metrics.md`**: **`dataset`**, **`accuracy`**, **`total_samples`**, **`latency_avg_ms`**, **`latency_p95_ms`**, **`best_class`**, **`best_class_accuracy`**, **`worst_class`**, **`worst_class_accuracy`**, **`token_cost`**, **`routing_failures`**. Those tier-level columns are **filled only on the last data row** for that tier (earlier rows leave them empty); they summarize the full tier after every prompt has finished.
+**`per_sample_tier{N}.csv`** has one row per evaluation prompt:
+- **`run_id`**: unique UUID for the benchmark session.
+- **`timestamp`**: ISO timestamp of the sample run.
+- **`row_index`**: 1-based index in the evaluation CSV.
+- **`dataset`**: name of the source CSV file.
+- **`tier`**: the scalability tier (3, 5, 8, or 10).
+- **`question`**: the user prompt.
+- **`gold`**: the expected specialist ID.
+- **`predicted_service_raw`**: the raw router output (e.g., `transfer_to_agent('math')`).
+- **`predicted`**: the normalized prediction label (or `__no_transfer__`).
+- **`correct`**: boolean indicating if `predicted == gold`.
+- **`response`**: full text response from the coordinator.
+- **`prompt_tokens`**: tokens in the request.
+- **`completion_tokens`**: tokens in the response.
+- **`latency_ms`**: total round-trip time in milliseconds.
+- **`error_type`**: one of `routing_failure`, `parsing_error`, `timeout`, or null.
 
-**`token_cost`** is the summed **`total_token_count`** across ADK events—not USD. **`routing_failures`** counts samples with no predicted transfer.
+**`summary_tier{N}.csv`** (and `summary_all_tiers.csv`) contains:
+- **`run_id`**, **`total_samples`**, **`accuracy`**, **`latency_avg_ms`**, **`latency_p95_ms`**, **`total_prompt_tokens`**, **`total_completion_tokens`**, **`routing_failures`**, **`best_class`**, **`worst_class`**.
+
+**`routing_failures`** counts samples with no predicted transfer.
 
 **`top3_accuracy` is omitted**: the coordinator selects a single `transfer_to_agent` target per question; ranking top-3 would require extra evaluation passes or API changes.
 
