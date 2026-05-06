@@ -28,12 +28,12 @@ if _cosmic_ollama_api_base:
     os.environ.setdefault("OLLAMA_API_BASE", _cosmic_ollama_api_base)
 
 # LiteLLM format: ollama_chat/<name> — name must exist in `ollama list`.
-DEFAULT_MODEL = "ollama_chat/llama3.1:8b"
+DEFAULT_MODEL = "ollama_chat/qwen2.5:7b-instruct"
 
 AGENT_MODEL = os.environ.get("COSMIC_AGENT_MODEL", DEFAULT_MODEL)
 
 # Coordinator defaults to the same Ollama tag as specialists.
-DEFAULT_COORDINATOR_MODEL = "ollama_chat/llama3.1:8b"
+DEFAULT_COORDINATOR_MODEL = "ollama_chat/qwen2.5:7b-instruct"
 COORDINATOR_MODEL = os.environ.get("COSMIC_COORDINATOR_MODEL", DEFAULT_COORDINATOR_MODEL)
 
 # ``loop_guard_before_tool`` (``agents/safeguards.py``): max invocations of the same

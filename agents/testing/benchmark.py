@@ -53,6 +53,8 @@ apply_known_deprecation_filters()
 _DEFAULT_RESULTS_DIR = os.path.normpath(os.path.join(_TESTING_DIR, "results"))
 
 try:
+    import matplotlib
+    matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 except ImportError:
     plt = None  # type: ignore[assignment]
@@ -225,9 +227,11 @@ async def _eval_tier(
     if predictions_dir:
         os.makedirs(predictions_dir, exist_ok=True)
         pred_path = os.path.join(predictions_dir, f"predictions_tier{tier}.csv")
-        pred_pf = open(pred_path, "w", newline="", encoding="utf-8")
+        file_exists = os.path.isfile(pred_path)
+        pred_pf = open(pred_path, "a", newline="", encoding="utf-8")
         pred_writer = csv.DictWriter(pred_pf, fieldnames=_PER_ROW_CSV_COLS, extrasaction="ignore")
-        pred_writer.writeheader()
+        if not file_exists:
+            pred_writer.writeheader()
         pred_pf.flush()
 
     total_rows = len(rows)
@@ -369,17 +373,23 @@ def _cell_str(key: str, val: object) -> str:
 
 def _write_metrics_md(path: str, rows: list[dict[str, object]]) -> None:
     """Write one Markdown table with all metric rows."""
+    exists = os.path.isfile(path)
     header = "| " + " | ".join(_METRIC_COLS) + " |"
     sep = "| " + " | ".join("---" for _ in _METRIC_COLS) + " |"
-    lines = ["# Routing benchmark metrics", "", header, sep]
+    
+    lines = []
+    if not exists:
+        lines.extend(["# Routing benchmark metrics", "", header, sep])
+    
     for r in rows:
         cells = [_cell_str(k, r.get(k)) for k in _METRIC_COLS]
         escaped = [c.replace("|", "\\|").replace("\n", " ") for c in cells]
         lines.append("| " + " | ".join(escaped) + " |")
-    lines.append("")
+    
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
+    with open(path, "a", encoding="utf-8") as f:
+        # If appending to an existing file, ensure it starts on a new line
+        f.write("\n".join(lines) + "\n")
 
 
 def _print_metrics_table(rows: list[dict[str, object]]) -> None:

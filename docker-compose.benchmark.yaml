@@ -37,6 +37,8 @@ services:
       - ollama
     networks:
       - cosmic_net
+    volumes:
+      - ./agents/testing/results:/app/agents/testing/results
     entrypoint: ["python", "-m", "agents.testing.benchmark"]
     command: ["--tier", "3"]
 
