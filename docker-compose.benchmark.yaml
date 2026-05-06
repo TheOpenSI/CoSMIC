@@ -7,10 +7,20 @@
 #
 # To use an Ollama on the host instead, set COSMIC_OLLAMA_API_BASE or OLLAMA_API_BASE for the
 # benchmark service (e.g. http://host.docker.internal:11434) and add extra_hosts if on Linux.
+#
+# Ollama below requests all NVIDIA GPUs (same pattern as docker-compose.postgres.yaml). Requires
+# NVIDIA drivers + NVIDIA Container Toolkit. Remove the `deploy` block if you only have CPU.
 
 services:
   ollama:
     image: ollama/ollama:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     volumes:
       - ollama_benchmark:/root/.ollama
     networks:
