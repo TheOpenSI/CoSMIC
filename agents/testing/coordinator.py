@@ -133,8 +133,8 @@ def build_root_agent(keys: list[str]) -> Agent:
         description=f"Routes to one domain specialist: {descriptions}",
         instruction=instruction,
         generate_content_config=types.GenerateContentConfig(
-            temperature=0.1,
-            top_p=0.9,
+            temperature=0.0,
+            top_p=0.1,
             max_output_tokens=1024,
         ),
         sub_agents=sub_agents,

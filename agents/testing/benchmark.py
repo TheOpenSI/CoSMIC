@@ -1,4 +1,4 @@
-"""Routing evaluation: confusion matrices and metrics for scalability tiers 3/5/8/10."""
+# Routing evaluation: confusion matrices and metrics for scalability tiers 3/5/8/10.
 
 from __future__ import annotations
 
@@ -10,13 +10,18 @@ import math
 import os
 import sys
 import uuid
-from typing import Sequence
+import re
+from datetime import datetime
+from typing import Sequence, Any
+
+import pandas as pd
+from sklearn.metrics import confusion_matrix
 
 _log = logging.getLogger(__name__)
 
 
 def _configure_benchmark_logging(verbose: bool) -> None:
-    """Benchmark progress goes to stderr; stdout stays metrics TSV."""
+    # Benchmark progress goes to stderr; stdout stays metrics TSV.
     pkg_level = logging.DEBUG if verbose else logging.INFO
 
     fmt = logging.Formatter("%(asctime)s %(levelname)s [%(name)s] %(message)s", datefmt="%H:%M:%S")
@@ -41,25 +46,15 @@ def _configure_benchmark_logging(verbose: bool) -> None:
     for name in noisy:
         logging.getLogger(name).setLevel(logging.WARNING)
 
+
 _TESTING_DIR = os.path.dirname(os.path.abspath(__file__))
-_project_root = os.path.join(_TESTING_DIR, "..", "..")
+_project_root = os.path.normpath(os.path.join(_TESTING_DIR, "..", ".."))
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 from agents.deprecation_filters import apply_known_deprecation_filters
 
 apply_known_deprecation_filters()
-
-_DEFAULT_RESULTS_DIR = os.path.normpath(os.path.join(_TESTING_DIR, "results"))
-
-try:
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-except ImportError:
-    plt = None  # type: ignore[assignment]
-
-from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 
 from agents.testing.coordinator import (
     default_csv_path,
@@ -68,37 +63,7 @@ from agents.testing.coordinator import (
 )
 from agents.testing.runner import RoutingOutcome, clear_runner_cache, run_agent_routing
 
-
-_SENTINEL_NO_ROUTE = "__no_transfer__"
-
-_METRIC_COLS = [
-    "dataset",
-    "accuracy",
-    "total_samples",
-    "latency_avg_ms",
-    "latency_p95_ms",
-    "best_class",
-    "best_class_accuracy",
-    "worst_class",
-    "worst_class_accuracy",
-    "token_cost",
-    "routing_failures",
-]
-
-_PER_ROW_CSV_COLS = [
-    "row_index",
-    "question",
-    "gold",
-    "predicted",
-    "predicted_service_raw",
-    "correct",
-    "response",
-    "aborted_reason",
-    "latency_ms",
-    "tokens",
-    "tier",
-    *_METRIC_COLS,
-]
+_DEFAULT_RESULTS_DIR = os.path.normpath(os.path.join(_TESTING_DIR, "results"))
 
 
 def _normalize_row(raw: dict[str, str | None]) -> dict[str, str]:
@@ -121,7 +86,6 @@ def _row_service(norm: dict[str, str]) -> str | None:
 
 
 def _load_csv_eval_rows(path: str, allowed: set[str]) -> list[tuple[str, str]]:
-    """Load (question, gold service) rows for evaluation."""
     tasks: list[tuple[str, str]] = []
     skipped = 0
     with open(path, newline="", encoding="utf-8") as f:
@@ -162,50 +126,100 @@ def _percentile_p95(values: Sequence[float]) -> float:
     return s[f] * (c - k) + s[c] * (k - f)
 
 
-def _per_class_accuracy(y_true: list[str], y_pred: list[str], classes: Sequence[str]) -> dict[str, float]:
-    out: dict[str, float] = {}
+def _calculate_metrics(
+    y_true: list[str],
+    y_pred: list[str],
+    latencies: list[float],
+    prompt_tokens: list[int],
+    completion_tokens: list[int],
+    routing_failures: int,
+    classes: list[str],
+    run_id: str,
+) -> dict[str, Any]:
+    total_samples = len(y_true)
+    accuracy = sum(1 for gt, pd_ in zip(y_true, y_pred) if gt == pd_) / total_samples if total_samples > 0 else 0.0
+    lat_avg = sum(latencies) / total_samples if total_samples > 0 else 0.0
+    lat_p95 = _percentile_p95(latencies)
+    total_prompt_tokens = sum(prompt_tokens)
+    total_completion_tokens = sum(completion_tokens)
+
+    # Per-class accuracy for best/worst
+    per_class_acc = {}
     for cls in classes:
-        gold_idx = [i for i, y in enumerate(y_true) if y == cls]
-        if not gold_idx:
-            continue
-        ok = sum(1 for i in gold_idx if y_pred[i] == cls)
-        out[cls] = ok / len(gold_idx)
-    return out
+        indices = [i for i, val in enumerate(y_true) if val == cls]
+        if indices:
+            correct = sum(1 for i in indices if y_pred[i] == cls)
+            per_class_acc[cls] = correct / len(indices)
+
+    best_class_name = ""
+    best_class_acc = 0.0
+    worst_class_name = ""
+    worst_class_acc = 1.0
+
+    if per_class_acc:
+        sorted_acc = sorted(per_class_acc.items(), key=lambda x: (x[1], x[0]), reverse=True)
+        best_class_name, best_class_acc = sorted_acc[0]
+        worst_class_name, worst_class_acc = sorted_acc[-1]
+
+    return {
+        "run_id": run_id,
+        "total_samples": total_samples,
+        "accuracy": accuracy,
+        "latency_avg_ms": lat_avg,
+        "latency_p95_ms": lat_p95,
+        "total_prompt_tokens": total_prompt_tokens,
+        "total_completion_tokens": total_completion_tokens,
+        "estimated_cost": 0.0,  # Placeholder as per requirement
+        "routing_failures": routing_failures,
+        "best_class": f"{best_class_name} ({best_class_acc:.4f})",
+        "worst_class": f"{worst_class_name} ({worst_class_acc:.4f})",
+    }
 
 
-def _best_worst_class(per_class: dict[str, float]) -> tuple[str, float, str, float]:
-    if not per_class:
-        return ("", float("nan"), "", float("nan"))
-    items = sorted(per_class.items(), key=lambda x: (x[1], x[0]), reverse=True)
-    best_name, best_acc = items[0]
-    items_w = sorted(per_class.items(), key=lambda x: (x[1], x[0]))
-    worst_name, worst_acc = items_w[0]
-    return (best_name, best_acc, worst_name, worst_acc)
-
-
-def _format_cm_text(labels: list[str], cm: list[list[int]]) -> str:
-    label_w = max(len(L) for L in labels) if labels else 8
-    lines = []
-    header = " " * (label_w + 1) + " pred→"
-    lines.append(header)
-    lines.append(" " * label_w + " " + "".join(str(i % 10) for i in range(len(labels))))
-    for i, row_name in enumerate(labels):
-        row = " ".join(str(v) for v in cm[i])
-        lines.append(f"{row_name:<{label_w}} {row}")
-    return "\n".join(lines)
+def _log_iteration(
+    run_id: str,
+    iteration: int,
+    total: int,
+    tier: int,
+    question: str,
+    gold: str,
+    predicted: str,
+    raw: str,
+    success: bool,
+    error_type: str | None,
+    latency: float,
+    prompt_tokens: int,
+    completion_tokens: int,
+) -> None:
+    status = "Success" if success else f"Failure - {error_type}"
+    q_trunc = (question.replace("\n", " ")[:77] + "...") if len(question) > 80 else question.replace("\n", " ")
+    
+    print("-" * 80)
+    if iteration == 1:
+        print(f"Run ID: {run_id}")
+    
+    print(f"Iteration: {iteration}/{total}")
+    print(f"Tier: {tier}")
+    print(f"Question: {q_trunc}")
+    print(f"Gold Target: {gold}")
+    print(f"Predicted Service: {predicted}")
+    print(f"Raw Router Output: {raw}")
+    print(f"Status: {status}")
+    print(f"Latency: {latency:.2f}ms")
+    print(f"Tokens: Prompt {prompt_tokens} / Completion {completion_tokens}")
 
 
 async def _eval_tier(
     tier: int,
     csv_path: str | None,
-    out_dir: str | None,
-    *,
-    predictions_dir: str | None = None,
+    out_dir: str,
+    run_id: str,
     verbose: bool = False,
-) -> dict[str, object]:
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     gold_allowed = set(tier_keys(tier))
     valid_predictions = frozenset(tier_prediction_labels(tier))
     path = csv_path if csv_path else default_csv_path(tier)
+    
     if not os.path.isfile(path):
         raise FileNotFoundError(f"CSV not found for tier {tier}: {path}")
 
@@ -215,253 +229,183 @@ async def _eval_tier(
 
     clear_runner_cache()
 
-    y_true: list[str] = []
-    y_pred: list[str] = []
-    latencies: list[float] = []
-    tokens_per_row: list[int] = []
+    evaluations = []
+    y_true = []
+    y_pred = []
+    latencies = []
+    prompt_tokens_list = []
+    completion_tokens_list = []
     routing_failures = 0
-
-    pred_path: str | None = None
-    pred_pf = None
-    pred_writer: csv.DictWriter | None = None
-    if predictions_dir:
-        os.makedirs(predictions_dir, exist_ok=True)
-        pred_path = os.path.join(predictions_dir, f"predictions_tier{tier}.csv")
-        file_exists = os.path.isfile(pred_path)
-        pred_pf = open(pred_path, "a", newline="", encoding="utf-8")
-        pred_writer = csv.DictWriter(pred_pf, fieldnames=_PER_ROW_CSV_COLS, extrasaction="ignore")
-        if not file_exists:
-            pred_writer.writeheader()
-        pred_pf.flush()
 
     total_rows = len(rows)
     uid_base = str(uuid.uuid4())
-    base: dict[str, str] = {}
-    empty_tier_metrics = {k: "" for k in _METRIC_COLS}
+    per_sample_path = os.path.join(out_dir, "per_sample_evaluations.csv")
 
-    try:
-        for i, (q, gold) in enumerate(rows):
-            outcome: RoutingOutcome = await run_agent_routing(
-                user_id=f"{uid_base}-{i}",
-                query=q,
-                tier=tier,
-                verbose=verbose,
-            )
-            pred = outcome.predicted_service
-            if pred is None:
-                routing_failures += 1
-                pred_label = _SENTINEL_NO_ROUTE
-            elif pred not in valid_predictions:
-                pred_label = _SENTINEL_NO_ROUTE
-            else:
-                pred_label = pred
-            y_true.append(gold)
-            y_pred.append(pred_label)
-            latencies.append(outcome.latency_ms)
-            tokens_per_row.append(outcome.tokens_total)
-            ok = "OK" if pred_label == gold else "MISS"
-            q_preview = q.replace("\n", " ").strip()
-            if len(q_preview) > 160:
-                q_preview = q_preview[:157] + "..."
-            _log.info(
-                "tier=%s row %s/%s gold=%s pred=%s latency_ms=%s %s tokens=%s question=%s",
-                tier,
-                i + 1,
-                total_rows,
-                gold,
-                pred_label,
-                f"{outcome.latency_ms:.0f}",
-                ok,
-                outcome.tokens_total,
-                q_preview,
-            )
-            if outcome.aborted_reason:
-                _log.warning("row %s aborted: %s", i + 1, outcome.aborted_reason)
-            base = {
-                "row_index": str(i + 1),
-                "question": q,
-                "gold": gold,
-                "predicted": pred_label,
-                "predicted_service_raw": pred if pred is not None else "",
-                "correct": str(pred_label == gold),
-                "response": outcome.final_text,
-                "aborted_reason": outcome.aborted_reason,
-                "latency_ms": f"{outcome.latency_ms:.2f}",
-                "tokens": str(outcome.tokens_total),
-            }
-            if pred_writer is not None and pred_pf is not None and i < total_rows - 1:
-                pred_writer.writerow(base | {"tier": str(tier)} | empty_tier_metrics)
-                pred_pf.flush()
-
-        labels_order = list(tier_keys(tier))
-        matrix_labels = tier_prediction_labels(tier) + [_SENTINEL_NO_ROUTE]
-
-        cm = confusion_matrix(y_true, y_pred, labels=matrix_labels)
-
-        correct = sum(1 for g, p in zip(y_true, y_pred) if g == p)
-        accuracy = correct / len(y_true) if y_true else 0.0
-
-        pca = _per_class_accuracy(y_true, y_pred, labels_order)
-        best_c, best_a, worst_c, worst_a = _best_worst_class(pca)
-
-        lat_avg = sum(latencies) / len(latencies) if latencies else float("nan")
-        lat_p95 = _percentile_p95(latencies)
-        tok_sum = sum(tokens_per_row)
-
-        dataset_id = os.path.basename(path)
-
-        result: dict[str, object] = {
-            "dataset": dataset_id,
-            "accuracy": accuracy,
-            "total_samples": len(y_true),
-            "latency_avg_ms": lat_avg,
-            "latency_p95_ms": lat_p95,
-            "best_class": best_c,
-            "best_class_accuracy": best_a,
-            "worst_class": worst_c,
-            "worst_class_accuracy": worst_a,
-            "token_cost": tok_sum,
-            "routing_failures": routing_failures,
-        }
-
-        _log.info(
-            "Tier %s complete | dataset=%s | n=%s | accuracy=%s",
-            tier,
-            dataset_id,
-            len(y_true),
-            f"{accuracy:.4f}",
+    for i, (q, gold) in enumerate(rows):
+        timestamp = datetime.now().isoformat()
+        outcome: RoutingOutcome = await run_agent_routing(
+            user_id=f"{uid_base}-{i}",
+            query=q,
+            tier=tier,
+            verbose=verbose,
         )
-        _log.info("Confusion matrix (rows=gold, cols=pred):\n%s", _format_cm_text(matrix_labels, cm.tolist()))
+        
+        predicted_service = outcome.predicted_service
+        raw_output = predicted_service or ""
+        error_type = None
 
-        if out_dir and plt is not None:
-            os.makedirs(out_dir, exist_ok=True)
-            safe = f"confusion_tier{tier}.png"
-            fig_path = os.path.join(out_dir, safe)
-            fig, ax = plt.subplots(figsize=(max(8, 0.45 * len(matrix_labels)), max(6, 0.4 * len(matrix_labels))))
-            disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=matrix_labels)
-            disp.plot(ax=ax, xticks_rotation=75, colorbar=False, include_values=True, values_format="d")
-            ax.set_title(f"Routing confusion (tier {tier})")
-            fig.tight_layout()
-            fig.savefig(fig_path, dpi=120, bbox_inches="tight")
-            plt.close(fig)
-            _log.info("saved confusion matrix PNG: %s", fig_path)
-        elif out_dir and plt is None:
-            _log.warning("matplotlib not installed; skipping PNG export")
+        # Fallback: if no structured predicted_service, try to parse from text
+        if not predicted_service and "transfer_to_agent" in outcome.final_text:
+            raw_output = outcome.final_text.strip()
+            match = re.search(r"transfer_to_agent\(['\"]([^'\"]+)['\"]\)", outcome.final_text)
+            if match:
+                predicted_service = match.group(1)
+                _log.info("Salvaged hallucinated text transfer: %s", predicted_service)
 
-        if pred_writer is not None and pred_pf is not None:
-            tier_suffix = {"tier": str(tier)} | {k: _cell_str(k, result[k]) for k in _METRIC_COLS}
-            pred_writer.writerow(base | tier_suffix)
-            pred_pf.flush()
-            _log.info("predictions written to %s", pred_path)
+        predicted = None
+        
+        # Validation Logic
+        if predicted_service is None:
+            error_type = "routing_failure"
+            routing_failures += 1
+            predicted = "__no_transfer__"
+        elif predicted_service not in valid_predictions:
+            error_type = "parsing_error"
+            predicted = "__no_transfer__"
+        else:
+            predicted = predicted_service
+            
+        if outcome.aborted_reason and "timeout" in outcome.aborted_reason.lower():
+            error_type = "timeout"
 
-        return result
-    finally:
-        if pred_pf is not None:
-            pred_pf.close()
+        correct = (predicted == gold)
+        
+        eval_data = {
+            "run_id": run_id,
+            "timestamp": timestamp,
+            "row_index": i + 1,
+            "dataset": os.path.basename(path),
+            "tier": tier,
+            "question": q,
+            "gold": gold,
+            "predicted_service_raw": raw_output,
+            "predicted": predicted,
+            "correct": correct,
+            "response": outcome.final_text,
+            "prompt_tokens": outcome.prompt_tokens,
+            "completion_tokens": outcome.completion_tokens,
+            "latency_ms": outcome.latency_ms,
+            "error_type": error_type,
+        }
+        evaluations.append(eval_data)
+        
+        # Append as you go
+        df_row = pd.DataFrame([eval_data])
+        df_row.to_csv(
+            per_sample_path, 
+            mode='a', 
+            header=not os.path.exists(per_sample_path), 
+            index=False
+        )
 
+        y_true.append(gold)
+        y_pred.append(predicted)
+        latencies.append(outcome.latency_ms)
+        prompt_tokens_list.append(outcome.prompt_tokens)
+        completion_tokens_list.append(outcome.completion_tokens)
+        
+        _log_iteration(
+            run_id=run_id,
+            iteration=i + 1,
+            total=total_rows,
+            tier=tier,
+            question=q,
+            gold=gold,
+            predicted=predicted,
+            raw=raw_output,
+            success=correct,
+            error_type=error_type,
+            latency=outcome.latency_ms,
+            prompt_tokens=outcome.prompt_tokens,
+            completion_tokens=outcome.completion_tokens
+        )
 
-def _cell_str(key: str, val: object) -> str:
-    if val is None:
-        return ""
-    if isinstance(val, float):
-        if key in ("accuracy", "best_class_accuracy", "worst_class_accuracy"):
-            return f"{val:.6f}".rstrip("0").rstrip(".")
-        if key in ("latency_avg_ms", "latency_p95_ms"):
-            return f"{val:.2f}"
-    return str(val)
-
-
-def _write_metrics_md(path: str, rows: list[dict[str, object]]) -> None:
-    """Write one Markdown table with all metric rows."""
-    exists = os.path.isfile(path)
-    header = "| " + " | ".join(_METRIC_COLS) + " |"
-    sep = "| " + " | ".join("---" for _ in _METRIC_COLS) + " |"
+    metrics = _calculate_metrics(
+        y_true, y_pred, latencies, prompt_tokens_list, completion_tokens_list, 
+        routing_failures, list(gold_allowed), run_id
+    )
     
-    lines = []
-    if not exists:
-        lines.extend(["# Routing benchmark metrics", "", header, sep])
-    
-    for r in rows:
-        cells = [_cell_str(k, r.get(k)) for k in _METRIC_COLS]
-        escaped = [c.replace("|", "\\|").replace("\n", " ") for c in cells]
-        lines.append("| " + " | ".join(escaped) + " |")
-    
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "a", encoding="utf-8") as f:
-        # If appending to an existing file, ensure it starts on a new line
-        f.write("\n".join(lines) + "\n")
-
-
-def _print_metrics_table(rows: list[dict[str, object]]) -> None:
-    header = "\t".join(_METRIC_COLS)
-    print(header)
-    for r in rows:
-        print("\t".join(_cell_str(c, r.get(c)) for c in _METRIC_COLS))
+    return evaluations, metrics
 
 
 async def _main_async(args: argparse.Namespace) -> None:
     out_dir = os.path.abspath(os.path.expanduser(args.out_dir))
+    run_id = str(uuid.uuid4())
+    
     os.makedirs(out_dir, exist_ok=True)
+    per_sample_path = os.path.join(out_dir, "per_sample_evaluations.csv")
+    summary_path = os.path.join(out_dir, "benchmark_summary_metrics.csv")
+    
+    if os.path.exists(per_sample_path):
+        os.remove(per_sample_path)
+    if os.path.exists(summary_path):
+        os.remove(summary_path)
+    
+    print("-" * 80)
+    print(f"Benchmark starting | Run ID: {run_id}")
+    print(f"Destination Output Directory: {out_dir}")
+    print("-" * 80)
 
     if args.all:
         tiers = [3, 5, 8, 10]
-        if args.csv:
-            _log.info("ignoring --csv when using --all (per-tier defaults from presets)")
     else:
         tiers = [args.tier]
 
-    pred_dir = None if args.no_per_row_csv else out_dir
+    _log.info("Starting benchmark | Run ID: %s | Tiers: %s", run_id, tiers)
 
-    _log.info("starting benchmark | tiers=%s | out_dir=%s | verbose=%s", tiers, out_dir, args.verbose)
-
-    results: list[dict[str, object]] = []
+    all_evaluations = []
+    all_summaries = []
     for tier in tiers:
         csv_override = None if args.all else args.csv
-        row = await _eval_tier(
-            tier, csv_override, out_dir,
-            predictions_dir=pred_dir,
-            verbose=args.verbose,
-        )
-        results.append(row)
+        evals, metrics = await _eval_tier(tier, csv_override, out_dir, run_id, args.verbose)
+        all_evaluations.extend(evals)
+        all_summaries.append(metrics)
 
-    metrics_path = os.path.join(out_dir, "metrics.md")
-    _write_metrics_md(metrics_path, results)
-    _log.info("metrics written to %s", metrics_path)
-
-    _print_metrics_table(results)
+    # Save CSVs (summaries)
+    os.makedirs(out_dir, exist_ok=True)
+    
+    summary_df = pd.DataFrame(all_summaries)
+    summary_path = os.path.join(out_dir, "benchmark_summary_metrics.csv")
+    
+    summary_df.to_csv(summary_path, index=False)
+    
+    _log.info("Saved per-sample evaluations to %s", per_sample_path)
+    _log.info("Saved summary metrics to %s", summary_path)
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Routing benchmark: confusion matrix and metrics per tier.")
+    p = argparse.ArgumentParser(description="Refactored Routing Benchmark for OpenSI-CoSMIC.")
     g = p.add_mutually_exclusive_group(required=True)
     g.add_argument("--tier", type=int, choices=[3, 5, 8, 10], help="Number of registered services (preset tier).")
     g.add_argument("--all", action="store_true", help="Run evaluation for tiers 3, 5, 8, and 10.")
     p.add_argument("--csv", type=str, default=None, help="Override CSV path (only with --tier).")
     p.add_argument(
-        "--no-per-row-csv",
-        action="store_true",
-        help="Skip per-row predictions_tier{N}.csv (full model responses can be large).",
-    )
-    p.add_argument(
-        "--predictions",
-        action="store_true",
-        help="No-op: per-row CSV is written by default unless --no-per-row-csv is set.",
-    )
-    p.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help="Log each ADK event (tools, transfers, finals) during each sample.",
+        help="Log each ADK event during each sample.",
     )
     p.add_argument(
         "--out-dir",
         type=str,
         default=_DEFAULT_RESULTS_DIR,
-        help=f"Directory for metrics.md, confusion PNGs, and per-row predictions CSV (default: {_DEFAULT_RESULTS_DIR}).",
+        help=f"Directory for CSV outputs (default: {_DEFAULT_RESULTS_DIR}).",
     )
     args = p.parse_args()
+    
     if args.csv and not args.all and not os.path.isfile(args.csv):
         raise SystemExit(f"CSV not found: {args.csv}")
+        
     _configure_benchmark_logging(verbose=args.verbose)
     asyncio.run(_main_async(args))
 

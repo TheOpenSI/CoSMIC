@@ -58,6 +58,8 @@ class RoutingOutcome:
     predicted_service: str | None
     latency_ms: float
     tokens_total: int
+    prompt_tokens: int
+    completion_tokens: int
     aborted_reason: str
 
 
@@ -161,6 +163,8 @@ async def _run_agent_inner(
 
     predicted_service: str | None = None
     tokens_accum = 0
+    prompt_tokens_accum = 0
+    completion_tokens_accum = 0
 
     t_start = time.perf_counter()
 
@@ -191,6 +195,12 @@ async def _run_agent_inner(
                 tt = getattr(um, "total_token_count", None)
                 if isinstance(tt, int) and tt > 0:
                     tokens_accum += tt
+                pt = getattr(um, "prompt_token_count", None)
+                if isinstance(pt, int) and pt > 0:
+                    prompt_tokens_accum += pt
+                ct = getattr(um, "candidates_token_count", None)
+                if isinstance(ct, int) and ct > 0:
+                    completion_tokens_accum += ct
 
             for fc in event.get_function_calls():
                 tool_name = fc.name or "<unknown>"
@@ -242,6 +252,8 @@ async def _run_agent_inner(
         predicted_service=predicted_service,
         latency_ms=latency_ms,
         tokens_total=tokens_accum,
+        prompt_tokens=prompt_tokens_accum,
+        completion_tokens=completion_tokens_accum,
         aborted_reason=aborted_reason,
     )
 
