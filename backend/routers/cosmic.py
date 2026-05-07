@@ -275,7 +275,7 @@ async def process_cosmic(data: CosmicAPI):
 
                 now = datetime.now(timezone.utc).isoformat()
                 new_detail = {
-                    "user_role": user_role,
+                    "user_role": "user",
                     "user_query": data.user_message,
                     "query_create_on": now,
                     "llm_role": "assistant",
