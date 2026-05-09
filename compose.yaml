@@ -2,7 +2,7 @@ name: OpenSI-CoSMIC
 
 services:
   ollama:
-    container_name: ollama
+    container_name: cosmic-ollama
     restart: unless-stopped
     build:
       context: ./
@@ -11,13 +11,13 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [ gpu ]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     ports:
       - name: ollama
         target: 11434
@@ -50,37 +50,33 @@ services:
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [ gpu ]
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     volumes:
       # - type: volume
       #   source: open-webui
       #   target: /app/backend/data
-
       - type: volume
         source: cosmic-configs
         target: /app/scripts/configs
         # NOTE:
         # Live mounting for auto reload on dev only. Remove it and the
         # corresponding top-level volume on prod.
-        # - type: bind
-        #   source: ./
-        #   target: /app
+      - type: bind
+        source: ./
+        target: /app
         # NOTE:
         # This makes `.venv` directory container-native at runtime and not
         # trying to bypass the ignore at build time. This's very important when
         # you do the development in Windows.
-        # - type: volume
-        #   source: cosmic-fastapi-venv
-        #   target: /app/.venv
-
-      - .:/app
-      - /app/.venv
+      - type: volume
+        source: cosmic-fastapi-venv
+        target: /app/.venv
     tty: true
     # NOTE: For quick debugging (on dev only)
     ports:
@@ -91,7 +87,6 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
-
       - name: cosmic-debugpy
         target: 5678
         host_ip: 127.0.0.1
@@ -115,37 +110,6 @@ services:
         target: /qdrant/storage
     networks:
       - cosmic
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: ../CoSMIC_UI/Dockerfile.dev
-  #   container_name: vite-react-dev
-  #   # Vite dev server + HMR
-  #   command: yarn dev --host --port 5173
-  #   ports:
-  #     - "5173:5173"     # Vite dev server
-  #     - "24678:24678"   # Vite HMR websocket (Vite auto-selects; mapping helps in some envs)
-  #   environment:
-  #     # Fix file watching across Docker/WSL/VMs
-  #     - CHOKIDAR_USEPOLLING=true
-  #     - WATCHPACK_POLLING=true
-  #     - NODE_ENV=development
-  #     # If your app reads VITE_ vars, you can pass them here or from .env
-  #     - VITE_API_BASE_URL=http://cosmic:3000
-  #   volumes:
-  #     # Bind-mount your source for live reload
-  #     - .:/app
-  #     # Keep node_modules in container to avoid OS conflicts & speed up installs
-  #     - /app/node_modules
-  #   # For Yarn Berry zero-install, optionally persist .yarn cache:
-  #   #   - ./.yarn:/app/.yarn
-  #   #   - ./.yarn/cache:/app/.yarn/cache
-  #   # If you need specific user permissions on Linux:
-  #   # user: "${UID:-1000}:${GID:-1000}"
-  #   networks:
-  #     - cosmic_net
-
-
   # pycapsule:
   #   image: opensicbr/pycapsule:latest
   #   privileged: true
@@ -156,22 +120,21 @@ services:
   #     - /var/run/docker.sock:/var/run/docker.sock
   #     - shared_mount:/app/services/Container/mount_dir/synk_mount
   #   depends_on:
-  #     - ollama
+  #     ollama:
+  #       restart: true
+  #       condition: service_started
+  #       required: true
   #   networks:
-  #     - cosmic_net
-
+  #     - cosmic
 
 volumes:
   cosmic-ollama-data:
     name: cosmic-default-models
-
   cosmic-configs:
     name: cosmic-default-configs
-
   # NOTE: as explained above, define this only in dev (delete on prod).
-  # cosmic-fastapi-venv:
-  #   name: cosmic-ignore
-
+  cosmic-fastapi-venv:
+    name: cosmic-ignore
   cosmic-qdrant-data:
     name: cosmic-database-vector
   # cosmic-shared-mount:
@@ -179,7 +142,6 @@ volumes:
   #   external: true
   # open-webui: {}
   # pipelines: {}
-
 
 networks:
   cosmic:
