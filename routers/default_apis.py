@@ -27,18 +27,20 @@ from typing import Any
 
 
 ### Internal modules ###
-from ...src.opensi_cosmic import OpenSICoSMIC
-from ...cores.dependencies import (
+from ..src.opensi_cosmic import OpenSICoSMIC
+from ..cores.dependencies import (
     get_cosmic,
     get_openai_status,
     get_openai_key,
     get_config_path
 )
-from ...utils.chat_history import build_context_from_messages
-from ...utils.general import validate_openai_api_key
+from ..utils.chat_history import build_context_from_messages
+from ..utils.general import validate_openai_api_key
 
 
-router = APIRouter()
+router = APIRouter(
+    tags=["CoSMIC APIs"]
+)
 
 UPLOAD_BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent.joinpath("third_party")
 UPLOAD_BASE_DIR.mkdir(

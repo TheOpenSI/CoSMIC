@@ -16,8 +16,8 @@ from typing import Any
 
 
 ### Internal modules ###
-from .backend.routers import (
-    # models,
+from .routers import (
+    models,
     # cosmic,
     default_apis
 )
@@ -136,6 +136,6 @@ app.add_middleware(
 )
 
 # APIs - smanile
-app.include_router(default_apis.router, tags=["CoSMIC APIs"])
-# app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
+app.include_router(router=default_apis.router)
+app.include_router(router=models.router)
 # app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
