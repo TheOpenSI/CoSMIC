@@ -18,7 +18,7 @@ from typing import Any
 ### Internal modules ###
 from .routers import (
     models,
-    # cosmic,
+    cosmic,
     default_apis
 )
 from .src.opensi_cosmic import OpenSICoSMIC
@@ -138,4 +138,4 @@ app.add_middleware(
 # APIs - smanile
 app.include_router(router=default_apis.router)
 app.include_router(router=models.router)
-# app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
+app.include_router(router=cosmic.router)
