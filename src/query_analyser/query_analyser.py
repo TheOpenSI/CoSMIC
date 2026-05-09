@@ -2,6 +2,7 @@
 from sys import exit
 from pathlib import Path
 from re import search
+from httpx import Client
 
 
 ### Type hints ###
@@ -38,27 +39,6 @@ class QueryAnalyser:
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
         self.device = device
 
-        # Set a list of services.
-        self.services = {
-            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
-            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
-            "2": "generate or improve a code or answer a question in order to generate or improve a code",
-            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
-            "4": "Answer question about Academic Governance"
-        }
-
-        # Set chess services.
-        self.chess_services = {
-            "0.0": "predict next move given a chess FEN",
-            "0.1": "predict next move given a sequence of moves"
-        }
-
-        # Get full services.
-        self.full_services = {**self.services, **self.chess_services}
-
-        # Get the number of services.
-        self.num_services = len(self.services)
-
         # Set provided service.
         self.service_index = service_index
 
@@ -94,6 +74,40 @@ class QueryAnalyser:
             device=device
         )
 
+
+    def __call__(
+        self,
+        query: str,
+        verbose: bool = False
+    ):
+        """
+        Analyse query to get service option.
+
+        Args:
+            query   (str):              question.
+            verbose (bool, optional):   debug mode. Default to False.
+
+        Returns:
+            service_option      (str):  service option.
+            service_info_dict   (dict): updated information dictionary.
+        """
+        # Set a list of services.
+        self.services = self._get_services_desc()
+        print(f"Mapped services from DB (Desc only): {self.services}")
+
+        # Set chess subservices.
+        self.chess_subservices = {
+            "0.0": "predict next move given a chess FEN",
+            "0.1": "predict next move given a sequence of moves"
+        }
+
+        # Get full services.
+        self.full_services = {**self.services, **self.chess_subservices}
+        # print(f"Full services from Query Analyser: {self.full_services}")
+
+        # Get the number of services.
+        self.num_services = len(self.services)
+
         # Set user prompter for service option.
         self.user_prompter_service = get_instance(
             instances=query_user_prompt_instances,
@@ -109,6 +123,74 @@ class QueryAnalyser:
         )(
             services=self.services
         )
+
+        # Create an initial information dictionary.
+        service_info_dict = {
+            "query": query,
+            "system_information_relevance": False,
+            "system_information": ""
+        }
+
+        if self.service_index >= 0:
+            service_option = str(self.service_index)
+
+        else:
+            # Set the user prompter for service option.
+            self.llm.set_user_prompter(self.user_prompter_service)
+
+            # Get raw anlysis from LLM to select a service.
+            service_analysis = self.llm(question=query)[0]
+
+            # Get the service option.
+            service_option = self.mapping(response=service_analysis)
+            print(f"[Debug] Selected service after asking LLM from Query Analyser: {service_option}")
+
+            # Analysis information.
+            if verbose:
+                print(
+                    set_color(
+                        status="info",
+                        information=f"Query: {query}, analysis: {service_analysis}, service: {service_option}."
+                    )
+                )
+
+        if service_option == "0":
+            # Remove last symbol.
+            if query[-1] in [",", ".", "!", "?"]: query = query[:-1]
+
+            # Predict the next move in chess game.
+            service_option, service_info_dict = self.chess_parse(query, service_info_dict)
+
+        elif service_option == "1":
+            # Update the vector database.
+            service_option, service_info_dict = self.update_vector_database_parse(
+                query,
+                service_info_dict
+            )
+
+        else:
+            print("[Debug] Of course it selects service that is neither 'Chess' or 'Vector DB'")
+            # Set the user prompter for system information relevance.
+            self.llm.set_user_prompter(self.user_prompter_system_info)
+
+            # Get the response for whether the query is related to system information.
+            relevance_analysis: str = self.llm(question=query)[0]
+            print(f"[Debug] Do we need to output system info or not? {relevance_analysis}")
+
+            # Get whether the question is related to system information.
+            relevance: bool = self.get_system_information_relevance(relevance_analysis)
+
+            # Add the system information if it is related to the question.
+            if relevance:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
+                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+            else:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
+
+        print(f"[Debug] Question that trigger system info: {service_info_dict}")
+        return (service_option, service_info_dict)
 
 
     def quit(self):
@@ -152,12 +234,12 @@ class QueryAnalyser:
                         information=f"Unknown service '{option}' from '{response}'."
                     )
                 )
-
                 return "-1"
+
+            else:
+                return option
         else:
             return "-1"
-
-        return option
 
 
     def get_service(
@@ -339,78 +421,32 @@ class QueryAnalyser:
         return relevance
 
 
-    def __call__(
-        self,
-        query: str,
-        verbose: bool = False
-    ):
-        """
-        Analyse query to get service option.
+    def _get_services_desc(
+        self
+    ) -> dict[str, str]:
+        try:
+            with Client(
+                base_url="http://backend:8000/api/v1/services/",
+                params={"active": True},
+                timeout=10.0
+            ) as client:
+                response = client.get(url="")
+                response.raise_for_status()
+                datas = response.json()
 
-        Args:
-            query   (str):              question.
-            verbose (bool, optional):   debug mode. Default to False.
+            services: dict[str, str] = {}
+            for data in datas.get("result", []):
+                # NOTE:
+                # For legacy purposes. Change to normal when update the checking
+                # logic to handle `int` properly
+                services[str(data["id"] - 1)] = data["desc"]
+            return services
 
-        Returns:
-            service_option      (str):  service option.
-            service_info_dict   (dict): updated information dictionary.
-        """
-        # Create an initial information dictionary.
-        service_info_dict = {
-            "query": query,
-            "system_information_relevance": False,
-            "system_information": ""
-        }
-
-        if self.service_index >= 0:
-            service_option = str(self.service_index)
-
-        else:
-            # Set the user prompter for service option.
-            self.llm.set_user_prompter(self.user_prompter_service)
-
-            # Get raw anlysis from LLM to select a service.
-            service_analysis = self.llm(query)[0]
-
-            # Get the service option.
-            service_option = self.mapping(service_analysis)
-
-            # Analysis information.
-            if verbose:
-                print(set_color(
-                    status="info",
-                    information=f"Query: {query}, analysis: {service_analysis}, service: {service_option}."
-                ))
-
-        if service_option == "0":
-            # Remove last symbol.
-            if query[-1] in [",", ".", "!", "?"]: query = query[:-1]
-
-            # Predict the next move in chess game.
-            service_option, service_info_dict = self.chess_parse(query, service_info_dict)
-
-        elif service_option == "1":
-            # Update the vector database.
-            service_option, service_info_dict = self.update_vector_database_parse(
-                query,
-                service_info_dict
+        except Exception as fastapi_err:
+            print(
+                set_color(
+                    status="warning",
+                    information=f"Could not fetch active services from backend: {fastapi_err}. Fallback to empty..."
+                )
             )
-
-        else:
-            # Set the user prompter for system information relevance.
-            self.llm.set_user_prompter(self.user_prompter_system_info)
-
-            # Get the response for whether the query is related to system information.
-            relevance_analysis: str = self.llm(query)[0]
-
-            # Get whether the question is related to system information.
-            relevance: bool = self.get_system_information_relevance(relevance_analysis)
-
-            # Update system information relevance.
-            service_info_dict["system_information_relevance"] = relevance
-
-            # Add the system information if it is related to the question.
-            if relevance:
-                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-
-        return (service_option, service_info_dict)
+            return {}

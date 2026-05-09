@@ -27,22 +27,21 @@ class QueryAnalyserService(UserPromptBase):
         self.num_services = len(self.services)
 
         # Get the service string and option string for user prompt.
-        service_string = ""
-        option_string = ""
+        self.service_string = ""
+        self.option_string = ""
 
         # Get strings for user prompt.
         for idx, service_tag in enumerate(self.services):
             service = self.services[service_tag]
-            service_string += f"service {service_tag}: {service}"
-            option_string += f"service {service_tag}"
+            self.service_string += f"service {service_tag}: {service}"
+            self.option_string += f"service {service_tag}"
 
             if idx < self.num_services - 1:
-                service_string += ", "
-                option_string += " or "
+                self.service_string += ", "
+                self.option_string += " or "
 
-        # Set as global variables.
-        self.service_string = service_string
-        self.option_string = option_string
+        # print(f"[Debug] All services received from DB (full info): {self.service_string}")
+        # print(f"[Debug] All services received from DB (number only): {self.option_string}")
 
     def __call__(
         self,

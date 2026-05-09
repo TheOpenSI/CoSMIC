@@ -390,8 +390,8 @@ async def process_cosmic(
         raise http_exc
 
 
-    except Exception as fastapi_err:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"{fastapi_err}"
-        )
+    # except Exception as fastapi_err:
+    #     raise HTTPException(
+    #         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+    #         detail=f"{fastapi_err}"
+    #     )
