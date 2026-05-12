@@ -42,7 +42,7 @@ router = APIRouter(
     tags=["CoSMIC APIs"]
 )
 
-UPLOAD_BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent.joinpath("third_party")
+UPLOAD_BASE_DIR: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath("third_party")
 UPLOAD_BASE_DIR.mkdir(
     mode=0o777,
     parents=False,

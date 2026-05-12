@@ -22,11 +22,10 @@ services:
       - name: ollama
         target: 11434
         host_ip: 127.0.0.1
-        published: "11434"
+        published: "11435"
         protocol: tcp
         app_protocol: http
         mode: host
-
     networks:
       - cosmic
 
