@@ -831,10 +831,6 @@ class QueryAnalyser:
         return service_option, service_info_dict
 
 
-# =============================================================================================================
-# BENCHMARK — đọc CSV cột A, print service được chọn ra terminal
-# =============================================================================================================
-
 import argparse
 import time
 import pandas as pd
@@ -958,6 +954,7 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
+
     gt_col = args.gt_col if args.gt_col >= 0 else None
     run_benchmark(
         csv_path=args.csv,

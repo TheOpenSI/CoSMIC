@@ -442,11 +442,6 @@ class ServiceSelectorPrompt(SystemPromptBase):
         return messages
 
 
-# =============================================================================================================
-# Legacy classes — preserved for backward compatibility with other CoSMIC services.
-# =============================================================================================================
-
-
 class Mistral7bv01(SystemPromptBase):
     def __init__(self, prefix="<s>", **kwargs):
         super().__init__(prefix=prefix, **kwargs)

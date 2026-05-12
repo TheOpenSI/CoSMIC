@@ -187,9 +187,8 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/../..")
 
 from src.services.llms.prompts.user_prompt import UserPromptBase
 
-# =============================================================================================================
-
 # CHANGE 1: Define services inline — replaces the need for an external config file.
+
 SERVICES = {
     "abstract_algebra": "Contains theoretical mathematics problems focused on algebraic structures, used to evaluate abstract reasoning routing.",
     "anatomy": "Includes questions about human body structure and systems, helping identify life science and medical queries.",
@@ -262,9 +261,6 @@ class QueryAnalyserService(UserPromptBase):
         )
 
         return user_prompt
-
-
-# =============================================================================================================
 
 
 class QueryAnalyserSystemInfo(QueryAnalyserService):
