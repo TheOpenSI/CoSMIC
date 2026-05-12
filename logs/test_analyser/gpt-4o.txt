@@ -1,0 +1,13 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.09s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.44s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.54s/it]
+[92m[Success][0m Load /home/s448842/WorkSpace/github/CoSMIC/src/services/../../database/vector_database to vector database.
+1/340, fail list: [].
+51/340, fail list: [].
+101/340, fail list: [].
+151/340, fail list: [].
+201/340, fail list: [].
+251/340, fail list: [].
+301/340, fail list: [].
+340/340, fail list: [].
+[95m[Info][0m {'0.0': {'success': 40, 'fail': 0, 'success_rate': 100.0}, '0.1': {'success': 0, 'fail': 0, 'success_rate': 0}, '1': {'success': 100, 'fail': 0, 'success_rate': 100.0}, '2': {'success': 100, 'fail': 0, 'success_rate': 100.0}, '3': {'success': 100, 'fail': 0, 'success_rate': 100.0}}.
+Average success rate: 100.0.
+Error list: [].

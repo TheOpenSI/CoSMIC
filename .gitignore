@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.venv
+env/
+venv/
+*__pycache__*
+data
+third_party
+database
+database
+./scripts/configs/config_updated.yaml
+.idea

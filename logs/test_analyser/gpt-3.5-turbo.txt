@@ -1,0 +1,16 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.88s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.38s/it]
+[92m[Success][0m Load /home/s448842/WorkSpace/github/CoSMIC/src/services/../../database/vector_database to vector database.
+1/340, fail list: [].
+51/340, fail list: [].
+101/340, fail list: [].
+151/340, fail list: [143, 145].
+201/340, fail list: [143, 145, 159, 167, 169, 173, 174, 177, 181].
+251/340, fail list: [143, 145, 159, 167, 169, 173, 174, 177, 181, 231].
+301/340, fail list: [143, 145, 159, 167, 169, 173, 174, 177, 181, 231].
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+[93m[Warning][0m Invalid chess query. [tip: index a sequence of moves or FEN with :]
+340/340, fail list: [143, 145, 159, 167, 169, 173, 174, 177, 181, 231, 320, 321, 322].
+[95m[Info][0m {'0.0': {'success': 40, 'fail': 0, 'success_rate': 100.0}, '0.1': {'success': 0, 'fail': 0, 'success_rate': 0}, '1': {'success': 100, 'fail': 0, 'success_rate': 100.0}, '2': {'success': 90, 'fail': 10, 'success_rate': 90.0}, '3': {'success': 97, 'fail': 3, 'success_rate': 97.0}}.
+Average success rate: 96.75.
+Error list: [143, 145, 159, 167, 169, 173, 174, 177, 181, 231, 320, 321, 322].

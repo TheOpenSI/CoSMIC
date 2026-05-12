@@ -1,0 +1,12 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.83s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.26s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.34s/it]
+`config.hidden_act` is ignored, you should use `config.hidden_activation` instead.
+Gemma's activation function will be set to `gelu_pytorch_tanh`. Please, use
+`config.hidden_activation` if you want to override this behaviour.
+See https://github.com/huggingface/transformers/pull/29402 for more details.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.11it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.10it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.10it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.36it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.25it/s]
+[92m[Success][0m Load /home/s448842/WorkSpace/github/CoSMIC/src/services/../../database/vector_database to vector database.
+1/20, fail list: [].
+20/20, fail list: [].
+[95m[Info][0m {'0.0': {'success': 1, 'fail': 0, 'success_rate': 100.0}, '0.1': {'success': 1, 'fail': 0, 'success_rate': 100.0}, '1': {'success': 3, 'fail': 0, 'success_rate': 100.0}, '2': {'success': 1, 'fail': 0, 'success_rate': 100.0}, '3': {'success': 14, 'fail': 0, 'success_rate': 100.0}}.
+Average success rate: 100.0.
+Error list: [].
