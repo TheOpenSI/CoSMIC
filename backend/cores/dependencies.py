@@ -6,7 +6,7 @@ from fastapi import Request
 
 
 ### Internal modules ###
-from ..src.opensi_cosmic import OpenSICoSMIC
+from ...src.opensi_cosmic import OpenSICoSMIC
 
 
 def get_cosmic(request: Request) -> OpenSICoSMIC:

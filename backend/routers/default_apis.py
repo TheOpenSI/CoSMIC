@@ -27,15 +27,15 @@ from typing import Any
 
 
 ### Internal modules ###
-from ..src.opensi_cosmic import OpenSICoSMIC
+from ...src.opensi_cosmic import OpenSICoSMIC
 from ..cores.dependencies import (
     get_cosmic,
     get_openai_status,
     get_openai_key,
     get_config_path
 )
-from ..utils.chat_history import build_context_from_messages
-from ..utils.general import validate_openai_api_key
+from ...utils.chat_history import build_context_from_messages
+from ...utils.general import validate_openai_api_key
 
 
 router = APIRouter(

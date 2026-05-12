@@ -16,13 +16,13 @@ from typing import Any
 
 
 # TODO:these 3 will be deleted soon
-OG_CONFIG_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
+OG_CONFIG_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
     "scripts",
     "configs",
     "config.yaml"
 )
 NEW_CONFIG_PATH: Path = OG_CONFIG_PATH.parent.joinpath("config_updated.yaml")
-ENV_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(".env")
+ENV_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(".env")
 CORS_ALLOW_ORIGIN: list[str] = [
     "http://localhost:5173",    # FE binded Docker port
     "http://localhost:8000",    # BE binded Docker port

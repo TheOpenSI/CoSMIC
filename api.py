@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 ### Internal modules ###
-from .cores.globals import (
+from .backend.cores.globals import (
     NEW_CONFIG_PATH,
     CORS_REQUEST_TIMEOUT,
     config_healthcheck,
@@ -17,7 +17,7 @@ from .cores.globals import (
     CORS_ALLOW_METHODS,
     CORS_ALLOW_HEADERS
 )
-from .routers import (
+from .backend.routers import (
     models,
     cosmic,
     default_apis
