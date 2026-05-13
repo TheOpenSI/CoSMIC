@@ -306,8 +306,14 @@ async def process_cosmic(
 ):
     try:
         # Rebuild if config or API key changed
-        current_ts = config_path.stat().st_mtime
-        current_key = environ.get("OPENAI_API_KEY", dotenv_values(".env").get("OPENAI_API_KEY", ""))
+        current_ts: float = config_path.stat().st_mtime
+        current_key: str | None = environ.get(
+            "OPENAI_API_KEY",
+            dotenv_values(".env").get(
+                "OPENAI_API_KEY",
+                None
+            )
+        )
 
         if (current_ts != request.app.state.config_modify_timestamp) \
         or (current_key != request.app.state.openai_api_key):
