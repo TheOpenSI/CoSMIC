@@ -1,7 +1,18 @@
 ### Core modules ###
+from sys import stdout
 from pathlib import Path
-from httpx import Client
+from fastapi import (
+    HTTPException,
+    status
+)
+from httpx import (
+    Client,
+    ConnectError,
+    ConnectTimeout,
+    Response
+)
 from yaml import safe_load
+from pprint import pp
 
 
 ### Type hints ###
@@ -15,7 +26,6 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-from ...utils.log_tool import set_color
 
 
 
@@ -23,10 +33,10 @@ class QABase(ServiceBase):
     def __init__(
         self,
         query_analyser: LLMBase,
-        llm: LLMBase,
-        rag: RAGBase,
+        llm:            LLMBase,
+        rag:            RAGBase,
         code_generator: CodeGenerator,
-        config: str | None = None,
+        config:         str | None = None,
         **kwargs
     ):
         """
@@ -49,14 +59,12 @@ class QABase(ServiceBase):
         self.config: str | None = config
 
 
-
-
     def __call__(
         self,
-        query: str,
-        context: str | dict = "",
-        is_rag: bool = False,
-        verbose: bool = False
+        query:      str,
+        context:    str | dict  = "",
+        is_rag:     bool        = False,
+        verbose:    bool        = False
     ):
         """
         Process each QA.
@@ -251,10 +259,27 @@ class QABase(ServiceBase):
                     )
 
             # Get the response with retrieved context if applicable.
+            # NOTE:
+            # For legacy purposes. Change to 'dict[int, str]' type when update to
+            # handle `int` properly
+            services_names: dict[str, str] = self._get_services_name()
 
-            # TODO: needs to read the services from the DataBase and pass the service name to the prompter.
-            services_names = self._get_services_name()
-            print(f"Mapped services from DB (Name only): {services_names}")
+            # There is/are active services available in the system
+            if len(services_names) != 0:
+                pass
+
+            # No active services available in the system
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail={
+                        "status": "500 - Internal Server Error",
+                        "message": "{trig:s}: {cond:s}".format(
+                            trig="ServiceNotFoundError",
+                            cond="No active services found. Query Analyser requires at least 1 service enabled for usages"
+                        )
+                    }
+                )
 
             (response, raw_response) = self.llm(
                 question=user_prompt,
@@ -264,43 +289,132 @@ class QABase(ServiceBase):
 
 
         # Print service name.
-        # if  verbose                                                             \
-        # and (response is not None)                                              \
-        # and (service_option in self.query_analyser["full_services"].keys()):
-        #     response += "{0:s} ; {1:s}".format(
-        #         f"[service: {self.query_analyser["full_services"][service_option]}",
-        #         f"system info relevance: {system_information_relevance}]"
-        #     )
+        if  (verbose)               \
+        and (response is not None)  \
+        and (service_option in self.query_analyser["full_services"].keys()):
+            response += "{0:s} ; {1:s}".format(
+                f"[service: {self.query_analyser["full_services"][service_option]}",
+                f"system info relevance: {system_information_relevance}]"
+            )
 
-        return (response, raw_response, retrieve_score)
+        return (
+            response,
+            raw_response,
+            retrieve_score
+        )
 
 
     def _get_services_name(
-        self
+        self,
+        # TODO: util to dynamically check for valid endpoint format
+        endpoint:           str                     = "http://backend:8000/api/v1/services/",
+        endpoint_params:    dict[str, bool] | None  = {"active": True},
+        lifetime:           float                   = 10.0,
+        verbose:            bool                    = False
+    # NOTE:
+    # For legacy purposes. Change to 'dict[int, str]' type when update to handle
+    # `int` properly
     ) -> dict[str, str]:
+        """
+        Retrieve service names from the backend API with 0-based indexing.
+
+        This method fetches service data from the specified endpoint and returns
+        a dictionary mapping 0-based indices to service names. The transformation
+        subtracts 1 from the API's 1-based IDs to create 0-based indexing.
+
+        Args:
+            endpoint: Base URL of the services API endpoint.
+                Defaults to "http://backend:8000/api/v1/services/".
+            endpoint_params: optional query parameter for provided endpoint.
+                Defaults to {"active": True} to get active only services.
+            lifetime: HTTP client timeout in seconds.
+                Defaults to 10.0 seconds.
+            verbose: Enable pretty-printed debug output of service data.
+                When True, prints formatted service data using 'pprint'.
+
+        Returns:
+            Dictionary mapping 0-based indices to service names.
+            Example: {0: "memory", 1: "code_generation"}
+
+        Raises:
+            HTTPException: With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> services = obj._get_services_name(verbose=True)
+            >>> services[0]  # First service name
+            'academic_governance'
+        """
+        services: dict[str, str] = {}
+
         try:
             with Client(
-                base_url="http://backend:8000/api/v1/services/",
-                params={"active": True},
-                timeout=10.0
+                base_url=endpoint,
+                params=endpoint_params,
+                timeout=lifetime
             ) as client:
-                response = client.get(url="")
+                response: Response = client.get(url="")
                 response.raise_for_status()
-                datas = response.json()
+                datas: list[dict[str, Any]] = response.json().get("result", [])
 
-            services: dict[str, str] = {}
-            for data in datas.get("result", []):
-                # NOTE:
-                # For legacy purposes. Change to normal when update the checking
-                # logic to handle `int` properly
-                services[str(data["id"] - 1)] = data["name"]
-            return services
+            if len(datas) == 0:
+                # No active services available
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    print(
+                        "{debug_msg:s}\n{foot_sep:s}".format(
+                            debug_msg="No active services available...",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    return {}
 
-        except Exception as fastapi_err:
-            print(
-                set_color(
-                    status="warning",
-                    information=f"Could not fetch active services from backend: {fastapi_err}. Fallback to empty..."
-                )
+                else:
+                    return {}
+
+            else:
+                # There is/are active services available
+                for data in datas:
+                    # NOTE:
+                    # For legacy purposes. Change to normal when update the checking
+                    # logic to handle `int` properly
+                    services.update({str(data["id"] - 1): data["name"]})
+
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    pp(
+                        object=services,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    print(f"{'=' * 80}")
+                    return services
+
+                else:
+                    return services
+
+
+        except ConnectError as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
             )
-            return {}
+
+
+        except ConnectTimeout as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
