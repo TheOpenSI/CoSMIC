@@ -289,9 +289,11 @@ class LLMBase(ServiceBase):
 
         # Decode response since some are torch.tensor.
         raw_response = self.tokenizer.decode(response_encoded)
+        print(f"[Debug] Raw response from LLM: {raw_response}")
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
         response = self.truncate_response(raw_response)
+        print(f"[Debug] Truncate response from LLM: {response}")
 
         # Return response with and without truncation.
         return (response, raw_response)

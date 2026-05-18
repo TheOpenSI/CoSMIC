@@ -1,25 +1,11 @@
 ### Core modules ###
-from sys import (
-    exit,
-    stdout
-)
+from sys import exit
 from pathlib import Path
 from re import search
-from httpx import (
-    Client,
-    Response,
-    ConnectError,
-    ConnectTimeout
-)
-from fastapi import (
-    HTTPException,
-    status
-)
-from pprint import pp
+from httpx import Client
 
 
 ### Type hints ###
-from ...types.query_analyser import ServicesJsonResponse
 
 
 ### Internal modules ###
@@ -53,99 +39,158 @@ class QueryAnalyser:
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
         self.device = device
 
-        # Set a list of services.
+        # Set provided service.
+        self.service_index = service_index
 
-        # NOTE:
-        # Due to the way current logic checking for selected service after
-        # receiving the response from LLM based on Query Analyser's refined
-        # question from user query, we've to do this kind of workaround until
-        # it get updates to handle 'int' type correctly (which it should be).
-        services_desc: dict[int, str] = self._get_service_desc(verbose=True)
+        # Build LLM instance from class defined in .py if llm_name is supported.
+        if llm_name in LLM_INSTANCE_DICT.keys():
+            llm_instance_name = LLM_INSTANCE_DICT[llm_name]
 
-        # No active services available in the system
-        if len(services_desc) == 0:
-            # TODO: do we want to deny using query analyser or default to using 
-            # service 3 - general QA answering?
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail={
-                    "status": "500 - Internal Server Error",
-                    "message": "{trig:s}: {cond:s}".format(
-                        trig="ServiceNotFoundError",
-                        cond="No active services found. Query Analyser requires at least 1 service enabled for usages"
-                    )
-                }
-            )
+        elif llm_name.find("gpt") > -1:
+            llm_instance_name = "GPT"
 
-        # There is/are active services available in the system
+        elif llm_name.find("ollama") > -1:
+            llm_instance_name = "Ollama"
+
         else:
-            self.legacy_services_desc: dict[str, str] = {
-                str(str_id): desc \
-                for (str_id, desc) in services_desc.items()
-            }
+            print(
+                set_color(
+                    status="error",
+                    information=f"Unsupported LLM: {llm_name}."
+                )
+            )
+            exit(1)
 
-            # Set chess subservices.
-            self.chess_subservices_desc: dict[str, str] = {
-                "0.0": "predict next move given a chess FEN",
-                "0.1": "predict next move given a sequence of moves"
-            }
+        # Build LLM instance from class defined in .py
+        self.llm = get_instance(
+            instances=llm_instances,
+            instance_name=llm_instance_name
+        )(
+            llm_name=llm_name,
+            seed=seed,
+            is_quantized=is_quantized,
+            use_example=False,
+            is_truncate_response=True,
+            device=device
+        )
 
-            # Get full services.
-            self.full_services = {**self.legacy_services_desc, **self.chess_subservices_desc}
 
-            # Get the number of services.
-            self.num_services = len(self.legacy_services_desc)
+    def __call__(
+        self,
+        query: str,
+        verbose: bool = False
+    ):
+        """
+        Analyse query to get service option.
 
-            # Set provided service.
-            self.service_index = service_index
+        Args:
+            query   (str):              question.
+            verbose (bool, optional):   debug mode. Default to False.
 
-            # Build LLM instance from class defined in .py if llm_name is supported.
-            if llm_name in LLM_INSTANCE_DICT.keys():
-                llm_instance_name = LLM_INSTANCE_DICT[llm_name]
+        Returns:
+            service_option      (str):  service option.
+            service_info_dict   (dict): updated information dictionary.
+        """
+        # Set a list of services.
+        self.services = self._get_services_desc()
+        print(f"Mapped services from DB (Desc only): {self.services}")
 
-            elif llm_name.find("gpt") > -1:
-                llm_instance_name = "GPT"
+        # Set chess subservices.
+        self.chess_subservices = {
+            "0.0": "predict next move given a chess FEN",
+            "0.1": "predict next move given a sequence of moves"
+        }
 
-            elif llm_name.find("ollama") > -1:
-                llm_instance_name = "Ollama"
+        # Get full services.
+        self.full_services = {**self.services, **self.chess_subservices}
+        # print(f"Full services from Query Analyser: {self.full_services}")
 
-            else:
+        # Get the number of services.
+        self.num_services = len(self.services)
+
+        # Set user prompter for service option.
+        self.user_prompter_service = get_instance(
+            instances=query_user_prompt_instances,
+            instance_name="QueryAnalyserService"
+        )(
+            services=self.services
+        )
+
+        # Set user prompter for system information.
+        self.user_prompter_system_info = get_instance(
+            instances=query_user_prompt_instances,
+            instance_name="QueryAnalyserSystemInfo"
+        )(
+            services=self.services
+        )
+
+        # Create an initial information dictionary.
+        service_info_dict = {
+            "query": query,
+            "system_information_relevance": False,
+            "system_information": ""
+        }
+
+        if self.service_index >= 0:
+            service_option = str(self.service_index)
+
+        else:
+            # Set the user prompter for service option.
+            self.llm.set_user_prompter(self.user_prompter_service)
+
+            # Get raw anlysis from LLM to select a service.
+            service_analysis = self.llm(question=query)[0]
+
+            # Get the service option.
+            service_option = self.mapping(response=service_analysis)
+            print(f"[Debug] Selected service after asking LLM from Query Analyser: {service_option}")
+
+            # Analysis information.
+            if verbose:
                 print(
                     set_color(
-                        status="error",
-                        information=f"Unsupported LLM: {llm_name}."
+                        status="info",
+                        information=f"Query: {query}, analysis: {service_analysis}, service: {service_option}."
                     )
                 )
-                exit(1)
 
-            # Build LLM instance from class defined in .py
-            self.llm = get_instance(
-                instances=llm_instances,
-                instance_name=llm_instance_name
-            )(
-                llm_name=llm_name,
-                seed=seed,
-                is_quantized=is_quantized,
-                use_example=False,
-                is_truncate_response=True,
-                device=device
+        if service_option == "0":
+            # Remove last symbol.
+            if query[-1] in [",", ".", "!", "?"]: query = query[:-1]
+
+            # Predict the next move in chess game.
+            service_option, service_info_dict = self.chess_parse(query, service_info_dict)
+
+        elif service_option == "1":
+            # Update the vector database.
+            service_option, service_info_dict = self.update_vector_database_parse(
+                query,
+                service_info_dict
             )
 
-            # Set user prompter for service option.
-            self.user_prompter_service = get_instance(
-                instances=query_user_prompt_instances,
-                instance_name="QueryAnalyserService"
-            )(
-                services=self.legacy_services_desc
-            )
+        else:
+            print("[Debug] Of course it selects service that is neither 'Chess' or 'Vector DB'")
+            # Set the user prompter for system information relevance.
+            self.llm.set_user_prompter(self.user_prompter_system_info)
 
-            # Set user prompter for system information.
-            self.user_prompter_system_info = get_instance(
-                instances=query_user_prompt_instances,
-                instance_name="QueryAnalyserSystemInfo"
-            )(
-                services=self.legacy_services_desc
-            )
+            # Get the response for whether the query is related to system information.
+            relevance_analysis: str = self.llm(question=query)[0]
+            print(f"[Debug] Do we need to output system info or not? {relevance_analysis}")
+
+            # Get whether the question is related to system information.
+            relevance: bool = self.get_system_information_relevance(relevance_analysis)
+
+            # Add the system information if it is related to the question.
+            if relevance:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
+                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+            else:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
+
+        print(f"[Debug] Question that trigger system info: {service_info_dict}")
+        return (service_option, service_info_dict)
 
 
     def quit(self):
@@ -174,7 +219,7 @@ class QueryAnalyser:
 
         # Truncate to get the option index.
         option = search(
-            pattern=r"service (\d{1,3}\.\d{1,3}|\d{1,3})",
+            pattern="service (\d{1,3}\.\d{1,3}|\d{1,3})",
             string=response,
             flags=0
         )
@@ -189,12 +234,12 @@ class QueryAnalyser:
                         information=f"Unknown service '{option}' from '{response}'."
                     )
                 )
-
                 return "-1"
+
+            else:
+                return option
         else:
             return "-1"
-
-        return option
 
 
     def get_service(
@@ -214,7 +259,7 @@ class QueryAnalyser:
         if index not in self.full_services.keys():
             return None
 
-        return self.legacy_services_desc[str(object=index)]
+        return self.services[str(object=index)]
 
 
     def chess_parse(
@@ -238,7 +283,7 @@ class QueryAnalyser:
 
         # Parse move string.
         move_match = search(
-            pattern=r"[\[,\:](.*?[,\s].*?)[\.,\]]?$",
+            pattern="[\[,\:](.*?[,\s].*?)[\.,\]]?$",
             string=query,
             flags=0
         )
@@ -246,8 +291,8 @@ class QueryAnalyser:
         # Parse FEN string.
         fen_match = search(
             pattern="{0:s}{1:s}".format(
-                r"(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)",
-                r"\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$"
+                "(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)",
+                "\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$"
             ),
             string=query,
             flags=0
@@ -309,7 +354,7 @@ class QueryAnalyser:
         if is_a_document:
             # Parse move string
             document_path = search(
-                pattern=r"(?<=\:\s)(.*?)+\.pdf",
+                pattern="(?<=\:\s)(.*?)+\.pdf",
                 string=query,
                 flags=0
             )
@@ -336,7 +381,7 @@ class QueryAnalyser:
         else:
             # Extract text.
             text = search(
-                pattern=r"\:((\"|\')?(.*?)[\",\']?$)",
+                pattern="\:((\"|\')?(.*?)[\",\']?$)",
                 string=query,
                 flags=0
             )
@@ -376,190 +421,32 @@ class QueryAnalyser:
         return relevance
 
 
-    def __call__(
-        self,
-        query: str,
-        verbose: bool = False
-    ):
-        """
-        Analyse query to get service option.
+    def _get_services_desc(
+        self
+    ) -> dict[str, str]:
+        try:
+            with Client(
+                base_url="http://backend:8000/api/v1/services/",
+                params={"active": True},
+                timeout=10.0
+            ) as client:
+                response = client.get(url="")
+                response.raise_for_status()
+                datas = response.json()
 
-        Args:
-            query   (str):              question.
-            verbose (bool, optional):   debug mode. Default to False.
+            services: dict[str, str] = {}
+            for data in datas.get("result", []):
+                # NOTE:
+                # For legacy purposes. Change to normal when update the checking
+                # logic to handle `int` properly
+                services[str(data["id"] - 1)] = data["desc"]
+            return services
 
-        Returns:
-            service_option      (str):  service option.
-            service_info_dict   (dict): updated information dictionary.
-        """
-        # Create an initial information dictionary.
-        service_info_dict = {
-            "query": query,
-            "system_information_relevance": False,
-            "system_information": ""
-        }
-
-        if self.service_index >= 0:
-            service_option = str(self.service_index)
-
-        else:
-            # Set the user prompter for service option.
-            self.llm.set_user_prompter(self.user_prompter_service)
-
-            # Get raw anlysis from LLM to select a service.
-            service_analysis = self.llm(query)[0]
-
-            # Get the service option.
-            service_option = self.mapping(service_analysis)
-
-            # Analysis information.
-            if verbose:
-                print(set_color(
-                    status="info",
-                    information=f"Query: {query}, analysis: {service_analysis}, service: {service_option}."
-                ))
-
-        if service_option == "0":
-            # Remove last symbol.
-            if query[-1] in [",", ".", "!", "?"]: query = query[:-1]
-
-            # Predict the next move in chess game.
-            service_option, service_info_dict = self.chess_parse(query, service_info_dict)
-
-        elif service_option == "1":
-            # Update the vector database.
-            service_option, service_info_dict = self.update_vector_database_parse(
-                query,
-                service_info_dict
+        except Exception as fastapi_err:
+            print(
+                set_color(
+                    status="warning",
+                    information=f"Could not fetch active services from backend: {fastapi_err}. Fallback to empty..."
+                )
             )
-
-        else:
-            # Set the user prompter for system information relevance.
-            self.llm.set_user_prompter(self.user_prompter_system_info)
-
-            # Get the response for whether the query is related to system information.
-            relevance_analysis: str = self.llm(query)[0]
-
-            # Get whether the question is related to system information.
-            relevance: bool = self.get_system_information_relevance(relevance_analysis)
-
-            # Update system information relevance.
-            service_info_dict["system_information_relevance"] = relevance
-
-            # Add the system information if it is related to the question.
-            if relevance:
-                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-
-        return (service_option, service_info_dict)
-
-
-    def _get_service_desc(
-        self,
-        # TODO: util to dynamically check for valid endpoint format
-        endpoint:           str                     = "http://backend:8000/api/v1/services/",
-        endpoint_params:    dict[str, bool] | None  = {"active": True},
-        lifetime:           float                   = 10.0,
-        verbose:            bool                    = False
-    ) -> dict[int, str]:
-        """
-        Retrieve service descriptions from the backend API with 0-based indexing.
-
-        This method fetches service data from the specified endpoint and returns
-        a dictionary mapping 0-based indices to service descriptions. The
-        transformation subtracts 1 from the API's 1-based IDs to create 0-based
-        indexing.
-
-        Args:
-            endpoint: Base URL of the services API endpoint.
-                Defaults to "http://backend:8000/api/v1/services/".
-            endpoint_params: optional query parameter for provided endpoint.
-                Defaults to {"active": True} to get active only services.
-            lifetime: HTTP client timeout in seconds.
-                Defaults to 10.0 seconds.
-            verbose: Enable pretty-printed debug output of service data.
-                When True, prints formatted service data using 'pprint'.
-
-        Returns:
-            Dictionary mapping 0-based indices to service descriptions.
-            Example: {0: "<service 1 description>", 1: "<service 2 description>"}
-
-        Raises:
-            HTTPException: With status code 500 if any connection error occurs
-                (ConnectError, ConnectTimeout) or other unexpected exceptions.
-
-        Example:
-            >>> services = obj._get_services_desc(verbose=True)
-            >>> services[0]  # First service description
-            'Answer question about Academic Governance.'
-        """
-        services_desc_dict: dict[int, str] = {}
-
-        with Client(
-            base_url=endpoint,
-            params=endpoint_params,
-            timeout=lifetime
-        ) as client:
-            try:
-                response:   Response                    = client.get(url="/")
-                data:       list[ServicesJsonResponse]  = response.json()["result"]
-
-                if len(data) == 0:
-                    # No active services available
-                    if verbose:
-                        print(
-                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                                head_sep=f"{'=' * 80}",
-                                body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)   [DEBUG]",
-                                foot_sep=f"{'=' * 80}"
-                            )
-                        )
-                        print(
-                            "{debug_msg:s}\n{foot_sep:s}".format(
-                                debug_msg="No active services available...",
-                                foot_sep=f"{'=' * 80}"
-                            )
-                        )
-                        return services_desc_dict
-
-                    else:
-                        return services_desc_dict
-
-                else:
-                    # There is/are active services available
-                    for service_data in data:
-                        # NOTE: for matching the hard-coded style until updating the logic
-                        service_id:     int = service_data["id"] - 1
-                        services_desc:  str = service_data["desc"]
-
-                        services_desc_dict.update({service_id: services_desc})
-
-                    if verbose:
-                        print(
-                            "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                                head_sep=f"{'=' * 80}",
-                                body_msg="[DEBUG]   SERVICES DATA ('DESC' ONLY)   [DEBUG]",
-                                foot_sep=f"{'=' * 80}"
-                            )
-                        )
-                        pp(
-                            object=services_desc_dict,
-                            stream=stdout,
-                            indent=4 # Prefer tab over spaces indentation
-                        )
-                        print(f"{'=' * 80}")
-                        return services_desc_dict
-
-                    else:
-                        return services_desc_dict
-
-            except ConnectError as httpx_err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=f"{httpx_err}"
-                )
-
-            except ConnectTimeout as httpx_err:
-                raise HTTPException(
-                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail=f"{httpx_err}"
-                )
+            return {}

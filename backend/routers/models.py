@@ -9,16 +9,21 @@ from pydantic import BaseModel
 
 
 ### Type hints ###
+from typing import TYPE_CHECKING
 
 
 ### Internal modules ###
-from ...src.services.llms.Ollama import Ollama
+if TYPE_CHECKING:
+    from ..src.services.llms.Ollama import Ollama
 
 
-router = APIRouter()
+router: APIRouter = APIRouter(
+    prefix="/api/v1/models",
+    tags=["Ollama Models APIs"]
+)
 
 
-ollama_client = Client(
+ollama_client: Client = Client(
     host="http://ollama:11434",
     headers={"Content-Type": "application/json"}
 )
