@@ -104,8 +104,13 @@ Set-Location CoSMIC\
 ---
 # Setup & Execution
 
+> [!IMPORTANT]
+> Before following either setup you have chosen from above instruction, ensure that our **backend and database** are available before **CoSMIC** since all API endpoints called within the codebase are coming from [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB/tree/dev) repository. [Refer to the setup guide from linked repository for more details](https://github.com/TheOpenSI/COSMIC-DB/blob/dev/README.md)
+
 > [!TIP]
-> Docker provides an isolated environment where all services run in containers. This is recommended if you want to avoid installing Ollama or other dependencies directly on your machine.
+> Docker provides an isolated environment where all services run in containers.
+> This is recommended if you want to avoid installing Ollama or other dependencies
+> directly on your machine.
 
 ## Docker Setup
 
