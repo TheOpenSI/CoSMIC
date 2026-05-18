@@ -72,9 +72,9 @@ Before setting up, ensure you have the appropriate tools installed depending on 
 | **Tool** | **Docker Setup**        | **Native Setup**        |
 | -------- | ----------------------- | ----------------------- |
 | Docker   | ✅ Mandatory            | ❌ Not required         |
-| Python   | ✅ Mandatory (v3.14+)   | ✅ Mandatory (v3.14+)   |
-| uv       | ✅ Mandatory            | ✅ Mandatory (latest)   |
-| Ollama   | ⚠️ Optional             | ⚠️ Optional             |
+| Python   | ❌ Not required         | ✅ Mandatory (v3.14+)   |
+| uv       | ❌ Not required            | ✅ Mandatory (latest)   |
+| Ollama   | ❌ Not required         | ⚠️ Optional             |
 
 
 Then, start by cloning the repository using your preferred method:
