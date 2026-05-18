@@ -296,7 +296,6 @@ If this repository is useful for your work, please cite the paper below:
 For technical support, please contact:
 1. [Carlos Kuhn](mailto:carlos.kuhn@canberra.edu.au)
 2. [Muntasir Adnan](mailto:adnan.adnan@canberra.edu.au)
-3. [Zohaib Hammad](mailto:zohaib.hammad@canberra.edu.au)
 
 For project support, please contact:
 1. [Carlos C. N. Kuhn](mailto:carlos.noschangkuhn@canberra.edu.au)
