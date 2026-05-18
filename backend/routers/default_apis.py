@@ -27,22 +27,22 @@ from typing import Any
 
 
 ### Internal modules ###
-from ..src.opensi_cosmic import OpenSICoSMIC
+from ...src.opensi_cosmic import OpenSICoSMIC
 from ..cores.dependencies import (
     get_cosmic,
     get_openai_status,
     get_openai_key,
     get_config_path
 )
-from ..utils.chat_history import build_context_from_messages
-from ..utils.general import validate_openai_api_key
+from ...utils.chat_history import build_context_from_messages
+from ...utils.general import validate_openai_api_key
 
 
 router = APIRouter(
     tags=["CoSMIC APIs"]
 )
 
-UPLOAD_BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent.joinpath("third_party")
+UPLOAD_BASE_DIR: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath("third_party")
 UPLOAD_BASE_DIR.mkdir(
     mode=0o777,
     parents=False,
@@ -306,8 +306,14 @@ async def process_cosmic(
 ):
     try:
         # Rebuild if config or API key changed
-        current_ts = config_path.stat().st_mtime
-        current_key = environ.get("OPENAI_API_KEY", dotenv_values(".env").get("OPENAI_API_KEY", ""))
+        current_ts: float = config_path.stat().st_mtime
+        current_key: str | None = environ.get(
+            "OPENAI_API_KEY",
+            dotenv_values(".env").get(
+                "OPENAI_API_KEY",
+                None
+            )
+        )
 
         if (current_ts != request.app.state.config_modify_timestamp) \
         or (current_key != request.app.state.openai_api_key):

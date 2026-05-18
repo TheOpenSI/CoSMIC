@@ -14,9 +14,9 @@ from .OllamaPullManager import OllamaPullManager
 class Ollama(LLMBase):
     def __init__(
         self,
-        llm_name: str = "llama3.2",
+        llm_name:       str = "llama3.2",
         container_name: str = "cosmic-ollama",
-        local_port: int = 11434,
+        local_port:     int = 11434,
         **kwargs
     ) -> None:
         """
@@ -56,7 +56,8 @@ class Ollama(LLMBase):
         Set the local client for the Ollama container.
 
         Args:
-            container_name (str): Name of the Ollama container.
+            container_name  (str): Name of the Ollama container.
+            port            (int): Public port to access Ollama API.
         """
         client = Client(
             host = f"http://{container_name}:{port}",

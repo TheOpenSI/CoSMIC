@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 ### Internal modules ###
-from .cores.globals import (
+from .backend.cores.globals import (
     NEW_CONFIG_PATH,
     CORS_REQUEST_TIMEOUT,
     config_healthcheck,
@@ -17,7 +17,7 @@ from .cores.globals import (
     CORS_ALLOW_METHODS,
     CORS_ALLOW_HEADERS
 )
-from .routers import (
+from .backend.routers import (
     models,
     cosmic,
     default_apis
@@ -31,7 +31,18 @@ async def lifespan(app: FastAPI):
     # Equivalent to the explicit 'startup' event
     config_healthcheck()
 
-    openai_api_key: str | None = load_openai_key()
+    openai_api_key:         str | None      = load_openai_key()
+    opensi_cosmic_instance: OpenSICoSMIC    = OpenSICoSMIC(config_path=str(NEW_CONFIG_PATH))
+
+    # Ref:
+    # https://www.starlette.dev/applications/#storing-state-on-the-app-instance
+    # https://fastapi.tiangolo.com/reference/fastapi/#fastapi.FastAPI.state
+    app.state.opensi_cosmic             = opensi_cosmic_instance
+    # TODO: these 4 will be deleted soon
+    app.state.openai_api_key            = openai_api_key
+    app.state.openai_api_status         = opensi_cosmic_instance.check_openai_key()
+    app.state.config_path               = NEW_CONFIG_PATH
+    app.state.config_modify_timestamp   = NEW_CONFIG_PATH.stat().st_mtime
 
     if openai_api_key is None:
         print(
@@ -42,17 +53,8 @@ async def lifespan(app: FastAPI):
         )
 
     else:
-        opensi_cosmic_instance: OpenSICoSMIC = OpenSICoSMIC(config_path=str(NEW_CONFIG_PATH))
-
-        # Ref:
-        # https://www.starlette.dev/applications/#storing-state-on-the-app-instance
-        # https://fastapi.tiangolo.com/reference/fastapi/#fastapi.FastAPI.state
-        app.state.opensi_cosmic             = opensi_cosmic_instance
-        # TODO: these 4 will be deleted soon
-        app.state.openai_api_key            = openai_api_key
-        app.state.openai_api_status         = opensi_cosmic_instance.check_openai_key()
-        app.state.config_path               = NEW_CONFIG_PATH
-        app.state.config_modify_timestamp   = NEW_CONFIG_PATH.stat().st_mtime
+        # We're absolutely okay with not using OpenAI API key
+        pass
 
 
     # Server is running
