@@ -14,50 +14,36 @@
 CoSMIC/
 ├── backend/
 │   ├── cores/                    # Core FastAPI application setup
-│   └── routers/
-│       ├── api_endpoints/        # CoSMIC-only API endpoints (e.g, pulling Ollama models from `/models` endpoint)
-│       └── normal_endpoints/     # CoSMIC non-API endpoints (e.g, sending user queries to Query Analyser using `/cosmic`)
-├── bins/                         # 3rd party binaries and vendored tools (e.g. Stockfish engine, FEN board renderer)
+│   └── routers/                  # CoSMIC API & non-API endpoints
 ├── data/                         # Datasets in certain format (e.g., CSVs, Excels, etc)
+├── default/                      # Dataset templates (TODO: to be merged into `/data` directory)
 ├── docker/                       # Containerisation resources and orchestration files
-│   ├── configs/                  # Non-sensitive config files for Docker services
 │   ├── dockerfiles/              # Dockerfile for each service defined in the Compose file
-│   └── secrets/                  # Secure storage for sensitive data (e.g., model special credentials)
-├── docs/                         # Project documentation (e.g., OAuth2 guide)
-├── assets/                       # Static files (e.g., favicon)
-├── examples/                     # Standalone runnable examples and demo scripts
-├── prompts/                      # Prompting logic for Query Analyser, specialised services, or SLM abstractions
-│   ├── system_prompts/           # Define the knowledge base and behavioural boundaries of each middleman layer
-│   │   ├── query_analyser/       # Instructs Query Analyser on how to classify and route incoming queries
-│   │   ├── services/             # Instructs each specialised service on its domain knowledge and constraints
-│   │   └── slms/                 # Instructs the SLM abstraction layer on output format and interaction rules
-│   └── user_prompts/             # Define how each middleman layer re-forms the end-user's input before forwarding it
-│       ├── query_analyser/       # Structures the raw query into a well-formed classification request for the SLM
-│       ├── services/             # Restructures the query into a precise, domain-optimised prompt for the target SLM
-│       └── slms/                 # Applies any final formatting or chain-of-thought (CoT) scaffolding before SLM inference
-├── src/
-│   ├── models/                   # LLM class definitions and abstractions (e.g., Ollama, ChatGPT, Mistral)
+├── modules/                      # Subservices for each of CoSMIC services (if any) (TODO: to be re-structured inside `/src` directory)
+├── pipelines/                    # Depricated CoSMIC pipeline logic to work with OpenWebUI (TODO: to be removed from new structure)
+├── scripts/                      # Standalone runnable examples and demo scripts
+│   ├── configs/                  # Default config data for Query Analyser to use depends on selected service (TODO: to be removed and call from BE instead)
+│   └── <others>/                 # Unit test files (TODO: to be moved into its own `/tests` folder on project root)
+├── src/                          # This is where the "heart" of CoSMIC located
 │   ├── query_analyser/           # SLM-based query routing and user prompt construction
-│   └── services/                 # Specialised AI service (similar to AI skills) implementations
-│       ├── chess/                # Chess services and subserivces (if any)
-│       ├── code_generation/      # Code services and subservices (if any)
-│       ├── memory/               # RAG and Vector DB services and subservices (if any)
-│       ├── general_qa_answering/ # General chatbot services and subservices (if any)
-│       └── academic_governance/  # Acedemic Governance services and subservices (if any)
-├── tests/                        # All test suites and evaluation notebooks
+│   └── services/                 # Specialised AI service (similar to AI skills) implementations (TODO: to be re-structured in a new format for better understanding)
+│       └── llms/                 # Contains base class for calling SLM providers
+│           └── prompts/          # Contains smart prompting techniques from user queries to use for Query Analyser and specific CoSMIC services usages
 ├── utils/                        # Helper functions and shared utility scripts
-├── __init__.py                   # Package initialisation (mainly for relative import usages)
 ├── .dockerignore                 # Files excluded from Docker builds
 ├── .gitattributes                # Git configuration for path attributes
 ├── .gitignore                    # Files excluded from version control
 ├── .python-version               # Pinned Python version for the project (beneficial to `uv` only)
-├── compose.yaml                  # Running CoSMIC in Docker environment by building Docker Compose file
 ├── CONTRIBUTING                  # Guidelines for project contributors
 ├── LICENSE                       # Project licensing information (MIT)
-├── main.py                       # Entry point for FastAPI application
-├── pyproject.toml                # Project metadata and dependency definitions
+├── OAuth.md                      # OAuth setup guide if using a hosting provider (TODO: to be moved inside `/docs` directory)
 ├── README.md                     # This is where you see the project hierarchy
-└── uv.lock                       # Pinned dependency lockfile via `uv`
+├── __init__.py                   # Package initialisation (mainly for relative import usages)
+├── compose.yaml                  # Running CoSMIC in Docker environment by building Docker Compose file
+├── api.py                        # Entry point for FastAPI application (TODO: to be moved inside `/backend/cores` directory and use `main.py` as entry point instead)
+├── pyproject.toml                # Project metadata and dependency definitions
+├── uv.lock                       # Pinned dependency lockfile via `uv`
+└── <other files>                 # Either depricated, not used anymore, or waiting for the new structure to be working on
 ```
 
 ---
@@ -272,7 +258,7 @@ Currently, **CoSMIC** provides 5 core services, each discoverable via the `/serv
 
 # OAuth Implementation
 
-OAuth authentication can be integrated to enhance security and manage user access. For detailed setup instructions, refer to the [OAuth guide](docs/OAuth.md).
+OAuth authentication can be integrated to enhance security and manage user access. For detailed setup instructions, refer to the [OAuth guide](./OAuth.md).
 
 ---
 
