@@ -55,12 +55,12 @@ Before setting up, ensure you have the appropriate tools installed depending on 
 - **Docker setup** (running CoSMIC in isolated containers)
 
 
-| **Tool** | **Docker Setup**        | **Native Setup**        |
-| -------- | ----------------------- | ----------------------- |
-| Docker   | ✅ Mandatory            | ❌ Not required         |
-| Python   | ❌ Not required         | ✅ Mandatory (v3.14+)   |
-| uv       | ❌ Not required            | ✅ Mandatory (latest)   |
-| Ollama   | ❌ Not required         | ⚠️ Optional             |
+| **Tool** | **Docker Setup**                       | **Native Setup**                               |
+| -------- | -------------------------------------- | ---------------------------------------------- |
+| Docker   | $\textcolor{green}{\text{Mandatory}}$  | $\textcolor{red}{\text{Not required}}$         |
+| Python   | $\textcolor{red}{\text{Not required}}$ | $\textcolor{green}{\text{Mandatory (v3.14+)}}$ |
+| uv       | $\textcolor{red}{\text{Not required}}$ | $\textcolor{green}{\text{Mandatory (latest)}}$ |
+| Ollama   | $\textcolor{red}{\text{Not required}}$ | $\textcolor{green}{\text{Mandatory}}$          |
 
 
 Then, start by cloning the repository using your preferred method:
@@ -142,10 +142,6 @@ docker compose up --build -d # Docker run through lightweight Linux VM on Window
 > On the first run, Ollama will automatically pull the default model pre-defined
 > in our configuration, which is fetched from the `/config` API endpoint in the
 > [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo. This may take a while depending on your connection speed.
-> Therefore, feels free to go and grab a coffee, say *good morning* to your AI
-> agents, get the kids to school, etc while waiting and CoSMIC will be ready
-> when you are. Or you sit there and monitor the progress with this command (I
-> would suggest not to since we all know why):
 
 ```bash
 # Linux/MacOS
@@ -168,18 +164,18 @@ Once containers are running, verify everything is healthy:
 
 ## Native Setup
 
-Before you begin, ensure that you have `Python (v3.14+)`, `Ollama (Optional)` and `uv` running on your system:
+Before you begin, ensure that you have `Python (v3.14+)`, `Ollama` and `uv` running on your system:
 
 ```bash
 # Linux/MacOS
 python --version
-ollama --version # Optional
+ollama --version
 uv --version
 ```
 ```ps1
 # Windows
 py --version
-ollama --version # Optional
+ollama --version
 uv --version
 ```
 
@@ -196,15 +192,12 @@ uv sync --frozen --no-cache
 uv sync --frozen --no-cache
 ```
 
-### **2. Start a Local SLM via Ollama (Optional)**
+### **2. Pull a Small Language Model (SLM) via Ollama**
 
 > [!TIP]
 > On the first run, Ollama will automatically pull the default model pre-defined
 > in our configuration, which is fetched from the `/config` API endpoint in the
 > [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo. This may take a while depending on your connection speed.
-> Therefore, feels free to go and grab a coffee, say *good morning* to your AI
-> agents, get the kids to school, etc while waiting and CoSMIC will be ready
-> when you are.
 
 If using a local model, pull it before starting the server. The default model is pre-defined in our configuration and fetched from the `/config` API endpoint in the [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo:
 
@@ -246,7 +239,7 @@ uv run fastapi dev
 
 Currently, **CoSMIC** provides 5 core services, each discoverable via the `/services` API endpoint within the same repo as above:
 
-|         Service         |                                     Description                                 |
+| Service                 | Description                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------- |
 | **Chess**               | Next-move prediction, position analysis, puzzle QA, and FEN generation          |
 | **Code Generation**     | Python code generation via [PyCapsule](https://github.com/TheOpenSI/PyCapsule)  |
