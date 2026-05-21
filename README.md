@@ -4,7 +4,6 @@
 [![arXiv](https://img.shields.io/badge/ACIS-2024-oliver.svg)](https://arxiv.org/abs/2408.04910)
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![Media](https://img.shields.io/badge/Media-2024-purple.svg)](https://www.canberra.edu.au/about-uc/media/newsroom/2024/november/ucs-opensi-researchers-develop-framework-to-integrate-and-interpret-ai-tools)
-
 **This is the official implementation of OpenSI flagship product - CoSMIC.**
 
 ---
@@ -157,8 +156,8 @@ docker compose logs -f ollama # Docker run through lightweight Linux VM on Windo
 
 Once containers are running, verify everything is healthy:
 
-1. **FastAPI** — [localhost:8000/docs](http://localhost:8000/docs)
-2. **Ollama** — [localhost:11435](http://localhost:11435)
+1. **FastAPI**: [localhost:8000/docs](http://localhost:8000/docs)
+2. **Ollama**: [localhost:11435](http://localhost:11435)
 
 ---
 
@@ -228,7 +227,7 @@ uv run fastapi dev
 ### **4. Verifying Native Setup**
 
 1. **FastAPI**: [localhost:8000/docs](http://localhost:8000/docs)
-2. **Ollama (Optional)**:
+2. **Ollama**:
 - On `Windows/MacOS`, search for and open the **Ollama** application from your applications menu.
 - On `Linux`, search for **ollama** or type `ollama` in your terminal to start the application.
 ---
