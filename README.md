@@ -128,7 +128,7 @@ From project root directory, start all services using the Docker Compose file:
 
 ```bash
 # Linux/MacOS
-sudo docker compose up --build -d # Refer to NOTE if running on rootless mode
+docker compose up --build -d # Refer to NOTE if running on rootless mode
 ```
 ```ps1
 # Windows
@@ -144,7 +144,7 @@ docker compose up --build -d # Docker run through lightweight Linux VM on Window
 
 ```bash
 # Linux/MacOS
-sudo docker compose logs -f ollama  # Refer to NOTE if running on rootless mode
+docker compose logs -f ollama  # Refer to NOTE if running on rootless mode
 ```
 ```ps1
 docker compose logs -f ollama # Docker run through lightweight Linux VM on Windows so it's rootless by default
