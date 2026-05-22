@@ -17,7 +17,7 @@ CoSMIC/
 ├── data/                         # Datasets in certain format (e.g., CSVs, Excels, etc)
 ├── default/                      # Dataset templates (TODO: to be merged into `/data` directory)
 ├── docker/                       # Containerisation resources and orchestration files
-│   ├── dockerfiles/              # Dockerfile for each service defined in the Compose file
+│   └── dockerfiles/              # Dockerfile for each service defined in the Compose file
 ├── modules/                      # Subservices for each of CoSMIC services (if any) (TODO: to be re-structured inside `/src` directory)
 ├── pipelines/                    # Depricated CoSMIC pipeline logic to work with OpenWebUI (TODO: to be removed from new structure)
 ├── scripts/                      # Standalone runnable examples and demo scripts
@@ -48,7 +48,16 @@ CoSMIC/
 ---
 # Quick Start
 
-Before setting up, ensure you have the appropriate tools installed depending on your chosen setup method. This guide supports:
+Before setting up, decide which one is the correct purpose when you get to this modular repository:
+
+> [!NOTE]
+> The rest of this guide covers **Purpose 1**. For **Purpose 2**, refer to the
+> setup instructions in [CoSMIC_Docker repository](https://github.com/TheOpenSI/CoSMIC_Docker)
+
+1. **Module-only**: you are working on this part of the project in isolation (e.g., only CoSMIC).
+2. **Full-stack**: you need an end-to-end test run across all services (Front-end &rarr; Back-end &rarr; CoSMIC).
+
+Next, ensure you have the appropriate tools installed depending on your chosen execution method. This guide supports:
 
 - **Native setup** (running CoSMIC directly on your machine)
 - **Docker setup** (running CoSMIC in isolated containers)
