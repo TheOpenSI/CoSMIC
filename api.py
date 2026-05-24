@@ -7,7 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 ### Internal modules ###
-from .backend.routers import default_apis, models, cosmic, chat_session_memory
+from .backend.routers import (
+    default_apis,
+    models,
+    cosmic,
+    chat_session_memory
+)
+
 
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
@@ -19,7 +25,7 @@ from .backend.routers import default_apis, models, cosmic, chat_session_memory
 # =======================================================
 
 
-app = FastAPI()
+cosmic_app: FastAPI = FastAPI()
 
 # To test CORS_ALLOW_ORIGIN locally, you can set something like
 # CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
@@ -35,8 +41,8 @@ CORS_ALLOW_ORIGIN = [
 if environ.get("CORS_ALLOW_ORIGIN"):
     CORS_ALLOW_ORIGIN.extend(str(object=environ.get("CORS_ALLOW_ORIGIN")).split(";"))
 
-app.add_middleware(
-    CORSMiddleware,
+cosmic_app.add_middleware(
+    middleware_class=CORSMiddleware,
     allow_origins=CORS_ALLOW_ORIGIN,  # or ["*"] to allow all
     allow_credentials=True,
     allow_methods=["*"],
@@ -44,11 +50,7 @@ app.add_middleware(
 )
 
 # APIs - smanile
-app.include_router(default_apis.router, tags=["CoSMIC APIs"])
-app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
-app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
-app.include_router(
-    chat_session_memory.router,
-    prefix="/api/v1",
-    tags=["Upload Files - chat session memory"],
-)
+cosmic_app.include_router(default_apis.router, tags=["CoSMIC APIs"])
+cosmic_app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
+cosmic_app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
+cosmic_app.include_router(chat_session_memory.router, prefix="/api/v1", tags=["Upload Files - chat session memory"])
