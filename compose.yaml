@@ -17,7 +17,7 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [ gpu ]
+              capabilities: [gpu]
     ports:
       - name: ollama
         target: 11434
@@ -26,7 +26,6 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
-
     networks:
       - cosmic
 
@@ -56,33 +55,31 @@ services:
           devices:
             - driver: nvidia
               count: all
-              capabilities: [ gpu ]
+              capabilities: [gpu]
     volumes:
+      # NOTE:
+      # This will be removed as soon as we perform repo restructuring.
       # - type: volume
       #   source: open-webui
       #   target: /app/backend/data
-
+      # NOTE:
+      # This will be removed as soon as we're able to remove the current `/config`
+      # endpoint and use the one from our API endpoints instead.
       - type: volume
         source: cosmic-configs
         target: /app/scripts/configs
-        # NOTE:
-        # Live mounting for auto reload on dev only. Remove it and the
-        # corresponding top-level volume on prod.
-        # - type: bind
-        #   source: ./
-        #   target: /app
-        # NOTE:
-        # This makes `.venv` directory container-native at runtime and not
-        # trying to bypass the ignore at build time. This's very important when
-        # you do the development in Windows.
-        # - type: volume
-        #   source: cosmic-fastapi-venv
-        #   target: /app/.venv
-
-      - .:/app
-      - /app/.venv
-    tty: true
-    # NOTE: For quick debugging (on dev only)
+      # NOTE:
+      # Direct mount for hot-reload during development. Remove this and its
+      # top-level volume during production.
+      - type: bind
+        source: ./
+        target: /app
+      # NOTE:
+      # Prevent issues with different `.venv` directory structure during
+      # development on Windows machine. Remove this during production.
+      - type: volume
+        source: cosmic-fastapi-venv
+        target: /app/.venv
     ports:
       - name: cosmic-uvicorn
         target: 3000
@@ -91,7 +88,8 @@ services:
         protocol: tcp
         app_protocol: http
         mode: host
-
+      # NOTE:
+      # For using debugger during development. Remove this during production.
       - name: cosmic-debugpy
         target: 5678
         host_ip: 127.0.0.1
@@ -103,48 +101,32 @@ services:
       - cosmic
 
   qdrant:
-    image: qdrant/qdrant:latest
-    container_name: qdrant
     restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/dockerfiles/qdrant.Dockerfile
+    container_name: cosmic-qdrant
     ports:
-      - "6333:6333"
-      - "6334:6334"
+      - name: cosmic-qdrant-web
+        target: 6333
+        host_ip: 127.0.0.1
+        published: "6333"
+        protocol: tcp
+        app_protocol: http
+        mode: host
+      - name: cosmic-qdrant-grpc
+        target: 6334
+        host_ip: 127.0.0.1
+        published: "6334"
+        protocol: tcp
+        app_protocol: http
+        mode: host
     volumes:
       - type: volume
         source: cosmic-qdrant-data
         target: /qdrant/storage
     networks:
       - cosmic
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: ../CoSMIC_UI/Dockerfile.dev
-  #   container_name: vite-react-dev
-  #   # Vite dev server + HMR
-  #   command: yarn dev --host --port 5173
-  #   ports:
-  #     - "5173:5173"     # Vite dev server
-  #     - "24678:24678"   # Vite HMR websocket (Vite auto-selects; mapping helps in some envs)
-  #   environment:
-  #     # Fix file watching across Docker/WSL/VMs
-  #     - CHOKIDAR_USEPOLLING=true
-  #     - WATCHPACK_POLLING=true
-  #     - NODE_ENV=development
-  #     # If your app reads VITE_ vars, you can pass them here or from .env
-  #     - VITE_API_BASE_URL=http://cosmic:3000
-  #   volumes:
-  #     # Bind-mount your source for live reload
-  #     - .:/app
-  #     # Keep node_modules in container to avoid OS conflicts & speed up installs
-  #     - /app/node_modules
-  #   # For Yarn Berry zero-install, optionally persist .yarn cache:
-  #   #   - ./.yarn:/app/.yarn
-  #   #   - ./.yarn/cache:/app/.yarn/cache
-  #   # If you need specific user permissions on Linux:
-  #   # user: "${UID:-1000}:${GID:-1000}"
-  #   networks:
-  #     - cosmic_net
-
 
   # pycapsule:
   #   image: opensicbr/pycapsule:latest
@@ -160,26 +142,23 @@ services:
   #   networks:
   #     - cosmic_net
 
-
 volumes:
   cosmic-ollama-data:
     name: cosmic-default-models
-
   cosmic-configs:
     name: cosmic-default-configs
-
-  # NOTE: as explained above, define this only in dev (delete on prod).
-  # cosmic-fastapi-venv:
-  #   name: cosmic-ignore
-
+  # NOTE:
+  # Follow the explanation above for this particular volume
+  cosmic-fastapi-venv:
+    name: cosmic-ignore
   cosmic-qdrant-data:
     name: cosmic-database-vector
   # cosmic-shared-mount:
   #   name: cosmic-shared-mount
   #   external: true
+  # NOTE:
+  # Follow the explanation above for this particular volume
   # open-webui: {}
-  # pipelines: {}
-
 
 networks:
   cosmic:
