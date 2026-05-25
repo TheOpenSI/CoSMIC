@@ -1,5 +1,7 @@
 ### Core modules ###
+from pathlib import Path
 from ollama import Client
+from dotenv import dotenv_values
 
 
 ### Type hints ###
@@ -16,7 +18,17 @@ class Ollama(LLMBase):
     def __init__(
         self,
         llm_name:       str = "llama3.2",
-        container_name: str = "cosmic-ollama",
+        container_name: str = str(
+            dotenv_values(
+                # Looks complex but essentially, it means to read `.env` file
+                # from project root directory
+                dotenv_path=Path(__file__).resolve(strict=True).parent.parent.parent.parent.joinpath(".env"),
+                encoding="utf-8"
+            ).get(
+                "OLLAMA_SERVICE_NAME",
+                "cosmic-ollama"
+            )
+        ),
         local_port:     int = 11434,
         **kwargs
     ) -> None:
@@ -25,13 +37,18 @@ class Ollama(LLMBase):
 
         Args:
             llm_name        (str, optional): Ollama supported LLMs available at https://ollama.com/library.
-            container_name  (str, optional): Name of the Ollama container. Defaults to "ollama".
+            container_name  (str, optional):
+                Name of the Ollama container defined in environment file. Fallback
+                to "cosmic-ollama" if not found.
             local_port      (int, optional): Local port for the ollama container. Defaults to 11434.
         """
         model_name = llm_name.replace("ollama:", "")
         super().__init__(llm_name=model_name, **kwargs)
         self._tag_model() # adds :latest if not present
-        self.ollama_client = self._set_local_client(container_name, local_port) # local client instance
+        self.ollama_client = self._set_local_client(
+            container_name=container_name,
+            port=local_port
+        ) # local client instance
         self.ollama_pull_manager = OllamaPullManager(
             model_name=self.llm_name,
             mode="stochastic",

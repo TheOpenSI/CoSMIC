@@ -180,7 +180,7 @@ class OllamaPullManager:
 
             print(
                 "{0:s}{1:s}".format(
-                    f"Starting download"
+                    f"Starting download",
                     f"(Intervention {intervention_idx + 1}/{len(self.interventions)} at {target_percentage}%)..."
                 )
             )
