@@ -39,32 +39,6 @@ class QueryAnalyser:
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
         self.device = device
 
-        # Set a list of services.
-        # TODO:
-        # replace this with service desc data fetched from our API endpoint
-        self.services = {
-            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
-            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
-            "2": "generate or improve a code or answer a question in order to generate or improve a code",
-            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
-            "4": "Answer question about Academic Governance"
-        }
-
-        # Set chess services.
-        self.chess_services = {
-            "0.0": "predict next move given a chess FEN",
-            "0.1": "predict next move given a sequence of moves"
-        }
-
-        # Get full services.
-        self.full_services = {
-            **self.services,
-            **self.chess_services
-        }
-
-        # Get the number of services.
-        self.num_services = len(self.services)
-
         # Set provided service.
         self.service_index = service_index
 
@@ -100,22 +74,6 @@ class QueryAnalyser:
             device=device
         )
 
-        # Set user prompter for service option.
-        self.user_prompter_service = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserService"
-        )(
-            services=self.services
-        )
-
-        # Set user prompter for system information.
-        self.user_prompter_system_info = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserSystemInfo"
-        )(
-            services=self.services
-        )
-
         return None
 
 
@@ -135,6 +93,48 @@ class QueryAnalyser:
             service_option      (str):  service option.
             service_info_dict   (dict): updated information dictionary.
         """
+        # Set a list of services.
+        # TODO:
+        # replace this with service desc data fetched from our API endpoint
+        self.services = {
+            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
+            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
+            "2": "generate or improve a code or answer a question in order to generate or improve a code",
+            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
+            "4": "Answer question about Academic Governance"
+        }
+
+        # Set chess services.
+        self.chess_services = {
+            "0.0": "predict next move given a chess FEN",
+            "0.1": "predict next move given a sequence of moves"
+        }
+
+        # Get full services.
+        self.full_services = {
+            **self.services,
+            **self.chess_services
+        }
+
+        # Get the number of services.
+        self.num_services = len(self.services)
+
+        # Set user prompter for service option.
+        self.user_prompter_service = get_instance(
+            instances=query_user_prompt_instances,
+            instance_name="QueryAnalyserService"
+        )(
+            services=self.services
+        )
+
+        # Set user prompter for system information.
+        self.user_prompter_system_info = get_instance(
+            instances=query_user_prompt_instances,
+            instance_name="QueryAnalyserSystemInfo"
+        )(
+            services=self.services
+        )
+
         # Create an initial information dictionary.
         service_info_dict = {
             "query":                        query,
