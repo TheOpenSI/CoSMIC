@@ -1,9 +1,23 @@
 ### Core modules ###
-from sys import exit
+from sys import (
+    exit,
+    stdout
+)
 from pathlib import Path
 from typing import Any
+from fastapi import (
+    HTTPException,
+    status
+)
 from yaml import safe_load
 from torch import cuda
+from httpx import (
+    Client,
+    ConnectError,
+    ConnectTimeout,
+    Response
+)
+from pprint import pp
 
 
 ### Type hints ###
@@ -254,6 +268,9 @@ class OpenSICoSMIC:
             # Truncation needs keywords from the example of system prompt.
             self.llm.system_prompter.set_use_example(True)
 
+            # NOTE: for testing purposes. Delete on next couple commits.
+            self.get_services(verbose=True)
+
             # Process each question.
             (
                 response,
@@ -481,3 +498,149 @@ class OpenSICoSMIC:
         self.query_analyser.quit()
         self.llm.quit()
         self.rag.vector_database.quit()
+
+
+    def get_services(
+        self,
+        # TODO:
+        # create a dedicated util to handle valid URL format
+        url:        str                     = "http://backend:8000/api/v1/services/",
+        params:     dict[str, bool] | None  = {"active": True},
+        lifetime:   float                   = 10.0,
+        verbose:    bool                    = False
+    # NOTE:
+    # for legacy purposes. Change to `dict[int, dict[str, str]]` type when update
+    # to handle `int` properly
+    ) -> dict[str, dict[str, str]]:
+        """
+        Retrieve all services from API endpoint with 0-based indexing.
+
+        This method fetches service data from the specified endpoint and returns
+        a nested dictionary mapping 0-based indices to minimal service info. The
+        transformation subtracts 1 from the API's 1-based IDs to create 0-based
+        indexing.
+
+        Args:
+            url:
+                base URL of the services API endpoint. Defaults to
+                "http://backend:8000/api/v1/services/".
+
+            params:
+                optional query parameter for provided endpoint. Defaults to
+                {"active": True} to get active only services.
+
+            lifetime:
+                HTTP client timeout in seconds. Defaults to 10.0 seconds.
+
+            verbose:
+                Enable pretty-printed debug output of service data. When True,
+                prints formatted service data using 'pprint'.
+
+        Returns:
+            Nested dictionary mapping 0-based indices to minimal service info.
+
+            Example:
+            {
+                0: {
+                    "name": "chess",
+                    "desc": "<a very long description>"
+                },
+                1: {
+                    "name": "memory",
+                    "desc": "<a very long description>"
+                }
+            }
+
+        Raises:
+            HTTPException:
+                With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> services = obj.get_services_name(verbose=True)
+            >>> services[0] # 1st service
+            {"name": "chess", "desc": "<a very long description>"
+                }
+        """
+        services: dict[str, dict[str, str]] = {}
+
+        try:
+            with Client(
+                base_url=url,
+                params=params,
+                timeout=lifetime
+            ) as client:
+                response: Response = client.get(url="")
+                response.raise_for_status()
+                datas: list[dict[str, Any]] = response.json().get("result", [])
+
+            if len(datas) == 0:
+                # No active services available
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    print(
+                        "{debug_msg:s}\n{foot_sep:s}".format(
+                            debug_msg="No active services available...",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    return {}
+
+                else:
+                    return {}
+
+            else:
+                # There is/are active services available
+                for data in datas:
+                    # NOTE:
+                    # for legacy purposes. Change to normal when update the checking
+                    # logic to handle `int` properly
+                    # Merge the new dict into the existing inner dict
+                    services.setdefault(
+                        str(data["id"] - 1),
+                        {}
+                    ).update(
+                        {
+                            "name": data["name"],
+                            "desc": data["desc"]
+                        }
+                    )
+
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    pp(
+                        object=services,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    print(f"{'=' * 80}")
+                    return services
+
+                else:
+                    return services
+
+
+        except ConnectError as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
+
+
+        except ConnectTimeout as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
