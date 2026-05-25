@@ -241,9 +241,12 @@ async def process_cosmic(data: CosmicAPI):
                 file_dir: Path = (
                     Path(__file__).resolve(strict=True).parent.parent.parent
                     / "data"
-                    / "upload"
+                    / "memories"
+                    / "users"
                     / f"{user_id}"
                 )
+                if data.chat_id:
+                    file_dir = file_dir / "sessions" / f"{data.chat_id}"
 
                 # Extract the files.
                 extracted_files: str = splits[0].split("<files>")[-1]

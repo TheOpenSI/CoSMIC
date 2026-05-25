@@ -7,7 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 ### Internal modules ###
-from .backend.routers import default_apis, models, cosmic, chat_session_memory
+from .backend.routers import default_apis, models, cosmic, memory
+# from .backend.routers import default_apis, models, cosmic, chat_session_memory
 
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging
@@ -48,7 +49,7 @@ app.include_router(default_apis.router, tags=["CoSMIC APIs"])
 app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
 app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
 app.include_router(
-    chat_session_memory.router,
-    prefix="/api/v1",
-    tags=["Upload Files - chat session memory"],
+    memory.router,
+    prefix="/api/v1/memory",
+    tags=["Upload Files"],
 )

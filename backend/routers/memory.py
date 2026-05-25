@@ -9,17 +9,10 @@ router = APIRouter()
 async def upload_file(
     file: UploadFile, memory_type: str = "session", chat_session_id: str = "default", user_id: str = "default"
 ):
-    # Old signature:
-    # async def upload_file(
-    #     file: UploadFile, chat_session_id: str = "default", user_id: str = "default"
-    # ):
 
     file_id = uuid.uuid4().hex[:8]
 
-    # # create a path
-    # save_dir = Path(f"/app/data/chat_session_memory/{user_id}/{chat_session_id}")
     
-    # New standardized path logic based on memory_type
     if memory_type == "global_memory":
         save_dir = Path("/app/data/memories/global")
     elif memory_type == "user":
