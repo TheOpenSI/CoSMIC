@@ -1,6 +1,7 @@
 ### Core modules ###
 from pathlib import Path
 from yaml import safe_load
+from fastapi import HTTPException, status
 
 
 ### Type hints ###
@@ -98,12 +99,29 @@ class QABase(ServiceBase):
             service_id: service_info['name']
             for (service_id, service_info) in services.items()
         }
-        print(
-            set_color(
-                status="info",
-                information=f"[DEBUG] - Services Name: {services_name}"
+
+        # There is/are active services from fetched API endpoint
+        if len(services_name) != 0:
+            print(
+                set_color(
+                    status="info",
+                    information=f"[DEBUG] - Services Name: {services_name}"
+                )
             )
-        )
+            pass
+
+        # No active services found from fetched API endpoint
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "status": "404 - Not Found",
+                    "message": "{trig:s}: {cond:s}".format(
+                        trig="EmptyServiceError",
+                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
+                    )
+                }
+            )
 
         # Get service option through query analyser.
         (
