@@ -80,14 +80,25 @@ class QueryAnalyser:
     def __call__(
         self,
         query:      str,
+        # NOTE:
+        # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
+        # update to handle `int` properly
+        services:   dict[str, dict[str, str]],
         verbose:    bool = False
     ):
         """
         Analyse query to get service option.
 
         Args:
-            query   (str):              question.
-            verbose (bool, optional):   debug mode. Default to False.
+            query (str):
+                question.
+
+            services (dict[str, dict[str, str]]):
+                all available services for Query Analyser, which then being used
+                to re-structure question with its prompting techniques.
+
+            verbose (bool, optional):
+                debug mode. Default to False.
 
         Returns:
             service_option      (str):  service option.
@@ -96,16 +107,13 @@ class QueryAnalyser:
         # Set a list of services.
         # TODO:
         # replace this with service desc data fetched from our API endpoint
-        self.services = {
-            "0": "if it is a chess game, predict the next chess move by providing a sequence of moves or a FEN",
-            "1": "update the vector database with a declarative sentence (not a question) or a pdf document",
-            "2": "generate or improve a code or answer a question in order to generate or improve a code",
-            "3": "answer a question or provide a reasoning, which cannot be achieved by the other services",
-            "4": "Answer question about Academic Governance"
+        self.services: dict[str, str] = {
+            service_id: service_info['desc']
+            for (service_id, service_info) in services.items()
         }
 
-        # Set chess services.
-        self.chess_services = {
+        # Set chess subservices.
+        self.chess_subservices = {
             "0.0": "predict next move given a chess FEN",
             "0.1": "predict next move given a sequence of moves"
         }
@@ -113,8 +121,14 @@ class QueryAnalyser:
         # Get full services.
         self.full_services = {
             **self.services,
-            **self.chess_services
+            **self.chess_subservices
         }
+        print(
+            set_color(
+                status="info",
+                information=f"[DEBUG] - Full services from Query Analyser: {self.full_services}"
+            )
+        )
 
         # Get the number of services.
         self.num_services = len(self.services)
@@ -153,7 +167,7 @@ class QueryAnalyser:
             service_analysis = self.llm(query)[0]
 
             # Get the service option.
-            service_option = self.mapping(service_analysis)
+            service_option = self.mapping(response=service_analysis)
             print(
                 set_color(
                     status="info",
@@ -226,12 +240,14 @@ class QueryAnalyser:
             # Get whether the question is related to system information.
             relevance: bool = self.get_system_information_relevance(relevance_analysis)
 
-            # Update system information relevance.
-            service_info_dict["system_information_relevance"] = relevance
-
             # Add the system information if it is related to the question.
             if relevance:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
                 service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+            else:
+                # Update system information relevance.
+                service_info_dict["system_information_relevance"] = relevance
 
         print(
             set_color(
@@ -287,12 +303,13 @@ class QueryAnalyser:
                         information=f"Unknown service '{option}' from '{response}'."
                     )
                 )
-
                 return "-1"
+
+            else:
+                return option
+
         else:
             return "-1"
-
-        return option
 
 
     def get_service(

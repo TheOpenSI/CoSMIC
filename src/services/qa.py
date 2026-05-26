@@ -6,13 +6,13 @@ from yaml import safe_load
 ### Type hints ###
 from typing import Any
 
-
 ### Internal modules ###
 from . import chess as chess_instances
 from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
+from ...utils.log_tool import set_color
 
 
 
@@ -92,18 +92,27 @@ class QABase(ServiceBase):
         retrieve_score  = -1
 
         # NOTE:
-        # for legacy purposes. Change to `dict[str, str]` type when
+        # for legacy purposes. Change to `dict[int, str]` type when
         # update to handle `int` properly
         services_name: dict[str, str] = {
             service_id: service_info['name']
             for (service_id, service_info) in services.items()
         }
+        print(
+            set_color(
+                status="info",
+                information=f"[DEBUG] - Services Name: {services_name}"
+            )
+        )
 
         # Get service option through query analyser.
         (
             service_option,
             service_info_dict
-        ) = self.query_analyser(query)
+        ) = self.query_analyser(
+            query,
+            services=services # pyright: ignore
+        )
 
         # Whether this query is related to system information.
         system_information_relevance = service_info_dict["system_information_relevance"]
