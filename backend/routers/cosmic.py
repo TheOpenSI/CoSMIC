@@ -9,6 +9,7 @@ from fastapi import Request, File, UploadFile, HTTPException, APIRouter, status
 from pydantic import BaseModel
 from zoneinfo import ZoneInfo
 import httpx
+from codecarbon import EmissionsTracker
 
 ### Type hints ###
 from typing import Any, List, Optional
@@ -259,17 +260,32 @@ async def process_cosmic(data: CosmicAPI):
                         f"Add the following file to the vector database: {new_file}"
                     )
 
+                    tracker = EmissionsTracker(project_name="cosmic-chat")
+                    tracker.start()
+
                     # Update vector database.
                     answer: str = str(
                         object=opensi_cosmic(question=user_message_vector_db_update)[0]
                     )
+                    emissions = tracker.stop()
+                    print(f"[CodeCarbon] VectorDB update emissions: {emissions:.8f} kg CO₂")
 
             else:
+
+                tracker = EmissionsTracker(project_name="cosmic-chat")
+                tracker.start()
+
+
                 answer: str = str(
                     object=opensi_cosmic(
                         question=data.user_message, context=chat_history_context
                     )[0]
                 )
+
+                tracker.stop()
+                print(f"[CodeCarbon] Chat query emissions: {emissions:.8f} kg CO₂")
+
+
                 # smanile - connect to database repo + return result
                 CHAT_API_URL = "http://cosmic-backend-fastapi:8000/api/v1/chatboxes/"  # TODO: later when have time, move to .env file
 
