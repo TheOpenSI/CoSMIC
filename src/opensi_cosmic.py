@@ -268,16 +268,14 @@ class OpenSICoSMIC:
             # Truncation needs keywords from the example of system prompt.
             self.llm.system_prompter.set_use_example(True)
 
-            # NOTE: for testing purposes. Delete on next couple commits.
-            self.get_services(verbose=True)
-
             # Process each question.
             (
                 response,
                 raw_response,
                 retrieve_score
             ) = self.qa(
-                question,
+                query=question,
+                services=self.get_services(verbose=True),
                 # The context that we are passing here is chat history. See api.py
                 context=context,
                 is_rag=True,
@@ -559,8 +557,7 @@ class OpenSICoSMIC:
         Example:
             >>> services = obj.get_services_name(verbose=True)
             >>> services[0] # 1st service
-            {"name": "chess", "desc": "<a very long description>"
-                }
+            {"name": "chess", "desc": "<a very long description>"}
         """
         services: dict[str, dict[str, str]] = {}
 

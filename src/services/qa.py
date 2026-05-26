@@ -51,6 +51,10 @@ class QABase(ServiceBase):
     def __call__(
         self,
         query:      str,
+        # NOTE:
+        # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
+        # update to handle `int` properly
+        services:   dict[str, dict[str, str]],
         context:    str | dict  = "",
         is_rag:     bool        = False,
         verbose:    bool        = False
@@ -59,20 +63,41 @@ class QABase(ServiceBase):
         Process each QA.
 
         Args:
-            query   (str):                  a question.
-            context (str | dict, optional): contex associated with the question. Defaults to "".
-            is_rag  (bool, optional):       if retrieve context for the question. Defaults to False.
-            verbose (bool, optional):       debug mode. Default to False.
+            query (str):
+                a question.
+
+            services (dict[str, dict[str, str]]):
+                all available services for Query Analyser, which then being used
+                to re-structure question with its prompting techniques.
+
+            context (str | dict, optional):
+                contex associated with the question. Defaults to "".
+
+            is_rag  (bool, optional):
+                if retrieve context for the question. Defaults to False.
+
+            verbose (bool, optional):
+                debug mode. Default to False.
 
         Returns:
             response        (str):      truncated answer if applicable.
+
             raw_response    (str):      original answer from LLM.
+
             retrieve_score  (float):    score of context retrieving if applicable.
         """
         # Set initial return answers.
         response        = None
         raw_response    = None
         retrieve_score  = -1
+
+        # NOTE:
+        # for legacy purposes. Change to `dict[str, str]` type when
+        # update to handle `int` properly
+        services_name: dict[str, str] = {
+            service_id: service_info['name']
+            for (service_id, service_info) in services.items()
+        }
 
         # Get service option through query analyser.
         (
@@ -289,23 +314,13 @@ class QABase(ServiceBase):
                     )
 
             # Get the response with retrieved context if applicable.
-            # TODO:
-            # replace this with service name data fetched from our API endpoint
-            services_names = {
-                '0': "chess",
-                '1': "memory",
-                '2': "code_generation",
-                '3': "general_question_answering",
-                '4': "AcademicGovernance"
-            }
-
             (
                 response,
                 raw_response
             ) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_names[service_option]
+                service_name=services_name[service_option]
             )
 
 
