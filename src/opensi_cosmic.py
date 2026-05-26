@@ -577,7 +577,7 @@ class OpenSICoSMIC:
                     print(
                         "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
                             head_sep=f"{'=' * 80}",
-                            body_msg="[DEBUG]   SERVICES DATA ('NAME' ONLY)   [DEBUG]",
+                            body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
                             foot_sep=f"{'=' * 80}"
                         )
                     )

@@ -1,7 +1,10 @@
 ### Core modules ###
 from pathlib import Path
 from yaml import safe_load
-from fastapi import HTTPException, status
+from fastapi import (
+    HTTPException,
+    status
+)
 
 
 ### Type hints ###
@@ -81,11 +84,14 @@ class QABase(ServiceBase):
                 debug mode. Default to False.
 
         Returns:
-            response        (str):      truncated answer if applicable.
+            response (str):
+                truncated answer if applicable.
 
-            raw_response    (str):      original answer from LLM.
+            raw_response (str):
+                original answer from LLM.
 
-            retrieve_score  (float):    score of context retrieving if applicable.
+            retrieve_score (float):
+                score of context retrieving if applicable.
         """
         # Set initial return answers.
         response        = None

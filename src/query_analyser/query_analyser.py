@@ -2,7 +2,10 @@
 from sys import exit
 from pathlib import Path
 from re import search
-from fastapi import HTTPException, status
+from fastapi import (
+    HTTPException,
+    status
+)
 
 
 ### Type hints ###
@@ -102,8 +105,11 @@ class QueryAnalyser:
                 debug mode. Default to False.
 
         Returns:
-            service_option      (str):  service option.
-            service_info_dict   (dict): updated information dictionary.
+            service_option (str):
+                service option.
+
+            service_info_dict (dict):
+                updated information dictionary.
         """
         # Set a list of services.
         # TODO:
