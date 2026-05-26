@@ -2,6 +2,7 @@
 from sys import exit
 from pathlib import Path
 from re import search
+from fastapi import HTTPException, status
 
 
 ### Type hints ###
@@ -111,6 +112,23 @@ class QueryAnalyser:
             service_id: service_info['desc']
             for (service_id, service_info) in services.items()
         }
+
+        # There is/are active services from fetched API endpoint
+        if len(self.services) != 0:
+            pass
+
+        # No active services found from fetched API endpoint
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail={
+                    "status": "404 - Not Found",
+                    "message": "{trig:s}: {cond:s}".format(
+                        trig="EmptyServiceError",
+                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
+                    )
+                }
+            )
 
         # Set chess subservices.
         self.chess_subservices = {
