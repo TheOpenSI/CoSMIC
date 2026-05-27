@@ -151,6 +151,8 @@ async def lifespan(app: FastAPI):
     app.state.config_modify_timestamp   = NEW_CONFIG_PATH.stat().st_mtime
 
     if openai_api_key is None:
+        # No API key provided? No problem at all, we'll just use models pulled
+        # from Ollama instead then
         print(
             set_color(
                 status="warning",
@@ -159,8 +161,8 @@ async def lifespan(app: FastAPI):
         )
 
     else:
-        # No API key provided? No problem at all, we'll just use local-first SLMs
-        # like Ollama instead
+        # Interesting, you sure want to spend your tokens on models from OpenAI?
+        # Remember, open-sources and locals...
         pass
 
 
