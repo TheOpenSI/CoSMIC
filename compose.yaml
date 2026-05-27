@@ -2,7 +2,7 @@ name: OpenSI-CoSMIC
 
 services:
   ollama:
-    container_name: cosmic-ollama
+    container_name: ${OLLAMA_SERVICE_NAME} # NOTE: prevent issues when working same Ollama container in shared VM
     restart: unless-stopped
     build:
       context: ./
