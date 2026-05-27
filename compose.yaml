@@ -2,7 +2,7 @@ name: OpenSI-CoSMIC
 
 services:
   ollama:
-    container_name: ollama
+    container_name: ${OLLAMA_SERVICE_NAME} # NOTE: prevent issues when working same Ollama container in shared VM
     restart: unless-stopped
     build:
       context: ./
@@ -22,7 +22,7 @@ services:
       - name: ollama
         target: 11434
         host_ip: 127.0.0.1
-        published: "11434"
+        published: "11435"
         protocol: tcp
         app_protocol: http
         mode: host
