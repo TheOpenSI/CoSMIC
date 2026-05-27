@@ -28,6 +28,18 @@ from .backend.routers import (
 
 
 
+# =====================Debugging========================
+# Uncomment the following lines to enable debugging:
+#
+# import debugpy
+# print("Waiting for debugger attach...")
+# debugpy.listen(("0.0.0.0", 5678))
+# debugpy.wait_for_client()
+# print("Debugger attached!")
+# =======================================================
+
+
+
 # TODO:
 # these 3 global vars & 2 funcs will get deleted after we successfully replace
 # `/config` endpoint in this repo by equivalent API endpoint from 'CoSMIC_DB' repo
@@ -160,15 +172,6 @@ async def lifespan(app: FastAPI):
     app.state.opensi_cosmic.quit()
 
 
-
-# =====================Debugging========================
-# Uncomment the following lines to enable debugging
-# import debugpy
-# print("Waiting for debugger attach...")
-# debugpy.listen(("0.0.0.0", 5678))
-# debugpy.wait_for_client()
-# print("Debugger attached!")
-# =======================================================
 cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 
