@@ -4,6 +4,7 @@ from pathlib import Path
 from shutil import copyfile, copyfileobj
 from yaml import safe_load, safe_dump
 from datetime import datetime, timezone
+import csv
 from dotenv import dotenv_values, set_key
 from fastapi import Request, File, UploadFile, HTTPException, APIRouter, status
 from pydantic import BaseModel
@@ -151,6 +152,55 @@ opensi_cosmic = OpenSICoSMIC(config_path=str(object=config_path))
 openai_api_status = opensi_cosmic.check_openai_key()
 
 
+def add_request_context_to_latest_emission(user_id: str, chat_id: Optional[str]) -> None:
+    """Find the latest individual emission file, add user/chat id, merge into master CSV."""
+    
+    master_file = EMISSIONS_DIR / "emissions.csv"
+    
+    # Find all individual emission files (not the master)
+    individual_files = sorted(
+        [f for f in EMISSIONS_DIR.glob("emission_*.csv")],
+        key=lambda f: f.stat().st_mtime
+    )
+    
+    if not individual_files:
+        return
+    
+    # Get the most recent one — that's the current query
+    latest_file = individual_files[-1]
+    
+    with latest_file.open(mode="r", encoding="utf-8", newline="") as csv_file:
+        reader = csv.DictReader(csv_file)
+        rows = list(reader)
+        fieldnames = list(reader.fieldnames or [])
+    
+    # Remove blank rows
+    rows = [row for row in rows if any(v.strip() for v in row.values())]
+    
+    if not rows:
+        latest_file.unlink()  # delete empty file
+        return
+    
+    # Add user_id and chat_id
+    for extra_column in ("user_id", "chat_id"):
+        if extra_column not in fieldnames:
+            fieldnames.append(extra_column)
+    
+    for row in rows:
+        row["user_id"] = str(user_id)
+        row["chat_id"] = "" if chat_id is None else str(chat_id)
+    
+    # Append to master CSV
+    master_exists = master_file.exists()
+    with master_file.open(mode="a", encoding="utf-8", newline="") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not master_exists:
+            writer.writeheader()
+        writer.writerows(rows)
+    
+    # Delete the individual file after merging
+    latest_file.unlink()
+
 def rebuild_cosmic():
     """
     Rebuilds the OpenSICoSMIC instance if the configuration file or OpenAI API key changes.
@@ -265,11 +315,17 @@ async def process_cosmic(data: CosmicAPI):
                         f"Add the following file to the vector database: {new_file}"
                     )
 
+                    query_time = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")
+
                     tracker = EmissionsTracker(
-                        project_name="cosmic-chat",
-                        save_to_file=True,
-                        output_dir=str(EMISSIONS_DIR),
-                    )
+                    project_name="cosmic-chat",
+                    save_to_file=True,
+                    output_dir=str(EMISSIONS_DIR),
+                    output_file=f"emission_{query_time}.csv",  # ← unique file per query
+                    allow_multiple_runs=True,
+                    log_level="error",)
+
+                   
                     tracker.start()
 
                     # Update vector database.
@@ -277,15 +333,29 @@ async def process_cosmic(data: CosmicAPI):
                         object=opensi_cosmic(question=user_message_vector_db_update)[0]
                     )
                     emissions = tracker.stop()
+                    add_request_context_to_latest_emission(
+                        user_id=str(user_id),
+                        chat_id=data.chat_id,
+            
+                    )
                     print(f"[CodeCarbon] VectorDB update emissions: {emissions:.8f} kg CO₂")
 
             else:
+
+                query_time = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%f")
 
                 tracker = EmissionsTracker(
                     project_name="cosmic-chat",
                     save_to_file=True,
                     output_dir=str(EMISSIONS_DIR),
-                )
+                    output_file=f"emission_{query_time}.csv",  # ← unique file per query
+                    allow_multiple_runs=True,
+                    log_level="error",)
+    
+   
+
+
+
                 tracker.start()
 
 
@@ -294,9 +364,6 @@ async def process_cosmic(data: CosmicAPI):
                         question=data.user_message, context=chat_history_context
                     )[0]
                 )
-
-                emissions = tracker.stop()
-                print(f"[CodeCarbon] Chat query emissions: {emissions:.8f} kg CO₂")
 
 
                 # smanile - connect to database repo + return result
@@ -333,6 +400,16 @@ async def process_cosmic(data: CosmicAPI):
                         )
                         save_response.raise_for_status()
                         chat_id = save_response.json()["created"]["id"]
+
+                emissions = tracker.stop()
+                add_request_context_to_latest_emission(
+                user_id=str(user_id),
+                chat_id=chat_id,
+                )
+
+
+                 
+                print(f"[CodeCarbon] Chat query emissions: {emissions:.8f} kg CO₂")
 
                 return {
                     "status": "success",
