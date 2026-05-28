@@ -11,7 +11,6 @@ services:
       - type: volume
         source: cosmic-ollama-data
         target: /root/.ollama
-<<<<<<< HEAD:docker-compose.yaml
     # deploy:
     #   resources:
     #     reservations:
@@ -51,7 +50,6 @@ services:
     build:
       context: ./
       dockerfile: ./docker/dockerfiles/fastapi.Dockerfile
-<<<<<<< HEAD:docker-compose.yaml
     # deploy:
     #   resources:
     #     reservations:
@@ -59,9 +57,6 @@ services:
     #         - driver: nvidia
     #           count: all
     #           capabilities: [ gpu ]
-=======
-
->>>>>>> Development:compose.yaml
     volumes:
       # NOTE:
       # This will be removed as soon as we perform repo restructuring.
