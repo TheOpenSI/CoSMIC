@@ -4,6 +4,7 @@
 # gpt-3.5-turbo, gpt-4o,
 # ollama:[ollama model] from https://ollama.com/library.
 
+<<<<<<< HEAD
 llm_name: "ollama:qwen2.5:0.5b"
 is_quantized: False
 seed: 0  # seed of response generation by base LLM.
@@ -16,10 +17,12 @@ query_analyser:
   llm_name: "ollama:qwen2.5:0.5b"
   is_quantized: False
 
+
 chess:
   stockfish_path: "" # if empty, default to "third_party/stockfish/stockfish-ubuntu-x86-64-avx2"
 
-rag: # RAG-related config.
+# RAG-related config.
+rag:
   topk: 10 # retrieve topk documents.
   retrieve_score_threshold: 0.7 # similarity score under this threshold will not be used in prompt.
   vector_db_path: "" # vector database path, if not exist, use default database/vector_database.
