@@ -29,6 +29,11 @@ UPLOAD_BASE_DIR: Path = (
 )
 UPLOAD_BASE_DIR.mkdir(mode=0o777, parents=False, exist_ok=True)
 
+EMISSIONS_DIR: Path = (
+    Path(__file__).resolve(strict=True).parent.parent.parent / "data" / "emissions"
+)
+EMISSIONS_DIR.mkdir(parents=True, exist_ok=True)
+
 
 config_path: Path = (
     Path(__file__).resolve(strict=True).parent.parent.parent
@@ -260,7 +265,11 @@ async def process_cosmic(data: CosmicAPI):
                         f"Add the following file to the vector database: {new_file}"
                     )
 
-                    tracker = EmissionsTracker(project_name="cosmic-chat")
+                    tracker = EmissionsTracker(
+                        project_name="cosmic-chat",
+                        save_to_file=True,
+                        output_dir=str(EMISSIONS_DIR),
+                    )
                     tracker.start()
 
                     # Update vector database.
@@ -272,7 +281,11 @@ async def process_cosmic(data: CosmicAPI):
 
             else:
 
-                tracker = EmissionsTracker(project_name="cosmic-chat")
+                tracker = EmissionsTracker(
+                    project_name="cosmic-chat",
+                    save_to_file=True,
+                    output_dir=str(EMISSIONS_DIR),
+                )
                 tracker.start()
 
 
@@ -282,7 +295,7 @@ async def process_cosmic(data: CosmicAPI):
                     )[0]
                 )
 
-                tracker.stop()
+                emissions = tracker.stop()
                 print(f"[CodeCarbon] Chat query emissions: {emissions:.8f} kg CO₂")
 
 
