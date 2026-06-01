@@ -143,9 +143,17 @@ async def process_cosmic(
             data.user_message = splits[1]
             file_dir: Path = Path(__file__).resolve().parent.parent.parent.joinpath(
                 "data",
-                "upload",
+                "memories",
+                "users",
                 f"{user_id}"
             )
+            if data.chat_id:
+                file_dir = file_dir.joinpath(
+                  "sessions",
+                  f"{data.chat_id}"
+                )
+
+            # Extract the files.
             extracted_files: str = splits[0].split("<files>")[-1]
             new_files: list[str] = [
                 str(file_dir.joinpath(extracted_file))
@@ -154,7 +162,11 @@ async def process_cosmic(
             ]
 
             for new_file in new_files:
-                answer: str = str(opensi_cosmic(question=f"Add the following file to the vector database: {new_file}")[0])
+                # Form a prompt to update vector database
+                user_message_vector_db_update: str = f"Add the following file to the vector database: {new_file}"
+                # Update vector database
+                answer: str = str(opensi_cosmic(question=user_message_vector_db_update)[0])
+
         else:
             answer: str = str(
                 opensi_cosmic(
@@ -163,8 +175,8 @@ async def process_cosmic(
                 )[0]
             )
 
-            # smanile - connect to database repo + return result
-            CHAT_API_URL: str = "http://backend:8000/api/v1/chatboxes/" # TODO: later when have time, move to '.env' file
+            # TODO: later when have time, move to '.env' file
+            CHAT_API_URL: str = "http://backend:8000/api/v1/chatboxes/"
 
             now: str = datetime.now(tz=timezone.utc).isoformat()
             new_detail: dict[str, Any] = {

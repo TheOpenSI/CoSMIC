@@ -96,6 +96,81 @@ Set-Location CoSMIC\
 ```
 
 ---
+# Understanding Configuration Setup
+
+## Docker Configuration
+
+Create a `.env` file in the project root directory:
+
+```bash
+# Linux/MacOS
+touch ./env
+```
+```ps1
+# Windows
+New-Item -Name .\.env -Type File
+```
+
+Then, edit `.env` and set required environment values in order to run CoSMIC. For example:
+
+```bash
+# Linux/MacOS
+OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
+OLLAMA_SERVICE_NAME="<any name>"
+```
+```ps1
+# Windows
+OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
+OLLAMA_SERVICE_NAME="<any name>"
+```
+
+## Native Configuration
+
+> [!TIP]
+> The `.env` file approach is recommended as it keeps your configuration
+> organised and prevents accidentally committing secrets to version control.
+> Make sure to add `.env` to your `.gitignore` file.
+
+### **Option 1: Create a `.env` file in the project root directory**
+
+```bash
+# Linux/MacOS
+touch ./env
+```
+```ps1
+# Windows
+New-Item -Name .\.env -Type File
+```
+
+Then, edit `.env` and set required environment values in order to run CoSMIC. For example:
+
+```bash
+# Linux/MacOS
+OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
+OLLAMA_SERVICE_NAME="<any name>"
+```
+```ps1
+# Windows
+OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
+OLLAMA_SERVICE_NAME="<any name>"
+```
+
+### **Option 2: Set environment variables directly in your shell**
+
+Alternatively, export variables directly before running the application:
+
+```bash
+# Linux/MacOS
+export OPENAI_API_KEY="http://localhost:3000" # TODO: remove this when we able to use our API endpoint directly
+export OLLAMA_SERVICE_NAME="<any name>"
+```
+```ps1
+# Windows
+$env:OPENAI_API_KEY="http://localhost:3000" # TODO: remove this when we able to use our API endpoint directly
+$env:OLLAMA_SERVICE_NAME="<any name>"
+```
+
+---
 # Setup & Execution
 
 > [!IMPORTANT]

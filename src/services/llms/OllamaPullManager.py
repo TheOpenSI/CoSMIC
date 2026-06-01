@@ -5,23 +5,23 @@ from time import sleep
 
 
 ### Type hints ###
-from typing import List
 
 
 ### Internal modules ###
 
 
+
 class OllamaPullManager:
     def __init__(
         self,
-        model_name: str,
-        mode: str = "auto",
-        interventions: list = [80, 90, 95],
-        min_speed_kbps: float = 200.0,
-        max_retries: int = 5,
-        fall_back_interval: int = 60,
-        ollama_client: Client | None = None
-    ):
+        model_name:         str,
+        mode:               str             = "auto",
+        interventions:      list            = [80, 90, 95],
+        min_speed_kbps:     float           = 200.0,
+        max_retries:        int             = 5,
+        fall_back_interval: int             = 60,
+        ollama_client:      Client | None   = None
+    ) -> None:
         """
         OllamaPullManager to mange fail-safe model pulling
 
@@ -33,13 +33,13 @@ class OllamaPullManager:
             max_retries         (int, optional):    Maximum retries for pulling the model. Defaults to 5.
             fall_back_interval  (int, optional):    Fallback interval in seconds. Defaults to 60.
         """
-        self.model_name = model_name
-        self.mode = mode  # "auto", "speed", "stochastic"
-        self.interventions = interventions
-        self.min_speed_kbps = min_speed_kbps
-        self.max_retries = max_retries
+        self.model_name         = model_name
+        self.mode               = mode  # "auto", "speed", "stochastic"
+        self.interventions      = interventions
+        self.min_speed_kbps     = min_speed_kbps
+        self.max_retries        = max_retries
         self.fall_back_interval = fall_back_interval
-        self._download_error = None
+        self._download_error    = None
 
         if ollama_client is None:
             self.ollama_client = Client()
@@ -52,67 +52,80 @@ class OllamaPullManager:
             self.interventions = self.interventions[:5]
 
         # Thread management
-        self._is_pulling = False
-        self._should_stop = False
-        self._download_thread = None
+        self._is_pulling        = False
+        self._should_stop       = False
+        self._download_thread   = None
 
         # Progress tracking
-        self._current_percentage = 0
-        self._last_completed = 0
-        self._download_completed = False
+        self._current_percentage    = 0
+        self._last_completed        = 0
+        self._download_completed    = False
 
         # Intervention tracking
-        self._intervention_count = 0
-        self._completed_interventions = []
+        self._intervention_count        = 0
+        self._completed_interventions   = []
+
+        return None
 
 
-    def _reset(self):
+    def _reset(self) -> None:
         """
         Reset all after a pull.
         """
-        self._is_pulling = False
-        self._should_stop = False
-        self._download_thread = None
-        self._current_percentage = 0
-        self._last_completed = 0
-        self._download_completed = False
-        self._intervention_count = 0
+        self._is_pulling            = False
+        self._should_stop           = False
+        self._download_thread       = None
+        self._current_percentage    = 0
+        self._last_completed        = 0
+        self._download_completed    = False
+        self._intervention_count    = 0
+
         self._completed_interventions.clear()
 
+        return None
 
-    def _get_available_models(self) -> List[str]:
+
+    def _get_available_models(self) -> list[str]:
         """
         Get the model names from the ollama.list() output.
 
         Returns:
-            List[str]: List of available model names.
+            list[str]: List of available model names.
         """
         available_models = self.ollama_client.list()
-        return [model.get("model") for model in available_models.get("models", [])]
+
+        return [
+            model.get("model")
+            for model in available_models.get("models", [])
+        ]
 
 
-    def _is_model_available(self):
+    def _is_model_available(self) -> bool:
         """
         Check if the model is avaiable on the server.
         """
-        available_models = self._get_available_models()
-        return True                                 \
-            if self.model_name in available_models  \
-            else False
+        available_models: list[str] = self._get_available_models()
+
+        return (
+            True
+            if   (self.model_name in available_models)
+            else (False)
+        )
 
 
     def pull_model(self) -> None:
         """
         Pull the model with the specified mode
         """
-        flag = self._is_model_available()
+        flag: bool = self._is_model_available()
+
         if flag:
             print(f"Model {self.model_name} is available on the server.")
-            return
+            return None
 
         print(f"Pulling model '{self.model_name}' in {self.mode} mode...")
 
-        attempt = 0
+        attempt: int = 0
         while attempt < self.max_retries:
             try:
                 if self.mode == "stochastic":
@@ -127,7 +140,7 @@ class OllamaPullManager:
                 if success:
                     self._reset()
                     print(f"\nModel {self.model_name} pulled successfully!")
-                    return
+                    return None
 
                 if self._download_error is not None:
                     # incorrect model name
@@ -143,7 +156,7 @@ class OllamaPullManager:
                         print(f"Download error: {self._download_error}")
 
                     self._reset()
-                    return
+                    return None
 
             except Exception as e:
                 print(f"\nError in attempt {attempt + 1}: {e}")
@@ -165,15 +178,19 @@ class OllamaPullManager:
             if self._intervention_count >= 5:  # Max 5 interventions
                 break
 
-            print(f"Starting download (Intervention {intervention_idx + 1}/{len(self.interventions)}"
-                       f" at {target_percentage}%)...")
+            print(
+                "{0:s}{1:s}".format(
+                    f"Starting download",
+                    f"(Intervention {intervention_idx + 1}/{len(self.interventions)} at {target_percentage}%)..."
+                )
+            )
 
             self._start_download()
             sleep(5) # Allow some time to start the thread and get initial progress
 
             if self._download_error is not None:
                 print(f"\nDownload error: {self._download_error}")
-                return False 
+                return False
 
             # Monitor progress until target percentage
             while self._is_pulling:
@@ -200,21 +217,23 @@ class OllamaPullManager:
             return self._fall_back_intervention()
 
 
-    def _pull_with_speed_monitoring(self):
+    def _pull_with_speed_monitoring(self) -> bool:
         """Pull with speed monitoring - placeholder"""
         print("Speed monitoring mode - placeholder implementation")
+
         # TODO: speed monitoring logic
         return self._pull_basic()
 
 
-    def _pull_with_auto(self):
+    def _pull_with_auto(self) -> bool:
         """Pull with auto detection - placeholder"""
         print("Auto mode - placeholder implementation")
+
         # TODO: auto detection logic
         return self._pull_basic()
 
 
-    def _pull_basic(self):
+    def _pull_basic(self) -> bool:
         """Basic pull without interventions"""
         self._start_download()
 
@@ -224,17 +243,23 @@ class OllamaPullManager:
         return self._download_completed
 
 
-    def _start_download(self):
+    def _start_download(self) -> None:
         """
         Start download in a separate thread
         """
-        self._should_stop = False
-        self._download_completed = False
-        self._download_thread = Thread(target=self._download_worker, daemon=True)
+        self._should_stop           = False
+        self._download_completed    = False
+        self._download_thread       = Thread(
+            target=self._download_worker,
+            daemon=True
+        )
+
         self._download_thread.start()
 
+        return None
 
-    def _stop_download(self):
+
+    def _stop_download(self) -> None:
         """
         Stop the download thread
         """
@@ -242,8 +267,10 @@ class OllamaPullManager:
         if self._download_thread and self._download_thread.is_alive():
             self._download_thread.join(timeout=5)
 
+        return None
 
-    def _download_worker(self):
+
+    def _download_worker(self) -> None:
         """
         Worker function that runs in the thread
         """
@@ -281,6 +308,8 @@ class OllamaPullManager:
                     else:
                         print(f"\r{status}", end="", flush=True)
 
+            return None
+
         except Exception as e:
             self._download_error = str(e)
 
@@ -288,7 +317,7 @@ class OllamaPullManager:
             self._is_pulling = False
 
 
-    def _fall_back_intervention(self):
+    def _fall_back_intervention(self) -> bool:
         """
         Fallback method to pull the model with set interventions
         """
@@ -313,7 +342,7 @@ class OllamaPullManager:
         return False
 
 
-    def get_intervention_log(self):
+    def get_intervention_log(self) -> list[str]:
         """
         Get log of completed interventions
         """

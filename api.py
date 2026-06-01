@@ -23,7 +23,7 @@ from .backend.routers import (
     default_apis,
     models,
     cosmic,
-    chat_session_memory
+    memory
 )
 
 
@@ -177,14 +177,10 @@ async def lifespan(app: FastAPI):
 cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 
-# To test CORS_ALLOW_ORIGIN locally, you can set something like
-# CORS_ALLOW_ORIGIN=http://localhost:5173;http://localhost:8080
-# in your .env file depending on your frontend port, 8080 or 5173 in this case.
-
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",  # Frontend production server
-    "http://localhost:5173",  # Frontend development server
-    "http://localhost:11434",  # Ollama server
+    "http://localhost:8080",   # FE binded Docker port (prod)
+    "http://localhost:5173",   # FE binded Docker port (dev)
+    "http://localhost:11434",  # Ollama binded Docker port
 ]
 
 # Allow CORS for the specified origins
@@ -199,8 +195,7 @@ cosmic_app.add_middleware(
     allow_headers=["*"],
 )
 
-# APIs - smanile
 cosmic_app.include_router(default_apis.router, tags=["CoSMIC APIs"])
 cosmic_app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
 cosmic_app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
-cosmic_app.include_router(chat_session_memory.router, prefix="/api/v1", tags=["Upload Files - chat session memory"])
+cosmic_app.include_router(memory.router, prefix="/api/v1/memory", tags=["Upload Files"])
