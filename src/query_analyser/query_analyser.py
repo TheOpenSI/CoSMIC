@@ -145,12 +145,12 @@ class QueryAnalyser:
             **self.services,
             **self.chess_subservices
         }
-        print(
-            set_color(
-                status="info",
-                information=f"[DEBUG] - Full services from Query Analyser: {self.full_services}"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"[DEBUG] - Full services from Query Analyser: {self.full_services}"
+        #     )
+        # )
 
         # Get the number of services.
         self.num_services = len(self.services)
@@ -190,12 +190,12 @@ class QueryAnalyser:
 
             # Get the service option.
             service_option = self.mapping(response=service_analysis)
-            print(
-                set_color(
-                    status="info",
-                    information=f"[DEBUG] - Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
-                )
-            )
+            # print(
+            #     set_color(
+            #         status="info",
+            #         information=f"[DEBUG] - Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
+            #     )
+            # )
 
             # Analysis information.
             if verbose:
@@ -240,24 +240,24 @@ class QueryAnalyser:
             )
 
         else:
-            print(
-                set_color(
-                    status="info",
-                    information="[DEBUG] - Query Analyser received response from SLM that is neither 'Chess' or 'Vector DB' service..."
-                )
-            )
+            # print(
+            #     set_color(
+            #         status="info",
+            #         information="[DEBUG] - Query Analyser received response from SLM that is neither 'Chess' or 'Vector DB' service..."
+            #     )
+            # )
 
             # Set the user prompter for system information relevance.
             self.llm.set_user_prompter(self.user_prompter_system_info)
 
             # Get the response for whether the query is related to system information.
             relevance_analysis: str = self.llm(query)[0]
-            print(
-                set_color(
-                    status="info",
-                    information=f"[DEBUG] - Does SLM response detected user query asking about our system info or not?  ({relevance_analysis})"
-                )
-            )
+            # print(
+            #     set_color(
+            #         status="info",
+            #         information=f"[DEBUG] - Does SLM response detected user query asking about our system info or not?  ({relevance_analysis})"
+            #     )
+            # )
 
             # Get whether the question is related to system information.
             relevance: bool = self.get_system_information_relevance(relevance_analysis)
@@ -271,12 +271,12 @@ class QueryAnalyser:
                 # Update system information relevance.
                 service_info_dict["system_information_relevance"] = relevance
 
-        print(
-            set_color(
-                status="info",
-                information=f"[DEBUG] - User query that triggered system info output: {service_info_dict}"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"[DEBUG] - User query that triggered system info output: {service_info_dict}"
+        #     )
+        # )
 
         return (
             service_option,
