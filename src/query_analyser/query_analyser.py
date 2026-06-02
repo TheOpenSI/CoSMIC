@@ -112,8 +112,6 @@ class QueryAnalyser:
                 updated information dictionary.
         """
         # Set a list of services.
-        # TODO:
-        # replace this with service desc data fetched from our API endpoint
         self.services: dict[str, str] = {
             service_id: service_info['desc']
             for (service_id, service_info) in services.items()
