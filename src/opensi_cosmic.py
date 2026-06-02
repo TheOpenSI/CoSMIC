@@ -275,7 +275,7 @@ class OpenSICoSMIC:
                 retrieve_score
             ) = self.qa(
                 query=question,
-                services=self.get_services(verbose=True),
+                services=self.get_services(),
                 # The context that we are passing here is chat history. See api.py
                 context=context,
                 is_rag=True,
