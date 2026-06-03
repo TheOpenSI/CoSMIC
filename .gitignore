@@ -292,3 +292,5 @@ database/
 
 # Whitelists
 !examples/*.env*
+#emissions data of code carbon
+/emissions.csv

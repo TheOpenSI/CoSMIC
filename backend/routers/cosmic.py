@@ -18,6 +18,10 @@ from httpx import (
     AsyncClient,
     Response
 )
+import csv
+from codecarbon import EmissionsTracker
+from ...utils.log_tool import set_color
+
 
 ### Type hints ###
 from typing import Any
@@ -34,8 +38,18 @@ from ...utils.chat_history import build_context_from_messages
 # from ...utils.statistics import update_statistic_per_query
 
 
-
 router: APIRouter = APIRouter()
+
+
+EMISSIONS_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
+    "data",
+    "emissions"
+)
+EMISSIONS_PATH.mkdir(
+    mode=0o777,
+    parents=True,
+    exist_ok=True
+)
 
 
 # TODO:
@@ -65,6 +79,83 @@ class CosmicAPI(BaseModel):
     name:           str | None = "New chat"
     user_message:   str
     body:           Body
+
+
+def add_request_context_to_latest_emission(
+    user_id: str,
+    chat_id: str | None
+) -> None:
+    """Find the latest individual emission file, add user/chat id, merge into master CSV."""
+    master_file: Path = EMISSIONS_PATH.joinpath("emissions.csv")
+
+    # Find all individual emission files (not the master)
+    individual_files: list[Path] = sorted(
+        [f for f in EMISSIONS_PATH.glob("emission_*.csv")],
+        key=lambda f: f.stat().st_mtime
+    )
+
+    if not individual_files:
+        return None
+
+    # Get the most recent one — that's the current query
+    latest_file: Path = individual_files[-1]
+
+    with latest_file.open(
+        mode="r",
+        encoding="utf-8",
+        newline=""
+    ) as csv_file:
+        reader:     csv.DictReader[str]     = csv.DictReader(csv_file)
+        rows:       list[dict[Any, Any]]    = list(reader)
+        fieldnames: list[str | None]        = list(reader.fieldnames or [])
+
+    # Remove blank rows
+    rows: list[dict[Any, Any]] = [
+        row
+        for row in rows
+        if any(
+            v.strip()
+            for v in row.values()
+        )
+    ]
+
+    if not rows:
+        latest_file.unlink()  # delete empty file
+        return None
+
+    # Add user_id and chat_id
+    for extra_column in ("user_id", "chat_id"):
+        if extra_column not in fieldnames:
+            fieldnames.append(extra_column)
+
+    for row in rows:
+        row["user_id"] = str(user_id)
+        row["chat_id"] = (
+            ""
+            if   (chat_id is None)
+            else (chat_id)
+        )
+
+    # Append to master CSV
+    master_exists: bool = master_file.exists(follow_symlinks=True)
+
+    with master_file.open(
+        mode="a",
+        encoding="utf-8",
+        newline=""
+    ) as csv_file:
+        writer: csv.DictWriter[str | None] = csv.DictWriter(
+            f=csv_file,
+            fieldnames=fieldnames
+        )
+
+        if not master_exists:
+            writer.writeheader()
+
+        writer.writerows(rows)
+
+    # Delete the individual file after merging
+    latest_file.unlink()
 
 
 # TODO:
@@ -164,10 +255,51 @@ async def process_cosmic(
             for new_file in new_files:
                 # Form a prompt to update vector database
                 user_message_vector_db_update: str = f"Add the following file to the vector database: {new_file}"
+
+                # Start CodeCarbon emission tracking process (for RAG-triggered user queries)
+                rag_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
+                rag_tracker: EmissionsTracker = EmissionsTracker(
+                    project_name="cosmic-chat",
+                    save_to_file=True,
+                    output_dir=str(EMISSIONS_PATH),
+                    output_file=f"emission_{rag_query_time}.csv",  # unique file per query
+                    allow_multiple_runs=True,
+                    log_level="error"
+                )
+
+                rag_tracker.start()
+
                 # Update vector database
                 answer: str = str(opensi_cosmic(question=user_message_vector_db_update)[0])
 
+                # Stop CodeCarbon emission tracking process (for RAG-triggered
+                # user queries) and start saving those tracked data
+                rag_emissions: float | None = rag_tracker.stop()
+                add_request_context_to_latest_emission(
+                    user_id=user_id,
+                    chat_id=data.chat_id
+                )
+                print(
+                    set_color(
+                        status="info",
+                        information=f"[CodeCarbon] VectorDB update emissions: {rag_emissions:.8f} kg CO₂"
+                    )
+                )
+
         else:
+            # Start CodeCarbon emission tracking process (for General user queries)
+            general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
+            general_tracker: EmissionsTracker = EmissionsTracker(
+                project_name="cosmic-chat",
+                save_to_file=True,
+                output_dir=str(EMISSIONS_PATH),
+                output_file=f"emission_{general_query_time}.csv",  # unique file per query
+                allow_multiple_runs=True,
+                log_level="error"
+            )
+
+            general_tracker.start()
+
             answer: str = str(
                 opensi_cosmic(
                     question=data.user_message,
@@ -210,10 +342,24 @@ async def process_cosmic(
                     save_response.raise_for_status()
                     chat_id = save_response.json()["created"]["id"]
 
+            # Stop CodeCarbon emission tracking process (for General user queries)
+            # and start saving those tracked data
+            general_emissions: float | None = general_tracker.stop()
+            add_request_context_to_latest_emission(
+                user_id=user_id,
+                chat_id=data.chat_id
+            )
+            print(
+                set_color(
+                    status="info",
+                    information=f"[CodeCarbon] General chat query emissions: {general_emissions:.8f} kg CO₂"
+                )
+            )
+
             return {
                 "status": "success",
                 "result": answer,
-                "chat_id": chat_id,
+                "chat_id": chat_id
             }
 
 
