@@ -108,12 +108,12 @@ class QABase(ServiceBase):
 
         # There is/are active services from fetched API endpoint
         if len(services_name) != 0:
-            print(
-                set_color(
-                    status="info",
-                    information=f"[DEBUG] - Services Name: {services_name}"
-                )
-            )
+            # print(
+            #     set_color(
+            #         status="info",
+            #         information=f"[DEBUG] - Services Name: {services_name}"
+            #     )
+            # )
             pass
 
         # No active services found from fetched API endpoint
