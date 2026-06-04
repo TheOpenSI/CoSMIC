@@ -106,18 +106,8 @@ class QABase(ServiceBase):
             for (service_id, service_info) in services.items()
         }
 
-        # There is/are active services from fetched API endpoint
-        if len(services_name) != 0:
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"[DEBUG] - Services Name: {services_name}"
-            #     )
-            # )
-            pass
-
         # No active services found from fetched API endpoint
-        else:
+        if len(services_name) == 0:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail={
