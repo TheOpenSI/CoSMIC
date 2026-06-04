@@ -1,36 +1,17 @@
 ### Core modules ###
-from contextlib import asynccontextmanager
 from os import environ
-from pathlib import Path
-from shutil import copyfile
-from dotenv import dotenv_values
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from yaml import (
-    safe_dump,
-    safe_load
-)
-
 
 ### Type hints ###
-from typing import Any
 
 
 ### Internal modules ###
-from .src.opensi_cosmic import OpenSICoSMIC
-from .utils.log_tool import set_color
-from .backend.routers import (
-    default_apis,
-    models,
-    cosmic,
-    memory
-)
-
-
+from .backend.routers import default_apis, models, cosmic, memory
+# from .backend.routers import default_apis, models, cosmic, chat_session_memory
 
 # =====================Debugging========================
-# Uncomment the following lines to enable debugging:
-#
+# Uncomment the following lines to enable debugging
 # import debugpy
 # print("Waiting for debugger attach...")
 # debugpy.listen(("0.0.0.0", 5678))
@@ -39,6 +20,7 @@ from .backend.routers import (
 # =======================================================
 
 
+app = FastAPI()
 
 # TODO:
 # these 3 global vars & 2 funcs will get deleted after we successfully replace
@@ -184,24 +166,29 @@ cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",   # FE binded Docker port (prod)
-    "http://localhost:5173",   # FE binded Docker port (dev)
-    "http://localhost:11434",  # Ollama binded Docker port
+    "http://localhost:8080",  # Frontend production server
+    "http://localhost:5173",  # Frontend development server
+    "http://localhost:11434",  # Ollama server
 ]
 
 # Allow CORS for the specified origins
 if environ.get("CORS_ALLOW_ORIGIN"):
     CORS_ALLOW_ORIGIN.extend(str(object=environ.get("CORS_ALLOW_ORIGIN")).split(";"))
 
-cosmic_app.add_middleware(
-    middleware_class=CORSMiddleware,
+app.add_middleware(
+    CORSMiddleware,
     allow_origins=CORS_ALLOW_ORIGIN,  # or ["*"] to allow all
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-cosmic_app.include_router(default_apis.router, tags=["CoSMIC APIs"])
-cosmic_app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
-cosmic_app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
-cosmic_app.include_router(memory.router, prefix="/api/v1/memory", tags=["Upload Files"])
+# APIs - smanile
+app.include_router(default_apis.router, tags=["CoSMIC APIs"])
+app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
+app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
+app.include_router(
+    memory.router,
+    prefix="/api/v1/memory",
+    tags=["Upload Files"],
+)
