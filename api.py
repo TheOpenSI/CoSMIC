@@ -104,6 +104,13 @@ def load_openai_key() -> str | None:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Equivalent to the explicit 'startup' event
+
+    # NOTE:
+    # run healthcheck func first so `config_updated.yaml` is guaranteed to exist.
+    # However, we'll soon remove this when the migration for `/config` endpoint
+    # starts.
+    config_healthcheck()
+
     opensi_cosmic_instance: OpenSICoSMIC = OpenSICoSMIC(config_path=str(NEW_CONFIG_PATH))
 
     # INFO:
@@ -142,7 +149,6 @@ async def lifespan(app: FastAPI):
     # TODO:
     # these logic down here will get deleted for the same reason mentioned at the
     # vert start of this file
-    config_healthcheck()
     openai_api_key: str | None = load_openai_key()
 
     app.state.openai_api_key            = openai_api_key
