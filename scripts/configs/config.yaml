@@ -30,3 +30,4 @@ rag:
   topk: 10 # retrieve topk documents.
   retrieve_score_threshold: 0.7 # similarity score under this threshold will not be used in prompt.
   vector_db_path: "" # vector database path, if not exist, use default database/vector_database.
+
