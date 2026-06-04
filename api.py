@@ -103,6 +103,7 @@ def load_openai_key() -> str | None:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    config_healthcheck()
     # Equivalent to the explicit 'startup' event
     opensi_cosmic_instance: OpenSICoSMIC = OpenSICoSMIC(config_path=str(NEW_CONFIG_PATH))
 
@@ -142,7 +143,6 @@ async def lifespan(app: FastAPI):
     # TODO:
     # these logic down here will get deleted for the same reason mentioned at the
     # vert start of this file
-    config_healthcheck()
     openai_api_key: str | None = load_openai_key()
 
     app.state.openai_api_key            = openai_api_key
