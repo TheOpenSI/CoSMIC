@@ -355,16 +355,16 @@ class OpenSICoSMIC:
                 device=self.device
             )
 
-            # Add a directory of documents.
-            if Path.exists(
-                Path(self.config_data["doc_directory"]).resolve(strict=True),
-                follow_symlinks=True
-            ):
-                vector_database.add_document_directory(self.config_data["doc_directory"])
+            # # Add a directory of documents.
+            # if Path.exists(
+            #     Path(self.config_data["doc_directory"]).resolve(strict=True),
+            #     follow_symlinks=True
+            # ):
+            #     vector_database.add_document_directory(self.config_data["doc_directory"])
 
-            # Add documents.
-            if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
-                vector_database.add_documents(self.config_data["document_path"])
+            # # Add documents.
+            # if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
+            #     vector_database.add_documents(self.config_data["document_path"])
 
             # Base RAG service with vector_database, the database can be changed using
             # self.rag.set_vector_database().
