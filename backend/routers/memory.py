@@ -4,6 +4,16 @@ from pathlib import Path
 
 router = APIRouter()
 
+# Global document index and vector database instances
+# These will be set by the cosmic router initialization
+_document_index = None
+# _vector_database = None
+
+
+def set_document_index(index):
+    """Initialize document index (called by cosmic router)"""
+    global _document_index
+    _document_index = index
 
 @router.post("/upload")
 async def upload_file(
@@ -33,6 +43,16 @@ async def upload_file(
     # then write content
     f.write(content)
     f.close()
+
+    # Add to document index if available
+    if _document_index:
+        _document_index.add_document(
+            document_id=file_id,
+            user_id=user_id,
+            file_name=file.filename,
+            memory_type=memory_type,
+            session_id=chat_session_id,
+        )
 
     return {
         "file_id": file_id,

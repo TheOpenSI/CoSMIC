@@ -34,8 +34,10 @@ from ..cores.dependencies import (
     get_opensi_cosmic
 )
 from ...src.opensi_cosmic import OpenSICoSMIC
+from ...src.services.document_index import DocumentIndex
 from ...utils.chat_history import build_context_from_messages
 # from ...utils.statistics import update_statistic_per_query
+from . import memory
 
 
 router: APIRouter = APIRouter()
@@ -80,6 +82,9 @@ class CosmicAPI(BaseModel):
     user_message:   str
     body:           Body
 
+# Initialize document index for metadata tracking
+document_index = DocumentIndex(persist_path="/app/data/document_index.json")
+memory.set_document_index(document_index)
 
 def add_request_context_to_latest_emission(
     user_id: str,
