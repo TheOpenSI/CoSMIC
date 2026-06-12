@@ -73,12 +73,31 @@ class OpenSICoSMIC:
             )
             exit(1)
 
-        # Load yaml file to get the config.
+
+        # NOTE:
+        # Because of how db table works, we could add multiple preset of CoSMIC
+        # default configs. While there're no usecase for this feature yet (there
+        # aren't any extra ones either beside the only inserted default configs
+        # data through Alembic script), it's good to mentioned here so that
+        # future devs can work on this once CoSMIC is getting more complexed and
+        # in need of this feature. For now, we'll assume to use the first result
+        # only.
+
+        # TODO: to be removed once the migration compleled, tested, and worked
         with self.config_path.open(
             mode="r",
             encoding="utf-8"
         ) as config_file:
             self.config_data: dict[str, Any] = safe_load(stream=config_file)
+
+        # For-loop here would be too expensive so I used this trick instead.
+        # Inspired from:
+        # https://stackoverflow.com/questions/61105986/how-to-access-elements-in-a-dict-values
+        modern_config_data:         dict[str, Any] = list((self.get_configs()[0]).values())[0]
+        self.general_config_data:   dict[str, Any] = modern_config_data["general"]
+        self.qa_config_data:        dict[str, Any] = modern_config_data["query_analyser"]
+        print(f"Default General configs: {self.general_config_data}")
+        print(f"Default QA configs: {self.qa_config_data}")
 
         self.user_id = (
             str(user["id"])
@@ -626,6 +645,131 @@ class OpenSICoSMIC:
 
                 else:
                     return dict(sorted(services.items()))
+
+
+        except ConnectError as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
+
+
+        except ConnectTimeout as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
+
+
+    def get_configs(
+        self,
+        # TODO:
+        # create a dedicated util to handle valid URL format
+        url:        str                     = "http://backend:8000/api/v1/configs/",
+        params:     dict[str, bool] | None  = None,
+        lifetime:   float                   = 10.0,
+        verbose:    bool                    = False
+    ) -> list[dict[str, dict[str, Any]]]:
+        """
+        Retrieve presets of configuration from API endpoint.
+
+        This method fetches presets of configuration data from the specified
+        # endpoint and returns the exact data structure received for further
+        # CoSMIC usages.
+
+        Args:
+            url:
+                base URL of the configurations API endpoint. Defaults to
+                "http://backend:8000/api/v1/configs/".
+
+            params:
+                optional query parameter for provided endpoint. Defaults to None.
+
+            lifetime:
+                HTTP client timeout in seconds. Defaults to 10.0 seconds.
+
+            verbose:
+                Enable pretty-printed debug output for presets of configuration
+                data. When True, prints formatted presets of configuration data
+                using 'pprint'.
+
+        Returns:
+            Presets of configuration data.
+
+            Example:
+            [
+                { <first configuration preset> },
+                { <second configuration preset> }
+            ]
+
+        Raises:
+            HTTPException:
+                With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> configs = obj.get_configs(verbose=True)
+            >>> configs[0] # 1st configuration preset
+            [{"<configuration preset name>": "<default configurations>"}]
+        """
+        configs: list[dict[str, dict[str, Any]]] = []
+
+        try:
+            with Client(
+                base_url=url,
+                params=params,
+                timeout=lifetime
+            ) as client:
+                response: Response = client.get(url="")
+                response.raise_for_status()
+                datas: list[dict[str, Any]] = response.json().get("result", [])
+
+            if len(datas) == 0:
+                # No config presets available
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    print(
+                        "{debug_msg:s}\n{foot_sep:s}".format(
+                            debug_msg="No configuration presets available...",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    return []
+
+                else:
+                    return []
+
+            else:
+                # There is/are config preset(s) available
+                for data in datas:
+                    # We only need `name` & `details` field to form minimal
+                    # config presets data
+                    configs.append({data["name"]: data["details"]})
+
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    pp(
+                        object=configs,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    print(f"{'=' * 80}")
+                    return configs
+
+                else:
+                    return configs
 
 
         except ConnectError as httpx_err:
