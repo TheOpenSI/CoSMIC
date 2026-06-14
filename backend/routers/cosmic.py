@@ -5,6 +5,8 @@ from datetime import (
     datetime,
     timezone
 )
+
+from uuid import UUID
 from dotenv import dotenv_values
 from fastapi import (
     Depends,
@@ -82,8 +84,7 @@ class CosmicAPI(BaseModel):
 
 
 def add_request_context_to_latest_emission(
-    user_id: str,
-    chat_id: str | None
+    user_id: UUID,
 ) -> None:
     """Find the latest individual emission file, add user/chat id, merge into master CSV."""
     master_file: Path = EMISSIONS_PATH.joinpath("emissions.csv")
@@ -123,18 +124,13 @@ def add_request_context_to_latest_emission(
         latest_file.unlink()  # delete empty file
         return None
 
-    # Add user_id and chat_id
-    for extra_column in ("user_id", "chat_id"):
+    # Add user_id
+    for extra_column in ("user_id"):
         if extra_column not in fieldnames:
             fieldnames.append(extra_column)
 
     for row in rows:
         row["user_id"] = str(user_id)
-        row["chat_id"] = (
-            ""
-            if   (chat_id is None)
-            else (chat_id)
-        )
 
     # Append to master CSV
     master_exists: bool = master_file.exists(follow_symlinks=True)
@@ -264,6 +260,7 @@ async def process_cosmic(
                     output_dir=str(EMISSIONS_PATH),
                     output_file=f"emission_{rag_query_time}.csv",  # unique file per query
                     allow_multiple_runs=True,
+                    tracking_mode="process",  # track only the current process (not the whole machine)
                     log_level="error"
                 )
 
@@ -295,6 +292,7 @@ async def process_cosmic(
                 output_dir=str(EMISSIONS_PATH),
                 output_file=f"emission_{general_query_time}.csv",  # unique file per query
                 allow_multiple_runs=True,
+                tracking_mode="process",  # track only the current process (not the whole machine)
                 log_level="error"
             )
 
