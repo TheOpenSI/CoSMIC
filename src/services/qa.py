@@ -16,7 +16,6 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-from ...utils.log_tool import set_color
 
 
 

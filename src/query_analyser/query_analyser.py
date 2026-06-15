@@ -25,7 +25,7 @@ class QueryAnalyser:
         self,
         llm_name:       str     = "mistral-7b-instruct-v0.1",
         seed:           int     = 0,
-        is_quantized:   bool    = False,
+        is_quantised:   bool    = False,
         service_index:  int     = -1,
         device:         str     = "cuda"
     ) -> None:
@@ -33,11 +33,20 @@ class QueryAnalyser:
         Query analyser to select a service.
 
         Args:
-            llm_name        (str, optional):    LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
-            seed            (int, optional):    response generation seed. Defaults to 0.
-            is_quantized    (bool, optional):   use quantized LLM. Defaults to False.
-            service_index   (int, optional):    use selected service, otherwise automatically select.
-            device          (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
+            llm_name (str, optional):
+                LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
+
+            seed (int, optional):
+                response generation seed. Defaults to 0.
+
+            is_quantised (bool, optional):
+                use quantized LLM. Defaults to False.
+
+            service_index (int, optional):
+                use selected service, otherwise automatically select.
+
+            device (str, optional):
+                use cuda or cpu for LLM. Defaults to "cuda".
         """
         # Set config.
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
@@ -72,7 +81,7 @@ class QueryAnalyser:
         )(
             llm_name=llm_name,
             seed=seed,
-            is_quantized=is_quantized,
+            is_quantised=is_quantised,
             use_example=False,
             is_truncate_response=True,
             device=device

@@ -43,23 +43,35 @@ from .query_analyser.query_analyser import QueryAnalyser
 class OpenSICoSMIC:
     def __init__(
         self,
-        query_llm_name: str         = "",
-        llm_name:       str         = "",
+        general_slm:    str         = "",
+        qa_slm:         str         = "",
         config_path:    str         = "scripts/configs/config.yaml",
         user:           dict | None = None
     ) -> None:
         """
-        Construct OpenSICoSMIC instance. It contains LLM and services including vector database
-        and RAG, where RAG includes context retriever and vector database update.
-        Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
+        Construct OpenSICoSMIC instance. It contains SLMs and services including
+        vector database and RAG, where RAG includes context retriever and vector
+        database update. Chess services are included in `PuzzleAnalyse()` and
+        `QualityEval()` classes (called on demand, not as global instance).
 
         Args:
-            query_llm_name  (str):  query analyser LLM name, check LLM_MODEL_DICT in src/maps.py,
-                                    if it is empty, the entry is self.config.query_llm_name.
-            llm_name        (str):  LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
-                                    is self.config.llm_name.
-            config_path     (str):  path of configuration file.
-            user            (dict): user information including ID, name, etc. Default to None.
+            general_slm (str):
+                General SLM name used in every chat session (check default list
+                of SLMs in `src/maps.py`). If empty, the entry is a combination
+                format with value from `provider` & `model` fields (accessible
+                through `self.general_config_data`).
+
+            qa_slm (str):
+                Query Analyser SLM name (check default list of SLMs in
+                `src/maps.py`). If empty, the entry is a combination format with
+                value from `provider` & `model` fields (accessible through
+                `self.qa_config_data`).
+
+            config_path (str):
+                path of configuration file.
+
+            user (dict, optional):
+                user information including ID, name, etc. Default to None.
         """
         # Check if required config file exists.
         self.config_path: Path = Path(config_path).resolve(strict=True)
@@ -96,9 +108,22 @@ class OpenSICoSMIC:
         modern_config_data:         dict[str, Any] = list((self.get_configs()[0]).values())[0]
         self.general_config_data:   dict[str, Any] = modern_config_data["general"]
         self.qa_config_data:        dict[str, Any] = modern_config_data["query_analyser"]
-        print(f"Default General configs: {self.general_config_data}")
-        print(f"Default QA configs: {self.qa_config_data}")
 
+        print(
+            set_color(
+                status="info",
+                information=f"Default General configs: {self.general_config_data}"
+            )
+        )
+        print(
+            set_color(
+                status="info",
+                information=f"Default QA configs: {self.qa_config_data}"
+            )
+        )
+
+
+        # Set user info
         self.user_id = (
             str(user["id"])
             if (
@@ -109,46 +134,73 @@ class OpenSICoSMIC:
             else (None)
         )
 
+
         # Set model device.
-        self.device = (
+        self.device: str = (
             "cuda"
             if   (cuda.is_available())
             else ("cpu")
         )
 
-        # Initialize QA instance.
-        self.qa = None
-
-        # If llm_name is not specified, read it from the config file.
-        if llm_name == "":
-            llm_name = self.config_data["llm_name"]
-
-        self.llm = self.get_llm(
-            llm_name=llm_name,
-            seed=self.config_data["seed"],
-            is_quantized=self.config_data["is_quantized"],
-            device=self.device,
-        )
 
         # Check OpenAI API key.
-        self.openai_api_status = self.check_openai_key()
+        self.openai_api_status: str | None = self.check_openai_key()
 
-        # Set LLM for query analysis.
-        if query_llm_name == "":
-            query_llm_name = self.config_data["query_analyser"]["llm_name"]
 
-        self.query_analyser = QueryAnalyser(
-            llm_name=query_llm_name,
-            seed=self.config_data["seed"],
-            is_quantized=self.config_data["query_analyser"]["is_quantized"],
-            service_index=self.config_data["service"],
-            device=self.device,
+        # Read SLMs from Configs API endpoint if not specified
+        self.general_slm = general_slm
+
+        if self.general_slm == "":
+            # Match model detection format in `src/services/llms/LLMBase.py`.
+            # For example: "ollama:qwen2.5:7b"
+            self.general_slm = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
+
+        print(
+            set_color(
+                status="info",
+                information=f"Set General SLM: [{self.general_slm}]"
+            )
         )
 
-        # Code generation service.
-        self.code_generator = CodeGenerator()
+        self.llm = self.get_llm(
+            llm_name=self.general_slm,
+            seed=self.general_config_data["seed"],
+            is_quantised=self.general_config_data["is_quantised"],
+            device=self.device
+        )
 
-        # Set up QA instance.
+
+        # Read SLMs from Configs API endpoint if not specified
+        self.qa_slm = qa_slm
+
+        if self.qa_slm == "":
+            # Match model detection format in `src/services/llms/LLMBase.py`.
+            # For example: "ollama:qwen2.5:7b"
+            self.qa_slm = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+
+        print(
+            set_color(
+                status="info",
+                information=f"Set QA SLM: [{self.general_slm}]"
+            )
+        )
+
+        self.query_analyser: QueryAnalyser = QueryAnalyser(
+            llm_name=self.qa_slm,
+            seed=self.qa_config_data["seed"],
+            is_quantised=self.qa_config_data["is_quantised"],
+            service_index=-1, # Default to 'auto' mode
+            device=self.device
+        )
+
+
+        # Code generation service.
+        self.code_generator: CodeGenerator = CodeGenerator()
+
+
+        # Initialise & setup QA instance.
+        self.qa: QABase | None = None
+
         self.set_up_qa(
             user_id=str(self.user_id),
             user_name=None
@@ -295,13 +347,13 @@ class OpenSICoSMIC:
             ) = self.qa(
                 query=question,
                 services=self.get_services(),
-                # The context that we are passing here is chat history. See api.py
-                context=context,
+                context=context, # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
                 verbose=False
             ) # pyright: ignore
 
-        # Return answers with and without truncation, and retrieve score if applicable otherwise -1.
+        # Return answers with and without truncation, and retrieve score (if
+        # applicable). Otherwise, -1.
         return (
             response,
             raw_response,
@@ -458,16 +510,21 @@ class OpenSICoSMIC:
         self,
         llm_name: str,
         seed: int = 0,
-        is_quantized: bool = False,
+        is_quantised: bool = False,
         **kwargs
     ):
         """
         Construct LLM give an LLM name.
 
         Args:
-            llm_name        (str):  LLM name, check LLM_MODEL_DICT in src/maps.py.
-            seed            (int):  LLM content generation seed. Default to 0.
-            is_quantized    (bool): use quantized LLM. Default to False.
+            llm_name        (str):
+                LLM name, check LLM_MODEL_DICT in src/maps.py.
+
+            seed            (int):
+                LLM content generation seed. Default to 0.
+
+            is_quantised    (bool):
+                use quantised LLM. Default to False.
 
         Return:
             llm (LLMBase): LLM instance.
@@ -479,10 +536,8 @@ class OpenSICoSMIC:
         elif llm_name.find("gpt") > -1:
             llm_instance_name = "GPT"
 
-
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
-
 
         else:
             print(
@@ -499,11 +554,16 @@ class OpenSICoSMIC:
         )(
             llm_name=llm_name,
             seed=seed,
-            is_quantized=is_quantized,
+            is_quantised=is_quantised,
             **kwargs
         )
 
-        print(f"LLM instance created: {llm}")
+        print(
+            set_color(
+                status="info",
+                information=f"LLM instance created: {llm}"
+            )
+        )
 
         return llm
 
