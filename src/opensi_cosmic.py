@@ -45,7 +45,7 @@ class OpenSICoSMIC:
         self,
         general_slm:    str         = "",
         qa_slm:         str         = "",
-        config_path:    str         = "scripts/configs/config.yaml",
+        config_path:    str         = "",
         user:           dict | None = None
     ) -> None:
         """
@@ -73,19 +73,6 @@ class OpenSICoSMIC:
             user (dict, optional):
                 user information including ID, name, etc. Default to None.
         """
-        # Check if required config file exists.
-        self.config_path: Path = Path(config_path).resolve(strict=True)
-
-        if not self.config_path.exists(follow_symlinks=True):
-            print(
-                set_color(
-                    status="error",
-                    information=f"Config file {config_path} not exist."
-                )
-            )
-            exit(1)
-
-
         # NOTE:
         # Because of how db table works, we could add multiple preset of CoSMIC
         # default configs. While there're no usecase for this feature yet (there
@@ -95,19 +82,12 @@ class OpenSICoSMIC:
         # in need of this feature. For now, we'll assume to use the first result
         # only.
 
-        # TODO: to be removed once the migration compleled, tested, and worked
-        with self.config_path.open(
-            mode="r",
-            encoding="utf-8"
-        ) as config_file:
-            self.config_data: dict[str, Any] = safe_load(stream=config_file)
-
         # For-loop here would be too expensive so I used this trick instead.
         # Inspired from:
         # https://stackoverflow.com/questions/61105986/how-to-access-elements-in-a-dict-values
-        modern_config_data:         dict[str, Any] = list((self.get_configs()[0]).values())[0]
-        self.general_config_data:   dict[str, Any] = modern_config_data["general"]
-        self.qa_config_data:        dict[str, Any] = modern_config_data["query_analyser"]
+        self.config_data:           dict[str, Any] = list((self.get_configs()[0]).values())[0]
+        self.general_config_data:   dict[str, Any] = self.config_data["general"]
+        self.qa_config_data:        dict[str, Any] = self.config_data["query_analyser"]
 
         print(
             set_color(
@@ -395,7 +375,7 @@ class OpenSICoSMIC:
             self.user_id = user_id
 
             # Create vector database service which will be included in RAG for retrieve and information updates.
-            vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
+            # vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
 
             # # If index.faiss exists, it is user selected path; do not change the path.
             # # Otherwise, create a new directory.
@@ -419,31 +399,36 @@ class OpenSICoSMIC:
             # Since Qdrant is now managed, we don't need to check for index.faiss
             # The VectorDatabase service will handle the connection.
 
+            # TODO:
+            # I know that we had a different path implmented for RAG works on
+            # another branch right now. However, I need to match what already
+            # there in the YAML file so COSMIC-225 PR can be merged. Once this
+            # merged, we can modify the path again with the current branch
+            # working on RAG to test out.
+
             vector_database = VectorDatabase(
-                document_analyser_model="gte-small",
-                local_database_path=str(object=vector_db_path),
-                vector_database_update_threshold=0.98,
+                local_database_path="",
                 device=self.device
             )
 
             # Add a directory of documents.
-            if Path.exists(
-                Path(self.config_data["doc_directory"]).resolve(strict=True),
-                follow_symlinks=True
-            ):
-                vector_database.add_document_directory(self.config_data["doc_directory"])
+            document_path: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
+                "data",
+                "docs"
+            )
+            documents: str | list[str] = []
+
+            if document_path.exists(follow_symlinks=True):
+                vector_database.add_document_directory(str(document_path))
 
             # Add documents.
-            if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
-                vector_database.add_documents(self.config_data["document_path"])
+            if (documents != "") \
+            or (len(documents) > 0):
+                vector_database.add_documents(documents)
 
             # Base RAG service with vector_database, the database can be changed using
             # self.rag.set_vector_database().
-            self.rag = RAGBase(
-                vector_database=vector_database,
-                retrieve_score_threshold=self.config_data["rag"]["retrieve_score_threshold"],
-                topk=self.config_data["rag"]["topk"],
-            )
+            self.rag = RAGBase(vector_database=vector_database)
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
@@ -452,7 +437,7 @@ class OpenSICoSMIC:
                 llm=self.llm,
                 rag=self.rag,
                 code_generator=self.code_generator,
-                config=str(object=self.config_path)
+                config=None
             )
 
 
@@ -463,8 +448,8 @@ class OpenSICoSMIC:
         Returns:
             answer: status information.
         """
-        llm_name                = self.config_data["llm_name"]
-        query_analyser_llm_name = self.config_data["query_analyser"]["llm_name"]
+        llm_name                = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
+        query_analyser_llm_name = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
 
         is_llm_name_gpt                 = llm_name.find("gpt") > -1
         is_query_analyser_llm_name_gpt  = query_analyser_llm_name.find("gpt") > -1
@@ -482,16 +467,10 @@ class OpenSICoSMIC:
 
         count = len(llm_name_list)
 
-        if is_llm_name_gpt:
-            openai_api_key = self.llm.get_openai_key()
+        openai_api_key: str | None = self.general_config_data["api_key"]
 
-        elif is_query_analyser_llm_name_gpt:
-            openai_api_key = self.query_analyser.llm.get_openai_key()
-
-        else:
-            openai_api_key = ""
-
-        if (count > 0) and (openai_api_key == ""):
+        if  (count > 0) \
+        and (openai_api_key == ""):
             answer = ""
 
             if count == 1:

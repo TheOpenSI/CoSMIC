@@ -5,7 +5,6 @@ from datetime import (
     datetime,
     timezone
 )
-from dotenv import dotenv_values
 from fastapi import (
     Depends,
     Request,
@@ -28,11 +27,7 @@ from typing import Any
 
 
 ### Internal modules ###
-from ..cores.dependencies import (
-    get_config_path,
-    get_openai_status,
-    get_opensi_cosmic
-)
+from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
 from ...utils.chat_history import build_context_from_messages
 # from ...utils.statistics import update_statistic_per_query
@@ -165,33 +160,11 @@ def add_request_context_to_latest_emission(
 async def process_cosmic(
     data:               CosmicAPI,
     request:            Request,
-    opensi_cosmic:      OpenSICoSMIC    = Depends(get_opensi_cosmic),
-    openai_api_status:  str             = Depends(get_openai_status),
-    config_path:        Path            = Depends(get_config_path)
+    opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic),
 ):
     try:
         # Rebuild if config or API key changed
-        current_ts = config_path.stat().st_mtime
-        current_key = environ.get(
-            "OPENAI_API_KEY",
-            dotenv_values(".env").get(
-                "OPENAI_API_KEY",
-                ""
-            )
-        )
-
-        if (current_ts != request.app.state.config_modify_timestamp) \
-        or (current_key != request.app.state.openai_api_key):
-            opensi_cosmic.quit()
-
-            request.app.state.openai_api_key            = current_key
-            request.app.state.config_modify_timestamp   = current_ts
-            request.app.state.opensi_cosmic             = OpenSICoSMIC(config_path=str(config_path))
-            request.app.state.openai_api_status         = request.app.state.opensi_cosmic.check_openai_key()
-            opensi_cosmic                               = request.app.state.opensi_cosmic
-            openai_api_status                           = request.app.state.openai_api_status
-
-            print("Reconstructed OpenSICoSMIC due to changed configs.")
+        openai_api_status: str = opensi_cosmic.check_openai_key()
 
         user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
         user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
@@ -226,7 +199,7 @@ async def process_cosmic(
         if openai_api_status != "":
             return {
                 "status": "success",
-                "result": f"{str(openai_api_status)}"
+                "result": openai_api_status
             }
 
         if data.user_message.find("</files>") > -1:
