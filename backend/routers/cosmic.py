@@ -84,7 +84,7 @@ class CosmicAPI(BaseModel):
 
 
 def add_request_context_to_latest_emission(
-    user_id: UUID,
+    user_id: str,
 ) -> None:
     """Find the latest individual emission file, add user/chat id, merge into master CSV."""
     master_file: Path = EMISSIONS_PATH.joinpath("emissions.csv")
@@ -125,9 +125,7 @@ def add_request_context_to_latest_emission(
         return None
 
     # Add user_id
-    for extra_column in ("user_id"):
-        if extra_column not in fieldnames:
-            fieldnames.append(extra_column)
+    fieldnames.append("user_id") if "user_id" not in fieldnames else None
 
     for row in rows:
         row["user_id"] = str(user_id)
@@ -273,8 +271,7 @@ async def process_cosmic(
                 # user queries) and start saving those tracked data
                 rag_emissions: float | None = rag_tracker.stop()
                 add_request_context_to_latest_emission(
-                    user_id=user_id,
-                    chat_id=data.chat_id
+                    user_id=user_id
                 )
                 print(
                     set_color(
@@ -344,8 +341,7 @@ async def process_cosmic(
             # and start saving those tracked data
             general_emissions: float | None = general_tracker.stop()
             add_request_context_to_latest_emission(
-                user_id=user_id,
-                chat_id=data.chat_id
+                user_id=user_id
             )
             print(
                 set_color(
