@@ -1,5 +1,4 @@
 ### Core modules ###
-from os import environ
 from pathlib import Path
 from datetime import (
     datetime,
@@ -7,7 +6,6 @@ from datetime import (
 )
 from fastapi import (
     Depends,
-    Request,
     HTTPException,
     APIRouter,
     status
@@ -50,9 +48,11 @@ EMISSIONS_PATH.mkdir(
 # TODO:
 # there'll be a new way to format this new chat session payload data from FE that
 # we don't need to rely on the legacy data format anymore as soon as we get to
-# work on the migration from old to new `/config` endpoint. For more information,
-# refer to `api.py` (for the new endpoint) & `default_apis.py` (for the mentioned
-# of new changes).
+# work on the migration from old to new `/config` endpoint.
+#
+# UPDATE:
+# This should be done in a sepearate PR instead.
+
 class Message(BaseModel):
     role:       str  # "user" | "assistant"
     content:    str
@@ -153,19 +153,12 @@ def add_request_context_to_latest_emission(
     latest_file.unlink()
 
 
-# TODO:
-# Refer to the note on new changes in this same endpoint but in the legacy file
-# (`default_apis.py`) for future updates.
 @router.post("")
 async def process_cosmic(
     data:               CosmicAPI,
-    request:            Request,
-    opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic),
+    opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
 ):
     try:
-        # Rebuild if config or API key changed
-        openai_api_status: str = opensi_cosmic.check_openai_key()
-
         user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
         user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
         # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
@@ -195,13 +188,15 @@ async def process_cosmic(
         #     current_time=current_time,
         # )
 
-        # Proceed as normal
+        openai_api_status: str = opensi_cosmic.check_openai_key()
+
         if openai_api_status != "":
             return {
                 "status": "success",
                 "result": openai_api_status
             }
 
+        # Proceed as normal
         if data.user_message.find("</files>") > -1:
             splits: list[str] = data.user_message.split("</files>")
             data.user_message = splits[1]
@@ -340,8 +335,8 @@ async def process_cosmic(
         raise http_exc
 
 
-    except Exception as fastapi_err:
+    except Exception as fastapi_exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"{fastapi_err}"
+            detail=f"{fastapi_exc}"
         )
