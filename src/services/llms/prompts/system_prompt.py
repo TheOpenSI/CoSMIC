@@ -12,13 +12,13 @@ class SystemPromptBase:
     def __init__(
         self,
         use_example: bool=False,
-        prefix: str = "{0:s}{1:s}. {2:s}. {3:s}. {4:s}. {5:s}.".format(
-            "SYSTEM IDENTITY: ",
-            "You are OpenSI-CoSMIC, a helpful assistant developed by Open Source Institute at University of Canberra. ",
-            "If the question is not clear, ask for clarification instead of making assumptions. ",
-            "You would have access to conversation history, this is for your context only. ",
-            "Always answer the question even if the context is not helpful. ",
-            "If you don't know the answer, say you don't know, but try to provide some helpful information if possible."
+        prefix: str = "{0:s} {1:s}. {2:s}. {3:s}. {4:s}. {5:s}.".format(
+            "SYSTEM IDENTITY:",
+            "You are OpenSI-CoSMIC, a helpful assistant developed by Open Source Institute at University of Canberra",
+            "If the question is not clear, ask for clarification instead of making assumptions",
+            "You would have access to conversation history, this is for your context only",
+            "Always answer the question even if the context is not helpful",
+            "If you don't know the answer, say you don't know, but try to provide some helpful information if possible"
         )
     ):
         """
