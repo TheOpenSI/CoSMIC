@@ -17,7 +17,9 @@ from typing import Any
 
 
 ### Internal modules ###
-from .src.opensi_cosmic import OpenSICoSMIC
+from .src.opensi_cosmic import OpenSICoSMIC, get_rag_required_services, get_service_id_by_name
+from .src.services.document_index import DocumentIndex
+from .src.services.storage_events import StorageEventWatcher
 from .utils.log_tool import set_color
 from .backend.routers import (
     default_apis,
@@ -165,6 +167,28 @@ async def lifespan(app: FastAPI):
         # Remember, open-sources and locals...
         pass
 
+    # Initialize document indexes for global and user memory management
+    global_document_index: DocumentIndex = DocumentIndex(
+        persist_path="/app/data/memories/global/global_document_index.json"
+    )
+    user_document_index: DocumentIndex = DocumentIndex(
+        persist_path="/app/data/memories/users/user_document_index.json"
+    )
+    app.state.global_document_index = global_document_index
+    app.state.user_document_index = user_document_index
+
+    # Initialize storage event watcher for autonomous file monitoring (uses global index)
+    storage_watcher: StorageEventWatcher = StorageEventWatcher(
+        watched_path="/app/data/memories/global/",
+        document_index=global_document_index,
+        get_rag_required_services=get_rag_required_services,
+        get_service_id_by_name=get_service_id_by_name,
+    )
+    app.state.storage_watcher = storage_watcher
+
+    # Start file system watcher and sync with current filesystem state
+    storage_watcher.start()
+    storage_watcher.sync_with_filesystem()
 
     # Server is running
     yield
@@ -172,6 +196,7 @@ async def lifespan(app: FastAPI):
 
     # Equivalent to the explicit 'shutdown' event
     app.state.opensi_cosmic.quit()
+    storage_watcher.stop()
 
 
 cosmic_app: FastAPI = FastAPI(lifespan=lifespan)

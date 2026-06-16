@@ -16,12 +16,14 @@ class DocumentMetadata:
     def __init__(
         self,
         document_id: str,
-        user_id: str,
+        user_id: Optional[str] = None,
         session_id: Optional[str] = None,
         file_name: str = "",
         memory_type: str = "session",
         chunk_count: int = 0,
-        upload_date: Optional[str] = None
+        upload_date: Optional[str] = None,
+        service_id: Optional[int] = None,
+        service_name: Optional[str] = None
     ):
         self.document_id = document_id
         self.user_id = user_id
@@ -30,17 +32,24 @@ class DocumentMetadata:
         self.memory_type = memory_type
         self.chunk_count = chunk_count
         self.upload_date = upload_date or datetime.now(tz=ZoneInfo("Australia/Sydney")).isoformat()
+        self.service_id = service_id
+        self.service_name = service_name
 
     def to_dict(self) -> Dict[str, Any]:
-        return {
+        data = {
             "document_id": self.document_id,
-            "user_id": self.user_id,
-            "session_id": self.session_id,
             "file_name": self.file_name,
             "memory_type": self.memory_type,
             "chunk_count": self.chunk_count,
-            "upload_date": self.upload_date
+            "upload_date": self.upload_date,
         }
+        if self.memory_type == "global_memory":
+            data["service_id"] = self.service_id
+            data["service_name"] = self.service_name
+        else:
+            data["user_id"] = self.user_id
+            data["session_id"] = self.session_id
+        return data
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DocumentMetadata":
@@ -74,22 +83,26 @@ class DocumentIndex(ServiceBase):
     def add_document(
         self,
         document_id: str,
-        user_id: str,
-        file_name: str,
+        user_id: Optional[str] = None,
+        file_name: str = "",
         memory_type: str = "session",
         session_id: Optional[str] = None,
-        chunk_count: int = 0
+        chunk_count: int = 0,
+        service_id: Optional[int] = None,
+        service_name: Optional[str] = None
     ) -> DocumentMetadata:
         """
         Add document metadata to index.
 
         Args:
             document_id (str): Unique document identifier
-            user_id (str): User who uploaded the document
+            user_id (str, optional): User who uploaded the document
             file_name (str): Original file name
             memory_type (str): Type of memory (global_memory, user, session)
             session_id (str, optional): Associated chat session ID
             chunk_count (int): Number of chunks created from document
+            service_id (int, optional): Service ID for service-specific memory
+            service_name (str, optional): Service name for service-specific memory
 
         Returns:
             DocumentMetadata: The indexed metadata
@@ -100,7 +113,9 @@ class DocumentIndex(ServiceBase):
             session_id=session_id,
             file_name=file_name,
             memory_type=memory_type,
-            chunk_count=chunk_count
+            chunk_count=chunk_count,
+            service_id=service_id,
+            service_name=service_name
         )
 
         self.documents[document_id] = metadata
@@ -154,6 +169,33 @@ class DocumentIndex(ServiceBase):
     def get_documents_by_session(self, session_id: str) -> List[DocumentMetadata]:
         """Get all documents for a session"""
         return self.get_documents_by_filter(session_id=session_id)
+
+    def get_documents_by_service(self, service_id: int) -> List[DocumentMetadata]:
+        """Get all documents for a specific service"""
+        return [d for d in self.documents.values() if d.service_id == service_id]
+
+    def get_documents_by_service_name(self, service_name: str) -> List[DocumentMetadata]:
+        """Get all documents for a specific service by name"""
+        return [d for d in self.documents.values() if d.service_name == service_name]
+
+    def has_file_in_service(self, file_name: str, service_name: str) -> bool:
+        """Check if a file with the same name already exists under a given service.
+
+        Different services are allowed to have files with the same name, but
+        within a single service each filename must be unique.
+
+        Args:
+            file_name (str): Original file name (without the file_id prefix).
+            service_name (str): Service folder name.
+
+        Returns:
+            True if a document with the same file_name + service_name already
+            exists in the index.
+        """
+        for doc in self.documents.values():
+            if doc.file_name == file_name and doc.service_name == service_name:
+                return True
+        return False
 
     def remove_document(self, document_id: str) -> bool:
         """
@@ -231,3 +273,40 @@ class DocumentIndex(ServiceBase):
         except Exception as e:
             print(f"Error loading document index from {self.persist_path}: {e}")
             self.documents = {}
+
+    def sync_with_filesystem(self, base_path: str = "/app/data/memories/global/") -> None:
+        """Sync document_index with actual filesystem state.
+
+        Removes entries for files that no longer exist and logs orphaned files.
+
+        Args:
+            base_path (str): Base path to scan for files. Defaults to global memory path.
+        """
+        import os
+
+        if not os.path.exists(base_path):
+            return
+
+        # Collect all files in the filesystem
+        filesystem_files = set()
+        for root, dirs, files in os.walk(base_path):
+            for file in files:
+                filepath = os.path.join(root, file)
+                filesystem_files.add(filepath)
+
+        # Remove index entries for missing files
+        documents_to_remove = []
+        for doc_id, metadata in self.documents.items():
+            if metadata.memory_type == "global_memory":
+                # Reconstruct expected file path
+                service_name = metadata.service_name or ""
+                expected_path = os.path.join(
+                    base_path, service_name, f"{doc_id}_{metadata.file_name}"
+                )
+                if not os.path.exists(expected_path):
+                    documents_to_remove.append(doc_id)
+
+        for doc_id in documents_to_remove:
+            self.remove_document(doc_id)
+
+        self._save_to_disk()

@@ -82,9 +82,10 @@ class CosmicAPI(BaseModel):
     user_message:   str
     body:           Body
 
-# Initialize document index for metadata tracking
-document_index = DocumentIndex(persist_path="/app/data/document_index.json")
-memory.set_document_index(document_index)
+# Initialize document indexes for metadata tracking
+global_document_index = DocumentIndex(persist_path="/app/data/memories/global/global_document_index.json")
+user_document_index = DocumentIndex(persist_path="/app/data/memories/users/user_document_index.json")
+memory.set_document_indexes(global_document_index, user_document_index)
 
 def add_request_context_to_latest_emission(
     user_id: str,
