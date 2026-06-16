@@ -23,7 +23,7 @@ from ...utils.module import get_instance
 class QueryAnalyser:
     def __init__(
         self,
-        llm_name:       str     = "mistral-7b-instruct-v0.1",
+        llm_name:       str     = "qwen2.5:7b",
         seed:           int     = 0,
         is_quantised:   bool    = False,
         service_index:  int     = -1,
@@ -34,7 +34,7 @@ class QueryAnalyser:
 
         Args:
             llm_name (str, optional):
-                LLM name for analyser. Defaults to "mistral-7b-instruct-v0.1".
+                LLM name for analyser. Defaults to "qwen2.5:7b".
 
             seed (int, optional):
                 response generation seed. Defaults to 0.
