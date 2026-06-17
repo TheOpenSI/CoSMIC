@@ -169,7 +169,7 @@ $env:OLLAMA_SERVICE_NAME="<any name>"
 > Before following either setup you have chosen from above instruction, ensure
 > that our **backend & database** are available before **CoSMIC** since all API
 > endpoints called within the codebase are coming from [CoSMIC_DB](https://github.com/TheOpenSI/CoSMIC_DB)
-> repository. Refer to the [setup guide](https://github.com/TheOpenSI/CoSMIC_DB/blob/README.md)
+> repository. Refer to the [setup guide](https://github.com/TheOpenSI/CoSMIC_DB/blob/main/README.md)
 > from linked repository for more details.
 
 > [!TIP]
@@ -380,7 +380,7 @@ If models from:
 
 1. **Hugging Face (Mistral 7B, Gemma 7B, etc.)** are used, please also follow [Hugging Face's licence terms](https://huggingface.co/docs/hub/repositories-licenses).
 2. **OpenAI API models (GPT-3.5-Turbo, GPT-4o, etc.)** are used, please also follow [OpenAI's licence terms](https://github.com/openai/openai-openapi/blob/master/LICENSE).
-3. **Meta (Llama 2, Llama 3, and Llama 4)** are used, please also follow licence terms specifically to each model (due to how **Meta** structuring their policy page). For quick redirecting, please on one of the following model: [Llama 2](https://www.llama.com/llama2/use-policy/), [Llama 3](https://www.llama.com/llama3/use-policy/), and [Llama 4](https://www.llama.com/llama4/use-policy/).
+3. **Meta (Llama 2, Llama 3, and Llama 4)** are used, please also follow licence terms specifically to each model (due to how **Meta** structuring their policy page). For quick redirection, please click on one of the following link for each model: [Llama 2](https://www.llama.com/llama2/use-policy/), [Llama 3](https://www.llama.com/llama3/use-policy/), and [Llama 4](https://www.llama.com/llama4/use-policy/).
 
 ---
 
