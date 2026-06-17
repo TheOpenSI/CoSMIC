@@ -125,8 +125,6 @@ async def send_emissions_to_db(
                 json=emission_payload
             )
             response.raise_for_status()
-            # print("Status:", response.status_code)
-            # print("Response:", response.json())
             print(set_color(
                 status="info",
                 information=f"[Emissions DB] Successfully stored emissions for user {user_id}"
