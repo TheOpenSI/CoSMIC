@@ -20,8 +20,6 @@ CoSMIC/
 │   └── dockerfiles/              # Dockerfile for each service defined in the Compose file
 ├── modules/                      # Subservices for each of CoSMIC services (if any) (TODO: to be re-structured inside `/src` directory)
 ├── pipelines/                    # Depricated CoSMIC pipeline logic to work with OpenWebUI (TODO: to be removed from new structure)
-├── scripts/                      # Standalone runnable examples and demo scripts
-│   ├── configs/                  # Default config data for Query Analyser to use depends on selected service (TODO: to be removed and call from BE instead)
 │   └── <others>/                 # Unit test files (TODO: to be moved into its own `/tests` folder on project root)
 ├── src/                          # This is where the "heart" of CoSMIC located
 │   ├── query_analyser/           # SLM-based query routing and user prompt construction
@@ -52,15 +50,15 @@ Before setting up, decide which one is the correct purpose when you get to this 
 
 > [!NOTE]
 > The rest of this guide covers **Purpose 1**. For **Purpose 2**, refer to the
-> setup instructions in [CoSMIC_Docker repository](https://github.com/TheOpenSI/CoSMIC_Docker)
+> setup instructions in [CoSMIC_Docker](https://github.com/TheOpenSI/CoSMIC_Docker) repository.
 
-1. **Module-only**: you are working on this part of the project in isolation (e.g., only CoSMIC).
-2. **Full-stack**: you need an end-to-end test run across all services (Front-end &rarr; Back-end &rarr; CoSMIC).
+1. **Module-only**: you are working on this part of the project in isolation (e.g., only **CoSMIC**).
+2. **Full-stack**: you need an end-to-end test run across all services (**Frontend &rarr; Backend &rarr; CoSMIC**).
 
 Next, ensure you have the appropriate tools installed depending on your chosen execution method. This guide supports:
 
-- **Native setup** (running CoSMIC directly on your machine)
-- **Docker setup** (running CoSMIC in isolated containers)
+- **Native setup** (running **CoSMIC** directly on your machine)
+- **Docker setup** (running **CoSMIC** in isolated containers)
 
 
 | **Tool** | **Docker Setup**                       | **Native Setup**                               |
@@ -115,12 +113,10 @@ Then, edit `.env` and set required environment values in order to run CoSMIC. Fo
 
 ```bash
 # Linux/MacOS
-OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
 OLLAMA_SERVICE_NAME="<any name>"
 ```
 ```ps1
 # Windows
-OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
 OLLAMA_SERVICE_NAME="<any name>"
 ```
 
@@ -146,12 +142,10 @@ Then, edit `.env` and set required environment values in order to run CoSMIC. Fo
 
 ```bash
 # Linux/MacOS
-OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
 OLLAMA_SERVICE_NAME="<any name>"
 ```
 ```ps1
 # Windows
-OPENAI_API_KEY="" # TODO: remove this when we able to use our API endpoint directly
 OLLAMA_SERVICE_NAME="<any name>"
 ```
 
@@ -161,12 +155,10 @@ Alternatively, export variables directly before running the application:
 
 ```bash
 # Linux/MacOS
-export OPENAI_API_KEY="http://localhost:3000" # TODO: remove this when we able to use our API endpoint directly
 export OLLAMA_SERVICE_NAME="<any name>"
 ```
 ```ps1
 # Windows
-$env:OPENAI_API_KEY="http://localhost:3000" # TODO: remove this when we able to use our API endpoint directly
 $env:OLLAMA_SERVICE_NAME="<any name>"
 ```
 
@@ -174,7 +166,11 @@ $env:OLLAMA_SERVICE_NAME="<any name>"
 # Setup & Execution
 
 > [!IMPORTANT]
-> Before following either setup you have chosen from above instruction, ensure that our **backend and database** are available before **CoSMIC** since all API endpoints called within the codebase are coming from [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB/tree/dev) repository. [Refer to the setup guide from linked repository for more details](https://github.com/TheOpenSI/COSMIC-DB/blob/dev/README.md)
+> Before following either setup you have chosen from above instruction, ensure
+> that our **backend & database** are available before **CoSMIC** since all API
+> endpoints called within the codebase are coming from [CoSMIC_DB](https://github.com/TheOpenSI/CoSMIC_DB)
+> repository. Refer to the [setup guide](https://github.com/TheOpenSI/CoSMIC_DB/blob/README.md)
+> from linked repository for more details.
 
 > [!TIP]
 > Docker provides an isolated environment where all services run in containers.
@@ -203,10 +199,9 @@ Before you begin, ensure you have **Docker** and **Docker Compose** installed:
 ### **1. Starting Docker Services**
 
 > [!NOTE]
-> It's possible to run Docker in rootless mode on Linux. However, the way to set
-> it up is different on each Linux distros. Please refer to [this](https://docs.docker.com/engine/install) and [this](https://docs.docker.com/engine/security/rootless/)
-> (all sourced from Docker documentation) to choose the one that fits for your
-> current Linux distro.
+> It's possible to run **Docker** in rootless mode on Linux. However, the way to set
+> it up is different on each Linux distro. Please refer to [this guide](https://docs.docker.com/engine/security/rootless/)
+> from **Docker** for further details.
 
 From project root directory, start all services using the Docker Compose file:
 
@@ -221,20 +216,22 @@ docker compose up --build -d # Docker run through lightweight Linux VM on Window
 
 ### **2. Monitoring First-Run Model Download**
 
-> [!TIP]
+> [!NOTE]
 > On the first run, Ollama will automatically pull the default model pre-defined
-> in our configuration, which is fetched from the `/config` API endpoint in the
-> [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo. This may take a while depending on your connection speed.
+> in our configuration, which is fetched from **Configurations API** endpoint in
+> [CoSMIC_DB](https://github.com/TheOpenSI/CoSMIC_DB) repo. This may take a while depending on your connection speed.
 
 ```bash
 # Linux/MacOS
-docker compose logs -f ollama  # Refer to NOTE if running on rootless mode
+docker compose logs -f ollama # Refer to above note if running on rootless mode
 ```
 ```ps1
-docker compose logs -f ollama # Docker run through lightweight Linux VM on Windows so it's rootless by default
+# Windows
+docker compose logs -f ollama # Rootless by default since Docker runs through a lightweight Linux VM
 ```
 
-**Please wait until you see `Model <name> is available in the Ollama container.` before sending requests to CoSMIC.**
+> [!IMPORTANT]
+> **Please wait until you see `Model <SLM> is available on the server.` before sending requests to CoSMIC.**
 
 ### **3. Verifying Docker Services**
 
@@ -277,12 +274,12 @@ uv sync --frozen --no-cache
 
 ### **2. Pull a Small Language Model (SLM) via Ollama**
 
-> [!TIP]
+> [!NOTE]
 > On the first run, Ollama will automatically pull the default model pre-defined
-> in our configuration, which is fetched from the `/config` API endpoint in the
-> [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo. This may take a while depending on your connection speed.
+> in our configuration, which is fetched from **Configurations API** endpoint in
+> [CoSMIC_DB](https://github.com/TheOpenSI/CoSMIC_DB) repo. This may take a while depending on your connection speed.
 
-If using a local model, pull it before starting the server. The default model is pre-defined in our configuration and fetched from the `/config` API endpoint in the [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo:
+If using a local model, pull it before starting the server:
 
 ```bash
 # Linux/MacOS
@@ -318,9 +315,10 @@ uv run fastapi dev
 
 # Framework
 
-**CoSMIC** routes every incoming query through an [SLM-based Query Analyser](src/query_analyser/query_analyser.py) that selects the most relevant service. Its configuration is fetched dynamically from the `/config` API endpoint in the [COSMIC-DB](https://github.com/TheOpenSI/COSMIC-DB) repo. This allows our product to stay in sync with the latest settings without requiring a restart or redeploy.
+**CoSMIC** routes every incoming query through an [SLM-based Query Analyser](src/query_analyser/query_analyser.py) that selects the most relevant service. Its configuration is fetched dynamically from the **Configurations API** endpoint in [CoSMIC_DB](https://github.com/TheOpenSI/CoSMIC_DB) repository. This allows our product to stay in sync with the latest settings without requiring a restart or redeploy.
 
-Currently, **CoSMIC** provides 5 core services, each discoverable via the `/services` API endpoint within the same repo as above:
+Currently, **CoSMIC** provides 5 core services, each discoverable via the **Services API** endpoint within the same repository:
+
 
 | Service                 | Description                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------- |
@@ -330,8 +328,8 @@ Currently, **CoSMIC** provides 5 core services, each discoverable via the `/serv
 | **General QA**          | Open-ended question answering and reasoning                                     |
 | **Academic Governance** | Document-grounded QA over academic governance materials                         |
 
----
 
+---
 # OAuth Implementation
 
 OAuth authentication can be integrated to enhance security and manage user access. For detailed setup instructions, refer to the [OAuth guide](./OAuth.md).
@@ -376,16 +374,19 @@ We welcome any contributions from the community no matter if you are researchers
 
 # License
 
-This code is distributed under [the MIT License](./LICENSE)
+This code is distributed under [the MIT License](./LICENSE).
 
 If models from:
-1. **Hugging Face (Mistral 7B, Gemma 7B, etc.)** are used, please also follow [Hugging Face's licence terms](https://huggingface.co/docs/hub/repositories-licenses)
-2. **OpenAI API models (GPT-3.5-Turbo, GPT-4o, etc.)** are used, please also follow [OpenAI's licence terms](https://github.com/openai/openai-openapi/blob/master/LICENSE)
+
+1. **Hugging Face (Mistral 7B, Gemma 7B, etc.)** are used, please also follow [Hugging Face's licence terms](https://huggingface.co/docs/hub/repositories-licenses).
+2. **OpenAI API models (GPT-3.5-Turbo, GPT-4o, etc.)** are used, please also follow [OpenAI's licence terms](https://github.com/openai/openai-openapi/blob/master/LICENSE).
+3. **Meta (Llama 2, Llama 3, and Llama 4)** are used, please also follow licence terms specifically to each model (due to how **Meta** structuring their policy page). For quick redirecting, please on one of the following model: [Llama 2](https://www.llama.com/llama2/use-policy/), [Llama 3](https://www.llama.com/llama3/use-policy/), and [Llama 4](https://www.llama.com/llama4/use-policy/).
 
 ---
 
 # Funding
 
 This project is funded under the agreement with:
-1. **ACT Government for Future Jobs Fund with Open Source Institute** (OpenSI-R01553)
-2. **NetApp Technology Alliance Agreement** (OpenSI-R01657)
+
+1. **ACT Government for Future Jobs Fund with Open Source Institute** (OpenSI-R01553).
+2. **NetApp Technology Alliance Agreement** (OpenSI-R01657).
