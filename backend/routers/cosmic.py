@@ -5,6 +5,8 @@ from datetime import (
     datetime,
     timezone
 )
+
+from uuid import UUID
 from dotenv import dotenv_values
 from fastapi import (
     Depends,
@@ -18,7 +20,6 @@ from httpx import (
     AsyncClient,
     Response
 )
-import csv
 from codecarbon import EmissionsTracker
 from ...utils.log_tool import set_color
 
@@ -39,17 +40,6 @@ from ...utils.chat_history import build_context_from_messages
 
 
 router: APIRouter = APIRouter()
-
-
-EMISSIONS_PATH: Path = Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
-    "data",
-    "emissions"
-)
-EMISSIONS_PATH.mkdir(
-    mode=0o777,
-    parents=True,
-    exist_ok=True
-)
 
 
 # TODO:
@@ -80,82 +70,70 @@ class CosmicAPI(BaseModel):
     user_message:   str
     body:           Body
 
-
-def add_request_context_to_latest_emission(
+async def send_emissions_to_db(
     user_id: str,
-    chat_id: str | None
+    tracker: EmissionsTracker,
 ) -> None:
-    """Find the latest individual emission file, add user/chat id, merge into master CSV."""
-    master_file: Path = EMISSIONS_PATH.joinpath("emissions.csv")
+    """Send emissions data directly via POST request to database."""
+    ed = tracker.final_emissions_data
 
-    # Find all individual emission files (not the master)
-    individual_files: list[Path] = sorted(
-        [f for f in EMISSIONS_PATH.glob("emission_*.csv")],
-        key=lambda f: f.stat().st_mtime
-    )
+    if ed is None:
+        print(set_color(status="error", information="[Emissions DB] No emissions data available"))
+        return
 
-    if not individual_files:
-        return None
+    emission_payload: dict[str, Any] = {
+        "run_id":                   ed.run_id,
+        "duration":                 ed.duration,
+        "emissions":                ed.emissions,
+        "emissions_rate":           ed.emissions_rate,
+        "cpu_power":                ed.cpu_power,
+        "gpu_power":                ed.gpu_power,
+        "ram_power":                ed.ram_power,
+        "cpu_energy":               ed.cpu_energy,
+        "gpu_energy":               ed.gpu_energy,
+        "ram_energy":               ed.ram_energy,
+        "energy_consumed":          ed.energy_consumed,
+        "water_consumed":           ed.water_consumed,
+        "region":                   ed.region,
+        "cloud_provider":           ed.cloud_provider,
+        "cloud_region":             ed.cloud_region,
+        "os":                       ed.os,
+        "cpu_count":                ed.cpu_count,
+        "cpu_model":                ed.cpu_model,
+        "gpu_count":                ed.gpu_count,
+        "gpu_model":                ed.gpu_model,
+        "longitude":                ed.longitude,
+        "latitude":                 ed.latitude,
+        "ram_total_size":           ed.ram_total_size,
+        "tracking_mode":            ed.tracking_mode,
+        "cpu_utilization_percent":  ed.cpu_utilization_percent,
+        "gpu_utilization_percent":  ed.gpu_utilization_percent,
+        "ram_utilization_percent":  ed.ram_utilization_percent,
+        "ram_used_gb":              ed.ram_used_gb,
+        "on_cloud":                 ed.on_cloud,
+        "pue":                      ed.pue,
+        "wue":                      ed.wue,
+        "user_id":                  str(user_id),
+    }
 
-    # Get the most recent one — that's the current query
-    latest_file: Path = individual_files[-1]
+    EMISSIONS_API_URL: str = "http://backend:8000/api/v1/emissions/"
 
-    with latest_file.open(
-        mode="r",
-        encoding="utf-8",
-        newline=""
-    ) as csv_file:
-        reader:     csv.DictReader[str]     = csv.DictReader(csv_file)
-        rows:       list[dict[Any, Any]]    = list(reader)
-        fieldnames: list[str | None]        = list(reader.fieldnames or [])
-
-    # Remove blank rows
-    rows: list[dict[Any, Any]] = [
-        row
-        for row in rows
-        if any(
-            v.strip()
-            for v in row.values()
-        )
-    ]
-
-    if not rows:
-        latest_file.unlink()  # delete empty file
-        return None
-
-    # Add user_id and chat_id
-    for extra_column in ("user_id", "chat_id"):
-        if extra_column not in fieldnames:
-            fieldnames.append(extra_column)
-
-    for row in rows:
-        row["user_id"] = str(user_id)
-        row["chat_id"] = (
-            ""
-            if   (chat_id is None)
-            else (chat_id)
-        )
-
-    # Append to master CSV
-    master_exists: bool = master_file.exists(follow_symlinks=True)
-
-    with master_file.open(
-        mode="a",
-        encoding="utf-8",
-        newline=""
-    ) as csv_file:
-        writer: csv.DictWriter[str | None] = csv.DictWriter(
-            f=csv_file,
-            fieldnames=fieldnames
-        )
-
-        if not master_exists:
-            writer.writeheader()
-
-        writer.writerows(rows)
-
-    # Delete the individual file after merging
-    latest_file.unlink()
+    try:
+        async with AsyncClient() as client:
+            response: Response = await client.post(
+                EMISSIONS_API_URL,
+                json=emission_payload
+            )
+            response.raise_for_status()
+            print(set_color(
+                status="info",
+                information=f"[Emissions DB] Successfully stored emissions for user {user_id}"
+            ))
+    except Exception as e:
+        print(set_color(
+            status="error",
+            information=f"[Emissions DB] Failed to store emissions: {str(e)}"
+        ))
 
 
 # TODO:
@@ -260,10 +238,9 @@ async def process_cosmic(
                 rag_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
                 rag_tracker: EmissionsTracker = EmissionsTracker(
                     project_name="cosmic-chat",
-                    save_to_file=True,
-                    output_dir=str(EMISSIONS_PATH),
-                    output_file=f"emission_{rag_query_time}.csv",  # unique file per query
+                    save_to_file=False, 
                     allow_multiple_runs=True,
+                    tracking_mode="process",  # track only the current process (not the whole machine)
                     log_level="error"
                 )
 
@@ -275,9 +252,9 @@ async def process_cosmic(
                 # Stop CodeCarbon emission tracking process (for RAG-triggered
                 # user queries) and start saving those tracked data
                 rag_emissions: float | None = rag_tracker.stop()
-                add_request_context_to_latest_emission(
+                await send_emissions_to_db(
                     user_id=user_id,
-                    chat_id=data.chat_id
+                    tracker=rag_tracker
                 )
                 print(
                     set_color(
@@ -291,10 +268,9 @@ async def process_cosmic(
             general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
             general_tracker: EmissionsTracker = EmissionsTracker(
                 project_name="cosmic-chat",
-                save_to_file=True,
-                output_dir=str(EMISSIONS_PATH),
-                output_file=f"emission_{general_query_time}.csv",  # unique file per query
+                save_to_file=False,  
                 allow_multiple_runs=True,
+                tracking_mode="process",  # track only the current process (not the whole machine)
                 log_level="error"
             )
 
@@ -345,9 +321,9 @@ async def process_cosmic(
             # Stop CodeCarbon emission tracking process (for General user queries)
             # and start saving those tracked data
             general_emissions: float | None = general_tracker.stop()
-            add_request_context_to_latest_emission(
+            await send_emissions_to_db(
                 user_id=user_id,
-                chat_id=data.chat_id
+                tracker=general_tracker
             )
             print(
                 set_color(
