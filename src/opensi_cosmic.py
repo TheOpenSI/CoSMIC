@@ -161,7 +161,7 @@ class OpenSICoSMIC:
         print(
             set_color(
                 status="info",
-                information=f"Set QA SLM: [{self.general_slm}]"
+                information=f"Set QA SLM: [{self.qa_slm}]"
             )
         )
 
@@ -208,6 +208,31 @@ class OpenSICoSMIC:
             raw_response    (str):      raw response from LLM without truncations.
             retrieve_score  (float):    context retrieve score if is_rag=True.
         """
+        print(
+            set_color(
+                status="info",
+                information=f"Default General configs (during execution): {self.general_config_data}"
+            )
+        )
+        print(
+            set_color(
+                status="info",
+                information=f"Default QA configs (during execution): {self.qa_config_data}"
+            )
+        )
+        print(
+            set_color(
+                status="info",
+                information=f"Set General SLM (during execution): [{self.general_slm}]"
+            )
+        )
+        print(
+            set_color(
+                status="info",
+                information=f"Set QA SLM (during execution): [{self.qa_slm}]"
+            )
+        )
+
         # Set initial output to return.
         response        = None
         raw_response    = None

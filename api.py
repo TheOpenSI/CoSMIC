@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -34,6 +35,7 @@ from .backend.routers import (
 async def lifespan(app: FastAPI):
     # Equivalent to the explicit 'startup' event
     opensi_cosmic_instance: OpenSICoSMIC = OpenSICoSMIC()
+    opensi_cosmic_default_configs: list[dict[str, dict[str, Any]]] = opensi_cosmic_instance.get_configs()
 
     # INFO:
     # ======================================================================== #
@@ -67,6 +69,13 @@ async def lifespan(app: FastAPI):
     # [FastAPI docs](https://fastapi.tiangolo.com/reference/fastapi/#fastapi.FastAPI.state)
     # ======================================================================== #
     app.state.opensi_cosmic = opensi_cosmic_instance
+    app.state.default_configs = (
+        # Similar trick to prevent having to perform expensive for-loop. Take a
+        # look at `src/opensi_cosmic.py` [Line 85]
+        list((opensi_cosmic_default_configs[0]).values())[0]
+        if   (opensi_cosmic_default_configs)
+        else ({})
+    )
 
     # Server is running
     yield

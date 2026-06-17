@@ -8,6 +8,7 @@ from fastapi import (
     Depends,
     HTTPException,
     APIRouter,
+    Request,
     status
 )
 from pydantic import BaseModel
@@ -143,6 +144,7 @@ def add_request_context_to_latest_emission(
             f=csv_file,
             fieldnames=fieldnames
         )
+
 
         if not master_exists:
             writer.writeheader()
@@ -339,4 +341,66 @@ async def process_cosmic(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"{fastapi_exc}"
+        )
+
+
+@router.patch("")
+async def rebuild_cosmic(
+    request:        Request,
+    opensi_cosmic:  OpenSICoSMIC = Depends(get_opensi_cosmic)
+):
+    try:
+        latest_configs: list[dict[str, dict[str, Any]]] = opensi_cosmic.get_configs()
+
+        if not latest_configs:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail={
+                    "status": "503 - API Services Unavailable",
+                    "message:": "Could not reach Configurations API."
+                }
+            )
+
+        else:
+            # Similar trick to prevent having to perform expensive for-loop. Take a
+            # look at `src/opensi_cosmic.py` [Line 85]
+            latest_config_data:             dict[str, Any] = list(latest_configs[0].values())[0]
+
+            latest_general_config_data:     dict[str, Any] = latest_config_data["general"]
+            default_general_config_data:    dict[str, Any] = request.app.state.default_configs["general"]
+
+            latest_qa_config_data:          dict[str, Any] = latest_config_data["query_analyser"]
+            default_qa_config_data:         dict[str, Any] = request.app.state.default_configs["query_analyser"]
+
+            if  (latest_general_config_data == default_general_config_data) \
+            and (latest_qa_config_data == default_qa_config_data):
+                # Accidentally click 'Save' button? No worries, nothing will
+                # happens except a friendly "warning" meesage :)
+                return {
+                    "status": "success",
+                    "message": "`OpenSICoSMIC()` stay the same due to exact config data found during update request."
+                }
+
+            else:
+                # Clear cached memories from currently used SLMs first
+                opensi_cosmic.quit()
+
+                # Then re-state it again to allow `OpenSICoSMIC()` receiving new config data
+                request.app.state.opensi_cosmic     = OpenSICoSMIC()
+                request.app.state.default_configs   = latest_config_data
+
+                return {
+                    "status": "success",
+                    "message": "`OpenSICoSMIC()` reconstructing due to new config data found during update request..."
+                }
+
+
+    except HTTPException as http_exc:
+        raise http_exc
+
+
+    except Exception as fastapi_err:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"{fastapi_err}"
         )
