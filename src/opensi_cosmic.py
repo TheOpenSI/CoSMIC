@@ -355,16 +355,16 @@ class OpenSICoSMIC:
                 device=self.device
             )
 
-            # Add a directory of documents.
-            if Path.exists(
-                Path(self.config_data["doc_directory"]).resolve(strict=True),
-                follow_symlinks=True
-            ):
-                vector_database.add_document_directory(self.config_data["doc_directory"])
+            # # Add a directory of documents.
+            # if Path.exists(
+            #     Path(self.config_data["doc_directory"]).resolve(strict=True),
+            #     follow_symlinks=True
+            # ):
+            #     vector_database.add_document_directory(self.config_data["doc_directory"])
 
-            # Add documents.
-            if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
-                vector_database.add_documents(self.config_data["document_path"])
+            # # Add documents.
+            # if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
+            #     vector_database.add_documents(self.config_data["document_path"])
 
             # Base RAG service with vector_database, the database can be changed using
             # self.rag.set_vector_database().
@@ -640,3 +640,109 @@ class OpenSICoSMIC:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"{httpx_err}"
             )
+
+
+# Service Registry Utilities (for StorageEventWatcher and memory management)
+
+_service_cache = {} # To avoid hitting the backend API frequently
+_service_cache_timestamp = 0
+_CACHE_TTL = 300  # 5 minutes 
+
+
+def _get_raw_services(
+    url: str = "http://backend:8000/api/v1/services/",
+    params: dict[str, bool] | None = None
+) -> list[dict[str, Any]]:
+    """Fetch raw service data from API endpoint with caching."""
+    global _service_cache, _service_cache_timestamp
+    from time import time
+
+    current_time = time()
+    if _service_cache and (current_time - _service_cache_timestamp) < _CACHE_TTL:
+        return _service_cache
+
+    if params is None:
+        params = {"active": True}
+
+    try:
+        with Client(base_url=url, params=params, timeout=10.0) as client:
+            response: Response = client.get(url="")
+            response.raise_for_status()
+            services = response.json().get("result", [])
+            _service_cache = services
+            _service_cache_timestamp = current_time
+            return services
+    except Exception as e:
+        # Return cached data if available, otherwise empty list
+        if _service_cache:
+            return _service_cache
+        return [5]
+
+
+def get_service_id_by_name(service_name: str) -> int | None:
+    """Get service_id by service name.
+
+    Args:
+        service_name: Name of the service (e.g., "chess", "academic_governance")
+
+    Returns:
+        service_id (int) if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("name", "").lower() == service_name.lower():
+            return service.get("id")
+    return None
+
+
+def get_service_name(service_id: int) -> str | None:
+    """Get service name by service_id.
+
+    Args:
+        service_id: ID of the service (e.g., 5 for academic_governance)
+
+    Returns:
+        service name (str) if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("id") == service_id:
+            return service.get("name")
+    return None
+
+
+def get_service_by_id(service_id: int) -> dict[str, Any] | None:
+    """Get full service record by service_id.
+
+    Args:
+        service_id: ID of the service
+
+    Returns:
+        Full service dict if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("id") == service_id:
+            return service
+    return None
+
+
+def get_rag_required_services() -> list[int]:
+    """Get list of service_ids that require memory/RAG storage.
+
+    Checks for 'memory_capability' field in service records. If field doesn't exist,
+    falls back to hardcoded list.
+
+    Returns:
+        List of service_ids that have memory_capability=True or hardcoded fallback
+    """
+    services = _get_raw_services()
+
+    # Check if any service has rag_req field
+    rag_services = [s.get("id") for s in services if s.get("memory_capability") == True]
+
+    # If no services marked with memory_capability, use hardcoded fallback
+    if not rag_services:
+        return [5]  # academic_governance
+
+    return rag_services
