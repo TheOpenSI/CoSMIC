@@ -9,7 +9,6 @@ from fastapi import (
     HTTPException,
     status
 )
-from yaml import safe_load
 from torch import cuda
 from httpx import (
     Client,
@@ -45,7 +44,6 @@ class OpenSICoSMIC:
         self,
         general_slm:    str         = "",
         qa_slm:         str         = "",
-        config_path:    str         = "",
         user:           dict | None = None
     ) -> None:
         """
@@ -66,9 +64,6 @@ class OpenSICoSMIC:
                 `src/maps.py`). If empty, the entry is a combination format with
                 value from `provider` & `model` fields (accessible through
                 `self.qa_config_data`).
-
-            config_path (str):
-                path of configuration file.
 
             user (dict, optional):
                 user information including ID, name, etc. Default to None.
