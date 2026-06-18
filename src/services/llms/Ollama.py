@@ -11,6 +11,7 @@ from typing import Any
 ### Internal modules ###
 from .llm import LLMBase
 from .OllamaPullManager import OllamaPullManager
+from ....utils.log_tool import set_color
 
 
 
@@ -114,6 +115,13 @@ class Ollama(LLMBase):
         Returns:
             Tuple of (response, raw_response)
         """
+        print(
+            set_color(
+                status="info",
+                information=f"Ollama models used: {self.llm_name}"
+            )
+        )
+
         # Generate user prompt with question and context
         user_prompt: str = self.user_prompter(
             question,

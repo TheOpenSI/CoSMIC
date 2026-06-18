@@ -261,12 +261,12 @@ class QueryAnalyser:
 
             # Get the response for whether the query is related to system information.
             relevance_analysis: str = self.llm(query)[0]
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"[DEBUG] - Does SLM response detected user query asking about our system info or not?  ({relevance_analysis})"
-            #     )
-            # )
+            print(
+                set_color(
+                    status="info",
+                    information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis} )"
+                )
+            )
 
             # Get whether the question is related to system information.
             relevance: bool = self.get_system_information_relevance(relevance_analysis)
@@ -279,6 +279,13 @@ class QueryAnalyser:
             else:
                 # Update system information relevance.
                 service_info_dict["system_information_relevance"] = relevance
+
+            print(
+                set_color(
+                    status="info",
+                    information=f"System info trigged: ({relevance})"
+                )
+            )
 
         # print(
         #     set_color(
