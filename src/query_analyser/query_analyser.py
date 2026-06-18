@@ -98,7 +98,7 @@ class QueryAnalyser:
         # update to handle `int` properly
         services:   dict[str, dict[str, str]],
         verbose:    bool = False
-    ):
+    ) -> tuple[str, dict[str, str | bool]]:
         """
         Analyse query to get service option.
 
@@ -117,7 +117,7 @@ class QueryAnalyser:
             service_option (str):
                 service option.
 
-            service_info_dict (dict):
+            service_info_dict (dict[str, str | bool]):
                 updated information dictionary.
         """
         # Set a list of services.
@@ -144,25 +144,26 @@ class QueryAnalyser:
             )
 
         # Set chess subservices.
-        self.chess_subservices = {
+        self.chess_subservices: dict[str, str] = {
             "0.0": "predict next move given a chess FEN",
             "0.1": "predict next move given a sequence of moves"
         }
 
         # Get full services.
-        self.full_services = {
+        self.full_services: dict[str, str] = {
             **self.services,
             **self.chess_subservices
         }
+
         # print(
         #     set_color(
         #         status="info",
-        #         information=f"[DEBUG] - Full services from Query Analyser: {self.full_services}"
+        #         information=f"Full services from Query Analyser: {self.full_services}"
         #     )
         # )
 
         # Get the number of services.
-        self.num_services = len(self.services)
+        self.num_services: int = len(self.services)
 
         # Set user prompter for service option.
         self.user_prompter_service = get_instance(
@@ -181,7 +182,7 @@ class QueryAnalyser:
         )
 
         # Create an initial information dictionary.
-        service_info_dict = {
+        service_info_dict: dict[str, str | bool] = {
             "query":                        query,
             "system_information_relevance": False,
             "system_information":           ""
@@ -199,10 +200,11 @@ class QueryAnalyser:
 
             # Get the service option.
             service_option = self.mapping(response=service_analysis)
+
             # print(
             #     set_color(
             #         status="info",
-            #         information=f"[DEBUG] - Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
+            #         information=f"Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
             #     )
             # )
 
@@ -249,24 +251,18 @@ class QueryAnalyser:
             )
 
         else:
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information="[DEBUG] - Query Analyser received response from SLM that is neither 'Chess' or 'Vector DB' service..."
-            #     )
-            # )
-
             # Set the user prompter for system information relevance.
             self.llm.set_user_prompter(self.user_prompter_system_info)
 
             # Get the response for whether the query is related to system information.
             relevance_analysis: str = self.llm(query)[0]
-            print(
-                set_color(
-                    status="info",
-                    information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis} )"
-                )
-            )
+
+            # print(
+            #     set_color(
+            #         status="info",
+            #         information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis})"
+            #     )
+            # )
 
             # Get whether the question is related to system information.
             relevance: bool = self.get_system_information_relevance(relevance_analysis)
@@ -276,23 +272,10 @@ class QueryAnalyser:
                 # Update system information relevance.
                 service_info_dict["system_information_relevance"] = relevance
                 service_info_dict["system_information"] = self.user_prompter_system_info.system_information
+
             else:
                 # Update system information relevance.
                 service_info_dict["system_information_relevance"] = relevance
-
-            print(
-                set_color(
-                    status="info",
-                    information=f"System info trigged: ({relevance})"
-                )
-            )
-
-        # print(
-        #     set_color(
-        #         status="info",
-        #         information=f"[DEBUG] - User query that triggered system info output: {service_info_dict}"
-        #     )
-        # )
 
         return (
             service_option,

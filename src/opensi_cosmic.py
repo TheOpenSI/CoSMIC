@@ -84,18 +84,18 @@ class OpenSICoSMIC:
         self.general_config_data:   dict[str, Any] = self.config_data["general"]
         self.qa_config_data:        dict[str, Any] = self.config_data["query_analyser"]
 
-        print(
-            set_color(
-                status="info",
-                information=f"Default General configs: {self.general_config_data}"
-            )
-        )
-        print(
-            set_color(
-                status="info",
-                information=f"Default QA configs: {self.qa_config_data}"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Default General configs: {self.general_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Default QA configs: {self.qa_config_data}"
+        #     )
+        # )
 
 
         # Set user info
@@ -130,12 +130,12 @@ class OpenSICoSMIC:
             # For example: "ollama:qwen2.5:7b"
             self.general_slm = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
 
-        print(
-            set_color(
-                status="info",
-                information=f"Set General SLM: [{self.general_slm}]"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Set General SLM: [{self.general_slm}]"
+        #     )
+        # )
 
         self.llm = self.get_llm(
             llm_name=self.general_slm,
@@ -153,12 +153,12 @@ class OpenSICoSMIC:
             # For example: "ollama:qwen2.5:7b"
             self.qa_slm = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
 
-        print(
-            set_color(
-                status="info",
-                information=f"Set QA SLM: [{self.qa_slm}]"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Set QA SLM: [{self.qa_slm}]"
+        #     )
+        # )
 
         self.query_analyser: QueryAnalyser = QueryAnalyser(
             llm_name=self.qa_slm,
@@ -194,51 +194,62 @@ class OpenSICoSMIC:
         Execute QA.
 
         Args:
-            question    (str):              a question or a .csv containing multiple questions.
-            context     (str, optional):    context for this question. Defaults to "".
-            log_file    (str, optional):    whether to print the result in a .txt file. Defaults to None.
+            question (str):
+                a question or a .csv containing multiple questions.
+
+            context (str, optional):
+                context for this question. Defaults to "".
+
+            log_file (str, optional):
+                whether to print the result in a .txt file. Defaults to None.
 
         Returns:
-            response        (str):      (truncated) response.
-            raw_response    (str):      raw response from LLM without truncations.
-            retrieve_score  (float):    context retrieve score if is_rag=True.
+            response (str):
+                (truncated) response.
+
+            raw_response (str):
+                raw response from LLM without truncations.
+
+            retrieve_score (float):
+                context retrieve score if `is_rag=True`.
         """
-        print(
-            set_color(
-                status="info",
-                information=f"Default General configs (during execution): {self.general_config_data}"
-            )
-        )
-        print(
-            set_color(
-                status="info",
-                information=f"Default QA configs (during execution): {self.qa_config_data}"
-            )
-        )
-        print(
-            set_color(
-                status="info",
-                information=f"Set General SLM (during execution): [{self.general_slm}]"
-            )
-        )
-        print(
-            set_color(
-                status="info",
-                information=f"Set QA SLM (during execution): [{self.qa_slm}]"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"General configs used when query received: {self.general_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"QA configs used when query received: {self.qa_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"General SLM used when query received: [{self.general_slm}]"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"QA SLM used when query received: [{self.qa_slm}]"
+        #     )
+        # )
 
         # Set initial output to return.
-        response        = None
-        raw_response    = None
-        retrieve_score  = -1
+        response:       str | None  = None
+        raw_response:   str | None  = None
+        retrieve_score: float | int = -1
+
 
         # Check if OpenAI API key is valid.
         if self.openai_api_status != "":
             return (
-                self.openai_api_status,
-                self.openai_api_status,
-                -1
+                str(response),
+                str(raw_response),
+                retrieve_score
             )
 
         # Chat-mode LLM do not need example in the system prompt.
@@ -633,7 +644,7 @@ class OpenSICoSMIC:
                 (ConnectError, ConnectTimeout) or other unexpected exceptions.
 
         Example:
-            >>> services = obj.get_services_name(verbose=True)
+            >>> services = obj.get_services(verbose=True)
             >>> services[0] # 1st service
             {"name": "chess", "desc": "<a very long description>"}
         """
@@ -733,8 +744,8 @@ class OpenSICoSMIC:
         Retrieve presets of configuration from API endpoint.
 
         This method fetches presets of configuration data from the specified
-        # endpoint and returns the exact data structure received for further
-        # CoSMIC usages.
+        endpoint and returns the exact data structure received for further
+        CoSMIC usages.
 
         Args:
             url:

@@ -37,11 +37,15 @@ class Ollama(LLMBase):
         LLMs using the official Ollama container.
 
         Args:
-            llm_name        (str, optional): Ollama supported LLMs available at https://ollama.com/library.
-            container_name  (str, optional):
+            llm_name (str, optional):
+                Ollama supported LLMs available at https://ollama.com/library.
+
+            container_name (str, optional):
                 Name of the Ollama container defined in environment file. Fallback
                 to "cosmic-ollama" if not found.
-            local_port      (int, optional): Local port for the ollama container. Defaults to 11434.
+
+            local_port (int, optional):
+                Local port for the Ollama container. Defaults to 11434.
         """
         model_name = llm_name.replace("ollama:", "")
         super().__init__(llm_name=model_name, **kwargs)
@@ -109,18 +113,24 @@ class Ollama(LLMBase):
         Process the question and generate a response using Ollama.
 
         Args:
-            question        (str):                              User question in string.
-            context         (str | dict[str, Any], optional):   Context for the question. Defaults to {}.
-            service_name    (str, optional):                    Name of the service. Defaults to "".
+            question (str):
+                user question in string.
+
+            context (str | dict[str, Any], optional):
+                context for the question. Defaults to {}.
+
+            service_name (str, optional):
+                name of the service. Defaults to "".
+
         Returns:
             Tuple of (response, raw_response)
         """
-        print(
-            set_color(
-                status="info",
-                information=f"Ollama models used: {self.llm_name}"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Ollama models used: {self.llm_name}"
+        #     )
+        # )
 
         # Generate user prompt with question and context
         user_prompt: str = self.user_prompter(
