@@ -8,6 +8,7 @@ from time import sleep
 
 
 ### Internal modules ###
+from ....utils.log_tool import set_color
 
 
 
@@ -120,7 +121,12 @@ class OllamaPullManager:
         flag: bool = self._is_model_available()
 
         if flag:
-            print(f"Model {self.model_name} is available on the server.")
+            print(
+                set_color(
+                    status="info",
+                    information=f"Model {self.model_name} is available on the server."
+                )
+            )
             return None
 
         print(f"Pulling model '{self.model_name}' in {self.mode} mode...")

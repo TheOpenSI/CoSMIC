@@ -31,7 +31,7 @@ class LLMBase(ServiceBase):
         use_example: bool = True,
         seed: int = 0,
         is_truncate_response: bool = True,
-        is_quantized: bool = False,
+        is_quantised: bool = False,
         device: str = "cuda",
         **kwargs
     ):
@@ -39,14 +39,29 @@ class LLMBase(ServiceBase):
         LLM Base Class as a Service. Check the names from src/maps.py
 
         Args:
-            llm_name                    (str):              LLM base model name.
-            user_prompt_instance_name   (str, optional):    user prompt instance name. Defaults to "".
-            system_prompt_instance_name (str, optional):    system prompt instance name. Defaults to "".
-            use_example                 (bool, optional):   use an example in system prompt. Defaults to True.
-            seed                        (int, optional):    seed for response generation. Defaults to 0.
-            is_truncate_response        (bool, optional):   truncate the raw response. Defaults to True.
-            is_quantized                (bool, optional):   whether use quantized model. Defaults to False.
-            device                      (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
+            llm_name (str):
+                LLM base model name.
+
+            user_prompt_instance_name (str, optional):
+                user prompt instance name. Defaults to "".
+
+            system_prompt_instance_name (str, optional):
+                system prompt instance name. Defaults to "".
+
+            use_example (bool, optional):
+                use an example in system prompt. Defaults to True.
+
+            seed (int, optional):
+                seed for response generation. Defaults to 0.
+
+            is_truncate_response (bool, optional):
+                truncate the raw response. Defaults to True.
+
+            is_quantised (bool, optional):
+                whether use quantised model. Defaults to False.
+
+            device (str, optional):
+                use cuda or cpu for LLM. Defaults to "cuda".
         """
         super().__init__(**kwargs)
 
@@ -56,7 +71,7 @@ class LLMBase(ServiceBase):
         self.use_example = use_example
         self.is_truncate_response = is_truncate_response
         self.seed = seed
-        self.is_quantized = is_quantized
+        self.is_quantised = is_quantised
         self.device = device
 
         # Use user prompt for general questions if not specified.
@@ -97,10 +112,10 @@ class LLMBase(ServiceBase):
 
         # CPU model cannot support quantization.
         if self.device.find("cpu") > -1:
-            is_quantized = False
+            is_quantised = False
 
         # Set quantization configs.
-        if is_quantized:
+        if is_quantised:
             self.quantization_config = BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_use_double_quant=True,

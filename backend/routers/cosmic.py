@@ -1,5 +1,4 @@
 ### Core modules ###
-from os import environ
 from pathlib import Path
 from datetime import (
     datetime,
@@ -10,9 +9,9 @@ from uuid import UUID
 from dotenv import dotenv_values
 from fastapi import (
     Depends,
-    Request,
     HTTPException,
     APIRouter,
+    Request,
     status
 )
 from pydantic import BaseModel
@@ -29,11 +28,7 @@ from typing import Any
 
 
 ### Internal modules ###
-from ..cores.dependencies import (
-    get_config_path,
-    get_openai_status,
-    get_opensi_cosmic
-)
+from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
 from ...utils.chat_history import build_context_from_messages
 # from ...utils.statistics import update_statistic_per_query
@@ -45,9 +40,11 @@ router: APIRouter = APIRouter()
 # TODO:
 # there'll be a new way to format this new chat session payload data from FE that
 # we don't need to rely on the legacy data format anymore as soon as we get to
-# work on the migration from old to new `/config` endpoint. For more information,
-# refer to `api.py` (for the new endpoint) & `default_apis.py` (for the mentioned
-# of new changes).
+# work on the migration from old to new `/config` endpoint.
+#
+# UPDATE:
+# This should be done in a sepearate PR instead.
+
 class Message(BaseModel):
     role:       str  # "user" | "assistant"
     content:    str
@@ -136,41 +133,12 @@ async def send_emissions_to_db(
         ))
 
 
-# TODO:
-# Refer to the note on new changes in this same endpoint but in the legacy file
-# (`default_apis.py`) for future updates.
 @router.post("")
 async def process_cosmic(
     data:               CosmicAPI,
-    request:            Request,
-    opensi_cosmic:      OpenSICoSMIC    = Depends(get_opensi_cosmic),
-    openai_api_status:  str             = Depends(get_openai_status),
-    config_path:        Path            = Depends(get_config_path)
+    opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
 ):
     try:
-        # Rebuild if config or API key changed
-        current_ts = config_path.stat().st_mtime
-        current_key = environ.get(
-            "OPENAI_API_KEY",
-            dotenv_values(".env").get(
-                "OPENAI_API_KEY",
-                ""
-            )
-        )
-
-        if (current_ts != request.app.state.config_modify_timestamp) \
-        or (current_key != request.app.state.openai_api_key):
-            opensi_cosmic.quit()
-
-            request.app.state.openai_api_key            = current_key
-            request.app.state.config_modify_timestamp   = current_ts
-            request.app.state.opensi_cosmic             = OpenSICoSMIC(config_path=str(config_path))
-            request.app.state.openai_api_status         = request.app.state.opensi_cosmic.check_openai_key()
-            opensi_cosmic                               = request.app.state.opensi_cosmic
-            openai_api_status                           = request.app.state.openai_api_status
-
-            print("Reconstructed OpenSICoSMIC due to changed configs.")
-
         user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
         user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
         # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
@@ -200,13 +168,15 @@ async def process_cosmic(
         #     current_time=current_time,
         # )
 
-        # Proceed as normal
+        openai_api_status: str = opensi_cosmic.check_openai_key()
+
         if openai_api_status != "":
             return {
                 "status": "success",
-                "result": f"{str(openai_api_status)}"
+                "result": openai_api_status
             }
 
+        # Proceed as normal
         if data.user_message.find("</files>") > -1:
             splits: list[str] = data.user_message.split("</files>")
             data.user_message = splits[1]
@@ -337,6 +307,68 @@ async def process_cosmic(
                 "result": answer,
                 "chat_id": chat_id
             }
+
+
+    except HTTPException as http_exc:
+        raise http_exc
+
+
+    except Exception as fastapi_exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"{fastapi_exc}"
+        )
+
+
+@router.patch("")
+async def rebuild_cosmic(
+    request:        Request,
+    opensi_cosmic:  OpenSICoSMIC = Depends(get_opensi_cosmic)
+):
+    try:
+        latest_configs: list[dict[str, dict[str, Any]]] = opensi_cosmic.get_configs()
+
+        if not latest_configs:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail={
+                    "status": "503 - API Services Unavailable",
+                    "message:": "Could not reach Configurations API."
+                }
+            )
+
+        else:
+            # Similar trick to prevent having to perform expensive for-loop. Take a
+            # look at `src/opensi_cosmic.py` [Line 85]
+            latest_config_data:             dict[str, Any] = list(latest_configs[0].values())[0]
+
+            latest_general_config_data:     dict[str, Any] = latest_config_data["general"]
+            default_general_config_data:    dict[str, Any] = request.app.state.default_configs["general"]
+
+            latest_qa_config_data:          dict[str, Any] = latest_config_data["query_analyser"]
+            default_qa_config_data:         dict[str, Any] = request.app.state.default_configs["query_analyser"]
+
+            if  (latest_general_config_data == default_general_config_data) \
+            and (latest_qa_config_data == default_qa_config_data):
+                # Accidentally click 'Save' button? No worries, nothing will
+                # happens except a friendly "warning" meesage :)
+                return {
+                    "status": "success",
+                    "message": "`OpenSICoSMIC()` stay the same due to exact config data found during update request."
+                }
+
+            else:
+                # Clear cached memories from currently used SLMs first
+                opensi_cosmic.quit()
+
+                # Then re-state it again to allow `OpenSICoSMIC()` receiving new config data
+                request.app.state.opensi_cosmic     = OpenSICoSMIC()
+                request.app.state.default_configs   = latest_config_data
+
+                return {
+                    "status": "success",
+                    "message": "`OpenSICoSMIC()` reconstructing due to new config data found during update request..."
+                }
 
 
     except HTTPException as http_exc:

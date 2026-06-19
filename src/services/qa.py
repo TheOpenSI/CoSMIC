@@ -1,6 +1,5 @@
 ### Core modules ###
 from pathlib import Path
-from yaml import safe_load
 from fastapi import (
     HTTPException,
     status
@@ -8,7 +7,7 @@ from fastapi import (
 
 
 ### Type hints ###
-from typing import Any
+
 
 ### Internal modules ###
 from . import chess as chess_instances
@@ -16,7 +15,6 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-from ...utils.log_tool import set_color
 
 
 
@@ -34,11 +32,20 @@ class QABase(ServiceBase):
         Base class for QA.
 
         Args:
-            query_analyser  (LLMBase):          query analyser.
-            llm             (LLMBase):          LLM instance.
-            rag             (RAGBase):          RAG instance containing vector database service.
-            code_generator  (CodeGenerator):    code generation service.
-            config          (str, optional):    config file to extract settings. Default to None.
+            query_analyser (LLMBase):
+                query analyser.
+
+            llm (LLMBase):
+                LLM instance.
+
+            rag (RAGBase):
+                RAG instance containing vector database service.
+
+            code_generator (CodeGenerator):
+                code generation service.
+
+            config (str, optional):
+                config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
 
@@ -47,7 +54,6 @@ class QABase(ServiceBase):
         self.llm                = llm
         self.rag                = rag
         self.code_generator     = code_generator
-        self.config             = config
 
         return None
 
@@ -152,23 +158,17 @@ class QABase(ServiceBase):
                 # Get chess FEN.
                 current_fen = service_info_dict["fen"]
 
-                # Set up next move predictor as Stockfish.
-                self.config_path: Path = Path(str(self.config)).resolve(strict=True)
-
-                with self.config_path.open(
-                    mode="r",
-                    buffering=-1,
-                    encoding="utf-8",
-                    errors=None,
-                    newline=None
-                ) as config_file:
-                    self.config_data: dict[str, Any] = safe_load(stream=config_file)
-
-                binary_path: str = (
-                    self.config_data["chess"]["stockfish_path"]
-                    if   (self.config)
-                    else ("")
+                # TODO:
+                # this will be updated again once we've service-specific configs
+                # implemented
+                binary_path: str = str(
+                    Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
+                        "third_party",
+                        "stockfish",
+                        "stockfish-ubuntu-x86-64-avx2"
+                    )
                 )
+
                 next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
 
                 # Predict the next move.
@@ -193,23 +193,17 @@ class QABase(ServiceBase):
                 # Get moves.
                 current_moves = service_info_dict["moves"]
 
-                # Set up next move predictor as Stockfish.
-                self.config_path: Path = Path(str(object=self.config)).resolve(strict=True)
-
-                with self.config_path.open(
-                    mode="r",
-                    buffering=-1,
-                    encoding="utf-8",
-                    errors=None,
-                    newline=None
-                ) as config_file:
-                    self.config_data: dict[str, Any] = safe_load(stream=config_file)
-
-                binary_path: str = (
-                    self.config_data["chess"]["stockfish_path"]
-                    if   (self.config)
-                    else ("")
+                # TODO:
+                # this will be updated again once we've service-specific configs
+                # implemented
+                binary_path: str = str(
+                    Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
+                        "third_party",
+                        "stockfish",
+                        "stockfish-ubuntu-x86-64-avx2"
+                    )
                 )
+
                 next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
 
                 # Predict the next move.

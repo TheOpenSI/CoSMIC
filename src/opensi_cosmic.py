@@ -9,7 +9,6 @@ from fastapi import (
     HTTPException,
     status
 )
-from yaml import safe_load
 from torch import cuda
 from httpx import (
     Client,
@@ -43,43 +42,63 @@ from .query_analyser.query_analyser import QueryAnalyser
 class OpenSICoSMIC:
     def __init__(
         self,
-        query_llm_name: str         = "",
-        llm_name:       str         = "",
-        config_path:    str         = "scripts/configs/config.yaml",
+        general_slm:    str         = "",
+        qa_slm:         str         = "",
         user:           dict | None = None
     ) -> None:
         """
-        Construct OpenSICoSMIC instance. It contains LLM and services including vector database
-        and RAG, where RAG includes context retriever and vector database update.
-        Chess services are induced in PuzzleAnalyse and QualityEval, called on demand, not as global instance.
+        Construct OpenSICoSMIC instance. It contains SLMs and services including
+        vector database and RAG, where RAG includes context retriever and vector
+        database update. Chess services are included in `PuzzleAnalyse()` and
+        `QualityEval()` classes (called on demand, not as global instance).
 
         Args:
-            query_llm_name  (str):  query analyser LLM name, check LLM_MODEL_DICT in src/maps.py,
-                                    if it is empty, the entry is self.config.query_llm_name.
-            llm_name        (str):  LLM name, check LLM_MODEL_DICT in src/maps.py, if it is empty, the entry
-                                    is self.config.llm_name.
-            config_path     (str):  path of configuration file.
-            user            (dict): user information including ID, name, etc. Default to None.
+            general_slm (str):
+                General SLM name used in every chat session (check default list
+                of SLMs in `src/maps.py`). If empty, the entry is a combination
+                format with value from `provider` & `model` fields (accessible
+                through `self.general_config_data`).
+
+            qa_slm (str):
+                Query Analyser SLM name (check default list of SLMs in
+                `src/maps.py`). If empty, the entry is a combination format with
+                value from `provider` & `model` fields (accessible through
+                `self.qa_config_data`).
+
+            user (dict, optional):
+                user information including ID, name, etc. Default to None.
         """
-        # Check if required config file exists.
-        self.config_path: Path = Path(config_path).resolve(strict=True)
+        # NOTE:
+        # Because of how db table works, we could add multiple preset of CoSMIC
+        # default configs. While there're no usecase for this feature yet (there
+        # aren't any extra ones either beside the only inserted default configs
+        # data through Alembic script), it's good to mentioned here so that
+        # future devs can work on this once CoSMIC is getting more complexed and
+        # in need of this feature. For now, we'll assume to use the first result
+        # only.
 
-        if not self.config_path.exists(follow_symlinks=True):
-            print(
-                set_color(
-                    status="error",
-                    information=f"Config file {config_path} not exist."
-                )
-            )
-            exit(1)
+        # For-loop here would be too expensive so I used this trick instead.
+        # Inspired from:
+        # https://stackoverflow.com/questions/61105986/how-to-access-elements-in-a-dict-values
+        self.config_data:           dict[str, Any] = list((self.get_configs()[0]).values())[0]
+        self.general_config_data:   dict[str, Any] = self.config_data["general"]
+        self.qa_config_data:        dict[str, Any] = self.config_data["query_analyser"]
 
-        # Load yaml file to get the config.
-        with self.config_path.open(
-            mode="r",
-            encoding="utf-8"
-        ) as config_file:
-            self.config_data: dict[str, Any] = safe_load(stream=config_file)
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Default General configs: {self.general_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Default QA configs: {self.qa_config_data}"
+        #     )
+        # )
 
+
+        # Set user info
         self.user_id = (
             str(user["id"])
             if (
@@ -90,46 +109,73 @@ class OpenSICoSMIC:
             else (None)
         )
 
+
         # Set model device.
-        self.device = (
+        self.device: str = (
             "cuda"
             if   (cuda.is_available())
             else ("cpu")
         )
 
-        # Initialize QA instance.
-        self.qa = None
-
-        # If llm_name is not specified, read it from the config file.
-        if llm_name == "":
-            llm_name = self.config_data["llm_name"]
-
-        self.llm = self.get_llm(
-            llm_name=llm_name,
-            seed=self.config_data["seed"],
-            is_quantized=self.config_data["is_quantized"],
-            device=self.device,
-        )
 
         # Check OpenAI API key.
-        self.openai_api_status = self.check_openai_key()
+        self.openai_api_status: str | None = self.check_openai_key()
 
-        # Set LLM for query analysis.
-        if query_llm_name == "":
-            query_llm_name = self.config_data["query_analyser"]["llm_name"]
 
-        self.query_analyser = QueryAnalyser(
-            llm_name=query_llm_name,
-            seed=self.config_data["seed"],
-            is_quantized=self.config_data["query_analyser"]["is_quantized"],
-            service_index=self.config_data["service"],
-            device=self.device,
+        # Read SLMs from Configs API endpoint if not specified
+        self.general_slm = general_slm
+
+        if self.general_slm == "":
+            # Match model detection format in `src/services/llms/LLMBase.py`.
+            # For example: "ollama:qwen2.5:7b"
+            self.general_slm = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
+
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Set General SLM: [{self.general_slm}]"
+        #     )
+        # )
+
+        self.llm = self.get_llm(
+            llm_name=self.general_slm,
+            seed=self.general_config_data["seed"],
+            is_quantised=self.general_config_data["is_quantised"],
+            device=self.device
         )
 
-        # Code generation service.
-        self.code_generator = CodeGenerator()
 
-        # Set up QA instance.
+        # Read SLMs from Configs API endpoint if not specified
+        self.qa_slm = qa_slm
+
+        if self.qa_slm == "":
+            # Match model detection format in `src/services/llms/LLMBase.py`.
+            # For example: "ollama:qwen2.5:7b"
+            self.qa_slm = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Set QA SLM: [{self.qa_slm}]"
+        #     )
+        # )
+
+        self.query_analyser: QueryAnalyser = QueryAnalyser(
+            llm_name=self.qa_slm,
+            seed=self.qa_config_data["seed"],
+            is_quantised=self.qa_config_data["is_quantised"],
+            service_index=-1, # Default to 'auto' mode
+            device=self.device
+        )
+
+
+        # Code generation service.
+        self.code_generator: CodeGenerator = CodeGenerator()
+
+
+        # Initialise & setup QA instance.
+        self.qa: QABase | None = None
+
         self.set_up_qa(
             user_id=str(self.user_id),
             user_name=None
@@ -148,26 +194,62 @@ class OpenSICoSMIC:
         Execute QA.
 
         Args:
-            question    (str):              a question or a .csv containing multiple questions.
-            context     (str, optional):    context for this question. Defaults to "".
-            log_file    (str, optional):    whether to print the result in a .txt file. Defaults to None.
+            question (str):
+                a question or a .csv containing multiple questions.
+
+            context (str, optional):
+                context for this question. Defaults to "".
+
+            log_file (str, optional):
+                whether to print the result in a .txt file. Defaults to None.
 
         Returns:
-            response        (str):      (truncated) response.
-            raw_response    (str):      raw response from LLM without truncations.
-            retrieve_score  (float):    context retrieve score if is_rag=True.
+            response (str):
+                (truncated) response.
+
+            raw_response (str):
+                raw response from LLM without truncations.
+
+            retrieve_score (float):
+                context retrieve score if `is_rag=True`.
         """
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"General configs used when query received: {self.general_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"QA configs used when query received: {self.qa_config_data}"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"General SLM used when query received: [{self.general_slm}]"
+        #     )
+        # )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"QA SLM used when query received: [{self.qa_slm}]"
+        #     )
+        # )
+
         # Set initial output to return.
-        response        = None
-        raw_response    = None
-        retrieve_score  = -1
+        response:       str | None  = None
+        raw_response:   str | None  = None
+        retrieve_score: float | int = -1
+
 
         # Check if OpenAI API key is valid.
         if self.openai_api_status != "":
             return (
-                self.openai_api_status,
-                self.openai_api_status,
-                -1
+                str(response),
+                str(raw_response),
+                retrieve_score
             )
 
         # Chat-mode LLM do not need example in the system prompt.
@@ -276,13 +358,13 @@ class OpenSICoSMIC:
             ) = self.qa(
                 query=question,
                 services=self.get_services(),
-                # The context that we are passing here is chat history. See api.py
-                context=context,
+                context=context, # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
                 verbose=False
             ) # pyright: ignore
 
-        # Return answers with and without truncation, and retrieve score if applicable otherwise -1.
+        # Return answers with and without truncation, and retrieve score (if
+        # applicable). Otherwise, -1.
         return (
             response,
             raw_response,
@@ -324,7 +406,7 @@ class OpenSICoSMIC:
             self.user_id = user_id
 
             # Create vector database service which will be included in RAG for retrieve and information updates.
-            vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
+            # vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
 
             # # If index.faiss exists, it is user selected path; do not change the path.
             # # Otherwise, create a new directory.
@@ -348,31 +430,36 @@ class OpenSICoSMIC:
             # Since Qdrant is now managed, we don't need to check for index.faiss
             # The VectorDatabase service will handle the connection.
 
+            # TODO:
+            # I know that we had a different path implmented for RAG works on
+            # another branch right now. However, I need to match what already
+            # there in the YAML file so COSMIC-225 PR can be merged. Once this
+            # merged, we can modify the path again with the current branch
+            # working on RAG to test out.
+
             vector_database = VectorDatabase(
-                document_analyser_model="gte-small",
-                local_database_path=str(object=vector_db_path),
-                vector_database_update_threshold=0.98,
+                local_database_path="",
                 device=self.device
             )
 
             # Add a directory of documents.
-            if Path.exists(
-                Path(self.config_data["doc_directory"]).resolve(strict=True),
-                follow_symlinks=True
-            ):
-                vector_database.add_document_directory(self.config_data["doc_directory"])
+            document_path: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
+                "data",
+                "docs"
+            )
+            documents: str | list[str] = []
+
+            if document_path.exists(follow_symlinks=True):
+                vector_database.add_document_directory(str(document_path))
 
             # Add documents.
-            if self.config_data["document_path"] != "" or len(self.config_data["document_path"]) > 0:
-                vector_database.add_documents(self.config_data["document_path"])
+            if (documents != "") \
+            or (len(documents) > 0):
+                vector_database.add_documents(documents)
 
             # Base RAG service with vector_database, the database can be changed using
             # self.rag.set_vector_database().
-            self.rag = RAGBase(
-                vector_database=vector_database,
-                retrieve_score_threshold=self.config_data["rag"]["retrieve_score_threshold"],
-                topk=self.config_data["rag"]["topk"],
-            )
+            self.rag = RAGBase(vector_database=vector_database)
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
@@ -381,7 +468,7 @@ class OpenSICoSMIC:
                 llm=self.llm,
                 rag=self.rag,
                 code_generator=self.code_generator,
-                config=str(object=self.config_path)
+                config=None
             )
 
 
@@ -392,8 +479,8 @@ class OpenSICoSMIC:
         Returns:
             answer: status information.
         """
-        llm_name                = self.config_data["llm_name"]
-        query_analyser_llm_name = self.config_data["query_analyser"]["llm_name"]
+        llm_name                = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
+        query_analyser_llm_name = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
 
         is_llm_name_gpt                 = llm_name.find("gpt") > -1
         is_query_analyser_llm_name_gpt  = query_analyser_llm_name.find("gpt") > -1
@@ -411,16 +498,10 @@ class OpenSICoSMIC:
 
         count = len(llm_name_list)
 
-        if is_llm_name_gpt:
-            openai_api_key = self.llm.get_openai_key()
+        openai_api_key: str | None = self.general_config_data["api_key"]
 
-        elif is_query_analyser_llm_name_gpt:
-            openai_api_key = self.query_analyser.llm.get_openai_key()
-
-        else:
-            openai_api_key = ""
-
-        if (count > 0) and (openai_api_key == ""):
+        if  (count > 0) \
+        and (openai_api_key == ""):
             answer = ""
 
             if count == 1:
@@ -439,16 +520,21 @@ class OpenSICoSMIC:
         self,
         llm_name: str,
         seed: int = 0,
-        is_quantized: bool = False,
+        is_quantised: bool = False,
         **kwargs
     ):
         """
         Construct LLM give an LLM name.
 
         Args:
-            llm_name        (str):  LLM name, check LLM_MODEL_DICT in src/maps.py.
-            seed            (int):  LLM content generation seed. Default to 0.
-            is_quantized    (bool): use quantized LLM. Default to False.
+            llm_name        (str):
+                LLM name, check LLM_MODEL_DICT in src/maps.py.
+
+            seed            (int):
+                LLM content generation seed. Default to 0.
+
+            is_quantised    (bool):
+                use quantised LLM. Default to False.
 
         Return:
             llm (LLMBase): LLM instance.
@@ -460,10 +546,8 @@ class OpenSICoSMIC:
         elif llm_name.find("gpt") > -1:
             llm_instance_name = "GPT"
 
-
         elif llm_name.find("ollama") > -1:
             llm_instance_name = "Ollama"
-
 
         else:
             print(
@@ -480,11 +564,16 @@ class OpenSICoSMIC:
         )(
             llm_name=llm_name,
             seed=seed,
-            is_quantized=is_quantized,
+            is_quantised=is_quantised,
             **kwargs
         )
 
-        print(f"LLM instance created: {llm}")
+        print(
+            set_color(
+                status="info",
+                information=f"LLM instance created: {llm}"
+            )
+        )
 
         return llm
 
@@ -555,7 +644,7 @@ class OpenSICoSMIC:
                 (ConnectError, ConnectTimeout) or other unexpected exceptions.
 
         Example:
-            >>> services = obj.get_services_name(verbose=True)
+            >>> services = obj.get_services(verbose=True)
             >>> services[0] # 1st service
             {"name": "chess", "desc": "<a very long description>"}
         """
@@ -626,6 +715,131 @@ class OpenSICoSMIC:
 
                 else:
                     return dict(sorted(services.items()))
+
+
+        except ConnectError as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
+
+
+        except ConnectTimeout as httpx_err:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"{httpx_err}"
+            )
+
+
+    def get_configs(
+        self,
+        # TODO:
+        # create a dedicated util to handle valid URL format
+        url:        str                     = "http://backend:8000/api/v1/configs/",
+        params:     dict[str, bool] | None  = None,
+        lifetime:   float                   = 10.0,
+        verbose:    bool                    = False
+    ) -> list[dict[str, dict[str, Any]]]:
+        """
+        Retrieve presets of configuration from API endpoint.
+
+        This method fetches presets of configuration data from the specified
+        endpoint and returns the exact data structure received for further
+        CoSMIC usages.
+
+        Args:
+            url:
+                base URL of the configurations API endpoint. Defaults to
+                "http://backend:8000/api/v1/configs/".
+
+            params:
+                optional query parameter for provided endpoint. Defaults to None.
+
+            lifetime:
+                HTTP client timeout in seconds. Defaults to 10.0 seconds.
+
+            verbose:
+                Enable pretty-printed debug output for presets of configuration
+                data. When True, prints formatted presets of configuration data
+                using 'pprint'.
+
+        Returns:
+            Presets of configuration data.
+
+            Example:
+            [
+                { <first configuration preset> },
+                { <second configuration preset> }
+            ]
+
+        Raises:
+            HTTPException:
+                With status code 500 if any connection error occurs
+                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+
+        Example:
+            >>> configs = obj.get_configs(verbose=True)
+            >>> configs[0] # 1st configuration preset
+            [{"<configuration preset name>": "<default configurations>"}]
+        """
+        configs: list[dict[str, dict[str, Any]]] = []
+
+        try:
+            with Client(
+                base_url=url,
+                params=params,
+                timeout=lifetime
+            ) as client:
+                response: Response = client.get(url="")
+                response.raise_for_status()
+                datas: list[dict[str, Any]] = response.json().get("result", [])
+
+            if len(datas) == 0:
+                # No config presets available
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    print(
+                        "{debug_msg:s}\n{foot_sep:s}".format(
+                            debug_msg="No configuration presets available...",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    return []
+
+                else:
+                    return []
+
+            else:
+                # There is/are config preset(s) available
+                for data in datas:
+                    # We only need `name` & `details` field to form minimal
+                    # config presets data
+                    configs.append({data["name"]: data["details"]})
+
+                if verbose:
+                    print(
+                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                            head_sep=f"{'=' * 80}",
+                            body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
+                            foot_sep=f"{'=' * 80}"
+                        )
+                    )
+                    pp(
+                        object=configs,
+                        stream=stdout,
+                        indent=4 # Prefer tab over spaces indentation
+                    )
+                    print(f"{'=' * 80}")
+                    return configs
+
+                else:
+                    return configs
 
 
         except ConnectError as httpx_err:

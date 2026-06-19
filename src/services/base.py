@@ -11,7 +11,7 @@ from pathlib import Path
 class ServiceBase:
     def __init__(
         self,
-        log_file: str | None = None,
+        log_file: str | None = None
     ):
         """
         Base class for the services in OpenSI-CoSMIC.
