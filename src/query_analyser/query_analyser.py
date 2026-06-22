@@ -143,17 +143,17 @@ class QueryAnalyser:
                 }
             )
 
-        # Set chess subservices.
-        self.chess_subservices: dict[str, str] = {
-            "0.0": "predict next move given a chess FEN",
-            "0.1": "predict next move given a sequence of moves"
-        }
+        # Chect if chess is one of the services, if yes, then add chess subservices to full services.
+        self.full_services: dict[str, str] = dict(self.services)
 
-        # Get full services.
-        self.full_services: dict[str, str] = {
-            **self.services,
-            **self.chess_subservices
-        }
+        if "0" in self.services:
+            self.chess_subservices: dict[str, str] = {
+                "0.0": "predict next move given a chess FEN",
+                "0.1": "predict next move given a sequence of moves"
+            }
+
+            self.full_services.update(self.chess_subservices)
+
 
         # print(
         #     set_color(
