@@ -143,24 +143,36 @@ class QueryAnalyser:
                 }
             )
 
-        # Set chess subservices.
-        self.chess_subservices: dict[str, str] = {
-            "0.0": "predict next move given a chess FEN",
-            "0.1": "predict next move given a sequence of moves"
-        }
+        # # Set chess subservices.
+        # self.chess_subservices: dict[str, str] = {
+        #     "0.0": "predict next move given a chess FEN",
+        #     "0.1": "predict next move given a sequence of moves"
+        # }
 
-        # Get full services.
-        self.full_services: dict[str, str] = {
-            **self.services,
-            **self.chess_subservices
-        }
+        # # Get full services.
+        # self.full_services: dict[str, str] = {
+        #     **self.services,
+        #     **self.chess_subservices
+        # }
 
-        # print(
-        #     set_color(
-        #         status="info",
-        #         information=f"Full services from Query Analyser: {self.full_services}"
-        #     )
-        # )
+        # Chect if chess is one of the services, if yes, then add chess subservices to full services.
+        self.full_services: dict[str, str] = dict(self.services)
+
+        if "0" in self.services:
+            self.chess_subservices: dict[str, str] = {
+                "0.0": "predict next move given a chess FEN",
+                "0.1": "predict next move given a sequence of moves"
+            }
+
+            self.full_services.update(self.chess_subservices)
+
+
+        print(
+            set_color(
+                status="info",
+                information=f"Full services from Query Analyser: {self.full_services}"
+            )
+        )
 
         # Get the number of services.
         self.num_services: int = len(self.services)
