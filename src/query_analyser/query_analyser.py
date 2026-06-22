@@ -167,12 +167,12 @@ class QueryAnalyser:
             self.full_services.update(self.chess_subservices)
 
 
-        print(
-            set_color(
-                status="info",
-                information=f"Full services from Query Analyser: {self.full_services}"
-            )
-        )
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Full services from Query Analyser: {self.full_services}"
+        #     )
+        # )
 
         # Get the number of services.
         self.num_services: int = len(self.services)
