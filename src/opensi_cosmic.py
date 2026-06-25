@@ -1,4 +1,5 @@
 ### Core modules ###
+import os
 from sys import (
     exit,
     stdout
@@ -191,7 +192,10 @@ class OpenSICoSMIC:
         self,
         question:   str,
         context:    str         = "",
-        log_file:   str | None  = None
+        log_file:   str | None  = None,
+        session_id: str | None  = None,
+        has_files:  bool        = False,
+        user_id:    str | None  = None,
     ) -> tuple:
         """
         Execute QA.
@@ -353,6 +357,12 @@ class OpenSICoSMIC:
             # Truncation needs keywords from the example of system prompt.
             self.llm.system_prompter.set_use_example(True)
 
+            # Resolve which memory scopes are active for retrieval
+            global_service_names, memory_service_active = get_active_memory_scope()
+
+            # Per-request user (from the chat call) for retrieval scoping
+            call_user_id = user_id if user_id is not None else self.user_id
+
             # Process each question.
             (
                 response,
@@ -363,7 +373,12 @@ class OpenSICoSMIC:
                 services=self.get_services(),
                 context=context, # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
-                verbose=False
+                verbose=False,
+                user_id=call_user_id,
+                session_id=session_id,
+                global_service_names=global_service_names,
+                memory_service_active=memory_service_active,
+                has_files=has_files,
             ) # pyright: ignore
 
         # Return answers with and without truncation, and retrieve score (if
@@ -408,41 +423,13 @@ class OpenSICoSMIC:
             # Change the global user ID.
             self.user_id = user_id
 
-            # Create vector database service which will be included in RAG for retrieve and information updates.
-            # vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
-
-            # # If index.faiss exists, it is user selected path; do not change the path.
-            # # Otherwise, create a new directory.
-            # if not Path.exists(
-            #     vector_db_path.joinpath("index.faiss"),
-            #     follow_symlinks=True
-            # ):
-            #     if self.user_id is not None:
-            #         # User ID specific.
-            #         vector_db_path: Path = vector_db_path.joinpath(self.user_id)
-            #     else:
-            #         # Set to default folder for easy management.
-            #         vector_db_path: Path = vector_db_path.joinpath("default")
-
-            #     # Create the data folder if not exist.
-            #     vector_db_path.mkdir(
-            #         mode=0o777,
-            #         parents=False,
-            #         exist_ok=True
-            #     )
-            # Since Qdrant is now managed, we don't need to check for index.faiss
-            # The VectorDatabase service will handle the connection.
-
-            # TODO:
-            # I know that we had a different path implmented for RAG works on
-            # another branch right now. However, I need to match what already
-            # there in the YAML file so COSMIC-225 PR can be merged. Once this
-            # merged, we can modify the path again with the current branch
-            # working on RAG to test out.
-
+            # Create vector database service, storage is backed by Qdrant (reached via QDRANT_URL)
+            # The VectorDatabase service handles the connection, so there is no local on-disk path
             vector_database = VectorDatabase(
-                local_database_path="",
-                device=self.device
+                document_analyser_model=os.getenv("RAG_EMBEDDING_MODEL", "gte-small"),
+                vector_database_update_threshold=float(os.getenv("RAG_UPDATE_THRESHOLD", "0.98")),
+                device=self.device,
+                reranker_model=os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"),
             )
 
             # Add a directory of documents.
@@ -460,9 +447,16 @@ class OpenSICoSMIC:
             or (len(documents) > 0):
                 vector_database.add_documents(documents)
 
-            # Base RAG service with vector_database, the database can be changed using
-            # self.rag.set_vector_database().
-            self.rag = RAGBase(vector_database=vector_database)
+            # Base RAG service tuning is read from .env
+            self.rag = RAGBase(
+                vector_database=vector_database,
+                retrieve_score_threshold=float(os.getenv("RAG_RETRIEVE_SCORE_THRESHOLD", "0.0")),
+                topk=int(os.getenv("RAG_TOPK", "6")),
+                rerank_enabled=os.getenv("RAG_RERANK_ENABLED", "true").strip().lower() == "true",
+                candidate_pool=int(os.getenv("RAG_CANDIDATE_POOL", "30")),
+                rerank_topk=int(os.getenv("RAG_RERANK_TOPK", "6")),
+                rerank_score_threshold=float(os.getenv("RAG_RERANK_SCORE_THRESHOLD", "0.0")),
+            )
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
@@ -858,3 +852,128 @@ class OpenSICoSMIC:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"{httpx_err}"
             )
+
+
+# Service Registry Utilities (for StorageEventWatcher and memory management)
+
+_service_cache = {} # To avoid hitting the backend API frequently
+_service_cache_timestamp = 0
+_CACHE_TTL = 30  # seconds; short TTL so service status/capability toggles take effect promptly
+
+
+def _get_raw_services(
+    url: str = "http://backend:8000/api/v1/services/",
+    params: dict[str, bool] | None = None
+) -> list[dict[str, Any]]:
+    """Fetch raw service data from API endpoint with caching."""
+    global _service_cache, _service_cache_timestamp
+    from time import time
+
+    current_time = time()
+    if _service_cache and (current_time - _service_cache_timestamp) < _CACHE_TTL:
+        return _service_cache
+
+    if params is None:
+        params = {"active": True}
+
+    try:
+        with Client(base_url=url, params=params, timeout=10.0) as client:
+            response: Response = client.get(url="")
+            response.raise_for_status()
+            services = response.json().get("result", [])
+            _service_cache = services
+            _service_cache_timestamp = current_time
+            return services
+    except Exception as e:
+        # Return cached data if available, otherwise empty list
+        if _service_cache:
+            return _service_cache
+        return [5]
+
+
+def get_service_id_by_name(service_name: str) -> int | None:
+    """Get service_id by service name.
+
+    Args:
+        service_name: Name of the service (e.g., "chess", "academic_governance")
+
+    Returns:
+        service_id (int) if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("name", "").lower() == service_name.lower():
+            return service.get("id")
+    return None
+
+
+def get_service_name(service_id: int) -> str | None:
+    """Get service name by service_id.
+
+    Args:
+        service_id: ID of the service (e.g., 5 for academic_governance)
+
+    Returns:
+        service name (str) if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("id") == service_id:
+            return service.get("name")
+    return None
+
+
+def get_service_by_id(service_id: int) -> dict[str, Any] | None:
+    """Get full service record by service_id.
+
+    Args:
+        service_id: ID of the service
+
+    Returns:
+        Full service dict if found, None otherwise
+    """
+    services = _get_raw_services()
+    for service in services:
+        if service.get("id") == service_id:
+            return service
+    return None
+
+def get_rag_required_services() -> list[int]:
+    """Get list of service_ids that require memory/RAG storage.
+
+    Checks for 'memory_capability' field in service records. If field doesn't exist,
+    falls back to hardcoded list.
+
+    Returns:
+        List of service_ids that have memory_capability=True or hardcoded fallback
+    """
+    services = _get_raw_services()
+
+    # Check if any service has rag_req field
+    rag_services = [s.get("id") for s in services if s.get("memory_capability") == True]
+
+    # If no services marked with memory_capability, use hardcoded fallback
+    if not rag_services:
+        return [5]  # academic_governance
+
+    return rag_services
+
+def get_active_memory_scope() -> tuple[list[str], bool]:
+    """ Resolve global memory scope and whether the user-memory service is active """
+    
+    services = _get_raw_services() # service is only used when active
+  
+    global_service_names = [
+        s.get("name")
+        for s in services
+        if s.get("status") is True
+        and s.get("memory_capability") is True
+        and s.get("name")
+        and (s.get("name") or "").lower() != "memory"
+    ]
+    memory_service_active = any(
+        (s.get("name") or "").lower() == "memory" and s.get("status") is True
+        for s in services
+    )
+
+    return global_service_names, memory_service_active

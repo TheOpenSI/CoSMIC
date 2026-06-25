@@ -7,15 +7,18 @@ from fastapi import (
 
 
 ### Type hints ###
-
+from typing import Any, Optional, List
 
 ### Internal modules ###
 from . import chess as chess_instances
 from .base import ServiceBase
+from .document_index import DocumentMetadata
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
+from ...utils.log_tool import set_color
+import uuid
 
 
 class QABase(ServiceBase):
@@ -70,7 +73,12 @@ class QABase(ServiceBase):
         services:   dict[str, dict[str, str]],
         context:    str | dict  = "",
         is_rag:     bool        = False,
-        verbose:    bool        = False
+        verbose:    bool        = False,
+        user_id:                Optional[str]       = None,
+        session_id:             Optional[str]       = None,
+        global_service_names:   Optional[List[str]] = None,
+        memory_service_active:  bool                = False,
+        has_files:              bool                = False,
     ) -> tuple:
         """
         Process each QA.
@@ -240,25 +248,22 @@ class QABase(ServiceBase):
             raw_response    = f"The next moves are from {next_move}.\n{raw_response}"
 
         elif service_option == "2":
-            # Check if context is a .pdf.
-            is_a_document = service_info_dict["is_a_document"]
-
-            if is_a_document:
-                # Get absolute document path.
-                document_path = service_info_dict["document_path"]
-
-                if document_path is not None:
-                    # Update the knowledge database and return the status.
-                    self.rag.vector_database.update_database_from_document(document_path=document_path)
-            else:
-                # Get text.
-                text = service_info_dict["text"]
-
-                if text is not None:
-                    # Add text to database.
-                    self.rag.vector_database.update_database_from_text(text=text)
-
-            response = raw_response = "Vector database updated."
+            selected_service_name = services_name.get(service_option, "").lower()
+            if (
+                memory_service_active
+                and selected_service_name == "memory"
+                and user_id
+            ):
+                payload = DocumentMetadata(
+                    document_id=uuid.uuid4().hex[:8],
+                    user_id=user_id,
+                    memory_type="user",
+                ).to_vector_payload()
+                self.rag.vector_database.update_database_from_text(
+                    text=query, extra_metadata=payload
+                )
+                response = raw_response = "Saved to your memory."
+                return (response, raw_response, retrieve_score)
 
         elif service_option == "3":
             (
@@ -282,7 +287,7 @@ class QABase(ServiceBase):
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
             execute_rag = (
                 (is_rag) and
-                (service_option in RAG_ENABLED_SERVICES)
+                (service_option in RAG_ENABLED_SERVICES or has_files)
             )
 
             if execute_rag:
@@ -306,11 +311,19 @@ class QABase(ServiceBase):
                     context=rag_context
                 ) # pyright: ignore
 
-                # Get the retrieved context.
+                # Get the retrieved context, scoped to the active memory tiers
                 (
                     context_retrieved,
                     retrieve_score
-                ) = self.rag(query)
+                ) = self.rag(
+                    query,
+                    user_id=user_id,
+                    session_id=session_id,
+                    global_service_names=global_service_names,
+                    include_session=True,
+                    include_user=memory_service_active,
+                    include_global=True,
+                )
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.

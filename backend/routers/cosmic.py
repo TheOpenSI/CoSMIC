@@ -30,7 +30,9 @@ from typing import Any
 ### Internal modules ###
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
+from ...src.services.document_index import DocumentIndex
 from ...utils.chat_history import build_context_from_messages
+from . import memory
 # from ...utils.statistics import update_statistic_per_query
 
 
@@ -66,6 +68,13 @@ class CosmicAPI(BaseModel):
     name:           str | None = "New chat"
     user_message:   str
     body:           Body
+
+
+# Initialize document indexes for metadata tracking
+global_document_index = DocumentIndex(persist_path="/app/data/memories/global/global_document_index.json")
+user_document_index = DocumentIndex(persist_path="/app/data/memories/users/user_document_index.json")
+memory.set_document_indexes(global_document_index, user_document_index)
+
 
 async def send_emissions_to_db(
     user_id: str,
@@ -217,7 +226,14 @@ async def process_cosmic(
                 rag_tracker.start()
 
                 # Update vector database
-                answer: str = str(opensi_cosmic(question=user_message_vector_db_update)[0])
+                answer: str = str(
+                    opensi_cosmic(
+                        question=user_message_vector_db_update,
+                        session_id=data.chat_id,
+                        has_files=True,
+                        user_id=user_id,
+                    )[0]
+                )
 
                 # Stop CodeCarbon emission tracking process (for RAG-triggered
                 # user queries) and start saving those tracked data
@@ -250,6 +266,9 @@ async def process_cosmic(
                 opensi_cosmic(
                     question=data.user_message,
                     context=chat_history_context,
+                    session_id=data.chat_id,
+                    has_files=False,
+                    user_id=user_id,
                 )[0]
             )
 

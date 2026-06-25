@@ -10,7 +10,9 @@ from typing import Any
 
 
 ### Internal modules ###
-from .src.opensi_cosmic import OpenSICoSMIC
+from .src.opensi_cosmic import OpenSICoSMIC, get_rag_required_services, get_service_id_by_name
+from .src.services.document_index import DocumentIndex
+from .src.services.storage_events import StorageEventWatcher
 from .backend.routers import (
     models,
     cosmic,
@@ -77,12 +79,43 @@ async def lifespan(app: FastAPI):
         else ({})
     )
 
+    # Initialize document indexes for global and user memory management
+    global_document_index: DocumentIndex = DocumentIndex(
+        persist_path="/app/data/memories/global/global_document_index.json"
+    )
+    user_document_index: DocumentIndex = DocumentIndex(
+        persist_path="/app/data/memories/users/user_document_index.json"
+    )
+    app.state.global_document_index = global_document_index
+    app.state.user_document_index = user_document_index
+
+    # Shared vector database (created during OpenSICoSMIC.__init__ via set_up_qa).
+    # Used both by the autonomous folder watcher (global memory) and the API
+    # upload path (user/session memory) so every tier embeds with metadata.
+    vector_database = opensi_cosmic_instance.rag.vector_database
+    memory.set_vector_database(vector_database)
+
+    # Initialize storage event watcher for autonomous file monitoring (uses global index)
+    storage_watcher: StorageEventWatcher = StorageEventWatcher(
+        watched_path="/app/data/memories/global/",
+        document_index=global_document_index,
+        get_rag_required_services=get_rag_required_services,
+        get_service_id_by_name=get_service_id_by_name,
+        vector_database=vector_database,
+    )
+    app.state.storage_watcher = storage_watcher
+
+    # Start file system watcher and sync with current filesystem state
+    storage_watcher.start()
+    storage_watcher.sync_with_filesystem()
+
     # Server is running
     yield
 
 
     # Equivalent to the explicit 'shutdown' event
     app.state.opensi_cosmic.quit()
+    storage_watcher.stop()
 
 
 cosmic_app: FastAPI = FastAPI(
