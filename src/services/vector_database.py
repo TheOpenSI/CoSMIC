@@ -223,7 +223,7 @@ class VectorDatabase(ServiceBase):
         extra_metadata = extra_metadata or {}
 
         # Check if the document exists.
-        self.document_path: Path = Path(document_path).resolve(strict=True)
+        self.document_path: Path = Path(document_path).resolve(strict=False)
 
         if self.document_path.exists(follow_symlinks=True):
             # Prefer the clean original title from metadata; fall back to the
@@ -302,7 +302,7 @@ class VectorDatabase(ServiceBase):
             return 0
 
     def delete_by_document_id(self, document_id: str) -> None:
-        """ Remove all vector points belonging to a document to avoid stale chinks """
+        """ Remove all vector points belonging to a document to avoid stale chunks """
         try:
             from qdrant_client import models
 

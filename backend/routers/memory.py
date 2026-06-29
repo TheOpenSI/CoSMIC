@@ -109,7 +109,7 @@ async def upload_file(
             user_id=user_id,
             file_name=file.filename,
             memory_type=memory_type,
-            session_id=chat_session_id,
+            session_id=chat_session_id if memory_type == "session" else None,
             chunk_count=chunk_count,
             content_hash=content_hash,
             file_size=len(content),

@@ -93,7 +93,11 @@ class DocumentMetadata:
             "title": self.title,
             "memory_type": self.memory_type,
             "content_hash": self.content_hash,
+            "file_size": self.file_size,
+            "file_ext": self.file_ext,
+            "content_type": self.content_type,
             "upload_date": self.upload_date,
+            "updated_date": self.updated_date,
         }
         if self.memory_type == "global_memory":
             payload["service_id"] = self.service_id
@@ -151,6 +155,7 @@ class DocumentIndex(ServiceBase):
         file_size: int = 0,
         file_ext: str = "",
         content_type: Optional[str] = None,
+        upload_date: Optional[str] = None,
         updated_date: Optional[str] = None,
     ) -> DocumentMetadata:
         # Add document metadata to index
@@ -161,6 +166,7 @@ class DocumentIndex(ServiceBase):
             file_name=file_name,
             memory_type=memory_type,
             chunk_count=chunk_count,
+            upload_date=upload_date,
             service_id=service_id,
             service_name=service_name,
             content_hash=content_hash,
