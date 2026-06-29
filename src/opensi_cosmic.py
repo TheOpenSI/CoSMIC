@@ -860,9 +860,10 @@ _service_cache = {} # To avoid hitting the backend API frequently
 _service_cache_timestamp = 0
 _CACHE_TTL = 30  # seconds; short TTL so service status/capability toggles take effect promptly
 
+SERVICES_API_URL = os.getenv("SERVICES_API_URL","http://backend:8000/api/v1/services/")
 
 def _get_raw_services(
-    url: str = "http://backend:8000/api/v1/services/",
+    url: str = SERVICES_API_URL,
     params: dict[str, bool] | None = None
 ) -> list[dict[str, Any]]:
     """Fetch raw service data from API endpoint with caching."""
