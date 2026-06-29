@@ -688,7 +688,7 @@ class OpenSICoSMIC:
                     # for legacy purposes. Change to normal when update the checking
                     # logic to handle `int` properly
                     services.setdefault(
-                        str(data["id"] - 1),
+                        str(data["id"]), 
                         {}
                     ).update(
                         {
