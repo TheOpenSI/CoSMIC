@@ -10,6 +10,7 @@ from langchain_qdrant import QdrantVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
+from qdrant_client import QdrantClient, models
 
 
 ### Type hints ###
@@ -88,12 +89,27 @@ class VectorDatabase(ServiceBase):
 
         print(set_color("info", f"Connecting to Qdrant at {qdrant_url}..."))
 
-        # Connect to existing collection or create one if it doesn't exist.
-        self.database = QdrantVectorStore.from_texts(
-            texts=["Initial collection entry"],
-            embedding=self.database_update_embedding,
-            url=qdrant_url,
+        client = QdrantClient(url=qdrant_url)
+
+        # Check collection exists if not create one 
+        if not client.collection_exists(collection_name):
+            embedding_dim = len(
+                self.database_update_embedding.embed_query("dimension probe")
+            )
+            client.create_collection(
+                collection_name=collection_name,
+                vectors_config=models.VectorParams(
+                    size=embedding_dim,
+                    distance=models.Distance.COSINE,
+                ),
+            )
+            print(set_color("info", f"Created Qdrant collection: {collection_name}"))
+
+        # Attach to the existing collection
+        self.database = QdrantVectorStore(
+            client=client,
             collection_name=collection_name,
+            embedding=self.database_update_embedding,
         )
 
         print(set_color("success", f"Connected to Qdrant collection: {collection_name}"))
@@ -231,17 +247,20 @@ class VectorDatabase(ServiceBase):
                 doc.metadata.update(extra_metadata)
                 doc.metadata["title"] = document_title
 
-                # If not highly similar to existing contents, add the content.
-                content_retrieved, similarity_score = self.similarity_search_with_relevance_scores(
+                # If not highly similar to existing contents, add the content
+                hits = self.similarity_search_with_relevance_scores(
                     doc.page_content,
                     k=1
-                )[0]
+                )
 
-                # Skip if already in the database or has a high similiarity.
-                if similarity_score >= self.vector_database_update_threshold \
-                    or content_retrieved.page_content.find(doc.page_content) > -1 \
-                    or doc.page_content.find(content_retrieved.page_content) > -1:
-                    continue
+                if hits:
+                    content_retrieved, similarity_score = hits[0]
+
+                    # Skip if already in the database or has a high similiarity.
+                    if similarity_score >= self.vector_database_update_threshold \
+                        or content_retrieved.page_content.find(doc.page_content) > -1 \
+                        or doc.page_content.find(content_retrieved.page_content) > -1:
+                        continue
 
                 # Ready to add to the vector database.
                 chunks = self.document_splitter.split_documents([doc])
@@ -324,18 +343,20 @@ class VectorDatabase(ServiceBase):
             status (int): skip (-1) or not (0).
         """
         if text != '':
-            # Skip for high-similar text.
-            content_retrieved, _ = self.similarity_search_with_relevance_scores(text, k=1)[0]
-            content_retrieved = content_retrieved.page_content
+            # Skip for high-similar text. On an empty collection the search
+            hits = self.similarity_search_with_relevance_scores(text, k=1)
 
-            # If the same as existing contents, skip the text.
-            if content_retrieved.find(text) > -1:
-                print(set_color(
-                    "warning",
-                    f"Similar contents found: '{content_retrieved}' for '{text}'."
-                ))
+            if hits:
+                content_retrieved = hits[0][0].page_content
 
-                return -1
+                # If the same as existing contents, skip the text
+                if content_retrieved.find(text) > -1:
+                    print(set_color(
+                        "warning",
+                        f"Similar contents found: '{content_retrieved}' for '{text}'."
+                    ))
+
+                    return -1
 
             # Update the text with timestamp.
             text = f"{text} by the date {self.time_stamper}"

@@ -88,6 +88,7 @@ async def lifespan(app: FastAPI):
     )
     app.state.global_document_index = global_document_index
     app.state.user_document_index = user_document_index
+    memory.set_document_indexes(global_document_index, user_document_index)
 
     # Shared vector database (created during OpenSICoSMIC.__init__ via set_up_qa).
     # Used both by the autonomous folder watcher (global memory) and the API
