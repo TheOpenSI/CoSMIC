@@ -106,6 +106,7 @@ cosmic_app.add_middleware(
     allow_headers=["*"],
 )
 
-cosmic_app.include_router(models.router)
-cosmic_app.include_router(cosmic.router)
-cosmic_app.include_router(memory.router)
+
+cosmic_app.include_router(router=models.router)
+cosmic_app.include_router(router=cosmic.router)
+cosmic_app.include_router(router=memory.router)
