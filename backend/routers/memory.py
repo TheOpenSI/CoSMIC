@@ -1,18 +1,39 @@
-import uuid
-from fastapi import APIRouter, UploadFile
+### Core modules ###
+from uuid import uuid4
+from fastapi import (
+    APIRouter,
+    UploadFile,
+    status
+)
 from pathlib import Path
 
-router = APIRouter()
+
+### Type hints ###
+from ...types.tags import APITag
 
 
-@router.post("/upload")
+### Internal modules ###
+
+
+router: APIRouter = APIRouter(
+    prefix="/api/v1/memory",
+    tags=[APITag.memory]
+)
+
+
+@router.post(
+    path="/upload",
+    status_code=status.HTTP_201_CREATED
+)
 async def upload_file(
-    file: UploadFile, memory_type: str = "session", chat_session_id: str = "default", user_id: str = "default"
+    file:               UploadFile,
+    memory_type:        str = "session",
+    chat_session_id:    str = "default",
+    user_id:            str = "default"
 ):
 
-    file_id = uuid.uuid4().hex[:8]
+    file_id = uuid4().hex[:8]
 
-    
     if memory_type == "global_memory":
         save_dir = Path("/app/data/memories/global")
     elif memory_type == "user":

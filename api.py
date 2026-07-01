@@ -108,4 +108,4 @@ cosmic_app.add_middleware(
 
 cosmic_app.include_router(models.router)
 cosmic_app.include_router(cosmic.router)
-cosmic_app.include_router(memory.router, prefix="/api/v1/memory", tags=["Upload Files"])
+cosmic_app.include_router(memory.router)
