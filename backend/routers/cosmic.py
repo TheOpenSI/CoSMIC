@@ -4,9 +4,6 @@ from datetime import (
     datetime,
     timezone
 )
-
-from uuid import UUID
-from dotenv import dotenv_values
 from fastapi import (
     Depends,
     HTTPException,
@@ -25,6 +22,7 @@ from ...utils.log_tool import set_color
 
 ### Type hints ###
 from typing import Any
+from ...types.tags import APITag
 
 
 ### Internal modules ###
@@ -34,7 +32,10 @@ from ...utils.chat_history import build_context_from_messages
 # from ...utils.statistics import update_statistic_per_query
 
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(
+    prefix="/api/v1/cosmic",
+    tags=[APITag.cosmic]
+)
 
 
 # TODO:
@@ -66,6 +67,7 @@ class CosmicAPI(BaseModel):
     name:           str | None = "New chat"
     user_message:   str
     body:           Body
+
 
 async def send_emissions_to_db(
     user_id: str,
@@ -133,7 +135,10 @@ async def send_emissions_to_db(
         ))
 
 
-@router.post("")
+@router.post(
+    path="",
+    status_code=status.HTTP_200_OK
+)
 async def process_cosmic(
     data:               CosmicAPI,
     opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
@@ -320,7 +325,10 @@ async def process_cosmic(
         )
 
 
-@router.patch("")
+@router.patch(
+    path="",
+    status_code=status.HTTP_200_OK
+)
 async def rebuild_cosmic(
     request:        Request,
     opensi_cosmic:  OpenSICoSMIC = Depends(get_opensi_cosmic)
