@@ -2,20 +2,27 @@
 import threading
 import sys
 import uuid
-from fastapi import APIRouter
+from fastapi import (
+    APIRouter,
+    status
+)
 from ollama import Client
 from fastapi import HTTPException
 from pydantic import BaseModel
 
 
 ### Type hints ###
+from ...types.tags import APITag
 
 
 ### Internal modules ###
 from ...src.services.llms.Ollama import Ollama
 
 
-router = APIRouter()
+router: APIRouter = APIRouter(
+    prefix="/api/v1/models",
+    tags=[APITag.models]
+)
 
 
 ollama_client = Client(
@@ -31,7 +38,10 @@ class PullModelRequest(BaseModel):
     model: str
 
 
-@router.get("")
+@router.get(
+    path="",
+    status_code=status.HTTP_200_OK
+)
 async def get_ollama_models():
     try:
         result = ollama_client.list()
@@ -57,7 +67,10 @@ async def get_ollama_models():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.delete("/{model_name}")
+@router.delete(
+    path="/{model_name}",
+    status_code=status.HTTP_200_OK
+)
 async def delete_ollama_model(model_name: str):
     try:
         ollama_client.delete(model_name)
@@ -69,7 +82,10 @@ async def delete_ollama_model(model_name: str):
 
 
 # fix downloading not persistent by giving frontend a job_id
-@router.post("/pull")
+@router.post(
+    path="/pull",
+    status_code=status.HTTP_201_CREATED
+)
 async def pull_ollama_model(request: PullModelRequest):
 
     job_id = str(uuid.uuid4())
@@ -130,7 +146,10 @@ async def pull_ollama_model(request: PullModelRequest):
 
 # create get api to check if there is any download,
 # if there is show progress for frontend to do polling
-@router.get("/pull/{job_id}")
+@router.get(
+    path="/pull/{job_id}",
+    status_code=status.HTTP_200_OK
+)
 async def get_pull_status(job_id: str):
     job = download_jobs.get(job_id)
     if not job:
