@@ -26,6 +26,7 @@ CoSMIC/
 │   └── services/                 # Specialised AI service (similar to AI skills) implementations (TODO: to be re-structured in a new format for better understanding)
 │       └── llms/                 # Contains base class for calling SLM providers
 │           └── prompts/          # Contains smart prompting techniques from user queries to use for Query Analyser and specific CoSMIC services usages
+├── types/                        # Shared type definitions used across the application
 ├── utils/                        # Helper functions and shared utility scripts
 ├── .dockerignore                 # Files excluded from Docker builds
 ├── .gitattributes                # Git configuration for path attributes
