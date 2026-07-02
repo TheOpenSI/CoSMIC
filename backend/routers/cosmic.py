@@ -181,9 +181,18 @@ async def process_cosmic(
 
         # Strip file reference. The file is already vectorised at upload time 
         # has_files forces session-scoped retrieval so the doc question is grounded
+        # keep the message tag included for storage so the UI can render chip
+        raw_user_message: str = data.user_message
         has_files: bool = data.user_message.find("</files>") > -1
+        file_refs: list[str] = []
         if has_files:
-            data.user_message = data.user_message.split("</files>")[1]
+            splits: list[str] = data.user_message.split("</files>")
+            file_refs = [
+                ref.strip()
+                for ref in splits[0].split("<files>")[-1].split(",")
+                if ref.strip()
+            ]
+            data.user_message = splits[1]
 
         # Start CodeCarbon emission tracking process (for General user queries)
         general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
@@ -204,6 +213,7 @@ async def process_cosmic(
                 session_id=data.chat_id,
                 has_files=has_files,
                 user_id=user_id,
+                file_refs=file_refs,
             )[0]
         )
 
@@ -212,7 +222,7 @@ async def process_cosmic(
         now: str = datetime.now(tz=timezone.utc).isoformat()
         new_detail: dict[str, Any] = {
             "user_role":            "user",         # per agreed solution within our team
-            "user_query":           data.user_message,
+            "user_query":           raw_user_message,
             "query_create_on":      now,
             "llm_role":             "assistant",    # per agreed solution within our team
             "llm_response":         answer,

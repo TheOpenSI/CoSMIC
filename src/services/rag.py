@@ -128,8 +128,11 @@ class RAGBase(ServiceBase):
         include_session: bool = True,
         include_user: bool = False,
         include_global: bool = True,
+        document_ids: Optional[List[str]] = None,
     ):
         # Qdrant filter spanning active memory scopes as a union
+        # When document_ids is given the session scope is narrowed to those
+        # documents so a file question targets that file's chunks
         from qdrant_client import models
 
         def eq(field: str, value):
@@ -140,11 +143,19 @@ class RAGBase(ServiceBase):
         should = []
 
         if include_session and user_id and session_id:
-            should.append(models.Filter(must=[
+            session_must = [
                 eq("memory_type", "session"),
                 eq("user_id", user_id),
                 eq("session_id", session_id),
-            ]))
+            ]
+            if document_ids:
+                session_must.append(
+                    models.FieldCondition(
+                        key="metadata.document_id",
+                        match=models.MatchAny(any=list(document_ids)),
+                    )
+                )
+            should.append(models.Filter(must=session_must))
 
         if include_user and user_id:
             should.append(models.Filter(must=[
@@ -175,12 +186,16 @@ class RAGBase(ServiceBase):
         include_session: bool = True,
         include_user: bool = False,
         include_global: bool = True,
+        document_ids: Optional[List[str]] = None,
     ):
         """
         Retrieve context for a given user prompt.
 
         Args:
             user_prompt (str): a question from the user.
+            document_ids (list[str], optional): when a file is attached, narrow the
+                session scope to these document ids so the file's chunks are the
+                retrieval target.
 
         Returns:
             context             (str): retrieved context from the vector database.
@@ -194,6 +209,7 @@ class RAGBase(ServiceBase):
             include_session=include_session,
             include_user=include_user,
             include_global=include_global,
+            document_ids=document_ids,
         )
 
         # If no scope resolved, return empty rather than searching the whole collection 

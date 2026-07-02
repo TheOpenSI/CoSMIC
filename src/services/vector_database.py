@@ -247,20 +247,21 @@ class VectorDatabase(ServiceBase):
                 doc.metadata.update(extra_metadata)
                 doc.metadata["title"] = document_title
 
-                # If not highly similar to existing contents, add the content
-                hits = self.similarity_search_with_relevance_scores(
-                    doc.page_content,
-                    k=1
-                )
+                # Content-similarity dedup runs ONLY on the legacy no-metadata path
+                if not extra_metadata:
+                    hits = self.similarity_search_with_relevance_scores(
+                        doc.page_content,
+                        k=1
+                    )
 
-                if hits:
-                    content_retrieved, similarity_score = hits[0]
+                    if hits:
+                        content_retrieved, similarity_score = hits[0]
 
-                    # Skip if already in the database or has a high similiarity.
-                    if similarity_score >= self.vector_database_update_threshold \
-                        or content_retrieved.page_content.find(doc.page_content) > -1 \
-                        or doc.page_content.find(content_retrieved.page_content) > -1:
-                        continue
+                        # Skip if already in the database or has a high similiarity.
+                        if similarity_score >= self.vector_database_update_threshold \
+                            or content_retrieved.page_content.find(doc.page_content) > -1 \
+                            or doc.page_content.find(content_retrieved.page_content) > -1:
+                            continue
 
                 # Ready to add to the vector database.
                 chunks = self.document_splitter.split_documents([doc])

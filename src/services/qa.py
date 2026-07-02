@@ -79,6 +79,7 @@ class QABase(ServiceBase):
         global_service_names:   Optional[List[str]] = None,
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
+        file_refs:              Optional[List[str]] = None,
     ) -> tuple:
         """
         Process each QA.
@@ -162,6 +163,21 @@ class QABase(ServiceBase):
                 retrieve_score
             )
 
+        # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
+        # document_ids target retrieval at the attached file
+        # attached_file_names tell the LLM which file the question is about
+        document_ids: List[str] = []
+        attached_file_names: List[str] = []
+        for ref in (file_refs or []):
+            parts = ref.split("_", 1)
+            doc_id = parts[0]
+            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
+                document_ids.append(doc_id)
+                raw_name = parts[1] if len(parts) > 1 else ref
+                attached_file_names.append(raw_name.replace("_", " "))
+            else:
+                print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
+        
         # Process query with service parsing.
         if service_option.find("1.") > -1:
             if service_option == "1.0":
@@ -323,6 +339,14 @@ class QABase(ServiceBase):
                     include_session=True,
                     include_user=memory_service_active,
                     include_global=True,
+                    document_ids=document_ids or None,
+                )
+
+                # Tell the LLM which file the question is about
+                file_note = (
+                    f"The user attached the file(s): {', '.join(attached_file_names)}. "
+                    "Answer using the retrieved context from that file.\n"
+                    if attached_file_names else ""
                 )
 
                 # Remain the other variables in context if it is a dictionary,
@@ -330,7 +354,7 @@ class QABase(ServiceBase):
                 suffix = (
                     ""
                     if   (context_retrieved == "")
-                    else (f"\nContext:\n {context_retrieved}")
+                    else (f"\n{file_note}Context:\n {context_retrieved}")
                 )
 
                 context = (
@@ -351,7 +375,7 @@ class QABase(ServiceBase):
             ) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_name[service_option]
+                service_name=services_name.get(service_option, "")
             )
 
 

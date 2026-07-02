@@ -196,6 +196,7 @@ class OpenSICoSMIC:
         session_id: str | None  = None,
         has_files:  bool        = False,
         user_id:    str | None  = None,
+        file_refs:  list | None = None,
     ) -> tuple:
         """
         Execute QA.
@@ -379,6 +380,7 @@ class OpenSICoSMIC:
                 global_service_names=global_service_names,
                 memory_service_active=memory_service_active,
                 has_files=has_files,
+                file_refs=file_refs,
             ) # pyright: ignore
 
         # Return answers with and without truncation, and retrieve score (if
