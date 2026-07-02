@@ -1,23 +1,11 @@
 ### Core modules ###
-from sys import (
-    exit,
-    stdout
-)
+from sys import exit, stdout
 from pathlib import Path
 from typing import Any
-from fastapi import (
-    HTTPException,
-    status
-)
+from fastapi import HTTPException, status
 from torch import cuda
-from httpx import (
-    Client,
-    ConnectError,
-    ConnectTimeout,
-    Response
-)
+from httpx import Client, ConnectError, ConnectTimeout, Response
 from pprint import pp
-
 
 ### Type hints ###
 
@@ -33,18 +21,15 @@ from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
 from ..modules.chess.chess_gencot import CotGenerator
 from ..modules.code_generation.code_generation import CodeGenerator
+from ..src.services.system_information import SystemInformationService
 from ..utils.log_tool import set_color
 from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
 
-
 class OpenSICoSMIC:
     def __init__(
-        self,
-        general_slm:    str         = "",
-        qa_slm:         str         = "",
-        user:           dict | None = None
+        self, general_slm: str = "", qa_slm: str = "", user: dict | None = None
     ) -> None:
         """
         Construct OpenSICoSMIC instance. It contains SLMs and services including
@@ -80,9 +65,9 @@ class OpenSICoSMIC:
         # For-loop here would be too expensive so I used this trick instead.
         # Inspired from:
         # https://stackoverflow.com/questions/61105986/how-to-access-elements-in-a-dict-values
-        self.config_data:           dict[str, Any] = list((self.get_configs()[0]).values())[0]
-        self.general_config_data:   dict[str, Any] = self.config_data["general"]
-        self.qa_config_data:        dict[str, Any] = self.config_data["query_analyser"]
+        self.config_data: dict[str, Any] = list((self.get_configs()[0]).values())[0]
+        self.general_config_data: dict[str, Any] = self.config_data["general"]
+        self.qa_config_data: dict[str, Any] = self.config_data["query_analyser"]
 
         # print(
         #     set_color(
@@ -97,30 +82,18 @@ class OpenSICoSMIC:
         #     )
         # )
 
-
         # Set user info
         self.user_id = (
             str(user["id"])
-            if (
-                (user is not None)  and
-                ("id" in user)      and
-                (user["id"] != "")
-            )
+            if ((user is not None) and ("id" in user) and (user["id"] != ""))
             else (None)
         )
 
-
         # Set model device.
-        self.device: str = (
-            "cuda"
-            if   (cuda.is_available())
-            else ("cpu")
-        )
-
+        self.device: str = "cuda" if (cuda.is_available()) else ("cpu")
 
         # Check OpenAI API key.
         self.openai_api_status: str | None = self.check_openai_key()
-
 
         # Read SLMs from Configs API endpoint if not specified
         self.general_slm = general_slm
@@ -141,9 +114,8 @@ class OpenSICoSMIC:
             llm_name=self.general_slm,
             seed=self.general_config_data["seed"],
             is_quantised=self.general_config_data["is_quantised"],
-            device=self.device
+            device=self.device,
         )
-
 
         # Read SLMs from Configs API endpoint if not specified
         self.qa_slm = qa_slm
@@ -151,7 +123,9 @@ class OpenSICoSMIC:
         if self.qa_slm == "":
             # Match model detection format in `src/services/llms/LLMBase.py`.
             # For example: "ollama:qwen2.5:7b"
-            self.qa_slm = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+            self.qa_slm = (
+                f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+            )
 
         # print(
         #     set_color(
@@ -164,31 +138,25 @@ class OpenSICoSMIC:
             llm_name=self.qa_slm,
             seed=self.qa_config_data["seed"],
             is_quantised=self.qa_config_data["is_quantised"],
-            service_index=-1, # Default to 'auto' mode
-            device=self.device
+            service_index=-1,  # Default to 'auto' mode
+            device=self.device,
         )
-
 
         # Code generation service.
         self.code_generator: CodeGenerator = CodeGenerator()
-
+        self.system_information_service: SystemInformationService = (
+            SystemInformationService(llm=self.llm)
+        )
 
         # Initialise & setup QA instance.
         self.qa: QABase | None = None
 
-        self.set_up_qa(
-            user_id=str(self.user_id),
-            user_name=None
-        )
+        self.set_up_qa(user_id=str(self.user_id), user_name=None)
 
         return None
 
-
     def __call__(
-        self,
-        question:   str,
-        context:    str         = "",
-        log_file:   str | None  = None
+        self, question: str, context: str = "", log_file: str | None = None
     ) -> tuple:
         """
         Execute QA.
@@ -239,24 +207,16 @@ class OpenSICoSMIC:
         # )
 
         # Set initial output to return.
-        response:       str | None  = None
-        raw_response:   str | None  = None
+        response: str | None = None
+        raw_response: str | None = None
         retrieve_score: float | int = -1
-
 
         # Check if OpenAI API key is valid.
         if self.openai_api_status != "":
-            return (
-                str(response),
-                str(raw_response),
-                retrieve_score
-            )
+            return (str(response), str(raw_response), retrieve_score)
 
         # Chat-mode LLM do not need example in the system prompt.
-        if self.llm.llm_name in [
-            "mistral-7b-instruct-v0.1",
-            "gemma-7b-it"
-        ]:
+        if self.llm.llm_name in ["mistral-7b-instruct-v0.1", "gemma-7b-it"]:
             use_example = False
 
         else:
@@ -292,14 +252,13 @@ class OpenSICoSMIC:
                 response = f"Success rate of {question} is {average_score:.2f}."
 
             elif (
-                (question.find("attention") > -1) or
-                (question.find("memory") > -1)    or
-                (question.find("perception") > -1)
+                (question.find("attention") > -1)
+                or (question.find("memory") > -1)
+                or (question.find("perception") > -1)
             ):
                 # Manually switch on and off RAG for specific questions.
-                if (
-                    (question.find("attention") > -1) or
-                    (question.find("memory_update") > -1)
+                if (question.find("attention") > -1) or (
+                    question.find("memory_update") > -1
                 ):
                     is_rag = True
 
@@ -314,10 +273,7 @@ class OpenSICoSMIC:
 
                 # Build quality evaluation service.
                 quality_evaluator = QualityEval(
-                    llm=self.llm,
-                    rag=self.rag,
-                    is_rag=is_rag,
-                    log_file=log_file
+                    llm=self.llm, rag=self.rag, is_rag=is_rag, log_file=log_file
                 )
 
                 # Batch process the question file.
@@ -336,8 +292,7 @@ class OpenSICoSMIC:
             elif question.find("finetune_dataset") > -1:
                 # Generate CoT analysis for finetune dataset.
                 cot_generator = CotGenerator(
-                    log_file=log_file,
-                    is_truncate_response=True
+                    log_file=log_file, is_truncate_response=True
                 )
 
                 # Batch process the question file.
@@ -351,32 +306,19 @@ class OpenSICoSMIC:
             self.llm.system_prompter.set_use_example(True)
 
             # Process each question.
-            (
-                response,
-                raw_response,
-                retrieve_score
-            ) = self.qa(
+            response, raw_response, retrieve_score = self.qa(
                 query=question,
                 services=self.get_services(),
-                context=context, # Chat history context (see `backend/routers/cosmic.py`)
+                context=context,  # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
-                verbose=False
-            ) # pyright: ignore
+                verbose=False,
+            )  # pyright: ignore
 
         # Return answers with and without truncation, and retrieve score (if
         # applicable). Otherwise, -1.
-        return (
-            response,
-            raw_response,
-            retrieve_score
-        )
+        return (response, raw_response, retrieve_score)
 
-
-    def set_up_qa(
-        self,
-        user_id: str,
-        user_name: str | None = None
-    ):
+    def set_up_qa(self, user_id: str, user_name: str | None = None):
         """
         Set up QA instance by user ID.
 
@@ -385,23 +327,14 @@ class OpenSICoSMIC:
             user_name   (str, optional):    user name. Defaults to None.
         """
         # Invalid user ID.
-        if (
-            (user_id == "") and
-            (not isinstance(user_id, str))
-        ):
+        if (user_id == "") and (not isinstance(user_id, str)):
             self.user_id = None
 
         # For a default user (no user ID), always use the same QA instance.
-        if (
-            (user_id is None) and
-            (self.qa is not None)
-        ):
+        if (user_id is None) and (self.qa is not None):
             return -1
 
-        if (
-            (user_id != self.user_id) or
-            (self.qa is None)
-        ):
+        if (user_id != self.user_id) or (self.qa is None):
             # Change the global user ID.
             self.user_id = user_id
 
@@ -437,15 +370,13 @@ class OpenSICoSMIC:
             # merged, we can modify the path again with the current branch
             # working on RAG to test out.
 
-            vector_database = VectorDatabase(
-                local_database_path="",
-                device=self.device
-            )
+            vector_database = VectorDatabase(local_database_path="", device=self.device)
 
             # Add a directory of documents.
-            document_path: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
-                "data",
-                "docs"
+            document_path: Path = (
+                Path(__file__)
+                .resolve(strict=True)
+                .parent.parent.joinpath("data", "docs")
             )
             documents: str | list[str] = []
 
@@ -453,8 +384,7 @@ class OpenSICoSMIC:
                 vector_database.add_document_directory(str(document_path))
 
             # Add documents.
-            if (documents != "") \
-            or (len(documents) > 0):
+            if (documents != "") or (len(documents) > 0):
                 vector_database.add_documents(documents)
 
             # Base RAG service with vector_database, the database can be changed using
@@ -464,13 +394,13 @@ class OpenSICoSMIC:
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
             self.qa = QABase(
-                query_analyser=self.query_analyser, # pyright: ignore
+                query_analyser=self.query_analyser,  # pyright: ignore
                 llm=self.llm,
                 rag=self.rag,
                 code_generator=self.code_generator,
-                config=None
+                system_information_service=self.system_information_service,
+                config=None,
             )
-
 
     def check_openai_key(self):
         """
@@ -479,20 +409,21 @@ class OpenSICoSMIC:
         Returns:
             answer: status information.
         """
-        llm_name                = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
-        query_analyser_llm_name = f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+        llm_name = f"{self.general_config_data["provider"]}:{self.general_config_data["model"]}"
+        query_analyser_llm_name = (
+            f"{self.qa_config_data["provider"]}:{self.qa_config_data["model"]}"
+        )
 
-        is_llm_name_gpt                 = llm_name.find("gpt") > -1
-        is_query_analyser_llm_name_gpt  = query_analyser_llm_name.find("gpt") > -1
+        is_llm_name_gpt = llm_name.find("gpt") > -1
+        is_query_analyser_llm_name_gpt = query_analyser_llm_name.find("gpt") > -1
 
         llm_name_list = []
 
         if is_llm_name_gpt:
             llm_name_list.append(llm_name)
 
-        if (
-            (is_query_analyser_llm_name_gpt) and
-            (query_analyser_llm_name not in llm_name_list)
+        if (is_query_analyser_llm_name_gpt) and (
+            query_analyser_llm_name not in llm_name_list
         ):
             llm_name_list.append(query_analyser_llm_name)
 
@@ -500,8 +431,7 @@ class OpenSICoSMIC:
 
         openai_api_key: str | None = self.general_config_data["api_key"]
 
-        if  (count > 0) \
-        and (openai_api_key == ""):
+        if (count > 0) and (openai_api_key == ""):
             answer = ""
 
             if count == 1:
@@ -515,13 +445,8 @@ class OpenSICoSMIC:
 
         return answer
 
-
     def get_llm(
-        self,
-        llm_name: str,
-        seed: int = 0,
-        is_quantised: bool = False,
-        **kwargs
+        self, llm_name: str, seed: int = 0, is_quantised: bool = False, **kwargs
     ):
         """
         Construct LLM give an LLM name.
@@ -551,32 +476,17 @@ class OpenSICoSMIC:
 
         else:
             print(
-                set_color(
-                    status="error",
-                    information=f"Unsupported LLM: {llm_name}."
-                )
+                set_color(status="error", information=f"Unsupported LLM: {llm_name}.")
             )
             exit(1)
 
-        llm = get_instance(
-            instances=llm_instances,
-            instance_name=llm_instance_name
-        )(
-            llm_name=llm_name,
-            seed=seed,
-            is_quantised=is_quantised,
-            **kwargs
+        llm = get_instance(instances=llm_instances, instance_name=llm_instance_name)(
+            llm_name=llm_name, seed=seed, is_quantised=is_quantised, **kwargs
         )
 
-        print(
-            set_color(
-                status="info",
-                information=f"LLM instance created: {llm}"
-            )
-        )
+        print(set_color(status="info", information=f"LLM instance created: {llm}"))
 
         return llm
-
 
     def quit(self):
         """
@@ -586,18 +496,17 @@ class OpenSICoSMIC:
         self.llm.quit()
         self.rag.vector_database.quit()
 
-
     def get_services(
         self,
         # TODO:
         # create a dedicated util to handle valid URL format
-        url:        str                     = "http://backend:8000/api/v1/services/",
-        params:     dict[str, bool] | None  = {"active": True},
-        lifetime:   float                   = 10.0,
-        verbose:    bool                    = False
-    # NOTE:
-    # for legacy purposes. Change to `dict[int, dict[str, str]]` type when update
-    # to handle `int` properly
+        url: str = "http://backend:8000/api/v1/services/",
+        params: dict[str, bool] | None = {"active": True},
+        lifetime: float = 10.0,
+        verbose: bool = False,
+        # NOTE:
+        # for legacy purposes. Change to `dict[int, dict[str, str]]` type when update
+        # to handle `int` properly
     ) -> dict[str, dict[str, str]]:
         """
         Retrieve all services from API endpoint with 0-based indexing.
@@ -651,11 +560,7 @@ class OpenSICoSMIC:
         services: dict[str, dict[str, str]] = {}
 
         try:
-            with Client(
-                base_url=url,
-                params=params,
-                timeout=lifetime
-            ) as client:
+            with Client(base_url=url, params=params, timeout=lifetime) as client:
                 response: Response = client.get(url="")
                 response.raise_for_status()
                 datas: list[dict[str, Any]] = response.json().get("result", [])
@@ -667,13 +572,13 @@ class OpenSICoSMIC:
                         "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
                             head_sep=f"{'=' * 80}",
                             body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     print(
                         "{debug_msg:s}\n{foot_sep:s}".format(
                             debug_msg="No active services available...",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     return {}
@@ -687,14 +592,8 @@ class OpenSICoSMIC:
                     # NOTE:
                     # for legacy purposes. Change to normal when update the checking
                     # logic to handle `int` properly
-                    services.setdefault(
-                        str(data["id"]), 
-                        {}
-                    ).update(
-                        {
-                            "name": data["name"],
-                            "desc": data["desc"]
-                        }
+                    services.setdefault(str(data["id"]), {}).update(
+                        {"name": data["name"], "desc": data["desc"]}
                     )
 
                 if verbose:
@@ -702,13 +601,13 @@ class OpenSICoSMIC:
                         "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
                             head_sep=f"{'=' * 80}",
                             body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     pp(
                         object=dict(sorted(services.items())),
                         stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
+                        indent=4,  # Prefer tab over spaces indentation
                     )
                     print(f"{'=' * 80}")
                     return dict(sorted(services.items()))
@@ -716,29 +615,24 @@ class OpenSICoSMIC:
                 else:
                     return dict(sorted(services.items()))
 
-
         except ConnectError as httpx_err:
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"{httpx_err}"
             )
-
 
         except ConnectTimeout as httpx_err:
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"{httpx_err}"
             )
-
 
     def get_configs(
         self,
         # TODO:
         # create a dedicated util to handle valid URL format
-        url:        str                     = "http://backend:8000/api/v1/configs/",
-        params:     dict[str, bool] | None  = None,
-        lifetime:   float                   = 10.0,
-        verbose:    bool                    = False
+        url: str = "http://backend:8000/api/v1/configs/",
+        params: dict[str, bool] | None = None,
+        lifetime: float = 10.0,
+        verbose: bool = False,
     ) -> list[dict[str, dict[str, Any]]]:
         """
         Retrieve presets of configuration from API endpoint.
@@ -785,11 +679,7 @@ class OpenSICoSMIC:
         configs: list[dict[str, dict[str, Any]]] = []
 
         try:
-            with Client(
-                base_url=url,
-                params=params,
-                timeout=lifetime
-            ) as client:
+            with Client(base_url=url, params=params, timeout=lifetime) as client:
                 response: Response = client.get(url="")
                 response.raise_for_status()
                 datas: list[dict[str, Any]] = response.json().get("result", [])
@@ -801,13 +691,13 @@ class OpenSICoSMIC:
                         "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
                             head_sep=f"{'=' * 80}",
                             body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     print(
                         "{debug_msg:s}\n{foot_sep:s}".format(
                             debug_msg="No configuration presets available...",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     return []
@@ -827,13 +717,13 @@ class OpenSICoSMIC:
                         "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
                             head_sep=f"{'=' * 80}",
                             body_msg="[DEBUG]   CONFIGURATIONS DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
+                            foot_sep=f"{'=' * 80}",
                         )
                     )
                     pp(
                         object=configs,
                         stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
+                        indent=4,  # Prefer tab over spaces indentation
                     )
                     print(f"{'=' * 80}")
                     return configs
@@ -841,16 +731,12 @@ class OpenSICoSMIC:
                 else:
                     return configs
 
-
         except ConnectError as httpx_err:
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"{httpx_err}"
             )
-
 
         except ConnectTimeout as httpx_err:
             raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"{httpx_err}"
             )

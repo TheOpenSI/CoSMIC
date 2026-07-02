@@ -2,11 +2,7 @@
 from sys import exit
 from pathlib import Path
 from re import search
-from fastapi import (
-    HTTPException,
-    status
-)
-
+from fastapi import HTTPException, status
 
 ### Type hints ###
 
@@ -19,15 +15,14 @@ from ...utils.log_tool import set_color
 from ...utils.module import get_instance
 
 
-
 class QueryAnalyser:
     def __init__(
         self,
-        llm_name:       str     = "qwen2.5:7b",
-        seed:           int     = 0,
-        is_quantised:   bool    = False,
-        service_index:  int     = -1,
-        device:         str     = "cuda"
+        llm_name: str = "qwen2.5:7b",
+        seed: int = 0,
+        is_quantised: bool = False,
+        service_index: int = -1,
+        device: str = "cuda",
     ) -> None:
         """
         Query analyser to select a service.
@@ -67,37 +62,32 @@ class QueryAnalyser:
 
         else:
             print(
-                set_color(
-                    status="error",
-                    information=f"Unsupported LLM: {llm_name}."
-                )
+                set_color(status="error", information=f"Unsupported LLM: {llm_name}.")
             )
             exit(1)
 
         # Build LLM instance from class defined in .py
         self.llm = get_instance(
-            instances=llm_instances,
-            instance_name=llm_instance_name
+            instances=llm_instances, instance_name=llm_instance_name
         )(
             llm_name=llm_name,
             seed=seed,
             is_quantised=is_quantised,
             use_example=False,
             is_truncate_response=True,
-            device=device
+            device=device,
         )
 
         return None
 
-
     def __call__(
         self,
-        query:      str,
+        query: str,
         # NOTE:
         # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
         # update to handle `int` properly
-        services:   dict[str, dict[str, str]],
-        verbose:    bool = False
+        services: dict[str, dict[str, str]],
+        verbose: bool = False,
     ) -> tuple[str, dict[str, str | bool]]:
         """
         Analyse query to get service option.
@@ -120,11 +110,17 @@ class QueryAnalyser:
             service_info_dict (dict[str, str | bool]):
                 updated information dictionary.
         """
-        # Set a list of services.
+        # Manile - add default service 0 and then add other services in
         self.services: dict[str, str] = {
-            service_id: service_info['desc']
+            service_id: service_info["desc"]
             for (service_id, service_info) in services.items()
         }
+
+        self.services["0"] = (
+            "Answer questions about the AI assistant itself — who created it, what OpenSI-CoSMIC is, and what it can do."
+        )
+
+        # print(self.services)
 
         # There is/are active services from fetched API endpoint
         if len(self.services) != 0:
@@ -138,9 +134,9 @@ class QueryAnalyser:
                     "status": "404 - Not Found",
                     "message": "{trig:s}: {cond:s}".format(
                         trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
+                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser.",
+                    ),
+                },
             )
 
         # Chect if chess is one of the services, if yes, then add chess subservices to full services.
@@ -149,11 +145,12 @@ class QueryAnalyser:
         if "1" in self.services:
             self.chess_subservices: dict[str, str] = {
                 "1.0": "predict next move given a chess FEN",
-                "1.1": "predict next move given a sequence of moves"
+                "1.1": "predict next move given a sequence of moves",
             }
 
             self.full_services.update(self.chess_subservices)
 
+        # print(self.full_services)
 
         # print(
         #     set_color(
@@ -167,25 +164,12 @@ class QueryAnalyser:
 
         # Set user prompter for service option.
         self.user_prompter_service = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserService"
-        )(
-            services=self.services
-        )
-
-        # Set user prompter for system information.
-        self.user_prompter_system_info = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserSystemInfo"
-        )(
-            services=self.services
-        )
+            instances=query_user_prompt_instances, instance_name="QueryAnalyserService"
+        )(services=self.services)
 
         # Create an initial information dictionary.
         service_info_dict: dict[str, str | bool] = {
-            "query":                        query,
-            "system_information_relevance": False,
-            "system_information":           ""
+            "query": query,
         }
 
         if self.service_index >= 0:
@@ -216,85 +200,38 @@ class QueryAnalyser:
                         information="{0:s}\n{1:s}\n{2:s}".format(
                             f"Query: {query}",
                             f"Analysis: {service_analysis}",
-                            f"Service: {service_option}"
-                        )
+                            f"Service: {service_option}",
+                        ),
                     )
                 )
 
         if service_option == "1":
             # Remove last symbol.
-            if query[-1] in [
-                ",",
-                ".",
-                "!",
-                "?"
-            ]:
+            if query[-1] in [",", ".", "!", "?"]:
                 query = query[:-1]
 
             # Predict the next move in chess game.
-            (
-                service_option,
-                service_info_dict
-            ) = self.chess_parse(
-                query=query,
-                service_info_dict=service_info_dict
+            service_option, service_info_dict = self.chess_parse(
+                query=query, service_info_dict=service_info_dict
             )
 
         elif service_option == "2":
             # Update the vector database.
-            (
-                service_option,
-                service_info_dict
-            ) = self.update_vector_database_parse(
-                query=query,
-                service_info_dict=service_info_dict
+            service_option, service_info_dict = self.update_vector_database_parse(
+                query=query, service_info_dict=service_info_dict
             )
 
-        else:
-            # Set the user prompter for system information relevance.
-            self.llm.set_user_prompter(self.user_prompter_system_info)
-
-            # Get the response for whether the query is related to system information.
-            relevance_analysis: str = self.llm(query)[0]
-
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis})"
-            #     )
-            # )
-
-            # Get whether the question is related to system information.
-            relevance: bool = self.get_system_information_relevance(relevance_analysis)
-
-            # Add the system information if it is related to the question.
-            if relevance:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-
-            else:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-
-        return (
-            service_option,
-            service_info_dict
-        )
-
+        return (service_option, service_info_dict)
 
     def quit(self):
         """
         Quit by releasing model memory and instance.
         """
         # Release memory of LLM.
-        if self.llm: self.llm.quit()
+        if self.llm:
+            self.llm.quit()
 
-
-    def mapping(
-        self,
-        response: str
-    ):
+    def mapping(self, response: str):
         """
         Parse response to get service option.
 
@@ -309,9 +246,7 @@ class QueryAnalyser:
 
         # Truncate to get the option index.
         option = search(
-            pattern="service (\d{1,3}\.\d{1,3}|\d{1,3})",
-            string=response,
-            flags=0
+            pattern="service (\d{1,3}\.\d{1,3}|\d{1,3})", string=response, flags=0
         )
 
         if option:
@@ -321,7 +256,7 @@ class QueryAnalyser:
                 print(
                     set_color(
                         status="error",
-                        information=f"Unknown service '{option}' from '{response}'."
+                        information=f"Unknown service '{option}' from '{response}'.",
                     )
                 )
                 return "-1"
@@ -330,13 +265,9 @@ class QueryAnalyser:
                 return option
 
         else:
-            return "-1"
+            return "4"
 
-
-    def get_service(
-        self,
-        index: int
-    ):
+    def get_service(self, index: int):
         """
         Get the description of the service.
 
@@ -352,12 +283,7 @@ class QueryAnalyser:
 
         return self.services[str(object=index)]
 
-
-    def chess_parse(
-        self,
-        query: str,
-        service_info_dict: dict
-    ):
+    def chess_parse(self, query: str, service_info_dict: dict):
         """
         Parse query to get chess service.
 
@@ -374,19 +300,17 @@ class QueryAnalyser:
 
         # Parse move string.
         move_match = search(
-            pattern="[\[,\:](.*?[,\s].*?)[\.,\]]?$",
-            string=query,
-            flags=0
+            pattern="[\[,\:](.*?[,\s].*?)[\.,\]]?$", string=query, flags=0
         )
 
         # Parse FEN string.
         fen_match = search(
             pattern="{0:s}{1:s}".format(
                 "(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)",
-                "\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$"
+                "\s([b|w])\s(-|[K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)$",
             ),
             string=query,
-            flags=0
+            flags=0,
         )
 
         if fen_match:
@@ -407,18 +331,13 @@ class QueryAnalyser:
                 print(
                     set_color(
                         status="hint",
-                        information="For chess move prediction, index a sequence of moves or FEN with \":\"."
+                        information='For chess move prediction, index a sequence of moves or FEN with ":".',
                     )
                 )
 
         return (service_option, service_info_dict)
 
-
-    def update_vector_database_parse(
-        self,
-        query: str,
-        service_info_dict: dict
-    ):
+    def update_vector_database_parse(self, query: str, service_info_dict: dict):
         """
         Parse query to get text or document path to update vector database.
 
@@ -436,18 +355,14 @@ class QueryAnalyser:
         is_a_document = query.find(".pdf") > -1
 
         # Update information dictionary.
-        service_info_dict.update({
-            "is_a_document": is_a_document,
-            "text": None,
-            "document_path": None
-        })
+        service_info_dict.update(
+            {"is_a_document": is_a_document, "text": None, "document_path": None}
+        )
 
         if is_a_document:
             # Parse move string
             document_path = search(
-                pattern="(?<=\:\s)(.*?)+\.pdf",
-                string=query,
-                flags=0
+                pattern="(?<=\:\s)(.*?)+\.pdf", string=query, flags=0
             )
 
             if document_path:
@@ -457,7 +372,7 @@ class QueryAnalyser:
                 print(
                     set_color(
                         status="warning",
-                        information="Invalid document query [tip: pdf file(s) is required.]"
+                        information="Invalid document query [tip: pdf file(s) is required.]",
                     )
                 )
 
@@ -471,11 +386,7 @@ class QueryAnalyser:
             service_info_dict["document_path"] = document_path
         else:
             # Extract text.
-            text = search(
-                pattern="\:((\"|\')?(.*?)[\",\']?$)",
-                string=query,
-                flags=0
-            )
+            text = search(pattern="\:((\"|')?(.*?)[\",']?$)", string=query, flags=0)
 
             if text:
                 text = text.group(0)
@@ -487,26 +398,8 @@ class QueryAnalyser:
                 print(
                     set_color(
                         status="warning",
-                        information="Invalid text query [tip: index the text with :]"
+                        information="Invalid text query [tip: index the text with :]",
                     )
                 )
 
         return (service_option, service_info_dict)
-
-
-    def get_system_information_relevance(
-        self,
-        response: str
-    ):
-        """
-        Get whether the question is related to system information from response.
-
-        Args:
-            response (str): LLM response.
-
-        Returns:
-            relevance (bool): whether being related to.
-        """
-        relevance = response.lower().find("yes") > -1
-
-        return relevance

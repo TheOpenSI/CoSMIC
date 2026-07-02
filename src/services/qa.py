@@ -1,10 +1,6 @@
 ### Core modules ###
 from pathlib import Path
-from fastapi import (
-    HTTPException,
-    status
-)
-
+from fastapi import HTTPException, status
 
 ### Type hints ###
 
@@ -15,18 +11,19 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-
+from ...src.services.system_information import SystemInformationService
 
 
 class QABase(ServiceBase):
     def __init__(
         self,
         query_analyser: LLMBase,
-        llm:            LLMBase,
-        rag:            RAGBase,
+        llm: LLMBase,
+        rag: RAGBase,
         code_generator: CodeGenerator,
-        config:         str | None = None,
-        **kwargs
+        system_information_service: SystemInformationService,
+        config: str | None = None,
+        **kwargs,
     ) -> None:
         """
         Base class for QA.
@@ -47,27 +44,27 @@ class QABase(ServiceBase):
             config (str, optional):
                 config file to extract settings. Default to None.
         """
-        super().__init__( **kwargs)
+        super().__init__(**kwargs)
 
         # Set config globally.
-        self.query_analyser     = query_analyser
-        self.llm                = llm
-        self.rag                = rag
-        self.code_generator     = code_generator
+        self.query_analyser = query_analyser
+        self.llm = llm
+        self.rag = rag
+        self.code_generator = code_generator
+        self.system_information_service = system_information_service
 
         return None
 
-
     def __call__(
         self,
-        query:      str,
+        query: str,
         # NOTE:
         # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
         # update to handle `int` properly
-        services:   dict[str, dict[str, str]],
-        context:    str | dict  = "",
-        is_rag:     bool        = False,
-        verbose:    bool        = False
+        services: dict[str, dict[str, str]],
+        context: str | dict = "",
+        is_rag: bool = False,
+        verbose: bool = False,
     ) -> tuple:
         """
         Process each QA.
@@ -100,15 +97,15 @@ class QABase(ServiceBase):
                 score of context retrieving if applicable.
         """
         # Set initial return answers.
-        response        = None
-        raw_response    = None
-        retrieve_score  = -1
+        response = None
+        raw_response = None
+        retrieve_score = -1
 
         # NOTE:
         # for legacy purposes. Change to `dict[int, str]` type when
         # update to handle `int` properly
         services_name: dict[str, str] = {
-            service_id: service_info['name']
+            service_id: service_info["name"]
             for (service_id, service_info) in services.items()
         }
 
@@ -120,40 +117,25 @@ class QABase(ServiceBase):
                     "status": "404 - Not Found",
                     "message": "{trig:s}: {cond:s}".format(
                         trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
+                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser.",
+                    ),
+                },
             )
 
         # Get service option through query analyser.
-        (
-            service_option,
-            service_info_dict
-        ) = self.query_analyser(
-            query,
-            services=services # pyright: ignore
+        service_option, service_info_dict = self.query_analyser(
+            query, services=services  # pyright: ignore
         )
-
-        # Whether this query is related to system information.
-        system_information_relevance = service_info_dict["system_information_relevance"]
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
-            return (
-                response,
-                raw_response,
-                retrieve_score
-            )
+            return (response, raw_response, retrieve_score)
 
         # Process query with service parsing.
         if service_option.find("1.") > -1:
             if service_option == "1.0":
                 # Set game move mode.
-                move_mode = (
-                    "algebric"
-                    if   (context == "")
-                    else (context)
-                )
+                move_mode = "algebric" if (context == "") else (context)
 
                 # Get chess FEN.
                 current_fen = service_info_dict["fen"]
@@ -162,20 +144,20 @@ class QABase(ServiceBase):
                 # this will be updated again once we've service-specific configs
                 # implemented
                 binary_path: str = str(
-                    Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
-                        "third_party",
-                        "stockfish",
-                        "stockfish-ubuntu-x86-64-avx2"
+                    Path(__file__)
+                    .resolve(strict=True)
+                    .parent.parent.parent.joinpath(
+                        "third_party", "stockfish", "stockfish-ubuntu-x86-64-avx2"
                     )
                 )
 
-                next_move_predictor = chess_instances.StockfishFENNextMove(binary_path=binary_path)
+                next_move_predictor = chess_instances.StockfishFENNextMove(
+                    binary_path=binary_path
+                )
 
                 # Predict the next move.
                 next_move = next_move_predictor(
-                    fen=current_fen,
-                    move_mode=str(object=move_mode),
-                    topk=5
+                    fen=current_fen, move_mode=str(object=move_mode), topk=5
                 )
 
                 # Set the response with question and next move.
@@ -184,11 +166,7 @@ class QABase(ServiceBase):
             # this is for prediction given moves, service_option == "1.1":
             else:
                 # Set game move mode.
-                move_mode = (
-                    "algebric"
-                    if   (context == "")
-                    else (context)
-                )
+                move_mode = "algebric" if (context == "") else (context)
 
                 # Get moves.
                 current_moves = service_info_dict["moves"]
@@ -197,38 +175,36 @@ class QABase(ServiceBase):
                 # this will be updated again once we've service-specific configs
                 # implemented
                 binary_path: str = str(
-                    Path(__file__).resolve(strict=True).parent.parent.parent.joinpath(
-                        "third_party",
-                        "stockfish",
-                        "stockfish-ubuntu-x86-64-avx2"
+                    Path(__file__)
+                    .resolve(strict=True)
+                    .parent.parent.parent.joinpath(
+                        "third_party", "stockfish", "stockfish-ubuntu-x86-64-avx2"
                     )
                 )
 
-                next_move_predictor = chess_instances.StockfishSequenceNextMove(binary_path=binary_path)
+                next_move_predictor = chess_instances.StockfishSequenceNextMove(
+                    binary_path=binary_path
+                )
 
                 # Predict the next move.
                 next_move = next_move_predictor(
-                    moves=current_moves,
-                    move_mode=str(object=move_mode),
-                    topk=5
+                    moves=current_moves, move_mode=str(object=move_mode), topk=5
                 )
 
                 # Set the response with question and next move.
-                move_prediction_context = f"The previous chess moves are {[current_moves]}."
+                move_prediction_context = (
+                    f"The previous chess moves are {[current_moves]}."
+                )
 
             # Explain why these moves are feasible.
             user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
-            (
-                response,
-                raw_response
-            ) = self.llm(
-                question=user_prompt,
-                context=move_prediction_context
+            response, raw_response = self.llm(
+                question=user_prompt, context=move_prediction_context
             )
 
             # Attach all the moves in case LLM cannot select the best one.
-            response        = f"The next moves are from {next_move}.\n{response}"
-            raw_response    = f"The next moves are from {next_move}.\n{raw_response}"
+            response = f"The next moves are from {next_move}.\n{response}"
+            raw_response = f"The next moves are from {next_move}.\n{raw_response}"
 
         elif service_option == "2":
             # Check if context is a .pdf.
@@ -240,7 +216,9 @@ class QABase(ServiceBase):
 
                 if document_path is not None:
                     # Update the knowledge database and return the status.
-                    self.rag.vector_database.update_database_from_document(document_path=document_path)
+                    self.rag.vector_database.update_database_from_document(
+                        document_path=document_path
+                    )
             else:
                 # Get text.
                 text = service_info_dict["text"]
@@ -252,108 +230,67 @@ class QABase(ServiceBase):
             response = raw_response = "Vector database updated."
 
         elif service_option == "3":
-            (
-                raw_response,
-                response
-            )= self.code_generator(query)
+            raw_response, response = self.code_generator(query)
+
+        elif service_option == "0":
+            response, raw_response = self.system_information_service(
+                query=query, services=services, context=context
+            )
 
         else:
-            RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
-            execute_rag = (
-                (is_rag) and
-                (service_option in RAG_ENABLED_SERVICES)
-            )
+            RAG_ENABLED_SERVICES = ["5"]  # Academic QA triggers retrieval
+            execute_rag = (is_rag) and (service_option in RAG_ENABLED_SERVICES)
 
             if execute_rag:
                 # Check if context is chat hostory
                 chat_history_context = (
-                    context
-                    if   ("Conversation History:" in context)
-                    else ("")
+                    context if ("Conversation History:" in context) else ("")
                 )
 
-                rag_context = (
-                    ""
-                    if   ("Conversation History:" in context)
-                    else (context)
-                )
+                rag_context = "" if ("Conversation History:" in context) else (context)
 
                 # If retrieving context, first generate the user prompt given the
                 # user prompter format.
                 user_prompt = self.llm.user_prompter(
-                    query,
-                    context=rag_context
-                ) # pyright: ignore
+                    query, context=rag_context
+                )  # pyright: ignore
 
                 # Get the retrieved context.
-                (
-                    context_retrieved,
-                    retrieve_score
-                ) = self.rag(query)
+                context_retrieved, retrieve_score = self.rag(query)
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.
                 suffix = (
                     ""
-                    if   (context_retrieved == "")
+                    if (context_retrieved == "")
                     else (f"\nContext:\n {context_retrieved}")
                 )
 
                 context = (
                     context.update({"context": f"{chat_history_context}{suffix}"})
-                    if   (isinstance(context, dict))
+                    if (isinstance(context, dict))
                     else (f"{chat_history_context}{suffix}")
-                ) # pyright: ignore
+                )  # pyright: ignore
 
             else:
-                user_prompt     = query
-                retrieve_score  = -1
-
-            # If the question is related to system information,
-            # add system information to context.
-            if system_information_relevance:
-                # Get system information.
-                system_information = service_info_dict["system_information"]
-
-                # Add the information to existing context.
-                # This context is likely to be chat history.
-                if isinstance(context, dict):
-                    context["context"] = "{0:s}\n{1:s}\n\n{2:s}".format(
-                        "OpenSI System Information:",
-                        system_information,
-                        context["context"]
-                    )
-                else:
-                    context = "{0:s}\n{1:s}\n\n{2:s}".format(
-                        "OpenSI System Information:",
-                        system_information,
-                        context
-                    )
+                user_prompt = query
+                retrieve_score = -1
 
             # Get the response with retrieved context if applicable.
-            (
-                response,
-                raw_response
-            ) = self.llm(
+            response, raw_response = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_name[service_option]
+                service_name=services_name[service_option],
             )
-
 
         # Print service name.
         if (
-            (verbose)               and
-            (response is not None)  and
-            (service_option in self.query_analyser["full_services"].keys()) # pyright: ignore
+            (verbose)
+            and (response is not None)
+            and (service_option in self.query_analyser.full_services.keys())
         ):
-            response += "{0:s}\n{1:s}".format(
-                f"[Service: {self.query_analyser["full_services"][service_option]}", # pyright: ignore
-                f"System info relevance: {system_information_relevance}]"
+            response = response + (
+                f"[Service: {self.query_analyser.full_services[service_option]}]"
             )
 
-        return (
-            response,
-            raw_response,
-            retrieve_score
-        )
+        return (response, raw_response, retrieve_score)

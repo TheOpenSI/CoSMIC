@@ -4,38 +4,32 @@ from os import environ
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
 ### Type hints ###
 from typing import Any
 
-
 ### Internal modules ###
 from .src.opensi_cosmic import OpenSICoSMIC
-from .backend.routers import (
-    models,
-    cosmic,
-    memory
-)
-
-
+from .backend.routers import models, cosmic, memory
 
 # =====================Debugging========================
 # Uncomment the following lines to enable debugging:
 #
-# import debugpy
-# print("Waiting for debugger attach...")
-# debugpy.listen(("0.0.0.0", 5678))
-# debugpy.wait_for_client()
-# print("Debugger attached!")
-# =======================================================
+import debugpy
 
+print("Waiting for debugger attach...")
+debugpy.listen(("0.0.0.0", 5678))
+debugpy.wait_for_client()
+print("Debugger attached!")
+# =======================================================
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Equivalent to the explicit 'startup' event
     opensi_cosmic_instance: OpenSICoSMIC = OpenSICoSMIC()
-    opensi_cosmic_default_configs: list[dict[str, dict[str, Any]]] = opensi_cosmic_instance.get_configs()
+    opensi_cosmic_default_configs: list[dict[str, dict[str, Any]]] = (
+        opensi_cosmic_instance.get_configs()
+    )
 
     # INFO:
     # ======================================================================== #
@@ -73,13 +67,12 @@ async def lifespan(app: FastAPI):
         # Similar trick to prevent having to perform expensive for-loop. Take a
         # look at `src/opensi_cosmic.py` [Line 85]
         list((opensi_cosmic_default_configs[0]).values())[0]
-        if   (opensi_cosmic_default_configs)
+        if (opensi_cosmic_default_configs)
         else ({})
     )
 
     # Server is running
     yield
-
 
     # Equivalent to the explicit 'shutdown' event
     app.state.opensi_cosmic.quit()
@@ -89,8 +82,8 @@ cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
 
 
 CORS_ALLOW_ORIGIN = [
-    "http://localhost:8080",   # FE binded Docker port (prod)
-    "http://localhost:5173",   # FE binded Docker port (dev)
+    "http://localhost:8080",  # FE binded Docker port (prod)
+    "http://localhost:5173",  # FE binded Docker port (dev)
     "http://localhost:11434",  # Ollama binded Docker port
 ]
 
@@ -106,6 +99,8 @@ cosmic_app.add_middleware(
     allow_headers=["*"],
 )
 
-cosmic_app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
+cosmic_app.include_router(
+    models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"]
+)
 cosmic_app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
 cosmic_app.include_router(memory.router, prefix="/api/v1/memory", tags=["Upload Files"])
