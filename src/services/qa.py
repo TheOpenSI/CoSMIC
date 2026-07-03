@@ -146,8 +146,8 @@ class QABase(ServiceBase):
             )
 
         # Process query with service parsing.
-        if service_option.find("0.") > -1:
-            if service_option == "0.0":
+        if service_option.find("1.") > -1:
+            if service_option == "1.0":
                 # Set game move mode.
                 move_mode = (
                     "algebric"
@@ -181,7 +181,7 @@ class QABase(ServiceBase):
                 # Set the response with question and next move.
                 move_prediction_context = f"The current chess FEN is {[current_fen]}."
 
-            # this is for prediction given moves, service_option == "0.1":
+            # this is for prediction given moves, service_option == "1.1":
             else:
                 # Set game move mode.
                 move_mode = (
@@ -230,7 +230,7 @@ class QABase(ServiceBase):
             response        = f"The next moves are from {next_move}.\n{response}"
             raw_response    = f"The next moves are from {next_move}.\n{raw_response}"
 
-        elif service_option == "1":
+        elif service_option == "2":
             # Check if context is a .pdf.
             is_a_document = service_info_dict["is_a_document"]
 
@@ -251,14 +251,14 @@ class QABase(ServiceBase):
 
             response = raw_response = "Vector database updated."
 
-        elif service_option == "2":
+        elif service_option == "3":
             (
                 raw_response,
                 response
             )= self.code_generator(query)
 
         else:
-            RAG_ENABLED_SERVICES = ["4"] # Academic QA triggers retrieval
+            RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
             execute_rag = (
                 (is_rag) and
                 (service_option in RAG_ENABLED_SERVICES)
@@ -304,7 +304,8 @@ class QABase(ServiceBase):
                     if   (isinstance(context, dict))
                     else (f"{chat_history_context}{suffix}")
                 ) # pyright: ignore
-
+            
+            # Service 4 falls into this else
             else:
                 user_prompt     = query
                 retrieve_score  = -1
