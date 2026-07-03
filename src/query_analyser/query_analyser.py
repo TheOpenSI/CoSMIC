@@ -117,7 +117,7 @@ class QueryAnalyser:
         }
 
         self.services["0"] = (
-            "Answer questions about the AI assistant itself — who created it, what OpenSI-CoSMIC is, and what it can do."
+            "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
         )
 
         # print(self.services)
@@ -184,6 +184,8 @@ class QueryAnalyser:
 
             # Get the service option.
             service_option = self.mapping(response=service_analysis)
+
+            # print(service_option)
 
             # print(
             #     set_color(
@@ -259,13 +261,13 @@ class QueryAnalyser:
                         information=f"Unknown service '{option}' from '{response}'.",
                     )
                 )
-                return "-1"
+                return "-1" 
 
             else:
                 return option
 
         else:
-            return "4"
+            return "4" 
 
     def get_service(self, index: int):
         """

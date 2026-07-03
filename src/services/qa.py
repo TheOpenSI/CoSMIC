@@ -11,7 +11,7 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-from ...src.services.system_information import SystemInformationService
+from .system_information_service import SystemInformationService
 
 
 class QABase(ServiceBase):
@@ -232,6 +232,7 @@ class QABase(ServiceBase):
         elif service_option == "3":
             raw_response, response = self.code_generator(query)
 
+        # Add system information service 
         elif service_option == "0":
             response, raw_response = self.system_information_service(
                 query=query, services=services, context=context
@@ -272,6 +273,7 @@ class QABase(ServiceBase):
                     else (f"{chat_history_context}{suffix}")
                 )  # pyright: ignore
 
+            # service 4 is falling into this else 
             else:
                 user_prompt = query
                 retrieve_score = -1
@@ -283,14 +285,11 @@ class QABase(ServiceBase):
                 service_name=services_name[service_option],
             )
 
-        # Print service name.
-        if (
-            (verbose)
-            and (response is not None)
-            and (service_option in self.query_analyser.full_services.keys())
-        ):
-            response = response + (
-                f"[Service: {self.query_analyser.full_services[service_option]}]"
-            )
+        # # Print service name.
+        # if verbose \
+        #     and (response is not None) \
+        #     and (service_option in self.query_analyser.full_services.keys()):
+        #     response += f" [service: {self.query_analyser.full_services[service_option]}" \
+        #         f"; system info relevance: {system_information_relevance}]"
 
         return (response, raw_response, retrieve_score)

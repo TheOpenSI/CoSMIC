@@ -21,7 +21,7 @@ from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
 from ..modules.chess.chess_gencot import CotGenerator
 from ..modules.code_generation.code_generation import CodeGenerator
-from ..src.services.system_information import SystemInformationService
+from .services.system_information_service import SystemInformationService
 from ..utils.log_tool import set_color
 from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
