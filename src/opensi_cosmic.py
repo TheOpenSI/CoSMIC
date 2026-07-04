@@ -28,6 +28,7 @@ from .maps import LLM_INSTANCE_DICT
 from .services.vector_database import VectorDatabase
 from .services.qa import QABase
 from .services.rag import RAGBase
+from .services.system_information_service import SystemInformationService
 from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
@@ -171,6 +172,9 @@ class OpenSICoSMIC:
 
         # Code generation service.
         self.code_generator: CodeGenerator = CodeGenerator()
+        # System information service.
+        self.system_information_service: SystemInformationService = SystemInformationService(llm=self.llm)
+        
 
 
         # Initialise & setup QA instance.
@@ -468,6 +472,7 @@ class OpenSICoSMIC:
                 llm=self.llm,
                 rag=self.rag,
                 code_generator=self.code_generator,
+                system_information_service = self.system_information_service,
                 config=None
             )
 

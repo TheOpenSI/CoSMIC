@@ -126,6 +126,12 @@ class QueryAnalyser:
             for (service_id, service_info) in services.items()
         }
 
+        # Add default service 0
+        self.services["0"] = (
+            "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
+        )
+        # print(self.services)
+
         # There is/are active services from fetched API endpoint
         if len(self.services) != 0:
             pass
@@ -173,18 +179,9 @@ class QueryAnalyser:
             services=self.services
         )
 
-        # Set user prompter for system information.
-        self.user_prompter_system_info = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserSystemInfo"
-        )(
-            services=self.services
-        )
-
         # Create an initial information dictionary.
         service_info_dict: dict[str, str | bool] = {
             "query":                        query,
-            "system_information_relevance": False,
             "system_information":           ""
         }
 
@@ -249,34 +246,7 @@ class QueryAnalyser:
                 query=query,
                 service_info_dict=service_info_dict
             )
-
-        else:
-            # Set the user prompter for system information relevance.
-            self.llm.set_user_prompter(self.user_prompter_system_info)
-
-            # Get the response for whether the query is related to system information.
-            relevance_analysis: str = self.llm(query)[0]
-
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis})"
-            #     )
-            # )
-
-            # Get whether the question is related to system information.
-            relevance: bool = self.get_system_information_relevance(relevance_analysis)
-
-            # Add the system information if it is related to the question.
-            if relevance:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-
-            else:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-
+        
         return (
             service_option,
             service_info_dict
@@ -493,20 +463,3 @@ class QueryAnalyser:
 
         return (service_option, service_info_dict)
 
-
-    def get_system_information_relevance(
-        self,
-        response: str
-    ):
-        """
-        Get whether the question is related to system information from response.
-
-        Args:
-            response (str): LLM response.
-
-        Returns:
-            relevance (bool): whether being related to.
-        """
-        relevance = response.lower().find("yes") > -1
-
-        return relevance

@@ -15,7 +15,7 @@ from .base import ServiceBase
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
-
+from .system_information_service import SystemInformationService
 
 
 class QABase(ServiceBase):
@@ -25,6 +25,7 @@ class QABase(ServiceBase):
         llm:            LLMBase,
         rag:            RAGBase,
         code_generator: CodeGenerator,
+        system_information_service: SystemInformationService,
         config:         str | None = None,
         **kwargs
     ) -> None:
@@ -54,6 +55,8 @@ class QABase(ServiceBase):
         self.llm                = llm
         self.rag                = rag
         self.code_generator     = code_generator
+        self.system_information_service = system_information_service
+
 
         return None
 
@@ -133,9 +136,6 @@ class QABase(ServiceBase):
             query,
             services=services # pyright: ignore
         )
-
-        # Whether this query is related to system information.
-        system_information_relevance = service_info_dict["system_information_relevance"]
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
@@ -257,6 +257,12 @@ class QABase(ServiceBase):
                 response
             )= self.code_generator(query)
 
+
+        # Add system information service 
+        elif service_option == "0":
+            response, raw_response = self.system_information_service(
+                query=query, services=services, context=context)
+
         else:
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
             execute_rag = (
@@ -310,27 +316,6 @@ class QABase(ServiceBase):
                 user_prompt     = query
                 retrieve_score  = -1
 
-            # If the question is related to system information,
-            # add system information to context.
-            if system_information_relevance:
-                # Get system information.
-                system_information = service_info_dict["system_information"]
-
-                # Add the information to existing context.
-                # This context is likely to be chat history.
-                if isinstance(context, dict):
-                    context["context"] = "{0:s}\n{1:s}\n\n{2:s}".format(
-                        "OpenSI System Information:",
-                        system_information,
-                        context["context"]
-                    )
-                else:
-                    context = "{0:s}\n{1:s}\n\n{2:s}".format(
-                        "OpenSI System Information:",
-                        system_information,
-                        context
-                    )
-
             # Get the response with retrieved context if applicable.
             (
                 response,
@@ -343,15 +328,15 @@ class QABase(ServiceBase):
 
 
         # Print service name.
-        if (
-            (verbose)               and
-            (response is not None)  and
-            (service_option in self.query_analyser["full_services"].keys()) # pyright: ignore
-        ):
-            response += "{0:s}\n{1:s}".format(
-                f"[Service: {self.query_analyser["full_services"][service_option]}", # pyright: ignore
-                f"System info relevance: {system_information_relevance}]"
-            )
+        # if (
+        #     (verbose)               and
+        #     (response is not None)  and
+        #     (service_option in self.query_analyser["full_services"].keys()) # pyright: ignore
+        # ):
+        #     response += "{0:s}\n{1:s}".format(
+        #         f"[Service: {self.query_analyser["full_services"][service_option]}", # pyright: ignore
+        #         # f"System info relevance: {system_information_relevance}]"
+        #     )
 
         return (
             response,
