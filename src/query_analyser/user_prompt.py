@@ -58,12 +58,12 @@ class QueryAnalyserService(UserPromptBase):
         Returns:
             user_prompt (str): question with instruction.
         """
-        user_prompt = f"Given {self.num_services} services: '{self.service_string}'," \
-            f" which service can answer the following query? The query is '{question}'." \
-            f" For instance, if the query is to predict the next chess move, then select service 1;"\
-            f" otherwise, if the query is to generate or modify a code, then select service 3." \
-            f" otherwise, if the query is about Academic Governance, then select service 5"\
-            f" Just return which service without any explainations"
+        user_prompt = (
+            f"Given {self.num_services} services: '{self.service_string}', which service can answer the following query? "
+            f"The query is '{question}'. "
+            "Reply with exactly: service <id> (e.g., 'service 1') and nothing else. "
+            "If the query is to predict the next chess move, select service 1; otherwise, if the query is to generate or modify code, select service 3; otherwise, if the query is about Academic Governance, select service 5."
+        )
 
         return user_prompt
 
