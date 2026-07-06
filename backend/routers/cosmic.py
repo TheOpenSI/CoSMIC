@@ -140,7 +140,7 @@ async def process_cosmic(
 ):
     try:
         user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
-        user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
+        # user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
         # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
 
         chat_history_context: str = build_context_from_messages(
@@ -258,10 +258,10 @@ async def process_cosmic(
 
             now: str = datetime.now(tz=timezone.utc).isoformat()
             new_detail: dict[str, Any] = {
-                "user_role":            user_role,
+                "user_role":            "user",         # per agreed solution within our team
                 "user_query":           data.user_message,
                 "query_create_on":      now,
-                "llm_role":             "assistant",
+                "llm_role":             "assistant",    # per agreed solution within our team
                 "llm_response":         answer,
                 "response_create_on":   now,
             }
