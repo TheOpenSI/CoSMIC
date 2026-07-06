@@ -146,10 +146,10 @@ class QueryAnalyser:
         # Chect if chess is one of the services, if yes, then add chess subservices to full services.
         self.full_services: dict[str, str] = dict(self.services)
 
-        if "0" in self.services:
+        if "1" in self.services:
             self.chess_subservices: dict[str, str] = {
-                "0.0": "predict next move given a chess FEN",
-                "0.1": "predict next move given a sequence of moves"
+                "1.0": "predict next move given a chess FEN",
+                "1.1": "predict next move given a sequence of moves"
             }
 
             self.full_services.update(self.chess_subservices)
@@ -221,7 +221,7 @@ class QueryAnalyser:
                     )
                 )
 
-        if service_option == "0":
+        if service_option == "1":
             # Remove last symbol.
             if query[-1] in [
                 ",",
@@ -240,7 +240,7 @@ class QueryAnalyser:
                 service_info_dict=service_info_dict
             )
 
-        elif service_option == "1":
+        elif service_option == "2":
             # Update the vector database.
             (
                 service_option,
@@ -392,13 +392,13 @@ class QueryAnalyser:
         if fen_match:
             # Given FEN.
             current_fen = fen_match.group()
-            service_option = "0.0"
+            service_option = "1.0"
             service_info_dict.update({"fen": current_fen})
 
         elif move_match:
             # Given a sequence of moves.
             current_moves = move_match.group(1)
-            service_option = "0.1"
+            service_option = "1.1"
             service_info_dict.update({"moves": current_moves})
 
         else:
@@ -430,7 +430,7 @@ class QueryAnalyser:
             service_option      (str):  service option.
             service_info_dict   (dict): updated information dictionary.
         """
-        service_option = "1"
+        service_option = "2"
 
         # Check if context is a .pdf.
         is_a_document = query.find(".pdf") > -1
