@@ -311,7 +311,7 @@ class QABase(ServiceBase):
                     else (f"{chat_history_context}{suffix}")
                 ) # pyright: ignore
             
-            # Service 4 falls into this else
+            # Non-RAG services (or when RAG is disabled) fall through here.
             else:
                 user_prompt     = query
                 retrieve_score  = -1
