@@ -165,7 +165,6 @@ class OpenSICoSMIC:
             llm_name=self.qa_slm,
             seed=self.qa_config_data["seed"],
             is_quantised=self.qa_config_data["is_quantised"],
-            service_index=-1, # Default to 'auto' mode
             device=self.device
         )
 

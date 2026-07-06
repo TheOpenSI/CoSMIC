@@ -26,7 +26,6 @@ class QueryAnalyser:
         llm_name:       str     = "qwen2.5:7b",
         seed:           int     = 0,
         is_quantised:   bool    = False,
-        service_index:  int     = -1,
         device:         str     = "cuda"
     ) -> None:
         """
@@ -42,18 +41,12 @@ class QueryAnalyser:
             is_quantised (bool, optional):
                 use quantized LLM. Defaults to False.
 
-            service_index (int, optional):
-                use selected service, otherwise automatically select.
-
             device (str, optional):
                 use cuda or cpu for LLM. Defaults to "cuda".
         """
         # Set config.
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
         self.device = device
-
-        # Set provided service.
-        self.service_index = service_index
 
         # Build LLM instance from class defined in .py if llm_name is supported.
         if llm_name in LLM_INSTANCE_DICT.keys():
@@ -185,38 +178,34 @@ class QueryAnalyser:
             "system_information":           ""
         }
 
-        if self.service_index >= 0:
-            service_option = str(self.service_index)
+        # Set the user prompter for service option.
+        self.llm.set_user_prompter(self.user_prompter_service)
 
-        else:
-            # Set the user prompter for service option.
-            self.llm.set_user_prompter(self.user_prompter_service)
+        # Get raw anlysis from LLM to select a service.
+        service_analysis = self.llm(query)[0]
 
-            # Get raw anlysis from LLM to select a service.
-            service_analysis = self.llm(query)[0]
+        # Get the service option.
+        service_option = self.mapping(response=service_analysis)
 
-            # Get the service option.
-            service_option = self.mapping(response=service_analysis)
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
+        #     )
+        # )
 
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
-            #     )
-            # )
-
-            # Analysis information.
-            if verbose:
-                print(
-                    set_color(
-                        status="info",
-                        information="{0:s}\n{1:s}\n{2:s}".format(
-                            f"Query: {query}",
-                            f"Analysis: {service_analysis}",
-                            f"Service: {service_option}"
-                        )
+        # Analysis information.
+        if verbose:
+            print(
+                set_color(
+                    status="info",
+                    information="{0:s}\n{1:s}\n{2:s}".format(
+                        f"Query: {query}",
+                        f"Analysis: {service_analysis}",
+                        f"Service: {service_option}"
                     )
                 )
+            )
 
         if service_option == "1":
             # Remove last symbol.
