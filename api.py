@@ -85,7 +85,10 @@ async def lifespan(app: FastAPI):
     app.state.opensi_cosmic.quit()
 
 
-cosmic_app: FastAPI = FastAPI(lifespan=lifespan)
+cosmic_app: FastAPI = FastAPI(
+    lifespan=lifespan,
+    title="CoSMIC Internal API"
+)
 
 
 CORS_ALLOW_ORIGIN = [
