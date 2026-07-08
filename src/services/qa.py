@@ -113,7 +113,7 @@ class QABase(ServiceBase):
         
         
         # Add default service 0
-        if '0' not in services:
+        if '0' not in self.services:
             self.services["0"] = {
             "name": "system_information",
             "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
