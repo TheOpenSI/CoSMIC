@@ -119,28 +119,22 @@ class QueryAnalyser:
             for (service_id, service_info) in services.items()
         }
 
-        # Add default service 0
-        self.services["0"] = (
-            "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
-        )
-        # print(self.services)
+        # # There is/are active services from fetched API endpoint
+        # if len(self.services) != 0:
+        #     pass
 
-        # There is/are active services from fetched API endpoint
-        if len(self.services) != 0:
-            pass
-
-        # No active services found from fetched API endpoint
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={
-                    "status": "404 - Not Found",
-                    "message": "{trig:s}: {cond:s}".format(
-                        trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
-            )
+        # # No active services found from fetched API endpoint
+        # else:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_404_NOT_FOUND,
+        #         detail={
+        #             "status": "404 - Not Found",
+        #             "message": "{trig:s}: {cond:s}".format(
+        #                 trig="EmptyServiceError",
+        #                 cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
+        #             )
+        #         }
+        #     )
 
         # Chect if chess is one of the services, if yes, then add chess subservices to full services.
         self.full_services: dict[str, str] = dict(self.services)

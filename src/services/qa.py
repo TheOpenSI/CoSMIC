@@ -110,10 +110,19 @@ class QABase(ServiceBase):
         # NOTE:
         # for legacy purposes. Change to `dict[int, str]` type when
         # update to handle `int` properly
-        services_name: dict[str, str] = {
-            service_id: service_info['name']
-            for (service_id, service_info) in services.items()
-        }
+        
+        
+        # Add default service 0
+        if '0' not in services:
+            self.services["0"] = {
+            "name": "system_information",
+            "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
+            }
+
+        # cut down to just "name" of the services not its "desc"
+        services_name: dict[str, str] = {}
+        for (service_id,service_info) in services.items():
+            services_name[service_id]= service_info['name']
 
         # No active services found from fetched API endpoint
         if len(services_name) == 0:
@@ -262,6 +271,12 @@ class QABase(ServiceBase):
         elif service_option == "0":
             response, raw_response = self.system_information_service(
                 query=query, services=services, context=context)
+            
+        # When all services are disabled and service 0 cannot answer, query analyser will return -1
+        elif service_option == "-1":
+            response = raw_response = (
+                "I can't help with that right now — it may be outside what I'm currently set up to answer, or the right service isn't enabled." "\n"
+                "Try rephrasing, or ask about something else I can help with. Otherwise, contact OpenSI team.")
 
         else:
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval

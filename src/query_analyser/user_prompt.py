@@ -63,6 +63,7 @@ class QueryAnalyserService(UserPromptBase):
             f" For instance, if the query is to predict the next chess move, then select service 1;"\
             f" otherwise, if the query is to generate or modify a code, then select service 3;" \
             f" otherwise, if the query is about Academic Governance, then select service 5."\
+            f" otherwise, if the query is a general knowledge question, then select service 4." \
             f" Just return which service without any explainations."
 
         return user_prompt

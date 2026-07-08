@@ -49,6 +49,6 @@ class SystemInformationService(ServiceBase):
             context = "OpenSI System Information:\n" + system_information + "\n\n" + context
 
         # Get the response with retrieved context if applicable.
-        response, raw_response = self.llm(user_prompt, context=context)
+        response, raw_response = self.llm(user_prompt, context=context, service_name="system_information")
 
         return (response, raw_response)
