@@ -169,7 +169,6 @@ class QueryAnalyser:
         # Create an initial information dictionary.
         service_info_dict: dict[str, str | bool] = {
             "query":                        query,
-            "system_information":           ""
         }
 
         # Set the user prompter for service option.
