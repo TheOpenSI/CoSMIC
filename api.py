@@ -10,7 +10,7 @@ from typing import Any
 
 
 ### Internal modules ###
-from .src.opensi_cosmic import OpenSICoSMIC, get_rag_required_services, get_service_id_by_name
+from .src.opensi_cosmic import OpenSICoSMIC
 from .src.services.document_index import DocumentIndex
 from .src.services.storage_events import StorageEventWatcher
 from .backend.routers import (
@@ -97,11 +97,21 @@ async def lifespan(app: FastAPI):
     memory.set_vector_database(vector_database)
 
     # Initialize storage event watcher for autonomous file monitoring (uses global index)
+    # All service info derives from the get_services(raw=True)
+    inst = opensi_cosmic_instance
     storage_watcher: StorageEventWatcher = StorageEventWatcher(
         watched_path="/app/data/memories/global/",
         document_index=global_document_index,
-        get_rag_required_services=get_rag_required_services,
-        get_service_id_by_name=get_service_id_by_name,
+        get_rag_required_services=lambda: [
+            s["id"] for s in inst.get_services(raw=True)
+            if s.get("memory_capability") is True
+        ],
+        get_service_id_by_name=lambda n: next(
+            (s["id"] for s in inst.get_services(raw=True)
+             if (s.get("name") or "").lower() == n.lower()),
+            None,
+        ),
+        get_raw_services=lambda: inst.get_services(raw=True),
         vector_database=vector_database,
     )
     app.state.storage_watcher = storage_watcher

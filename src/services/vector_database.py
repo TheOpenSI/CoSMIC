@@ -5,7 +5,6 @@ from glob import glob
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-# from langchain_community.vectorstores import FAISS
 from langchain_qdrant import QdrantVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
@@ -247,7 +246,7 @@ class VectorDatabase(ServiceBase):
                 doc.metadata.update(extra_metadata)
                 doc.metadata["title"] = document_title
 
-                # Content-similarity dedup runs ONLY on the legacy no-metadata path
+                # Scope-level dedup is already handled by the watcher's content_hash
                 if not extra_metadata:
                     hits = self.similarity_search_with_relevance_scores(
                         doc.page_content,

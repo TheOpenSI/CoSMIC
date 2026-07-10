@@ -177,6 +177,14 @@ class RAGBase(ServiceBase):
 
         return models.Filter(should=should)
 
+    @staticmethod
+    def _scope_rank(doc) -> int:
+        """Priority rank for ordering: session (0) > user (1) > global (2)."""
+        meta = getattr(doc, "metadata", None) or {}
+        return {"session": 0, "user": 1, "global_memory": 2}.get(
+            meta.get("memory_type"), 3
+        )
+
     def __call__(
         self,
         user_prompt: str,
@@ -212,7 +220,7 @@ class RAGBase(ServiceBase):
             document_ids=document_ids,
         )
 
-        # If no scope resolved, return empty rather than searching the whole collection 
+        # If no scope resolved, return empty rather than searching the whole collection
         # unfiltered (which would leak other users'/sessions'/global points)
         if memory_filter is None:
             return "", []
@@ -225,9 +233,17 @@ class RAGBase(ServiceBase):
             filter=memory_filter,
         )
 
+        def _select(pairs, keep_n, threshold):
+            """Order by scope priority (session>user>global) keeping the incoming
+            score order within a scope, take the top keep_n, then apply the score
+            threshold as a *soft* filter that never empties a non-empty set."""
+            ordered = sorted(pairs, key=lambda p: self._scope_rank(p[0]))  # stable
+            top = ordered[:keep_n]
+            passing = [(d, s) for d, s in top if s >= threshold]
+            return passing if passing else top[:1]
+
         # Rerank with the cross-encoder, if enabled.
-        retrieved_docs: list = []
-        retrieved_context_score: list = []
+        selected: list = []
 
         if self.rerank_enabled and retrieved_contents:
             candidate_docs = [doc for doc, _ in retrieved_contents]
@@ -236,34 +252,36 @@ class RAGBase(ServiceBase):
             )
 
             if rerank_scores:
+                # Sort by rerank score (desc); rely on the reranker's ranking
                 ranked = sorted(
                     zip(candidate_docs, rerank_scores),
                     key=lambda pair: pair[1],
                     reverse=True,
                 )
-                for doc, score in ranked[: self.rerank_topk]:
-                    if score >= self.rerank_score_threshold:
-                        retrieved_docs.append(doc)
-                        retrieved_context_score.append(score)
+                selected = _select(ranked, self.rerank_topk, self.rerank_score_threshold)
             else:
-                # Reranker unavailable fall back to dense cosine
-                for doc, score in retrieved_contents[: self.topk]:
-                    if score >= self.retrieve_score_threshold:
-                        retrieved_docs.append(doc)
-                        retrieved_context_score.append(score)
+                # Reranker unavailable — fall back to dense cosine order.
+                selected = _select(
+                    list(retrieved_contents), self.topk, self.retrieve_score_threshold
+                )
         else:
-            # keep contexts above the cosine threshold.
-            for doc, score in retrieved_contents:
-                if score >= self.retrieve_score_threshold:
-                    retrieved_docs.append(doc)
-                    retrieved_context_score.append(score)
+            selected = _select(
+                list(retrieved_contents), self.topk, self.retrieve_score_threshold
+            )
+
+        retrieved_docs = [doc for doc, _ in selected]
+        retrieved_context_score = [score for _, score in selected]
 
         if not retrieved_docs:
             context = ""
         else:
-            # Change the linechange to avoid messing up the print and log file.
+            # Prefix each chunk with its source title
+            def _title(doc) -> str:
+                meta = getattr(doc, "metadata", None) or {}
+                return str(meta.get("title") or "")
+
             context = "".join([
-                f"{doc.metadata.get('title') if getattr(doc, 'metadata', None) else None}: "
+                f"{_title(doc)}: "
                 + doc.page_content.replace("\n", " ")
                 + ". "
                 for doc in retrieved_docs

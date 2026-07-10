@@ -40,6 +40,12 @@ from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
 
+# Shared cache for the services registry  
+# Every service-derived view is built from this cached raw list
+_services_cache: list[dict[str, Any]] = []
+_services_cache_timestamp: float = 0
+_SERVICES_CACHE_TTL = 30  # seconds
+
 
 class OpenSICoSMIC:
     def __init__(
@@ -359,7 +365,17 @@ class OpenSICoSMIC:
             self.llm.system_prompter.set_use_example(True)
 
             # Resolve which memory scopes are active for retrieval
-            global_service_names, memory_service_active = get_active_memory_scope()
+            _services = self.get_services(raw=True)
+            global_service_names = [
+                s["name"] for s in _services
+                if s.get("status") is True
+                and s.get("memory_capability") is True
+                and (s.get("name") or "").lower() != "memory"
+            ]
+            memory_service_active = any(
+                (s.get("name") or "").lower() == "memory" and s.get("status") is True
+                for s in _services
+            )
 
             # Per-request user (from the chat call) for retrieval scoping
             call_user_id = user_id if user_id is not None else self.user_id
@@ -591,26 +607,26 @@ class OpenSICoSMIC:
         self,
         # TODO:
         # create a dedicated util to handle valid URL format
-        url:        str                     = "http://backend:8000/api/v1/services/",
+        url:        str | None              = None,
         params:     dict[str, bool] | None  = {"active": True},
         lifetime:   float                   = 10.0,
-        verbose:    bool                    = False
+        verbose:    bool                    = False,
+        raw:        bool                    = False,
     # NOTE:
     # for legacy purposes. Change to `dict[int, dict[str, str]]` type when update
     # to handle `int` properly
-    ) -> dict[str, dict[str, str]]:
+    ) -> dict[str, dict[str, str]] | list[dict[str, Any]]:
         """
-        Retrieve all services from API endpoint with 0-based indexing.
+        THE single entry point for the services registry.
 
-        This method fetches service data from the specified endpoint and returns
-        a nested dictionary mapping 0-based indices to minimal service info. The
-        transformation subtracts 1 from the API's 1-based IDs to create 0-based
-        indexing.
+        One HTTP fetch + one module-level 30s cache; every service-derived view
+        is built from this method. On fetch failure the stale cache is returned
+        if present, otherwise empty — no default/invented services.
 
         Args:
             url:
-                base URL of the services API endpoint. Defaults to
-                "http://backend:8000/api/v1/services/".
+                base URL of the services API endpoint. Defaults to the
+                SERVICES_API_URL env var or "http://backend:8000/api/v1/services/".
 
             params:
                 optional query parameter for provided endpoint. Defaults to
@@ -620,115 +636,86 @@ class OpenSICoSMIC:
                 HTTP client timeout in seconds. Defaults to 10.0 seconds.
 
             verbose:
-                Enable pretty-printed debug output of service data. When True,
-                prints formatted service data using 'pprint'.
+                Enable pretty-printed debug output of service data.
 
-        Returns:
-            Nested dictionary mapping 0-based indices to minimal service info.
-
-            Example:
-            {
-                0: {
-                    "name": "chess",
-                    "desc": "<a very long description>"
-                },
-                1: {
-                    "name": "memory",
-                    "desc": "<a very long description>"
-                }
-            }
-
-        Raises:
-            HTTPException:
-                With status code 500 if any connection error occurs
-                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+            raw:
+                When True, return the cached raw records
+                [{id, name, desc, status, memory_capability}, ...].
+                When False (default), return the query-analyser shape with
+                0-based string indices: {str(id-1): {"name", "desc"}}.
 
         Example:
-            >>> services = obj.get_services(verbose=True)
-            >>> services[0] # 1st service
+            >>> obj.get_services()["0"]           # analyser shape (1st service)
             {"name": "chess", "desc": "<a very long description>"}
+            >>> obj.get_services(raw=True)[0]     # raw registry record
+            {"id": 1, "name": "chess", "desc": "...", "status": True, ...}
         """
+        global _services_cache, _services_cache_timestamp
+        from time import time
+
+        if url is None:
+            url = os.getenv("SERVICES_API_URL", "http://backend:8000/api/v1/services/")
+
+        current_time = time()
+
+        # Refresh the shared cache when stale.
+        if not (_services_cache and (current_time - _services_cache_timestamp) < _SERVICES_CACHE_TTL):
+            try:
+                with Client(
+                    base_url=url,
+                    params=params,
+                    timeout=lifetime
+                ) as client:
+                    response: Response = client.get(url="")
+                    response.raise_for_status()
+                    _services_cache = response.json().get("result", [])
+                    _services_cache_timestamp = current_time
+            except Exception as httpx_err:
+                print(
+                    set_color(
+                        status="warning",
+                        information=f"Services registry unreachable ({httpx_err}); "
+                                    f"using {'stale cache' if _services_cache else 'no services'}."
+                    )
+                )
+
+        datas: list[dict[str, Any]] = list(_services_cache)
+
+        if verbose:
+            print(
+                "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                    head_sep=f"{'=' * 80}",
+                    body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
+                    foot_sep=f"{'=' * 80}"
+                )
+            )
+            pp(
+                object=datas,
+                stream=stdout,
+                indent=4 # Prefer tab over spaces indentation
+            )
+            print(f"{'=' * 80}")
+
+        if raw:
+            return datas
+
+        # Query-analyser shape, derived from the same cached raw list.
+        # NOTE:
+        # for legacy purposes. Change to normal when update the checking
+        # logic to handle `int` properly
         services: dict[str, dict[str, str]] = {}
-
-        try:
-            with Client(
-                base_url=url,
-                params=params,
-                timeout=lifetime
-            ) as client:
-                response: Response = client.get(url="")
-                response.raise_for_status()
-                datas: list[dict[str, Any]] = response.json().get("result", [])
-
-            if len(datas) == 0:
-                # No active services available
-                if verbose:
-                    print(
-                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}",
-                            body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    print(
-                        "{debug_msg:s}\n{foot_sep:s}".format(
-                            debug_msg="No active services available...",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    return {}
-
-                else:
-                    return {}
-
-            else:
-                # There is/are active services available
-                for data in datas:
-                    # NOTE:
-                    # for legacy purposes. Change to normal when update the checking
-                    # logic to handle `int` properly
-                    services.setdefault(
-                        str(data["id"]),
-                        {}
-                    ).update(
-                        {
-                            "name": data["name"],
-                            "desc": data["desc"]
-                        }
-                    )
-
-                if verbose:
-                    print(
-                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}",
-                            body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    pp(
-                        object=dict(sorted(services.items())),
-                        stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
-                    )
-                    print(f"{'=' * 80}")
-                    return dict(sorted(services.items()))
-
-                else:
-                    return dict(sorted(services.items()))
-
-
-        except ConnectError as httpx_err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+        for data in datas:
+            services.setdefault(
+                str(data["id"]),
+                {}
+            ).update(
+                {
+                    "name": data["name"],
+                    "desc": data["desc"]
+                }
             )
 
-
-        except ConnectTimeout as httpx_err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
-            )
+        return dict(sorted(services.items()))
 
 
     def get_configs(
@@ -855,128 +842,3 @@ class OpenSICoSMIC:
                 detail=f"{httpx_err}"
             )
 
-
-# Service Registry Utilities (for StorageEventWatcher and memory management)
-
-_service_cache = {} # To avoid hitting the backend API frequently
-_service_cache_timestamp = 0
-_CACHE_TTL = 30  # seconds; short TTL so service status/capability toggles take effect promptly
-
-SERVICES_API_URL = os.getenv("SERVICES_API_URL","http://backend:8000/api/v1/services/")
-
-def _get_raw_services(
-    url: str = SERVICES_API_URL,
-    params: dict[str, bool] | None = None
-) -> list[dict[str, Any]]:
-    """Fetch raw service data from API endpoint with caching."""
-    global _service_cache, _service_cache_timestamp
-    from time import time
-
-    current_time = time()
-    if _service_cache and (current_time - _service_cache_timestamp) < _CACHE_TTL:
-        return _service_cache
-
-    if params is None:
-        params = {"active": True}
-
-    try:
-        with Client(base_url=url, params=params, timeout=10.0) as client:
-            response: Response = client.get(url="")
-            response.raise_for_status()
-            services = response.json().get("result", [])
-            _service_cache = services
-            _service_cache_timestamp = current_time
-            return services
-    except Exception as e:
-        # Return cached data if available, otherwise empty list
-        if _service_cache:
-            return _service_cache
-        return [5]
-
-
-def get_service_id_by_name(service_name: str) -> int | None:
-    """Get service_id by service name.
-
-    Args:
-        service_name: Name of the service (e.g., "chess", "academic_governance")
-
-    Returns:
-        service_id (int) if found, None otherwise
-    """
-    services = _get_raw_services()
-    for service in services:
-        if service.get("name", "").lower() == service_name.lower():
-            return service.get("id")
-    return None
-
-
-def get_service_name(service_id: int) -> str | None:
-    """Get service name by service_id.
-
-    Args:
-        service_id: ID of the service (e.g., 5 for academic_governance)
-
-    Returns:
-        service name (str) if found, None otherwise
-    """
-    services = _get_raw_services()
-    for service in services:
-        if service.get("id") == service_id:
-            return service.get("name")
-    return None
-
-
-def get_service_by_id(service_id: int) -> dict[str, Any] | None:
-    """Get full service record by service_id.
-
-    Args:
-        service_id: ID of the service
-
-    Returns:
-        Full service dict if found, None otherwise
-    """
-    services = _get_raw_services()
-    for service in services:
-        if service.get("id") == service_id:
-            return service
-    return None
-
-def get_rag_required_services() -> list[int]:
-    """Get list of service_ids that require memory/RAG storage.
-
-    Checks for 'memory_capability' field in service records. If field doesn't exist,
-    falls back to hardcoded list.
-
-    Returns:
-        List of service_ids that have memory_capability=True or hardcoded fallback
-    """
-    services = _get_raw_services()
-
-    # Check if any service has rag_req field
-    rag_services = [s.get("id") for s in services if s.get("memory_capability") == True]
-
-    # If no services marked with memory_capability, use hardcoded fallback
-    if not rag_services:
-        return [5]  # academic_governance
-
-    return rag_services
-
-def get_active_memory_scope() -> tuple[list[str], bool]:
-    """ Resolve global memory scope and whether the user-memory service is active """
-    
-    services = _get_raw_services() # service is only used when active
-  
-    global_service_names = [
-        s.get("name")
-        for s in services
-        if s.get("status") is True
-        and s.get("memory_capability") is True
-        and s.get("name")
-        and (s.get("name") or "").lower() != "memory"
-    ]
-    memory_service_active = any(
-        (s.get("name") or "").lower() == "memory" and s.get("status") is True
-        for s in services
-    )
-
-    return global_service_names, memory_service_active

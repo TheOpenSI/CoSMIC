@@ -174,7 +174,7 @@ class QABase(ServiceBase):
             if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
                 document_ids.append(doc_id)
                 raw_name = parts[1] if len(parts) > 1 else ref
-                attached_file_names.append(raw_name.replace("_", " "))
+                attached_file_names.append(raw_name)
             else:
                 print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
         

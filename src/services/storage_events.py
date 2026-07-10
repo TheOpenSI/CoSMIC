@@ -32,8 +32,8 @@ class StorageEventHandler(FileSystemEventHandler):
     ):
         self.document_index = document_index
         self.watched_path = watched_path
-        self.get_rag_required_services = get_rag_required_services or (lambda: [5])
-        self.get_service_id_by_name = get_service_id_by_name or (lambda x: None)
+        self.get_rag_required_services = get_rag_required_services
+        self.get_service_id_by_name = get_service_id_by_name
         self.vector_database = vector_database
         self.event_log_path = os.path.join(
             os.path.dirname(watched_path), "storage_events.log"
@@ -205,10 +205,6 @@ class StorageEventHandler(FileSystemEventHandler):
         # Return the service_id if the service has memory_capability, else None
         rag_services = self.get_rag_required_services()
         service_id = self.get_service_id_by_name(service_name)
-
-        # Fallback for academic_governance when registry not available
-        if service_id is None and service_name.lower() == "academic_governance":
-            service_id = 5
 
         if service_id is None or service_id not in rag_services:
             return None
@@ -395,9 +391,12 @@ class StorageEventWatcher:
         get_rag_required_services=None,
         get_service_id_by_name=None,
         vector_database=None,
+        get_raw_services=None,
     ):
         self.watched_path = watched_path
         self.document_index = document_index
+        # Raw service records for folder provisioning OpenSICoSMIC.get_services(raw=True).
+        self.get_raw_services = get_raw_services or (lambda: [])
         self.observer = PollingObserver()
         self.event_handler = StorageEventHandler(
             document_index,
@@ -416,15 +415,19 @@ class StorageEventWatcher:
             except Exception:
                 pass
 
-        # Query services and pre-create folders for those with memory_capability=True
+        # Pre-create folders for ACTIVE services with memory_capability=True
         try:
-            from ..opensi_cosmic import _get_raw_services
-            services = _get_raw_services()
-            memory_services = [s for s in services if s.get("memory_capability") is True]
+            services = self.get_raw_services()
+            memory_services = [
+                s for s in services
+                if s.get("status") is True and s.get("memory_capability") is True
+            ]
 
-            # Fallback to academic_governance if no service with memory_capability=True is found
             if not memory_services:
-                memory_services = [{"name": "academic_governance"}]
+                logger.warning(
+                    "No active service with memory_capability=True — no global "
+                    "memory folders created."
+                )
 
             for service in memory_services:
                 service_name = service.get("name")
