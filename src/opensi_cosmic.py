@@ -450,21 +450,6 @@ class OpenSICoSMIC:
                 reranker_model=os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"),
             )
 
-            # Add a directory of documents.
-            document_path: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
-                "data",
-                "docs"
-            )
-            documents: str | list[str] = []
-
-            if document_path.exists(follow_symlinks=True):
-                vector_database.add_document_directory(str(document_path))
-
-            # Add documents.
-            if (documents != "") \
-            or (len(documents) > 0):
-                vector_database.add_documents(documents)
-
             # Base RAG service tuning is read from .env
             self.rag = RAGBase(
                 vector_database=vector_database,

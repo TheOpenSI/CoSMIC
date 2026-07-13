@@ -155,6 +155,11 @@ class QABase(ServiceBase):
             services=services # pyright: ignore
         )
 
+        # The query analyser can route a question about a uploaded file into 0 or -1  
+        # RAG-eligible fallback branch so an attached file is considered
+        if has_files and service_option in ("0", "-1"):
+            service_option = "5"
+
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
             return (
