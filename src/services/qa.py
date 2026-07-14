@@ -7,15 +7,18 @@ from fastapi import (
 
 
 ### Type hints ###
-
+from typing import Any, Optional, List
 
 ### Internal modules ###
 from . import chess as chess_instances
 from .base import ServiceBase
+from .document_index import DocumentMetadata
 from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
+from ...utils.log_tool import set_color
+import uuid
 
 
 class QABase(ServiceBase):
@@ -70,7 +73,13 @@ class QABase(ServiceBase):
         services:   dict[str, dict[str, str]],
         context:    str | dict  = "",
         is_rag:     bool        = False,
-        verbose:    bool        = False
+        verbose:    bool        = False,
+        user_id:                Optional[str]       = None,
+        session_id:             Optional[str]       = None,
+        global_service_names:   Optional[List[str]] = None,
+        memory_service_active:  bool                = False,
+        has_files:              bool                = False,
+        file_refs:              Optional[List[str]] = None,
     ) -> tuple:
         """
         Process each QA.
@@ -146,6 +155,11 @@ class QABase(ServiceBase):
             services=services # pyright: ignore
         )
 
+        # The query analyser can route a question about a uploaded file into 0 or -1  
+        # RAG-eligible fallback branch so an attached file is considered
+        if has_files and service_option in ("0", "-1"):
+            service_option = "5"
+
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
             return (
@@ -154,6 +168,21 @@ class QABase(ServiceBase):
                 retrieve_score
             )
 
+        # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
+        # document_ids target retrieval at the attached file
+        # attached_file_names tell the LLM which file the question is about
+        document_ids: List[str] = []
+        attached_file_names: List[str] = []
+        for ref in (file_refs or []):
+            parts = ref.split("_", 1)
+            doc_id = parts[0]
+            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
+                document_ids.append(doc_id)
+                raw_name = parts[1] if len(parts) > 1 else ref
+                attached_file_names.append(raw_name)
+            else:
+                print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
+        
         # Process query with service parsing.
         if service_option.find("1.") > -1:
             if service_option == "1.0":
@@ -240,25 +269,22 @@ class QABase(ServiceBase):
             raw_response    = f"The next moves are from {next_move}.\n{raw_response}"
 
         elif service_option == "2":
-            # Check if context is a .pdf.
-            is_a_document = service_info_dict["is_a_document"]
-
-            if is_a_document:
-                # Get absolute document path.
-                document_path = service_info_dict["document_path"]
-
-                if document_path is not None:
-                    # Update the knowledge database and return the status.
-                    self.rag.vector_database.update_database_from_document(document_path=document_path)
-            else:
-                # Get text.
-                text = service_info_dict["text"]
-
-                if text is not None:
-                    # Add text to database.
-                    self.rag.vector_database.update_database_from_text(text=text)
-
-            response = raw_response = "Vector database updated."
+            selected_service_name = services_name.get(service_option, "").lower()
+            if (
+                memory_service_active
+                and selected_service_name == "memory"
+                and user_id
+            ):
+                payload = DocumentMetadata(
+                    document_id=uuid.uuid4().hex[:8],
+                    user_id=user_id,
+                    memory_type="user",
+                ).to_vector_payload()
+                self.rag.vector_database.update_database_from_text(
+                    text=query, extra_metadata=payload
+                )
+                response = raw_response = "Saved to your memory."
+                return (response, raw_response, retrieve_score)
 
         elif service_option == "3":
             (
@@ -282,7 +308,7 @@ class QABase(ServiceBase):
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
             execute_rag = (
                 (is_rag) and
-                (service_option in RAG_ENABLED_SERVICES)
+                (service_option in RAG_ENABLED_SERVICES or has_files)
             )
 
             if execute_rag:
@@ -306,18 +332,34 @@ class QABase(ServiceBase):
                     context=rag_context
                 ) # pyright: ignore
 
-                # Get the retrieved context.
+                # Get the retrieved context, scoped to the active memory tiers
                 (
                     context_retrieved,
                     retrieve_score
-                ) = self.rag(query)
+                ) = self.rag(
+                    query,
+                    user_id=user_id,
+                    session_id=session_id,
+                    global_service_names=global_service_names,
+                    include_session=True,
+                    include_user=memory_service_active,
+                    include_global=True,
+                    document_ids=document_ids or None,
+                )
+
+                # Tell the LLM which file the question is about
+                file_note = (
+                    f"The user attached the file(s): {', '.join(attached_file_names)}. "
+                    "Answer using the retrieved context from that file.\n"
+                    if attached_file_names else ""
+                )
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.
                 suffix = (
                     ""
                     if   (context_retrieved == "")
-                    else (f"\nContext:\n {context_retrieved}")
+                    else (f"\n{file_note}Context:\n {context_retrieved}")
                 )
 
                 context = (
@@ -338,7 +380,7 @@ class QABase(ServiceBase):
             ) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_name[service_option]
+                service_name=services_name.get(service_option, "")
             )
 
 

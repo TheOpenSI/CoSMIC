@@ -1,4 +1,5 @@
 ### Core modules ###
+import os
 from sys import (
     exit,
     stdout
@@ -38,6 +39,12 @@ from ..utils.log_tool import set_color
 from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
+
+# Shared cache for the services registry  
+# Every service-derived view is built from this cached raw list
+_services_cache: list[dict[str, Any]] = []
+_services_cache_timestamp: float = 0
+_SERVICES_CACHE_TTL = 30  # seconds
 
 
 class OpenSICoSMIC:
@@ -191,7 +198,11 @@ class OpenSICoSMIC:
         self,
         question:   str,
         context:    str         = "",
-        log_file:   str | None  = None
+        log_file:   str | None  = None,
+        session_id: str | None  = None,
+        has_files:  bool        = False,
+        user_id:    str | None  = None,
+        file_refs:  list | None = None,
     ) -> tuple:
         """
         Execute QA.
@@ -353,6 +364,22 @@ class OpenSICoSMIC:
             # Truncation needs keywords from the example of system prompt.
             self.llm.system_prompter.set_use_example(True)
 
+            # Resolve which memory scopes are active for retrieval
+            _services = self.get_services(raw=True)
+            global_service_names = [
+                s["name"] for s in _services
+                if s.get("status") is True
+                and s.get("memory_capability") is True
+                and (s.get("name") or "").lower() != "memory"
+            ]
+            memory_service_active = any(
+                (s.get("name") or "").lower() == "memory" and s.get("status") is True
+                for s in _services
+            )
+
+            # Per-request user (from the chat call) for retrieval scoping
+            call_user_id = user_id if user_id is not None else self.user_id
+
             # Process each question.
             (
                 response,
@@ -363,7 +390,13 @@ class OpenSICoSMIC:
                 services=self.get_services(),
                 context=context, # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
-                verbose=False
+                verbose=False,
+                user_id=call_user_id,
+                session_id=session_id,
+                global_service_names=global_service_names,
+                memory_service_active=memory_service_active,
+                has_files=has_files,
+                file_refs=file_refs,
             ) # pyright: ignore
 
         # Return answers with and without truncation, and retrieve score (if
@@ -408,61 +441,25 @@ class OpenSICoSMIC:
             # Change the global user ID.
             self.user_id = user_id
 
-            # Create vector database service which will be included in RAG for retrieve and information updates.
-            # vector_db_path: Path = Path(self.config_data["rag"]["vector_db_path"]).resolve(strict=True)
-
-            # # If index.faiss exists, it is user selected path; do not change the path.
-            # # Otherwise, create a new directory.
-            # if not Path.exists(
-            #     vector_db_path.joinpath("index.faiss"),
-            #     follow_symlinks=True
-            # ):
-            #     if self.user_id is not None:
-            #         # User ID specific.
-            #         vector_db_path: Path = vector_db_path.joinpath(self.user_id)
-            #     else:
-            #         # Set to default folder for easy management.
-            #         vector_db_path: Path = vector_db_path.joinpath("default")
-
-            #     # Create the data folder if not exist.
-            #     vector_db_path.mkdir(
-            #         mode=0o777,
-            #         parents=False,
-            #         exist_ok=True
-            #     )
-            # Since Qdrant is now managed, we don't need to check for index.faiss
-            # The VectorDatabase service will handle the connection.
-
-            # TODO:
-            # I know that we had a different path implmented for RAG works on
-            # another branch right now. However, I need to match what already
-            # there in the YAML file so COSMIC-225 PR can be merged. Once this
-            # merged, we can modify the path again with the current branch
-            # working on RAG to test out.
-
+            # Create vector database service, storage is backed by Qdrant (reached via QDRANT_URL)
+            # The VectorDatabase service handles the connection, so there is no local on-disk path
             vector_database = VectorDatabase(
-                local_database_path="",
-                device=self.device
+                document_analyser_model=os.getenv("RAG_EMBEDDING_MODEL", "gte-small"),
+                vector_database_update_threshold=float(os.getenv("RAG_UPDATE_THRESHOLD", "0.98")),
+                device=self.device,
+                reranker_model=os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"),
             )
 
-            # Add a directory of documents.
-            document_path: Path = Path(__file__).resolve(strict=True).parent.parent.joinpath(
-                "data",
-                "docs"
+            # Base RAG service tuning is read from .env
+            self.rag = RAGBase(
+                vector_database=vector_database,
+                retrieve_score_threshold=float(os.getenv("RAG_RETRIEVE_SCORE_THRESHOLD", "0.0")),
+                topk=int(os.getenv("RAG_TOPK", "6")),
+                rerank_enabled=os.getenv("RAG_RERANK_ENABLED", "true").strip().lower() == "true",
+                candidate_pool=int(os.getenv("RAG_CANDIDATE_POOL", "30")),
+                rerank_topk=int(os.getenv("RAG_RERANK_TOPK", "6")),
+                rerank_score_threshold=float(os.getenv("RAG_RERANK_SCORE_THRESHOLD", "0.0")),
             )
-            documents: str | list[str] = []
-
-            if document_path.exists(follow_symlinks=True):
-                vector_database.add_document_directory(str(document_path))
-
-            # Add documents.
-            if (documents != "") \
-            or (len(documents) > 0):
-                vector_database.add_documents(documents)
-
-            # Base RAG service with vector_database, the database can be changed using
-            # self.rag.set_vector_database().
-            self.rag = RAGBase(vector_database=vector_database)
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
@@ -595,26 +592,26 @@ class OpenSICoSMIC:
         self,
         # TODO:
         # create a dedicated util to handle valid URL format
-        url:        str                     = "http://backend:8000/api/v1/services/",
+        url:        str | None              = None,
         params:     dict[str, bool] | None  = {"active": True},
         lifetime:   float                   = 10.0,
-        verbose:    bool                    = False
+        verbose:    bool                    = False,
+        raw:        bool                    = False,
     # NOTE:
     # for legacy purposes. Change to `dict[int, dict[str, str]]` type when update
     # to handle `int` properly
-    ) -> dict[str, dict[str, str]]:
+    ) -> dict[str, dict[str, str]] | list[dict[str, Any]]:
         """
-        Retrieve all services from API endpoint with 0-based indexing.
+        THE single entry point for the services registry.
 
-        This method fetches service data from the specified endpoint and returns
-        a nested dictionary mapping 0-based indices to minimal service info. The
-        transformation subtracts 1 from the API's 1-based IDs to create 0-based
-        indexing.
+        One HTTP fetch + one module-level 30s cache; every service-derived view
+        is built from this method. On fetch failure the stale cache is returned
+        if present, otherwise empty — no default/invented services.
 
         Args:
             url:
-                base URL of the services API endpoint. Defaults to
-                "http://backend:8000/api/v1/services/".
+                base URL of the services API endpoint. Defaults to the
+                SERVICES_API_URL env var or "http://backend:8000/api/v1/services/".
 
             params:
                 optional query parameter for provided endpoint. Defaults to
@@ -624,115 +621,86 @@ class OpenSICoSMIC:
                 HTTP client timeout in seconds. Defaults to 10.0 seconds.
 
             verbose:
-                Enable pretty-printed debug output of service data. When True,
-                prints formatted service data using 'pprint'.
+                Enable pretty-printed debug output of service data.
 
-        Returns:
-            Nested dictionary mapping 0-based indices to minimal service info.
-
-            Example:
-            {
-                0: {
-                    "name": "chess",
-                    "desc": "<a very long description>"
-                },
-                1: {
-                    "name": "memory",
-                    "desc": "<a very long description>"
-                }
-            }
-
-        Raises:
-            HTTPException:
-                With status code 500 if any connection error occurs
-                (ConnectError, ConnectTimeout) or other unexpected exceptions.
+            raw:
+                When True, return the cached raw records
+                [{id, name, desc, status, memory_capability}, ...].
+                When False (default), return the query-analyser shape with
+                0-based string indices: {str(id-1): {"name", "desc"}}.
 
         Example:
-            >>> services = obj.get_services(verbose=True)
-            >>> services[0] # 1st service
+            >>> obj.get_services()["0"]           # analyser shape (1st service)
             {"name": "chess", "desc": "<a very long description>"}
+            >>> obj.get_services(raw=True)[0]     # raw registry record
+            {"id": 1, "name": "chess", "desc": "...", "status": True, ...}
         """
+        global _services_cache, _services_cache_timestamp
+        from time import time
+
+        if url is None:
+            url = os.getenv("SERVICES_API_URL", "http://backend:8000/api/v1/services/")
+
+        current_time = time()
+
+        # Refresh the shared cache when stale.
+        if not (_services_cache and (current_time - _services_cache_timestamp) < _SERVICES_CACHE_TTL):
+            try:
+                with Client(
+                    base_url=url,
+                    params=params,
+                    timeout=lifetime
+                ) as client:
+                    response: Response = client.get(url="")
+                    response.raise_for_status()
+                    _services_cache = response.json().get("result", [])
+                    _services_cache_timestamp = current_time
+            except Exception as httpx_err:
+                print(
+                    set_color(
+                        status="warning",
+                        information=f"Services registry unreachable ({httpx_err}); "
+                                    f"using {'stale cache' if _services_cache else 'no services'}."
+                    )
+                )
+
+        datas: list[dict[str, Any]] = list(_services_cache)
+
+        if verbose:
+            print(
+                "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
+                    head_sep=f"{'=' * 80}",
+                    body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
+                    foot_sep=f"{'=' * 80}"
+                )
+            )
+            pp(
+                object=datas,
+                stream=stdout,
+                indent=4 # Prefer tab over spaces indentation
+            )
+            print(f"{'=' * 80}")
+
+        if raw:
+            return datas
+
+        # Query-analyser shape, derived from the same cached raw list.
+        # NOTE:
+        # for legacy purposes. Change to normal when update the checking
+        # logic to handle `int` properly
         services: dict[str, dict[str, str]] = {}
-
-        try:
-            with Client(
-                base_url=url,
-                params=params,
-                timeout=lifetime
-            ) as client:
-                response: Response = client.get(url="")
-                response.raise_for_status()
-                datas: list[dict[str, Any]] = response.json().get("result", [])
-
-            if len(datas) == 0:
-                # No active services available
-                if verbose:
-                    print(
-                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}",
-                            body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    print(
-                        "{debug_msg:s}\n{foot_sep:s}".format(
-                            debug_msg="No active services available...",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    return {}
-
-                else:
-                    return {}
-
-            else:
-                # There is/are active services available
-                for data in datas:
-                    # NOTE:
-                    # for legacy purposes. Change to normal when update the checking
-                    # logic to handle `int` properly
-                    services.setdefault(
-                        str(data["id"]),
-                        {}
-                    ).update(
-                        {
-                            "name": data["name"],
-                            "desc": data["desc"]
-                        }
-                    )
-
-                if verbose:
-                    print(
-                        "{head_sep:s}\n{body_msg:s}\n{foot_sep:s}".format(
-                            head_sep=f"{'=' * 80}",
-                            body_msg="[DEBUG]   SERVICES DATA   [DEBUG]",
-                            foot_sep=f"{'=' * 80}"
-                        )
-                    )
-                    pp(
-                        object=dict(sorted(services.items())),
-                        stream=stdout,
-                        indent=4 # Prefer tab over spaces indentation
-                    )
-                    print(f"{'=' * 80}")
-                    return dict(sorted(services.items()))
-
-                else:
-                    return dict(sorted(services.items()))
-
-
-        except ConnectError as httpx_err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
+        for data in datas:
+            services.setdefault(
+                str(data["id"]),
+                {}
+            ).update(
+                {
+                    "name": data["name"],
+                    "desc": data["desc"]
+                }
             )
 
-
-        except ConnectTimeout as httpx_err:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"{httpx_err}"
-            )
+        return dict(sorted(services.items()))
 
 
     def get_configs(
@@ -858,3 +826,4 @@ class OpenSICoSMIC:
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 detail=f"{httpx_err}"
             )
+

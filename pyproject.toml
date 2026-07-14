@@ -21,6 +21,7 @@ dependencies = [
     "stockfish>=5.0.0",
     "torch>=2.11.0",
     "transformers[torch]>=5.3.0",
+    "watchdog>=3.0.0",
     "qdrant-client>=1.12.1",
     "langchain-qdrant>=0.2.0",
     "langchain>=1.2.13",
