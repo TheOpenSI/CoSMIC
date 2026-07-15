@@ -168,8 +168,8 @@ class QueryAnalyser:
 
         # Create an initial information dictionary.
         service_info_dict: dict[str, str | int] = {
-            "query": query,
-            "input_token": 0,
+            "query":        query,
+            "input_token":  0,
             "output_token": 0
         }
 
