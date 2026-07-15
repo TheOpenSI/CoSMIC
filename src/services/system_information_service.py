@@ -19,25 +19,43 @@ class SystemInformationService(ServiceBase):
         return None
 
     def __call__(
-        self, query: str, services: dict, context: str | dict = "") -> tuple[str, str]:
+        self,
+        query:      str,
+        services:   dict,
+        context:    str | dict = ""
+    ) -> tuple[str, str, int, int]:
         """
         Answer a system-information query about OpenSI-CoSMIC.
 
         Args:
-            query (str): user query.
-            services (dict): current services dict, used to describe capabilities. *important for accessing: QueryAnalyserSystemInfo()
-            context (str | dict, optional): existing context (e.g. chat history). Defaults to "".
+            query (str):
+                user query.
+
+            services (dict):
+                current services dict, used to describe capabilities. *important for accessing: QueryAnalyserSystemInfo()
+
+            context (str | dict, optional):
+                existing context (e.g. chat history). Defaults to "".
 
         Returns:
-            response (str): truncated answer.
-            raw_response (str): original answer from LLM.
+            response (str):
+                truncated answer.
+
+            raw_response (str):
+                original answer from LLM.
+
+            input_token (int):
+                total amount of tokens used by LLM.
+
+            output_token (int):
+                total amount of tokens produced by LLM.
         """
-        user_prompt = query
+        user_prompt: str = query
 
         # If the question is related to system information,
         # add system information to context.
 
-        system_information = QueryAnalyserSystemInfo(services).system_information
+        system_information: str = QueryAnalyserSystemInfo(services).system_information
 
 
         # Add the information to existing context.
@@ -48,7 +66,24 @@ class SystemInformationService(ServiceBase):
         else:
             context = "OpenSI System Information:\n" + system_information + "\n\n" + context
 
-        # Get the response with retrieved context if applicable.
-        response, raw_response = self.llm(user_prompt, context=context, service_name="system_information")
+        # NOTE:
+        # This's where QA sent user query + selected service prompt (from
+        # `query_analyser.py`) to Ollama. For this case, we hit service
+        # 0 - System Information service
+        ( # pyright: ignore[reportAssignmentType]
+            response,
+            raw_response,
+            input_token,
+            output_token
+        ) = self.llm(
+            user_prompt,
+            context=context,
+            service_name="system_information"
+        )
 
-        return (response, raw_response)
+        return (
+            response,
+            raw_response,
+            input_token,
+            output_token
+        )

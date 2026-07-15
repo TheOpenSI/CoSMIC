@@ -260,29 +260,38 @@ class LLMBase(ServiceBase):
 
         return response
 
+
     def __call__(
         self,
         question: str,
         context: str | dict = {},
         service_name: str = ""
-    ):
+    ) -> tuple[str, str]:
         """
         Process the question answering.
 
         Args:
-            question        (str): user question in string.
-            context         (str, optional): context retrieved externally if applicable. Defaults to "".
-            service_name    (str, optional): the service for which to set the prompter. Defaults to "".
+            question (str):
+                user question in string.
+
+            context (str, optional):
+                context retrieved externally if applicable. Defaults to "".
+
+            service_name (str, optional):
+                the service for which to set the prompter. Defaults to "".
 
         Returns:
-            response        : truncated response.
-            raw_response    : original response without truncation.
+            response (str):
+                truncated response.
+
+            raw_response (str):
+                original response without truncation.
         """
         # Set a seed for reproduction.
         self.set_torch_seed(self.seed)
 
         # Generate user prompt with question and context.
-        user_prompt = self.user_prompter(question, context=context)
+        user_prompt: str = self.user_prompter(question, context=context)
 
         # Merge user prompt to system prompt by LLM type.
 
@@ -292,21 +301,26 @@ class LLMBase(ServiceBase):
         # since different services may have different system prompts. only if 
         # the Instance is GPT
 
-        system_prompt = self.system_prompter(user_prompt, context=context, service=service_name)
-        # system_prompt = self.system_prompter(user_prompt, context=context)
-
+        system_prompt: str = self.system_prompter(
+            user_prompt,
+            context=context,
+            service=service_name
+        )
 
         # Encode system prompt for LLM.
-        system_prompt_encoded = self.tokenizer.encode(system_prompt)
+        system_prompt_encoded: str = self.tokenizer.encode(system_prompt)
 
         # Get response from LLM.
-        response_encoded = self.llm(system_prompt_encoded)
+        response_encoded = self.llm(system_prompt_encoded) # pyright: ignore[reportOptionalCall]
 
         # Decode response since some are torch.tensor.
-        raw_response = self.tokenizer.decode(response_encoded)
+        raw_response: str = self.tokenizer.decode(response_encoded)
 
         # Truncate response, is_truncate_response can be set externally by LLM type.
-        response = self.truncate_response(raw_response)
+        response: str = self.truncate_response(raw_response)
 
         # Return response with and without truncation.
-        return (response, raw_response)
+        return (
+            response,
+            raw_response
+        )

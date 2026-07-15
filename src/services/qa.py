@@ -80,7 +80,7 @@ class QABase(ServiceBase):
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
         file_refs:              Optional[List[str]] = None,
-    ) -> tuple:
+    ) -> tuple[str, str, int, int ,float | int]:
         """
         Process each QA.
 
@@ -108,25 +108,29 @@ class QABase(ServiceBase):
             raw_response (str):
                 original answer from LLM.
 
-            retrieve_score (float):
+            input_token (int):
+                total amount of tokens used by LLM.
+
+            output_token (int):
+                total amount of tokens produced by LLM.
+
+            retrieve_score (float | int):
                 score of context retrieving if applicable.
         """
         # Set initial return answers.
-        response        = None
-        raw_response    = None
-        retrieve_score  = -1
+        response:       str | None  = None
+        raw_response:   str | None  = None
+        input_token:    int         = 0
+        output_token:   int         = 0
+        retrieve_score: float | int = -1
 
-        # NOTE:
-        # for legacy purposes. Change to `dict[int, str]` type when
-        # update to handle `int` properly
-        
         
         # Add default service 0
         if '0' not in services:
             services["0"] = {
                 "name": "system_information",
                 "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
-                }
+            }
 
         # cut down to just "name" of the services not its "desc"
         services_name: dict[str, str] = {}
@@ -146,13 +150,17 @@ class QABase(ServiceBase):
                 }
             )
 
-        # Get service option through query analyser.
+        # Get service option & minimal extra info about selected service through
+        # `query_analyser.py`.
         (
             service_option,
             service_info_dict
+            # _service_raw_option,
+            # service_input_token,
+            # service_output_token
         ) = self.query_analyser(
             query,
-            services=services # pyright: ignore
+            services=services # pyright: ignore[reportCallIssue]
         )
 
         # The query analyser can route a question about a uploaded file into 0 or -1  
@@ -163,8 +171,10 @@ class QABase(ServiceBase):
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
             return (
-                response,
-                raw_response,
+                str(response),
+                str(raw_response),
+                input_token,
+                output_token,
                 retrieve_score
             )
 
@@ -284,7 +294,11 @@ class QABase(ServiceBase):
                     text=query, extra_metadata=payload
                 )
                 response = raw_response = "Saved to your memory."
-                return (response, raw_response, retrieve_score)
+                return (
+                    str(response),
+                    str(raw_response),
+                    retrieve_score
+                )
 
         elif service_option == "3":
             (
@@ -295,9 +309,17 @@ class QABase(ServiceBase):
 
         # Add system information service 
         elif service_option == "0":
-            response, raw_response = self.system_information_service(
-                query=query, services=services, context=context)
-            
+            (
+                response,
+                raw_response,
+                input_token,
+                output_token
+            ) = self.system_information_service(
+                query=query,
+                services=services,
+                context=context
+            )
+
         # When all services are disabled and service 0 cannot answer, query analyser will return -1
         elif service_option == "-1":
             response = raw_response = (
@@ -383,20 +405,20 @@ class QABase(ServiceBase):
                 service_name=services_name.get(service_option, "")
             )
 
+        # NOTE:
+        # Final process to transfer final response with some extra info (I/O
+        # token, retrieve score, etc) over to `opensi_cosmic.py`. This's the
+        # 2nd time QA sent user query + selected service prompt (from
+        # `query_analyser.py`). The latter is different based on which condition
+        # above get hit
 
-        # Print service name.
-        # if (
-        #     (verbose)               and
-        #     (response is not None)  and
-        #     (service_option in self.query_analyser["full_services"].keys()) # pyright: ignore
-        # ):
-        #     response += "{0:s}\n{1:s}".format(
-        #         f"[Service: {self.query_analyser["full_services"][service_option]}", # pyright: ignore
-        #         # f"System info relevance: {system_information_relevance}]"
-        #     )
+        # TODO:
+        # Combine I/O token from 1st Ollama call (in `service_info_dict`) with I/O token from 2nd Ollama call (in either condition above)
 
         return (
-            response,
-            raw_response,
+            str(response),
+            str(raw_response),
+            input_token,
+            output_token,
             retrieve_score
         )

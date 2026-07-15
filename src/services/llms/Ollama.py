@@ -1,6 +1,9 @@
 ### Core modules ###
 from pathlib import Path
-from ollama import Client
+from ollama import (
+    ChatResponse,
+    Client
+)
 from dotenv import dotenv_values
 
 
@@ -108,7 +111,7 @@ class Ollama(LLMBase):
         question:       str,
         context:        str | dict[str, Any]    = {},
         service_name:   str                     = "",
-    ) -> tuple[str, str]:
+    ) -> tuple[str, str, int, int]:
         """
         Process the question and generate a response using Ollama.
 
@@ -123,7 +126,17 @@ class Ollama(LLMBase):
                 name of the service. Defaults to "".
 
         Returns:
-            Tuple of (response, raw_response)
+            response (str):
+                LLM response.
+
+            raw_response (str):
+                LLM raw response without truncations.
+
+            input_token (int):
+                total amount of tokens used by LLM.
+
+            output_token (int):
+                total amount of tokens produced by LLM.
         """
         # print(
         #     set_color(
@@ -139,19 +152,20 @@ class Ollama(LLMBase):
         )
 
         # Combine system prompt with user prompt
-        # combined_prompt: list[dict] = self.system_prompter(user_prompt, context=context)
-        combined_prompt: list[dict] = self.system_prompter(
+        combined_prompt: list[dict[str, str]] = self.system_prompter(
             user_prompt,
             context=context,
             service=service_name
         )
 
         # Chat
-        chat_response = self.ollama_client.chat(
+        chat_response: ChatResponse = self.ollama_client.chat(
             model=self.llm_name,
             messages=combined_prompt,
         )
-        raw_response = chat_response["message"]["content"]
+        raw_response:   str = chat_response["message"]["content"]
+        input_token:    int = chat_response["prompt_eval_count"]
+        output_token:   int = chat_response["eval_count"]
 
         # Apply truncation if enabled
         response = (
@@ -162,7 +176,9 @@ class Ollama(LLMBase):
 
         return (
             response,
-            raw_response
+            raw_response,
+            input_token,
+            output_token
         )
 
 

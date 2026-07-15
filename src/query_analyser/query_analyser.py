@@ -91,7 +91,7 @@ class QueryAnalyser:
         # update to handle `int` properly
         services:   dict[str, dict[str, str]],
         verbose:    bool = False
-    ) -> tuple[str, dict[str, str | bool]]:
+    ) -> tuple[str, dict[str, str | int]]:
         """
         Analyse query to get service option.
 
@@ -110,7 +110,7 @@ class QueryAnalyser:
             service_option (str):
                 service option.
 
-            service_info_dict (dict[str, str | bool]):
+            service_info_dict (dict[str, str | int]):
                 updated information dictionary.
         """
         # Set a list of services.
@@ -167,18 +167,28 @@ class QueryAnalyser:
         )
 
         # Create an initial information dictionary.
-        service_info_dict: dict[str, str | bool] = {
-            "query":                        query,
+        service_info_dict: dict[str, str | int] = {
+            "query": query,
+            "input_token": 0,
+            "output_token": 0
         }
 
         # Set the user prompter for service option.
         self.llm.set_user_prompter(self.user_prompter_service)
 
-        # Get raw anlysis from LLM to select a service.
-        service_analysis = self.llm(query)[0]
+        # NOTE:
+        # This's the 1st time QA sent user query + its combined prompt
+        # (user & system prompting). We only use Ollama models at the moment so
+        # it's safe to assume that `self.llm` is calling methods from `Ollama.py`.
+        (
+            service_analysis,
+            _service_raw_analysis,
+            service_input_token,
+            service_output_token
+        ) = self.llm(query)
 
         # Get the service option.
-        service_option = self.mapping(response=service_analysis)
+        service_option: str = self.mapping(response=service_analysis)
 
         # print(
         #     set_color(
@@ -228,7 +238,10 @@ class QueryAnalyser:
                 query=query,
                 service_info_dict=service_info_dict
             )
-        
+
+        service_info_dict["input_token"]    = service_input_token
+        service_info_dict["output_token"]   = service_output_token
+
         return (
             service_option,
             service_info_dict
