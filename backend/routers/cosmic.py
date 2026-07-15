@@ -227,11 +227,11 @@ async def process_cosmic(
             "llm_role":             "assistant",    # per agreed solution within our team
             "llm_response":         answer,
             "response_create_on":   now,
-                # TODO: later we have to implement the function to calculate the number of
-                # tokens used for each query and response, and then store it in the database. 
-                # For now, we will just set it to 1.
-                "input_token":          1,
-                "output_token":         1,
+            # TODO: later we have to implement the function to calculate the number of
+            # tokens used for each query and response, and then store it in the database. 
+            # For now, we will just set it to 1.
+            "input_token":          1,
+            "output_token":         1,
         }
         payload: dict[str, Any] = {
             "user_id":  str(user_id),
