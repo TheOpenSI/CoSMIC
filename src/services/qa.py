@@ -4,21 +4,20 @@ from fastapi import (
     HTTPException,
     status
 )
+import uuid
 
 
 ### Type hints ###
-from typing import Any, Optional, List
+
 
 ### Internal modules ###
 from . import chess as chess_instances
 from .base import ServiceBase
 from .document_index import DocumentMetadata
-from .llms.llm import LLMBase
+from .llms.LLMBase import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
-from ...utils.log_tool import set_color
-import uuid
 
 
 class QABase(ServiceBase):
@@ -54,10 +53,10 @@ class QABase(ServiceBase):
         super().__init__( **kwargs)
 
         # Set config globally.
-        self.query_analyser     = query_analyser
-        self.llm                = llm
-        self.rag                = rag
-        self.code_generator     = code_generator
+        self.query_analyser             = query_analyser
+        self.llm                        = llm
+        self.rag                        = rag
+        self.code_generator             = code_generator
         self.system_information_service = system_information_service
 
 
@@ -70,16 +69,16 @@ class QABase(ServiceBase):
         # NOTE:
         # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
         # update to handle `int` properly
-        services:   dict[str, dict[str, str]],
-        context:    str | dict  = "",
-        is_rag:     bool        = False,
-        verbose:    bool        = False,
-        user_id:                Optional[str]       = None,
-        session_id:             Optional[str]       = None,
-        global_service_names:   Optional[List[str]] = None,
+        services:               dict[str, dict[str, str]],
+        context:                str | dict          = "",
+        is_rag:                 bool                = False,
+        verbose:                bool                = False,
+        user_id:                str | None          = None,
+        session_id:             str | None          = None,
+        global_service_names:   list[str] | None    = None,
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
-        file_refs:              Optional[List[str]] = None,
+        file_refs:              list[str] | None    = None,
     ) -> tuple[str, str, int, int ,float | int]:
         """
         Process each QA.
@@ -352,13 +351,13 @@ class QABase(ServiceBase):
                 user_prompt = self.llm.user_prompter(
                     query,
                     context=rag_context
-                ) # pyright: ignore
+                ) # pyright: ignore[reportCallIssue]
 
                 # Get the retrieved context, scoped to the active memory tiers
                 (
                     context_retrieved,
                     retrieve_score
-                ) = self.rag(
+                ) = self.rag( # pyright: ignore[reportAssignmentType]
                     query,
                     user_id=user_id,
                     session_id=session_id,
@@ -388,7 +387,7 @@ class QABase(ServiceBase):
                     context.update({"context": f"{chat_history_context}{suffix}"})
                     if   (isinstance(context, dict))
                     else (f"{chat_history_context}{suffix}")
-                ) # pyright: ignore
+                ) # pyright: ignore[reportAssignmentType]
             
             # Non-RAG services (or when RAG is disabled) fall through here.
             else:

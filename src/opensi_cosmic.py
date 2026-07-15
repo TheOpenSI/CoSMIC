@@ -4,8 +4,6 @@ from sys import (
     exit,
     stdout
 )
-from pathlib import Path
-from typing import Any
 from fastapi import (
     HTTPException,
     status
@@ -21,6 +19,7 @@ from pprint import pp
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -40,7 +39,7 @@ from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
 
-# Shared cache for the services registry  
+# Shared cache for the services registry
 # Every service-derived view is built from this cached raw list
 _services_cache: list[dict[str, Any]] = []
 _services_cache_timestamp: float = 0
@@ -225,13 +224,14 @@ class OpenSICoSMIC:
                 raw response from LLM without truncations.
 
             input_token (int):
-                total amount of tokens used by LLM.
+                amount of input tokens captured from each QA session.
 
             output_token (int):
-                total amount of tokens produced by LLM.
+                amount of output tokens generated from each QA session.
 
             retrieve_score (float | int):
-                context retrieve score if `is_rag=True`.
+                score of context retrieving (if applicable). Default to '-1' for
+                non-RAG services.
         """
         # print(
         #     set_color(

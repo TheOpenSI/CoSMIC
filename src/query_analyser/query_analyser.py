@@ -2,10 +2,6 @@
 from sys import exit
 from pathlib import Path
 from re import search
-from fastapi import (
-    HTTPException,
-    status
-)
 
 
 ### Type hints ###

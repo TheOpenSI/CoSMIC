@@ -1,4 +1,5 @@
 ### Core modules ###
+import os
 from datetime import (
     datetime,
     timezone
@@ -17,7 +18,6 @@ from httpx import (
     Response
 )
 from codecarbon import EmissionsTracker
-from ...utils.log_tool import set_color
 
 
 ### Type hints ###
@@ -28,9 +28,8 @@ from typing import Any
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
 from ...utils.chat_history import build_context_from_messages
-from . import memory
-# from ...utils.statistics import update_statistic_per_query
-import os
+from ...utils.log_tool import set_color
+
 
 router: APIRouter = APIRouter()
 
@@ -192,7 +191,6 @@ async def process_cosmic(
             data.user_message = splits[1]
 
         # Start CodeCarbon emission tracking process (for General user queries)
-        general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
         general_tracker: EmissionsTracker = EmissionsTracker(
             project_name="cosmic-chat",
             save_to_file=False,
@@ -215,7 +213,7 @@ async def process_cosmic(
             session_id=data.chat_id,
             has_files=has_files,
             user_id=user_id,
-            file_refs=file_refs,
+            file_refs=file_refs
         )
         
         CHAT_API_URL = os.getenv(
