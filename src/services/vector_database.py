@@ -1,16 +1,15 @@
 ### Core modules ###
 import os
 from pathlib import Path
-from csv import writer
 from glob import glob
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-# from langchain_community.vectorstores import FAISS
 from langchain_qdrant import QdrantVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 from langchain_community.document_loaders import PyPDFLoader
+from qdrant_client import QdrantClient, models
 
 
 ### Type hints ###
@@ -26,18 +25,19 @@ class VectorDatabase(ServiceBase):
         self,
         document_analyser_model: str = "gte-small",
         # document_analyser_model: str = "Qwen/Qwen3-Embedding-8B",
-        local_database_path: str = "database/vector_database",
         vector_database_update_threshold: float = 0.98,
         device: str = "cuda",
+        reranker_model: str = "BAAI/bge-reranker-v2-m3",
         **kwargs
     ):
         """
         Vector database service.
 
+        Storage is backed by Qdrant (running as its own container, reached via the
+        ``QDRANT_URL`` environment variable); there is no local on-disk database.
+
         Args:
             document_analyser_model             (str, optional):    document analyser/process model.
-            local_database_path                 (str, optional):    path of local vector database on disk.
-                                                                    Default to "database/vector_database".
             vector_database_update_threshold    (float, optional):  contents with similarity >= this threshold
                                                                     will be skipped. Default to 0.98.
             device                              (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
@@ -45,65 +45,17 @@ class VectorDatabase(ServiceBase):
         """
         super().__init__(**kwargs)
 
-        # Set config.
-        # Set to absolute path.
-        self.local_database_path: Path = Path(local_database_path).resolve(strict=True)
+        # Cross-encoder reranker
+        self.device = device
+        self.reranker_model = reranker_model
+        self._reranker = None
 
-        if local_database_path != "" and not self.local_database_path.is_absolute():
-            self.local_database_path: Path = self.root.joinpath(self.local_database_path)
-
-        # Use default one.
-        if not self.local_database_path.exists(follow_symlinks=True):
-            if self.local_database_path != "":
-                print(
-                    set_color(
-                        status="warning",
-                        information="{0:s}{1:s}".format(
-                            f"Vector database \"{local_database_path}\" not exist",
-                            f", use default \"database/vector_database\"."
-                        )
-                    )
-                )
-
-            self.local_database_path: Path = self.root.joinpath("database/vector_database")
-
-        # Get the catalogue path and threshold.
-        self.current_local_database_path: Path = self.local_database_path
-        self.local_database_catalogue_path: Path = self.current_local_database_path.joinpath("file_list.csv")
+        # Similarity threshold for deduplicating content before adding to Qdrant.
         self.vector_database_update_threshold = vector_database_update_threshold
 
-        # Create local database directory.
-        if self.current_local_database_path != "":
-            local_database_name = str(object=self.current_local_database_path).split("/")[-1]
-            local_database_directory = str(object=self.current_local_database_path).replace(
-                f"/{local_database_name}",
-                ""
-            )
-            Path(local_database_directory).resolve(strict=True).mkdir(
-                mode=0o777,
-                parents=False,
-                exist_ok=True
-            )
-
-        # Write head in catalogue file.
-        if not self.local_database_catalogue_path.exists(follow_symlinks=True):
-            with self.local_database_catalogue_path.open(
-                mode="w",
-                buffering=-1,
-                encoding="utf-8",
-                errors=None,
-                newline=None
-            ) as catalogue_pt:
-                catalogue = writer(catalogue_pt)
-                catalogue.writerow(
-                    [
-                        "Source",
-                        "Time",
-                        "Comment"
-                    ]
-                )
-
         # For document analysis and knowledge database generation/update.
+        # Known short aliases map to their full Hugging Face repo id; any other
+        # value is treated as a direct Hugging Face model name.
         EMBEDDING_MODEL_DICT = {'gte-small': "thenlper/gte-small"}
 
         # Set page separators.
@@ -119,7 +71,7 @@ class VectorDatabase(ServiceBase):
         )
 
         # Build a document analyser.
-        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT[document_analyser_model]
+        EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT.get(document_analyser_model, document_analyser_model)
 
         self.database_update_embedding = HuggingFaceEmbeddings(
             model_name=EMBEDDING_MODEL_NAME,
@@ -128,61 +80,44 @@ class VectorDatabase(ServiceBase):
             encode_kwargs={"normalize_embeddings": True},
         )
 
-                # Initialize Qdrant client connecting to the Docker service
-        # Collection name defaults to "cosmic_collection"
-        # The URL points to the qdrant service defined in docker-compose.yml
+        # Initialize Qdrant client connecting to the Docker service.
+        # Collection name defaults to "cosmic_collection".
+        # The URL points to the qdrant service defined in docker-compose.yml.
         qdrant_url = os.getenv("QDRANT_URL", "http://qdrant:6333")
         collection_name = "cosmic_collection"
 
         print(set_color("info", f"Connecting to Qdrant at {qdrant_url}..."))
-        
-        # Connect to existing collection or create one if it doesn't exist
-        # Replaces FAISS local loading logic
-        self.database = QdrantVectorStore.from_texts(
-            texts=["Initial collection entry"],
-            embedding=self.database_update_embedding,
-            url=qdrant_url,
+
+        client = QdrantClient(url=qdrant_url)
+
+        # Check collection exists if not create one 
+        if not client.collection_exists(collection_name):
+            embedding_dim = len(
+                self.database_update_embedding.embed_query("dimension probe")
+            )
+            client.create_collection(
+                collection_name=collection_name,
+                vectors_config=models.VectorParams(
+                    size=embedding_dim,
+                    distance=models.Distance.COSINE,
+                ),
+            )
+            print(set_color("info", f"Created Qdrant collection: {collection_name}"))
+
+        # Attach to the existing collection
+        self.database = QdrantVectorStore(
+            client=client,
             collection_name=collection_name,
+            embedding=self.database_update_embedding,
         )
-        
+
         print(set_color("success", f"Connected to Qdrant collection: {collection_name}"))
-
-        # Build processor to handle a new document for database updates.
-        # Find the API at https://api.python.langchain.com/en/latest/vectorstores
-        # /langchain_community.vectorstores.faiss.FAISS.html
-        # Build a processor to handle a sentence for database updates.
-
-        # # Load a local database from a file
-        # if Path(self.current_local_database_path / "index.faiss").exists(follow_symlinks=True):
-        #     self.database = FAISS.load_local(
-        #         folder_path=local_database_path,
-        #         embeddings=self.database_update_embedding,
-        #         index_name="index",
-        #         allow_dangerous_deserialization=True
-        #     )
-
-        #     print(
-        #         set_color(
-        #             status="success",
-        #             information=f"Load \"{str(object=self.current_local_database_path)}\" to vector database."
-        #         )
-        #     )
-        # else:
-        #     self.database = FAISS.from_texts(
-        #         texts=["Use FAISS as database updater"],
-        #         embedding=self.database_update_embedding,
-        #         metadatas=None,
-        #         ids=None
-        #     )
 
         # Set search strategy.
         self.database.distance_strategy = DistanceStrategy.COSINE
 
         # Set a time stamp to highlight the most recently updated information.
         self.time_stamper:              str = datetime.now(tz=ZoneInfo(key="Australia/Sydney")).strftime(format="%B, %Y")
-
-        # Set a time stamp to update vector database catalogue.
-        self.catalogue_time_stamper:    str = datetime.now(tz=ZoneInfo(key="Australia/Sydney")).strftime(format="%m/%d/%Y, %H:%M:%S")
 
 
     def similarity_search_with_relevance_scores(
@@ -197,6 +132,27 @@ class VectorDatabase(ServiceBase):
             context (str): retrieved information.
         """
         return self.database.similarity_search_with_relevance_scores(*args, **kwargs)
+
+
+    def rerank(self, query: str, texts: list[str]) -> list[float]:
+        """ Score query text pairs with a cross encoder reranker """
+        if not texts:
+            return []
+
+        if self._reranker is None:
+            try:
+                from sentence_transformers import CrossEncoder
+                self._reranker = CrossEncoder(self.reranker_model, device=self.device)
+            except Exception as e:
+                print(set_color("warning", f"Reranker load failed ({self.reranker_model}): {e}"))
+                return []
+
+        try:
+            scores = self._reranker.predict([(query, t) for t in texts])
+            return [float(s) for s in scores]
+        except Exception as e:
+            print(set_color("warning", f"Reranker scoring failed: {e}"))
+            return []
 
 
     def quit(self):
@@ -252,59 +208,26 @@ class VectorDatabase(ServiceBase):
             self.add_documents(document_paths)
 
 
-    def update_database_catalogue(
-        self,
-        metadata: str
-    ):
-        """
-        Update catalogue of vector database.
-
-        Args:
-            metadata (str|list): contents to be added.
-        """
-        # Set as a list for loop.
-        if not isinstance(metadata, list):
-            metadatas: list[str] = [metadata]
-        else:
-            metadatas: list[str] = metadata
-
-        # Open the catalogue file.
-        with self.local_database_catalogue_path.open(
-            mode="a",
-            buffering=-1,
-            encoding="utf-8",
-            errors=None,
-            newline=None
-        ) as catalogue_pt:
-            catalogue = writer(catalogue_pt)
-
-            # Write metadata.
-            for data in metadatas:
-                if isinstance(data, str):
-                    catalogue.writerow(
-                        [
-                            data,
-                            self.catalogue_time_stamper,
-                            ""
-                        ]
-                    )
-
-
     def update_database_from_document(
         self,
-        document_path: str
-    ):
+        document_path: str,
+        extra_metadata: dict | None = None,
+    ) -> int:
         """
         Add a document to the vector database.
 
         Args:
             document_path (str): a document path.
         """
+        extra_metadata = extra_metadata or {}
+
         # Check if the document exists.
-        self.document_path: Path = Path(document_path).resolve(strict=True)
+        self.document_path: Path = Path(document_path).resolve(strict=False)
 
         if self.document_path.exists(follow_symlinks=True):
-            document_title = self.document_path.stem
+            # Prefer the clean original title from metadata; fall back to the
+            # on-disk stem (which still carries the file_id prefix).
+            document_title = extra_metadata.get("title") or self.document_path.stem
 
             # Read pages of a document.
             loader = PyPDFLoader(self.document_path)
@@ -320,40 +243,39 @@ class VectorDatabase(ServiceBase):
                 # Attach per-document metadata (propagates to all chunks).
                 if doc.metadata is None:
                     doc.metadata = {}
+                doc.metadata.update(extra_metadata)
                 doc.metadata["title"] = document_title
 
-                # If not highly similar to existing contents, add the content.
-                content_retrieved, similarity_score = self.similarity_search_with_relevance_scores(
-                    doc.page_content,
-                    k=1
-                )[0]
+                # Scope-level dedup is already handled by the watcher's content_hash
+                if not extra_metadata:
+                    hits = self.similarity_search_with_relevance_scores(
+                        doc.page_content,
+                        k=1
+                    )
 
-                # Skip if already in the database or has a high similiarity.
-                if similarity_score >= self.vector_database_update_threshold \
-                    or content_retrieved.page_content.find(doc.page_content) > -1 \
-                    or doc.page_content.find(content_retrieved.page_content) > -1:
-                    continue
+                    if hits:
+                        content_retrieved, similarity_score = hits[0]
+
+                        # Skip if already in the database or has a high similiarity.
+                        if similarity_score >= self.vector_database_update_threshold \
+                            or content_retrieved.page_content.find(doc.page_content) > -1 \
+                            or doc.page_content.find(content_retrieved.page_content) > -1:
+                            continue
 
                 # Ready to add to the vector database.
                 chunks = self.document_splitter.split_documents([doc])
                 for chunk in chunks:
                     if chunk.metadata is None:
                         chunk.metadata = {}
+                    for key, value in extra_metadata.items():
+                        chunk.metadata.setdefault(key, value)
                     chunk.metadata.setdefault("title", document_title)
                 document_processed += chunks
 
             # Obtain new knowledge from the splitted tokens.
             if len(document_processed) > 0:  # for invalid pdf such as a scanned .pdf
+                # Qdrant handles persistence automatically; no explicit save is needed.
                 self.database.add_documents(document_processed)
-
-                # Update database catalogue.
-                self.update_database_catalogue(document_path)
-
-                # Save to local database.
-                # self.database.save_local(str(object=self.current_local_database_path))
-
-                # Qdrant handles persistence automatically in Docker/Disk mode.
-                # No explicit save_local call is needed.
 
                 print(
                     set_color(
@@ -368,6 +290,8 @@ class VectorDatabase(ServiceBase):
                         information=f"Contents of '{str(object=self.document_path)}' exist."
                     )
                 )
+
+            return len(document_processed)
         else:
             print(
                 set_color(
@@ -375,11 +299,39 @@ class VectorDatabase(ServiceBase):
                     information=f"Document {str(object=document_path)} not exists."
                 )
             )
+            return 0
+
+    def delete_by_document_id(self, document_id: str) -> None:
+        """ Remove all vector points belonging to a document to avoid stale chunks """
+        try:
+            from qdrant_client import models
+
+            self.database.client.delete(
+                collection_name=self.database.collection_name,
+                points_selector=models.FilterSelector(
+                    filter=models.Filter(
+                        must=[
+                            models.FieldCondition(
+                                key="metadata.document_id",
+                                match=models.MatchValue(value=document_id),
+                            )
+                        ]
+                    )
+                ),
+            )
+        except Exception as e:
+            print(
+                set_color(
+                    status="warning",
+                    information=f"Failed to delete vectors for document '{document_id}': {e}"
+                )
+            )
 
 
     def update_database_from_text(
         self,
-        text: str
+        text: str,
+        extra_metadata: dict | None = None,
     ):
         """
         Add a sentence to the vector database.
@@ -391,30 +343,31 @@ class VectorDatabase(ServiceBase):
             status (int): skip (-1) or not (0).
         """
         if text != '':
-            # Skip for high-similar text.
-            content_retrieved, _ = self.similarity_search_with_relevance_scores(text, k=1)[0]
-            content_retrieved = content_retrieved.page_content
+            # Skip for high-similar text. On an empty collection the search
+            hits = self.similarity_search_with_relevance_scores(text, k=1)
 
-            # If the same as existing contents, skip the text.
-            if content_retrieved.find(text) > -1:
-                print(set_color(
-                    "warning",
-                    f"Similar contents found: '{content_retrieved}' for '{text}'."
-                ))
+            if hits:
+                content_retrieved = hits[0][0].page_content
 
-                return -1
+                # If the same as existing contents, skip the text
+                if content_retrieved.find(text) > -1:
+                    print(set_color(
+                        "warning",
+                        f"Similar contents found: '{content_retrieved}' for '{text}'."
+                    ))
+
+                    return -1
 
             # Update the text with timestamp.
             text = f"{text} by the date {self.time_stamper}"
 
-            # Add text to database.
-            self.database.add_texts([text])
+            # Add text to database with per-tier payload
+            if extra_metadata:
+                self.database.add_texts([text], metadatas=[extra_metadata])
+            else:
+                self.database.add_texts([text])
 
-            # Update database catalogue.
-            self.update_database_catalogue(text)
-
-            # Save to local file.
-            # self.database.save_local(str(object=self.current_local_database_path))
+            # Qdrant handles persistence automatically; no explicit save is needed.
 
             # Print the progress.
             print(

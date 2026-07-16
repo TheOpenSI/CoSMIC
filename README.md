@@ -14,7 +14,12 @@ CoSMIC/
 ├── backend/
 │   ├── cores/                    # Core FastAPI application setup
 │   └── routers/                  # CoSMIC API & non-API endpoints
+│       ├── cosmic.py             # Chat endpoint and routes to the QA layer
+│       └── memory.py             # File upload endpoint (/api/v1/memory/upload)
 ├── data/                         # Datasets in certain format (e.g., CSVs, Excels, etc)
+│   └── memories/                 # On-disk store for uploaded/ingested files, scoped by tier
+│       ├── global/               # Service-folder drop zone, watched for auto-ingestion
+│       └── users/                # Per-session uploaded files 
 ├── default/                      # Dataset templates (TODO: to be merged into `/data` directory)
 ├── docker/                       # Containerisation resources and orchestration files
 │   └── dockerfiles/              # Dockerfile for each service defined in the Compose file
@@ -24,6 +29,12 @@ CoSMIC/
 ├── src/                          # This is where the "heart" of CoSMIC located
 │   ├── query_analyser/           # SLM-based query routing and user prompt construction
 │   └── services/                 # Specialised AI service (similar to AI skills) implementations (TODO: to be re-structured in a new format for better understanding)
+│       ├── base.py               # Shared base class for services
+│       ├── document_index.py     # Tracks ingested document metadata
+│       ├── qa.py                 # Service routing and question-answering orchestration
+│       ├── rag.py                # Retrieval-augmented generation over the vector database
+│       ├── storage_events.py     # Folder-watcher that auto-ingests files dropped into it
+│       ├── vector_database.py    # Vector store (embedding, similarity search, reranking)
 │       └── llms/                 # Contains base class for calling SLM providers
 │           └── prompts/          # Contains smart prompting techniques from user queries to use for Query Analyser and specific CoSMIC services usages
 ├── types/                        # Shared type definitions used across the application

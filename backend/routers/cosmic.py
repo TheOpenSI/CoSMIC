@@ -29,8 +29,9 @@ from ...types.tags import APITag
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
 from ...utils.chat_history import build_context_from_messages
+from . import memory
 # from ...utils.statistics import update_statistic_per_query
-
+import os
 
 router: APIRouter = APIRouter(
     prefix="/api/v1/cosmic",
@@ -67,6 +68,7 @@ class CosmicAPI(BaseModel):
     name:           str | None = "New chat"
     user_message:   str
     body:           Body
+
 
 
 async def send_emissions_to_db(
@@ -145,7 +147,7 @@ async def process_cosmic(
 ):
     try:
         user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
-        user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
+        # user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
         # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
 
         chat_history_context: str = build_context_from_messages(
@@ -181,137 +183,102 @@ async def process_cosmic(
                 "result": openai_api_status
             }
 
-        # Proceed as normal
-        if data.user_message.find("</files>") > -1:
+        # Strip file reference. The file is already vectorised at upload time 
+        # has_files forces session-scoped retrieval so the doc question is grounded
+        # keep the message tag included for storage so the UI can render chip
+        raw_user_message: str = data.user_message
+        has_files: bool = data.user_message.find("</files>") > -1
+        file_refs: list[str] = []
+        if has_files:
             splits: list[str] = data.user_message.split("</files>")
-            data.user_message = splits[1]
-            file_dir: Path = Path(__file__).resolve().parent.parent.parent.joinpath(
-                "data",
-                "memories",
-                "users",
-                f"{user_id}"
-            )
-            if data.chat_id:
-                file_dir = file_dir.joinpath(
-                  "sessions",
-                  f"{data.chat_id}"
-                )
-
-            # Extract the files.
-            extracted_files: str = splits[0].split("<files>")[-1]
-            new_files: list[str] = [
-                str(file_dir.joinpath(extracted_file))
-                for extracted_file in extracted_files.split(",")
-                if  extracted_file
+            file_refs = [
+                ref.strip()
+                for ref in splits[0].split("<files>")[-1].split(",")
+                if ref.strip()
             ]
+            data.user_message = splits[1]
 
-            for new_file in new_files:
-                # Form a prompt to update vector database
-                user_message_vector_db_update: str = f"Add the following file to the vector database: {new_file}"
+        # Start CodeCarbon emission tracking process (for General user queries)
+        general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
+        general_tracker: EmissionsTracker = EmissionsTracker(
+            project_name="cosmic-chat",
+            save_to_file=False,
+            allow_multiple_runs=True,
+            tracking_mode="process",  # track only the current process (not the whole machine)
+            log_level="error"
+        )
 
-                # Start CodeCarbon emission tracking process (for RAG-triggered user queries)
-                rag_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
-                rag_tracker: EmissionsTracker = EmissionsTracker(
-                    project_name="cosmic-chat",
-                    save_to_file=False, 
-                    allow_multiple_runs=True,
-                    tracking_mode="process",  # track only the current process (not the whole machine)
-                    log_level="error"
-                )
+        general_tracker.start()
 
-                rag_tracker.start()
-
-                # Update vector database
-                answer: str = str(opensi_cosmic(question=user_message_vector_db_update)[0])
-
-                # Stop CodeCarbon emission tracking process (for RAG-triggered
-                # user queries) and start saving those tracked data
-                rag_emissions: float | None = rag_tracker.stop()
-                await send_emissions_to_db(
-                    user_id=user_id,
-                    tracker=rag_tracker
-                )
-                print(
-                    set_color(
-                        status="info",
-                        information=f"[CodeCarbon] VectorDB update emissions: {rag_emissions:.8f} kg CO₂"
-                    )
-                )
-
-        else:
-            # Start CodeCarbon emission tracking process (for General user queries)
-            general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
-            general_tracker: EmissionsTracker = EmissionsTracker(
-                project_name="cosmic-chat",
-                save_to_file=False,  
-                allow_multiple_runs=True,
-                tracking_mode="process",  # track only the current process (not the whole machine)
-                log_level="error"
-            )
-
-            general_tracker.start()
-
-            answer: str = str(
-                opensi_cosmic(
-                    question=data.user_message,
-                    context=chat_history_context,
-                )[0]
-            )
-
-            # TODO: later when have time, move to '.env' file
-            CHAT_API_URL: str = "http://backend:8000/api/v1/chatboxes/"
-
-            now: str = datetime.now(tz=timezone.utc).isoformat()
-            new_detail: dict[str, Any] = {
-                "user_role":            user_role,
-                "user_query":           data.user_message,
-                "query_create_on":      now,
-                "llm_role":             "assistant",
-                "llm_response":         answer,
-                "response_create_on":   now,
-            }
-            payload: dict[str, Any] = {
-                "user_id":  str(user_id),
-                "name":     data.name,
-                "details":  [new_detail],
-            }
-
-            async with AsyncClient() as client:
-                if data.chat_id:
-                    save_response: Response = await client.patch(
-                        f"{CHAT_API_URL}{data.chat_id}",
-                        json=payload
-                    )
-                    save_response.raise_for_status()
-                    chat_id: str = data.chat_id
-
-                else:
-                    save_response: Response = await client.post(
-                        CHAT_API_URL,
-                        json=payload
-                    )
-                    save_response.raise_for_status()
-                    chat_id = save_response.json()["created"]["id"]
-
-            # Stop CodeCarbon emission tracking process (for General user queries)
-            # and start saving those tracked data
-            general_emissions: float | None = general_tracker.stop()
-            await send_emissions_to_db(
+        answer: str = str(
+            opensi_cosmic(
+                question=data.user_message,
+                context=chat_history_context,
+                session_id=data.chat_id,
+                has_files=has_files,
                 user_id=user_id,
-                tracker=general_tracker
-            )
-            print(
-                set_color(
-                    status="info",
-                    information=f"[CodeCarbon] General chat query emissions: {general_emissions:.8f} kg CO₂"
-                )
-            )
+                file_refs=file_refs,
+            )[0]
+        )
 
-            return {
-                "status": "success",
-                "result": answer,
-                "chat_id": chat_id
-            }
+        CHAT_API_URL = os.getenv("CHAT_API_URL", "http://backend:8000/api/v1/chatboxes/")
+
+        now: str = datetime.now(tz=timezone.utc).isoformat()
+        new_detail: dict[str, Any] = {
+            "user_role":            "user",         # per agreed solution within our team
+            "user_query":           raw_user_message,
+            "query_create_on":      now,
+            "llm_role":             "assistant",    # per agreed solution within our team
+            "llm_response":         answer,
+            "response_create_on":   now,
+            # TODO: later we have to implement the function to calculate the number of
+            # tokens used for each query and response, and then store it in the database. 
+            # For now, we will just set it to 1.
+            "input_token":          1,
+            "output_token":         1,
+        }
+        payload: dict[str, Any] = {
+            "user_id":  str(user_id),
+            "name":     data.name,
+            "details":  [new_detail],
+        }
+
+        async with AsyncClient() as client:
+            if data.chat_id:
+                save_response: Response = await client.patch(
+                    f"{CHAT_API_URL}{data.chat_id}",
+                    json=payload
+                )
+                save_response.raise_for_status()
+                chat_id: str = data.chat_id
+
+            else:
+                save_response: Response = await client.post(
+                    CHAT_API_URL,
+                    json=payload
+                )
+                save_response.raise_for_status()
+                chat_id = save_response.json()["created"]["id"]
+
+        # Stop CodeCarbon emission tracking process (for General user queries)
+        # and start saving those tracked data
+        general_emissions: float | None = general_tracker.stop()
+        await send_emissions_to_db(
+            user_id=user_id,
+            tracker=general_tracker
+        )
+        print(
+            set_color(
+                status="info",
+                information=f"[CodeCarbon] General chat query emissions: {general_emissions:.8f} kg CO₂"
+            )
+        )
+
+        return {
+            "status": "success",
+            "result": answer,
+            "chat_id": chat_id
+        }
 
 
     except HTTPException as http_exc:

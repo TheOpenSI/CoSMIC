@@ -26,7 +26,6 @@ class QueryAnalyser:
         llm_name:       str     = "qwen2.5:7b",
         seed:           int     = 0,
         is_quantised:   bool    = False,
-        service_index:  int     = -1,
         device:         str     = "cuda"
     ) -> None:
         """
@@ -42,18 +41,12 @@ class QueryAnalyser:
             is_quantised (bool, optional):
                 use quantized LLM. Defaults to False.
 
-            service_index (int, optional):
-                use selected service, otherwise automatically select.
-
             device (str, optional):
                 use cuda or cpu for LLM. Defaults to "cuda".
         """
         # Set config.
         self.root = Path(__file__).resolve(strict=True).parent.parent.parent
         self.device = device
-
-        # Set provided service.
-        self.service_index = service_index
 
         # Build LLM instance from class defined in .py if llm_name is supported.
         if llm_name in LLM_INSTANCE_DICT.keys():
@@ -126,30 +119,30 @@ class QueryAnalyser:
             for (service_id, service_info) in services.items()
         }
 
-        # There is/are active services from fetched API endpoint
-        if len(self.services) != 0:
-            pass
+        # # There is/are active services from fetched API endpoint
+        # if len(self.services) != 0:
+        #     pass
 
-        # No active services found from fetched API endpoint
-        else:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={
-                    "status": "404 - Not Found",
-                    "message": "{trig:s}: {cond:s}".format(
-                        trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
-            )
+        # # No active services found from fetched API endpoint
+        # else:
+        #     raise HTTPException(
+        #         status_code=status.HTTP_404_NOT_FOUND,
+        #         detail={
+        #             "status": "404 - Not Found",
+        #             "message": "{trig:s}: {cond:s}".format(
+        #                 trig="EmptyServiceError",
+        #                 cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
+        #             )
+        #         }
+        #     )
 
         # Chect if chess is one of the services, if yes, then add chess subservices to full services.
         self.full_services: dict[str, str] = dict(self.services)
 
-        if "0" in self.services:
+        if "1" in self.services:
             self.chess_subservices: dict[str, str] = {
-                "0.0": "predict next move given a chess FEN",
-                "0.1": "predict next move given a sequence of moves"
+                "1.0": "predict next move given a chess FEN",
+                "1.1": "predict next move given a sequence of moves"
             }
 
             self.full_services.update(self.chess_subservices)
@@ -173,55 +166,41 @@ class QueryAnalyser:
             services=self.services
         )
 
-        # Set user prompter for system information.
-        self.user_prompter_system_info = get_instance(
-            instances=query_user_prompt_instances,
-            instance_name="QueryAnalyserSystemInfo"
-        )(
-            services=self.services
-        )
-
         # Create an initial information dictionary.
         service_info_dict: dict[str, str | bool] = {
             "query":                        query,
-            "system_information_relevance": False,
-            "system_information":           ""
         }
 
-        if self.service_index >= 0:
-            service_option = str(self.service_index)
+        # Set the user prompter for service option.
+        self.llm.set_user_prompter(self.user_prompter_service)
 
-        else:
-            # Set the user prompter for service option.
-            self.llm.set_user_prompter(self.user_prompter_service)
+        # Get raw anlysis from LLM to select a service.
+        service_analysis = self.llm(query)[0]
 
-            # Get raw anlysis from LLM to select a service.
-            service_analysis = self.llm(query)[0]
+        # Get the service option.
+        service_option = self.mapping(response=service_analysis)
 
-            # Get the service option.
-            service_option = self.mapping(response=service_analysis)
+        # print(
+        #     set_color(
+        #         status="info",
+        #         information=f"Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
+        #     )
+        # )
 
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"Selected service from SLM response (user query has been re-prompted by Query Analyser): {service_option}"
-            #     )
-            # )
-
-            # Analysis information.
-            if verbose:
-                print(
-                    set_color(
-                        status="info",
-                        information="{0:s}\n{1:s}\n{2:s}".format(
-                            f"Query: {query}",
-                            f"Analysis: {service_analysis}",
-                            f"Service: {service_option}"
-                        )
+        # Analysis information.
+        if verbose:
+            print(
+                set_color(
+                    status="info",
+                    information="{0:s}\n{1:s}\n{2:s}".format(
+                        f"Query: {query}",
+                        f"Analysis: {service_analysis}",
+                        f"Service: {service_option}"
                     )
                 )
+            )
 
-        if service_option == "0":
+        if service_option == "1":
             # Remove last symbol.
             if query[-1] in [
                 ",",
@@ -240,7 +219,7 @@ class QueryAnalyser:
                 service_info_dict=service_info_dict
             )
 
-        elif service_option == "1":
+        elif service_option == "2":
             # Update the vector database.
             (
                 service_option,
@@ -249,34 +228,7 @@ class QueryAnalyser:
                 query=query,
                 service_info_dict=service_info_dict
             )
-
-        else:
-            # Set the user prompter for system information relevance.
-            self.llm.set_user_prompter(self.user_prompter_system_info)
-
-            # Get the response for whether the query is related to system information.
-            relevance_analysis: str = self.llm(query)[0]
-
-            # print(
-            #     set_color(
-            #         status="info",
-            #         information=f"Does SLM response detected user query asking about our system info or not? ({relevance_analysis})"
-            #     )
-            # )
-
-            # Get whether the question is related to system information.
-            relevance: bool = self.get_system_information_relevance(relevance_analysis)
-
-            # Add the system information if it is related to the question.
-            if relevance:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-                service_info_dict["system_information"] = self.user_prompter_system_info.system_information
-
-            else:
-                # Update system information relevance.
-                service_info_dict["system_information_relevance"] = relevance
-
+        
         return (
             service_option,
             service_info_dict
@@ -392,13 +344,13 @@ class QueryAnalyser:
         if fen_match:
             # Given FEN.
             current_fen = fen_match.group()
-            service_option = "0.0"
+            service_option = "1.0"
             service_info_dict.update({"fen": current_fen})
 
         elif move_match:
             # Given a sequence of moves.
             current_moves = move_match.group(1)
-            service_option = "0.1"
+            service_option = "1.1"
             service_info_dict.update({"moves": current_moves})
 
         else:
@@ -430,7 +382,7 @@ class QueryAnalyser:
             service_option      (str):  service option.
             service_info_dict   (dict): updated information dictionary.
         """
-        service_option = "1"
+        service_option = "2"
 
         # Check if context is a .pdf.
         is_a_document = query.find(".pdf") > -1
@@ -493,20 +445,3 @@ class QueryAnalyser:
 
         return (service_option, service_info_dict)
 
-
-    def get_system_information_relevance(
-        self,
-        response: str
-    ):
-        """
-        Get whether the question is related to system information from response.
-
-        Args:
-            response (str): LLM response.
-
-        Returns:
-            relevance (bool): whether being related to.
-        """
-        relevance = response.lower().find("yes") > -1
-
-        return relevance
