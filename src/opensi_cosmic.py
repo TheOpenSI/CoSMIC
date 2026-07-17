@@ -472,6 +472,7 @@ class OpenSICoSMIC:
                 rag=self.rag,
                 code_generator=self.code_generator,
                 system_information_service = self.system_information_service,
+                fallback_service=self.fallback_service,
                 config=None
             )
 
