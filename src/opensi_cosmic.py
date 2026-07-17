@@ -184,7 +184,7 @@ class OpenSICoSMIC:
         self.system_information_service: SystemInformationService = SystemInformationService(llm=self.llm)
 
         # Fallback service
-        self.fallback_service: FallBackService = FallBackService(services=self.get_services(raw=True))
+        self.fallback_service: FallBackService = FallBackService()
 
         # Initialise & setup QA instance.
         self.qa: QABase | None = None

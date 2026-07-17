@@ -302,7 +302,7 @@ class QABase(ServiceBase):
             
         # When all services are disabled and service 0 cannot answer, query analyser will return -1
         elif service_option == "-1":
-            response, raw_response = self.fallback_service()
+            response, raw_response = self.fallback_service(services=services)
 
         else:
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
