@@ -1,6 +1,5 @@
 ### Core modules ###
 from pathlib import Path
-from CoSMIC.src.services.fallBackService import FallBackService
 from fastapi import (
     HTTPException,
     status
