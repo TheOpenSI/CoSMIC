@@ -17,7 +17,7 @@ from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
-from .fallback_service import FallBackService
+from .fallback_service import FallbackService
 from ...utils.log_tool import set_color
 import uuid
 
@@ -30,7 +30,7 @@ class QABase(ServiceBase):
         rag:            RAGBase,
         code_generator: CodeGenerator,
         system_information_service: SystemInformationService,
-        fallback_service: FallBackService,
+        fallback_service: FallbackService,
         config:         str | None = None,
         **kwargs
     ) -> None:
@@ -53,7 +53,7 @@ class QABase(ServiceBase):
             system_information_service (SystemInformationService):
                 system information service.
 
-            fallback_service (FallBackService):
+            fallback_service (FallbackService):
                 fallback service.
 
             config (str, optional):

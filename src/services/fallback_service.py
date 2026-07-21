@@ -1,6 +1,6 @@
 from .base import ServiceBase
 
-class FallBackService(ServiceBase):
+class FallbackService(ServiceBase):
     def __init__(self,
                  **kwargs) -> None:
         """
