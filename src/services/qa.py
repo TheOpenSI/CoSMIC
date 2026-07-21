@@ -17,7 +17,7 @@ from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
-from .fallBackService import FallBackService
+from .fallback_service import FallBackService
 from ...utils.log_tool import set_color
 import uuid
 
@@ -49,6 +49,12 @@ class QABase(ServiceBase):
 
             code_generator (CodeGenerator):
                 code generation service.
+
+            system_information_service (SystemInformationService):
+                system information service.
+
+            fallback_service (FallBackService):
+                fallback service.
 
             config (str, optional):
                 config file to extract settings. Default to None.

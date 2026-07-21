@@ -1,5 +1,3 @@
-from typing import Any
-
 from .base import ServiceBase
 
 class FallBackService(ServiceBase):
@@ -36,9 +34,11 @@ class FallBackService(ServiceBase):
         Returns:
             service_names (str): names of the available services.
         """
-        return ', '.join([self._fix_service_name(service.get("name")) 
-                          for service in services.values() 
-                          if not "system_information" in service.get("name")])
+        return ", ".join(
+            self._fix_service_name(service.get("name", "undefined_service_name")) 
+            for service in services.values()
+            if not "system_information" in service.get("name", "")
+        )
 
 
     def __call__(self,
@@ -50,10 +50,11 @@ class FallBackService(ServiceBase):
             response (str): truncated answer.
             raw_response (str): original answer from LLM.
         """
+        service_string = self._get_service_names(services) or "None"
         raw_response = response = (f"I am unable to assist with that request at this time. "
                                    f"It may be outside my current capabilities, or the required service is not enabled. "
                                    f"For your reference, I currently have access to the following {len(services) - 1} service(s): "
-                                   f"{self._get_service_names(services)}. "
+                                   f"{service_string}. "
                                    f"Please feel free to rephrase your request, or contact the OpenSI team for further support.")
 
         return (response, raw_response)

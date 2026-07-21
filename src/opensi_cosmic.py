@@ -30,7 +30,7 @@ from .services.vector_database import VectorDatabase
 from .services.qa import QABase
 from .services.rag import RAGBase
 from .services.system_information_service import SystemInformationService
-from .services.fallBackService import FallBackService
+from .services.fallback_service import FallBackService
 from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
