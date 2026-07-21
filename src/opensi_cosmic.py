@@ -30,7 +30,7 @@ from .services.vector_database import VectorDatabase
 from .services.qa import QABase
 from .services.rag import RAGBase
 from .services.system_information_service import SystemInformationService
-from .services.fallback_service import FallBackService
+from .services.fallback_service import FallbackService
 from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
@@ -184,7 +184,7 @@ class OpenSICoSMIC:
         self.system_information_service: SystemInformationService = SystemInformationService(llm=self.llm)
 
         # Fallback service
-        self.fallback_service: FallBackService = FallBackService()
+        self.fallback_service: FallbackService = FallbackService()
 
         # Initialise & setup QA instance.
         self.qa: QABase | None = None
