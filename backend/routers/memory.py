@@ -1,8 +1,18 @@
+### Core modules ###
+from uuid import uuid4
+from fastapi import (
+    APIRouter,
+    UploadFile,
+    status,
+    HTTPException
+)
+from pathlib import Path
+
+
+### Type hints ###
+from ...types.tags import APITag
 import mimetypes
 import os
-import uuid
-from fastapi import APIRouter, UploadFile, HTTPException, status
-from pathlib import Path
 
 from ...src.services.document_index import DocumentMetadata, compute_content_hash
 
@@ -32,9 +42,25 @@ def set_vector_database(vector_database):
     _vector_database = vector_database
 
 
-@router.post("/upload")
+
+### Internal modules ###
+
+
+router: APIRouter = APIRouter(
+    prefix="/api/v1/memory",
+    tags=[APITag.memory]
+)
+
+
+@router.post(
+    path="/upload",
+    status_code=status.HTTP_201_CREATED
+)
 async def upload_file(
-    file: UploadFile, memory_type: str = "session", chat_session_id: str = "default", user_id: str = "default"
+    file:               UploadFile,
+    memory_type:        str = "session",
+    chat_session_id:    str = "default",
+    user_id:            str = "default"
 ):
     if memory_type == "global_memory":
         raise HTTPException(
@@ -58,7 +84,7 @@ async def upload_file(
                     detail=f"A file with the name '{file.filename}' already exists."
                 )
 
-    file_id = uuid.uuid4().hex[:8]
+    file_id = uuid4().hex[:8]
 
     if memory_type == "user":
         save_dir = Path(f"/app/data/memories/users/{user_id}")
