@@ -17,6 +17,7 @@ from .llms.llm import LLMBase
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
+from .fallback_service import FallbackService
 from ...utils.log_tool import set_color
 import uuid
 
@@ -29,6 +30,7 @@ class QABase(ServiceBase):
         rag:            RAGBase,
         code_generator: CodeGenerator,
         system_information_service: SystemInformationService,
+        fallback_service: FallbackService,
         config:         str | None = None,
         **kwargs
     ) -> None:
@@ -48,18 +50,24 @@ class QABase(ServiceBase):
             code_generator (CodeGenerator):
                 code generation service.
 
+            system_information_service (SystemInformationService):
+                system information service.
+
+            fallback_service (FallbackService):
+                fallback service.
+
             config (str, optional):
                 config file to extract settings. Default to None.
         """
         super().__init__( **kwargs)
 
         # Set config globally.
-        self.query_analyser     = query_analyser
-        self.llm                = llm
-        self.rag                = rag
-        self.code_generator     = code_generator
+        self.query_analyser             = query_analyser
+        self.llm                        = llm
+        self.rag                        = rag
+        self.code_generator             = code_generator
         self.system_information_service = system_information_service
-
+        self.fallback_service           = fallback_service
 
         return None
 
@@ -300,9 +308,7 @@ class QABase(ServiceBase):
             
         # When all services are disabled and service 0 cannot answer, query analyser will return -1
         elif service_option == "-1":
-            response = raw_response = (
-                "I can't help with that right now — it may be outside what I'm currently set up to answer, or the right service isn't enabled." "\n"
-                "Try rephrasing, or ask about something else I can help with. Otherwise, contact OpenSI team.")
+            response, raw_response = self.fallback_service(services=services)
 
         else:
             RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
