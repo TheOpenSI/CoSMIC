@@ -7,6 +7,8 @@ from fastapi import (
     HTTPException
 )
 from pathlib import Path
+import logging
+import shutil
 
 
 ### Type hints ###
@@ -14,22 +16,24 @@ from ...types.tags import APITag
 import mimetypes
 import os
 
-from ...src.services.document_index import DocumentMetadata, compute_content_hash
+from ...src.services.document_index import DocumentIndex, DocumentMetadata, compute_content_hash
 
 router = APIRouter()
+
+logger = logging.getLogger(__name__)
 
 # Embeddable file types
 EMBEDDABLE_EXTENSIONS = {".pdf"}
 
 # Global and User document index instances
 # These will be set by the cosmic router initialization
-_global_document_index = None
-_user_document_index = None
+_global_document_index: DocumentIndex = None
+_user_document_index: DocumentIndex = None
 # Vector database to embed uploaded files
 _vector_database = None
 
 
-def set_document_indexes(global_index, user_index):
+def set_document_indexes(global_index: DocumentIndex, user_index: DocumentIndex) -> None:
     """Initialize document indexes (called by cosmic router)"""
     global _global_document_index, _user_document_index
     _global_document_index = global_index
@@ -150,3 +154,45 @@ async def upload_file(
         "content_type": file.content_type,
         "chunk_count": chunk_count,
     }
+
+
+@router.delete(
+    path="/session/{chat_session_id}",
+    status_code=status.HTTP_200_OK,
+)
+async def delete_session_data(chat_session_id: str):
+    """
+    Receiver for chat-session deletion. Called clicking the 
+    "delete chat" action, so CoSMIC can drop the on-disk files
+    and document-index metadata it holds for that session_id.
+    """
+    docs = _user_document_index.get_documents_by_session(chat_session_id) \
+        if _user_document_index \
+            else []
+
+    user_ids = {doc.user_id for doc in docs if doc.user_id} # this would ideally be 0
+
+    deleted_files = 0
+    failed_paths: list[str] = []
+
+    for user_id in user_ids:
+        session_dir = Path(f"/app/data/memories/users/{user_id}/sessions/{chat_session_id}")
+
+        if not session_dir.exists():
+            continue
+
+        try:
+            file_count = sum(1 for p in session_dir.rglob("*") if p.is_file())
+            shutil.rmtree(session_dir)
+            deleted_files += file_count
+            logger.info(
+                f"Deleted session directory {session_dir} ({file_count} files) "
+                f"for session_id = {chat_session_id}"
+            )
+
+        except OSError as exc:
+            failed_paths.append(str(session_dir))
+            logger.error(
+                f"Failed to delete session directory {session_dir} "
+                f"for session_id = {chat_session_id}: {exc}"
+            )
