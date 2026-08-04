@@ -196,3 +196,23 @@ async def delete_session_data(chat_session_id: str):
                 f"Failed to delete session directory {session_dir} "
                 f"for session_id = {chat_session_id}: {exc}"
             )
+
+    removed_docs = 0
+    for doc in docs:
+        if _user_document_index.remove_document(doc.document_id):
+            removed_docs += 1
+
+    success = not failed_paths
+    logger.info(
+        f"Session cleanup for session_id = {chat_session_id}: "
+        f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
+        f"failed_paths = {failed_paths}"
+    )
+
+    return {
+        "success": success,
+        "session_id": chat_session_id,
+        "files_deleted_count": deleted_files,
+        "metadata_removed_count": removed_docs,
+        "failed_paths": failed_paths,
+    }
