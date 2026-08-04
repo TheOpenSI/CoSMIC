@@ -160,11 +160,22 @@ async def upload_file(
     path="/session/{chat_session_id}",
     status_code=status.HTTP_200_OK,
 )
-async def delete_session_data(chat_session_id: str):
+async def delete_session_data(chat_session_id: str) -> dict:
     """
     Receiver for chat-session deletion. Called clicking the 
     "delete chat" action, so CoSMIC can drop the on-disk files
     and document-index metadata it holds for that session_id.
+
+    Args:
+        chat_session_id (str): The chat session to delete.
+
+    Returns:
+        dict: A dictionary with:
+            - Success bool
+            - Session id
+            - The number of files deleted, 
+            - The number of metadata removed, and 
+            - A list of failed paths.
     """
     docs = _user_document_index.get_documents_by_session(chat_session_id) \
         if _user_document_index \
