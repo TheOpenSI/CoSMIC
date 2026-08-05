@@ -7,6 +7,7 @@ from fastapi import (
     HTTPException
 )
 from pathlib import Path
+from pydantic import BaseModel
 import logging
 import shutil
 
@@ -17,6 +18,7 @@ import mimetypes
 import os
 
 from ...src.services.document_index import DocumentIndex, DocumentMetadata, compute_content_hash
+from ...src.services.vector_database import VectorDatabase
 
 router = APIRouter()
 
@@ -30,7 +32,7 @@ EMBEDDABLE_EXTENSIONS = {".pdf"}
 _global_document_index: DocumentIndex = None
 _user_document_index: DocumentIndex = None
 # Vector database to embed uploaded files
-_vector_database = None
+_vector_database: VectorDatabase = None
 
 
 def set_document_indexes(global_index: DocumentIndex, user_index: DocumentIndex) -> None:
@@ -156,42 +158,47 @@ async def upload_file(
     }
 
 
-@router.delete(
-    path="/session/{chat_session_id}",
+class SessionDeleteRequest(BaseModel):
+    chat_id: str
+    user_id: str
+
+
+@router.post(
+    path="/session/delete",
     status_code=status.HTTP_200_OK,
 )
-async def delete_session_data(chat_session_id: str) -> dict:
+async def delete_session_data(request: SessionDeleteRequest) -> dict:
     """
-    Receiver for chat-session deletion. Called clicking the 
-    "delete chat" action, so CoSMIC can drop the on-disk files
-    and document-index metadata it holds for that session_id.
+    Receiver for chat-session deletion. Called when the user clicks the
+    "delete chat" action, so CoSMIC can drop the on-disk files, the
+    document-index metadata, and the vectors it holds for that session_id.
 
     Args:
-        chat_session_id (str): The chat session to delete.
+        request (SessionDeleteRequest): chat_id and user_id of the deleted session.
 
     Returns:
         dict: A dictionary with:
             - Success bool
             - Session id
-            - The number of files deleted, 
-            - The number of metadata removed, and 
-            - A list of failed paths.
+            - The number of files deleted,
+            - The number of metadata removed,
+            - The number of vectors deleted,
+            - A list of failed paths, and
+            - Whether vector cleanup failed.
     """
+    chat_session_id = request.chat_id
+    user_id = request.user_id
+
     docs = _user_document_index.get_documents_by_session(chat_session_id) \
         if _user_document_index \
             else []
 
-    user_ids = {doc.user_id for doc in docs if doc.user_id} # this would ideally be 0
-
     deleted_files = 0
     failed_paths: list[str] = []
 
-    for user_id in user_ids:
-        session_dir = Path(f"/app/data/memories/users/{user_id}/sessions/{chat_session_id}")
+    session_dir = Path(f"/app/data/memories/users/{user_id}/sessions/{chat_session_id}")
 
-        if not session_dir.exists():
-            continue
-
+    if session_dir.exists():
         try:
             file_count = sum(1 for p in session_dir.rglob("*") if p.is_file())
             shutil.rmtree(session_dir)
@@ -213,11 +220,27 @@ async def delete_session_data(chat_session_id: str) -> dict:
         if _user_document_index.remove_document(doc.document_id):
             removed_docs += 1
 
-    success = not failed_paths
+    vectors_deleted_count = 0
+    vector_cleanup_failed = False
+    if _vector_database is not None:
+        try:
+            vectors_deleted_count = _vector_database.delete_by_session_id(chat_session_id)
+            logger.info(
+                f"Deleted {vectors_deleted_count} vector(s) from Qdrant "
+                f"for session_id = {chat_session_id}"
+            )
+        except Exception as exc:
+            vector_cleanup_failed = True
+            logger.error(
+                f"Failed to delete vectors for session_id = {chat_session_id}: {exc}"
+            )
+
+    success = not failed_paths and not vector_cleanup_failed
     logger.info(
         f"Session cleanup for session_id = {chat_session_id}: "
         f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
-        f"failed_paths = {failed_paths}"
+        f"vectors_deleted_count = {vectors_deleted_count}, failed_paths = {failed_paths}, "
+        f"vector_cleanup_failed = {vector_cleanup_failed}"
     )
 
     return {
@@ -225,5 +248,7 @@ async def delete_session_data(chat_session_id: str) -> dict:
         "session_id": chat_session_id,
         "files_deleted_count": deleted_files,
         "metadata_removed_count": removed_docs,
+        "vectors_deleted_count_count": vectors_deleted_count,
         "failed_paths": failed_paths,
+        "vector_cleanup_failed": vector_cleanup_failed,
     }

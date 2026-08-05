@@ -301,6 +301,40 @@ class VectorDatabase(ServiceBase):
             )
             return 0
 
+
+    def delete_by_session_id(self, session_id: str) -> int:
+        """ 
+        Remove all vector points belonging to a chat session.
+        Scoped strictly to `metadata.session_id == session_id`, so other
+        sessions' vectors are left untouched. Unlike `delete_by_document_id`,
+        this does not swallow errors - callers are expected to handle/log
+        failures themselves.
+
+        Returns:
+            int: number of points deleted.
+        """
+        session_filter = models.Filter(
+            must = [models.FieldCondition(key = "metadata.session_id",
+                                          match=models.MatchValue(value=session_id))]
+        )
+
+        point_count = self.database.client.count(
+            collection_name=self.database.collection_name,
+            count_filter=session_filter,
+            exact=True,
+        ).count
+
+        if point_count == 0:
+            return 0
+
+        self.database.client.delete(
+            collection_name=self.database.collection_name,
+            points_selector=models.FilterSelector(filter=session_filter),
+        )
+
+        return point_count
+
+
     def delete_by_document_id(self, document_id: str) -> None:
         """ Remove all vector points belonging to a document to avoid stale chunks """
         try:
