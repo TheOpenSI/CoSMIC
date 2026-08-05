@@ -203,7 +203,7 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
             deleted_files += file_count
             print(
                 set_color(
-                    staus = "info", 
+                    status = "info", 
                     information = (f"Deleted session directory {session_dir} ({file_count} files) "
                                    f"for session_id = {chat_session_id}")
                 )
@@ -213,7 +213,7 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
             failed_paths.append(str(session_dir))
             print(
                 set_color(
-                    staus = "error", 
+                    status = "error", 
                     information = (f"Failed to delete session directory {session_dir} "
                                    f"for session_id = {chat_session_id}: {exc}")
                 )
@@ -231,7 +231,7 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
             vectors_deleted_count = _vector_database.delete_by_session_id(chat_session_id)
             print(
                 set_color(
-                    staus = "info", 
+                    status = "info", 
                     information = (f"Deleted {vectors_deleted_count} vector(s) from Qdrant "
                                    f"for session_id = {chat_session_id}")
                 )
@@ -240,7 +240,7 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
             vector_cleanup_failed = True
             print(
                 set_color(
-                    staus = "error", 
+                    status = "error", 
                     information = (f"Failed to delete vectors for session_id = {chat_session_id}: {exc}")
                 )
             )
@@ -248,7 +248,7 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
     success = not failed_paths and not vector_cleanup_failed
     print(
         set_color(
-            staus = "info", 
+            status = "info", 
             information = (f"Session cleanup for session_id = {chat_session_id}: "
                            f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
                            f"vectors_deleted_count = {vectors_deleted_count}, failed_paths = {failed_paths}, "
