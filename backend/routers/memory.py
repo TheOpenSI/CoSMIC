@@ -8,7 +8,6 @@ from fastapi import (
 )
 from pathlib import Path
 from pydantic import BaseModel
-import logging
 import shutil
 
 
@@ -19,10 +18,9 @@ import os
 
 from ...src.services.document_index import DocumentIndex, DocumentMetadata, compute_content_hash
 from ...src.services.vector_database import VectorDatabase
+from ...utils.log_tool import set_color
 
 router = APIRouter()
-
-logger = logging.getLogger(__name__)
 
 # Embeddable file types
 EMBEDDABLE_EXTENSIONS = {".pdf"}
@@ -203,16 +201,22 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
             file_count = sum(1 for p in session_dir.rglob("*") if p.is_file())
             shutil.rmtree(session_dir)
             deleted_files += file_count
-            logger.info(
-                f"Deleted session directory {session_dir} ({file_count} files) "
-                f"for session_id = {chat_session_id}"
+            print(
+                set_color(
+                    staus = "info", 
+                    information = (f"Deleted session directory {session_dir} ({file_count} files) "
+                                   f"for session_id = {chat_session_id}")
+                )
             )
 
         except OSError as exc:
             failed_paths.append(str(session_dir))
-            logger.error(
-                f"Failed to delete session directory {session_dir} "
-                f"for session_id = {chat_session_id}: {exc}"
+            print(
+                set_color(
+                    staus = "error", 
+                    information = (f"Failed to delete session directory {session_dir} "
+                                   f"for session_id = {chat_session_id}: {exc}")
+                )
             )
 
     removed_docs = 0
@@ -225,22 +229,31 @@ async def delete_session_data(request: SessionDeleteRequest) -> dict:
     if _vector_database is not None:
         try:
             vectors_deleted_count = _vector_database.delete_by_session_id(chat_session_id)
-            logger.info(
-                f"Deleted {vectors_deleted_count} vector(s) from Qdrant "
-                f"for session_id = {chat_session_id}"
+            print(
+                set_color(
+                    staus = "info", 
+                    information = (f"Deleted {vectors_deleted_count} vector(s) from Qdrant "
+                                   f"for session_id = {chat_session_id}")
+                )
             )
         except Exception as exc:
             vector_cleanup_failed = True
-            logger.error(
-                f"Failed to delete vectors for session_id = {chat_session_id}: {exc}"
+            print(
+                set_color(
+                    staus = "error", 
+                    information = (f"Failed to delete vectors for session_id = {chat_session_id}: {exc}")
+                )
             )
 
     success = not failed_paths and not vector_cleanup_failed
-    logger.info(
-        f"Session cleanup for session_id = {chat_session_id}: "
-        f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
-        f"vectors_deleted_count = {vectors_deleted_count}, failed_paths = {failed_paths}, "
-        f"vector_cleanup_failed = {vector_cleanup_failed}"
+    print(
+        set_color(
+            staus = "info", 
+            information = (f"Session cleanup for session_id = {chat_session_id}: "
+                           f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
+                           f"vectors_deleted_count = {vectors_deleted_count}, failed_paths = {failed_paths}, "
+                           f"vector_cleanup_failed = {vector_cleanup_failed}")
+        )
     )
 
     return {
