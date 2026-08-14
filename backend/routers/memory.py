@@ -7,6 +7,8 @@ from fastapi import (
     HTTPException
 )
 from pathlib import Path
+from pydantic import BaseModel
+import shutil
 
 
 ### Type hints ###
@@ -14,7 +16,9 @@ from ...types.tags import APITag
 import mimetypes
 import os
 
-from ...src.services.document_index import DocumentMetadata, compute_content_hash
+from ...src.services.document_index import DocumentIndex, DocumentMetadata, compute_content_hash
+from ...src.services.vector_database import VectorDatabase
+from ...utils.log_tool import set_color
 
 router = APIRouter()
 
@@ -23,13 +27,13 @@ EMBEDDABLE_EXTENSIONS = {".pdf"}
 
 # Global and User document index instances
 # These will be set by the cosmic router initialization
-_global_document_index = None
-_user_document_index = None
+_global_document_index: DocumentIndex = None
+_user_document_index: DocumentIndex = None
 # Vector database to embed uploaded files
-_vector_database = None
+_vector_database: VectorDatabase = None
 
 
-def set_document_indexes(global_index, user_index):
+def set_document_indexes(global_index: DocumentIndex, user_index: DocumentIndex) -> None:
     """Initialize document indexes (called by cosmic router)"""
     global _global_document_index, _user_document_index
     _global_document_index = global_index
@@ -149,4 +153,115 @@ async def upload_file(
         "file_path": str(file_path),
         "content_type": file.content_type,
         "chunk_count": chunk_count,
+    }
+
+
+class SessionDeleteRequest(BaseModel):
+    chat_id: str
+    user_id: str
+
+
+@router.post(
+    path="/session/delete",
+    status_code=status.HTTP_200_OK,
+)
+async def delete_session_data(request: SessionDeleteRequest) -> dict:
+    """
+    Receiver for chat-session deletion. Called when the user clicks the
+    "delete chat" action, so CoSMIC can drop the on-disk files, the
+    document-index metadata, and the vectors it holds for that session_id.
+
+    Args:
+        request (SessionDeleteRequest): chat_id and user_id of the deleted session.
+
+    Returns:
+        dict: A dictionary with:
+            - Success bool
+            - Session id
+            - The number of files deleted,
+            - The number of metadata removed,
+            - The number of vectors deleted,
+            - A list of failed paths, and
+            - Whether vector cleanup failed.
+    """
+    chat_session_id = request.chat_id
+    user_id = request.user_id
+
+    docs = _user_document_index.get_documents_by_session(chat_session_id) \
+        if _user_document_index \
+            else []
+
+    deleted_files = 0
+    failed_paths: list[str] = []
+
+    session_dir = Path(f"/app/data/memories/users/{user_id}/sessions/{chat_session_id}")
+
+    if session_dir.exists():
+        try:
+            file_count = sum(1 for p in session_dir.rglob("*") if p.is_file())
+            shutil.rmtree(session_dir)
+            deleted_files += file_count
+            print(
+                set_color(
+                    status = "info", 
+                    information = (f"Deleted session directory {session_dir} ({file_count} files) "
+                                   f"for session_id = {chat_session_id}")
+                )
+            )
+
+        except OSError as exc:
+            failed_paths.append(str(session_dir))
+            print(
+                set_color(
+                    status = "error", 
+                    information = (f"Failed to delete session directory {session_dir} "
+                                   f"for session_id = {chat_session_id}: {exc}")
+                )
+            )
+
+    removed_docs = 0
+    for doc in docs:
+        if _user_document_index.remove_document(doc.document_id):
+            removed_docs += 1
+
+    vectors_deleted_count = 0
+    vector_cleanup_failed = False
+    if _vector_database is not None:
+        try:
+            vectors_deleted_count = _vector_database.delete_by_session_id(chat_session_id)
+            print(
+                set_color(
+                    status = "info", 
+                    information = (f"Deleted {vectors_deleted_count} vector(s) from Qdrant "
+                                   f"for session_id = {chat_session_id}")
+                )
+            )
+        except Exception as exc:
+            vector_cleanup_failed = True
+            print(
+                set_color(
+                    status = "error", 
+                    information = (f"Failed to delete vectors for session_id = {chat_session_id}: {exc}")
+                )
+            )
+
+    success = not failed_paths and not vector_cleanup_failed
+    print(
+        set_color(
+            status = "info", 
+            information = (f"Session cleanup for session_id = {chat_session_id}: "
+                           f"files_deleted = {deleted_files}, metadata_removed = {removed_docs}, "
+                           f"vectors_deleted_count = {vectors_deleted_count}, failed_paths = {failed_paths}, "
+                           f"vector_cleanup_failed = {vector_cleanup_failed}")
+        )
+    )
+
+    return {
+        "success": success,
+        "session_id": chat_session_id,
+        "files_deleted_count": deleted_files,
+        "metadata_removed_count": removed_docs,
+        "vectors_deleted_count_count": vectors_deleted_count,
+        "failed_paths": failed_paths,
+        "vector_cleanup_failed": vector_cleanup_failed,
     }
