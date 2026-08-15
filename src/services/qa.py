@@ -279,25 +279,24 @@ class QABase(ServiceBase):
 
         elif service_option == "2":
             selected_service_name = services_name.get(service_option, "").lower()
+
             if (
                 memory_service_active
-                and selected_service_name == "memory"
-                and user_id
+                and (selected_service_name == "memory")
+                and (user_id)
             ):
                 payload = DocumentMetadata(
                     document_id=uuid.uuid4().hex[:8],
                     user_id=user_id,
                     memory_type="user",
                 ).to_vector_payload()
+
                 self.rag.vector_database.update_database_from_text(
-                    text=query, extra_metadata=payload
+                    text=query,
+                    extra_metadata=payload
                 )
+
                 response = raw_response = "Saved to your memory."
-                return (
-                    str(response),
-                    str(raw_response),
-                    retrieve_score
-                )
 
         elif service_option == "3":
             (
