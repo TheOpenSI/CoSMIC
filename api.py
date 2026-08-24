@@ -153,6 +153,7 @@ cosmic_app.add_middleware(
     allow_headers=["*"],
 )
 
-cosmic_app.include_router(models.router, prefix="/api/v1/models", tags=["Ollama Models APIs"])
-cosmic_app.include_router(cosmic.router, prefix="/api/v1/cosmic", tags=["CoSMIC - V1"])
-cosmic_app.include_router(memory.router, prefix="/api/v1/memory", tags=["Upload Files"])
+
+cosmic_app.include_router(router=models.router)
+cosmic_app.include_router(router=cosmic.router)
+cosmic_app.include_router(router=memory.router)

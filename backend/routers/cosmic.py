@@ -4,7 +4,6 @@ from datetime import (
     datetime,
     timezone
 )
-
 from fastapi import (
     Depends,
     HTTPException,
@@ -22,6 +21,7 @@ from codecarbon import EmissionsTracker
 
 ### Type hints ###
 from typing import Any
+from ...types.tags import APITag
 
 
 ### Internal modules ###
@@ -31,7 +31,10 @@ from ...utils.chat_history import build_context_from_messages
 from ...utils.log_tool import set_color
 
 
-router: APIRouter = APIRouter()
+router: APIRouter = APIRouter(
+    prefix="/api/v1/cosmic",
+    tags=[APITag.cosmic]
+)
 
 
 # TODO:
@@ -132,7 +135,10 @@ async def send_emissions_to_db(
         ))
 
 
-@router.post("")
+@router.post(
+    path="",
+    status_code=status.HTTP_200_OK
+)
 async def process_cosmic(
     data:               CosmicAPI,
     opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
@@ -298,7 +304,10 @@ async def process_cosmic(
         )
 
 
-@router.patch("")
+@router.patch(
+    path="",
+    status_code=status.HTTP_200_OK
+)
 async def rebuild_cosmic(
     request:        Request,
     opensi_cosmic:  OpenSICoSMIC = Depends(get_opensi_cosmic)

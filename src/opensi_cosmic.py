@@ -29,6 +29,7 @@ from .services.vector_database import VectorDatabase
 from .services.qa import QABase
 from .services.rag import RAGBase
 from .services.system_information_service import SystemInformationService
+from .services.fallback_service import FallbackService
 from ..modules.chess.chess_qa_puzzle import PuzzleAnalyse
 from ..modules.chess.chess_qa_quality import QualityEval
 from ..modules.chess.chess_genfen import FENGenerator
@@ -177,10 +178,12 @@ class OpenSICoSMIC:
 
         # Code generation service.
         self.code_generator: CodeGenerator = CodeGenerator()
+
         # System information service.
         self.system_information_service: SystemInformationService = SystemInformationService(llm=self.llm)
-        
 
+        # Fallback service
+        self.fallback_service: FallbackService = FallbackService()
 
         # Initialise & setup QA instance.
         self.qa: QABase | None = None
@@ -486,6 +489,7 @@ class OpenSICoSMIC:
                 rag=self.rag,
                 code_generator=self.code_generator,
                 system_information_service = self.system_information_service,
+                fallback_service=self.fallback_service,
                 config=None
             )
 
