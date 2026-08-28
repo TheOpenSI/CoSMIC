@@ -4,8 +4,6 @@ from sys import (
     exit,
     stdout
 )
-from pathlib import Path
-from typing import Any
 from fastapi import (
     HTTPException,
     status
@@ -21,6 +19,7 @@ from pprint import pp
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -41,7 +40,7 @@ from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
 
 
-# Shared cache for the services registry  
+# Shared cache for the services registry
 # Every service-derived view is built from this cached raw list
 _services_cache: list[dict[str, Any]] = []
 _services_cache_timestamp: float = 0
@@ -206,7 +205,7 @@ class OpenSICoSMIC:
         has_files:  bool        = False,
         user_id:    str | None  = None,
         file_refs:  list | None = None,
-    ) -> tuple:
+    ) -> tuple[str, str, int, int, float | int]:
         """
         Execute QA.
 
@@ -227,8 +226,15 @@ class OpenSICoSMIC:
             raw_response (str):
                 raw response from LLM without truncations.
 
-            retrieve_score (float):
-                context retrieve score if `is_rag=True`.
+            input_token (int):
+                amount of input tokens captured from each QA session.
+
+            output_token (int):
+                amount of output tokens generated from each QA session.
+
+            retrieve_score (float | int):
+                score of context retrieving (if applicable). Default to '-1' for
+                non-RAG services.
         """
         # print(
         #     set_color(
@@ -258,6 +264,8 @@ class OpenSICoSMIC:
         # Set initial output to return.
         response:       str | None  = None
         raw_response:   str | None  = None
+        input_token:    int         = 0
+        output_token:   int         = 0
         retrieve_score: float | int = -1
 
 
@@ -266,6 +274,8 @@ class OpenSICoSMIC:
             return (
                 str(response),
                 str(raw_response),
+                input_token,
+                output_token,
                 retrieve_score
             )
 
@@ -383,14 +393,18 @@ class OpenSICoSMIC:
             # Per-request user (from the chat call) for retrieval scoping
             call_user_id = user_id if user_id is not None else self.user_id
 
-            # Process each question.
+            # NOTE:
+            # User query received. Therefore, we can start processing each of
+            # them against our QA.
             (
                 response,
                 raw_response,
+                input_token,
+                output_token,
                 retrieve_score
-            ) = self.qa(
+            ) = self.qa( # pyright: ignore[reportOptionalCall]
                 query=question,
-                services=self.get_services(),
+                services=self.get_services(), # pyright: ignore[reportArgumentType]
                 context=context, # Chat history context (see `backend/routers/cosmic.py`)
                 is_rag=True,
                 verbose=False,
@@ -399,14 +413,17 @@ class OpenSICoSMIC:
                 global_service_names=global_service_names,
                 memory_service_active=memory_service_active,
                 has_files=has_files,
-                file_refs=file_refs,
-            ) # pyright: ignore
+                file_refs=file_refs, # pyright: ignore[reportUnknownArgumentType]
+            )
 
-        # Return answers with and without truncation, and retrieve score (if
-        # applicable). Otherwise, -1.
+        # NOTE:
+        # Each user query has been processed successfully. We can return the
+        # final output to our endpont call now.
         return (
-            response,
-            raw_response,
+            str(response),
+            str(raw_response),
+            input_token,
+            output_token,
             retrieve_score
         )
 

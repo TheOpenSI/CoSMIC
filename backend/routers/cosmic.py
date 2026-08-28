@@ -1,5 +1,5 @@
 ### Core modules ###
-from pathlib import Path
+import os
 from datetime import (
     datetime,
     timezone
@@ -17,7 +17,6 @@ from httpx import (
     Response
 )
 from codecarbon import EmissionsTracker
-from ...utils.log_tool import set_color
 
 
 ### Type hints ###
@@ -29,9 +28,8 @@ from ...types.tags import APITag
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
 from ...utils.chat_history import build_context_from_messages
-from . import memory
-# from ...utils.statistics import update_statistic_per_query
-import os
+from ...utils.log_tool import set_color
+
 
 router: APIRouter = APIRouter(
     prefix="/api/v1/cosmic",
@@ -199,7 +197,6 @@ async def process_cosmic(
             data.user_message = splits[1]
 
         # Start CodeCarbon emission tracking process (for General user queries)
-        general_query_time: str = datetime.now(tz=timezone.utc).strftime("%Y%m%dT%H%M%S%f")
         general_tracker: EmissionsTracker = EmissionsTracker(
             project_name="cosmic-chat",
             save_to_file=False,
@@ -210,36 +207,51 @@ async def process_cosmic(
 
         general_tracker.start()
 
-        answer: str = str(
-            opensi_cosmic(
-                question=data.user_message,
-                context=chat_history_context,
-                session_id=data.chat_id,
-                has_files=has_files,
-                user_id=user_id,
-                file_refs=file_refs,
-            )[0]
+        (
+            llm_response,
+            _llm_raw_response,
+            llm_input_token,
+            llm_output_token,
+            _llm_retrieve_score
+        ) = opensi_cosmic(
+            question=data.user_message,
+            context=chat_history_context,
+            session_id=data.chat_id,
+            has_files=has_files,
+            user_id=user_id,
+            file_refs=file_refs
+        )
+        
+        CHAT_API_URL = os.getenv(
+            "CHAT_API_URL",
+            "http://backend:8000/api/v1/chatboxes/"
         )
 
-        CHAT_API_URL = os.getenv("CHAT_API_URL", "http://backend:8000/api/v1/chatboxes/")
+        # TODO:
+        # created timestamp vars here should indicate the time that we received
+        # the final LLM response from QA only. It's much more accurate timing if
+        # we can retrieved this within the return value in `opensi_cosmic.py`.
+        #
+        # For user query, it's also more accurate timing if FE sent it's generated
+        # timestamp to us through the partial payload.
+        #
+        # I'll create a different PR for this particular approach later.
+        user_query_timestamp:   str = datetime.now(tz=timezone.utc).isoformat()
+        llm_response_timestamp: str = datetime.now(tz=timezone.utc).isoformat()
 
-        now: str = datetime.now(tz=timezone.utc).isoformat()
-        new_detail: dict[str, Any] = {
+        new_detail: dict[str, str | int] = {
             "user_role":            "user",         # per agreed solution within our team
             "user_query":           raw_user_message,
-            "query_create_on":      now,
+            "query_create_on":      user_query_timestamp,
             "llm_role":             "assistant",    # per agreed solution within our team
-            "llm_response":         answer,
-            "response_create_on":   now,
-            # TODO: later we have to implement the function to calculate the number of
-            # tokens used for each query and response, and then store it in the database. 
-            # For now, we will just set it to 1.
-            "input_token":          1,
-            "output_token":         1,
+            "llm_response":         llm_response,
+            "response_create_on":   llm_response_timestamp,
+            "input_token":          llm_input_token,
+            "output_token":         llm_output_token
         }
-        payload: dict[str, Any] = {
+        payload: dict[str, str | list[dict[str, str | int]]] = {
             "user_id":  str(user_id),
-            "name":     data.name,
+            "name":     str(data.name),
             "details":  [new_detail],
         }
 
@@ -258,7 +270,7 @@ async def process_cosmic(
                     json=payload
                 )
                 save_response.raise_for_status()
-                chat_id = save_response.json()["created"]["id"]
+                chat_id: str = save_response.json()["created"]["id"]
 
         # Stop CodeCarbon emission tracking process (for General user queries)
         # and start saving those tracked data
@@ -276,7 +288,7 @@ async def process_cosmic(
 
         return {
             "status": "success",
-            "result": answer,
+            "result": llm_response,
             "chat_id": chat_id
         }
 

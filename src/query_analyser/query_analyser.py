@@ -2,10 +2,6 @@
 from sys import exit
 from pathlib import Path
 from re import search
-from fastapi import (
-    HTTPException,
-    status
-)
 
 
 ### Type hints ###
@@ -91,7 +87,7 @@ class QueryAnalyser:
         # update to handle `int` properly
         services:   dict[str, dict[str, str]],
         verbose:    bool = False
-    ) -> tuple[str, dict[str, str | bool]]:
+    ) -> tuple[str, dict[str, str | int | bool | None]]:
         """
         Analyse query to get service option.
 
@@ -110,7 +106,7 @@ class QueryAnalyser:
             service_option (str):
                 service option.
 
-            service_info_dict (dict[str, str | bool]):
+            service_info_dict (dict[str, str | int | bool | None]):
                 updated information dictionary.
         """
         # Set a list of services.
@@ -167,18 +163,28 @@ class QueryAnalyser:
         )
 
         # Create an initial information dictionary.
-        service_info_dict: dict[str, str | bool] = {
-            "query":                        query,
+        service_info_dict: dict[str, str | int | bool | None] = {
+            "query":        query,
+            "input_token":  0,
+            "output_token": 0
         }
 
         # Set the user prompter for service option.
         self.llm.set_user_prompter(self.user_prompter_service)
 
-        # Get raw anlysis from LLM to select a service.
-        service_analysis = self.llm(query)[0]
+        # NOTE:
+        # This's the 1st time QA sent user query + its combined prompt
+        # (user & system prompting). We only use Ollama models at the moment so
+        # it's safe to assume that `self.llm` is calling methods from `Ollama.py`.
+        (
+            service_analysis,
+            _service_raw_analysis,
+            service_input_token,
+            service_output_token
+        ) = self.llm(query)
 
         # Get the service option.
-        service_option = self.mapping(response=service_analysis)
+        service_option: str = self.mapping(response=service_analysis)
 
         # print(
         #     set_color(
@@ -223,12 +229,14 @@ class QueryAnalyser:
             # Update the vector database.
             (
                 service_option,
-                service_info_dict
-            ) = self.update_vector_database_parse(
-                query=query,
-                service_info_dict=service_info_dict
-            )
-        
+                service_extra_info
+            ) = self.update_vector_database_parse(query=query)
+
+            service_info_dict.update(service_extra_info)
+
+        service_info_dict["input_token"]    = service_input_token
+        service_info_dict["output_token"]   = service_output_token
+
         return (
             service_option,
             service_info_dict
@@ -240,7 +248,8 @@ class QueryAnalyser:
         Quit by releasing model memory and instance.
         """
         # Release memory of LLM.
-        if self.llm: self.llm.quit()
+        if self.llm:
+            self.llm.quit()
 
 
     def mapping(
@@ -261,7 +270,7 @@ class QueryAnalyser:
 
         # Truncate to get the option index.
         option = search(
-            pattern="service (\d{1,3}\.\d{1,3}|\d{1,3})",
+            pattern=r"service (\d{1,3}\.\d{1,3}|\d{1,3})",
             string=response,
             flags=0
         )
@@ -369,35 +378,36 @@ class QueryAnalyser:
     def update_vector_database_parse(
         self,
         query: str,
-        service_info_dict: dict
-    ):
+    ) -> tuple[str, dict[str, bool | str | None]]:
         """
         Parse query to get text or document path to update vector database.
 
         Args:
-            query               (str):  question.
-            service_info_dict   (dict): dictionary to contain parsed information.
+            query (str):
+                question.
 
         Returns:
-            service_option      (str):  service option.
-            service_info_dict   (dict): updated information dictionary.
+            service_option (str):
+                service option.
+
+            service_extra_info (dict[str, bool | str | None]):
+                extra information needed to current information dictionary.
         """
-        service_option = "2"
+        service_option: str = "2"
 
-        # Check if context is a .pdf.
-        is_a_document = query.find(".pdf") > -1
-
-        # Update information dictionary.
-        service_info_dict.update({
-            "is_a_document": is_a_document,
+        # Memory-specific information dictionary
+        service_extra_info: dict[str, bool | str | None] = {
             "text": None,
             "document_path": None
-        })
+        }
 
-        if is_a_document:
+        # Check if context is a .pdf.
+        if query.find(".pdf") > -1:
+            service_extra_info.update({"is_a_document": True})
+
             # Parse move string
             document_path = search(
-                pattern="(?<=\:\s)(.*?)+\.pdf",
+                pattern=r"(?<=\:\s)(.*?)+\.pdf",
                 string=query,
                 flags=0
             )
@@ -413,18 +423,24 @@ class QueryAnalyser:
                     )
                 )
 
-                return (service_option, service_info_dict)
+                return (
+                    service_option,
+                    service_extra_info
+                )
 
             # Check if not an absolute path, convert to an absoluate path.
             if not Path(document_path).resolve(strict=True).is_absolute():
-                document_path = self.root.joinpath(document_path)
+                document_path = str(self.root.joinpath(document_path))
 
-            # Update information dictionary.
-            service_info_dict["document_path"] = document_path
+            # Update our extra information dictionary
+            service_extra_info["document_path"] = document_path
+
         else:
+            service_extra_info.update({"is_a_document": False})
+
             # Extract text.
             text = search(
-                pattern="\:((\"|\')?(.*?)[\",\']?$)",
+                pattern=r"\:((\"|\')?(.*?)[\",\']?$)",
                 string=query,
                 flags=0
             )
@@ -433,8 +449,9 @@ class QueryAnalyser:
                 text = text.group(0)
                 text = text.replace(": ", "").replace(":", "")
 
-                # Update information dictionary.
-                service_info_dict["text"] = text
+                # Update our extra information dictionary
+                service_extra_info["text"] = text
+
             else:
                 print(
                     set_color(
@@ -443,5 +460,12 @@ class QueryAnalyser:
                     )
                 )
 
-        return (service_option, service_info_dict)
+                return (
+                    service_option,
+                    service_extra_info
+                )
 
+        return (
+            service_option,
+            service_extra_info
+        )
