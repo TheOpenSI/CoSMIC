@@ -31,6 +31,7 @@ from ...utils.chat_history import build_context_from_messages
 from ...utils.log_tool import set_color
 
 
+
 router: APIRouter = APIRouter(
     prefix="/api/v1/cosmic",
     tags=[APITag.cosmic]
@@ -51,9 +52,11 @@ class Message(BaseModel):
 
 
 class User(BaseModel):
-    id:     str
-    role:   str
-    email:  str
+    id:                 str
+    role:               str
+    email:              str
+    inquiry_cycle_id:   str
+
 
 
 class Body(BaseModel):
@@ -144,9 +147,11 @@ async def process_cosmic(
     opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
 ):
     try:
-        user_id:    str     = data.body.model_dump(mode="json")["user"]["id"]
+        user_id:            str = data.body.model_dump(mode="python")["user"]["id"]
         # user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
         # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
+        inquiry_cycle_id:   str = data.body.model_dump(mode="python")["user"]["inquiry_cycle_id"]
+
 
         chat_history_context: str = build_context_from_messages(
             messages=data.body.model_dump(mode="json").get(
@@ -240,6 +245,7 @@ async def process_cosmic(
         llm_response_timestamp: str = datetime.now(tz=timezone.utc).isoformat()
 
         new_detail: dict[str, str | int] = {
+            "inquiry_cycle_id":     str(inquiry_cycle_id),
             "user_role":            "user",         # per agreed solution within our team
             "user_query":           raw_user_message,
             "query_create_on":      user_query_timestamp,
