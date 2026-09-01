@@ -15,7 +15,7 @@ Pillow==10.4.0
 python-dotenv==1.0.1
 pytz==2024.1
 torch==2.3.0
-transformers==4.42.4
+transformers==5.10.1
 python-box==7.2.0
 PyYAML==6.0.2
 regex==2024.5.15
