@@ -404,7 +404,9 @@ class QABase(ServiceBase):
             # Get the response with retrieved context if applicable.
             (
                 response,
-                raw_response
+                raw_response,
+                input_token,
+                output_token
             ) = self.llm(
                 question=user_prompt,
                 context=context,
