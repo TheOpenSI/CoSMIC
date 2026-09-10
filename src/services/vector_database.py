@@ -302,6 +302,63 @@ class VectorDatabase(ServiceBase):
             return 0
 
 
+    def get_session_document_ids(
+        self,
+        user_id: str,
+        session_id: str,
+    ) -> list:
+        """
+        List the attached-file documents indexed under a chat session.
+
+        Scans the session-scoped points for this user/session and returns one
+        entry per distinct document as ``(document_id, file_name)``. Used to
+        resolve a file-directed follow-up ("summarise it") back to the file the
+        user attached earlier in the session, when the turn itself carries no
+        fresh attachment.
+        """
+        if not (user_id and session_id):
+            return []
+
+        session_filter = models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="metadata.memory_type",
+                    match=models.MatchValue(value="session"),
+                ),
+                models.FieldCondition(
+                    key="metadata.user_id",
+                    match=models.MatchValue(value=user_id),
+                ),
+                models.FieldCondition(
+                    key="metadata.session_id",
+                    match=models.MatchValue(value=session_id),
+                ),
+            ]
+        )
+
+        seen: dict = {}
+        next_offset = None
+        while True:
+            points, next_offset = self.database.client.scroll(
+                collection_name=self.database.collection_name,
+                scroll_filter=session_filter,
+                with_payload=True,
+                with_vectors=False,
+                limit=256,
+                offset=next_offset,
+            )
+            for p in points:
+                payload = p.payload or {}
+                meta = payload.get("metadata", payload)
+                doc_id = meta.get("document_id")
+                if doc_id and doc_id not in seen:
+                    seen[doc_id] = str(meta.get("file_name") or meta.get("title") or "")
+            if next_offset is None:
+                break
+
+        return [(doc_id, name) for doc_id, name in seen.items()]
+
+
     def delete_by_session_id(self, session_id: str) -> int:
         """ 
         Remove all vector points belonging to a chat session.
