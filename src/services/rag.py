@@ -1,4 +1,5 @@
 ### Core modules ###
+import os
 from typing import Optional, List
 
 
@@ -14,39 +15,32 @@ class RAGBase(ServiceBase):
     def __init__(
         self,
         vector_database: VectorDatabase,
-        retrieve_score_threshold: float = 0.7,
-        topk: int = 5,
-        rerank_enabled: bool = True,
-        candidate_pool: int = 30,
-        rerank_topk: int = 6,
-        rerank_score_threshold: float = 0.0,
         **kwargs
     ):
         """
         Context retriever service.
 
+        All retrieval config is sourced from the environment (`.env`) 
+        see `.env.example` for the keys.
+
+        Required environment keys:
+            RAG_TOPK            (int):  contexts kept when reranking is disabled.
+            RAG_RERANK_ENABLED  (bool): two-stage retrieval (dense pool -> cross-encoder).
+            RAG_CANDIDATE_POOL  (int):  dense candidates fetched before reranking.
+            RAG_RERANK_TOPK     (int):  contexts kept after reranking.
+
         Args:
-            vector_database             (VectorDatabase):   vector database.
-            retrieve_score_threshold    (float, optional):  retrieve score threshold to filter out retrieved context with
-                                                            similarity under this threshold. Defaults to 0.7.
-            topk                        (int, optional):    up to topk retrieved context returned. Defaults to 5.
-            rerank_enabled              (bool, optional):   two-stage retrieval (dense pool -> cross-encoder). Default True.
-            candidate_pool              (int, optional):    dense candidates fetched before reranking. Default 30.
-            rerank_topk                 (int, optional):    contexts kept after reranking. Default 6.
-            rerank_score_threshold      (float, optional):  drop reranked contexts under this score.
+            vector_database (VectorDatabase): vector database.
         """
         super().__init__(**kwargs)
 
-        # Set config.
-        self.retrieve_score_threshold = retrieve_score_threshold
-        self.topk = topk
         self.vector_database = vector_database
 
-        # Reranking config.
-        self.rerank_enabled = rerank_enabled
-        self.candidate_pool = candidate_pool
-        self.rerank_topk = rerank_topk
-        self.rerank_score_threshold = rerank_score_threshold
+        # Retrieval tuning — read strictly from .env (no fallback defaults).
+        self.topk           = int(os.environ["RAG_TOPK"])
+        self.rerank_enabled = os.environ["RAG_RERANK_ENABLED"].strip().lower() == "true"
+        self.candidate_pool = int(os.environ["RAG_CANDIDATE_POOL"])
+        self.rerank_topk    = int(os.environ["RAG_RERANK_TOPK"])
 
 
     def set_vector_database(
@@ -60,32 +54,6 @@ class RAGBase(ServiceBase):
             vector_database (VectorDatabase): an external vector database.
         """
         self.vector_database = vector_database
-
-
-    def set_retrieve_score_threshold(
-        self,
-        retrieve_score_threshold: float
-    ):
-        """
-        Change the retrieve score externally on demand.
-
-        Args:
-            retrieve_score_threshold (float): an external threshold.
-        """
-        self.retrieve_score_threshold = retrieve_score_threshold
-
-
-    def set_topk(
-        self,
-        topk: int
-    ):
-        """
-        Change the topk externally on demand.
-
-        Args:
-            topk (int): topk documents to be retrieved.
-        """
-        self.topk = topk
 
 
     @staticmethod
@@ -185,7 +153,42 @@ class RAGBase(ServiceBase):
             meta.get("memory_type"), 3
         )
 
-    def __call__(
+    @staticmethod
+    def _source_info(doc, score=None) -> dict:
+        """Describe where a chunk came from, for citation in the final answer.
+
+        Normalises the stored ``memory_type`` into a stable tier key plus a
+        human-readable label and the source title (e.g. the attached file's
+        name for a session chunk, or the service name for a global chunk).
+        """
+        meta = getattr(doc, "metadata", None) or {}
+        memory_type = meta.get("memory_type")
+        title = str(meta.get("title") or meta.get("file_name") or "")
+        service_name = str(meta.get("service_name") or "")
+
+        tier, label = {
+            "session": ("session", "Attached file / session"),
+            "user": ("user", "Your saved memory"),
+            "global_memory": ("global", "Global knowledge base"),
+        }.get(memory_type, ("unknown", "Unknown source"))
+
+        return {
+            "tier": tier,
+            "label": label,
+            "title": title,
+            "service_name": service_name,
+            "score": None if score is None else float(score),
+        }
+
+    def _select(self, pairs, keep_n):
+        """Rank by relevance and take the top keep_n."""
+        ordered = sorted(
+            pairs,
+            key=lambda p: (-p[1], self._scope_rank(p[0])),
+        )
+        return ordered[:keep_n]
+
+    def _retrieve_pairs(
         self,
         user_prompt: str,
         user_id: Optional[str] = None,
@@ -195,21 +198,9 @@ class RAGBase(ServiceBase):
         include_user: bool = False,
         include_global: bool = True,
         document_ids: Optional[List[str]] = None,
-    ):
-        """
-        Retrieve context for a given user prompt.
-
-        Args:
-            user_prompt (str): a question from the user.
-            document_ids (list[str], optional): when a file is attached, narrow the
-                session scope to these document ids so the file's chunks are the
-                retrieval target.
-
-        Returns:
-            context             (str): retrieved context from the vector database.
-            retrieved_doc_score      : score of the retrieved context.
-        """
-        # Scope retrieval to the union of active memory tiers
+    ) -> list:
+        """Fetch + rank the active memory scopes
+        returning selected (doc, score) pairs."""
         memory_filter = self.build_union_filter(
             user_id=user_id,
             session_id=session_id,
@@ -223,7 +214,7 @@ class RAGBase(ServiceBase):
         # If no scope resolved, return empty rather than searching the whole collection
         # unfiltered (which would leak other users'/sessions'/global points)
         if memory_filter is None:
-            return "", []
+            return []
 
         # Fetch a larger candidate pool when reranking
         fetch_k = self.candidate_pool if self.rerank_enabled else self.topk
@@ -233,58 +224,186 @@ class RAGBase(ServiceBase):
             filter=memory_filter,
         )
 
-        def _select(pairs, keep_n, threshold):
-            """Order by scope priority (session>user>global) keeping the incoming
-            score order within a scope, take the top keep_n, then apply the score
-            threshold as a *soft* filter that never empties a non-empty set."""
-            ordered = sorted(pairs, key=lambda p: self._scope_rank(p[0]))  # stable
-            top = ordered[:keep_n]
-            passing = [(d, s) for d, s in top if s >= threshold]
-            return passing if passing else top[:1]
-
-        # Rerank with the cross-encoder, if enabled.
-        selected: list = []
+        # debug
+        _scope = f"session={include_session} user={include_user} global={include_global}"
+        def _dbg(doc, score):
+            meta = getattr(doc, "metadata", None) or {}
+            return (meta.get("memory_type"), round(float(score), 4),
+                    doc.page_content[:45].replace("\n", " "))
+        print(f"[rag] DENSE  ({_scope}) " + str(
+            [_dbg(d, s) for d, s in sorted(retrieved_contents, key=lambda p: p[1], reverse=True)[:12]]
+        ))
 
         if self.rerank_enabled and retrieved_contents:
             candidate_docs = [doc for doc, _ in retrieved_contents]
             rerank_scores = self.vector_database.rerank(
                 user_prompt, [d.page_content for d in candidate_docs]
             )
-
             if rerank_scores:
-                # Sort by rerank score (desc); rely on the reranker's ranking
-                ranked = sorted(
-                    zip(candidate_docs, rerank_scores),
-                    key=lambda pair: pair[1],
-                    reverse=True,
+                print(f"[rag] RERANK ({_scope}) " + str(sorted(
+                    [_dbg(d, x) for d, x in zip(candidate_docs, rerank_scores)],
+                    key=lambda t: t[1], reverse=True)[:12]
+                ))
+                selected = self._select(
+                    list(zip(candidate_docs, rerank_scores)), self.rerank_topk
                 )
-                selected = _select(ranked, self.rerank_topk, self.rerank_score_threshold)
-            else:
-                # Reranker unavailable — fall back to dense cosine order.
-                selected = _select(
-                    list(retrieved_contents), self.topk, self.retrieve_score_threshold
-                )
-        else:
-            selected = _select(
-                list(retrieved_contents), self.topk, self.retrieve_score_threshold
-            )
+                print(f"[rag] SELECT ({_scope}) " + str([_dbg(d, s) for d, s in selected]))
+                return selected
+            # Reranker unavailable — fall back to dense cosine order.
+            return self._select(list(retrieved_contents), self.topk)
 
+        return self._select(list(retrieved_contents), self.topk)
+
+    @staticmethod
+    def _doc_key(doc) -> tuple:
+        """Identity of a chunk for de-duplication across two retrieval passes."""
+        meta = getattr(doc, "metadata", None) or {}
+        return (meta.get("document_id"), doc.page_content)
+
+    def _format_selection(self, selected: list):
+        """Turn selected (doc, score) pairs into (context, scores, sources)."""
         retrieved_docs = [doc for doc, _ in selected]
         retrieved_context_score = [score for _, score in selected]
+        sources = [self._source_info(doc, score) for doc, score in selected]
 
         if not retrieved_docs:
-            context = ""
+            return "", [], []
+
+        def _title(doc) -> str:
+            meta = getattr(doc, "metadata", None) or {}
+            return str(meta.get("title") or "")
+
+        context = "".join([
+            f"{_title(doc)}: " + doc.page_content.replace("\n", " ") + ". "
+            for doc in retrieved_docs
+        ])
+        return context, retrieved_context_score, sources
+
+    def __call__(
+        self,
+        user_prompt: str,
+        user_id: Optional[str] = None,
+        session_id: Optional[str] = None,
+        global_service_names: Optional[List[str]] = None,
+        include_session: bool = True,
+        include_user: bool = False,
+        include_global: bool = True,
+        document_ids: Optional[List[str]] = None,
+    ):
+        """
+        Retrieve context for a given user prompt (single union query over the
+        active memory tiers).
+
+        Args:
+            user_prompt (str): a question from the user.
+            document_ids (list[str], optional): when a file is attached, narrow the
+                session scope to these document ids so the file's chunks are the
+                retrieval target.
+
+        Returns:
+            context             (str): retrieved context from the vector database.
+            retrieved_doc_score      : score of each retrieved context chunk.
+            sources             (list): per-chunk origin descriptors (tier, label,
+                title, service_name, score) in the same order as the context, for
+                citing where each piece of information came from.
+        """
+        selected = self._retrieve_pairs(
+            user_prompt,
+            user_id=user_id,
+            session_id=session_id,
+            global_service_names=global_service_names,
+            include_session=include_session,
+            include_user=include_user,
+            include_global=include_global,
+            document_ids=document_ids,
+        )
+        return self._format_selection(selected)
+
+    def retrieve_with_attachment(
+        self,
+        user_prompt: str,
+        user_id: Optional[str] = None,
+        session_id: Optional[str] = None,
+        global_service_names: Optional[List[str]] = None,
+        document_ids: Optional[List[str]] = None,
+        include_user: bool = False,
+        include_global: bool = True,
+        file_directed: bool = False,
+        force_kb: bool = False,
+        kb_service_name: Optional[str] = None,
+    ):
+        """
+        Retrieval for a turn with an attached file.
+
+        The attached file's chunks are retrieved separately (so a generic
+        question like "summarise this" always has them available), and the rest
+        of the active memory (user + global) is retrieved too. What ends up in
+        the context is decided purely by INTENT signals:
+
+        - ``file_directed`` — the query points at the attached file.
+        - ``force_kb`` — the query analyser routed the query to a memory-capable
+          service (that service's knowledge base is what it wants).
+
+        Rules:
+        - The file is included unless the question does not reference it and
+          was routed to a KB service
+        - When the file is included AND the query was routed to a KB service,
+          both are merged (file first). Otherwise the answer stays file-only.
+
+        Returns (context, scores, sources)
+        """
+        # 1) Attached document's best chunks (file/session scope).
+        doc_pairs = self._retrieve_pairs(
+            user_prompt,
+            user_id=user_id,
+            session_id=session_id,
+            global_service_names=global_service_names,
+            include_session=True,
+            include_user=False,
+            include_global=False,
+            document_ids=document_ids,
+        )
+
+        # 2) The rest 
+        kb_scope = (
+            [kb_service_name]
+            if (force_kb and kb_service_name)
+            else global_service_names
+        )
+        other_pairs = self._retrieve_pairs(
+            user_prompt,
+            user_id=user_id,
+            session_id=session_id,
+            global_service_names=kb_scope,
+            include_session=False,
+            include_user=include_user,
+            include_global=include_global,
+            document_ids=None,
+        )
+
+        # File not indexed / scoping mismatch — fall back to the full union so a
+        # question is still answerable rather than silently returning nothing.
+        if not doc_pairs:
+            return self._format_selection(other_pairs)
+
+        # The decision is driven purely by INTENT signals
+        #   - file_directed : the query points at the attached file.
+        #   - force_kb      : the query analyser routed this query to a
+        #                     memory-capable service (its knowledge base).
+        #
+        # Include the file unless this is a pure domain question (routed to a KB
+        # service) that does not reference the file — i.e. a stale attachment 
+        # In that case answer from the knowledge base and do not cite the file.
+        include_file = file_directed or not force_kb
+
+        if not include_file:
+            return self._format_selection(other_pairs)
+
+        seen = {self._doc_key(d) for d, _ in doc_pairs}
+        if force_kb:
+            merged = list(doc_pairs) + [
+                (d, s) for d, s in other_pairs if self._doc_key(d) not in seen
+            ]
         else:
-            # Prefix each chunk with its source title
-            def _title(doc) -> str:
-                meta = getattr(doc, "metadata", None) or {}
-                return str(meta.get("title") or "")
-
-            context = "".join([
-                f"{_title(doc)}: "
-                + doc.page_content.replace("\n", " ")
-                + ". "
-                for doc in retrieved_docs
-            ])
-
-        return context, retrieved_context_score
+            merged = list(doc_pairs)
+        return self._format_selection(merged)

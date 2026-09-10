@@ -172,10 +172,18 @@ class QABase(ServiceBase):
             services=services # pyright: ignore[reportCallIssue]
         )
 
-        # The query analyser can route a question about a uploaded file into 0 or -1  
-        # RAG-eligible fallback branch so an attached file is considered
+        # The service the analyser actually chose (before any override below),
+        # for debugging.
+        analyser_service_option = service_option
+
+        # A file attached while the analyser was unsure (routed to system-info 0
+        # or fallback -1) still needs the retrieval branch so the file gets
+        # considered. Route it to the NEUTRAL general service (4) — not the
+        # academic-governance specialist (5) — so an unrelated file is not
+        # forced onto the governance knowledge base/persona. Fall back to 5 only
+        # if the general service is not registered.
         if has_files and service_option in ("0", "-1"):
-            service_option = "5"
+            service_option = "4" if "4" in services_name else "5"
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
@@ -201,7 +209,69 @@ class QABase(ServiceBase):
                 attached_file_names.append(raw_name)
             else:
                 print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
-        
+
+        # Is this turn directed at an attached file? (explicit reference words,
+        # or a "summarise" request). We detect it here so a file-directed
+        # follow-up that carries NO fresh attachment ("summarise it") can be
+        # resolved back to the file the user attached earlier in this session.
+        _ql = query.lower()
+        FILE_INTENT_MARKERS = (
+            "this file", "the file", "this document", "the document",
+            "this doc", "the doc", "this pdf", "the pdf",
+            "this paper", "the paper", "this report", "the report",
+            "attached", "attachment", "uploaded",
+            "summarise", "summarize", "summary",
+        )
+        file_directed: bool = any(m in _ql for m in FILE_INTENT_MARKERS)
+
+        # File-directed but nothing re-attached this turn: fall back to the
+        # files already indexed under this session (attached earlier). Their
+        # chunks are session-scoped to this user, so this stays isolated.
+        if file_directed and not document_ids and user_id and session_id:
+            try:
+                session_docs = self.rag.vector_database.get_session_document_ids(
+                    user_id, session_id
+                )
+            except Exception as exc:  # pragma: no cover - defensive
+                session_docs = []
+                print(f"[qa] WARNING: session document lookup failed: {exc}")
+            for doc_id, name in session_docs:
+                document_ids.append(doc_id)
+                attached_file_names.append(name)
+
+        # NOTE: "the attached file" / "this document" always refers to the file
+        # the user attached in the UI for this turn (or resolved from the session
+        # above) — NOT to any document the query merely *names*. So a question
+        # like "what does the Academic Governance Handbook say ...?" is a
+        # knowledge-base question, not a file-directed one, even if an attached
+        # file happens to share that name. We therefore rely only on the explicit
+        # reference markers above and do NOT treat a filename mention as
+        # file-directed.
+
+        # DANGLING file reference: the query refers to "the attached file" but
+        # none is actually present — nothing attached this turn (`has_files`) and
+        # no session file resolved above (`document_ids` still empty). The global
+        # knowledge base is NOT the user's attached file, so we must not let it be
+        # used as one. Flag it so the answer says the file is missing and asks the
+        # user to attach it, instead of silently substituting a KB document.
+        dangling_file_reference: bool = (
+            file_directed and not has_files and not document_ids
+        )
+
+        # Which knowledge base (if any) does this query want? Use the query
+        # analyser's own routing decision, not keyword matching: the analyser
+        # is an intent classifier that already picked the service this query is
+        # about, and each service carries a `memory_capability` flag (surfaced
+        # here as membership of `global_service_names`, the active
+        # memory-capable services). If the query is routed to a memory-capable
+        # service, that service's knowledge base is the one to consult — even
+        # when the reranker scores it low, because intent (routing) beats a weak
+        # similarity score. This scales to any number of services with no
+        # per-service configuration: add a memory-capable service and the
+        # router routes to it automatically.
+        routed_service_name: str = services_name.get(service_option, "")
+        routed_to_kb: bool = routed_service_name in (global_service_names or [])
+
         # Process query with service parsing.
         if service_option.find("1.") > -1:
             if service_option == "1.0":
@@ -277,7 +347,9 @@ class QABase(ServiceBase):
             user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
             (
                 response,
-                raw_response
+                raw_response,
+                input_token,
+                output_token
             ) = self.llm(
                 question=user_prompt,
                 context=move_prediction_context
@@ -333,11 +405,25 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services=services)
 
         else:
-            RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
+            # Retrieval runs when the query is routed to a memory-capable
+            # service (metadata-driven — any such service, not a hardcoded id),
+            # or a file is involved (freshly attached, or a file-directed
+            # follow-up resolved to a session file).
             execute_rag = (
                 (is_rag) and
-                (service_option in RAG_ENABLED_SERVICES or has_files)
+                (routed_to_kb
+                 or has_files
+                 or bool(document_ids))
             )
+
+            # Origins of retrieved context, for citing sources in the answer.
+            retrieved_sources: list = []
+            # Whether the attached file contributed context to this answer.
+            answered_from_file: bool = False
+            # Retrieved context text (empty on the non-RAG path).
+            context_retrieved: str = ""
+            # The persona (system prompt) that will actually answer this turn.
+            answering_service: str = services_name.get(service_option, "")
 
             if execute_rag:
                 # Check if context is chat hostory
@@ -360,27 +446,118 @@ class QABase(ServiceBase):
                     context=rag_context
                 ) # pyright: ignore[reportCallIssue]
 
-                # Get the retrieved context, scoped to the active memory tiers
-                (
-                    context_retrieved,
-                    retrieve_score
-                ) = self.rag( # pyright: ignore[reportAssignmentType]
-                    query,
-                    user_id=user_id,
-                    session_id=session_id,
-                    global_service_names=global_service_names,
-                    include_session=True,
-                    include_user=memory_service_active,
-                    include_global=True,
-                    document_ids=document_ids or None,
+                # Get the retrieved context, scoped to the active memory tiers.
+                # `retrieved_sources` describes where each selected chunk came
+                # from (session/user/global + title) so the final answer can
+                # cite its sources and attribute the winning tier correctly.
+                #
+                # An explicitly attached file is an intent signal, not just
+                # another candidate: the user is pointing at that document. So
+                # when document_ids are present we GUARANTEE the attached file's
+                # chunks into the context and MERGE the rest of memory on top —
+                # a generic question ("summarise this") is answered from the
+                # file, while a question relating it to the knowledge base ("how
+                # does this align with the governance policies?") gets BOTH the
+                # file and the relevant policy chunks in one answer. With no
+                # file, this is a plain union over the active memory tiers.
+                if document_ids:
+                    # `file_directed` (computed above) says whether the question
+                    # points at the file. When True the file is guaranteed into
+                    # the answer even for generic phrasing ("summarise it"); when
+                    # False it is included only if actually relevant, so a pure
+                    # domain question with a stale attachment is answered from
+                    # the knowledge base and does not cite the file.
+                    (
+                        context_retrieved,
+                        retrieve_score,
+                        retrieved_sources
+                    ) = self.rag.retrieve_with_attachment(
+                        query,
+                        user_id=user_id,
+                        session_id=session_id,
+                        global_service_names=global_service_names,
+                        document_ids=document_ids,
+                        include_user=memory_service_active,
+                        include_global=True,
+                        file_directed=file_directed,
+                        force_kb=routed_to_kb,
+                        kb_service_name=routed_service_name if routed_to_kb else None,
+                    )
+                else:
+                    (
+                        context_retrieved,
+                        retrieve_score,
+                        retrieved_sources
+                    ) = self.rag( # pyright: ignore[reportAssignmentType]
+                        query,
+                        user_id=user_id,
+                        session_id=session_id,
+                        global_service_names=global_service_names,
+                        include_session=True,
+                        include_user=memory_service_active,
+                        include_global=True,
+                        document_ids=None,
+                    )
+
+                # Whether the attached file actually contributed any chunk to the
+                # merged context (its chunks are guaranteed first when present).
+                answered_from_file = bool(document_ids) and any(
+                    s["tier"] == "session" for s in retrieved_sources
                 )
 
-                # Tell the LLM which file the question is about
+                # Choose the answering persona.
+                #  - If the query analyser routed to a SPECIFIC specialist
+                #    service (e.g. academic_governance), use THAT service's
+                #    persona — the analyser decided the query is about that
+                #    domain, so it should answer as that specialist.
+                #  - Only fall back to the neutral document-QA persona when a
+                #    file genuinely contributed AND the route is a generic /
+                #    non-specialist service (general 4, system-info 0, fallback
+                #    -1) that has no persona of its own — so a plain document
+                #    question isn't answered by a bland/empty prompt.
+                answering_service = (
+                    "document_qa"
+                    if answered_from_file and service_option in ("0", "-1", "4")
+                    else services_name.get(service_option, "")
+                )
+
+                # --- debug: final context + persona handed to the LLM (grep "[qa]") ---
+                from collections import Counter as _Counter
+                print(
+                    f"[qa] CONTEXT analyser_service={analyser_service_option!r}"
+                    f"({services_name.get(analyser_service_option, '')}) "
+                    f"routed_service={service_option!r}({services_name.get(service_option, '')}) "
+                    f"persona={answering_service!r} "
+                    f"routed_to_kb={routed_to_kb} "
+                    f"file_directed={file_directed} docs={document_ids or None} "
+                    f"tiers={dict(_Counter(s['tier'] for s in retrieved_sources))} "
+                    f"scores={[round(s['score'], 4) for s in retrieved_sources]} "
+                    f"ctx_chars={len(context_retrieved)} q={query[:60]!r}"
+                )
+
+                # Only claim "answered from your attached file" when the file
+                # actually contributed context — otherwise the answer came from
+                # user/global memory and crediting the attached file would be
+                # false (e.g. an attached file unrelated to the query).
                 file_note = (
                     f"The user attached the file(s): {', '.join(attached_file_names)}. "
                     "Answer using the retrieved context from that file.\n"
-                    if attached_file_names else ""
+                    if attached_file_names and answered_from_file else ""
                 )
+
+                # The query mentions an attached file but none is present: tell
+                # the LLM explicitly so it does NOT treat the knowledge-base
+                # context below as the user's attached file.
+                if dangling_file_reference:
+                    file_note += (
+                        "IMPORTANT: the user's message refers to an attached "
+                        "file, but NO file is attached to this conversation. The "
+                        "Context below is from the shared knowledge base, which "
+                        "is NOT the user's attached file. Answer only the parts "
+                        "you can from that context, and for anything that "
+                        "requires the user's file, state that no file is attached "
+                        "and ask them to attach it.\n"
+                    )
 
                 # Remain the other variables in context if it is a dictionary,
                 # otherwise overwrite it.
@@ -401,6 +578,9 @@ class QABase(ServiceBase):
                 user_prompt     = query
                 retrieve_score  = -1
 
+            # `answering_service` (the persona) was chosen above when RAG ran; on
+            # the non-RAG path it defaults to the routed service's persona.
+
             # Get the response with retrieved context if applicable.
             (
                 response,
@@ -410,8 +590,57 @@ class QABase(ServiceBase):
             ) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=services_name.get(service_option, "")
+                service_name=answering_service
             )
+
+            # If a file was attached but this answer did NOT use it (the question
+            # was about something else), acknowledge the file and offer to use
+            # it — so ignoring it reads as a deliberate choice, and the user is
+            # nudged to ask about the file if that's what they meant. Only when
+            # the answer actually produced retrieved context from the knowledge
+            # base (there was something to answer from).
+            if attached_file_names and not answered_from_file and context_retrieved:
+                _names = ", ".join(attached_file_names)
+                response = (
+                    f"{response}\n\n_You also attached {_names}, but this answer "
+                    f"is from the knowledge base — your question wasn't about that "
+                    f"file. Would you like a summary of {_names}, or an answer to "
+                    f"something specific in it?_"
+                )
+
+            # The query referred to an attached file, but none is attached. Tell
+            # the user plainly (the knowledge base is not their file) and ask
+            # them to attach it for the part that needs it.
+            if dangling_file_reference:
+                response = (
+                    f"{response}\n\n_You referred to an attached file, but no "
+                    f"file is attached to this chat. I've answered from the "
+                    f"knowledge base where I could — please attach the file so I "
+                    f"can use it for the part of your question that needs it._"
+                )
+
+            # Cite where the retrieved information came from. Sources are listed
+            # in relevance order; each line names the tier and the source title
+            # (attached file name, or the global service it came from), so the
+            # user can see which parts of the answer are grounded in their file,
+            # their saved memory, or the global knowledge base.
+            if retrieved_sources:
+                seen: set = set()
+                lines: list[str] = []
+                for src in retrieved_sources:
+                    key = (src["tier"], src["title"], src["service_name"])
+                    if key in seen:
+                        continue
+                    seen.add(key)
+
+                    label = src["label"]
+                    if src["tier"] == "global" and src["service_name"]:
+                        label = f"{label} ({src['service_name']})"
+
+                    title = src["title"] or "(untitled)"
+                    lines.append(f"- {label}: {title}")
+
+                response = f"{response}\n\nSources:\n" + "\n".join(lines)
 
         # NOTE:
         # Last step to transfer final response with some extra info (I/O

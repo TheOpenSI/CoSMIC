@@ -1,5 +1,7 @@
 ### Core modules ###
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 from sys import (
     exit,
     stdout
@@ -38,6 +40,11 @@ from ..modules.code_generation.code_generation import CodeGenerator
 from ..utils.log_tool import set_color
 from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
+
+
+# Load environment variables from the project-root .env into os.environ so
+# every service (e.g. RAGBase) can read its configuration  from the environment
+load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
 
 # Shared cache for the services registry
@@ -470,16 +477,8 @@ class OpenSICoSMIC:
                 reranker_model=os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"),
             )
 
-            # Base RAG service tuning is read from .env
-            self.rag = RAGBase(
-                vector_database=vector_database,
-                retrieve_score_threshold=float(os.getenv("RAG_RETRIEVE_SCORE_THRESHOLD", "0.0")),
-                topk=int(os.getenv("RAG_TOPK", "6")),
-                rerank_enabled=os.getenv("RAG_RERANK_ENABLED", "true").strip().lower() == "true",
-                candidate_pool=int(os.getenv("RAG_CANDIDATE_POOL", "30")),
-                rerank_topk=int(os.getenv("RAG_RERANK_TOPK", "6")),
-                rerank_score_threshold=float(os.getenv("RAG_RERANK_SCORE_THRESHOLD", "0.0")),
-            )
+            # RAG service tuning is read from .env inside RAGBase itself.
+            self.rag = RAGBase(vector_database=vector_database)
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.
