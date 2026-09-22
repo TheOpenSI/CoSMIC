@@ -153,20 +153,17 @@ async def process_cosmic(
         inquiry_cycle_id:   str = data.body.model_dump(mode="python")["user"]["inquiry_cycle_id"]
 
 
+        raw_messages: list = data.body.model_dump(mode="json").get("messages", [])
+
+        # Formatted history string — still used downstream to detect whether
+        # history is present (the "Conversation History:" sentinel in qa.py)
+        # and to provide a human-readable fallback in the context block.
         chat_history_context: str = build_context_from_messages(
-            messages=data.body.model_dump(mode="json").get(
-                "messages",
-                []
-            ),
+            messages=raw_messages,
             num_pairs=5
         )
-
-        chat_history_template: str = (
-            "Conversation History:\n\n"
-            "=============== End of Chat History ==============="
-        )
-        if chat_history_context.strip() == chat_history_template:
-            chat_history_context = ""
+        # build_context_from_messages now returns "" when no prior pairs exist,
+        # so the old broken template-equality check is no longer needed.
 
         # current_time = datetime.strftime(
         #     datetime.now(tz=ZoneInfo("Australia/Sydney")), "%d-%m-%Y,%H:%M:%S"
@@ -221,6 +218,7 @@ async def process_cosmic(
         ) = opensi_cosmic(
             question=data.user_message,
             context=chat_history_context,
+            history_messages=raw_messages,
             session_id=data.chat_id,
             has_files=has_files,
             user_id=user_id,

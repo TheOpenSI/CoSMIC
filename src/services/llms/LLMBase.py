@@ -265,7 +265,8 @@ class LLMBase(ServiceBase):
         self,
         question: str,
         context: str | dict = {},
-        service_name: str = ""
+        service_name: str = "",
+        history_messages: list | None = None,
     ) -> tuple[str, str]:
         """
         Process the question answering.

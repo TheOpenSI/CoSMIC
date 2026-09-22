@@ -31,6 +31,11 @@ def build_context_from_messages(
 
     selected_pairs: list[tuple[str ,str]] = pairs[-num_pairs:]
 
+    # No prior user/assistant pairs — return empty so the caller does not pass
+    # a history header with no content to the LLM.
+    if not selected_pairs:
+        return ""
+
     context_parts: list[str] = []
 
     for idx, (user_msg, assistant_msg) in enumerate(
@@ -45,9 +50,9 @@ def build_context_from_messages(
         )
         context_parts.append(block)
 
-    full_context: str = "{0:s}\n\n\n{1:s}\n{2:s}\n".format(
+    full_context: str = "{0:s}\n\n{1:s}\n{2:s}\n".format(
         "Conversation History:",
-        f"{context_parts}",
+        "\n\n".join(context_parts),
         f"{'='*15} End of Chat History {'='*15}"
     )
 

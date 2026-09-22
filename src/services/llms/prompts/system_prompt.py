@@ -309,33 +309,58 @@ class GPT(SystemPromptBase):
         self,
         user_prompt: str,
         context: str = "",
-        service: str = ""
+        service: str = "",
+        history_messages: list | None = None,
     ):
         """
         Apply system prompt with user prompt and context.
 
         Args:
-            user_prompt (str):                  question with context.
-            context     (str|dict, optional):   context retrieved. Defaults to "".
-            services    (str, optional):        service name for loading specific system prompt. Defaults to "".
+            user_prompt      (str):             question with context (RAG context embedded).
+            context          (str|dict):        context retrieved. Defaults to "".
+            service          (str):             service name for loading specific system prompt.
+            history_messages (list|None):       raw message list from the frontend
+                                                (each entry is {"role": ..., "content": ...}).
+                                                When provided, prior user/assistant pairs are
+                                                inserted as proper multi-turn turns between the
+                                                system message and the current user message so
+                                                the LLM receives a real conversation thread
+                                                rather than a history text blob.
 
         Returns:
-            system_prompt (str): system prompt with question and context under LLM query format.
+            list[dict]: messages array for the Ollama/OpenAI chat API.
         """
-    
         # Compose the system content: base self.prefix + (optional) file content
         prompt_service = self._load_service_prompt(service)
         composed_prefix = self.prefix + (prompt_service if prompt_service else "")
 
-        system_prompt = [
-            {
-                "role": "system",
-                "content": composed_prefix
-            },
-            {"role": "user", "content": user_prompt}
+        messages: list[dict[str, str]] = [
+            {"role": "system", "content": composed_prefix}
         ]
 
-        return system_prompt
+        # Insert prior conversation turns as real multi-turn messages.
+        # Only user and assistant roles are forwarded — system messages from the
+        # frontend (e.g. injected file content) are intentionally excluded because
+        # the composed_prefix above already carries the system persona.
+        # The last message in history_messages is the current user turn, which is
+        # handled separately below as user_prompt (with RAG context embedded), so
+        # we stop before the final message.
+        if history_messages:
+            prior = [
+                m for m in history_messages
+                if isinstance(m, dict) and m.get("role") in ("user", "assistant")
+            ]
+            # Exclude the very last user message — it is the current question and
+            # is already captured in user_prompt with any RAG context attached.
+            if prior and prior[-1].get("role") == "user":
+                prior = prior[:-1]
+            for turn in prior:
+                messages.append({"role": turn["role"], "content": turn["content"]})
+
+        # Current user turn with RAG context embedded by user_prompter.
+        messages.append({"role": "user", "content": user_prompt})
+
+        return messages
 
 
 class Ollama(GPT):

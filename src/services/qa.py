@@ -89,6 +89,7 @@ class QABase(ServiceBase):
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
         file_refs:              list[str] | None    = None,
+        history_messages:       list | None         = None,
     ) -> tuple[str, str, int, int ,float | int]:
         """
         Process each QA.
@@ -590,7 +591,8 @@ class QABase(ServiceBase):
             ) = self.llm(
                 question=user_prompt,
                 context=context,
-                service_name=answering_service
+                service_name=answering_service,
+                history_messages=history_messages,
             )
 
             # If a file was attached but this answer did NOT use it (the question
