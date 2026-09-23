@@ -177,6 +177,7 @@ class QABase(ServiceBase):
         if has_files and service_option in ("0", "-1"):
             service_option = "5"
 
+
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
             return (
@@ -333,10 +334,13 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services=services)
 
         else:
-            RAG_ENABLED_SERVICES = ["5"] # Academic QA triggers retrieval
+            is_rag_eligible_service = ( 
+               services.get(service_option, {}).get("memory_capability") is True
+            )
+           
             execute_rag = (
                 (is_rag) and
-                (service_option in RAG_ENABLED_SERVICES or has_files)
+                (is_rag_eligible_service or has_files)
             )
 
             if execute_rag:

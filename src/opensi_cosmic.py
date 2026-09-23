@@ -717,7 +717,8 @@ class OpenSICoSMIC:
             ).update(
                 {
                     "name": data["name"],
-                    "desc": data["desc"]
+                    "desc": data["desc"],
+                    "memory_capability": data.get("memory_capability", False),
                 }
             )
 
