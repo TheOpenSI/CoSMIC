@@ -445,8 +445,8 @@ class QABase(ServiceBase):
 
         elif service_option == "3":
             (
-                raw_response,
-                response
+                response,
+                raw_response
             )= self.code_generator(query)
 
 
