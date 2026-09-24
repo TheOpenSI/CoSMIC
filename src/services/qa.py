@@ -268,6 +268,70 @@ class QABase(ServiceBase):
         return response, raw_response, input_token, output_token
 
 
+    # TODO: extract into a dedicated MemoryService class, mirroring
+    # system_information_service/fallback_service/code_generator
+    def _handle_memory_update_service(
+        self,
+        query: str,
+        services: dict[str, dict[str, str]],
+        services_name: dict[str, str],
+        memory_service_active: bool,
+        user_id: str | None,
+    ) -> tuple[str, str]:
+        """
+        Save the query to the user's long-term memory when the memory
+        service is active and enabled; otherwise fall back to a generic
+        response.
+
+        Args:
+            query (str):
+                the question, saved verbatim as the memory text.
+
+            services (dict[str, dict[str, str]]):
+                dictionary of services, passed through to the fallback
+                service if memory can't be used.
+
+            services_name (dict[str, str]):
+                mapping of service id to service name, used to confirm
+                service "2" is configured as "memory".
+
+            memory_service_active (bool):
+                whether the memory service is enabled for this request.
+
+            user_id (str | None):
+                the current user, required to scope the saved memory.
+
+        Returns:
+            response (str):
+                truncated answer.
+
+            raw_response (str):
+                original answer.
+        """
+        selected_service_name = services_name.get("2", "").lower()
+
+        if (
+            memory_service_active
+            and (selected_service_name == "memory")
+            and (user_id)
+        ):
+            payload = DocumentMetadata(
+                document_id=uuid.uuid4().hex[:8],
+                user_id=user_id,
+                memory_type="user",
+            ).to_vector_payload()
+
+            self.rag.vector_database.update_database_from_text(
+                text=query,
+                extra_metadata=payload
+            )
+
+            return "Saved to your memory.", "Saved to your memory."
+
+        # fallback to generic response if memory service is not active or not configured
+        return self.fallback_service(services=services)
+
+
     def __call__(
         self,
         query:      str,
@@ -368,25 +432,16 @@ class QABase(ServiceBase):
             )
 
         elif service_option == "2":
-            selected_service_name = services_name.get(service_option, "").lower()
-
-            if (
-                memory_service_active
-                and (selected_service_name == "memory")
-                and (user_id)
-            ):
-                payload = DocumentMetadata(
-                    document_id=uuid.uuid4().hex[:8],
-                    user_id=user_id,
-                    memory_type="user",
-                ).to_vector_payload()
-
-                self.rag.vector_database.update_database_from_text(
-                    text=query,
-                    extra_metadata=payload
-                )
-
-                response = raw_response = "Saved to your memory."
+            (
+                response,
+                raw_response
+            ) = self._handle_memory_update_service(
+                query=query,
+                services=services,
+                services_name=services_name,
+                memory_service_active=memory_service_active,
+                user_id=user_id,
+            )
 
         elif service_option == "3":
             (
