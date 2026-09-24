@@ -71,7 +71,6 @@ class QABase(ServiceBase):
         self.fallback_service           = fallback_service
 
 
-    @staticmethod
     def _add_service_0(self, services: dict[str, dict[str, str]]) -> None:
         """
         Add default service 0 to the services dictionary if not present.
@@ -87,7 +86,6 @@ class QABase(ServiceBase):
             }
 
 
-    @staticmethod
     def _get_services_name(self, services: dict[str, dict[str, str]]) -> dict[str, str]:
         """
         Extracts the names of the services from the services dictionary.
@@ -101,7 +99,6 @@ class QABase(ServiceBase):
         return {service_id: service_info["name"] for service_id, service_info in services.items()}
 
 
-    @staticmethod
     def _force_route_check(self, service_option: str, has_files: bool) -> str:
         """
         If a file is attached but the query analyser routed to "0" (system info)
@@ -120,7 +117,6 @@ class QABase(ServiceBase):
         return service_option
 
 
-    @staticmethod
     def _parse_file_refs(self, 
                          file_refs: list[str] | None) -> tuple[list[str], list[str]]:
         """
@@ -163,7 +159,6 @@ class QABase(ServiceBase):
         return document_ids, attached_file_names
 
 
-    @staticmethod
     def _get_stockfish_binary_path(self) -> str:
         """
         Get the path to the Stockfish binary.
@@ -328,11 +323,159 @@ class QABase(ServiceBase):
         except KeyError:
             print(
                 set_color(
-                    "error",
-                    f"[qa] Error: Service option '{service_option}' not found in services."
+                    "info",
+                    f"[qa] Service option '{service_option}' has no entry in services "
+                    "(expected for the forced-route fallback); treating as not RAG-eligible."
                 )
             )
             return False
+
+
+    def _use_rag(self,
+                 services: dict[str, dict[str, str]],
+                 service_option: str,
+                 is_rag: bool,
+                 has_files: bool) -> bool:
+        """
+        Determine whether to use RAG based on the service option, RAG eligibility,
+        and whether files are attached.
+
+        Args:
+            services (dict[str, dict[str, str]]): Dictionary of services.
+            service_option (str): Selected service option.
+            is_rag (bool): Whether RAG is enabled for this request.
+            has_files (bool): Whether files are attached to the query.
+
+        Returns:
+            bool: True if RAG should be used, False otherwise.
+        """
+        is_rag_eligible_service = self._is_rag_eligible(services, service_option)
+        use_rag = (
+                (is_rag) and
+                (is_rag_eligible_service or has_files)
+            )
+
+        return use_rag
+
+
+    def _split_chat_history_context(self, context: str) -> tuple[str, str]:
+        """
+        Split context into its chat-history and non-history parts, based on
+        whether it carries the "Conversation History:" marker.
+
+        Args:
+            context (str): context associated with the question.
+
+        Returns:
+            chat_history_context (str): context if it holds chat history, else "".
+            rag_context (str): context if it doesn't hold chat history, else "".
+        """
+        is_chat_history = "Conversation History:" in context
+        return (context, "") if is_chat_history else ("", context)
+
+
+    def _merge_retrieved_context(
+        self,
+        context: str | dict,
+        chat_history_context: str,
+        context_retrieved: str,
+        attached_file_names: list[str],
+    ) -> str | dict:
+        """
+        Fold RAG-retrieved context back into `context`, alongside chat
+        history and a note about which attached file(s) the question is
+        about.
+
+        Args:
+            context (str | dict): context associated with the question.
+            chat_history_context (str): chat history part of the context, if any.
+            context_retrieved (str): context retrieved by RAG.
+            attached_file_names (list[str]): original filenames of attached files.
+
+        Returns:
+            str | dict: context updated with the retrieved information.
+        """
+        file_note = (
+            f"The user attached the file(s): {', '.join(attached_file_names)}. "
+            "Answer using the retrieved context from that file.\n"
+            if attached_file_names else ""
+        )
+
+        suffix = (
+            ""
+            if   (context_retrieved == "")
+            else (f"\n{file_note}Context:\n {context_retrieved}")
+        )
+
+        if isinstance(context, dict):
+            context.update({"context": f"{chat_history_context}{suffix}"})
+        else:
+            context = f"{chat_history_context}{suffix}"
+
+        return context
+
+
+    def _retrieve_rag_context(
+        self,
+        query: str,
+        context: str | dict,
+        user_id: str | None,
+        session_id: str | None,
+        global_service_names: list[str] | None,
+        memory_service_active: bool,
+        document_ids: list[str],
+        attached_file_names: list[str],
+    ) -> tuple[str, str | dict, float | int]:
+        """
+        Retrieve RAG context for the query and fold it into `context`.
+
+        Args:
+            query (str): the question.
+            context (str | dict): context associated with the question.
+            user_id (str | None): the current user, used to scope retrieval.
+            session_id (str | None): the current session, used to scope retrieval.
+            global_service_names (list[str] | None): global services to include in retrieval.
+            memory_service_active (bool): whether the user memory tier should be included.
+            document_ids (list[str]): file_ids to scope retrieval to attached files.
+            attached_file_names (list[str]): original filenames of attached files.
+
+        Returns:
+            user_prompt (str): prompt built from the query and non-history context.
+            context (str | dict): context updated with the retrieved information.
+            retrieve_score (float | int): score of the context retrieval.
+        """
+        chat_history_context, rag_context = self._split_chat_history_context(context=context)
+
+        # If retrieving context, first generate the user prompt given the
+        # user prompter format.
+        user_prompt = self.llm.user_prompter(
+            query,
+            context=rag_context
+        ) # pyright: ignore[reportCallIssue]
+
+        # Get the retrieved context, scoped to the active memory tiers
+        (
+            context_retrieved,
+            retrieve_score
+        ) = self.rag( # pyright: ignore[reportAssignmentType]
+            query,
+            user_id = user_id,
+            session_id = session_id,
+            global_service_names = global_service_names,
+            include_session = True,
+            include_user = memory_service_active,
+            include_global = True,
+            document_ids = document_ids or None
+        )
+
+        context = self._merge_retrieved_context(
+            context = context,
+            chat_history_context = chat_history_context,
+            context_retrieved = context_retrieved,
+            attached_file_names = attached_file_names
+        )
+
+        return user_prompt, context, retrieve_score
 
 
     def __call__(
@@ -429,9 +572,9 @@ class QABase(ServiceBase):
                 input_token,
                 output_token
             ) = self._handle_chess_service(
-                service_option=service_option,
-                service_info_dict=service_info_dict,
-                context=context
+                service_option = service_option,
+                service_info_dict = service_info_dict,
+                context = context
             )
 
         elif service_option == "2":
@@ -439,11 +582,11 @@ class QABase(ServiceBase):
                 response,
                 raw_response
             ) = self._handle_memory_update_service(
-                query=query,
-                services=services,
-                services_name=services_name,
-                memory_service_active=memory_service_active,
-                user_id=user_id,
+                query = query,
+                services = services,
+                services_name = services_name,
+                memory_service_active = memory_service_active,
+                user_id = user_id
             )
 
         elif service_option == "3":
@@ -461,86 +604,37 @@ class QABase(ServiceBase):
                 input_token,
                 output_token
             ) = self.system_information_service(
-                query=query,
-                services=services,
-                context=context
+                query = query,
+                services = services,
+                context = context
             )
 
         # When all services are disabled and service 0 cannot answer, query analyser will return -1
         elif service_option == "-1":
-            response, raw_response = self.fallback_service(services=services)
+            response, raw_response = self.fallback_service(services = services)
 
         else:
-            is_rag_eligible_service = self._is_rag_eligible(services, service_option)
-           
-            execute_rag = (
-                (is_rag) and
-                (is_rag_eligible_service or has_files)
-            )
-
-            if self._use_rag():
-                # Check if context is chat hostory
-                chat_history_context = (
-                    context
-                    if   ("Conversation History:" in context)
-                    else ("")
-                )
-
-                rag_context = (
-                    ""
-                    if   ("Conversation History:" in context)
-                    else (context)
-                )
-
-                # If retrieving context, first generate the user prompt given the
-                # user prompter format.
-                user_prompt = self.llm.user_prompter(
-                    query,
-                    context=rag_context
-                ) # pyright: ignore[reportCallIssue]
-
-                # Get the retrieved context, scoped to the active memory tiers
+            if self._use_rag(services, service_option, is_rag, has_files):
                 (
-                    context_retrieved,
+                    user_prompt,
+                    context,
                     retrieve_score
-                ) = self.rag( # pyright: ignore[reportAssignmentType]
-                    query,
-                    user_id=user_id,
-                    session_id=session_id,
-                    global_service_names=global_service_names,
-                    include_session=True,
-                    include_user=memory_service_active,
-                    include_global=True,
-                    document_ids=document_ids or None,
+                ) = self._retrieve_rag_context(
+                    query = query,
+                    context = context,
+                    user_id = user_id,
+                    session_id = session_id,
+                    global_service_names = global_service_names,
+                    memory_service_active = memory_service_active,
+                    document_ids = document_ids,
+                    attached_file_names = attached_file_names
                 )
 
-                # Tell the LLM which file the question is about
-                file_note = (
-                    f"The user attached the file(s): {', '.join(attached_file_names)}. "
-                    "Answer using the retrieved context from that file.\n"
-                    if attached_file_names else ""
-                )
-
-                # Remain the other variables in context if it is a dictionary,
-                # otherwise overwrite it.
-                suffix = (
-                    ""
-                    if   (context_retrieved == "")
-                    else (f"\n{file_note}Context:\n {context_retrieved}")
-                )
-
-                if (isinstance(context, dict)):
-                    context.update({"context": f"{chat_history_context}{suffix}"})
-
-                else:
-                    context = f"{chat_history_context}{suffix}"
-            
             # Non-RAG services (or when RAG is disabled) fall through here.
             else:
-                user_prompt     = query
+                user_prompt = query
                 retrieve_score  = -1
 
-            # Get the response with retrieved context if applicable.
             (
                 response,
                 raw_response,
@@ -554,9 +648,9 @@ class QABase(ServiceBase):
 
         # NOTE:
         # Last step to transfer final response with some extra info (I/O
-        # token, retrieve score, etc) over to `opensi_cosmic.py`. This's the
+        # token, retrieve score, etc) over to opensi_cosmic.py. This's the
         # 2nd time QA sent user query + selected service prompt (from
-        # `query_analyser.py`). The latter is different based on which condition
+        # query_analyser.py). The latter is different based on which condition
         # above get hit
 
         # Sum up I/O tokens from 1st Ollama call (in `service_info_dict`) with
