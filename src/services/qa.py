@@ -70,9 +70,8 @@ class QABase(ServiceBase):
         self.system_information_service = system_information_service
         self.fallback_service           = fallback_service
 
-        return None
 
-
+    @staticmethod
     def _add_service_0(self, services: dict[str, dict[str, str]]) -> None:
         """
         Add default service 0 to the services dictionary if not present.
@@ -89,6 +88,7 @@ class QABase(ServiceBase):
             }
 
 
+    @staticmethod
     def _get_services_name(self, services: dict[str, dict[str, str]]) -> dict[str, str]:
         """
         Extracts the names of the services from the services dictionary.
@@ -104,6 +104,7 @@ class QABase(ServiceBase):
         return {service_id: service_info["name"] for service_id, service_info in services.items()}
 
 
+    @staticmethod
     def _force_route_check(self, service_option: str, has_files: bool) -> str:
         """
         If a file is attached but the query analyser routed to "0" (system info)
@@ -125,6 +126,7 @@ class QABase(ServiceBase):
         return service_option
 
 
+    @staticmethod
     def _parse_file_refs(self, 
                          file_refs: list[str] | None) -> tuple[list[str], list[str]]:
         """
@@ -170,6 +172,7 @@ class QABase(ServiceBase):
         return document_ids, attached_file_names
 
 
+    @staticmethod
     def _get_stockfish_binary_path(self) -> str:
         """
         Get the path to the Stockfish binary.
