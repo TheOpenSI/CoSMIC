@@ -1,9 +1,14 @@
 ### Core modules ###
-from typing import Optional, List
-from qdrant_client import models
+from qdrant_client.models import (
+    FieldCondition,
+    Filter,
+    MatchAny,
+    MatchValue
+)
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -21,32 +26,35 @@ class RAGBase(ServiceBase):
         candidate_pool: int = 30,
         rerank_topk: int = 6,
         rerank_score_threshold: float = 0.0,
-        **kwargs
+        **kwargs: Any
     ) -> None:
         """
         Context retriever service.
 
         Args:
             vector_database             (VectorDatabase):   vector database.
-            retrieve_score_threshold    (float, optional):  retrieve score threshold to filter out retrieved context with
-                                                            similarity under this threshold. Defaults to 0.7.
+            retrieve_score_threshold    (float, optional):  retrieve score threshold to filter out retrieved
+                                                            context with similarity under this threshold.
+                                                            Defaults to 0.7.
             topk                        (int, optional):    up to topk retrieved context returned. Defaults to 5.
-            rerank_enabled              (bool, optional):   two-stage retrieval (dense pool -> cross-encoder). Default True.
-            candidate_pool              (int, optional):    dense candidates fetched before reranking. Default 30.
-            rerank_topk                 (int, optional):    contexts kept after reranking. Default 6.
+            rerank_enabled              (bool, optional):   two-stage retrieval (dense pool -> cross-encoder).
+                                                            Defaults to True.
+            candidate_pool              (int, optional):    dense candidates fetched before reranking. Defaults to 30.
+            rerank_topk                 (int, optional):    contexts kept after reranking. Defaults to 6.
             rerank_score_threshold      (float, optional):  drop reranked contexts under this score.
+                                                            Defaults to 0.0.
         """
         super().__init__(**kwargs)
 
         # Set config.
-        self.retrieve_score_threshold = retrieve_score_threshold
-        self.topk = topk
-        self.vector_database = vector_database
+        self.retrieve_score_threshold   = retrieve_score_threshold
+        self.topk                       = topk
+        self.vector_database            = vector_database
 
         # Reranking config.
-        self.rerank_enabled = rerank_enabled
-        self.candidate_pool = candidate_pool
-        self.rerank_topk = rerank_topk
+        self.rerank_enabled         = rerank_enabled
+        self.candidate_pool         = candidate_pool
+        self.rerank_topk            = rerank_topk
         self.rerank_score_threshold = rerank_score_threshold
 
 
@@ -66,7 +74,7 @@ class RAGBase(ServiceBase):
     def set_retrieve_score_threshold(
         self,
         retrieve_score_threshold: float
-    ):
+    ) -> None:
         """
         Change the retrieve score externally on demand.
 
@@ -79,7 +87,7 @@ class RAGBase(ServiceBase):
     def set_topk(
         self,
         topk: int
-    ):
+    ) -> None:
         """
         Change the topk externally on demand.
 
@@ -91,11 +99,11 @@ class RAGBase(ServiceBase):
 
     @staticmethod
     def build_memory_filter(
-        memory_type: Optional[str] = None,
-        user_id: Optional[str] = None,
-        session_id: Optional[str] = None,
-        service_name: Optional[str] = None,
-    ) -> Optional[models.Filter]:
+        memory_type: str | None = None,
+        user_id: str | None = None,
+        session_id: str | None = None,
+        service_name: str | None = None
+    ) -> Filter | None:
         """
         Build a Qdrant payload filter scoping retrieval to a single memory tier.
 
@@ -106,14 +114,17 @@ class RAGBase(ServiceBase):
             service_name (str, optional): service a global memory belongs to.
 
         Returns:
-            memory_filter (models.Filter | None): filter, or None if no field is set.
+            memory_filter (Filter | None): filter, or None if no field is set.
         """
         must = []
 
-        def eq(field: str, value):
-            return models.FieldCondition(
+        def eq(
+            field: str,
+            value: str
+        ) -> FieldCondition:
+            return FieldCondition(
                 key=f"metadata.{field}",
-                match=models.MatchValue(value=value),
+                match=MatchValue(value=value)
             )
 
         if memory_type:
@@ -128,18 +139,19 @@ class RAGBase(ServiceBase):
         if not must:
             return None
 
-        return models.Filter(must=must)
+        return Filter(must=must)
+
 
     @staticmethod
     def build_union_filter(
-        user_id: Optional[str] = None,
-        session_id: Optional[str] = None,
-        global_service_names: Optional[List[str]] = None,
+        user_id: str | None = None,
+        session_id: str | None = None,
+        global_service_names: list[str] | None = None,
         include_session: bool = True,
         include_user: bool = False,
         include_global: bool = True,
-        document_ids: Optional[List[str]] = None,
-    ) -> Optional[models.Filter]:
+        document_ids: list[str] | None = None
+    ) -> Filter | None:
         """
         Build a Qdrant filter spanning the active memory tiers as a union.
 
@@ -155,11 +167,14 @@ class RAGBase(ServiceBase):
                 attached documents.
 
         Returns:
-            memory_filter (models.Filter | None): filter, or None if no tier is active.
+            memory_filter (Filter | None): filter, or None if no tier is active.
         """
-        def eq(field: str, value):
-            return models.FieldCondition(
-                key=f"metadata.{field}", match=models.MatchValue(value=value)
+        def eq(
+            field: str,
+            value: str
+        ) -> FieldCondition:
+            return FieldCondition(
+                key=f"metadata.{field}", match=MatchValue(value=value)
             )
 
         should = []
@@ -168,39 +183,42 @@ class RAGBase(ServiceBase):
             session_must = [
                 eq("memory_type", "session"),
                 eq("user_id", user_id),
-                eq("session_id", session_id),
+                eq("session_id", session_id)
             ]
             if document_ids:
                 session_must.append(
-                    models.FieldCondition(
+                    FieldCondition(
                         key="metadata.document_id",
-                        match=models.MatchAny(any=list(document_ids)),
+                        match=MatchAny(any=list(document_ids))
                     )
                 )
-            should.append(models.Filter(must=session_must))
+            should.append(Filter(must=session_must))
 
         if include_user and user_id:
-            should.append(models.Filter(must=[
+            should.append(Filter(must=[
                 eq("memory_type", "user"),
-                eq("user_id", user_id),
+                eq("user_id", user_id)
             ]))
 
         if include_global and global_service_names:
-            should.append(models.Filter(must=[
+            should.append(Filter(must=[
                 eq("memory_type", "global_memory"),
-                models.FieldCondition(
+                FieldCondition(
                     key="metadata.service_name",
-                    match=models.MatchAny(any=list(global_service_names)),
-                ),
+                    match=MatchAny(any=list(global_service_names))
+                )
             ]))
 
         if not should:
             return None
 
-        return models.Filter(should=should)
+        return Filter(should=should)
+
 
     @staticmethod
-    def _scope_rank(doc) -> int:
+    def _scope_rank(
+        doc: Any
+    ) -> int:
         """
         Priority rank of a chunk's memory tier.
 
@@ -215,16 +233,17 @@ class RAGBase(ServiceBase):
             meta.get("memory_type"), 3
         )
 
+
     def __call__(
         self,
         user_prompt: str,
-        user_id: Optional[str] = None,
-        session_id: Optional[str] = None,
-        global_service_names: Optional[List[str]] = None,
+        user_id: str | None = None,
+        session_id: str | None = None,
+        global_service_names: list[str] | None = None,
         include_session: bool = True,
         include_user: bool = False,
         include_global: bool = True,
-        document_ids: Optional[List[str]] = None,
+        document_ids: list[str] | None = None
     ) -> tuple[str, list[float]]:
         """
         Retrieve context for a given user prompt.
@@ -245,7 +264,7 @@ class RAGBase(ServiceBase):
             context (str): retrieved context from the vector database.
             retrieved_context_score (list[float]): score of each retrieved chunk.
         """
-        # Scope retrieval to the union of active memory tiers
+        # Scope retrieval to the union of active memory tiers.
         memory_filter = self.build_union_filter(
             user_id=user_id,
             session_id=session_id,
@@ -253,26 +272,32 @@ class RAGBase(ServiceBase):
             include_session=include_session,
             include_user=include_user,
             include_global=include_global,
-            document_ids=document_ids,
+            document_ids=document_ids
         )
 
         # If no scope resolved, return empty rather than searching the whole collection
-        # unfiltered (which would leak other users'/sessions'/global points)
+        # unfiltered (which would leak other users'/sessions'/global points).
         if memory_filter is None:
             return "", []
 
-        # Fetch a larger candidate pool when reranking
+        # Fetch a larger candidate pool when reranking.
         fetch_k = self.candidate_pool if self.rerank_enabled else self.topk
         retrieved_contents = self.vector_database.similarity_search_with_relevance_scores(
             query=user_prompt,
             k=fetch_k,
-            filter=memory_filter,
+            filter=memory_filter
         )
 
-        def _select(pairs, keep_n, threshold):
-            """Order by scope priority (session>user>global) keeping the incoming
+        def _select(
+            pairs: list[tuple[Any, float]],
+            keep_n: int,
+            threshold: float
+        ) -> list[tuple[Any, float]]:
+            """
+            Order by scope priority (session > user > global) keeping the incoming
             score order within a scope, take the top keep_n, then apply the score
-            threshold as a *soft* filter that never empties a non-empty set."""
+            threshold as a *soft* filter that never empties a non-empty set.
+            """
             ordered = sorted(pairs, key=lambda p: self._scope_rank(p[0]))  # stable
             top = ordered[:keep_n]
             passing = [(d, s) for d, s in top if s >= threshold]
@@ -288,11 +313,11 @@ class RAGBase(ServiceBase):
             )
 
             if rerank_scores:
-                # Sort by rerank score (desc); rely on the reranker's ranking
+                # Sort by rerank score (desc); rely on the reranker's ranking.
                 ranked = sorted(
                     zip(candidate_docs, rerank_scores),
                     key=lambda pair: pair[1],
-                    reverse=True,
+                    reverse=True
                 )
                 selected = _select(ranked, self.rerank_topk, self.rerank_score_threshold)
             else:
@@ -311,8 +336,10 @@ class RAGBase(ServiceBase):
         if not retrieved_docs:
             context = ""
         else:
-            # Prefix each chunk with its source title
-            def _title(doc) -> str:
+            # Prefix each chunk with its source title.
+            def _title(
+                doc: Any
+            ) -> str:
                 meta = getattr(doc, "metadata", None) or {}
                 return str(meta.get("title") or "")
 

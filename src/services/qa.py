@@ -8,6 +8,7 @@ import uuid
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -33,7 +34,7 @@ class QABase(ServiceBase):
         system_information_service: SystemInformationService,
         fallback_service: FallbackService,
         config:         str | None = None,
-        **kwargs
+        **kwargs: Any
     ) -> None:
         """
         Base class for QA.
@@ -58,9 +59,9 @@ class QABase(ServiceBase):
                 fallback service.
 
             config (str, optional):
-                config file to extract settings. Default to None.
+                config file to extract settings. Defaults to None.
         """
-        super().__init__( **kwargs)
+        super().__init__(**kwargs)
 
         # Set config globally.
         self.query_analyser             = query_analyser
@@ -88,8 +89,8 @@ class QABase(ServiceBase):
         global_service_names:   list[str] | None    = None,
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
-        file_refs:              list[str] | None    = None,
-    ) -> tuple[str, str, int, int ,float | int]:
+        file_refs:              list[str] | None    = None
+    ) -> tuple[str, str, int, int, float | int]:
         """
         Process each QA.
 
@@ -102,13 +103,32 @@ class QABase(ServiceBase):
                 to re-structure question with its prompting techniques.
 
             context (str | dict, optional):
-                contex associated with the question. Defaults to "".
+                context associated with the question. Defaults to "".
 
-            is_rag  (bool, optional):
+            is_rag (bool, optional):
                 if retrieve context for the question. Defaults to False.
 
             verbose (bool, optional):
-                debug mode. Default to False.
+                debug mode. Defaults to False.
+
+            user_id (str | None, optional):
+                owner of the session and user memory. Defaults to None.
+
+            session_id (str | None, optional):
+                chat session of the session memory. Defaults to None.
+
+            global_service_names (list[str] | None, optional):
+                services whose global memory is searched. Defaults to None.
+
+            memory_service_active (bool, optional):
+                if the memory service is enabled. Defaults to False.
+
+            has_files (bool, optional):
+                if the user attached files to the question. Defaults to False.
+
+            file_refs (list[str] | None, optional):
+                attached file references in "<8-hex file_id>_<name>" form.
+                Defaults to None.
 
         Returns:
             response (str):
@@ -126,7 +146,7 @@ class QABase(ServiceBase):
                 QA process.
 
             retrieve_score (float | int):
-                score of context retrieving (if applicable). Default to '-1' for
+                score of context retrieving (if applicable). Defaults to -1 for
                 non-RAG services.
         """
         # Set initial return answers.
@@ -136,28 +156,30 @@ class QABase(ServiceBase):
         output_token:   int         = 0
         retrieve_score: float | int = -1
 
-        
-        # Add default service 0
-        if '0' not in services:
+        # Add default service 0.
+        if "0" not in services:
             services["0"] = {
                 "name": "system_information",
-                "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
+                "desc": (
+                    "Answer questions about the AI assistant itself such as who "
+                    "created it, what OpenSI-CoSMIC is, and what it can do."
+                )
             }
 
-        # cut down to just "name" of the services not its "desc"
+        # Cut down to just "name" of the services not its "desc".
         services_name: dict[str, str] = {}
-        for (service_id,service_info) in services.items():
-            services_name[service_id]= service_info['name']
+        for (service_id, service_info) in services.items():
+            services_name[service_id] = service_info["name"]
 
-        # No active services found from fetched API endpoint
+        # No active services found from fetched API endpoint.
         if len(services_name) == 0:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail={
                     "status": "404 - Not Found",
-                    "message": "{trig:s}: {cond:s}".format(
-                        trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
+                    "message": (
+                        "EmptyServiceError: No active services found from fetched API "
+                        "endpoint. At least 1 service is required to for Query Analyser."
                     )
                 }
             )
@@ -172,11 +194,10 @@ class QABase(ServiceBase):
             services=services # pyright: ignore[reportCallIssue]
         )
 
-        # The query analyser can route a question about a uploaded file into 0 or -1  
-        # RAG-eligible fallback branch so an attached file is considered
-        if has_files and service_option in ("0", "-1"):
-            service_option = "5"
-
+        # # The query analyser can route a question about an uploaded file into 0 or -1.
+        # # RAG-eligible fallback branch so an attached file is considered.
+        # if has_files and service_option in ("0", "-1"):
+        #     service_option = "5"
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
@@ -188,9 +209,9 @@ class QABase(ServiceBase):
                 retrieve_score
             )
 
-        # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
-        # document_ids target retrieval at the attached file
-        # attached_file_names tell the LLM which file the question is about
+        # Validate the prefix is an 8-char hex file_id so a malformed ref cannot
+        # silently break retrieval. `document_ids` target retrieval at the attached
+        # file, `attached_file_names` tell the LLM which file the question is about.
         document_ids: list[str] = []
         attached_file_names: list[str] = []
         for ref in (file_refs or []):
@@ -201,8 +222,10 @@ class QABase(ServiceBase):
                 raw_name = parts[1] if len(parts) > 1 else ref
                 attached_file_names.append(raw_name)
             else:
-                print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
-        
+                print(
+                    f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping."
+                )
+
         # Process query with service parsing.
         if service_option.find("1.") > -1:
             if service_option == "1.0":
@@ -315,10 +338,9 @@ class QABase(ServiceBase):
             (
                 raw_response,
                 response
-            )= self.code_generator(query)
+            ) = self.code_generator(query)
 
-
-        # Add system information service 
+        # Add system information service.
         elif service_option == "0":
             (
                 response,
@@ -331,22 +353,23 @@ class QABase(ServiceBase):
                 context=context
             )
 
-        # When all services are disabled and service 0 cannot answer, query analyser will return -1
+        # When all services are disabled and service 0 cannot answer, query analyser
+        # will return -1.
         elif service_option == "-1":
             response, raw_response = self.fallback_service(services=services)
 
         else:
-            is_rag_eligible_service = ( 
-               services.get(service_option, {}).get("memory_capability") is True
+            is_rag_eligible_service = (
+                services.get(service_option, {}).get("memory_capability") is True
             )
-           
+
             execute_rag = (
                 (is_rag) and
                 (is_rag_eligible_service or has_files)
             )
 
             if execute_rag:
-                # Check if context is chat hostory
+                # Check if context is chat history.
                 chat_history_context = (
                     context
                     if   ("Conversation History:" in context)
@@ -366,7 +389,7 @@ class QABase(ServiceBase):
                     context=rag_context
                 ) # pyright: ignore[reportCallIssue]
 
-                # Get the retrieved context, scoped to the active memory tiers
+                # Get the retrieved context, scoped to the active memory tiers.
                 (
                     context_retrieved,
                     retrieve_score
@@ -378,10 +401,10 @@ class QABase(ServiceBase):
                     include_session=True,
                     include_user=memory_service_active,
                     include_global=True,
-                    document_ids=document_ids or None,
+                    document_ids=document_ids or None
                 )
 
-                # Tell the LLM which file the question is about
+                # Tell the LLM which file the question is about.
                 file_note = (
                     f"The user attached the file(s): {', '.join(attached_file_names)}. "
                     "Answer using the retrieved context from that file.\n"
@@ -401,7 +424,7 @@ class QABase(ServiceBase):
                     if   (isinstance(context, dict))
                     else (f"{chat_history_context}{suffix}")
                 ) # pyright: ignore[reportAssignmentType]
-            
+
             # Non-RAG services (or when RAG is disabled) fall through here.
             else:
                 user_prompt     = query
@@ -424,10 +447,10 @@ class QABase(ServiceBase):
         # token, retrieve score, etc) over to `opensi_cosmic.py`. This's the
         # 2nd time QA sent user query + selected service prompt (from
         # `query_analyser.py`). The latter is different based on which condition
-        # above get hit
+        # above get hit.
 
         # Sum up I/O tokens from 1st Ollama call (in `service_info_dict`) with
-        # I/O tokens from 2nd Ollama call (in either condition above)
+        # I/O tokens from 2nd Ollama call (in either condition above).
         total_input_token:  int = service_info_dict["input_token"] + input_token
         total_output_token: int = service_info_dict["output_token"] + output_token
 
