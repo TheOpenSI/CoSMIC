@@ -1,5 +1,6 @@
 ### Core modules ###
 from typing import Optional, List
+from qdrant_client import models
 
 
 ### Type hints ###
@@ -21,7 +22,7 @@ class RAGBase(ServiceBase):
         rerank_topk: int = 6,
         rerank_score_threshold: float = 0.0,
         **kwargs
-    ):
+    ) -> None:
         """
         Context retriever service.
 
@@ -52,7 +53,7 @@ class RAGBase(ServiceBase):
     def set_vector_database(
         self,
         vector_database: VectorDatabase
-    ):
+    ) -> None:
         """
         Set the vector database externally on demand.
 
@@ -94,10 +95,19 @@ class RAGBase(ServiceBase):
         user_id: Optional[str] = None,
         session_id: Optional[str] = None,
         service_name: Optional[str] = None,
-    ):
-        # Build a Qdrant payload filter to scope retrieval by memory tier
-        from qdrant_client import models
+    ) -> Optional[models.Filter]:
+        """
+        Build a Qdrant payload filter scoping retrieval to a single memory tier.
 
+        Args:
+            memory_type (str, optional): memory tier (session, user, global_memory).
+            user_id (str, optional): owner of the memory.
+            session_id (str, optional): chat session of the memory.
+            service_name (str, optional): service a global memory belongs to.
+
+        Returns:
+            memory_filter (models.Filter | None): filter, or None if no field is set.
+        """
         must = []
 
         def eq(field: str, value):
@@ -129,12 +139,24 @@ class RAGBase(ServiceBase):
         include_user: bool = False,
         include_global: bool = True,
         document_ids: Optional[List[str]] = None,
-    ):
-        # Qdrant filter spanning active memory scopes as a union
-        # When document_ids is given the session scope is narrowed to those
-        # documents so a file question targets that file's chunks
-        from qdrant_client import models
+    ) -> Optional[models.Filter]:
+        """
+        Build a Qdrant filter spanning the active memory tiers as a union.
 
+        Args:
+            user_id (str, optional): owner of the session and user memory.
+            session_id (str, optional): chat session of the session memory.
+            global_service_names (list[str], optional): services whose global
+                memory is searched.
+            include_session (bool, optional): search session memory. Defaults to True.
+            include_user (bool, optional): search user memory. Defaults to False.
+            include_global (bool, optional): search global memory. Defaults to True.
+            document_ids (list[str], optional): narrow the session tier to these
+                attached documents.
+
+        Returns:
+            memory_filter (models.Filter | None): filter, or None if no tier is active.
+        """
         def eq(field: str, value):
             return models.FieldCondition(
                 key=f"metadata.{field}", match=models.MatchValue(value=value)
@@ -179,7 +201,15 @@ class RAGBase(ServiceBase):
 
     @staticmethod
     def _scope_rank(doc) -> int:
-        """Priority rank for ordering: session (0) > user (1) > global (2)."""
+        """
+        Priority rank of a chunk's memory tier.
+
+        Args:
+            doc (Document): retrieved chunk.
+
+        Returns:
+            rank (int): session (0) > user (1) > global (2) > unknown (3).
+        """
         meta = getattr(doc, "metadata", None) or {}
         return {"session": 0, "user": 1, "global_memory": 2}.get(
             meta.get("memory_type"), 3
@@ -195,19 +225,25 @@ class RAGBase(ServiceBase):
         include_user: bool = False,
         include_global: bool = True,
         document_ids: Optional[List[str]] = None,
-    ):
+    ) -> tuple[str, list[float]]:
         """
         Retrieve context for a given user prompt.
 
         Args:
             user_prompt (str): a question from the user.
-            document_ids (list[str], optional): when a file is attached, narrow the
-                session scope to these document ids so the file's chunks are the
-                retrieval target.
+            user_id (str, optional): owner of the session and user memory.
+            session_id (str, optional): chat session of the session memory.
+            global_service_names (list[str], optional): services whose global
+                memory is searched.
+            include_session (bool, optional): search session memory. Defaults to True.
+            include_user (bool, optional): search user memory. Defaults to False.
+            include_global (bool, optional): search global memory. Defaults to True.
+            document_ids (list[str], optional): narrow the session tier to these
+                attached documents.
 
         Returns:
-            context             (str): retrieved context from the vector database.
-            retrieved_doc_score      : score of the retrieved context.
+            context (str): retrieved context from the vector database.
+            retrieved_context_score (list[float]): score of each retrieved chunk.
         """
         # Scope retrieval to the union of active memory tiers
         memory_filter = self.build_union_filter(

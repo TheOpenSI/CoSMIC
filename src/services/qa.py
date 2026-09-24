@@ -191,8 +191,8 @@ class QABase(ServiceBase):
         # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
         # document_ids target retrieval at the attached file
         # attached_file_names tell the LLM which file the question is about
-        document_ids: List[str] = []
-        attached_file_names: List[str] = []
+        document_ids: list[str] = []
+        attached_file_names: list[str] = []
         for ref in (file_refs or []):
             parts = ref.split("_", 1)
             doc_id = parts[0]
@@ -278,7 +278,9 @@ class QABase(ServiceBase):
             user_prompt = f"Select the best next move from {next_move} and explain why it is the best."
             (
                 response,
-                raw_response
+                raw_response,
+                input_token,
+                output_token
             ) = self.llm(
                 question=user_prompt,
                 context=move_prediction_context
