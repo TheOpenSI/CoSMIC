@@ -73,6 +73,103 @@ class QABase(ServiceBase):
         return None
 
 
+    def _add_service_0(self, services: dict[str, dict[str, str]]) -> None:
+        """
+        Add default service 0 to the services dictionary if not present.
+        NOTE: This is an inplace mutation of the `services` dictionary.
+
+        Args:
+            services (dict[str, dict[str, str]]):
+                Dictionary of services to be updated.
+        """
+        if "0" not in services:
+            services["0"] = {
+                "name": "system_information",
+                "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
+            }
+
+
+    def _get_services_name(self, services: dict[str, dict[str, str]]) -> dict[str, str]:
+        """
+        Extracts the names of the services from the services dictionary.
+
+        Args:
+            services (dict[str, dict[str, str]]):
+                Dictionary of services.
+
+        Returns:
+            dict[str, str]:
+                Dictionary mapping service IDs to their names.
+        """
+        return {service_id: service_info["name"] for service_id, service_info in services.items()}
+
+
+    def _force_route_check(self, service_option: str, has_files: bool) -> str:
+        """
+        If a file is attached but the query analyser routed to "0" (system info)
+        or "-1" (fallback) neither of which use RAG, force it into the
+        generic RAG branch so the attached file actually gets used.
+
+        Args:
+            service_option (str):
+                The current service option selected by the query analyser.
+            has_files (bool):
+                Whether files are attached to the query.
+
+        Returns:
+            str:
+                The updated service option, if necessary.
+        """
+        if has_files and service_option in ("0", "-1"):
+            return "5"
+        return service_option
+
+
+    def _parse_file_refs(self, 
+                         file_refs: list[str] | None) -> tuple[list[str], list[str]]:
+        """
+        Parse `file_refs` (each formatted as "<8-char-hex-file_id>_<original_filename>")
+        into the file_id and filename lists used downstream. A ref whose prefix
+        isn't a valid 8-char hex file_id is dropped rather than passed through,
+        so a malformed ref can't silently corrupt retrieval.
+
+        Args:
+            file_refs (list[str] | None):
+                Raw file references attached to the query, e.g.
+                ["a1b2c3d4_report.pdf"].
+
+        Returns:
+            document_ids (list[str]):
+                Valid file_ids, used to scope RAG retrieval to the attached
+                files.
+
+            attached_file_names (list[str]):
+                Original filenames, used to tell the LLM which file(s) the
+                question is about.
+        """
+        document_ids: list[str] = []
+        attached_file_names: list[str] = []
+
+        for ref in (file_refs or []):
+            parts = ref.split("_", 1)
+            doc_id = parts[0]
+
+            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
+                document_ids.append(doc_id)
+                raw_name = parts[1] if len(parts) > 1 else ref
+                attached_file_names.append(raw_name)
+            else:
+                print(
+                    set_color(
+                        "warning",
+                        f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping."
+                    )
+                )
+
+
+        return document_ids, attached_file_names
+
+
     def __call__(
         self,
         query:      str,
@@ -138,29 +235,10 @@ class QABase(ServiceBase):
 
         
         # Add default service 0
-        if '0' not in services:
-            services["0"] = {
-                "name": "system_information",
-                "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
-            }
+        self._add_service_0(services=services)
 
         # cut down to just "name" of the services not its "desc"
-        services_name: dict[str, str] = {}
-        for (service_id,service_info) in services.items():
-            services_name[service_id]= service_info['name']
-
-        # No active services found from fetched API endpoint
-        if len(services_name) == 0:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={
-                    "status": "404 - Not Found",
-                    "message": "{trig:s}: {cond:s}".format(
-                        trig="EmptyServiceError",
-                        cond="No active services found from fetched API endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
-            )
+        services_name: dict[str, str] = self._get_services_name(services=services)
 
         # Get service option & minimal extra info about selected service through
         # `query_analyser.py`.
@@ -172,39 +250,14 @@ class QABase(ServiceBase):
             services=services # pyright: ignore[reportCallIssue]
         )
 
-        # The query analyser can route a question about a uploaded file into 0 or -1  
-        # RAG-eligible fallback branch so an attached file is considered
-        if has_files and service_option in ("0", "-1"):
-            service_option = "5"
+        # Check if force route is required.
+        service_option = self._force_route_check(service_option, has_files)
 
+        # Parse file_refs into validated document_ids / attached_file_names
+        document_ids, attached_file_names = self._parse_file_refs(file_refs)
 
-        # Skip query as required or unknown service option.
-        if query.find("skip") > -1:
-            return (
-                str(response),
-                str(raw_response),
-                input_token,
-                output_token,
-                retrieve_score
-            )
-
-        # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
-        # document_ids target retrieval at the attached file
-        # attached_file_names tell the LLM which file the question is about
-        document_ids: list[str] = []
-        attached_file_names: list[str] = []
-        for ref in (file_refs or []):
-            parts = ref.split("_", 1)
-            doc_id = parts[0]
-            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
-                document_ids.append(doc_id)
-                raw_name = parts[1] if len(parts) > 1 else ref
-                attached_file_names.append(raw_name)
-            else:
-                print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
-        
         # Process query with service parsing.
-        if service_option.find("1.") > -1:
+        if service_option.startswith("1."):
             if service_option == "1.0":
                 # Set game move mode.
                 move_mode = (
