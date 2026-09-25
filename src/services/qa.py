@@ -1,9 +1,5 @@
 ### Core modules ###
 from pathlib import Path
-from fastapi import (
-    HTTPException,
-    status
-)
 import uuid
 
 
