@@ -102,7 +102,7 @@ class QABase(ServiceBase):
         """
         If a file is attached but the query analyser routed to "0" (system info)
         or "-1" (fallback) neither of which use RAG, force it into the
-        generic RAG branch so the attached file actually gets used.
+        generic RAG (else) branch so the attached file actually gets used.
 
         Args:
             service_option (str): The current service option selected by the query analyser.
@@ -112,7 +112,7 @@ class QABase(ServiceBase):
             str: The updated service option, if necessary.
         """
         if has_files and service_option in ("0", "-1"):
-            return "4"
+            return "rag_fallback"
         return service_option
 
 
