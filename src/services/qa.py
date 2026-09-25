@@ -4,6 +4,7 @@ import uuid
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -18,7 +19,6 @@ from .fallback_service import FallbackService
 from ...utils.log_tool import set_color
 
 
-
 class QABase(ServiceBase):
     def __init__(
         self,
@@ -29,7 +29,7 @@ class QABase(ServiceBase):
         system_information_service: SystemInformationService,
         fallback_service: FallbackService,
         config:         str | None = None,
-        **kwargs
+        **kwargs: Any
     ) -> None:
         """
         Base class for QA.
@@ -510,8 +510,8 @@ class QABase(ServiceBase):
         global_service_names:   list[str] | None    = None,
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
-        file_refs:              list[str] | None    = None,
-    ) -> tuple[str, str, int, int ,float | int]:
+        file_refs:              list[str] | None    = None
+    ) -> tuple[str, str, int, int, float | int]:
         """
         Process each QA.
 
@@ -628,7 +628,8 @@ class QABase(ServiceBase):
                 context = context
             )
 
-        # When all services are disabled and service 0 cannot answer, query analyser will return -1
+        # When all services are disabled and service 0 cannot answer, query analyser
+        # will return -1.
         elif service_option == "-1":
             response, raw_response = self.fallback_service(services = services)
 
@@ -673,7 +674,7 @@ class QABase(ServiceBase):
         # above get hit
 
         # Sum up I/O tokens from 1st Ollama call (in `service_info_dict`) with
-        # I/O tokens from 2nd Ollama call (in either condition above)
+        # I/O tokens from 2nd Ollama call (in either condition above).
         total_input_token:  int = service_info_dict["input_token"] + input_token
         total_output_token: int = service_info_dict["output_token"] + output_token
 
