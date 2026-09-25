@@ -27,6 +27,7 @@ from ...types.tags import APITag
 ### Internal modules ###
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
+from ...src.services.qa import EmptyServiceError
 from ...utils.chat_history import build_context_from_messages
 from ...utils.log_tool import set_color
 
@@ -301,6 +302,16 @@ async def process_cosmic(
 
     except HTTPException as http_exc:
         raise http_exc
+
+
+    except EmptyServiceError as empty_service_exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "status": "404 - Not Found",
+                "message": f"EmptyServiceError: {empty_service_exc}"
+            }
+        )
 
 
     except Exception as fastapi_exc:

@@ -1,10 +1,6 @@
 ### Core modules ###
 from pathlib import Path
 import logging
-from fastapi import (
-    HTTPException,
-    status
-)
 import uuid
 
 
@@ -21,11 +17,16 @@ from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
-from ...utils.log_tool import set_color
 
 
 
 logger: logging.Logger = logging.getLogger(__name__)
+
+
+class EmptyServiceError(Exception):
+    """
+    Raised when no active service is available for the Query Analyser.
+    """
 
 
 class QABase(ServiceBase):
@@ -192,8 +193,11 @@ class QABase(ServiceBase):
                 QA process.
 
             retrieve_score (float | int):
-                score of context retrieving (if applicable). Defaults to -1 for
-                non-RAG services.
+                highest score among the retrieved chunks (if applicable).
+                Defaults to -1 for non-RAG services or when nothing is retrieved.
+
+        Raises:
+            EmptyServiceError: no active service is available.
         """
         # Set initial return answers.
         response:       str | None  = None
@@ -219,15 +223,9 @@ class QABase(ServiceBase):
 
         # No active services found from fetched API endpoint.
         if len(services_name) == 0:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail={
-                    "status": "404 - Not Found",
-                    "message": (
-                        "EmptyServiceError: No active services found from fetched API "
-                        "endpoint. At least 1 service is required to for Query Analyser."
-                    )
-                }
+            raise EmptyServiceError(
+                "No active services found from fetched API endpoint. At least 1 "
+                "service is required for Query Analyser."
             )
 
         # Get service option & minimal extra info about selected service through
@@ -331,7 +329,6 @@ class QABase(ServiceBase):
                     topk=5
                 )
 
-                # Set the response with question and next move.
                 move_prediction_context = f"The previous chess moves are {[current_moves]}."
 
             # Explain why these moves are feasible.
@@ -442,8 +439,8 @@ class QABase(ServiceBase):
                 # Get the retrieved context, scoped to the active memory tiers.
                 (
                     context_retrieved,
-                    retrieve_score
-                ) = self.rag( # pyright: ignore[reportAssignmentType]
+                    retrieved_context_score
+                ) = self.rag(
                     query,
                     user_id=user_id,
                     session_id=session_id,
@@ -452,6 +449,13 @@ class QABase(ServiceBase):
                     include_user=(memory_service_active and is_rag_eligible_service),
                     include_global=is_rag_eligible_service,
                     document_ids=document_ids or None
+                )
+
+                # Report the best chunk score, or -1 if nothing was retrieved.
+                retrieve_score = (
+                    max(retrieved_context_score)
+                    if   (retrieved_context_score)
+                    else (-1)
                 )
 
                 # Tell the LLM which file the question is about.
@@ -469,11 +473,11 @@ class QABase(ServiceBase):
                     else (f"\n{file_note}Context:\n {context_retrieved}")
                 )
 
-                context = (
+                if isinstance(context, dict):
                     context.update({"context": f"{chat_history_context}{suffix}"})
-                    if   (isinstance(context, dict))
-                    else (f"{chat_history_context}{suffix}")
-                ) # pyright: ignore[reportAssignmentType]
+
+                else:
+                    context = f"{chat_history_context}{suffix}"
 
             # Non-RAG services (or when RAG is disabled) fall through here.
             else:
