@@ -32,32 +32,29 @@ class RAGBase(ServiceBase):
         Context retriever service.
 
         Args:
-            vector_database (VectorDatabase):   vector database.
-
-            retrieve_score_threshold (float, optional):  retrieve score threshold to filter out retrieved
-                context with similarity under this threshold. Defaults to 0.7.
-
-            topk (int, optional): up to topk retrieved context returned. Defaults to 5.
-
-            rerank_enabled (bool, optional): two-stage retrieval (dense pool -> cross-encoder). Defaults to True.
-
-            candidate_pool (int, optional): dense candidates fetched before reranking. Defaults to 30.
-
-            rerank_topk (int, optional): contexts kept after reranking. Defaults to 6.
-
-            rerank_score_threshold (float, optional): drop reranked contexts under this score. Defaults to 0.0.
+            vector_database             (VectorDatabase):   vector database.
+            retrieve_score_threshold    (float, optional):  retrieve score threshold to filter out retrieved
+                                                            context with similarity under this threshold.
+                                                            Defaults to 0.7.
+            topk                        (int, optional):    up to topk retrieved context returned. Defaults to 5.
+            rerank_enabled              (bool, optional):   two-stage retrieval (dense pool -> cross-encoder).
+                                                            Defaults to True.
+            candidate_pool              (int, optional):    dense candidates fetched before reranking. Defaults to 30.
+            rerank_topk                 (int, optional):    contexts kept after reranking. Defaults to 6.
+            rerank_score_threshold      (float, optional):  drop reranked contexts under this score.
+                                                            Defaults to 0.0.
         """
         super().__init__(**kwargs)
 
         # Set config.
-        self.retrieve_score_threshold = retrieve_score_threshold
-        self.topk = topk
-        self.vector_database = vector_database
+        self.retrieve_score_threshold   = retrieve_score_threshold
+        self.topk                       = topk
+        self.vector_database            = vector_database
 
         # Reranking config.
-        self.rerank_enabled = rerank_enabled
-        self.candidate_pool = candidate_pool
-        self.rerank_topk = rerank_topk
+        self.rerank_enabled         = rerank_enabled
+        self.candidate_pool         = candidate_pool
+        self.rerank_topk            = rerank_topk
         self.rerank_score_threshold = rerank_score_threshold
 
 
@@ -121,7 +118,10 @@ class RAGBase(ServiceBase):
         """
         must = []
 
-        def eq(field: str, value: str) -> FieldCondition:
+        def eq(
+            field: str,
+            value: str
+        ) -> FieldCondition:
             return FieldCondition(
                 key=f"metadata.{field}",
                 match=MatchValue(value=value)
