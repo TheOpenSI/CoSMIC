@@ -35,26 +35,19 @@ class QABase(ServiceBase):
         Base class for QA.
 
         Args:
-            query_analyser (LLMBase):
-                query analyser.
+            query_analyser (LLMBase): The query analyser.
 
-            llm (LLMBase):
-                LLM instance.
+            llm (LLMBase): LLM instance.
 
-            rag (RAGBase):
-                RAG instance containing vector database service.
+            rag (RAGBase): RAG instance containing vector database service.
 
-            code_generator (CodeGenerator):
-                code generation service.
+            code_generator (CodeGenerator): code generation service.
 
-            system_information_service (SystemInformationService):
-                system information service.
+            system_information_service (SystemInformationService): system information service.
 
-            fallback_service (FallbackService):
-                fallback service.
+            fallback_service (FallbackService): fallback service.
 
-            config (str, optional):
-                config file to extract settings. Default to None.
+            config (str, optional): config file to extract settings. Default to None.
         """
         super().__init__(**kwargs)
 
@@ -106,6 +99,7 @@ class QABase(ServiceBase):
 
         Args:
             service_option (str): The current service option selected by the query analyser.
+
             has_files (bool): Whether files are attached to the query.
 
         Returns:
@@ -310,6 +304,7 @@ class QABase(ServiceBase):
 
         Args:
             services (dict[str, dict[str, str]]): Dictionary of services.
+
             service_option (str): Selected service option.
 
         Returns:
@@ -341,9 +336,13 @@ class QABase(ServiceBase):
 
         Args:
             services (dict[str, dict[str, str]]): Dictionary of services.
+
             service_option (str): Selected service option.
+
             is_rag (bool): Whether RAG is enabled for this request.
+
             has_files (bool): Whether files are attached to the query.
+
 
         Returns:
             bool: True if RAG should be used, False otherwise.
@@ -367,6 +366,7 @@ class QABase(ServiceBase):
 
         Returns:
             chat_history_context (str): context if it holds chat history, else "".
+
             rag_context (str): context if it doesn't hold chat history, else "".
         """
         is_chat_history = "Conversation History:" in context
@@ -387,8 +387,11 @@ class QABase(ServiceBase):
 
         Args:
             context (str | dict): context associated with the question.
+
             chat_history_context (str): chat history part of the context, if any.
+
             context_retrieved (str): context retrieved by RAG.
+
             attached_file_names (list[str]): original filenames of attached files.
 
         Returns:
@@ -430,17 +433,26 @@ class QABase(ServiceBase):
 
         Args:
             query (str): the question.
+
             context (str | dict): context associated with the question.
+
             user_id (str | None): the current user, used to scope retrieval.
+
             session_id (str | None): the current session, used to scope retrieval.
+
             global_service_names (list[str] | None): global services to include in retrieval.
+
             memory_service_active (bool): whether the user memory tier should be included.
+
             document_ids (list[str]): file_ids to scope retrieval to attached files.
+
             attached_file_names (list[str]): original filenames of attached files.
 
         Returns:
             user_prompt (str): prompt built from the query and non-history context.
+
             context (str | dict): context updated with the retrieved information.
+
             retrieve_score (float | int): score of the context retrieval.
         """
         chat_history_context, rag_context = self._split_chat_history_context(context=context)
@@ -504,58 +516,41 @@ class QABase(ServiceBase):
         Process each QA.
 
         Args:
-            query (str):
-                a question.
+            query (str): a question.
 
-            services (dict[str, dict[str, str]]):
-                all available services for Query Analyser, which then being used
-                to re-structure question with its prompting techniques.
+            services (dict[str, dict[str, str]]): all available services for Query Analyser, which 
+                then being used to re-structure question with its prompting techniques.
 
-            context (str | dict, optional):
-                context associated with the question. Defaults to "".
+            context (str | dict, optional): context associated with the question. Defaults to "".
 
-            is_rag  (bool, optional):
-                if retrieve context for the question. Defaults to False.
+            is_rag  (bool, optional): if retrieve context for the question. Defaults to False.
 
-            verbose (bool, optional):
-                debug mode. Default to False.
+            verbose (bool, optional): debug mode. Default to False.
 
-            user_id (str | None, optional):
-                owner of the session and user memory. Defaults to None.
+            user_id (str | None, optional): owner of the session and user memory. Defaults to None.
 
-            session_id (str | None, optional):
-                chat session of the session memory. Defaults to None.
+            session_id (str | None, optional): chat session of the session memory. Defaults to None.
 
-            global_service_names (list[str] | None, optional):
-                services whose global memory is searched. Defaults to None.
-
-            memory_service_active (bool, optional):
-                if the memory service is enabled. Defaults to False.
-
-            has_files (bool, optional):
-                if the user attached files to the question. Defaults to False.
-
-            file_refs (list[str] | None, optional):
-                attached file references in "<8-hex file_id>_<name>" form.
+            global_service_names (list[str] | None, optional): services whose global memory is searched. 
                 Defaults to None.
 
+            memory_service_active (bool, optional): if the memory service is enabled. Defaults to False.
+
+            has_files (bool, optional): if the user attached files to the question. Defaults to False.
+
+            file_refs (list[str] | None, optional): attached file references in "<8-hex file_id>_<name>" 
+                form. Defaults to None.
+
         Returns:
-            response (str):
-                truncated answer if applicable.
+            response (str): truncated answer if applicable.
 
-            raw_response (str):
-                original answer from LLM.
+            raw_response (str): original answer from LLM.
 
-            input_token (int):
-                total amount of input tokens captured by LLM during each
-                QA process.
+            input_token (int): total amount of input tokens captured by LLM during each QA process.
 
-            output_token (int):
-                total amount of output tokens generated by LLM during each
-                QA process.
+            output_token (int): total amount of output tokens generated by LLM during each QA process.
 
-            retrieve_score (float | int):
-                highest score among the retrieved chunks (if applicable).
+            retrieve_score (float | int): highest score among the retrieved chunks (if applicable).
                 Defaults to -1 for non-RAG services or when nothing is retrieved.
         """
         # Set initial return answers.
