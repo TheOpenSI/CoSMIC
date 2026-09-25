@@ -56,7 +56,7 @@ class QABase(ServiceBase):
             config (str, optional):
                 config file to extract settings. Default to None.
         """
-        super().__init__( **kwargs)
+        super().__init__(**kwargs)
 
         # Set config globally.
         self.query_analyser             = query_analyser
@@ -78,7 +78,10 @@ class QABase(ServiceBase):
         if "0" not in services:
             services["0"] = {
                 "name": "system_information",
-                "desc": "Answer questions about the AI assistant itself such as who created it, what OpenSI-CoSMIC is, and what it can do."
+                "desc": (
+                    "Answer questions about the AI assistant itself such as who created it, "
+                    "what OpenSI-CoSMIC is, and what it can do."
+                )
             }
 
 
@@ -109,7 +112,7 @@ class QABase(ServiceBase):
             str: The updated service option, if necessary.
         """
         if has_files and service_option in ("0", "-1"):
-            return "5"
+            return "4"
         return service_option
 
 
@@ -452,7 +455,7 @@ class QABase(ServiceBase):
         # Get the retrieved context, scoped to the active memory tiers
         (
             context_retrieved,
-            retrieve_score
+            retrieved_context_score
         ) = self.rag( # pyright: ignore[reportAssignmentType]
             query,
             user_id = user_id,
@@ -462,6 +465,12 @@ class QABase(ServiceBase):
             include_user = memory_service_active,
             include_global = True,
             document_ids = document_ids or None
+        )
+
+        retrieve_score = (
+            max(retrieved_context_score)
+            if   (retrieved_context_score)
+            else (-1)
         )
 
         context = self._merge_retrieved_context(
@@ -511,6 +520,25 @@ class QABase(ServiceBase):
             verbose (bool, optional):
                 debug mode. Default to False.
 
+            user_id (str | None, optional):
+                owner of the session and user memory. Defaults to None.
+
+            session_id (str | None, optional):
+                chat session of the session memory. Defaults to None.
+
+            global_service_names (list[str] | None, optional):
+                services whose global memory is searched. Defaults to None.
+
+            memory_service_active (bool, optional):
+                if the memory service is enabled. Defaults to False.
+
+            has_files (bool, optional):
+                if the user attached files to the question. Defaults to False.
+
+            file_refs (list[str] | None, optional):
+                attached file references in "<8-hex file_id>_<name>" form.
+                Defaults to None.
+
         Returns:
             response (str):
                 truncated answer if applicable.
@@ -527,8 +555,8 @@ class QABase(ServiceBase):
                 QA process.
 
             retrieve_score (float | int):
-                score of context retrieving (if applicable). Default to '-1' for
-                non-RAG services.
+                highest score among the retrieved chunks (if applicable).
+                Defaults to -1 for non-RAG services or when nothing is retrieved.
         """
         # Set initial return answers.
         response:       str | None  = None
