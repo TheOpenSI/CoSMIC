@@ -1,5 +1,6 @@
 ### Core modules ###
 from pathlib import Path
+import logging
 from fastapi import (
     HTTPException,
     status
@@ -22,6 +23,9 @@ from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
 from ...utils.log_tool import set_color
 
+
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class QABase(ServiceBase):
@@ -72,6 +76,48 @@ class QABase(ServiceBase):
         self.fallback_service           = fallback_service
 
         return None
+
+
+    @staticmethod
+    def _parse_file_refs(
+        file_refs: list[str] | None
+    ) -> tuple[list[str], list[str]]:
+        """
+        Split the attached file refs sent by the frontend.
+
+        The frontend sends each attached file as "<file_id>_<file_name>", where
+        file_id is the 8-char hex id returned by `/memory/upload`. A ref without
+        a valid file_id is skipped, because it would filter retrieval down to
+        nothing.
+
+        Args:
+            file_refs (list[str] | None):
+                attached file refs.
+
+        Returns:
+            document_ids (list[str]):
+                file ids used to limit retrieval to the attached files.
+
+            attached_file_names (list[str]):
+                file names used to tell the LLM which file the question is about.
+        """
+        document_ids:           list[str] = []
+        attached_file_names:    list[str] = []
+
+        for ref in (file_refs or []):
+            parts:      list[str]   = ref.split("_", 1)
+            file_id:    str         = parts[0]
+
+            if len(file_id) == 8 and all(c in "0123456789abcdef" for c in file_id):
+                document_ids.append(file_id)
+                attached_file_names.append(parts[1] if len(parts) > 1 else ref)
+
+            else:
+                logger.warning(
+                    f"Unparseable file ref '{ref}' (no 8-hex file_id); skipping."
+                )
+
+        return document_ids, attached_file_names
 
 
     def __call__(
@@ -194,10 +240,11 @@ class QABase(ServiceBase):
             services=services # pyright: ignore[reportCallIssue]
         )
 
-        # # The query analyser can route a question about an uploaded file into 0 or -1.
-        # # RAG-eligible fallback branch so an attached file is considered.
-        # if has_files and service_option in ("0", "-1"):
-        #     service_option = "5"
+        # If a file is attached but the query analyser routes to "0" (system info)
+        # or "-1" (fallback), neither of which use RAG, force it into the generic
+        # RAG branch so the attached file actually gets used.
+        if has_files and service_option in ("0", "-1"):
+            service_option = "4"
 
         # Skip query as required or unknown service option.
         if query.find("skip") > -1:
@@ -209,22 +256,12 @@ class QABase(ServiceBase):
                 retrieve_score
             )
 
-        # Validate the prefix is an 8-char hex file_id so a malformed ref cannot
-        # silently break retrieval. `document_ids` target retrieval at the attached
-        # file, `attached_file_names` tell the LLM which file the question is about.
-        document_ids: list[str] = []
-        attached_file_names: list[str] = []
-        for ref in (file_refs or []):
-            parts = ref.split("_", 1)
-            doc_id = parts[0]
-            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
-                document_ids.append(doc_id)
-                raw_name = parts[1] if len(parts) > 1 else ref
-                attached_file_names.append(raw_name)
-            else:
-                print(
-                    f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping."
-                )
+        # Split attached file refs into ids (to limit retrieval to those files)
+        # and names (to tell the LLM which file the question is about).
+        (
+            document_ids,
+            attached_file_names
+        ) = self._parse_file_refs(file_refs=file_refs)
 
         # Process query with service parsing.
         if service_option.find("1.") > -1:
@@ -334,6 +371,10 @@ class QABase(ServiceBase):
 
                 response = raw_response = "Saved to your memory."
 
+            # Memory service is disabled or the user is unknown, so it cannot answer.
+            else:
+                response, raw_response = self.fallback_service(services=services)
+
         elif service_option == "3":
             (
                 raw_response,
@@ -356,6 +397,15 @@ class QABase(ServiceBase):
         # When all services are disabled and service 0 cannot answer, query analyser
         # will return -1.
         elif service_option == "-1":
+            response, raw_response = self.fallback_service(services=services)
+
+        # The query analyser returned an option that is not an active service.
+        # Attached files still go to the RAG branch below.
+        elif (service_option not in services) and (not has_files):
+            logger.warning(
+                f"Query analyser returned unknown service option '{service_option}'; "
+                "using fallback service."
+            )
             response, raw_response = self.fallback_service(services=services)
 
         else:
@@ -399,8 +449,8 @@ class QABase(ServiceBase):
                     session_id=session_id,
                     global_service_names=global_service_names,
                     include_session=True,
-                    include_user=memory_service_active,
-                    include_global=True,
+                    include_user=(memory_service_active and is_rag_eligible_service),
+                    include_global=is_rag_eligible_service,
                     document_ids=document_ids or None
                 )
 
