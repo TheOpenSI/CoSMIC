@@ -1,4 +1,5 @@
 ### Core modules ###
+from datetime import datetime
 from pathlib import Path
 from ollama import (
     ChatResponse,
@@ -110,7 +111,7 @@ class Ollama(LLMBase):
         question:       str,
         context:        str | dict[str, Any]    = {},
         service_name:   str                     = "",
-    ) -> tuple[str, str, int, int]:
+    ) -> tuple[str, str, datetime, int, int]:
         """
         Process the question and generate a response using Ollama.
 
@@ -130,6 +131,10 @@ class Ollama(LLMBase):
 
             raw_response (str):
                 LLM raw response without truncations.
+
+            response_timestamp (datetime):
+                LLM response timestamp. Converted to datetime type to fit in with
+                Pydantic AwareDateTime type.
 
             input_token (int):
                 amount of input tokens captured by Ollama when processing each
@@ -163,9 +168,10 @@ class Ollama(LLMBase):
             model=self.llm_name,
             messages=combined_prompt,
         )
-        raw_response:   str = chat_response["message"]["content"]
-        input_token:    int = chat_response["prompt_eval_count"]
-        output_token:   int = chat_response["eval_count"]
+        raw_response:       str         = chat_response["message"]["content"]
+        response_timestamp: datetime    = datetime.fromisoformat(chat_response["created_at"])
+        input_token:        int         = chat_response["prompt_eval_count"]
+        output_token:       int         = chat_response["eval_count"]
 
         # Apply truncation if enabled
         response: str = (
@@ -177,6 +183,7 @@ class Ollama(LLMBase):
         return (
             response,
             raw_response,
+            response_timestamp,
             input_token,
             output_token
         )

@@ -1,4 +1,8 @@
 ### Core modules ###
+from datetime import (
+    datetime,
+    timezone
+)
 from pathlib import Path
 from fastapi import (
     HTTPException,
@@ -15,11 +19,11 @@ from . import chess as chess_instances
 from .base import ServiceBase
 from .document_index import DocumentMetadata
 from .llms.LLMBase import LLMBase
+from .llms.Ollama import Ollama
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
-from ...utils.log_tool import set_color
 
 
 
@@ -27,7 +31,7 @@ class QABase(ServiceBase):
     def __init__(
         self,
         query_analyser: LLMBase,
-        llm:            LLMBase,
+        llm:            Ollama,
         rag:            RAGBase,
         code_generator: CodeGenerator,
         system_information_service: SystemInformationService,
@@ -89,7 +93,7 @@ class QABase(ServiceBase):
         memory_service_active:  bool                = False,
         has_files:              bool                = False,
         file_refs:              list[str] | None    = None,
-    ) -> tuple[str, str, int, int ,float | int]:
+    ) -> tuple[str, str, datetime, int, int ,float | int]:
         """
         Process each QA.
 
@@ -117,6 +121,10 @@ class QABase(ServiceBase):
             raw_response (str):
                 original answer from LLM.
 
+            response_timestamp (datetime):
+                timestamp when received raw response from LLM. The format is align
+                with Pydantic AwareDateTime format.
+
             input_token (int):
                 total amount of input tokens captured by LLM during each
                 QA process.
@@ -130,11 +138,12 @@ class QABase(ServiceBase):
                 non-RAG services.
         """
         # Set initial return answers.
-        response:       str | None  = None
-        raw_response:   str | None  = None
-        input_token:    int         = 1
-        output_token:   int         = 1
-        retrieve_score: float | int = -1
+        response:           str | None  = None
+        raw_response:       str | None  = None
+        response_timestamp: datetime    = datetime.now(tz=timezone.utc)
+        input_token:        int         = 1
+        output_token:       int         = 1
+        retrieve_score:     float | int = -1
 
         
         # Add default service 0
@@ -183,6 +192,7 @@ class QABase(ServiceBase):
             return (
                 str(response),
                 str(raw_response),
+                response_timestamp,
                 input_token,
                 output_token,
                 retrieve_score
@@ -316,11 +326,12 @@ class QABase(ServiceBase):
             )= self.code_generator(query)
 
 
-        # Add system information service 
+        # Add system information service
         elif service_option == "0":
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token
             ) = self.system_information_service(
@@ -334,8 +345,14 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services=services)
 
         else:
-            is_rag_eligible_service = ( 
-               services.get(service_option, {}).get("memory_capability") is True
+            is_rag_eligible_service = (
+                services.get(
+                    service_option,
+                    {}
+                ).get(
+                    "memory_capability",
+                    False
+                ) is True
             )
            
             execute_rag = (
@@ -409,6 +426,7 @@ class QABase(ServiceBase):
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token
             ) = self.llm(
@@ -432,6 +450,7 @@ class QABase(ServiceBase):
         return (
             str(response),
             str(raw_response),
+            response_timestamp,
             total_input_token,
             total_output_token,
             retrieve_score

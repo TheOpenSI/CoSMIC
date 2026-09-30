@@ -252,6 +252,7 @@ async def process_cosmic(
                     (
                         llm_response,
                         _llm_raw_response,
+                        llm_response_timestamp,
                         llm_input_token,
                         llm_output_token,
                         _llm_retrieve_score
@@ -273,7 +274,7 @@ async def process_cosmic(
                     query_create_on=chat_history_block.query_create_on,     # pyright: ignore[reportArgumentType]
                     llm_role=LLM_ROLE,
                     llm_response=llm_response,
-                    response_create_on=datetime.now(tz=timezone.utc),
+                    response_create_on=llm_response_timestamp,
                     input_token=llm_input_token,
                     output_token=llm_output_token
                 )
