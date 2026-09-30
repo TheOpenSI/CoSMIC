@@ -132,8 +132,8 @@ class QABase(ServiceBase):
         # Set initial return answers.
         response:       str | None  = None
         raw_response:   str | None  = None
-        input_token:    int         = 0
-        output_token:   int         = 0
+        input_token:    int         = 1
+        output_token:   int         = 1
         retrieve_score: float | int = -1
 
         
@@ -297,7 +297,7 @@ class QABase(ServiceBase):
                 and (user_id)
             ):
                 payload = DocumentMetadata(
-                    document_id=uuid.uuid4().hex[:8],
+                    document_id=uuid.uuid7().hex[:8],
                     user_id=user_id,
                     memory_type="user",
                 ).to_vector_payload()

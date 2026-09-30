@@ -1,70 +1,70 @@
-def build_context_from_messages(
-    messages: list,
-    num_pairs: int
+### Core modules ###
+
+
+### Type hints ###
+from typing import Any
+
+
+### Internal modules ###
+
+
+def build_context_from_chat_history(
+    details: list[Any],
+    num_pairs: int = 5
 ) -> str:
     """
-    Build a chat history from the given number of conversation pairs.
+    Build the LLM conversation context from the completed blocks of a `details`
+    list. Returns an empty string when there are no complete pairs.
 
     Args:
-        messages (list): List of messages in the chat history.
-        num_pairs (int): Number of conversation pairs to include in the context.
+        details (list): completed chat history blocks (attribute access).
+        num_pairs (int): number of most recent conversation pairs to include.
 
     Returns:
-        str: Formatted string representing the chat history.
+        str: formatted conversation history, or "" when none is available.
     """
-    if not messages:
+    pairs: list[tuple[str, str]] = [
+        (
+            (
+                chat_history_field.user_query.split("</files>", 1)[1].strip()
+                if   ("</files>" in chat_history_field.user_query)
+                else (chat_history_field.user_query)
+            ),
+            chat_history_field.llm_response
+        )
+        for chat_history_field in details
+        if (
+            chat_history_field.user_query
+            and
+            chat_history_field.llm_response
+        )
+    ]
+
+    selected_pairs: list[tuple[str, str]] = pairs[-num_pairs:]
+
+    if not selected_pairs:
         return ""
 
-    pairs: list[tuple[str, str]] = []
-    i: int = 0
-
-    while i < len(messages) - 1:
-        if messages[i]["role"] == "user" and messages[i + 1]["role"] == "assistant":
-            user_msg: str = messages[i]["content"]
-            assistant_msg: str = messages[i + 1]["content"]
-
-            pairs.append((user_msg, assistant_msg))
-            i += 2
-
-        else:
-            i += 1
-
-    selected_pairs: list[tuple[str ,str]] = pairs[-num_pairs:]
-
     context_parts: list[str] = []
-
-    for idx, (user_msg, assistant_msg) in enumerate(
+    for (
+        index,
+        (user_msg, assistant_msg)
+    ) in enumerate(
         iterable=selected_pairs,
         start=1
     ):
-        block: str = "{0:s}\n{1:s}\n{2:s}\n{3:s}".format(
-            f"Previous Conversation Pair {idx}",
-            f"{'-'*30}",
-            f"**User:** {user_msg}",
-            f"**Assistant:** {assistant_msg}"
+        context_parts.append(
+            "Previous Conversation Pair {0:d}\n{1:s}\n**User:** {2:s}\n**Assistant:** {3:s}".format(
+                index,
+                "-" * 30,
+                user_msg,
+                assistant_msg
+            )
         )
-        context_parts.append(block)
 
-    full_context: str = "{0:s}\n\n\n{1:s}\n{2:s}\n".format(
-        "Conversation History:",
-        f"{context_parts}",
-        f"{'='*15} End of Chat History {'='*15}"
-    )
-
-    return full_context
-
-
-if __name__ == "__main__":
-    messages: list[dict[str, str]] = [
-        {
-            'role': 'system',
-            'content': 'PDF content from OpenwebUI'
-        }
-    ]
-
-    print(
-        build_context_from_messages(
-            messages=messages,
-            num_pairs=5
+    return (
+        "{0:s} Conversation History {0:s}\n{1:s}\n{0:s} End of Chat History {0:s}\n".format(
+            ("=" * 15),
+            "\n\n".join(context_parts)
         )
     )
