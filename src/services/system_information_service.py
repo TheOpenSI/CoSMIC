@@ -1,4 +1,5 @@
 ### Core modules ###
+from datetime import datetime
 
 
 ### Type hints ###
@@ -37,7 +38,7 @@ class SystemInformationService(ServiceBase):
         query:      str,
         services:   dict,
         context:    str | dict = ""
-    ) -> tuple[str, str, int, int]:
+    ) -> tuple[str, str, datetime, int, int]:
         """
         Answer a system-information query about OpenSI-CoSMIC.
 
@@ -58,6 +59,10 @@ class SystemInformationService(ServiceBase):
 
             raw_response (str):
                 original answer from LLM.
+
+            response_timestamp (datetime):
+                timestamp when received raw response from LLM. The format is align
+                with Pydantic AwareDateTime format.
 
             input_token (int):
                 amount of input tokens captured by LLM for each QA process that
@@ -90,6 +95,7 @@ class SystemInformationService(ServiceBase):
         ( # pyright: ignore[reportAssignmentType]
             response,
             raw_response,
+            response_timestamp,
             input_token,
             output_token
         ) = self.llm(
@@ -101,6 +107,7 @@ class SystemInformationService(ServiceBase):
         return (
             response,
             raw_response,
+            response_timestamp,
             input_token,
             output_token
         )
