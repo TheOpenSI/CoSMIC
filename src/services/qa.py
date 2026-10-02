@@ -12,6 +12,7 @@ import uuid
 
 
 ### Type hints ###
+from typing import Any
 
 
 ### Internal modules ###
@@ -19,7 +20,6 @@ from . import chess as chess_instances
 from .base import ServiceBase
 from .document_index import DocumentMetadata
 from .llms.LLMBase import LLMBase
-from .llms.Ollama import Ollama
 from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
@@ -30,14 +30,14 @@ from .fallback_service import FallbackService
 class QABase(ServiceBase):
     def __init__(
         self,
-        query_analyser: LLMBase,
-        llm:            Ollama,
-        rag:            RAGBase,
-        code_generator: CodeGenerator,
+        query_analyser:             LLMBase,
+        llm:                        LLMBase,
+        rag:                        RAGBase,
+        code_generator:             CodeGenerator,
         system_information_service: SystemInformationService,
-        fallback_service: FallbackService,
-        config:         str | None = None,
-        **kwargs
+        fallback_service:           FallbackService,
+        config:                     str | None = None,
+        **kwargs:                   Any
     ) -> None:
         """
         Base class for QA.
@@ -79,20 +79,20 @@ class QABase(ServiceBase):
 
     def __call__(
         self,
-        query:      str,
+        query:                  str,
         # NOTE:
         # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
         # update to handle `int` properly
         services:               dict[str, dict[str, str]],
-        context:                str | dict          = "",
-        is_rag:                 bool                = False,
-        verbose:                bool                = False,
-        user_id:                str | None          = None,
-        session_id:             str | None          = None,
-        global_service_names:   list[str] | None    = None,
-        memory_service_active:  bool                = False,
-        has_files:              bool                = False,
-        file_refs:              list[str] | None    = None,
+        context:                str | dict[str, str]    = "",
+        is_rag:                 bool                    = False,
+        verbose:                bool                    = False,
+        user_id:                str | None              = None,
+        session_id:             str | None              = None,
+        global_service_names:   list[str] | None        = None,
+        memory_service_active:  bool                    = False,
+        has_files:              bool                    = False,
+        file_refs:              list[str] | None        = None,
     ) -> tuple[str, str, datetime, int, int ,float | int]:
         """
         Process each QA.
@@ -105,7 +105,7 @@ class QABase(ServiceBase):
                 all available services for Query Analyser, which then being used
                 to re-structure question with its prompting techniques.
 
-            context (str | dict, optional):
+            context (str | dict[str, str], optional):
                 contex associated with the question. Defaults to "".
 
             is_rag  (bool, optional):
@@ -140,10 +140,16 @@ class QABase(ServiceBase):
         # Set initial return answers.
         response:           str | None  = None
         raw_response:       str | None  = None
+        retrieve_score:     float | int = -1
+        # NOTE:
+        # After having a chat with some members in the team regarding the active
+        # usage of `chess` & `code_generation` services, I came to a solution to
+        # purposefully ignore the support for both of them. We'll still use
+        # `code_genertion` service (under active development at the moment) while
+        # the `chess` service will be completely removed in the future.
         response_timestamp: datetime    = datetime.now(tz=timezone.utc)
         input_token:        int         = 1
         output_token:       int         = 1
-        retrieve_score:     float | int = -1
 
         
         # Add default service 0
@@ -177,8 +183,8 @@ class QABase(ServiceBase):
             service_option,
             service_info_dict
         ) = self.query_analyser(
-            query,
-            services=services # pyright: ignore[reportCallIssue]
+            query=query,        # pyright: ignore[reportCallIssue]
+            services=services   # pyright: ignore[reportCallIssue]
         )
 
         # The query analyser can route a question about a uploaded file into 0 or -1  
@@ -198,18 +204,22 @@ class QABase(ServiceBase):
                 retrieve_score
             )
 
-        # Validate the prefix is an 8-char hex file_id to avoid malformed ref silently breaks retrieval 
-        # document_ids target retrieval at the attached file
-        # attached_file_names tell the LLM which file the question is about
-        document_ids: List[str] = []
-        attached_file_names: List[str] = []
+        # Validate the prefix is an 8-char hex file_id to avoid malformed ref
+        # silently breaks retrieval `document_ids` target retrieval at the
+        # attached file `attached_file_names` tell the LLM which file the
+        # question is about
+        document_ids:           list[str] = []
+        attached_file_names:    list[str] = []
+
         for ref in (file_refs or []):
             parts = ref.split("_", 1)
             doc_id = parts[0]
+
             if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
                 document_ids.append(doc_id)
                 raw_name = parts[1] if len(parts) > 1 else ref
                 attached_file_names.append(raw_name)
+
             else:
                 print(f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping.")
         
@@ -299,7 +309,7 @@ class QABase(ServiceBase):
             raw_response    = f"The next moves are from {next_move}.\n{raw_response}"
 
         elif service_option == "2":
-            selected_service_name = services_name.get(service_option, "").lower()
+            selected_service_name = services_name[service_option]
 
             if (
                 memory_service_active
@@ -345,19 +355,18 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services=services)
 
         else:
-            is_rag_eligible_service = (
-                services.get(
-                    service_option,
-                    {}
-                ).get(
-                    "memory_capability",
-                    False
-                ) is True
-            )
+            is_rag_eligible_service: bool | None = None
+
+            if service_option in services:
+                selected_service: dict[str, Any] = services[service_option]
+
+                if "memory_capability" in selected_service:
+                    is_rag_eligible_service = selected_service["memory_capability"] is True
            
-            execute_rag = (
-                (is_rag) and
-                (is_rag_eligible_service or has_files)
+            execute_rag: bool = (
+                is_rag
+                and
+                is_rag_eligible_service or has_files
             )
 
             if execute_rag:
@@ -422,6 +431,15 @@ class QABase(ServiceBase):
                 user_prompt     = query
                 retrieve_score  = -1
 
+            # NOTE:
+            # For most of the time when I turn on the debug to test the
+            # functionality of CoSMIC, it always found `Ollama` class rather than
+            # the base class. As we do support multi AI providers but the linter
+            # (e.g., `basedpyright`) isn't happy about the usecase of this one
+            # (error-level raised here), I've to temporary disable the notice on
+            # purpose until we re-implement/modify the base class structure to
+            # properly support this capability again.
+            #
             # Get the response with retrieved context if applicable.
             (
                 response,
@@ -429,7 +447,7 @@ class QABase(ServiceBase):
                 response_timestamp,
                 input_token,
                 output_token
-            ) = self.llm(
+            ) = self.llm( # pyright: ignore[reportAssignmentType]
                 question=user_prompt,
                 context=context,
                 service_name=services_name.get(service_option, "")
