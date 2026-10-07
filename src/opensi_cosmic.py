@@ -1,4 +1,8 @@
 ### Core modules ###
+from datetime import (
+    datetime,
+    timezone
+)
 import os
 from sys import (
     exit,
@@ -205,7 +209,7 @@ class OpenSICoSMIC:
         has_files:  bool        = False,
         user_id:    str | None  = None,
         file_refs:  list | None = None,
-    ) -> tuple[str, str, int, int, float | int]:
+    ) -> tuple[str, str, datetime, int, int, float | int]:
         """
         Execute QA.
 
@@ -225,6 +229,10 @@ class OpenSICoSMIC:
 
             raw_response (str):
                 raw response from LLM without truncations.
+
+            response_timestamp (datetime):
+                timestamp when received raw response from LLM. The format is align
+                with Pydantic AwareDateTime format.
 
             input_token (int):
                 amount of input tokens captured from each QA session.
@@ -262,11 +270,12 @@ class OpenSICoSMIC:
         # )
 
         # Set initial output to return.
-        response:       str | None  = None
-        raw_response:   str | None  = None
-        input_token:    int         = 0
-        output_token:   int         = 0
-        retrieve_score: float | int = -1
+        response:           str | None  = None
+        raw_response:       str | None  = None
+        response_timestamp: datetime    = datetime.now(tz=timezone.utc)
+        input_token:        int         = 1
+        output_token:       int         = 1
+        retrieve_score:     float | int = -1
 
 
         # Check if OpenAI API key is valid.
@@ -274,6 +283,7 @@ class OpenSICoSMIC:
             return (
                 str(response),
                 str(raw_response),
+                response_timestamp,
                 input_token,
                 output_token,
                 retrieve_score
@@ -399,6 +409,7 @@ class OpenSICoSMIC:
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token,
                 retrieve_score
@@ -422,6 +433,7 @@ class OpenSICoSMIC:
         return (
             str(response),
             str(raw_response),
+            response_timestamp,
             input_token,
             output_token,
             retrieve_score

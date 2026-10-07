@@ -1,4 +1,8 @@
 ### Core modules ###
+from datetime import (
+    datetime,
+    timezone
+)
 from pathlib import Path
 import uuid
 
@@ -16,20 +20,19 @@ from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
-from ...utils.log_tool import set_color
 
 
 class QABase(ServiceBase):
     def __init__(
         self,
-        query_analyser: LLMBase,
-        llm:            LLMBase,
-        rag:            RAGBase,
-        code_generator: CodeGenerator,
+        query_analyser:             LLMBase,
+        llm:                        LLMBase,
+        rag:                        RAGBase,
+        code_generator:             CodeGenerator,
         system_information_service: SystemInformationService,
-        fallback_service: FallbackService,
-        config:         str | None = None,
-        **kwargs: Any
+        fallback_service:           FallbackService,
+        config:                     str | None = None,
+        **kwargs:                   Any
     ) -> None:
         """
         Base class for QA.
@@ -110,8 +113,10 @@ class QABase(ServiceBase):
         return service_option
 
 
-    def _parse_file_refs(self, 
-                         file_refs: list[str] | None) -> tuple[list[str], list[str]]:
+    def _parse_file_refs(
+        self, 
+        file_refs: list[str] | None
+    ) -> tuple[list[str], list[str]]:
         """
         Parse `file_refs` (each formatted as "<8-char-hex-file_id>_<original_filename>")
         into the file_id and filename lists used downstream. A ref whose prefix
@@ -296,9 +301,11 @@ class QABase(ServiceBase):
         return self.fallback_service(services=services)
 
 
-    def _is_rag_eligible(self, 
-                         services: dict[str, dict[str, str]], 
-                         service_option: str) -> bool:
+    def _is_rag_eligible(
+        self, 
+        services: dict[str, dict[str, str]], 
+        service_option: str
+    ) -> bool:
         """
         Check if the selected service is eligible for RAG.
 
@@ -325,11 +332,13 @@ class QABase(ServiceBase):
             return False
 
 
-    def _use_rag(self,
-                 services: dict[str, dict[str, str]],
-                 service_option: str,
-                 is_rag: bool,
-                 has_files: bool) -> bool:
+    def _use_rag(
+        self,
+        services: dict[str, dict[str, str]],
+        service_option: str,
+        is_rag: bool,
+        has_files: bool
+    ) -> bool:
         """
         Determine whether to use RAG based on the service option, RAG eligibility,
         and whether files are attached.
@@ -497,31 +506,33 @@ class QABase(ServiceBase):
 
     def __call__(
         self,
-        query:      str,
+        query:                  str,
         # NOTE:
         # for legacy purposes. Change to `dict[int, dict[str, str]]` type when
         # update to handle `int` properly
         services:               dict[str, dict[str, str]],
-        context:                str | dict          = "",
-        is_rag:                 bool                = False,
-        verbose:                bool                = False,
-        user_id:                str | None          = None,
-        session_id:             str | None          = None,
-        global_service_names:   list[str] | None    = None,
-        memory_service_active:  bool                = False,
-        has_files:              bool                = False,
-        file_refs:              list[str] | None    = None
-    ) -> tuple[str, str, int, int, float | int]:
+        context:                str | dict[str, str]    = "",
+        is_rag:                 bool                    = False,
+        verbose:                bool                    = False,
+        user_id:                str | None              = None,
+        session_id:             str | None              = None,
+        global_service_names:   list[str] | None        = None,
+        memory_service_active:  bool                    = False,
+        has_files:              bool                    = False,
+        file_refs:              list[str] | None        = None,
+    ) -> tuple[str, str, datetime, int, int ,float | int]:
         """
         Process each QA.
 
         Args:
             query (str): a question.
 
-            services (dict[str, dict[str, str]]): all available services for Query Analyser, which 
-                then being used to re-structure question with its prompting techniques.
+            services (dict[str, dict[str, str]]): 
+                all available services for Query Analyser, which then being used to re-structure question
+                with its prompting techniques.
 
-            context (str | dict, optional): context associated with the question. Defaults to "".
+            context (str | dict[str, str], optional):
+                contex associated with the question. Defaults to "".
 
             is_rag  (bool, optional): if retrieve context for the question. Defaults to False.
 
@@ -531,34 +542,48 @@ class QABase(ServiceBase):
 
             session_id (str | None, optional): chat session of the session memory. Defaults to None.
 
-            global_service_names (list[str] | None, optional): services whose global memory is searched. 
-                Defaults to None.
+            global_service_names (list[str] | None, optional): 
+                services whose global memory is searched. Defaults to None.
 
             memory_service_active (bool, optional): if the memory service is enabled. Defaults to False.
 
             has_files (bool, optional): if the user attached files to the question. Defaults to False.
 
-            file_refs (list[str] | None, optional): attached file references in "<8-hex file_id>_<name>" 
-                form. Defaults to None.
+            file_refs (list[str] | None, optional): 
+                attached file references in "<8-hex file_id>_<name>" form. Defaults to None.
 
         Returns:
             response (str): truncated answer if applicable.
 
             raw_response (str): original answer from LLM.
 
-            input_token (int): total amount of input tokens captured by LLM during each QA process.
+            response_timestamp (datetime):
+                timestamp when received raw response from LLM. The format is align
+                with Pydantic AwareDateTime format.
+
+            input_token (int):
+                total amount of input tokens captured by LLM during each
+                QA process.
 
             output_token (int): total amount of output tokens generated by LLM during each QA process.
 
-            retrieve_score (float | int): highest score among the retrieved chunks (if applicable).
-                Defaults to -1 for non-RAG services or when nothing is retrieved.
+            retrieve_score (float | int): 
+                highest score among the retrieved chunks (if applicable). Defaults to -1 for non-RAG
+                services or when nothing is retrieved.
         """
         # Set initial return answers.
-        response:       str | None  = None
-        raw_response:   str | None  = None
-        input_token:    int         = 0
-        output_token:   int         = 0
-        retrieve_score: float | int = -1
+        response:           str | None  = None
+        raw_response:       str | None  = None
+        retrieve_score:     float | int = -1
+        # NOTE:
+        # After having a chat with some members in the team regarding the active
+        # usage of `chess` & `code_generation` services, I came to a solution to
+        # purposefully ignore the support for both of them. We'll still use
+        # `code_genertion` service (under active development at the moment) while
+        # the `chess` service will be completely removed in the future.
+        response_timestamp: datetime    = datetime.now(tz=timezone.utc)
+        input_token:        int         = 1
+        output_token:       int         = 1
 
         
         # Add default service 0
@@ -573,8 +598,8 @@ class QABase(ServiceBase):
             service_option,
             service_info_dict
         ) = self.query_analyser(
-            query,
-            services=services # pyright: ignore[reportCallIssue]
+            query=query,        # pyright: ignore[reportCallIssue]
+            services=services   # pyright: ignore[reportCallIssue]
         )
 
         # Check if force route is required.
@@ -588,6 +613,7 @@ class QABase(ServiceBase):
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token
             ) = self._handle_chess_service(
@@ -614,12 +640,12 @@ class QABase(ServiceBase):
                 raw_response
             )= self.code_generator(query)
 
-
-        # system information service 
+        # System information service 
         elif service_option == "0":
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token
             ) = self.system_information_service(
@@ -655,12 +681,23 @@ class QABase(ServiceBase):
                 user_prompt = query
                 retrieve_score  = -1
 
+            # NOTE:
+            # For most of the time when I turn on the debug to test the
+            # functionality of CoSMIC, it always found `Ollama` class rather than
+            # the base class. As we do support multi AI providers but the linter
+            # (e.g., `basedpyright`) isn't happy about the usecase of this one
+            # (error-level raised here), I've to temporary disable the notice on
+            # purpose until we re-implement/modify the base class structure to
+            # properly support this capability again.
+            #
+            # Get the response with retrieved context if applicable.
             (
                 response,
                 raw_response,
+                response_timestamp,
                 input_token,
                 output_token
-            ) = self.llm(
+            ) = self.llm( # pyright: ignore[reportAssignmentType]
                 question=user_prompt,
                 context=context,
                 service_name=services_name.get(service_option, "")
@@ -681,6 +718,7 @@ class QABase(ServiceBase):
         return (
             str(response),
             str(raw_response),
+            response_timestamp,
             total_input_token,
             total_output_token,
             retrieve_score

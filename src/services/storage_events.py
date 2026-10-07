@@ -1,19 +1,36 @@
+### Core modules ###
 import json
 import logging
 import mimetypes
 import os
 import time
-import uuid
-from datetime import datetime, timezone
+from uuid import uuid7
+from datetime import (
+    datetime,
+    timezone
+)
 from zoneinfo import ZoneInfo
-from pathlib import Path
-from typing import Optional, List
-
-from watchdog.events import FileSystemEventHandler, FileCreatedEvent, FileDeletedEvent, FileModifiedEvent
+from watchdog.events import (
+    FileSystemEventHandler,
+    FileCreatedEvent,
+    FileDeletedEvent,
+    FileModifiedEvent
+)
 # PollingObserver is used instead of the native observer
 from watchdog.observers.polling import PollingObserver
 
-from .document_index import DocumentIndex, DocumentMetadata, compute_content_hash
+
+### Type hints ###
+from typing import Optional
+
+
+### Internal modules ###
+from .document_index import (
+    DocumentIndex,
+    DocumentMetadata,
+    compute_content_hash
+)
+
 
 logger = logging.getLogger(__name__)
 
@@ -143,7 +160,7 @@ class StorageEventHandler(FileSystemEventHandler):
         renamed = False
 
         if not file_id:
-            file_id = uuid.uuid4().hex[:8]
+            file_id = uuid7().hex[:8]
             original_filename = filename
             renamed = True
 

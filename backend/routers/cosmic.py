@@ -11,7 +11,6 @@ from fastapi import (
     Request,
     status
 )
-from pydantic import BaseModel
 from httpx import (
     AsyncClient,
     Response
@@ -27,7 +26,13 @@ from ...types.tags import APITag
 ### Internal modules ###
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
-from ...utils.chat_history import build_context_from_messages
+from ...types.json_schemas import (
+    ChatHistorySchema,
+    ChatHistorySchemaUpdate,
+    ChatSessionPayload,
+    LLM_ROLE
+)
+from ...utils.chat_history import build_context_from_chat_history
 from ...utils.log_tool import set_color
 
 
@@ -38,44 +43,71 @@ router: APIRouter = APIRouter(
 )
 
 
-# TODO:
-# there'll be a new way to format this new chat session payload data from FE that
-# we don't need to rely on the legacy data format anymore as soon as we get to
-# work on the migration from old to new `/config` endpoint.
-#
-# UPDATE:
-# This should be done in a sepearate PR instead.
-
-class Message(BaseModel):
-    role:       str  # "user" | "assistant"
-    content:    str
+CHAT_API_URL: str = os.getenv(
+    "CHAT_API_URL",
+    "http://backend:8000/api/v1/chatboxes/"
+)
+EMISSIONS_API_URL: str = os.getenv(
+    "EMISSIONS_API_URL",
+    "http://backend:8000/api/v1/emissions/"
+)
 
 
-class User(BaseModel):
-    id:                 str
-    role:               str
-    email:              str
-    inquiry_cycle_id:   str
+async def _chat_session_create(
+    client:     AsyncClient,
+    user_id:    str,
+    name:       str
+) -> str:
+    """Create an empty chatbox and return its id (used before QA needs a session)."""
+    response: Response = await client.post(
+        url=CHAT_API_URL,
+        json={
+            "user_id":  user_id,
+            "name":     name,
+            "details":  [],
+        }
+    )
+    response.raise_for_status()
+    return response.json()["created"]["id"]
 
 
+async def _chat_session_patch(
+    client:             AsyncClient,
+    chat_session_id:    str,
+    payload:            dict[str, Any]
+) -> None:
+    """Append the completed chat history block to an existing chatbox."""
+    response: Response = await client.patch(
+        url=f"{CHAT_API_URL}{chat_session_id}",
+        json=payload
+    )
 
-class Body(BaseModel):
-    user:       User
-    messages:   list[Message | None] = []
+    response.raise_for_status()
+    return None
+
+
+async def _chat_session_delete(
+    client:             AsyncClient,
+    chat_session_id:    str
+) -> None:
+    """Best-effort rollback for a chatbox created during a failed request."""
+    try:
+        response: Response = await client.delete(url=f"{CHAT_API_URL}{chat_session_id}")
+        response.raise_for_status()
+
+    except Exception as rollback_exc:
+        print(
+            set_color(
+                status="error",
+                information=f"[Chatbox Rollback] Failed to delete {chat_session_id}: {rollback_exc}"
+            )
+        )
 
 
 class EmptyServiceError(Exception):
     """
     Raised when no active service is available for the Query Analyser.
     """
-
-
-class CosmicAPI(BaseModel):
-    chat_id:        str | None = None
-    name:           str | None = "New chat"
-    user_message:   str
-    body:           Body
-
 
 
 async def send_emissions_to_db(
@@ -124,24 +156,29 @@ async def send_emissions_to_db(
         "user_id":                  str(user_id),
     }
 
-    EMISSIONS_API_URL: str = "http://backend:8000/api/v1/emissions/"
-
     try:
         async with AsyncClient() as client:
             response: Response = await client.post(
-                EMISSIONS_API_URL,
+                url=EMISSIONS_API_URL,
                 json=emission_payload
             )
+
             response.raise_for_status()
-            print(set_color(
-                status="info",
-                information=f"[Emissions DB] Successfully stored emissions for user {user_id}"
-            ))
-    except Exception as e:
-        print(set_color(
-            status="error",
-            information=f"[Emissions DB] Failed to store emissions: {str(e)}"
-        ))
+            print(
+                set_color(
+                    status="info",
+                    information=f"[Emissions DB] Successfully stored emissions for user {user_id}"
+                )
+            )
+            return None
+
+    except Exception as emission_exc:
+        print(
+            set_color(
+                status="error",
+                information=f"[Emissions DB] Failed to store emissions: {str(emission_exc)}"
+            )
+        )
 
 
 @router.post(
@@ -149,161 +186,149 @@ async def send_emissions_to_db(
     status_code=status.HTTP_200_OK
 )
 async def process_cosmic(
-    data:               CosmicAPI,
+    chat_session_data:  ChatSessionPayload,
     opensi_cosmic:      OpenSICoSMIC = Depends(get_opensi_cosmic)
 ):
+    """
+    Receive FE's partial chat session payload, run QA, then send the
+    completed payload to the Chatboxes API.
+
+    When a file is attached, FE pre-creates an empty chat session, uploads the
+    file into that session, then sends the tag as part of user query. At this
+    point, CoSMIC just simply need to parse it.
+    """
     try:
-        user_id:            str = data.body.model_dump(mode="python")["user"]["id"]
-        # user_role:  str     = data.body.model_dump(mode="json")["user"]["role"]
-        # user_email: str     = data.body.model_dump(mode="json")["user"]["email"]
-        inquiry_cycle_id:   str = data.body.model_dump(mode="python")["user"]["inquiry_cycle_id"]
+        user_id:            str                             = str(chat_session_data.user_id)
+        chat_history:       list[ChatHistorySchemaUpdate]   = chat_session_data.details[:-1]
+        chat_history_block: ChatHistorySchemaUpdate         = chat_session_data.details[-1]
 
-
-        chat_history_context: str = build_context_from_messages(
-            messages=data.body.model_dump(mode="json").get(
-                "messages",
-                []
-            ),
-            num_pairs=5
+        chat_session_id: str | None = (
+            str(chat_session_data.chat_session_id)
+            if chat_session_data.chat_session_id
+            else None
         )
 
-        chat_history_template: str = (
-            "Conversation History:\n\n"
-            "=============== End of Chat History ==============="
-        )
-        if chat_history_context.strip() == chat_history_template:
-            chat_history_context = ""
-
-        # current_time = datetime.strftime(
-        #     datetime.now(tz=ZoneInfo("Australia/Sydney")), "%d-%m-%Y,%H:%M:%S"
-        # )
-        # update_statistic_per_query(
-        #     query=[data.user_message],
-        #     user_id=user_id,
-        #     user_email=user_email,
-        #     current_time=current_time,
-        # )
-
-        openai_api_status: str = opensi_cosmic.check_openai_key()
-
-        if openai_api_status != "":
-            return {
-                "status": "success",
-                "result": openai_api_status
-            }
-
-        # Strip file reference. The file is already vectorised at upload time 
-        # has_files forces session-scoped retrieval so the doc question is grounded
-        # keep the message tag included for storage so the UI can render chip
-        raw_user_message: str = data.user_message
-        has_files: bool = data.user_message.find("</files>") > -1
-        file_refs: list[str] = []
-        if has_files:
-            splits: list[str] = data.user_message.split("</files>")
-            file_refs = [
-                ref.strip()
-                for ref in splits[0].split("<files>")[-1].split(",")
-                if ref.strip()
-            ]
-            data.user_message = splits[1]
-
-        # Start CodeCarbon emission tracking process (for General user queries)
-        general_tracker: EmissionsTracker = EmissionsTracker(
-            project_name="cosmic-chat",
-            save_to_file=False,
-            allow_multiple_runs=True,
-            tracking_mode="process",  # track only the current process (not the whole machine)
-            log_level="error"
-        )
-
-        general_tracker.start()
-
-        (
-            llm_response,
-            _llm_raw_response,
-            llm_input_token,
-            llm_output_token,
-            _llm_retrieve_score
-        ) = opensi_cosmic(
-            question=data.user_message,
-            context=chat_history_context,
-            session_id=data.chat_id,
-            has_files=has_files,
-            user_id=user_id,
-            file_refs=file_refs
-        )
-        
-        CHAT_API_URL = os.getenv(
-            "CHAT_API_URL",
-            "http://backend:8000/api/v1/chatboxes/"
-        )
-
-        # TODO:
-        # created timestamp vars here should indicate the time that we received
-        # the final LLM response from QA only. It's much more accurate timing if
-        # we can retrieved this within the return value in `opensi_cosmic.py`.
-        #
-        # For user query, it's also more accurate timing if FE sent it's generated
-        # timestamp to us through the partial payload.
-        #
-        # I'll create a different PR for this particular approach later.
-        user_query_timestamp:   str = datetime.now(tz=timezone.utc).isoformat()
-        llm_response_timestamp: str = datetime.now(tz=timezone.utc).isoformat()
-
-        new_detail: dict[str, str | int] = {
-            "inquiry_cycle_id":     str(inquiry_cycle_id),
-            "user_role":            "user",         # per agreed solution within our team
-            "user_query":           raw_user_message,
-            "query_create_on":      user_query_timestamp,
-            "llm_role":             "assistant",    # per agreed solution within our team
-            "llm_response":         llm_response,
-            "response_create_on":   llm_response_timestamp,
-            "input_token":          llm_input_token,
-            "output_token":         llm_output_token
-        }
-        payload: dict[str, str | list[dict[str, str | int]]] = {
-            "user_id":  str(user_id),
-            "name":     str(data.name),
-            "details":  [new_detail],
-        }
+        exist_chat_session: bool = False
 
         async with AsyncClient() as client:
-            if data.chat_id:
-                save_response: Response = await client.patch(
-                    f"{CHAT_API_URL}{data.chat_id}",
-                    json=payload
+            # A session must exist before QA can run; the FE normally creates
+            # it up-front only when it needs to upload an attachment.
+            if chat_session_id is None:
+                chat_session_id = await _chat_session_create(
+                    client=client,
+                    user_id=user_id,
+                    name=chat_session_data.name
                 )
-                save_response.raise_for_status()
-                chat_id: str = data.chat_id
+                exist_chat_session = True
 
-            else:
-                save_response: Response = await client.post(
-                    CHAT_API_URL,
-                    json=payload
+            try:
+                # The current inquiry cycle carries the leading `<files>` tag
+                # when a file was attached. Strip it inline (legacy approach) so
+                # QA keeps receiving bare question text, while the stored
+                # `user_query` keeps the tag for the UI chip.
+                stored_user_query:  str         = (chat_history_block.user_query or "")
+                has_files:          bool        = stored_user_query.find("</files>") > -1
+                file_refs:          list[str]   = []
+                question:           str         = stored_user_query
+                if has_files:
+                    splits: list[str] = stored_user_query.split("</files>")
+                    file_refs = [
+                        ref.strip()
+                        for ref in splits[0].split("<files>")[-1].split(",")
+                        if ref.strip()
+                    ]
+                    question = splits[1]
+
+                chat_history_context: str = build_context_from_chat_history(details=chat_history)
+
+                # Start CodeCarbon emission tracking process (for General user queries).
+                general_tracker: EmissionsTracker = EmissionsTracker(
+                    project_name="cosmic-chat",
+                    save_to_file=False,
+                    allow_multiple_runs=True,
+                    tracking_mode="process",  # track only the current process (not the whole machine)
+                    log_level="error"
                 )
-                save_response.raise_for_status()
-                chat_id: str = save_response.json()["created"]["id"]
+                general_tracker.start()
 
-        # Stop CodeCarbon emission tracking process (for General user queries)
-        # and start saving those tracked data
-        general_emissions: float | None = general_tracker.stop()
-        await send_emissions_to_db(
-            user_id=user_id,
-            tracker=general_tracker
-        )
-        print(
-            set_color(
-                status="info",
-                information=f"[CodeCarbon] General chat query emissions: {general_emissions:.8f} kg CO₂"
-            )
-        )
+                try:
+                    (
+                        llm_response,
+                        _llm_raw_response,
+                        llm_response_timestamp,
+                        llm_input_token,
+                        llm_output_token,
+                        _llm_retrieve_score
+                    ) = opensi_cosmic(
+                        question=question,
+                        context=chat_history_context,
+                        session_id=chat_session_id,
+                        has_files=has_files,
+                        user_id=user_id,
+                        file_refs=file_refs
+                    )
+                finally:
+                    general_emissions: float | None = general_tracker.stop()
+
+                final_payload: ChatHistorySchema = ChatHistorySchema(
+                    inquiry_cycle_id=chat_history_block.inquiry_cycle_id,   # pyright: ignore[reportArgumentType]
+                    user_role=chat_history_block.user_role,                 # pyright: ignore[reportArgumentType]
+                    user_query=stored_user_query,
+                    query_create_on=chat_history_block.query_create_on,     # pyright: ignore[reportArgumentType]
+                    llm_role=LLM_ROLE,
+                    llm_response=llm_response,
+                    response_create_on=llm_response_timestamp,
+                    input_token=llm_input_token,
+                    output_token=llm_output_token
+                )
+
+                await _chat_session_patch(
+                    client=client,
+                    chat_session_id=chat_session_id,
+                    payload={
+                        "user_id":  user_id,
+                        "name":     chat_session_data.name,
+                        "details":  [
+                            final_payload.model_dump(
+                                mode="json",
+                                exclude_unset=True
+                            )
+                        ]
+                    }
+                )
+
+                await send_emissions_to_db(
+                    user_id=user_id,
+                    tracker=general_tracker
+                )
+                if general_emissions is not None:
+                    print(
+                        set_color(
+                            status="info",
+                            information=f"[CodeCarbon] General chat query emissions: {general_emissions:.8f} kg CO₂"
+                        )
+                    )
+
+            except Exception as fastapi_exc:
+                if exist_chat_session:
+                    await _chat_session_delete(
+                        client=client,
+                        chat_session_id=chat_session_id
+                    )
+
+                raise HTTPException(
+                        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                        detail={
+                            "status": "500 - Internal Server Error",
+                            "message": f"{fastapi_exc}"
+                        }
+                )
 
         return {
             "status": "success",
             "result": llm_response,
-            "chat_id": chat_id
+            "chat_session_id": chat_session_id
         }
-
 
     except HTTPException as http_exc:
         raise http_exc
@@ -322,7 +347,10 @@ async def process_cosmic(
     except Exception as fastapi_exc:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"{fastapi_exc}"
+            detail={
+                "status": "500 - Internal Server Error",
+                "message": f"{fastapi_exc}"
+            }
         )
 
 

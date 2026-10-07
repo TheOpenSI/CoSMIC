@@ -1,4 +1,5 @@
 ### Core modules ###
+from datetime import datetime
 from sys import exit
 from pathlib import Path
 from re import search
@@ -87,7 +88,7 @@ class QueryAnalyser:
         # update to handle `int` properly
         services:   dict[str, dict[str, str]],
         verbose:    bool = False
-    ) -> tuple[str, dict[str, str | int | bool | None]]:
+    ) -> tuple[str, dict[str, str | datetime | int | bool | None]]:
         """
         Analyse query to get service option.
 
@@ -179,6 +180,7 @@ class QueryAnalyser:
         (
             service_analysis,
             _service_raw_analysis,
+            service_response_timestamp,
             service_input_token,
             service_output_token
         ) = self.llm(query)
@@ -234,8 +236,9 @@ class QueryAnalyser:
 
             service_info_dict.update(service_extra_info)
 
-        service_info_dict["input_token"]    = service_input_token
-        service_info_dict["output_token"]   = service_output_token
+        service_info_dict["response_timestamp"] = service_response_timestamp
+        service_info_dict["input_token"]        = service_input_token
+        service_info_dict["output_token"]       = service_output_token
 
         return (
             service_option,
