@@ -27,7 +27,6 @@ from ...types.tags import APITag
 ### Internal modules ###
 from ..cores.dependencies import get_opensi_cosmic
 from ...src.opensi_cosmic import OpenSICoSMIC
-from ...src.services.qa import EmptyServiceError
 from ...utils.chat_history import build_context_from_messages
 from ...utils.log_tool import set_color
 
@@ -63,6 +62,12 @@ class User(BaseModel):
 class Body(BaseModel):
     user:       User
     messages:   list[Message | None] = []
+
+
+class EmptyServiceError(Exception):
+    """
+    Raised when no active service is available for the Query Analyser.
+    """
 
 
 class CosmicAPI(BaseModel):
