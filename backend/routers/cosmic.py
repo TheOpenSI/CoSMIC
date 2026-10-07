@@ -64,6 +64,12 @@ class Body(BaseModel):
     messages:   list[Message | None] = []
 
 
+class EmptyServiceError(Exception):
+    """
+    Raised when no active service is available for the Query Analyser.
+    """
+
+
 class CosmicAPI(BaseModel):
     chat_id:        str | None = None
     name:           str | None = "New chat"
@@ -301,6 +307,16 @@ async def process_cosmic(
 
     except HTTPException as http_exc:
         raise http_exc
+
+
+    except EmptyServiceError as empty_service_exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "status": "404 - Not Found",
+                "message": f"EmptyServiceError: {empty_service_exc}"
+            }
+        )
 
 
     except Exception as fastapi_exc:
