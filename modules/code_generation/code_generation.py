@@ -87,4 +87,4 @@ class CodeGenerator(ServiceBase):
             raw_response = response = "PyCapsule service encountered an error."
             print(str(e))
 
-        return (response, raw_response) # Order changed
+        return (response, raw_response)

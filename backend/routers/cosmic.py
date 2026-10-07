@@ -53,7 +53,6 @@ EMISSIONS_API_URL: str = os.getenv(
 )
 
 
-
 async def _chat_session_create(
     client:     AsyncClient,
     user_id:    str,
@@ -104,7 +103,11 @@ async def _chat_session_delete(
             )
         )
 
-    return None
+
+class EmptyServiceError(Exception):
+    """
+    Raised when no active service is available for the Query Analyser.
+    """
 
 
 async def send_emissions_to_db(
@@ -329,6 +332,17 @@ async def process_cosmic(
 
     except HTTPException as http_exc:
         raise http_exc
+
+
+    except EmptyServiceError as empty_service_exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={
+                "status": "404 - Not Found",
+                "message": f"EmptyServiceError: {empty_service_exc}"
+            }
+        )
+
 
     except Exception as fastapi_exc:
         raise HTTPException(
