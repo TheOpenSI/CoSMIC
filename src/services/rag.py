@@ -9,6 +9,7 @@ from qdrant_client.models import (
 
 ### Type hints ###
 from typing import Any
+from langchain_core.documents import Document
 
 
 ### Internal modules ###
@@ -20,42 +21,33 @@ class RAGBase(ServiceBase):
     def __init__(
         self,
         vector_database: VectorDatabase,
-        retrieve_score_threshold: float = 0.7,
         topk: int = 5,
         rerank_enabled: bool = True,
         candidate_pool: int = 30,
         rerank_topk: int = 6,
-        rerank_score_threshold: float = 0.0,
         **kwargs: Any
     ) -> None:
         """
         Context retriever service.
 
         Args:
-            vector_database             (VectorDatabase):   vector database.
-            retrieve_score_threshold    (float, optional):  retrieve score threshold to filter out retrieved
-                                                            context with similarity under this threshold.
-                                                            Defaults to 0.7.
-            topk                        (int, optional):    up to topk retrieved context returned. Defaults to 5.
-            rerank_enabled              (bool, optional):   two-stage retrieval (dense pool -> cross-encoder).
-                                                            Defaults to True.
-            candidate_pool              (int, optional):    dense candidates fetched before reranking. Defaults to 30.
-            rerank_topk                 (int, optional):    contexts kept after reranking. Defaults to 6.
-            rerank_score_threshold      (float, optional):  drop reranked contexts under this score.
-                                                            Defaults to 0.0.
+            vector_database (VectorDatabase): vector database.
+            topk            (int, optional):  contexts kept when reranking is disabled. Defaults to 5.
+            rerank_enabled  (bool, optional): two-stage retrieval (dense pool -> cross-encoder).
+                                              Defaults to True.
+            candidate_pool  (int, optional):  dense candidates fetched before reranking. Defaults to 30.
+            rerank_topk     (int, optional):  contexts kept after reranking. Defaults to 6.
         """
         super().__init__(**kwargs)
 
         # Set config.
-        self.retrieve_score_threshold   = retrieve_score_threshold
-        self.topk                       = topk
-        self.vector_database            = vector_database
+        self.topk               = topk
+        self.vector_database    = vector_database
 
         # Reranking config.
         self.rerank_enabled         = rerank_enabled
         self.candidate_pool         = candidate_pool
         self.rerank_topk            = rerank_topk
-        self.rerank_score_threshold = rerank_score_threshold
 
 
     def set_vector_database(
@@ -69,32 +61,6 @@ class RAGBase(ServiceBase):
             vector_database (VectorDatabase): an external vector database.
         """
         self.vector_database = vector_database
-
-
-    def set_retrieve_score_threshold(
-        self,
-        retrieve_score_threshold: float
-    ) -> None:
-        """
-        Change the retrieve score externally on demand.
-
-        Args:
-            retrieve_score_threshold (float): an external threshold.
-        """
-        self.retrieve_score_threshold = retrieve_score_threshold
-
-
-    def set_topk(
-        self,
-        topk: int
-    ) -> None:
-        """
-        Change the topk externally on demand.
-
-        Args:
-            topk (int): topk documents to be retrieved.
-        """
-        self.topk = topk
 
 
     @staticmethod
@@ -248,7 +214,7 @@ class RAGBase(ServiceBase):
                 case "user":
                     return 1
 
-                case "global":
+                case "global_memory":
                     return 2
 
                 case _:
@@ -259,19 +225,127 @@ class RAGBase(ServiceBase):
 
     @staticmethod
     def _select(
-        pairs: list[tuple[Any, float]],
-        keep_n: int,
-        threshold: float
-    ) -> list[tuple[Any, float]]:
+        pairs: list[tuple[Document, float]],
+        keep_n: int
+    ) -> list[tuple[Document, float]]:
         """
-        Order by scope priority (session > user > global) keeping the incoming
-        score order within a scope, take the top keep_n, then apply the score
-        threshold as a *soft* filter that never empties a non-empty set.
+        Rank chunks by relevance score and keep the best ones.
+
+        Ties on score are broken by memory tier (session > user > global), so a
+        weakly related session chunk no longer beats a highly relevant global one.
+
+        Args:
+            pairs   (list[tuple[Document, float]]): (chunk, score) candidates.
+            keep_n  (int):                          number of chunks to keep.
+
+        Returns:
+            selected (list[tuple[Document, float]]): top keep_n (chunk, score) pairs.
         """
-        ordered = sorted(pairs, key=lambda p: RAGBase._scope_rank(p[0]))  # stable
-        top = ordered[:keep_n]
-        passing = [(d, s) for d, s in top if s >= threshold]
-        return passing if passing else top[:1]
+        ordered: list[tuple[Document, float]] = sorted(
+            pairs,
+            key=lambda pair: (-pair[1], RAGBase._scope_rank(doc=pair[0]))
+        )
+
+        return ordered[:keep_n]
+
+
+    def _retrieve_pairs(
+        self,
+        user_prompt: str,
+        user_id: str | None = None,
+        session_id: str | None = None,
+        global_service_names: list[str] | None = None,
+        include_session: bool = True,
+        include_user: bool = False,
+        include_global: bool = True,
+        document_ids: list[str] | None = None
+    ) -> list[tuple[Document, float]]:
+        """
+        Search the active memory tiers and select the most relevant chunks.
+
+        Args:
+            Same as `__call__()`.
+
+        Returns:
+            selected (list[tuple[Document, float]]): selected (chunk, score) pairs,
+                most relevant first.
+        """
+        selected: list[tuple[Document, float]] = []
+
+        # Scope retrieval to the union of active memory tiers.
+        memory_filter: Filter | None = self.build_union_filter(
+            user_id=user_id,
+            session_id=session_id,
+            global_service_names=global_service_names,
+            include_session=include_session,
+            include_user=include_user,
+            include_global=include_global,
+            document_ids=document_ids
+        )
+
+        # Never search the collection unfiltered: that would leak other
+        # users', sessions' and services' points.
+        if memory_filter is None:
+            return selected
+
+        # Fetch a larger candidate pool when reranking.
+        fetch_k: int = self.candidate_pool if self.rerank_enabled else self.topk
+        retrieved_contents: list[tuple[Document, float]] = (
+            self.vector_database.similarity_search_with_relevance_scores(
+                query=user_prompt,
+                k=fetch_k,
+                filter=memory_filter
+            )
+        )
+
+        if self.rerank_enabled and retrieved_contents:
+            candidate_docs: list[Document] = [doc for doc, _ in retrieved_contents]
+            rerank_scores: list[float] = self.vector_database.rerank(
+                user_prompt,
+                [doc.page_content for doc in candidate_docs]
+            )
+
+            if rerank_scores:
+                selected = RAGBase._select(
+                    pairs=list(zip(candidate_docs, rerank_scores)),
+                    keep_n=self.rerank_topk
+                )
+
+                return selected
+
+        # Reranking disabled or unavailable: use the dense similarity order.
+        selected = RAGBase._select(
+            pairs=list(retrieved_contents),
+            keep_n=self.topk
+        )
+
+        return selected
+
+
+    @staticmethod
+    def _format_context(
+        selected: list[tuple[Document, float]]
+    ) -> tuple[str, list[float]]:
+        """
+        Join selected chunks into one context string, each prefixed by its title.
+
+        Args:
+            selected (list[tuple[Document, float]]): selected (chunk, score) pairs.
+
+        Returns:
+            context                 (str):          retrieved context for the LLM.
+            retrieved_context_score (list[float]):  score of each chunk.
+        """
+        context: str = "".join(
+            f"{RAGBase._title(doc=doc)}: {doc.page_content.replace("\n", " ")}. "
+            for doc, _ in selected
+        )
+        retrieved_context_score: list[float] = [score for _, score in selected]
+
+        return (
+            context,
+            retrieved_context_score
+        )
 
 
     def __call__(
@@ -284,7 +358,7 @@ class RAGBase(ServiceBase):
         include_user: bool = False,
         include_global: bool = True,
         document_ids: list[str] | None = None
-    ) -> tuple[str, list[float | None]]:
+    ) -> tuple[str, list[float]]:
         """
         Retrieve context for a given user prompt.
 
@@ -302,13 +376,11 @@ class RAGBase(ServiceBase):
 
         Returns:
             context (str): retrieved context from the vector database.
-            retrieved_context_score (list[float | None]): score of each retrieved chunk.
+            retrieved_context_score (list[float]): score of each retrieved chunk,
+                most relevant first.
         """
-        context:                    str = ""
-        retrieved_context_score:    list[float | None] = []
-
-        # Scope retrieval to the union of active memory tiers.
-        memory_filter = self.build_union_filter(
+        selected: list[tuple[Document, float]] = self._retrieve_pairs(
+            user_prompt=user_prompt,
             user_id=user_id,
             session_id=session_id,
             global_service_names=global_service_names,
@@ -318,70 +390,4 @@ class RAGBase(ServiceBase):
             document_ids=document_ids
         )
 
-        # If no scope resolved, return empty rather than searching the whole collection
-        # unfiltered (which would leak other users'/sessions'/global points).
-        if memory_filter is None:
-            return (
-                context,
-                retrieved_context_score
-            )
-
-        # Fetch a larger candidate pool when reranking.
-        fetch_k = self.candidate_pool if self.rerank_enabled else self.topk
-        retrieved_contents = self.vector_database.similarity_search_with_relevance_scores(
-            query=user_prompt,
-            k=fetch_k,
-            filter=memory_filter
-        )
-
-        # Rerank with the cross-encoder, if enabled.
-        selected: list[tuple[Any, float]] = []
-
-        if self.rerank_enabled and retrieved_contents:
-            candidate_docs = [doc for doc, _ in retrieved_contents]
-            rerank_scores = self.vector_database.rerank(
-                user_prompt, [d.page_content for d in candidate_docs]
-            )
-
-            if rerank_scores:
-                # Sort by rerank score (desc); rely on the reranker's ranking.
-                ranked = sorted(
-                    zip(candidate_docs, rerank_scores),
-                    key=lambda pair: pair[1],
-                    reverse=True
-                )
-                selected = RAGBase._select(
-                    pairs=ranked,
-                    keep_n=self.rerank_topk,
-                    threshold=self.rerank_score_threshold)
-            else:
-                # Reranker unavailable — fall back to dense cosine order.
-                selected = RAGBase._select(
-                    pairs=list(retrieved_contents),
-                    keep_n=self.topk,
-                    threshold=self.retrieve_score_threshold
-                )
-        else:
-            selected = RAGBase._select(
-                pairs=list(retrieved_contents),
-                keep_n=self.topk,
-                threshold=self.retrieve_score_threshold
-            )
-
-        retrieved_docs = [doc for doc, _ in selected]
-        retrieved_context_score = [score for _, score in selected]
-
-        if not retrieved_docs:
-            context = ""
-
-        else:
-            # Prefix each chunk with its source title.
-            context = "".join([
-                f"{RAGBase._title(doc=doc)}: {doc.page_content.replace("\n", " ")}."
-                for doc in retrieved_docs
-            ])
-
-        return (
-            context,
-            retrieved_context_score
-        )
+        return RAGBase._format_context(selected=selected)

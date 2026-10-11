@@ -485,12 +485,10 @@ class OpenSICoSMIC:
             # Base RAG service tuning is read from .env
             self.rag = RAGBase(
                 vector_database=vector_database,
-                retrieve_score_threshold=float(os.getenv("RAG_RETRIEVE_SCORE_THRESHOLD", "0.0")),
                 topk=int(os.getenv("RAG_TOPK", "6")),
                 rerank_enabled=os.getenv("RAG_RERANK_ENABLED", "true").strip().lower() == "true",
                 candidate_pool=int(os.getenv("RAG_CANDIDATE_POOL", "30")),
                 rerank_topk=int(os.getenv("RAG_RERANK_TOPK", "6")),
-                rerank_score_threshold=float(os.getenv("RAG_RERANK_SCORE_THRESHOLD", "0.0")),
             )
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
