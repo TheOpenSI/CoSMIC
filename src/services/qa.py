@@ -20,6 +20,7 @@ from .rag import RAGBase
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
+from ...utils.log_tool import set_color
 
 
 class QABase(ServiceBase):
