@@ -16,6 +16,7 @@ dependencies = [
     "pandas>=3.0.2",
     "peft>=0.18.1",
     "pypdf[crypto]>=6.10.0",
+    "python-dotenv>=1.2.2",
     "sentence-transformers>=5.4.0",
     "sqlmodel>=0.0.37",
     "stockfish>=5.0.0",

@@ -1,4 +1,5 @@
 ### Core modules ###
+import os
 from qdrant_client.models import (
     FieldCondition,
     Filter,
@@ -21,33 +22,33 @@ class RAGBase(ServiceBase):
     def __init__(
         self,
         vector_database: VectorDatabase,
-        topk: int = 5,
-        rerank_enabled: bool = True,
-        candidate_pool: int = 30,
-        rerank_topk: int = 6,
         **kwargs: Any
     ) -> None:
         """
         Context retriever service.
 
+        Retrieval tuning is read from the environment (see `.env.example`):
+            RAG_TOPK            (int):  contexts kept when reranking is disabled.
+            RAG_RERANK_ENABLED  (bool): two-stage retrieval (dense pool -> cross-encoder).
+            RAG_CANDIDATE_POOL  (int):  dense candidates fetched before reranking.
+            RAG_RERANK_TOPK     (int):  contexts kept after reranking.
+
         Args:
             vector_database (VectorDatabase): vector database.
-            topk            (int, optional):  contexts kept when reranking is disabled. Defaults to 5.
-            rerank_enabled  (bool, optional): two-stage retrieval (dense pool -> cross-encoder).
-                                              Defaults to True.
-            candidate_pool  (int, optional):  dense candidates fetched before reranking. Defaults to 30.
-            rerank_topk     (int, optional):  contexts kept after reranking. Defaults to 6.
+
+        Raises:
+            KeyError: if a required environment key is missing.
         """
         super().__init__(**kwargs)
 
         # Set config.
-        self.topk               = topk
+        self.topk               = int(os.environ["RAG_TOPK"])
         self.vector_database    = vector_database
 
         # Reranking config.
-        self.rerank_enabled         = rerank_enabled
-        self.candidate_pool         = candidate_pool
-        self.rerank_topk            = rerank_topk
+        self.rerank_enabled         = os.environ["RAG_RERANK_ENABLED"].strip().lower() == "true"
+        self.candidate_pool         = int(os.environ["RAG_CANDIDATE_POOL"])
+        self.rerank_topk            = int(os.environ["RAG_RERANK_TOPK"])
 
 
     def set_vector_database(

@@ -4,6 +4,8 @@ from datetime import (
     timezone
 )
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 from sys import (
     exit,
     stdout
@@ -42,6 +44,10 @@ from ..modules.code_generation.code_generation import CodeGenerator
 from ..utils.log_tool import set_color
 from ..utils.module import get_instance
 from .query_analyser.query_analyser import QueryAnalyser
+
+
+# Load the project-root .env into os.environ so services can read their config.
+load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 
 
 # Shared cache for the services registry
@@ -475,21 +481,12 @@ class OpenSICoSMIC:
 
             # Create vector database service, storage is backed by Qdrant (reached via QDRANT_URL)
             # The VectorDatabase service handles the connection, so there is no local on-disk path
-            vector_database = VectorDatabase(
-                document_analyser_model=os.getenv("RAG_EMBEDDING_MODEL", "gte-small"),
-                vector_database_update_threshold=float(os.getenv("RAG_UPDATE_THRESHOLD", "0.98")),
-                device=self.device,
-                reranker_model=os.getenv("RAG_RERANKER_MODEL", "BAAI/bge-reranker-v2-m3"),
-            )
+            # Embedding, deduplication and reranker settings are read from the
+            # environment inside VectorDatabase.
+            vector_database = VectorDatabase(device=self.device)
 
-            # Base RAG service tuning is read from .env
-            self.rag = RAGBase(
-                vector_database=vector_database,
-                topk=int(os.getenv("RAG_TOPK", "6")),
-                rerank_enabled=os.getenv("RAG_RERANK_ENABLED", "true").strip().lower() == "true",
-                candidate_pool=int(os.getenv("RAG_CANDIDATE_POOL", "30")),
-                rerank_topk=int(os.getenv("RAG_RERANK_TOPK", "6")),
-            )
+            # RAG tuning is read from the environment inside RAGBase.
+            self.rag = RAGBase(vector_database=vector_database)
 
             # QA module to handle basic types of questions, such __next__move__, __update__store__, and
             # general questions.

@@ -23,11 +23,7 @@ from .base import ServiceBase
 class VectorDatabase(ServiceBase):
     def __init__(
         self,
-        document_analyser_model: str = "gte-small",
-        # document_analyser_model: str = "Qwen/Qwen3-Embedding-8B",
-        vector_database_update_threshold: float = 0.98,
         device: str = "cuda",
-        reranker_model: str = "BAAI/bge-reranker-v2-m3",
         **kwargs
     ):
         """
@@ -36,22 +32,26 @@ class VectorDatabase(ServiceBase):
         Storage is backed by Qdrant (running as its own container, reached via the
         ``QDRANT_URL`` environment variable); there is no local on-disk database.
 
+        Model and deduplication settings are read from the environment (see `.env.example`):
+            RAG_EMBEDDING_MODEL     (str):      document analyser/process model.
+            RAG_UPDATE_THRESHOLD    (float):    contents with similarity >= this threshold are skipped.
+            RAG_RERANKER_MODEL      (str):      cross-encoder model used for reranking.
+
         Args:
-            document_analyser_model             (str, optional):    document analyser/process model.
-            vector_database_update_threshold    (float, optional):  contents with similarity >= this threshold
-                                                                    will be skipped. Default to 0.98.
-            device                              (str, optional):    use cuda or cpu for LLM. Defaults to "cuda".
-                                                                    Defaults to "gte-small".
+            device (str, optional): use cuda or cpu for LLM. Defaults to "cuda".
+
+        Raises:
+            KeyError: if a required environment key is missing.
         """
         super().__init__(**kwargs)
 
         # Cross-encoder reranker
         self.device = device
-        self.reranker_model = reranker_model
+        self.reranker_model = os.environ["RAG_RERANKER_MODEL"]
         self._reranker = None
 
         # Similarity threshold for deduplicating content before adding to Qdrant.
-        self.vector_database_update_threshold = vector_database_update_threshold
+        self.vector_database_update_threshold = float(os.environ["RAG_UPDATE_THRESHOLD"])
 
         # For document analysis and knowledge database generation/update.
         # Known short aliases map to their full Hugging Face repo id; any other
@@ -71,6 +71,7 @@ class VectorDatabase(ServiceBase):
         )
 
         # Build a document analyser.
+        document_analyser_model = os.environ["RAG_EMBEDDING_MODEL"]
         EMBEDDING_MODEL_NAME = EMBEDDING_MODEL_DICT.get(document_analyser_model, document_analyser_model)
 
         self.database_update_embedding = HuggingFaceEmbeddings(
