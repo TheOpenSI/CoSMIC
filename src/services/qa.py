@@ -17,6 +17,12 @@ from .base import ServiceBase
 from .document_index import DocumentMetadata
 from .llms.LLMBase import LLMBase
 from .rag import RAGBase
+from .attachment_context import (
+    AttachmentContext,
+    AttachmentResolver,
+    MISSING_FILE_LLM_NOTE,
+    MISSING_FILE_USER_NOTE
+)
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
@@ -95,67 +101,26 @@ class QABase(ServiceBase):
         return {service_id: service_info["name"] for service_id, service_info in services.items()}
 
 
-    def _force_route_check(self, service_option: str, has_files: bool) -> str:
+    def _force_route_check(self, service_option: str, has_attachment: bool) -> str:
         """
-        If a file is attached but the query analyser routed to "0" (system info)
+        If the turn is about a file but the query analyser routed to "0" (system info)
         or "-1" (fallback) neither of which use RAG, force it into the
-        generic RAG (else) branch so the attached file actually gets used.
+        generic RAG (else) branch so the file actually gets used. This covers
+        files attached this turn and files resolved from earlier in the session
+        for a follow-up.
 
         Args:
             service_option (str): The current service option selected by the query analyser.
 
-            has_files (bool): Whether files are attached to the query.
+            has_attachment (bool): Whether the turn has files, attached now or earlier
+                in the session.
 
         Returns:
             str: The updated service option, if necessary.
         """
-        if has_files and service_option in ("0", "-1"):
+        if has_attachment and service_option in ("0", "-1"):
             return "rag_fallback"
         return service_option
-
-
-    def _parse_file_refs(
-        self, 
-        file_refs: list[str] | None
-    ) -> tuple[list[str], list[str]]:
-        """
-        Parse `file_refs` (each formatted as "<8-char-hex-file_id>_<original_filename>")
-        into the file_id and filename lists used downstream. A ref whose prefix
-        isn't a valid 8-char hex file_id is dropped rather than passed through,
-        so a malformed ref can't silently corrupt retrieval.
-
-        Args:
-            file_refs (list[str] | None): Raw file references attached to the query, 
-                e.g. ["a1b2c3d4_report.pdf"].
-
-        Returns:
-            document_ids (list[str]): Valid file_ids, used to scope RAG retrieval to 
-                the attached files.
-
-            attached_file_names (list[str]): Original filenames, used to tell the LLM 
-                which file(s) the question is about.
-        """
-        document_ids: list[str] = []
-        attached_file_names: list[str] = []
-
-        for ref in (file_refs or []):
-            parts = ref.split("_", 1)
-            doc_id = parts[0]
-
-            if len(doc_id) == 8 and all(c in "0123456789abcdef" for c in doc_id):
-                document_ids.append(doc_id)
-                raw_name = parts[1] if len(parts) > 1 else ref
-                attached_file_names.append(raw_name)
-            else:
-                print(
-                    set_color(
-                        "warning",
-                        f"[qa] WARNING: unparseable file ref '{ref}' (no 8-hex file_id); skipping."
-                    )
-                )
-
-
-        return document_ids, attached_file_names
 
 
     def _get_stockfish_binary_path(self) -> str:
@@ -338,7 +303,8 @@ class QABase(ServiceBase):
         services: dict[str, dict[str, str]],
         service_option: str,
         is_rag: bool,
-        has_files: bool
+        has_files: bool,
+        attachment: AttachmentContext
     ) -> bool:
         """
         Determine whether to use RAG based on the service option, RAG eligibility,
@@ -353,6 +319,7 @@ class QABase(ServiceBase):
 
             has_files (bool): Whether files are attached to the query.
 
+            attachment (AttachmentContext): resolved files of the question.
 
         Returns:
             bool: True if RAG should be used, False otherwise.
@@ -360,7 +327,11 @@ class QABase(ServiceBase):
         is_rag_eligible_service = self._is_rag_eligible(services, service_option)
         use_rag = (
                 (is_rag) and
-                (is_rag_eligible_service or has_files)
+                (
+                    is_rag_eligible_service
+                    or has_files
+                    or bool(attachment.document_ids)
+                )
             )
 
         return use_rag
@@ -383,12 +354,37 @@ class QABase(ServiceBase):
         return (context, "") if is_chat_history else ("", context)
 
 
+    @staticmethod
+    def _build_file_note(
+        attachment: AttachmentContext
+    ) -> str:
+        """
+        Tell the LLM which file the question is about, or that it is missing.
+
+        Args:
+            attachment (AttachmentContext): resolved files of the question.
+
+        Returns:
+            file_note (str): note placed before the retrieved context.
+        """
+        if attachment.missing_file:
+            return MISSING_FILE_LLM_NOTE
+
+        if attachment.file_names:
+            return (
+                f"The user attached the file(s): {', '.join(attachment.file_names)}. "
+                "Answer using the retrieved context from that file.\n"
+            )
+
+        return ""
+
+
     def _merge_retrieved_context(
         self,
         context: str | dict,
         chat_history_context: str,
         context_retrieved: str,
-        attached_file_names: list[str],
+        attachment: AttachmentContext,
     ) -> str | dict:
         """
         Fold RAG-retrieved context back into `context`, alongside chat
@@ -402,16 +398,12 @@ class QABase(ServiceBase):
 
             context_retrieved (str): context retrieved by RAG.
 
-            attached_file_names (list[str]): original filenames of attached files.
+            attachment (AttachmentContext): resolved files of the question.
 
         Returns:
             str | dict: context updated with the retrieved information.
         """
-        file_note = (
-            f"The user attached the file(s): {', '.join(attached_file_names)}. "
-            "Answer using the retrieved context from that file.\n"
-            if attached_file_names else ""
-        )
+        file_note = self._build_file_note(attachment)
 
         suffix = (
             ""
@@ -435,8 +427,7 @@ class QABase(ServiceBase):
         session_id: str | None,
         global_service_names: list[str] | None,
         memory_service_active: bool,
-        document_ids: list[str],
-        attached_file_names: list[str],
+        attachment: AttachmentContext,
     ) -> tuple[str, str | dict, float | int]:
         """
         Retrieve RAG context for the query and fold it into `context`.
@@ -454,9 +445,8 @@ class QABase(ServiceBase):
 
             memory_service_active (bool): whether the user memory tier should be included.
 
-            document_ids (list[str]): file_ids to scope retrieval to attached files.
-
-            attached_file_names (list[str]): original filenames of attached files.
+            attachment (AttachmentContext): resolved files of the question, used to scope
+                retrieval and to tell the LLM which file the question is about.
 
         Returns:
             user_prompt (str): prompt built from the query and non-history context.
@@ -486,7 +476,7 @@ class QABase(ServiceBase):
             include_session = True,
             include_user = memory_service_active,
             include_global = True,
-            document_ids = document_ids or None
+            document_ids = attachment.document_ids or None
         )
 
         retrieve_score = (
@@ -499,7 +489,7 @@ class QABase(ServiceBase):
             context = context,
             chat_history_context = chat_history_context,
             context_retrieved = context_retrieved,
-            attached_file_names = attached_file_names
+            attachment = attachment
         )
 
         return user_prompt, context, retrieve_score
@@ -603,11 +593,21 @@ class QABase(ServiceBase):
             services=services   # pyright: ignore[reportCallIssue]
         )
 
-        # Check if force route is required.
-        service_option = self._force_route_check(service_option, has_files)
+        # Files the question is about: attached this turn, or attached earlier
+        # in the session when the question points at "the file".
+        attachment = AttachmentResolver(self.rag.vector_database)(
+            query,
+            file_refs=file_refs,
+            has_files=has_files,
+            user_id=user_id,
+            session_id=session_id
+        )
 
-        # Parse file_refs into validated document_ids / attached_file_names
-        document_ids, attached_file_names = self._parse_file_refs(file_refs)
+        # Check if force route is required.
+        service_option = self._force_route_check(
+            service_option,
+            has_attachment=has_files or bool(attachment.document_ids)
+        )
 
         # TODO: Remove chess service
         if service_option.startswith("1."):
@@ -661,7 +661,7 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services = services)
 
         else:
-            if self._use_rag(services, service_option, is_rag, has_files):
+            if self._use_rag(services, service_option, is_rag, has_files, attachment):
                 (
                     user_prompt,
                     context,
@@ -673,8 +673,7 @@ class QABase(ServiceBase):
                     session_id = session_id,
                     global_service_names = global_service_names,
                     memory_service_active = memory_service_active,
-                    document_ids = document_ids,
-                    attached_file_names = attached_file_names
+                    attachment = attachment
                 )
 
             # Non-RAG services (or when RAG is disabled) fall through here.
@@ -703,6 +702,9 @@ class QABase(ServiceBase):
                 context=context,
                 service_name=services_name.get(service_option, "")
             )
+
+            if attachment.missing_file:
+                response = f"{response}\n\n{MISSING_FILE_USER_NOTE}"
 
         # NOTE:
         # Last step to transfer final response with some extra info (I/O
