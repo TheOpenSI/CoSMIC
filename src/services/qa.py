@@ -903,8 +903,14 @@ class QABase(ServiceBase):
                 )
             )
 
-            if attachment.file_names and not answered_from_file and context_retrieved:
-                response = f"{response}\n\n{unused_file_note(attachment.file_names)}"
+            # Acknowledge an attached file the question was not about, even when
+            # nothing was retrieved for the answer instead.
+            if attachment.file_names and not attachment.file_directed and not answered_from_file:
+                note = unused_file_note(
+                    file_names=attachment.file_names,
+                    from_knowledge_base=bool(context_retrieved)
+                )
+                response = f"{response}\n\n{note}"
 
             if attachment.missing_file:
                 response = f"{response}\n\n{MISSING_FILE_USER_NOTE}"
