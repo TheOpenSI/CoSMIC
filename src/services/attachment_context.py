@@ -14,19 +14,17 @@ from .vector_database import VectorDatabase
 from ...utils.log_tool import set_color
 
 
-# Phrases that point the question at an attached file. A file merely named in
-# the query (e.g. "the Academic Governance Handbook") is deliberately NOT a
-# marker: that is a knowledge-base question. For the same reason, a bare
-# "summarise" / "summary" / "the report" is not a marker ("summarise the
-# Academic Governance Handbook" is a knowledge-base question); only forms that
-# point at the user's own file are.
+# Phrases that point the question at an attached file, including a bare
+# "summarise" request so a follow-up like "summarise" or "give me a summary"
+# resolves to the session's file. A file merely named in the query (e.g. "the
+# Academic Governance Handbook") is deliberately NOT a marker: that is a
+# knowledge-base question.
 FILE_INTENT_MARKERS: tuple[str, ...] = (
     "this file", "the file", "this document", "the document",
     "this doc", "the doc", "this pdf", "the pdf",
-    "this paper", "this report",
+    "this paper", "the paper", "this report", "the report",
     "attached", "attachment", "uploaded",
-    "summarise this", "summarize this", "summarise it", "summarize it",
-    "summary of this", "summary of it",
+    "summarise", "summarize", "summary",
 )
 
 # File refs are "<8-hex document_id>_<file name>".
@@ -48,22 +46,29 @@ file so I can use it for the part of your question that needs it._\
 
 
 def unused_file_note(
-    file_names: list[str]
+    file_names: list[str],
+    from_knowledge_base: bool
 ) -> str:
     """
     Tell the user their attached file was not used for this answer.
 
     Args:
         file_names (list[str]): attached file names.
+        from_knowledge_base (bool): the answer used retrieved knowledge-base context.
 
     Returns:
         note (str): note appended to the answer.
     """
     names = ", ".join(file_names)
+    source = (
+        "is from the knowledge base"
+        if   (from_knowledge_base)
+        else ("doesn't use it")
+    )
     return (
-        f"_You also attached {names}, but this answer is from the knowledge "
-        f"base — your question wasn't about that file. Would you like a summary "
-        f"of {names}, or an answer to something specific in it?_"
+        f"_You also attached {names}, but this answer {source} — your question "
+        f"wasn't about that file. Would you like a summary of {names}, or an "
+        f"answer to something specific in it?_"
     )
 
 
@@ -196,11 +201,12 @@ class AttachmentResolver:
         """
         Resolve the files a question is about.
 
-        Files attached this turn are used first, and the question is always
-        treated as directed at them: refs only come from the current message,
-        so a file attached this turn is never stale. A follow-up sent without
-        an attachment ("summarise it") falls back to the files attached earlier
-        in the session only when the query itself points at a file.
+        Files attached this turn are used first. Whether the question is
+        directed at a file comes from its wording alone, so a domain question
+        sent with an unrelated attachment is answered from the knowledge base
+        when it is routed to one. A follow-up sent without an attachment
+        ("summarise it") falls back to the files attached earlier in the
+        session only when the query itself points at a file.
 
         Args:
             query (str): a question.
@@ -213,7 +219,7 @@ class AttachmentResolver:
             attachment (AttachmentContext): resolved files and intent flags.
         """
         document_ids, file_names = self.parse_file_refs(file_refs)
-        file_directed = bool(document_ids) or self.is_file_directed(query)
+        file_directed = self.is_file_directed(query)
 
         if file_directed and not document_ids and user_id and session_id:
             document_ids, file_names = self.get_session_files(user_id, session_id)

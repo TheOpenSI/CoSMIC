@@ -397,6 +397,41 @@ class QABase(ServiceBase):
 
 
     @staticmethod
+    def _format_sources(
+        sources: list[dict]
+    ) -> str:
+        """
+        List where the retrieved context came from, one line per source.
+
+        Sources keep relevance order and are de-duplicated by (tier, title,
+        service). A global source also names the service it belongs to.
+
+        Args:
+            sources (list[dict]): origin of each retrieved chunk.
+
+        Returns:
+            citation (str): "Sources:" block, or "" if there are no sources.
+        """
+        if not sources:
+            return ""
+
+        seen: set[tuple[str, str, str]] = set()
+        lines: list[str] = []
+        for source in sources:
+            key = (source["tier"], source["title"], source["service_name"])
+            if key in seen:
+                continue
+            seen.add(key)
+
+            label = source["label"]
+            if source["tier"] == "global" and source["service_name"]:
+                label = f"{label} ({source['service_name']})"
+            lines.append(f"- {label}: {source['title'] or '(untitled)'}")
+
+        return "Sources:\n" + "\n".join(lines)
+
+
+    @staticmethod
     def _build_file_note(
         attachment: AttachmentContext,
         answered_from_file: bool
@@ -547,7 +582,7 @@ class QABase(ServiceBase):
         memory_service_active: bool,
         attachment: AttachmentContext,
         kb_service_name: str | None,
-    ) -> tuple[str, str | dict, float | int, str, bool]:
+    ) -> tuple[str, str | dict, float | int, str, list[dict[str, Any]], bool]:
         """
         Retrieve RAG context for the query and fold it into `context`.
 
@@ -578,6 +613,8 @@ class QABase(ServiceBase):
             retrieve_score (float | int): score of the context retrieval.
 
             context_retrieved (str): context retrieved by RAG.
+
+            retrieved_sources (list[dict[str, Any]]): origin of each retrieved chunk.
 
             answered_from_file (bool): a chunk of the attached file made it into the context.
         """
@@ -628,6 +665,7 @@ class QABase(ServiceBase):
             context,
             retrieve_score,
             context_retrieved,
+            retrieved_sources,
             answered_from_file
         )
 
@@ -798,8 +836,9 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services = services)
 
         else:
-            context_retrieved:  str     = ""
-            answered_from_file: bool    = False
+            context_retrieved:  str                     = ""
+            retrieved_sources:  list[dict[str, Any]]    = []
+            answered_from_file: bool                    = False
 
             if self._use_rag(
                 services = services,
@@ -820,6 +859,7 @@ class QABase(ServiceBase):
                     context,
                     retrieve_score,
                     context_retrieved,
+                    retrieved_sources,
                     answered_from_file
                 ) = self._retrieve_rag_context(
                     query = query,
@@ -863,11 +903,20 @@ class QABase(ServiceBase):
                 )
             )
 
-            if attachment.file_names and not answered_from_file and context_retrieved:
-                response = f"{response}\n\n{unused_file_note(attachment.file_names)}"
+            # Acknowledge an attached file the question was not about, even when
+            # nothing was retrieved for the answer instead.
+            if attachment.file_names and not attachment.file_directed and not answered_from_file:
+                note = unused_file_note(
+                    file_names=attachment.file_names,
+                    from_knowledge_base=bool(context_retrieved)
+                )
+                response = f"{response}\n\n{note}"
 
             if attachment.missing_file:
                 response = f"{response}\n\n{MISSING_FILE_USER_NOTE}"
+
+            if retrieved_sources:
+                response = f"{response}\n\n{self._format_sources(retrieved_sources)}"
 
         # NOTE:
         # Last step to transfer final response with some extra info (I/O
