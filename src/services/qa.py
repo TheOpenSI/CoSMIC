@@ -454,7 +454,10 @@ class QABase(ServiceBase):
         Returns:
             str | dict: context updated with the retrieved information.
         """
-        file_note = self._build_file_note(attachment, answered_from_file)
+        file_note: str = self._build_file_note(
+            attachment = attachment,
+            answered_from_file = answered_from_file
+        )
 
         suffix = (
             ""
@@ -620,7 +623,13 @@ class QABase(ServiceBase):
             answered_from_file = answered_from_file
         )
 
-        return user_prompt, context, retrieve_score, context_retrieved, answered_from_file
+        return (
+            user_prompt,
+            context,
+            retrieve_score,
+            context_retrieved,
+            answered_from_file
+        )
 
 
     def __call__(
