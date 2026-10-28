@@ -1,6 +1,9 @@
 ### Core modules ###
 import re
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field
+)
 
 
 ### Type hints ###
@@ -29,19 +32,19 @@ FILE_INTENT_MARKERS: tuple[str, ...] = (
 # File refs are "<8-hex document_id>_<file name>".
 FILE_ID_PATTERN = re.compile(r"^[0-9a-f]{8}$")
 
-MISSING_FILE_LLM_NOTE: str = (
-    "IMPORTANT: the user's message refers to an attached file, but NO file is "
-    "attached to this conversation. The Context below is from the shared "
-    "knowledge base, which is NOT the user's attached file. Answer only the "
-    "parts you can from that context, and for anything that requires the "
-    "user's file, state that no file is attached and ask them to attach it.\n"
-)
+MISSING_FILE_LLM_NOTE: str = """\
+IMPORTANT: the user's message refers to an attached file, but NO file is \
+attached to this conversation. The Context below is from the shared \
+knowledge base, which is NOT the user's attached file. Answer only the \
+parts you can from that context, and for anything that requires the \
+user's file, state that no file is attached and ask them to attach it.
+"""
 
-MISSING_FILE_USER_NOTE: str = (
-    "_You referred to an attached file, but no file is attached to this chat. "
-    "I've answered from the knowledge base where I could — please attach the "
-    "file so I can use it for the part of your question that needs it._"
-)
+MISSING_FILE_USER_NOTE: str = """\
+_You referred to an attached file, but no file is attached to this chat. \
+I've answered from the knowledge base where I could — please attach the \
+file so I can use it for the part of your question that needs it._\
+"""
 
 
 @dataclass

@@ -101,7 +101,11 @@ class QABase(ServiceBase):
         return {service_id: service_info["name"] for service_id, service_info in services.items()}
 
 
-    def _force_route_check(self, service_option: str, has_attachment: bool) -> str:
+    def _force_route_check(
+        self,
+        service_option: str,
+        has_attachment: bool
+    ) -> str:
         """
         If the turn is about a file but the query analyser routed to "0" (system info)
         or "-1" (fallback) neither of which use RAG, force it into the
@@ -595,18 +599,18 @@ class QABase(ServiceBase):
 
         # Files the question is about: attached this turn, or attached earlier
         # in the session when the question points at "the file".
-        attachment = AttachmentResolver(self.rag.vector_database)(
-            query,
-            file_refs=file_refs,
-            has_files=has_files,
-            user_id=user_id,
-            session_id=session_id
+        attachment: AttachmentContext = AttachmentResolver(self.rag.vector_database)(
+            query = query,
+            file_refs = file_refs,
+            has_files = has_files,
+            user_id = user_id,
+            session_id = session_id
         )
 
         # Check if force route is required.
         service_option = self._force_route_check(
-            service_option,
-            has_attachment=has_files or bool(attachment.document_ids)
+            service_option = service_option,
+            has_attachment = has_files or bool(attachment.document_ids)
         )
 
         # TODO: Remove chess service
@@ -661,7 +665,13 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services = services)
 
         else:
-            if self._use_rag(services, service_option, is_rag, has_files, attachment):
+            if self._use_rag(
+                services = services,
+                service_option = service_option,
+                is_rag = is_rag,
+                has_files = has_files,
+                attachment = attachment
+            ):
                 (
                     user_prompt,
                     context,
