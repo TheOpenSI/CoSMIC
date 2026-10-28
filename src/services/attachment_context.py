@@ -47,6 +47,26 @@ file so I can use it for the part of your question that needs it._\
 """
 
 
+def unused_file_note(
+    file_names: list[str]
+) -> str:
+    """
+    Tell the user their attached file was not used for this answer.
+
+    Args:
+        file_names (list[str]): attached file names.
+
+    Returns:
+        note (str): note appended to the answer.
+    """
+    names = ", ".join(file_names)
+    return (
+        f"_You also attached {names}, but this answer is from the knowledge "
+        f"base — your question wasn't about that file. Would you like a summary "
+        f"of {names}, or an answer to something specific in it?_"
+    )
+
+
 @dataclass
 class AttachmentContext:
     """

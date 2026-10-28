@@ -18,6 +18,14 @@ from .base import ServiceBase
 from .vector_database import VectorDatabase
 
 
+# Stored memory_type -> (tier, human-readable label) used when citing sources.
+SOURCE_TIERS: dict[str, tuple[str, str]] = {
+    "session":          ("session", "Attached file / session"),
+    "user":             ("user", "Your saved memory"),
+    "global_memory":    ("global", "Global knowledge base")
+}
+
+
 class RAGBase(ServiceBase):
     def __init__(
         self,
@@ -225,6 +233,53 @@ class RAGBase(ServiceBase):
 
 
     @staticmethod
+    def _source_info(
+        doc: Document,
+        score: float
+    ) -> dict[str, Any]:
+        """
+        Describe where a chunk came from, for citing it in the answer.
+
+        Args:
+            doc     (Document): retrieved chunk.
+            score   (float):    relevance score of the chunk.
+
+        Returns:
+            source (dict[str, Any]): tier ("session" | "user" | "global" | "unknown"),
+                label, title, service_name and score of the chunk.
+        """
+        meta: dict[str, Any] = doc.metadata or {}
+        tier, label = SOURCE_TIERS.get(
+            meta.get("memory_type", ""),
+            ("unknown", "Unknown source")
+        )
+
+        return {
+            "tier":         tier,
+            "label":        label,
+            "title":        str(meta.get("title") or meta.get("file_name") or ""),
+            "service_name": str(meta.get("service_name") or ""),
+            "score":        float(score)
+        }
+
+
+    @staticmethod
+    def _doc_key(
+        doc: Document
+    ) -> tuple[str | None, str]:
+        """
+        Identity of a chunk, used to de-duplicate two retrieval passes.
+
+        Args:
+            doc (Document): retrieved chunk.
+
+        Returns:
+            key (tuple[str | None, str]): (document_id, page_content).
+        """
+        return (doc.metadata or {}).get("document_id"), doc.page_content
+
+
+    @staticmethod
     def _select(
         pairs: list[tuple[Document, float]],
         keep_n: int
@@ -326,7 +381,7 @@ class RAGBase(ServiceBase):
     @staticmethod
     def _format_context(
         selected: list[tuple[Document, float]]
-    ) -> tuple[str, list[float]]:
+    ) -> tuple[str, list[float], list[dict[str, Any]]]:
         """
         Join selected chunks into one context string, each prefixed by its title.
 
@@ -334,18 +389,24 @@ class RAGBase(ServiceBase):
             selected (list[tuple[Document, float]]): selected (chunk, score) pairs.
 
         Returns:
-            context                 (str):          retrieved context for the LLM.
-            retrieved_context_score (list[float]):  score of each chunk.
+            context                 (str):                  retrieved context for the LLM.
+            retrieved_context_score (list[float]):          score of each chunk.
+            sources                 (list[dict[str, Any]]): origin of each chunk (see `_source_info()`).
         """
         context: str = "".join(
             f"{RAGBase._title(doc=doc)}: {doc.page_content.replace("\n", " ")}. "
             for doc, _ in selected
         )
         retrieved_context_score: list[float] = [score for _, score in selected]
+        sources: list[dict[str, Any]] = [
+            RAGBase._source_info(doc=doc, score=score)
+            for doc, score in selected
+        ]
 
         return (
             context,
-            retrieved_context_score
+            retrieved_context_score,
+            sources
         )
 
 
@@ -359,7 +420,7 @@ class RAGBase(ServiceBase):
         include_user: bool = False,
         include_global: bool = True,
         document_ids: list[str] | None = None
-    ) -> tuple[str, list[float]]:
+    ) -> tuple[str, list[float], list[dict[str, Any]]]:
         """
         Retrieve context for a given user prompt.
 
@@ -379,6 +440,7 @@ class RAGBase(ServiceBase):
             context (str): retrieved context from the vector database.
             retrieved_context_score (list[float]): score of each retrieved chunk,
                 most relevant first.
+            sources (list[dict[str, Any]]): origin of each chunk (see `_source_info()`).
         """
         selected: list[tuple[Document, float]] = self._retrieve_pairs(
             user_prompt=user_prompt,
@@ -392,3 +454,81 @@ class RAGBase(ServiceBase):
         )
 
         return RAGBase._format_context(selected=selected)
+
+
+    def retrieve_with_attachment(
+        self,
+        user_prompt: str,
+        document_ids: list[str],
+        user_id: str | None = None,
+        session_id: str | None = None,
+        global_service_names: list[str] | None = None,
+        include_user: bool = False,
+        file_directed: bool = False,
+        kb_service_name: str | None = None
+    ) -> tuple[str, list[float], list[dict[str, Any]]]:
+        """
+        Retrieve context for a question asked with an attached file.
+
+        The file and the rest of memory are retrieved in two separate passes, so
+        the file's chunks do not compete with the knowledge base for the top-k.
+        What is kept depends on intent:
+            - file directed, no KB route: the file only.
+            - file directed, KB route: the file first, then the KB chunks.
+            - not file directed, KB route: the KB only (the file is stale).
+            - not file directed, no KB route: the file only.
+        If the file has no indexed chunks, the rest of memory is used.
+
+        Args:
+            user_prompt (str): a question from the user.
+            document_ids (list[str]): attached documents.
+            user_id (str, optional): owner of the session and user memory.
+            session_id (str, optional): chat session of the session memory.
+            global_service_names (list[str], optional): memory-capable services.
+            include_user (bool, optional): search user memory. Defaults to False.
+            file_directed (bool, optional): the question points at the file.
+                Defaults to False.
+            kb_service_name (str, optional): memory-capable service the query
+                analyser routed to, if any. Narrows the global tier to it.
+
+        Returns:
+            context (str): retrieved context from the vector database.
+            retrieved_context_score (list[float]): score of each retrieved chunk.
+            sources (list[dict[str, Any]]): origin of each chunk (see `_source_info()`).
+        """
+        file_pairs: list[tuple[Document, float]] = self._retrieve_pairs(
+            user_prompt=user_prompt,
+            user_id=user_id,
+            session_id=session_id,
+            include_session=True,
+            include_user=False,
+            include_global=False,
+            document_ids=document_ids
+        )
+        routed_to_kb: bool = kb_service_name is not None
+
+        if file_pairs and not routed_to_kb:
+            return RAGBase._format_context(selected=file_pairs)
+
+        memory_pairs: list[tuple[Document, float]] = self._retrieve_pairs(
+            user_prompt=user_prompt,
+            user_id=user_id,
+            session_id=session_id,
+            global_service_names=[kb_service_name] if kb_service_name else global_service_names,
+            include_session=False,
+            include_user=include_user,
+            include_global=True
+        )
+
+        if not file_pairs or not file_directed:
+            return RAGBase._format_context(selected=memory_pairs)
+
+        file_keys: set[tuple[str | None, str]] = {
+            RAGBase._doc_key(doc=doc) for doc, _ in file_pairs
+        }
+        merged: list[tuple[Document, float]] = file_pairs + [
+            (doc, score) for doc, score in memory_pairs
+            if RAGBase._doc_key(doc=doc) not in file_keys
+        ]
+
+        return RAGBase._format_context(selected=merged)

@@ -21,12 +21,21 @@ from .attachment_context import (
     AttachmentContext,
     AttachmentResolver,
     MISSING_FILE_LLM_NOTE,
-    MISSING_FILE_USER_NOTE
+    MISSING_FILE_USER_NOTE,
+    unused_file_note
 )
 from ...modules.code_generation.code_generation import CodeGenerator
 from .system_information_service import SystemInformationService
 from .fallback_service import FallbackService
 from ...utils.log_tool import set_color
+
+
+# System prompt (prompts/document_qa.txt) for questions answered from a file.
+DOCUMENT_QA_PERSONA: str = "document_qa"
+
+# Services without a persona of their own: the general service and the
+# forced route used when a file is attached to an unsure query.
+GENERIC_SERVICE_IDS: tuple[str, ...] = ("4", "rag_fallback")
 
 
 class QABase(ServiceBase):
@@ -359,14 +368,49 @@ class QABase(ServiceBase):
 
 
     @staticmethod
+    def _select_persona(
+        service_option: str,
+        routed_service_name: str,
+        answered_from_file: bool
+    ) -> str:
+        """
+        Pick the system prompt that answers this turn.
+
+        A specialist service keeps its own persona. The general service (and
+        the forced file route) has no persona of its own, so a question it
+        answers from an attached file uses the neutral document-QA persona.
+
+        Args:
+            service_option (str): service answering the question.
+
+            routed_service_name (str): name of that service.
+
+            answered_from_file (bool): the file contributed retrieved context.
+
+        Returns:
+            persona (str): service name used to load the system prompt.
+        """
+        if answered_from_file and service_option in GENERIC_SERVICE_IDS:
+            return DOCUMENT_QA_PERSONA
+
+        return routed_service_name
+
+
+    @staticmethod
     def _build_file_note(
-        attachment: AttachmentContext
+        attachment: AttachmentContext,
+        answered_from_file: bool
     ) -> str:
         """
         Tell the LLM which file the question is about, or that it is missing.
 
+        The file is named only if it actually contributed context, so an
+        answer from the knowledge base is never credited to the file.
+
         Args:
             attachment (AttachmentContext): resolved files of the question.
+
+            answered_from_file (bool): the file contributed retrieved context.
 
         Returns:
             file_note (str): note placed before the retrieved context.
@@ -374,7 +418,7 @@ class QABase(ServiceBase):
         if attachment.missing_file:
             return MISSING_FILE_LLM_NOTE
 
-        if attachment.file_names:
+        if attachment.file_names and answered_from_file:
             return (
                 f"The user attached the file(s): {', '.join(attachment.file_names)}. "
                 "Answer using the retrieved context from that file.\n"
@@ -389,6 +433,7 @@ class QABase(ServiceBase):
         chat_history_context: str,
         context_retrieved: str,
         attachment: AttachmentContext,
+        answered_from_file: bool,
     ) -> str | dict:
         """
         Fold RAG-retrieved context back into `context`, alongside chat
@@ -404,10 +449,15 @@ class QABase(ServiceBase):
 
             attachment (AttachmentContext): resolved files of the question.
 
+            answered_from_file (bool): the file contributed retrieved context.
+
         Returns:
             str | dict: context updated with the retrieved information.
         """
-        file_note = self._build_file_note(attachment)
+        file_note: str = self._build_file_note(
+            attachment = attachment,
+            answered_from_file = answered_from_file
+        )
 
         suffix = (
             ""
@@ -423,6 +473,70 @@ class QABase(ServiceBase):
         return context
 
 
+    def _retrieve_context(
+        self,
+        query: str,
+        attachment: AttachmentContext,
+        user_id: str | None,
+        session_id: str | None,
+        global_service_names: list[str] | None,
+        memory_service_active: bool,
+        kb_service_name: str | None
+    ) -> tuple[str, list[float], list[dict[str, Any]]]:
+        """
+        Retrieve context over the active memory tiers.
+
+        With an attached file, the file and the rest of memory are retrieved
+        separately and combined by intent (see
+        `RAGBase.retrieve_with_attachment()`). Otherwise, a single search runs
+        over all active tiers.
+
+        Args:
+            query (str): a question.
+
+            attachment (AttachmentContext): resolved files of the question.
+
+            user_id (str | None): current user.
+
+            session_id (str | None): current chat session.
+
+            global_service_names (list[str] | None): memory-capable services.
+
+            memory_service_active (bool): search the user's saved memory.
+
+            kb_service_name (str | None): memory-capable service the query was
+                routed to, if any.
+
+        Returns:
+            context (str): retrieved context.
+
+            retrieve_score (list[float]): score of each retrieved chunk.
+
+            sources (list[dict[str, Any]]): origin of each chunk.
+        """
+        if attachment.document_ids:
+            return self.rag.retrieve_with_attachment(
+                query,
+                document_ids = attachment.document_ids,
+                user_id = user_id,
+                session_id = session_id,
+                global_service_names = global_service_names,
+                include_user = memory_service_active,
+                file_directed = attachment.file_directed,
+                kb_service_name = kb_service_name
+            )
+
+        return self.rag( # pyright: ignore[reportReturnType]
+            query,
+            user_id = user_id,
+            session_id = session_id,
+            global_service_names = global_service_names,
+            include_session = True,
+            include_user = memory_service_active,
+            include_global = True
+        )
+
+
     def _retrieve_rag_context(
         self,
         query: str,
@@ -432,7 +546,8 @@ class QABase(ServiceBase):
         global_service_names: list[str] | None,
         memory_service_active: bool,
         attachment: AttachmentContext,
-    ) -> tuple[str, str | dict, float | int]:
+        kb_service_name: str | None,
+    ) -> tuple[str, str | dict, float | int, str, bool]:
         """
         Retrieve RAG context for the query and fold it into `context`.
 
@@ -452,12 +567,19 @@ class QABase(ServiceBase):
             attachment (AttachmentContext): resolved files of the question, used to scope
                 retrieval and to tell the LLM which file the question is about.
 
+            kb_service_name (str | None): memory-capable service the query was
+                routed to, if any.
+
         Returns:
             user_prompt (str): prompt built from the query and non-history context.
 
             context (str | dict): context updated with the retrieved information.
 
             retrieve_score (float | int): score of the context retrieval.
+
+            context_retrieved (str): context retrieved by RAG.
+
+            answered_from_file (bool): a chunk of the attached file made it into the context.
         """
         chat_history_context, rag_context = self._split_chat_history_context(context=context)
 
@@ -471,16 +593,20 @@ class QABase(ServiceBase):
         # Get the retrieved context, scoped to the active memory tiers
         (
             context_retrieved,
-            retrieved_context_score
-        ) = self.rag( # pyright: ignore[reportAssignmentType]
-            query,
+            retrieved_context_score,
+            retrieved_sources
+        ) = self._retrieve_context(
+            query = query,
+            attachment = attachment,
             user_id = user_id,
             session_id = session_id,
             global_service_names = global_service_names,
-            include_session = True,
-            include_user = memory_service_active,
-            include_global = True,
-            document_ids = attachment.document_ids or None
+            memory_service_active = memory_service_active,
+            kb_service_name = kb_service_name
+        )
+
+        answered_from_file = bool(attachment.document_ids) and any(
+            source["tier"] == "session" for source in retrieved_sources
         )
 
         retrieve_score = (
@@ -493,10 +619,17 @@ class QABase(ServiceBase):
             context = context,
             chat_history_context = chat_history_context,
             context_retrieved = context_retrieved,
-            attachment = attachment
+            attachment = attachment,
+            answered_from_file = answered_from_file
         )
 
-        return user_prompt, context, retrieve_score
+        return (
+            user_prompt,
+            context,
+            retrieve_score,
+            context_retrieved,
+            answered_from_file
+        )
 
 
     def __call__(
@@ -665,6 +798,9 @@ class QABase(ServiceBase):
             response, raw_response = self.fallback_service(services = services)
 
         else:
+            context_retrieved:  str     = ""
+            answered_from_file: bool    = False
+
             if self._use_rag(
                 services = services,
                 service_option = service_option,
@@ -672,10 +808,19 @@ class QABase(ServiceBase):
                 has_files = has_files,
                 attachment = attachment
             ):
+                # A memory-capable service owns a knowledge base worth consulting.
+                kb_service_name = (
+                    services_name.get(service_option)
+                    if   (self._is_rag_eligible(services, service_option))
+                    else (None)
+                )
+
                 (
                     user_prompt,
                     context,
-                    retrieve_score
+                    retrieve_score,
+                    context_retrieved,
+                    answered_from_file
                 ) = self._retrieve_rag_context(
                     query = query,
                     context = context,
@@ -683,7 +828,8 @@ class QABase(ServiceBase):
                     session_id = session_id,
                     global_service_names = global_service_names,
                     memory_service_active = memory_service_active,
-                    attachment = attachment
+                    attachment = attachment,
+                    kb_service_name = kb_service_name
                 )
 
             # Non-RAG services (or when RAG is disabled) fall through here.
@@ -710,8 +856,15 @@ class QABase(ServiceBase):
             ) = self.llm( # pyright: ignore[reportAssignmentType]
                 question=user_prompt,
                 context=context,
-                service_name=services_name.get(service_option, "")
+                service_name=self._select_persona(
+                    service_option,
+                    routed_service_name=services_name.get(service_option, ""),
+                    answered_from_file=answered_from_file
+                )
             )
+
+            if attachment.file_names and not answered_from_file and context_retrieved:
+                response = f"{response}\n\n{unused_file_note(attachment.file_names)}"
 
             if attachment.missing_file:
                 response = f"{response}\n\n{MISSING_FILE_USER_NOTE}"
